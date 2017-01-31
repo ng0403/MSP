@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.msp.cp.code.service.CodeService;
 
 @Controller
-@RequestMapping("/code")
+@RequestMapping("/code/*")
 public class CodeController {
 	
 	@Inject
