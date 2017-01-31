@@ -14,7 +14,11 @@
 				<value>/WEB-INF/mybatis/jdbc.properties</value>
 			</property>
 		</bean>
-
+		
+		<!-- handler mapping과 handler adapter 설정 -->
+		<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+		<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+		
 		<!-- DBCP를 위한 DataSource 객체 -->
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 			<property name="driverClassName" value="${jdbc.driverClass}" />
@@ -39,7 +43,7 @@
 		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 			<constructor-arg index="0" ref="sqlSessionFactory" />
 		</bean>
-
+		
 		<!-- 트랜잭션관리자. -->
 		<bean id="transactionManager"
 			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
