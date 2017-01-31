@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,13 +17,13 @@ import com.msp.cp.auth.service.AuthService;
 import com.msp.cp.auth.vo.AuthVO;
 
 @Controller
-@Repository(value="/ahth")
+@RequestMapping(value="/auth")
 public class AuthController {
 	
 	@Autowired
 	AuthService authService;
 	
-	@RequestMapping(value="/auth_list", method=RequestMethod.GET)
+	@RequestMapping(value="/authlist", method=RequestMethod.GET)
 	public ModelAndView authList(HttpSession session, Locale locale,
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum,
 			@RequestParam(value = "searchnotice", defaultValue="") String searchnotice,
@@ -78,6 +77,7 @@ public class AuthController {
 	public ModelAndView authUpdatePage(AuthVO authVO){
 		System.out.println("업데이트" + authVO.toString());
 		authService.updateAuth(authVO);
+		
 		ModelAndView mov = new ModelAndView("/auth/auth_pop");
 		mov.addObject("result", "success");
 		System.out.println("업데이트 시작" + mov);
@@ -97,7 +97,7 @@ public class AuthController {
 		authService.deleteAuth(dc);
 	}
 	
-	return "redirect:/auth/auth_list";
+	return "redirect:/auth/authlist";
 	  
 	}  
 	
