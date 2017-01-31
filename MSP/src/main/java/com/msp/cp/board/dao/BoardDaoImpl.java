@@ -12,12 +12,15 @@ import com.msp.cp.board.vo.BoardVO;
 public class BoardDaoImpl implements BoardDao {
 	
 	@Autowired
-	SqlSession sqlsession;
+	SqlSession sqlSession;
+	public void setSqlSessionTemplate(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
 
 	@Override
-	public List<BoardVO> list() {	
+	public List<BoardVO> list(BoardVO vo) {	
 		 
-		return null;
+		return sqlSession.selectList("BoardList", vo);
 	}
 
 }
