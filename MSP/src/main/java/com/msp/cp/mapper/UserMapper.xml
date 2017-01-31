@@ -2,54 +2,75 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 
-<select id="searchListUser" parameterType="string" resultType="map">
+	<select id="searchListUser" parameterType="string" resultType="map">
 		SELECT *
-		FROM USERS
-		where ACTIVE_FLG='Y'
-</select>
+		FROM TB_USER
+		where active_flg='Y'
+	</select>
 
-<update id="userInsert" parameterType="com.crm.cp.test.user.vo.userVO">
-		INSERT INTO USERS(
-			user_id, user_name ,pwd ,email ,cell_phone ,home_phone 
-			, company_phone ,p_channel_cd ,user_type_cd ,org_id ,active_flg  )
-		VALUES( #{USER_ID},#{USER_NAME},#{PWD}
-		,#{EMAIL},#{CELL_PHONE},#{HOME_PHONE}
-		,#{COMPANY_PHONE},#{P_CHANNEL_CD},#{USER_TYPE_CD}
-		,#{ORG_ID},'Y')
+	<insert id="userInsert" parameterType="com.msp.cp.user.vo.userVO">
+		INSERT INTO tb_user (
+			user_id, emp_no, user_nm, dept_cd, rank_cd, duty_cd, cphone_num1, cphone_num2, cphone_num3, phone_num1, phone_num2, phone_num3, email_id, email_domain, hiredate, created_by, active_flg
+			)
+			VALUES (
+					#{user_id},
+					(<![CDATA[
+						SELECT /*+INDEX_DESC(TB_USER IDX_EMP_NO)*/
+						DECODE(SUBSTR(MAX(emp_no), 1, 6), TO_CHAR(SYSDATE, 'YYYYMM'), MAX(emp_no)+1, TO_CHAR(SYSDATE,
+						'YYYYMM')||'0001')emp_no
+						FROM tb_user
+						WHERE emp_no < TO_CHAR(SYSDATE, 'YYYYMM')||'9999'
+						AND ROWNUM = 1]]>),
+					#{user_nm},
+					#{dept_cd},
+					#{rank_cd},
+					#{duty_cd},
+					#{cphone_num1},
+					#{cphone_num2},
+					#{cphone_num3},
+					#{phone_num1},
+					#{phone_num2},
+					#{phone_num3},
+					#{email_id},
+					#{email_domain},
+					#{hiredate},
+					#{created_by}, 
+					'Y'
+		)
+	</insert>
 
+	<update id="userDel" parameterType="com.msp.cp.user.vo.userVO">
+		UPDATE USERS
+		SET ACTIVE_FLG = 'N'
+		where user_id = #{USER_ID}
 	</update>
-	
-<update id="userDel" parameterType="com.crm.cp.test.user.vo.userVO">
-	UPDATE USERS
-	SET ACTIVE_FLG = 'N'
-	where user_id = #{USER_ID}
-</update>
 
-<select id="userDetail"  parameterType="string" resultType="com.crm.cp.test.user.vo.userVO">
-		SELECT 
-			*
-		FROM 
-			USERS
+	<select id="userDetail" parameterType="string"
+		resultType="com.msp.cp.user.vo.userVO">
+		SELECT
+		*
+		FROM
+		TB_USER
 		WHERE
-			USER_ID = #{USER_ID}
-		  AND ACTIVE_FLG = 'Y'
-</select>
-	
-<update id="userEdit" parameterType="com.crm.cp.test.user.vo.userVO">
-		UPDATE 
-			USERS
+		USER_ID = #{USER_ID}
+		AND ACTIVE_FLG = 'Y'
+	</select>
+
+	<update id="userEdit" parameterType="com.msp.cp.user.vo.userVO">
+		UPDATE
+		TB_USER
 		SET
-			 user_name=#{USER_NAME}
-			,pwd=#{PWD}
-			,email=#{EMAIL}
-			,cell_phone=#{CELL_PHONE}
-			,home_phone=#{HOME_PHONE}
-			,company_phone=#{COMPANY_PHONE}
-			,p_channel_cd=#{P_CHANNEL_CD}
-			,user_type_cd=#{USER_TYPE_CD}
-			,org_id=#{ORG_ID}
-			
+		user_name=#{USER_NAME}
+		,pwd=#{PWD}
+		,email=#{EMAIL}
+		,cell_phone=#{CELL_PHONE}
+		,home_phone=#{HOME_PHONE}
+		,company_phone=#{COMPANY_PHONE}
+		,p_channel_cd=#{P_CHANNEL_CD}
+		,user_type_cd=#{USER_TYPE_CD}
+		,org_id=#{ORG_ID}
+
 		WHERE
-			user_id   = #{USER_ID}
+		user_id = #{USER_ID}
 	</update>
 </mapper>

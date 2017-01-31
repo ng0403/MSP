@@ -39,7 +39,7 @@ public class UserController {
 //		}
 		//userService.searchListUser();
 		System.out.println(list);
-		ModelAndView mov = new ModelAndView("/test/user/user", "list", list);
+		ModelAndView mov = new ModelAndView("/user/user", "list", list);
 		
 		return mov;
 		
@@ -50,7 +50,7 @@ public class UserController {
 	{
 		int entry_flg = 1;
 		System.out.println("userTab Controller");
-		ModelAndView mov = new ModelAndView("/test/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/userTab");
 		mov.addObject("entry_flg", entry_flg);
 		
 		return mov;
@@ -61,7 +61,7 @@ public class UserController {
 		System.out.println("userInsert Controller" + vo.toString());
 		userService.insertUser(vo);
 		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/test/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/userTab");
 		int result = 1;
 		mov.addObject("result", result);
 		System.out.println(mov);
@@ -77,7 +77,7 @@ public class UserController {
 			System.out.println(arrIdx[i]);
 			userService.userDel(arrIdx[i]);
 		}
-		return "redirect:/usertest/userlist";
+		return "redirect:/user/userlist";
 	}
 	
 	//userMdfyPop
@@ -91,33 +91,48 @@ public class UserController {
 		userVO vo= userService.searchListUserOne(user_id);
 		System.out.println("After Service : " + vo);
 		System.out.println("由ъ뒪�듃 : " + vo);
-		ModelAndView mov = new ModelAndView("test/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/userTab");
 		
-		String USER_ID = vo.getUSER_ID();
-		String USER_NAME = vo.getUSER_NAME();
-		String PWD = vo.getPWD();
-		String CELL_PHONE = vo.getCELL_PHONE();
-		String COMPANY_PHONE = vo.getCOMPANY_PHONE();
-		String P_CHANNEL_CD = vo.getP_CHANNEL_CD();
-		String USER_TYPE_CD = vo.getUSER_TYPE_CD();
-		String EMAIL = vo.getEMAIL();
-		String HOME_PHONE = vo.getHOME_PHONE();
-		String ORG_ID = vo.getORG_ID();
-		String ACTIVE_FLG = vo.getACTIVE_FLG();
+		user_id = vo.getUser_id();
+		String user_nm = vo.getUser_nm();
+		String user_pwd = vo.getUser_pwd();
+		String emp_no = vo.getEmp_no();
+		String dept_cd = vo.getDept_cd();
+		String rank_cd = vo.getRank_cd();
+		String duty_cd = vo.getDuty_cd();
+		String cphone_num1 = vo.getCphone_num1();
+		String cphone_num2 = vo.getCphone_num2();
+		String cphone_num3 = vo.getCphone_num3();
+		String phone_num1 = vo.getPhone_num1();
+		String phone_num2 = vo.getPhone_num2();
+		String phone_num3 = vo.getPhone_num3();
+		String email_id = vo.getEmail_id();
+		String email_domain = vo.getEmail_domain();
+		String hiredate = vo.getHiredate();
+		String retiredate = vo.getRetiredate();
+		String active_flg = vo.getActive_flg();
+		String del_flg = vo.getDel_flg();
 		
 		
-		mov.addObject("USER_ID",USER_ID);
-		mov.addObject("USER_NAME",USER_NAME);
-		mov.addObject("PWD",PWD);
-		mov.addObject("EMAIL",EMAIL);
-		mov.addObject("HOME_PHONE",HOME_PHONE);
-		mov.addObject("CELL_PHONE",CELL_PHONE);
-		mov.addObject("COMPANY_PHONE",COMPANY_PHONE);
-		mov.addObject("P_CHANNEL_CD",P_CHANNEL_CD);
-		mov.addObject("USER_TYPE_CD",USER_TYPE_CD);
-		mov.addObject("ORG_ID",ORG_ID);
-		mov.addObject("ACTIVE_FLG",ACTIVE_FLG);
-		mov.addObject("entry_flg", entry_flg);
+		
+		
+		mov.addObject("user_id",user_id);
+		mov.addObject("user_nm",user_nm);
+		mov.addObject("user_pwd",user_pwd);
+		mov.addObject("emp_no",emp_no);
+		mov.addObject("dept_cd",dept_cd);
+		mov.addObject("rank_cd",rank_cd);
+		mov.addObject("duty_cd",duty_cd);
+		mov.addObject("cphone_num1",cphone_num1);
+		mov.addObject("cphone_num2",cphone_num2);
+		mov.addObject("cphone_num3",cphone_num3);
+		mov.addObject("phone_num1",phone_num1);
+		mov.addObject("phone_num2",phone_num2);
+		mov.addObject("phone_num3",phone_num3);
+		mov.addObject("email_id",email_id);
+		mov.addObject("email_domain",email_domain);
+		mov.addObject("hiredate",hiredate);
+		mov.addObject("del_flg", del_flg);
 		
 		return mov;
 	}
@@ -126,13 +141,13 @@ public class UserController {
 	@RequestMapping(value="/userMdfy", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userMdfy(userVO vo, HttpServletRequest req)
 	{
-		String user_id = vo.getUSER_ID();
+		String user_id = vo.getUser_id();
 		
-		vo.setUSER_ID(user_id);
-		System.out.println("�젙蹂댁닔�젙 controller " + vo.getUSER_ID());
+		vo.setUser_id(user_id);
+		System.out.println("�젙蹂댁닔�젙 controller " + vo.getUser_id());
 		userService.userMdfy(vo);
 		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/test/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/userTab");
 		int result = 1;
 		mov.addObject("result", result);
 		System.out.println(mov);

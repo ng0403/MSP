@@ -4,93 +4,159 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class userVO {
-		String USER_ID;
-		String PWD;
-		String USER_NAME;
-		String EMAIL;
-		String CELL_PHONE;
-		String HOME_PHONE;
-		String COMPANY_PHONE;
-		String P_CHANNEL_CD;
-		String USER_TYPE_CD;
-		String ORG_ID;
-		String ACTIVE_FLG;
-		
-		
-		public String getUSER_ID() {
-			return USER_ID;
-		}
-		public void setUSER_ID(String uSER_ID) {
-			USER_ID = uSER_ID;
-		}
-		public String getPWD() {
-			return PWD;
-		}
-		public void setPWD(String pWD) {
-			PWD = pWD;
-		}
-		public String getUSER_NAME() {
-			return USER_NAME;
-		}
-		public void setUSER_NAME(String uSER_NAME) {
-			USER_NAME = uSER_NAME;
-		}
-		public String getEMAIL() {
-			return EMAIL;
-		}
-		public void setEMAIL(String eMAIL) {
-			EMAIL = eMAIL;
-		}
-		public String getCELL_PHONE() {
-			return CELL_PHONE;
-		}
-		public void setCELL_PHONE(String cELL_PHONE) {
-			CELL_PHONE = cELL_PHONE;
-		}
-		public String getHOME_PHONE() {
-			return HOME_PHONE;
-		}
-		public void setHOME_PHONE(String hOME_PHONE) {
-			HOME_PHONE = hOME_PHONE;
-		}
-		public String getCOMPANY_PHONE() {
-			return COMPANY_PHONE;
-		}
-		public void setCOMPANY_PHONE(String cOMPANY_PHONE) {
-			COMPANY_PHONE = cOMPANY_PHONE;
-		}
-		public String getP_CHANNEL_CD() {
-			return P_CHANNEL_CD;
-		}
-		public void setP_CHANNEL_CD(String p_CHANNEL_CD) {
-			P_CHANNEL_CD = p_CHANNEL_CD;
-		}
-		public String getUSER_TYPE_CD() {
-			return USER_TYPE_CD;
-		}
-		public void setUSER_TYPE_CD(String uSER_TYPE_CD) {
-			USER_TYPE_CD = uSER_TYPE_CD;
-		}
-		public String getORG_ID() {
-			return ORG_ID;
-		}
-		public void setORG_ID(String oRG_ID) {
-			ORG_ID = oRG_ID;
-		}
-		public String getACTIVE_FLG() {
-			return ACTIVE_FLG;
-		}
-		public void setACTIVE_FLG(String aCTIVE_FLG) {
-			ACTIVE_FLG = aCTIVE_FLG;
-		}
-		@Override
-		public String toString() {
-			return "userVO [USER_ID=" + USER_ID + ", PWD=" + PWD + ", USER_NAME=" + USER_NAME + ", EMAIL=" + EMAIL
-					+ ", CELL_PHONE=" + CELL_PHONE + ", HOME_PHONE=" + HOME_PHONE + ", COMPANY_PHONE=" + COMPANY_PHONE
-					+ ", P_CHANNEL_CD=" + P_CHANNEL_CD + ", USER_TYPE_CD=" + USER_TYPE_CD + ", ORG_ID=" + ORG_ID
-					+ ", ACTIVE_FLG=" + ACTIVE_FLG + "]";
-		}
-		
-		
+	String user_id;
+	String user_pwd;
+	String emp_no;
+	String user_nm;
+	String dept_cd;
+	String rank_cd;
+	String duty_cd;
+	String cphone_num1;
+	String cphone_num2;
+	String cphone_num3;
+	String phone_num1;
+	String phone_num2;
+	String phone_num3;
+	String email_id;
+	String email_domain;
+	String hiredate;
+	String created_by;
+	String retiredate;
+	String active_flg;
+	String del_flg;
+	
+	
+	
+	public String getDel_flg() {
+		return del_flg;
+	}
+	public void setDel_flg(String del_flg) {
+		this.del_flg = del_flg;
+	}
+	public String getRetiredate() {
+		return retiredate;
+	}
+	public void setRetiredate(String retiredate) {
+		this.retiredate = retiredate;
+	}
+	public String getUser_pwd() {
+		return user_pwd;
+	}
+	public void setUser_pwd(String user_pwd) {
+		this.user_pwd = user_pwd;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getEmp_no() {
+		return emp_no;
+	}
+	public void setEmp_no(String emp_no) {
+		this.emp_no = emp_no;
+	}
+	public String getUser_nm() {
+		return user_nm;
+	}
+	public void setUser_nm(String user_nm) {
+		this.user_nm = user_nm;
+	}
+	public String getDept_cd() {
+		return dept_cd;
+	}
+	public void setDept_cd(String dept_cd) {
+		this.dept_cd = dept_cd;
+	}
+	public String getRank_cd() {
+		return rank_cd;
+	}
+	public void setRank_cd(String rank_cd) {
+		this.rank_cd = rank_cd;
+	}
+	public String getDuty_cd() {
+		return duty_cd;
+	}
+	public void setDuty_cd(String duty_cd) {
+		this.duty_cd = duty_cd;
+	}
+	public String getCphone_num1() {
+		return cphone_num1;
+	}
+	public void setCphone_num1(String cphone_num1) {
+		this.cphone_num1 = cphone_num1;
+	}
+	public String getCphone_num2() {
+		return cphone_num2;
+	}
+	public void setCphone_num2(String cphone_num2) {
+		this.cphone_num2 = cphone_num2;
+	}
+	public String getCphone_num3() {
+		return cphone_num3;
+	}
+	public void setCphone_num3(String cphone_num3) {
+		this.cphone_num3 = cphone_num3;
+	}
+	public String getPhone_num1() {
+		return phone_num1;
+	}
+	public void setPhone_num1(String phone_num1) {
+		this.phone_num1 = phone_num1;
+	}
+	public String getPhone_num2() {
+		return phone_num2;
+	}
+	public void setPhone_num2(String phone_num2) {
+		this.phone_num2 = phone_num2;
+	}
+	public String getPhone_num3() {
+		return phone_num3;
+	}
+	public void setPhone_num3(String phone_num3) {
+		this.phone_num3 = phone_num3;
+	}
+	public String getEmail_id() {
+		return email_id;
+	}
+	public void setEmail_id(String email_id) {
+		this.email_id = email_id;
+	}
+	public String getEmail_domain() {
+		return email_domain;
+	}
+	public void setEmail_domain(String email_domain) {
+		this.email_domain = email_domain;
+	}
+	public String getHiredate() {
+		return hiredate;
+	}
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
+	}
+	public String getCreated_by() {
+		return created_by;
+	}
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
+	public String getActive_flg() {
+		return active_flg;
+	}
+	public void setActive_flg(String active_flg) {
+		this.active_flg = active_flg;
+	}
+	@Override
+	public String toString() {
+		return "userVO [user_id=" + user_id + ",user_pwd=" + user_pwd + ", emp_no=" + emp_no + ", user_nm=" + user_nm + ", dept_cd=" + dept_cd
+				+ ", rank_cd=" + rank_cd + ", duty_cd=" + duty_cd + ", cphone_num1=" + cphone_num1 + ", cphone_num2="
+				+ cphone_num2 + ", cphone_num3=" + cphone_num3 + ", phone_num1=" + phone_num1 + ", phone_num2="
+				+ phone_num2 + ", phone_num3=" + phone_num3 + ", email_id=" + email_id + ", email_domain="
+				+ email_domain + ", hiredate=" + hiredate + ",retiredate=" + retiredate + ", created_by=" + created_by + ", active_flg=" + active_flg+ ", del_flg=" + del_flg
+				+ "]";
+	}
+	
+	
 }
 
