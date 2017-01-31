@@ -15,7 +15,7 @@ public class BoardDaoImpl implements BoardDao {
 	SqlSession sqlsession;
 
 	@Override
-	public List<BoardVO> list() {
+	public List<BoardVO> list() {	
 		 
 		return null;
 	}
