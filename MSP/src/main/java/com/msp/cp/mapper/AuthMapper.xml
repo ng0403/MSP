@@ -2,8 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="auth">
 
-<select id="">
-
-
+<select id="searchListAuth" parameterType="string" resultType="map">
+SELECT
+    AUTH_ID,
+    AUTH_NM,
+    ACTIVE_FLG,
+    DEL_FLG,
+    CREATED_BY,
+    CREATED,
+    UPDATED_BY,
+    UPDATED
+FROM TB_AUTH;
+WHERE ACTIVE_FLG = 'Y'
 </select>
+
 </mapper>
