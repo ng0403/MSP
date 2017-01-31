@@ -16,4 +16,58 @@ FROM TB_AUTH;
 WHERE ACTIVE_FLG = 'Y'
 </select>
 
+<select id="authCheck" parameterType="com.crm.cp.auth..vo.AuthVO" resultType="map">
+SELECT
+	AUTH_ID,
+    AUTH_NM,
+    ACTIVE_FLG,
+    DEL_FLG,
+    CREATED_BY,
+    CREATED,
+    UPDATED_BY,
+    UPDATED 
+FROM TB_AUTH
+WHERE AUTH_ID = #{AUTH_ID}
+</select>	
+
+<update id = "insertAuth" parameterType = "com.crm.cp.auth..vo.AuthVO"> 
+INSERT INTO TB_AUTH
+( 
+    AUTH_ID,
+    AUTH_NM,
+    ACTIVE_FLG,
+    DEL_FLG,
+    CREATED_BY,
+    CREATED,
+    UPDATED_BY,
+    UPDATED
+)
+VALUES
+(
+    #{AUTH_ID},
+    #{AUTH_NM},
+    #{ACTIVE_FLG},
+    'Y',
+    '관리자',
+    SYSDATE,
+    '',
+    ''
+)	
+</update>
+	
+<update id = "updateAuth" parameterType = "com.crm.cp.auth..vo.AuthVO"> 
+UPDATE TB_AUTH
+SET AUTH_NM = #{AUTH_ID},
+    ACTIVE_FLG = #{ACTIVE_FLG},
+    DEL_FLG = #{DEL_FLG}
+WHERE  AUTH_ID = 'AUT1000001';
+</update>
+	
+<update id = "deleteAuth" parameterType="String">
+UPDATE TB_AUTH
+SET ACTIVE_FLG = 'N',
+    DEL_FLG = 'N'
+WHERE  AUTH_ID = 'AUT1000001';
+</update>
+
 </mapper>
