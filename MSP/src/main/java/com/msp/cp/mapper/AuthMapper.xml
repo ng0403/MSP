@@ -16,7 +16,7 @@ FROM TB_AUTH;
 WHERE ACTIVE_FLG = 'Y'
 </select>
 
-<select id="authCheck" parameterType="com.crm.cp.auth..vo.AuthVO" resultType="map">
+<select id="authCheck" parameterType="com.msp.cp.auth.vo.AuthVO" resultType="map">
 SELECT
 	AUTH_ID,
     AUTH_NM,
@@ -30,7 +30,7 @@ FROM TB_AUTH
 WHERE AUTH_ID = #{AUTH_ID}
 </select>	
 
-<update id = "insertAuth" parameterType = "com.crm.cp.auth..vo.AuthVO"> 
+<update id = "insertAuth" parameterType = "com.msp.cp.auth.vo.AuthVO"> 
 INSERT INTO TB_AUTH
 ( 
     AUTH_ID,
@@ -55,7 +55,7 @@ VALUES
 )	
 </update>
 	
-<update id = "updateAuth" parameterType = "com.crm.cp.auth..vo.AuthVO"> 
+<update id = "updateAuth" parameterType = "com.msp.cp.auth.vo.AuthVO"> 
 UPDATE TB_AUTH
 SET AUTH_NM = #{AUTH_ID},
     ACTIVE_FLG = #{ACTIVE_FLG},
