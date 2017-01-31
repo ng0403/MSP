@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+<select id="searchListUser" parameterType="string" resultType="map">
+		SELECT *
+		FROM USERS
+		where ACTIVE_FLG='Y'
+</select>
+
+<update id="userInsert" parameterType="com.crm.cp.test.user.vo.userVO">
+		INSERT INTO USERS(
+			user_id, user_name ,pwd ,email ,cell_phone ,home_phone 
+			, company_phone ,p_channel_cd ,user_type_cd ,org_id ,active_flg  )
+		VALUES( #{USER_ID},#{USER_NAME},#{PWD}
+		,#{EMAIL},#{CELL_PHONE},#{HOME_PHONE}
+		,#{COMPANY_PHONE},#{P_CHANNEL_CD},#{USER_TYPE_CD}
+		,#{ORG_ID},'Y')
+
+	</update>
+	
+<update id="userDel" parameterType="com.crm.cp.test.user.vo.userVO">
+	UPDATE USERS
+	SET ACTIVE_FLG = 'N'
+	where user_id = #{USER_ID}
+</update>
+
+<select id="userDetail"  parameterType="string" resultType="com.crm.cp.test.user.vo.userVO">
+		SELECT 
+			*
+		FROM 
+			USERS
+		WHERE
+			USER_ID = #{USER_ID}
+		  AND ACTIVE_FLG = 'Y'
+</select>
+	
+<update id="userEdit" parameterType="com.crm.cp.test.user.vo.userVO">
+		UPDATE 
+			USERS
+		SET
+			 user_name=#{USER_NAME}
+			,pwd=#{PWD}
+			,email=#{EMAIL}
+			,cell_phone=#{CELL_PHONE}
+			,home_phone=#{HOME_PHONE}
+			,company_phone=#{COMPANY_PHONE}
+			,p_channel_cd=#{P_CHANNEL_CD}
+			,user_type_cd=#{USER_TYPE_CD}
+			,org_id=#{ORG_ID}
+			
+		WHERE
+			user_id   = #{USER_ID}
+	</update>
+</mapper>

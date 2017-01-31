@@ -8,6 +8,6 @@ import com.msp.cp.board.vo.BoardVO;
 
 public interface BoardDao {
 	
-	public List<BoardVO> list();
+	public List<BoardVO> list(BoardVO vo);
 
 }
