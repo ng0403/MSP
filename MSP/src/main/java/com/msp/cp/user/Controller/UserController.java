@@ -17,7 +17,7 @@ import com.msp.cp.user.Service.UserService;
 import com.msp.cp.user.vo.userVO;
 
 @Controller
-@RequestMapping(value="/usertest")
+@RequestMapping(value="/user")
 public class UserController {
 	
 	@Autowired
