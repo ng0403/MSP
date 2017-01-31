@@ -1,0 +1,80 @@
+@CHARSET "UTF-8";
+
+.list_prod_id,
+list_prod_id{
+	cursor : pointer;
+	color: blue;
+}
+
+#act_list_table tr,
+#act_list_table tr td{
+	height:25px;
+}
+
+.prod_page_txt{
+	position:relative;
+	width:22px;
+	height:20px;
+	border:1px solid #bebebe;
+	color:#232323;
+	border-radius: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.sprod_nm{
+	position:relative;
+	width:150px;
+	height:24px;
+	border:1px solid #bebebe;
+	color:#232323;
+	border-radius: 5px 5px 5px 5px;
+	margin-right: 20px;
+}
+
+.prod_label_search{
+	margin-right: 10px;
+}
+
+.prod_page_div{
+	color:#232323;
+	float:left;
+	margin-top:10px;
+	font-weight: bold;
+}
+
+.prod_page_txt{
+	position:relative;
+	width:22px;
+	height:20px;
+	border:1px solid #bebebe;
+	color:#232323;
+	border-radius: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.end_text{
+	position:relative;
+	width:230px;
+	height:24px;
+	border:1px solid #bebebe;
+	color:#232323;
+	border-radius: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.prod_cate{
+	background-color:#eaeaea;
+ 	 color:#353535;
+ 	 border:1px solid #C0C4CB;
+ 	 padding:5px 5px;
+ 	 border-radius:5px 5px 5px 5px;
+ 	 width: auto;
+ 	 margin-right: 5px;
+ 	 cursor: pointer;
+ 	 vertical-align: middle;
+}
+
+.prodTarea{
+	border:1px solid #C0C4CB;
+	border-radius:5px 5px 5px 5px;
+}

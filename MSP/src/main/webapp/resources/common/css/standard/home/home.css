@@ -1,0 +1,120 @@
+@CHARSET "UTF-8";
+html{
+	font-family: 'Nanum Gothic', Dotum, "돋움", Gulim, "굴림", Verdana, Arial, "Trebuchet MS";
+	font-size: 13px;
+}
+#title .caption{
+  	color:#484848;
+  	font-weight:bold;
+  	border-bottom: 1px solid #dddddd;
+  	margin-bottom: 20px;
+  	padding-bottom: 10px;
+  }
+
+#left_home{
+	width:47%;
+	heiht:30%;
+	border-radius: 5px 5px 5px 5px;
+	border:1px solid #bebebe;
+	float: left;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 40px;
+} 
+
+#right_home{
+	width:47%;
+	heiht:30%;
+	border-radius: 5px 5px 5px 5px;
+	border:1px solid #bebebe;
+	float: right;
+	padding-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 40px;
+}
+
+#contract_title{
+	color:#484848;
+  	font-weight:bold;
+  	font-family: 'Nanum Gothic', Dotum, "돋움", Gulim, "굴림", Verdana, Arial, "Trebuchet MS";
+  	border-bottom: 1px solid #dddddd;
+  	padding-left: 10px;
+  	padding-top:10px;
+  	padding-bottom: 10px;
+  	
+} 
+
+.detailPopbtn{	  
+	 float: right;
+	 font-weight: normal;
+  	 background-color:#eaeaea;
+ 	 color:#353535;
+ 	 white-space: nowrap;
+ 	 border:1px solid #C0C4CB;
+ 	 padding:3.5px 3.5px;
+ 	 border-radius:5px 5px 5px 5px;
+ 	 width: auto;
+ 	 margin-right: 5px;
+ 	 cursor: pointer;
+ 	 vertical-align: middle;  
+ 	 text-align:center;
+ 	 margin-top: -5px;
+}
+
+.contract_detail:hover,
+.contract_detail:focus,
+.contract_detail:active,
+.contract_detail.active{
+  color: #333333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+
+ #tableline{
+	padding-top: 20px;
+	width: 100%;	
+}
+
+#tableline2{
+	float:right;
+	padding-top: 19px;
+	width: 70%; 
+}
+
+#goaltable{
+	border: 2px solid #DDD;
+	width: 100%;
+	height:80px;
+	border-collapse: collapse;
+}
+
+#goaltable th{
+	width: 5%;
+	text-align: center;
+}
+
+#goaltable thead{
+	text-align: center;
+}
+
+#goaltable tr,
+#goaltable tr td{
+	border: 1px solid #DDD;
+}
+
+#goaltable thead th,
+#goaltable thead td {
+	background-color: #F2F2F2;
+	font-weight: bold;
+	height:10px;
+	padding: 5px 5px;
+	
+}
+
+#goaltable tbody tr,
+#goaltable tbody tr td {
+	text-align: center;
+}
+
