@@ -8,7 +8,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/iuser/iuserTab.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userTab.css" type="text/css" />
  <title>Insert title here</title>
  <c:if test="${result=='1'}" var = "result"> 
 	<script type="text/javascript">
@@ -26,10 +26,12 @@
 		{
 			//$('#addsave_btn').CSS('display', "hidden");
 			$('#joinform').find('input[type="text"]').attr('disabled',false).attr('readonly', false);
+			$('#emp_no').attr('display',none);
 			//$('#modifysave_btn').css("visibility","hidden");
 
 		}else{
 			$('#user_id').attr("readonly", true);
+			$('#emp_no').attr('display',block);
 			$('#joinform').find('input[type="text"]').attr('disabled',true);
 		    $('#joinform').find('input[type="password"]').attr('disabled',true);
 	        $('#joinform').find('input[type="email"]').attr('disabled',true);
@@ -66,6 +68,7 @@
 					$('#joinform').find('input[type="text"]').attr('disabled',false);
 					$('#joinform').find('input[type="password"]').attr('disabled',false);
 					$('#user_id').attr("readonly", true);
+					$('#emp_no').attr("readonly", true);
 					$('#addsave_btn').css("visibility","hidden");
 					$('#modify_btn').attr("disabled", true);
 					$('#submit_btn').attr("disabled", true);
@@ -115,7 +118,7 @@
 								<input type="hidden" id="user_id_h" value="${user_id}">
 								<input type="hidden" id="created_by" value="">
 								<input type="hidden" id="active_flg" value="${active_flg}">
- 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:90%" value="${user_id}"></input>
+ 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:40%" value="${user_id}"/><input type="text" name="emp_no" id="emp_no" class="iuser_txt" style=" width:40%" value="${emp_no}"/>
  							</td>
  							<th>직급</th>
  							<td>
@@ -137,7 +140,7 @@
 						<tr>
 							<th>비밀번호</th>
 							<td>
-								<input type="password" name="user_pwd" id="user_pwd" class="iuser_txt" style="width:90%" value="${user_pwd}"></input>
+								<input type="password" name="user_pwd" id="user_pwd" class="iuser_txt" style="width:45%" value="${user_pwd}"></input>
 							</td>
 							<th>조직ID</th>
 							<td>
@@ -159,18 +162,18 @@
 						<tr>
 							<th>비밀번호확인</th>
 							<td>
-								<input type="password" name="user_pwd_chk" id="user_pwd_chk" class="iuser_txt" style="width:90%"></input>
+								<input type="password" name="user_pwd_chk" id="user_pwd_chk" class="iuser_txt" style="width:45%"></input>
 							</td>
 						</tr>
 						<tr>	
-							<th>사용자명</th>
-							<td>
+							<th colspan="2" align="left">사용자명</th>
+							<td colspan="2" align="left">
 								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" style="width:90%" value="${user_nm}"></input>
 							</td>
 						</tr>
 						<tr>
-							<th>휴대 전화</th>
-							<td>
+							<th colspan="2" align="left">휴대 전화</th>
+							<td colspan="2" align="left">
 								<select name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:90%">
 									<option name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:90%"value="010">010</option>
 									<option value="011">011</option>
@@ -180,22 +183,22 @@
 							</td>
 						</tr>
 						<tr>
-							<th>이메일</th>
-							<td>
+							<th colspan="2" align="left">이메일</th>
+							<td colspan="2" align="left">
 								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:90%" value="${email_id}">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:90%" value="${email_domain}"> 
  							</td>
  						</tr>
 						<tr>
-							<th>부서</th>
-							<td>
+							<th colspan="2" align="left">부서</th>
+							<td colspan="2" align="left">
 								<%-- <input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> --%> 
 								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}"/>
 								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색"/>
 							</td>
 						</tr>
 						<tr>
-							<th>내선전화</th>
-							<td>
+							<th colspan="2" align="left">내선전화</th>
+							<td colspan="2" align="left">
 							<select name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="" style="width:90%">
 									<option name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="3" style="width:90%"value="02">02</option>
 									<option value="031">031</option>
