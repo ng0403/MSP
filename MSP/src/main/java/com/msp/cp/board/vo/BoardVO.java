@@ -1,126 +1,116 @@
 package com.msp.cp.board.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class BoardVO {
 	
-	private String board_no;
-	private String board_mng_no;
-	private String file_cd;
-	private String title;
-	private String content;
-	private String view_cnt;
-	private String question_type_cd;
-	private String answer_flg;
-	private String active_flg;
-	private String del_flg;
-	private String created_by;
-	private Date created;
-	private String updated_by;
-	private Date updated; 
+	private int BOARD_NO;
+	private String BOARD_MNG_NO;
+	private String FILE_CD;
+	private String TITLE;
+	private String CONTENT;
+	private int VIEW_CNT;
+	private String QUESTION_TYPE_CD;
+	private String ANSWER_FLG;
+	private String ACTIVE_FLG;
+	private String DEL_FLG;
+	private String CREATED_BY;
+	private Date CREATED;
+	private String UPDATED_BY;
+	private String UPDATED;
 	
-	public String getBoard_no() {
-		return board_no;
-	} 
-
-
-	public void setBoard_no(String board_no) {
-		this.board_no = board_no;
-	} 
-
-	public String getBoard_mng_no() {
-		return board_mng_no;
-	} 
-
-	public void setBoard_mng_no(String board_mng_no) {
-		this.board_mng_no = board_mng_no;
-	} 
-	public String getFile_cd() {
-		return file_cd;
-	} 
-	public void setFile_cd(String file_cd) {
-		this.file_cd = file_cd;
-	} 
-
-	public String getTitle() {
-		return title;
-	} 
-
-	public void setTitle(String title) {
-		this.title = title;
+	public int getBOARD_NO() {
+		return BOARD_NO;
 	}
-  
-	public String getContent() {
-		return content;
+	public void setBOARD_NO(int bOARD_NO) {
+		BOARD_NO = bOARD_NO;
 	}
-  
-	public void setContent(String content) {
-		this.content = content;
-	} 
-	public String getView_cnt() {
-		return view_cnt;
-	} 
-	public void setView_cnt(String view_cnt) {
-		this.view_cnt = view_cnt;
-	} 
-	public String getQuestion_type_cd() {
-		return question_type_cd;
-	}  
-	public void setQuestion_type_cd(String question_type_cd) {
-		this.question_type_cd = question_type_cd;
-	} 
-	public String getAnswer_flg() {
-		return answer_flg;
-	} 
-	public void setAnswer_flg(String answer_flg) {
-		this.answer_flg = answer_flg;
-	} 
-	public String getActive_flg() {
-		return active_flg;
-	} 
-	public void setActive_flg(String active_flg) {
-		this.active_flg = active_flg;
-	} 
-	public String getDel_flg() {
-		return del_flg;
-	} 
-	public void setDel_flg(String del_flg) {
-		this.del_flg = del_flg;
-	} 
-	public String getCreated_by() {
-		return created_by;
-	} 
-	public void setCreated_by(String created_by) {
-		this.created_by = created_by;
-	}  
-	public Date getCreated() {
-		return created;
-	} 
-	public void setCreated(Date created) {
-		this.created = created;
-	} 
-	public String getUpdated_by() {
-		return updated_by;
-	}  
-	public void setUpdated_by(String updated_by) {
-		this.updated_by = updated_by;
-	} 
-	public Date getUpdated() {
-		return updated;
-	} 
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	} 
+	public String getBOARD_MNG_NO() {
+		return BOARD_MNG_NO;
+	}
+	public void setBOARD_MNG_NO(String bOARD_MNG_NO) {
+		BOARD_MNG_NO = bOARD_MNG_NO;
+	}
+	public String getFILE_CD() {
+		return FILE_CD;
+	}
+	public void setFILE_CD(String fILE_CD) {
+		FILE_CD = fILE_CD;
+	}
+	public String getTITLE() {
+		return TITLE;
+	}
+	public void setTITLE(String tITLE) {
+		TITLE = tITLE;
+	}
+	public String getCONTENT() {
+		return CONTENT;
+	}
+	public void setCONTENT(String cONTENT) {
+		CONTENT = cONTENT;
+	}
+	public int getVIEW_CNT() {
+		return VIEW_CNT;
+	}
+	public void setVIEW_CNT(int vIEW_CNT) {
+		VIEW_CNT = vIEW_CNT;
+	}
+	public String getQUESTION_TYPE_CD() {
+		return QUESTION_TYPE_CD;
+	}
+	public void setQUESTION_TYPE_CD(String qUESTION_TYPE_CD) {
+		QUESTION_TYPE_CD = qUESTION_TYPE_CD;
+	}
+	public String getANSWER_FLG() {
+		return ANSWER_FLG;
+	}
+	public void setANSWER_FLG(String aNSWER_FLG) {
+		ANSWER_FLG = aNSWER_FLG;
+	}
+	public String getACTIVE_FLG() {
+		return ACTIVE_FLG;
+	}
+	public void setACTIVE_FLG(String aCTIVE_FLG) {
+		ACTIVE_FLG = aCTIVE_FLG;
+	}
+	public String getDEL_FLG() {
+		return DEL_FLG;
+	}
+	public void setDEL_FLG(String dEL_FLG) {
+		DEL_FLG = dEL_FLG;
+	}
+	public String getCREATED_BY() {
+		return CREATED_BY;
+	}
+	public void setCREATED_BY(String cREATED_BY) {
+		CREATED_BY = cREATED_BY;
+	}
+	 
+	public Date getCREATED() {
+		return CREATED;
+	}
+	public void setCREATED(Date cREATED) {
+		CREATED = cREATED;
+	}
+	public String getUPDATED_BY() {
+		return UPDATED_BY;
+	}
+	public void setUPDATED_BY(String uPDATED_BY) {
+		UPDATED_BY = uPDATED_BY;
+	}
+	public String getUPDATED() {
+		return UPDATED;
+	}
+	public void setUPDATED(String uPDATED) {
+		UPDATED = uPDATED;
+	}
 	@Override
 	public String toString() {
-		return "BoardVO [board_no=" + board_no + ", board_mng_no=" + board_mng_no + ", file_cd=" + file_cd + ", title="
-				+ title + ", content=" + content + ", view_cnt=" + view_cnt + ", question_type_cd=" + question_type_cd
-				+ ", answer_flg=" + answer_flg + ", active_flg=" + active_flg + ", del_flg=" + del_flg + ", created_by="
-				+ created_by + ", created=" + created + ", updated_by=" + updated_by + ", updated=" + updated + "]";
-	}
-	
+		return "BoardVO [BOARD_NO=" + BOARD_NO + ", BOARD_MNG_NO=" + BOARD_MNG_NO + ", FILE_CD=" + FILE_CD + ", TITLE="
+				+ TITLE + ", CONTENT=" + CONTENT + ", VIEW_CNT=" + VIEW_CNT + ", QUESTION_TYPE_CD=" + QUESTION_TYPE_CD
+				+ ", ANSWER_FLG=" + ANSWER_FLG + ", ACTIVE_FLG=" + ACTIVE_FLG + ", DEL_FLG=" + DEL_FLG + ", CREATED_BY="
+				+ CREATED_BY + ", CREATED=" + CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED + "]";
+	} 
 	 
-	
   
 }

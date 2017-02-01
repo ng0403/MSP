@@ -3,11 +3,16 @@
 <mapper namespace="board">
 
 
-<select id="BoardList" resultType="com.msp.cp.board.vo.BoardVO">
+<select id="BoardList" resultType="map">
 SELECT
   *
-FROM tb_board;
+FROM tb_board
  </select>
-
+ 
+ <select id="ReadPage"  resultType="com.msp.cp.board.vo.BoardVO">
+ SELECT TITLE, CONTENT, CREATED, CREATED_BY, VIEW_CNT 
+ FROM TB_BOARD
+ WHERE BOARD_NO = #{BOARD_NO}
+ </select>
 
 </mapper>

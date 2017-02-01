@@ -8,6 +8,7 @@ import com.msp.cp.board.vo.BoardVO;
 
 public interface BoardDao {
 	
-	public List<BoardVO> list(BoardVO vo);
+	public List<Object> list();
+	public BoardVO readPage(int BOARD_NO);
 
 }

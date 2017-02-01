@@ -18,9 +18,15 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVO> list(BoardVO vo) {	
+	public List<Object> list() {	
 		 
-		return sqlSession.selectList("BoardList", vo);
+		return sqlSession.selectList("BoardList");
+	}
+
+	@Override
+	public BoardVO readPage(int BOARD_NO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ReadPage", BOARD_NO);
 	}
 
 }
