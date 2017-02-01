@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dept">
+
+	<select id="selectDept" parameterType="com.msp.cp.dept.vo.DeptVO" resultType="com.msp.cp.dept.vo.DeptVO">
+		SELECT
+			dept_cd
+			,dept_nm
+			,dept_num1
+			,dept_num2
+			,dept_num3
+			,dept_fnum1
+			,dept_fnum2
+			,dept_fnum3
+			,active_flg
+		FROM TB_DEPT
+		WHERE
+			del_flg='N'
+	</select>
+	
+	<select id="selectDetailDept" parameterType="com.msp.cp.dept.vo.DeptVO"
+		resultType="com.msp.cp.dept.vo.DeptVO">
+		SELECT
+			dept_cd
+			,dept_nm
+			,dept_num1
+			,dept_num2
+			,dept_num3
+			,dept_fnum1
+			,dept_fnum2
+			,dept_fnum3
+			,active_flg
+		FROM TB_DEPT
+		WHERE
+			dept_cd = #{dept_cd}
+			AND del_flg = 'N'
+	</select>
+
+	<insert id="InsertDept" parameterType="com.msp.cp.dept.vo.DeptVO">
+		INSERT INTO TB_DEPT (
+			dept_cd
+			,dept_nm
+			,dept_num1
+			,dept_num2
+			,dept_num3
+			,dept_fnum1
+			,dept_fnum2
+			,dept_fnum3
+			,active_flg
+			,created_by
+			)
+		VALUES (
+			(SELECT /*+INDEX_DESC(TB_DEPT TB_DEPT_PK)*/
+				DECODE(SUBSTR(MAX(dept_cd), 1, 3), null, 'DEP1000001', SUBSTR(MAX(dept_cd), 1, 3)||(SUBSTR(MAX(dept_cd), 4, 7))+1)dept_cd
+			FROM TB_DEPT
+			WHERE
+				ROWNUM = 1)
+			,#{dept_nm}
+			,#{dept_num1}
+			,#{dept_num2}
+			,#{dept_num3}
+			,#{dept_fnum1}
+			,#{dept_fnum2}
+			,#{dept_fnum3}
+			,#{active_flg}
+			,#{created_by}
+		)
+	</insert>
+	
+	
+	<update id="updateDept" parameterType="com.msp.cp.dept.vo.DeptVO">
+		UPDATE TB_DEPT
+		SET
+			dept_nm = #{dept_nm}
+			,dept_num1 = #{dept_num1}
+			,dept_num2 = #{dept_num2}
+			,dept_num3 = #{dept_num3}
+			,dept_fnum1 = #{dept_fnum1}
+			,dept_fnum2 = #{dept_fnum2}
+			,dept_fnum3 = #{dept_fnum3}
+			,active_flg = #{active_flg}
+			,updated_by = #{created_by}
+			,updated = sysdate
+		WHERE
+			WHERE DEPT_CD = #{dept_cd}
+	</update>
+
+	<update id="delDept" parameterType="com.msp.cp.dept.vo.DeptVO">
+		UPDATE TB_DEPT
+		SET DEL_FLG = 'Y'
+		WHERE DEPT_CD = #{dept_cd}
+	</update>
+
+</mapper>

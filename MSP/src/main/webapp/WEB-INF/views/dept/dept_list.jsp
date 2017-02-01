@@ -19,7 +19,7 @@
 			<div class="search2_div">
 				<form id="searchForm" name="searchForm">
 					<input type="text" id="keyword" name="keyword"> &nbsp;
-					<input type="button" id="dept_inqr_fbtn" value="검색">
+					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
 				</form>
 			</div>
 		</div>
@@ -153,14 +153,19 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="btn_div">
+						<input type="button" id="dept_save_fbtn" class="func_btn" value="저장">
+						<input type="button" id="dept_edit_fbtn" class="nonfunc_btn" value="편집">
+						<input type="button" id="dept_reset_fbtn" class="nonfunc_btn" value="초기화">
+					</div>
 				</form>
 			</div>
 		</div>
 		<div class="paging_div">
-			<input type="button" id="dept_add_fbtn" value="추가">
-			<input type="button" id="dept_del_fbtn" value="삭제">
-			<input type="button" id="dept_del_fbtn" value="삭제">
-			<input type="button" id="dept_del_fbtn" value="삭제">
+			<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
+			<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">
+			<input type="button" id="dept_exIm_fbtn" class="func_btn" value="excelImport">
+			<input type="button" id="dept_exEx_fbtn" class="func_btn" value="excelExport">
 		</div>
 	</div>
 </body>
