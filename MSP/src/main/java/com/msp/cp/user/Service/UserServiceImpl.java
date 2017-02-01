@@ -15,8 +15,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Object> searchListUser() {
-		
+		System.out.println("User List Search Service Impl");
 		List<Object> obj = userDao.searchListUser();
+		System.out.println("User List Search Service Impl" + obj.toString());
 		return obj;
 	}
 
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void insertUser(userVO vo) {
+		System.out.println("insert start ServiceImpl");
 		userDao.insert(vo);
 		System.out.println("insert success ServiceImpl");
 		

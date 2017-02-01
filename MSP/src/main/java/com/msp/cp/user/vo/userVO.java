@@ -9,6 +9,7 @@ public class userVO {
 	String emp_no;
 	String user_nm;
 	String dept_cd;
+	String dept_nm;
 	String rank_cd;
 	String duty_cd;
 	String cphone_num1;
@@ -27,6 +28,12 @@ public class userVO {
 	
 	
 	
+	public String getDept_nm() {
+		return dept_nm;
+	}
+	public void setDept_nm(String dept_nm) {
+		this.dept_nm = dept_nm;
+	}
 	public String getDel_flg() {
 		return del_flg;
 	}
@@ -149,7 +156,7 @@ public class userVO {
 	}
 	@Override
 	public String toString() {
-		return "userVO [user_id=" + user_id + ",user_pwd=" + user_pwd + ", emp_no=" + emp_no + ", user_nm=" + user_nm + ", dept_cd=" + dept_cd
+		return "userVO [user_id=" + user_id + ",user_pwd=" + user_pwd + ", emp_no=" + emp_no + ", user_nm=" + user_nm + ", dept_cd=" + dept_cd+ ", dept_nm=" + dept_nm
 				+ ", rank_cd=" + rank_cd + ", duty_cd=" + duty_cd + ", cphone_num1=" + cphone_num1 + ", cphone_num2="
 				+ cphone_num2 + ", cphone_num3=" + cphone_num3 + ", phone_num1=" + phone_num1 + ", phone_num2="
 				+ phone_num2 + ", phone_num3=" + phone_num3 + ", email_id=" + email_id + ", email_domain="

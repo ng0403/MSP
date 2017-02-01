@@ -19,9 +19,9 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public List<Object> searchListUser() {
-		
+		System.out.println("User List Search Dao Impl");
 		List<Object> obj = sqlSession.selectList("searchListUser");
-		System.out.println(obj);
+		System.out.println("User List Search Dao Impl" + obj);
 		
 		return obj;
 
@@ -40,6 +40,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void insert(userVO vo) {
+		System.out.println("insert start DaoImpl");
+		System.out.println("insert start DaoImpl vo : " + vo.toString());
 		sqlSession.insert("user.userInsert", vo);
 		System.out.println("insert success DaoImpl");
 		

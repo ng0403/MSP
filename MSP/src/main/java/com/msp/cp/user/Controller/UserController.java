@@ -38,8 +38,8 @@ public class UserController {
 //			//return mov;
 //		}
 		//userService.searchListUser();
-		System.out.println(list);
-		ModelAndView mov = new ModelAndView("/user/user", "list", list);
+		System.out.println("User Search list" + list);
+		ModelAndView mov = new ModelAndView("/user/user_list", "list", list);
 		
 		return mov;
 		
@@ -50,7 +50,7 @@ public class UserController {
 	{
 		int entry_flg = 1;
 		System.out.println("userTab Controller");
-		ModelAndView mov = new ModelAndView("/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/user_tab");
 		mov.addObject("entry_flg", entry_flg);
 		
 		return mov;
@@ -58,10 +58,10 @@ public class UserController {
 	
 	@RequestMapping(value="/userInsert", method=RequestMethod.POST)
 	public ModelAndView userInsert(userVO vo, HttpSession session) {
-		System.out.println("userInsert Controller" + vo.toString());
+		System.out.println("userInsert Controller : " + vo.toString());
 		userService.insertUser(vo);
 		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/user_tab");
 		int result = 1;
 		mov.addObject("result", result);
 		System.out.println(mov);
@@ -91,7 +91,7 @@ public class UserController {
 		userVO vo= userService.searchListUserOne(user_id);
 		System.out.println("After Service : " + vo);
 		System.out.println("由ъ뒪�듃 : " + vo);
-		ModelAndView mov = new ModelAndView("/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/user_tab");
 		
 		user_id = vo.getUser_id();
 		String user_nm = vo.getUser_nm();
@@ -132,7 +132,10 @@ public class UserController {
 		mov.addObject("email_id",email_id);
 		mov.addObject("email_domain",email_domain);
 		mov.addObject("hiredate",hiredate);
+		mov.addObject("retiredate",retiredate);
+		mov.addObject("active_flg",active_flg);
 		mov.addObject("del_flg", del_flg);
+		mov.addObject("entry_flg", entry_flg);
 		
 		return mov;
 	}
@@ -147,7 +150,7 @@ public class UserController {
 		System.out.println("�젙蹂댁닔�젙 controller " + vo.getUser_id());
 		userService.userMdfy(vo);
 		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/user/userTab");
+		ModelAndView mov = new ModelAndView("/user/user_tab");
 		int result = 1;
 		mov.addObject("result", result);
 		System.out.println(mov);

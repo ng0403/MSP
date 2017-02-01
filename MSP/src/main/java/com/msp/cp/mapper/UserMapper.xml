@@ -10,17 +10,23 @@
 
 	<insert id="userInsert" parameterType="com.msp.cp.user.vo.userVO">
 		INSERT INTO tb_user (
-			user_id, emp_no, user_nm, dept_cd, rank_cd, duty_cd, cphone_num1, cphone_num2, cphone_num3, phone_num1, phone_num2, phone_num3, email_id, email_domain, hiredate, created_by, active_flg
+			user_id, user_pwd, emp_no, user_nm, dept_cd
+			, rank_cd, duty_cd, cphone_num1, cphone_num2, cphone_num3
+			, phone_num1, phone_num2, phone_num3, email_id, email_domain
+			, hiredate, created_by
 			)
 			VALUES (
 					#{user_id},
+					#{user_pwd},
 					(<![CDATA[
 						SELECT /*+INDEX_DESC(TB_USER IDX_EMP_NO)*/
-						DECODE(SUBSTR(MAX(emp_no), 1, 6), TO_CHAR(SYSDATE, 'YYYYMM'), MAX(emp_no)+1, TO_CHAR(SYSDATE,
-						'YYYYMM')||'0001')emp_no
+						DECODE(SUBSTR(MAX(emp_no), 1, 6)
+						, TO_CHAR(SYSDATE, 'YYYYMM')
+						, MAX(emp_no)+1
+						, TO_CHAR(SYSDATE,'YYYYMM')||'0001')emp_no
 						FROM tb_user
 						WHERE emp_no < TO_CHAR(SYSDATE, 'YYYYMM')||'9999'
-						AND ROWNUM = 1]]>),
+						AND ROWNUM = 1)]]>,
 					#{user_nm},
 					#{dept_cd},
 					#{rank_cd},
@@ -33,16 +39,15 @@
 					#{phone_num3},
 					#{email_id},
 					#{email_domain},
-					#{hiredate},
-					#{created_by}, 
-					'Y'
+					'12345',
+					'admin'
 		)
 	</insert>
 
 	<update id="userDel" parameterType="com.msp.cp.user.vo.userVO">
-		UPDATE USERS
+		UPDATE tb_user
 		SET ACTIVE_FLG = 'N'
-		where user_id = #{USER_ID}
+		where user_id = #{user_id}
 	</update>
 
 	<select id="userDetail" parameterType="string"
@@ -52,7 +57,7 @@
 		FROM
 		TB_USER
 		WHERE
-		USER_ID = #{USER_ID}
+		USER_ID = #{user_id}
 		AND ACTIVE_FLG = 'Y'
 	</select>
 
@@ -60,17 +65,21 @@
 		UPDATE
 		TB_USER
 		SET
-		user_name=#{USER_NAME}
-		,pwd=#{PWD}
-		,email=#{EMAIL}
-		,cell_phone=#{CELL_PHONE}
-		,home_phone=#{HOME_PHONE}
-		,company_phone=#{COMPANY_PHONE}
-		,p_channel_cd=#{P_CHANNEL_CD}
-		,user_type_cd=#{USER_TYPE_CD}
-		,org_id=#{ORG_ID}
+		user_nm=#{user_nm}
+		,user_pwd=#{user_pwd}
+		,email_id=#{email_id}
+		,email_domain=#{email_domain}
+		,cphone_num1=#{cphone_num1}
+		,cphone_num2=#{cphone_num2}
+		,cphone_num3=#{cphone_num3}
+		,phone_num1=#{phone_num1}
+		,phone_num2=#{phone_num2}
+		,phone_num3=#{phone_num3}
+		,dept_cd=#{dept_cd}
+		,rank_cd=#{rank_cd}
+		,duty_cd=#{duty_cd}
 
 		WHERE
-		user_id = #{USER_ID}
+		user_id = #{user_id}
 	</update>
 </mapper>
