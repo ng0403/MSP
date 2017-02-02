@@ -425,9 +425,9 @@ $(document).ready(function(){
 	<input type="hidden" id="ctx" value="${ctx}">
 	<input type="hidden" id="userNo" value="${userNo}">
 	<input type="hidden" id="popMenuId1">
-    <div style="margin-left:1%;"><h3>권한관리>사용자권한 리스트</h3></div>
+    <div style="margin-left:1%;"><h4>권한관리>사용자권한 리스트</h4></div>
     
-	<div id="container" style="margin-top:1%;">
+	<div id="container" style="margin-top:2%;">
 	    <!-- 사용자권한 리스트,조회화면 -->
 	    <form name="frm_userAuth" id="frm_userAuth" action="/cp/userAuth/deleteUserAuth"	enctype="multipart/form-data"  method="post">
 		<div id="inputDiv" style="font-size:11.8px;width:100%;font-family:Helvetica, sans-serif;">

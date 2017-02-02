@@ -81,6 +81,7 @@
 			    A.USER_ID
 	</select>
 	
+	<!-- 권한리스트 -->
 	<select id="authList" parameterType="java.util.Map" resultType="com.msp.cp.auth.vo.AuthVO">
 	    SELECT 
 	        DISTINCT AUTH_ID, 
