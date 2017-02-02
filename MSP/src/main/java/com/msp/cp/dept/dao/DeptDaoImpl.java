@@ -15,7 +15,7 @@ public class DeptDaoImpl implements DeptDao{
 	SqlSession sqlSession;
 
 	@Override
-	public List<DeptVO> codeList() {
+	public List<DeptVO> codeList(DeptVO dvo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("dept.selectDept");
 	}

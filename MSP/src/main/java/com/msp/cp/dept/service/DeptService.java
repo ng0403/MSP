@@ -6,7 +6,7 @@ import com.msp.cp.dept.vo.DeptVO;
 
 public interface DeptService {
 
-	public List<DeptVO> deptList();
+	public List<DeptVO> deptList(DeptVO dvo);
 
 	public List<DeptVO> deptDetailList(DeptVO dvo);
 

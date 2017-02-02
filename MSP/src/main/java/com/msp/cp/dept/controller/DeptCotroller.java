@@ -26,13 +26,14 @@ public class DeptCotroller {
 	DeptService deptService;
 	
 	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView deptList(){
+	public ModelAndView deptList(@ModelAttribute DeptVO dvo){
 		
-		List<DeptVO> list = deptService.deptList();
+		List<DeptVO> list = deptService.deptList(dvo);
 		
-		ModelAndView mav = new ModelAndView("dept/dept_list");
+		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("dept_list", list);
+		mav.setViewName("/dept/dept_list");
 		
 		return mav;
 	}
@@ -57,7 +58,7 @@ public class DeptCotroller {
 		
 		ResponseEntity<String> entity = null;
 		int result;
-		
+		System.out.println(dvo.toString());
 		try{
 			result = deptService.deptInsert(dvo);
 			if(result==1){

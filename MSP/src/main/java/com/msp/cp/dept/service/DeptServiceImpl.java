@@ -15,9 +15,9 @@ public class DeptServiceImpl implements DeptService{
 	DeptDao deptDao;
 	
 	@Override
-	public List<DeptVO> deptList() {
+	public List<DeptVO> deptList(DeptVO dvo) {
 		// TODO Auto-generated method stub
-		List<DeptVO> list = deptDao.codeList();
+		List<DeptVO> list = deptDao.codeList(dvo);
 		return list;
 	}
 

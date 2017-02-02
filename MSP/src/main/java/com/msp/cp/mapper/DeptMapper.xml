@@ -14,8 +14,12 @@
 			,dept_fnum3
 			,active_flg
 		FROM TB_DEPT
-		WHERE
+		<where>
 			del_flg='N'
+			<if test="keyword != null">
+				and dept_nm like '%'||#{keyword}||'%'
+			</if>
+		</where>
 	</select>
 	
 	<select id="selectDetailDept" parameterType="com.msp.cp.dept.vo.DeptVO"
@@ -36,7 +40,7 @@
 			AND del_flg = 'N'
 	</select>
 
-	<insert id="InsertDept" parameterType="com.msp.cp.dept.vo.DeptVO">
+	<insert id="insertDept" parameterType="com.msp.cp.dept.vo.DeptVO">
 		INSERT INTO TB_DEPT (
 			dept_cd
 			,dept_nm

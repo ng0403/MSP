@@ -10,6 +10,199 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <title>부서관리화면</title>
 </head>
+<script type="text/javascript">
+	var dept_cd = "";
+	var save_cd = "";
+	
+	$(function(){
+		/*검색버튼 클릭 시 처리 이벤트*/
+		$("#dept_inqr_fbtn").click(function(){
+			deptListInqr();
+		})
+		/*부서명 클릭 시 상세정보 출력 이벤트*/
+		$(".open_detail").click(function(){
+			dept_cd = $(this).parents("tr").attr("data_num");
+			deptDetailInqr(dept_cd);
+		})
+		/*추가버튼 클릭 시 처리 이벤트*/
+		$("#dept_add_fbtn").click(function(){
+			dataReset();
+			$("#dept_nm").focus();
+			save_cd = "insert";
+		})
+		/*삭제버튼 클릭 시 처리 이벤트*/
+		$("#dept_del_fbtn").click(function(){
+			deptDel();
+		})
+		/*편집버튼 클릭 시 처리 이벤트*/
+		$("#dept_edit_nfbtn").click(function(){
+			$("#dept_nm").focus();
+			save_cd = "update";
+		})
+		/*초기화버튼 클릭 시 처리 이벤트*/
+		$("#dept_reset_nfbtn").click(function(){
+			dataReset();
+			save_cd = "";
+		})
+		/*저장버튼 클릭 시 처리 이벤트*/
+		$("#dept_save_fbtn").click(function(){
+			if(save_cd == "insert"){
+				deptSave();
+			}else if(save_cd == "update"){
+				deptMdfy();
+			}
+		})
+		/* 체크박스 전체선택, 전체해제 */
+		$("#allCheck").on("click", function(){
+		      if( $("#allCheck").is(':checked') ){
+		        $("input[name=del_code]").prop("checked", true);
+		      }else{
+		        $("input[name=del_code]").prop("checked", false);
+		      }
+		})
+	})
+	/*부서 리스트 출력및 페이징 처리 함수*/
+	function deptListInqr(){
+		$("#searchForm").attr({
+			"method":"post",
+			"action":"list"
+		})
+		$("#searchForm").submit();
+	}
+	/*부서 상세정보 요청 함수*/
+	function deptDetailInqr(dept_cd){
+		$.getJSON("detail_list/"+dept_cd, function(data){
+			$(data).each(function(){
+				var dept_cd = this.dept_cd;
+				var dept_nm = this.dept_nm;
+				var dept_num1 = this.dept_num1;
+				var dept_num2 = this.dept_num2;
+				var dept_num3 = this.dept_num3;
+				var dept_fnum1 = this.dept_fnum1;
+				var dept_fnum2 = this.dept_fnum2;
+				var dept_fnum3 = this.dept_fnum3;
+				var actice_flg = this.action_flg;
+				detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg);
+			})
+		}).fail(function(){
+			warning("부서 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+		})
+	}
+	/*부서 입력 요청 함수*/
+	function deptSave(){
+		$.ajax({
+			url:"insert",
+			type:"POST",
+			header:{
+				"Content-type":"application/json"/* , "X-HTTP-Method-Override":"POST" */
+			},
+			dataType:"text",
+			data:JSON.stringify({
+				dept_nm:$("#dept_nm").val(),
+				dept_num1:$("#dept_num1 option:selected").val(),
+				dept_num2:$("#dept_num2").val(),
+				dept_num3:$("#dept_num3").val(),
+				dept_fnum1:$("#dept_fnum1 option:selected").val(),
+				dept_fnum2:$("#dept_fnum2").val(),
+				dept_fnum3:$("#dept_fnum3").val(),
+				active_flg:$(".active_flg:checked").val()
+			}),
+			error:function(){
+				warning("시스템 오류 입니다. 관리자에게 문의하세요.");
+			},
+			success:function(resultData){
+				if(resultData == "SUCCESS"){
+					warning("부서 등록이 완료되었습니다.");
+					dataReset();
+					deptListInqr();
+				}
+			}
+		})
+	}
+	/*부서 수정 요청 함수*/
+	function deptMdfy(){
+		$.ajax({
+			url:"update",
+			type:"post",
+			header:{
+				"Content-type":"application/json","X-HTTP-Method-Override":"POST"
+			},
+			dataType:"text",
+			data:JSON.stringify({
+				dept_cd:$("#dept_cd").val(),
+				dept_nm:$("#dept_nm").val(),
+				dept_num1:$("#dept_num1 option:selected").val(),
+				dept_num2:$("#dept_num2").val(),
+				dept_num3:$("#dept_num3").val(),
+				dept_fnum1:$("#dept_fnum1 option:selected").val(),
+				dept_fnum2:$("#dept_fnum2").val(),
+				dept_fnum3:$("#dept_fnum3").val(),
+				active_flg:$(".active_flg:checked").val()
+			}),
+			error:function(){
+				warning("시스템 오류 입니다. 관리자에게 문의하세요.");
+			},
+			success:function(resultData){
+				if(resultData == "SUCCESS"){
+					warning("부서 등록이 완료되었습니다.");
+					dataReset();
+					deptListInqr();
+				}
+			}
+		})
+	}
+	/*부서 삭제 요청 함수*/
+	function deptDel(){
+		var del_code = "";
+		$( "input[name='del_code']:checked" ).each (function (){
+			  del_code = del_code + $(this).val()+"," ;
+		});
+		
+		del_code = del_code.split(","); //맨끝 콤마 지우기
+		
+		if(del_code == ""){
+			alert("삭제할 대상을 선택해 주세요");
+			return false;
+		}else{
+			$("delAll_form").attr({
+				"method":"post",
+				"action":"delete"
+			});
+			$("delAll_form").submit();
+		}
+	}
+	/*부서 상세정보 출력 함수*/
+	function detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg){
+		dataReset();
+		
+		$("#dept_cd").attr("value", dept_cd);
+		$("#dept_nm").attr("value", dept_nm);
+		$("#dept_num1").val(dept_num1).attr("selected","selected");
+		$("#dept_num2").attr("value", dept_num2);
+		$("#dept_num3").attr("value", dept_num3);
+		$("#dept_fnum1").val(dept_fnum1).attr("selected","selected");
+		$("#dept_fnum2").attr("value", dept_fnum2);
+		$("#dept_fnum3").attr("value", dept_fnum3);
+		$(".active_flg:radio[value='"+active_flg+"']").attr("checked", true);
+	}
+	/*상세정보 초기화*/
+	function dataReset(){
+		$("#dept_cd").val("");
+		$("#dept_nm").val("");
+		$("#dept_num1").index(0);
+		$("#dept_num2").val("");
+		$("#dept_num3").val("");
+		$("#dept_fnum1").index(0);
+		$("#dept_fnum2").val("");
+		$("#dept_fnum3").val("");
+		$(".active_flg:radio[value='Y']").attr("checked", true);
+	}
+	/*경고창 출력함수*/
+	function warning(str){
+		alert(str);
+	}
+	
+</script>
 <body>
 	<div class="main_div">
 		<div class="navi_div">
@@ -29,10 +222,10 @@
 					<table summary="dept_list">
 						<colgroup>
 							<col width="10%">
-							<col width="40%">
+							<col width="35%">
 							<col width="20%">
 							<col width="15%">
-							<col width="15%">
+							<col width="20%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -113,8 +306,10 @@
 										<option value="062">062</option>
 										<option value="063">063</option>
 										<option value="064">064</option>
-									</select>-
-									<input type="text" id="dept_num2" name="dept_num2" value="${dept_detail.dept_num2}">-
+									</select>
+									<label>-</label>
+									<input type="text" id="dept_num2" name="dept_num2" value="${dept_detail.dept_num2}">
+									<label>-</label>
 									<input type="text" id="dept_num3" name="dept_num3" value="${dept_detail.dept_num3}">
 								</td>
 							</tr>
@@ -139,24 +334,26 @@
 										<option value="062">062</option>
 										<option value="063">063</option>
 										<option value="064">064</option>
-									</select>-
-									<input type="text" id="dept_fnum2" name="dept_fnum2" value="${dept_detail.dept_fnum2}">-
+									</select>
+									<label>-</label>
+									<input type="text" id="dept_fnum2" name="dept_fnum2" value="${dept_detail.dept_fnum2}">
+									<label>-</label>
 									<input type="text" id="dept_fnum3" name="dept_fnum3" value="${dept_detail.dept_fnum3}">
 								</td>
 							</tr>
 							<tr>
 								<td class="dc">활성화여부</td>
 								<td>
-									<input type="radio" id="active_flg1" name="active_flg" value="Y"/>Y
-									<input type="radio" id="active_flg2" name="active_flg" value="N"/>N
+									<input type="radio" class="active_flg" name="active_flg" value="Y"/>Y
+									<input type="radio" class="active_flg" name="active_flg" value="N"/>N
 								</td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="btn_div">
 						<input type="button" id="dept_save_fbtn" class="func_btn" value="저장">
-						<input type="button" id="dept_edit_fbtn" class="nonfunc_btn" value="편집">
-						<input type="button" id="dept_reset_fbtn" class="nonfunc_btn" value="초기화">
+						<input type="button" id="dept_edit_nfbtn" class="nonfunc_btn" value="편집">
+						<input type="button" id="dept_reset_nfbtn" class="nonfunc_btn" value="초기화">
 					</div>
 				</form>
 			</div>
