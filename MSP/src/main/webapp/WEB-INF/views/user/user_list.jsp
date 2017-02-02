@@ -94,12 +94,12 @@
 		<div class="search1_div">
 			<form name="searchForm" method="post" action="${ctx}/user">
 					<select name="keyfield">
-						<option value="u_id">사용자ID명</option>
-						<option value="u_name">사용자명</option>
-						<option value="o_name">조직명</option>
+						<option value="user_id">사용자ID명</option>
+						<option value="user_nm">사용자명</option>
+						<option value="dept_cd">조직명</option>
 					</select> <input id="title_text" type="text" name="keyword"
 						class="int_search"> &nbsp;
-					<button id="search_btn" type="submit" class="iuser_serach_bt">검색</button>
+					<button id="search_fbtn" type="submit" class="user_serach_fbtn">검색</button>
 			</form>
 		</div>
 	</div>

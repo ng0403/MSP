@@ -32,12 +32,7 @@ public class UserController {
 		System.out.println("user Controller");
 		
 		List<Object> list = userService.searchListUser();
-//		if(session.getAttribute("user") == null){
-//			 //ModelAndView mov = new ModelAndView("redirect:/");
-//			employeeService.searchListEmployee();   
-//			//return mov;
-//		}
-		//userService.searchListUser();
+
 		System.out.println("User Search list" + list);
 		ModelAndView mov = new ModelAndView("/user/user_list", "list", list);
 		

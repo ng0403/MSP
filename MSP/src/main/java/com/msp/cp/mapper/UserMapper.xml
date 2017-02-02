@@ -6,9 +6,11 @@
 		SELECT *
 		FROM TB_USER
 		where del_flg='N'
+		
+		 	
 	</select>
 
-	<insert id="userInsert" parameterType="com.msp.cp.user.vo.userVO">
+	<update id="userInsert" parameterType="com.msp.cp.user.vo.userVO">
 		INSERT INTO tb_user (
 			user_id, user_pwd, emp_no, user_nm, dept_cd
 			, rank_cd, duty_cd, cphone_num1, cphone_num2, cphone_num3
@@ -42,7 +44,7 @@
 					'sysdate',
 					'admin'
 		)
-	</insert>
+	</update>
 
 	<update id="userDel" parameterType="com.msp.cp.user.vo.userVO">
 		UPDATE tb_user
