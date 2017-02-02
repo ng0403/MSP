@@ -358,8 +358,6 @@
 				</table>
 				
 			</form>
-		</div>
-		
 		<!-- Modal Btn Div -->
 		<div class="modalL_btn_div">
 			<input type="button" id="submit_btn" class="iuser_tab_bt" value="추가"/>
@@ -368,6 +366,8 @@
 			<!-- <input type="button" id="addsave_btn" class="iuser_tab_bt" value="저장"/> -->
 			<input type="button" id="modifysave_btn" class="iuser_tab_bt"  value="저장"/>
 		</div>
+		</div>
+		
 	</div>
 	
 </body>

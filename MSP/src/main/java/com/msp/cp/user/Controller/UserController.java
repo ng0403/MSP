@@ -2,12 +2,15 @@ package com.msp.cp.user.Controller;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,15 +26,27 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value="/userlist", method=RequestMethod.GET)
-	public ModelAndView userListPage(HttpSession session, Locale locale,
+	@RequestMapping(value="/userlist", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model, 
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum,
 			@RequestParam(value = "searchnotice", defaultValue="") String searchnotice,
-			@RequestParam(value = "code", defaultValue="empty") String selectcode)
+			userVO userVO,
+			@RequestParam(value = "keyword", defaultValue="") String keyword,
+			@RequestParam(value = "code", defaultValue="empty") String selectcode,
+			@RequestParam Map<String, Object> map)
 	{
+		String user_id_sch = request.getParameter("user_id_sch");
+		String user_nm_sch = request.getParameter("user_nm_sch");
+		String dept_nm_sch = request.getParameter("dept_cd_sch");
 		System.out.println("user Controller");
+		map.put("user_id_sch", user_id_sch);
+		map.put("user_nm_sch", user_nm_sch);
+		map.put("dept_nm_sch", dept_nm_sch);
+		System.out.println("user_id_sch : " + user_id_sch);
+		System.out.println("user_nm_sch : " + user_nm_sch);
+		System.out.println("dept_nm_sch : " + dept_nm_sch);
 		
-		List<Object> list = userService.searchListUser();
+		List<userVO> list = userService.searchListUser(map);
 
 		System.out.println("User Search list" + list);
 		ModelAndView mov = new ModelAndView("/user/user_list", "list", list);
@@ -64,7 +79,7 @@ public class UserController {
 		return mov;
 	}
 	
-	@RequestMapping(value="userDel", method=RequestMethod.GET)
+	@RequestMapping(value="userDel", method={RequestMethod.GET, RequestMethod.POST})
 	public String userDel(String user_id) throws Exception { 
 		System.out.println("del controller enter");
 		String[] arrIdx = user_id.split(",");

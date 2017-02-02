@@ -1,6 +1,7 @@
 package com.msp.cp.user.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ public class UserServiceImpl implements UserService {
 	UserDao userDao;
 
 	@Override
-	public List<Object> searchListUser() {
+	public List<userVO> searchListUser(Map map) {
 		System.out.println("User List Search Service Impl");
-		List<Object> obj = userDao.searchListUser();
+		List<userVO> obj = userDao.searchListUser(map);
 		System.out.println("User List Search Service Impl" + obj.toString());
 		return obj;
 	}

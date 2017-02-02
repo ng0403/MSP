@@ -11,6 +11,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userList.css" type="text/css" /> --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -91,14 +92,16 @@
 		
 		<!-- Search1 Div  -->
 		<div class="search1_div">
-			<form name="searchForm" method="post" action="${ctx}/user">
-					<select name="keyfield">
-						<option value="user_id">사용자ID명</option>
-						<option value="user_nm">사용자명</option>
-						<option value="dept_cd">조직명</option>
-					</select> <input id="title_text" type="text" name="keyword"
-						class="int_search"> &nbsp;
-					<button id="search_fbtn" type="submit" class="user_serach_fbtn">검색</button>
+			<form name="searchForm" method="post" action="${ctx}/user/userlist">
+					<tr>
+						<th>사용자ID</th>
+						<td><input type="text" id="user_id_sch" value=""></td>
+						<th>사용자명</th>
+						<td><input type="text" id="user_nm_sch" value=""></td>
+						<th>부서명</th>
+						<td><input type="text" id="dept_cd_sch" value=""></td>&nbsp;
+					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn">검색</button></td>
+					</tr>
 			</form>
 		</div>
 	</div>
@@ -145,17 +148,15 @@
 			</table>
 		</form>
 		</div>
-	</div>
-	
 	<!-- Paging Div -->
 	<div class="paging_div">
-		<input type="button" id="iuserListAddBtn" onclick="userTabOpen()"
-			class="iuser_bt" value="등록" />
-		<!-- <input type="button" id="iuserListEditBtn" class="iuser_bt" value="수정"/> -->
-		<input type="button" id="iuserDelBtn" onclick="deleteAction()"
-			class="iuser_bt" value="삭제" />
+		<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
+		<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
 	</div>
+	</div>
+	
 </div>
+
 </body>
 </html>
 <%@include file="../include/footer.jsp"%>

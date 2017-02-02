@@ -1,12 +1,13 @@
 package com.msp.cp.user.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.msp.cp.user.vo.userVO;
 
 public interface UserService {
 
-	public List<Object> searchListUser();
+	public List<userVO> searchListUser(Map map);
 
 	public void insertUser(userVO vo);
 
