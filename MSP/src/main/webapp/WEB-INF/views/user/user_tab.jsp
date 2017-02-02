@@ -47,8 +47,6 @@
 				var tmp = $('#user_id').val();
 				var user_pwd = $('#user_pwd').val();
 				var user_pwd_chk = $('#user_pwd_chk').val();
-				alert("user_pwd : " +user_pwd);
-				alert("user_pwd_chk : " +user_pwd_chk);
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
@@ -86,7 +84,6 @@
 			});
 		//편집 저장 버튼
 			$("#modifysave_btn").on("click", function() {
-				alert("저장버튼 클릭");
 				var entry_flg = ${entry_flg}
 				var tmp = $('#user_id').val();
 				var user_pwd = $('#user_pwd');
@@ -211,7 +208,6 @@
 				return false; 
 				} */ 
 				
-				alert("유효성 검사 완료");
 				return true;
 			} 
 	
