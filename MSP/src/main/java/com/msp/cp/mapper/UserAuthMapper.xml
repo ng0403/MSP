@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userAuth">
+
+    <!-- 사용자권한 검색 결과 list -->
+	<select id="userAuthList" parameterType="java.util.Map"	resultType="com.msp.cp.userAuth.vo.UserAuthVO">	
+        SELECT *
+        FROM(SELECT ROWNUM AS RNUM, A.*
+		FROM(SELECT
+		     DISTINCT A.USER_ID,A.USER_NM,
+             LISTAGG(B.AUTH_ID,', ') WITHIN GROUP (ORDER BY B.AUTH_ID) AS agg_auth_id,
+             LISTAGG((SELECT DISTINCT AUTH_NM FROM TB_AUTH WHERE AUTH_ID = B.AUTH_ID),', ') WITHIN GROUP (ORDER BY B.AUTH_ID) AS agg_auth_nm,
+             (SELECT DISTINCT DEPT_CD FROM TB_USER WHERE USER_ID = A.USER_ID) AS dept_cd,
+		     (SELECT DISTINCT DEPT_NM FROM TB_DEPT WHERE DEPT_CD = (SELECT DISTINCT DEPT_CD FROM TB_USER WHERE USER_ID = A.USER_ID)) AS dept_nm,
+             (SELECT DISTINCT ACTIVE_FLG FROM TB_USER_AUTH WHERE USER_ID = A.USER_ID) AS active_flg,
+             A.EMAIL_ID||'@'||A.EMAIL_DOMAIN as email,
+             A.CPHONE_NUM1||'-'||A.CPHONE_NUM2||'-'||A.CPHONE_NUM3 as cphone,
+             (SELECT DISTINCT CREATED_BY FROM TB_USER_AUTH WHERE USER_ID = A.USER_ID) AS created_by,
+             (SELECT DISTINCT USER_NM FROM TB_USER 
+                     WHERE USER_ID = (SELECT DISTINCT CREATED_BY 
+                                      FROM TB_USER_AUTH 
+                                      WHERE USER_ID = A.USER_ID)) AS created_by_nm,
+             TO_CHAR((SELECT CREATED 
+                      FROM (SELECT DISTINCT CREATED,USER_ID,
+                      row_number() over(partition by USER_ID order by CREATED desc) rn 
+                      FROM TB_USER_AUTH ORDER BY CREATED) 
+                      WHERE rn =1 AND USER_ID = A.USER_ID ),'YYYY-MM-DD HH24:MI:SS') AS created,
+             (SELECT DISTINCT UPDATED_BY FROM TB_USER_AUTH WHERE USER_ID = A.USER_ID) AS updated_by,
+             (SELECT DISTINCT USER_NM FROM TB_USER 
+                     WHERE USER_ID = (SELECT DISTINCT UPDATED_BY 
+                                      FROM TB_USER_AUTH 
+                                      WHERE USER_ID = A.USER_ID)) AS updated_by_nm,
+             TO_CHAR((SELECT UPDATED 
+                      FROM (SELECT DISTINCT UPDATED,USER_ID,
+                      row_number() over(partition by USER_ID order by UPDATED desc) rn 
+                      FROM TB_USER_AUTH ORDER BY UPDATED) 
+                      WHERE rn =1 AND USER_ID = A.USER_ID ),'YYYY-MM-DD HH24:MI:SS') AS updated
+		     
+		     FROM TB_USER A,TB_USER_AUTH B
+		     WHERE 1=1
+		         AND A.USER_ID = B.USER_ID
+		   
+		        <if test="user_id !=null and user_id != '' ">
+		            AND UPPER(A.USER_ID) LIKE '%' || UPPER(#{user_id}) || '%'
+		        </if>
+		        <if test="user_nm !=null and user_nm !='' ">
+                    AND UPPER(A.USER_NM) LIKE '%' || UPPER(#{user_nm}) || '%'
+                </if>
+		        <if test="auth_id !=null and auth_id !='' ">
+                    <!-- AND UPPER(B.AUTH_ID) LIKE '%' || UPPER(#{auth_id}) || '%' -->
+                    AND UPPER(B.USER_ID) in ((SELECT WM_CONCAT(UPPER(USER_ID))
+                               FROM TB_USER_AUTH 
+                               WHERE UPPER(AUTH_ID) LIKE '%' || UPPER(#{auth_id}) || '%'  
+                               GROUP BY USER_ID))
+                </if>
+                GROUP BY 
+                    A.USER_ID,A.USER_NM,A.EMAIL_ID,A.EMAIL_DOMAIN,A.CPHONE_NUM1,A.CPHONE_NUM2,A.CPHONE_NUM3
+			    ORDER BY A.USER_ID) A )
+		<![CDATA[
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 검색 결과 list의 수 -->
+	<select id="userAuthCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+		    COUNT(*)
+		FROM TB_USER A, TB_USER_AUTH B
+		WHERE 1=1
+		    AND A.USER_ID = B.USER_ID
+		    <if test="user_id !=null and user_id != '' ">
+		        AND UPPER(A.USER_ID) LIKE '%' || UPPER(#{user_id}) || '%'
+		    </if>
+		    <if test="user_nm !=null and user_nm !='' ">
+                AND UPPER(A.USER_NM) LIKE '%' || UPPER(#{user_nm}) || '%'
+            </if>
+		    <if test="auth_id !=null and auth_id !='' ">
+                AND UPPER(B.AUTH_ID) LIKE '%' || UPPER(#{auth_id}) || '%'
+            </if>
+			ORDER BY 
+			    A.USER_ID
+	</select>
+	
+	<select id="authList" parameterType="java.util.Map" resultType="com.msp.cp.auth.vo.AuthVO">
+	    SELECT 
+	        DISTINCT AUTH_ID, 
+	        AUTH_NM
+	    FROM TB_AUTH
+	    ORDER BY AUTH_ID
+	</select>
+	
+	<!-- 사용자권한 view -->
+	<select id="userAuthDetail" parameterType="java.util.Map" resultType="com.msp.cp.userAuth.vo.UserAuthVO">
+	    SELECT
+		    DISTINCT A.MENU_ID, A.MENU_NAME,A.P_MENU_ID,A.MENU_LEVEL,A.MENU_URL,A.DEFAULT_FLG,A.ACTIVE_FLG,
+		    TO_CHAR(A.CDATE,'YYYY-MM-DD HH24:MI:SS') AS cdate,TO_CHAR(A.UDATE,'YYYY-MM-DD HH24:MI:SS') AS udate,
+		    A.C_USER_ID,A.U_USER_ID
+		FROM MENU A
+		WHERE 1=1
+		    AND A.MENU_ID = #{menu_id}
+	</select>
+	
+	<!-- 새 사용자권한 등록 -->
+	<insert id="createUserAuth" parameterType="com.msp.cp.userAuth.vo.UserAuthVO">
+		INSERT INTO MENU
+		(
+		MENU_ID,MENU_NAME,P_MENU_ID,MENU_LEVEL,MENU_URL,DEFAULT_FLG,ACTIVE_FLG,C_USER_ID,CDATE
+		)
+		VALUES
+		(
+		#{menu_id},#{menu_name},#{p_menu_id},#{menu_level},#{menu_url},#{default_flg},
+		#{active_flg},'ADMIN',SYSDATE
+		)
+	</insert>
+	
+	<!-- 사용자권한 수정 -->
+	<update id="updateUserAuth" parameterType="com.msp.cp.userAuth.vo.UserAuthVO">
+		UPDATE MENU
+		SET MENU_NAME = #{menu_name},
+		    P_MENU_ID = #{p_menu_id},
+		    MENU_LEVEL = #{menu_level},
+		    MENU_URL = #{menu_url},
+		    DEFAULT_FLG = #{default_flg},
+		    ACTIVE_FLG = #{active_flg},
+		    U_USER_ID = 'ADMIN',
+		    UDATE = SYSDATE
+		WHERE
+		MENU_ID=#{menu_id}
+	</update>
+	
+	<!-- 사용자권한 삭제 -->
+	<delete id="deleteUserAuth" parameterType="com.msp.cp.userAuth.vo.UserAuthVO">
+		DELETE 
+		FROM TB_USER_AUTH
+		WHERE USER_ID=#{user_id}
+	</delete>
+	
+	<!-- 사용자 ID 확인 -->
+    <!-- <select id="getUserId" parameterType="java.util.Map" resultType ="com.msp.cp.userAuth.vo.UserAuthVO">
+	    SELECT /*+INDEX_DESC(TB_USER USER_ID)*/
+            DECODE(MAX(USER_ID),NULL,'MN101',SUBSTR(MAX(USER_ID),1,2)||(SUBSTR(MAX(USER_ID),3,3)+1))USER_ID
+        FROM TB_USER
+	</select>  -->
+
+</mapper>
