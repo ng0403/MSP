@@ -36,4 +36,20 @@ public class DeptServiceImpl implements DeptService{
 		return result;
 	}
 
+	@Override
+	public int deptUpdate(DeptVO dvo) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = deptDao.deptUpdate(dvo);
+		return result;
+	}
+
+	@Override
+	public int deptDelete(String dc) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = deptDao.deptDelete(dc);
+		return result;
+	}
+
 }

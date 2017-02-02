@@ -32,4 +32,16 @@ public class DeptDaoImpl implements DeptDao{
 		return sqlSession.insert("dept.insertDept");
 	}
 
+	@Override
+	public int deptUpdate(DeptVO dvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("dept.updateDept");
+	}
+
+	@Override
+	public int deptDelete(String dc) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("dept.deleteDept");
+	}
+
 }

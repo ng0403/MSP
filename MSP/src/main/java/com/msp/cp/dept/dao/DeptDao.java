@@ -12,4 +12,8 @@ public interface DeptDao {
 
 	public int deptInsert(DeptVO dvo);
 
+	public int deptUpdate(DeptVO dvo);
+
+	public int deptDelete(String dc);
+
 }

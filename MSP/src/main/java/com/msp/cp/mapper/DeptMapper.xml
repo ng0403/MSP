@@ -85,7 +85,7 @@
 			WHERE DEPT_CD = #{dept_cd}
 	</update>
 
-	<update id="delDept" parameterType="com.msp.cp.dept.vo.DeptVO">
+	<update id="deleteDept" parameterType="com.msp.cp.dept.vo.DeptVO">
 		UPDATE TB_DEPT
 		SET DEL_FLG = 'Y'
 		WHERE DEPT_CD = #{dept_cd}

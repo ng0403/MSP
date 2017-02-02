@@ -90,23 +90,23 @@ public class DeptCotroller {
 		return entity;
 	}
 	
-	@RequestMapping(value="/delete", method={RequestMethod.POST})
-	public ResponseEntity<String> deptDelete(@PathVariable("dept_cd") Integer dept_cd){
+	@RequestMapping(value="/delete", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView deptDelete(@RequestParam(value="del_code") String del_code){
 		
-		ResponseEntity<String> entity = null;
-		int result;
+		String[] delcode = del_code.split(",");
 		
-		try{
-			result = deptService.deptDelete(dept_cd);
-			if(result==1){
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		ModelAndView mav = new ModelAndView();
+		
+		for(int i = 0; i < delcode.length; i++)
+		{
+			String dc = delcode[i];
+			
+			int result1 = deptService.deptDelete(dc);
 		}
-				
-		return entity;
+		
+		mav.setViewName("redirect:/dept/list");
+		
+		return mav;
 	}
 
 }
