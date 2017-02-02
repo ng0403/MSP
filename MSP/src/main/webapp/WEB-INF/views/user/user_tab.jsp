@@ -26,12 +26,14 @@
 		{
 			//$('#addsave_btn').CSS('display', "hidden");
 			$('#joinform').find('input[type="text"]').attr('disabled',false).attr('readonly', false);
-			$('#emp_no').attr('display',none);
+			$('#emp_no').css('display','none');
+			$('#modifysave_btn').css('display','none');
 			//$('#modifysave_btn').css("visibility","hidden");
 
 		}else{
 			$('#user_id').attr("readonly", true);
-			$('#emp_no').attr('display',block);
+			$('#emp_no').css('display','block');
+			$('#submit_btn').css('display','none');
 			$('#joinform').find('input[type="text"]').attr('disabled',true);
 		    $('#joinform').find('input[type="password"]').attr('disabled',true);
 	        $('#joinform').find('input[type="email"]').attr('disabled',true);
@@ -122,7 +124,7 @@
  							</td>
  							<th>직급</th>
  							<td>
- 								<select id="rank_cd" name="rank_cd">
+ 								<select id="rank_cd" name="rank_cd" style="width: 55%; height: 70%;">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -144,7 +146,7 @@
 							</td>
 							<th>조직ID</th>
 							<td>
-								<select id="duty_cd" name="duty_cd">
+								<select id="duty_cd" name="duty_cd" style="width: 55%; height: 70%;">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -174,37 +176,37 @@
 						<tr>
 							<th colspan="2" align="left">휴대 전화</th>
 							<td colspan="2" align="left">
-								<select name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:90%">
-									<option name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:90%"value="010">010</option>
+								<select name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:25%">
+									<option value="010">010</option>
 									<option value="011">011</option>
 									<option value="016">016</option>
 									<option value="019">019</option>
-								</select>-<input type="text" name="cphone_num2" id="cphone_num2" class="iuser_txt" maxlength="4" style="width:90%" value="${cphone_num2}"/>-<input type="text" name="cphone_num3" id="cphone_num3" class="iuser_txt" maxlength="4" style="width:90%" value="${cphone_num3}"/> 
+								</select>-<input type="text" name="cphone_num2" id="cphone_num2" class="iuser_txt" maxlength="4" style="width:25%" value="${cphone_num2}"/>-<input type="text" name="cphone_num3" id="cphone_num3" class="iuser_txt" maxlength="4" style="width:25%" value="${cphone_num3}"/> 
 							</td>
 						</tr>
 						<tr>
 							<th colspan="2" align="left">이메일</th>
 							<td colspan="2" align="left">
-								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:90%" value="${email_id}">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:90%" value="${email_domain}"> 
+								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:50%" value="${email_id}">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:50%" value="${email_domain}"> 
  							</td>
  						</tr>
 						<tr>
 							<th colspan="2" align="left">부서</th>
 							<td colspan="2" align="left">
 								<%-- <input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> --%> 
-								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}"/>
+								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}" style="width:65%"/>
 								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색"/>
 							</td>
 						</tr>
 						<tr>
 							<th colspan="2" align="left">내선전화</th>
 							<td colspan="2" align="left">
-							<select name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="" style="width:90%">
-									<option name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="3" style="width:90%"value="02">02</option>
+							<select name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="" style="width:25%">
+									<option value="02">02</option>
 									<option value="031">031</option>
 									<option value="032">032</option>
 									<option value="033">033</option>
-								</select>-<input type="text" name="phone_num2" id="phone_num2" class="iuser_txt" maxlength="4" style="width:90%" value="${phone_num2}"/>-<input type="text" name="phone_num3" id="phone_num3" class="iuser_txt" maxlength="4" style="width:90%" value="${phone_num3}"/> 
+								</select>-<input type="text" name="phone_num2" id="phone_num2" class="iuser_txt" maxlength="4" style="width:25%" value="${phone_num2}"/>-<input type="text" name="phone_num3" id="phone_num3" class="iuser_txt" maxlength="4" style="width:25%" value="${phone_num3}"/> 
 							</td>
 							
 						</tr>
