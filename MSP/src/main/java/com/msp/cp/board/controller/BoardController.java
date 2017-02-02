@@ -51,12 +51,12 @@ public class BoardController {
 	
 	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
 	public String board_insert(BoardVO vo) {
-		System.out.println("insert entering");
+		System.out.println("insert entering" + vo);
 		boardService.insert(vo);
 		System.out.println("board_insert success....");
 
-		return "redirect : /board_list"; 
-	}
+		return "redirect:/board/board_list"; 
+	} 
 	
 	@RequestMapping(value="/board_modify", method=RequestMethod.GET)
 	public void board_modifyPage(BoardVO vo)
@@ -74,6 +74,22 @@ public class BoardController {
 		return "";
 	}
 	
+	@RequestMapping(value="/board_remove", method=RequestMethod.POST)
+	public String board_remove(String del_code){ 
+		
+		System.out.println("remove insert" + del_code);
+		
+		String[] delcode = del_code.split(",");
+		System.out.println("delcode" + delcode);
+		for(int i = 0; i < delcode.length; i++)
+		{
+			String dc = delcode[i];
+			System.out.println("delete..." + dc);
+			boardService.removeBoard(dc);
+		}
+		
+		return "redirect:/board/board_list";
+	}
 	 
 
 }

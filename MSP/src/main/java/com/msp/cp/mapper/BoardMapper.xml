@@ -17,11 +17,14 @@ FROM tb_board
  
  
  <insert id="InsertBoard">
-INSERT INTO TB_BOARD
- (BOARD_NO, BOARD_MNG_NO, FILE_CD, TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
-VALUES
-(board_seq.nextval, 'ABCD', #{FILE_CD}, #{TITLE}, #{CONTENT}, '1234', #{QUESTION_TYPE_CD}, 'mom', #{UPDATED_BY})
- 
+INSERT INTO TB_BOARD (BOARD_NO, BOARD_MNG_NO, FILE_CD, TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
+VALUES(board_seq.nextval, 'abcd','', #{TITLE}, #{CONTENT}, '1', 'abcd', '진수거', '')
+
  </insert>
+ 
+ <update id="removeBoard" parameterType="String"> 
+ update tb_board set active_flg = 'N'
+ 	where BOARD_NO = #{BOARD_NO}
+ </update>
 
 </mapper>

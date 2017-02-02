@@ -12,4 +12,5 @@ public interface BoardDao {
 	public BoardVO detail(int BOARD_NO);
 	public void insert(BoardVO vo);
 	public void modify(BoardVO vo);
+	public void removeBoard(String dc);
 }

@@ -42,4 +42,9 @@ public class BoardDaoImpl implements BoardDao {
 		
 	}
 
+	@Override
+	public void removeBoard(String dc) {
+		sqlSession.update("removeBoard", dc);
+	}
+
 }

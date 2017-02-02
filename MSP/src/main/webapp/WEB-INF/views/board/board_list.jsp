@@ -35,6 +35,8 @@
 
 <div class= list_div>
 <div class= list1_div >
+ 
+ <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table class="table table-bordered" style ="width: 90%">
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
@@ -47,7 +49,7 @@
  						<c:forEach items="${boardlist}" var="boardVO"> 
 							<tr>
 								<td scope="row"><input type="checkbox" name="del_code" value="${boardVO.BOARD_NO}"></td>
-  								<td>${boardVO.BOARD_NO}</td>
+   								<td>${boardVO.BOARD_NO}</td>
 								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
 								<td>${boardVO.CREATED_BY} </td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
@@ -56,7 +58,8 @@
 							</tr> 
 						</c:forEach>
 					</table>
-					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" class="btn btn-default" value="삭제"/>
+					</form>
+					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction()"/>
 					
 </div>
 </div>
@@ -68,13 +71,35 @@
 </div>
 
 
-<script>
+<script type="text/javascript">
  
  
 $("#board_add_fbtn").on("click", function(){
 	location.href="/board/board_insert";
 	
 })
+
+
+/* 삭제(체크박스된 것 전부) */
+	function deleteAction() {
+		var del_code = "";
+		$("input[name='del_code']:checked").each(function() {
+			del_code = del_code + $(this).val() + ",";
+ 		}); 
+		
+ 		alert(del_code);
+
+		if (del_code == '') {
+			alert("삭제할 대상을 선택하세요.");
+			return false;
+		}
+ 
+		if (confirm("정보를 삭제 하시겠습니까?")) {
+
+			//삭제처리 후 다시 불러올 리스트 url
+ 			$("form[name='delAllForm']").attr("action", "${ctx}/board/board_remove").submit();
+ 		}
+	}
  
  
  

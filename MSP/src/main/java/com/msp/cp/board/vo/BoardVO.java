@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BoardVO {
 	
-	private int BOARD_NO;
+	private Integer BOARD_NO;
 	private String BOARD_MNG_NO;
 	private String FILE_CD;
 	private String TITLE;
@@ -19,10 +19,10 @@ public class BoardVO {
 	private String UPDATED_BY;
 	private String UPDATED;
 	
-	public int getBOARD_NO() {
+	public Integer getBOARD_NO() {
 		return BOARD_NO;
 	}
-	public void setBOARD_NO(int bOARD_NO) {
+	public void setBOARD_NO(Integer bOARD_NO) {
 		BOARD_NO = bOARD_NO;
 	}
 	public String getBOARD_MNG_NO() {
