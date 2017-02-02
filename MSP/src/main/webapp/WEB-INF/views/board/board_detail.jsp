@@ -43,7 +43,7 @@
 </div>
  
 <div> <!-- 버튼 div  -->
-<input type="button" class = "btn btn-default" value="편집"/> <input type="button" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="list" value="목록"/>
+<input type="button" class = "btn btn-default" value="편집"/> <input type="button" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
 </div>
 
 
@@ -54,11 +54,14 @@
 
 
 <script>
-$("#list").on("click", function(){  
-	 
-	location.href=ctx+'/board/list';
-	})
-
+ 
+ 
+$("#board_list_fbtn").on("click", function(){  
+    	location.href = "/board/board_list";
+ 	})
+ 	
+ 	
+ 
 </script>
 
  

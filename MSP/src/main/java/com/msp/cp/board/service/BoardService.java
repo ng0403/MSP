@@ -7,7 +7,7 @@ import com.msp.cp.board.vo.BoardVO;
 public interface BoardService {
 	
 	  public List<Object> list();
-	  public BoardVO readPage(int BOARD_NO);
-
-
+	  public BoardVO detail(int BOARD_NO);
+	  public void insert(BoardVO vo);
+	  public void modify(BoardVO vo);
 }

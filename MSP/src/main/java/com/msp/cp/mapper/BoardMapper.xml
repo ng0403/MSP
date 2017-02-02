@@ -14,5 +14,14 @@ FROM tb_board
  FROM TB_BOARD
  WHERE BOARD_NO = #{BOARD_NO}
  </select>
+ 
+ 
+ <insert id="InsertBoard">
+INSERT INTO TB_BOARD
+ (BOARD_NO, BOARD_MNG_NO, FILE_CD, TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
+VALUES
+(board_seq.nextval, 'ABCD', #{FILE_CD}, #{TITLE}, #{CONTENT}, '1234', #{QUESTION_TYPE_CD}, 'mom', #{UPDATED_BY})
+ 
+ </insert>
 
 </mapper>

@@ -48,7 +48,7 @@
 							<tr>
 								<td scope="row"><input type="checkbox" name="del_code" value="${boardVO.BOARD_NO}"></td>
   								<td>${boardVO.BOARD_NO}</td>
-								<td><a href="/board/readpage?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
+								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
 								<td>${boardVO.CREATED_BY} </td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.CREATED}" /></td>
@@ -56,7 +56,7 @@
 							</tr> 
 						</c:forEach>
 					</table>
-					<input type="button" class = "btn btn-default" value="추가"/> <input type="button" class="btn btn-default" value="삭제"/>
+					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" class="btn btn-default" value="삭제"/>
 					
 </div>
 </div>
@@ -68,7 +68,28 @@
 </div>
 
 
+<script>
+ 
+ 
+$("#board_add_fbtn").on("click", function(){
+	location.href="/board/board_insert";
+	
+})
+ 
+ 
+ 
+	$("#checkall").on("click", function() {
 
+		if ($("#checkall").prop("checked")) {
+
+			$("input[name=del_code]").prop("checked", true);
+		} else {
+			$("input[name=del_code]").prop("checked", false);
+		}
+
+	}) 
+	
+</script>
 
 
 </body>
