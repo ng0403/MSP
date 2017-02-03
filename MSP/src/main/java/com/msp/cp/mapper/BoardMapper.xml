@@ -9,8 +9,17 @@ SELECT
 FROM tb_board
  </select>
  
+ <select id="ajaxList" resultType="map">
+ 
+ SELECT
+  *
+FROM tb_board
+WHERE ACTIVE_FLG='Y'
+ </select>
+ 
+ 
  <select id="ReadPage"  resultType="com.msp.cp.board.vo.BoardVO">
- SELECT TITLE, CONTENT, CREATED, CREATED_BY, VIEW_CNT 
+ SELECT BOARD_NO, TITLE, CONTENT, CREATED, CREATED_BY, VIEW_CNT 
  FROM TB_BOARD
  WHERE BOARD_NO = #{BOARD_NO}
  </select>
@@ -22,9 +31,24 @@ VALUES(board_seq.nextval, 'abcd','', #{TITLE}, #{CONTENT}, '1', 'abcd', '진수�
 
  </insert>
  
+ <select id="readBoard"  resultType="com.msp.cp.board.vo.BoardVO">
+ 
+ SELECT TITLE, CONTENT, BOARD_NO, CREATED, VIEW_CNT
+ FROM TB_BOARD
+ WHERE BOARD_NO = #{BOARD_NO}
+ 
+ </select>
+ 
  <update id="removeBoard" parameterType="String"> 
  update tb_board set active_flg = 'N'
  	where BOARD_NO = #{BOARD_NO}
+ </update>
+ 
+ <update id="ModifyBoard" >
+ 
+ update tb_board set title = #{TITLE}, content = #{CONTENT}
+ where BOARD_NO = #{BOARD_NO}
+ 
  </update>
 
 </mapper>

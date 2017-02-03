@@ -18,9 +18,10 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
-
-
+<form role="form" name = "form_modify" method="post">
+ <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"> 
+</form>
+ 
 
 <div> <!-- 전체 div-->
 
@@ -43,7 +44,7 @@
 </div>
  
 <div> <!-- 버튼 div  -->
-<input type="button" class = "btn btn-default" value="편집"/> <input type="button" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+<input type="button" id="board_modify_fbtn" class = "btn btn-default" value="편집"/> <input type="button" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
 </div>
 
 
@@ -59,8 +60,20 @@
 $("#board_list_fbtn").on("click", function(){  
     	location.href = "/board/board_list";
  	})
- 	
- 	
+ 
+$(document).ready(function(){ 
+	
+	var formObj = $("form[role='form']");
+	console.log(formObj);
+	
+ $("#board_modify_fbtn").on("click", function(){
+	 	formObj.attr("action", "/board/board_modify");
+		formObj.attr("method", "get");		
+		formObj.submit();
+	 /* $("form[name='form_modify']").attr("action", "${ctx}/board/board_read?BOARD_NO=?").submit();  */
+	 
+ })
+})
  
 </script>
 

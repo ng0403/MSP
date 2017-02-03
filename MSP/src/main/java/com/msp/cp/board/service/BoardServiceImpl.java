@@ -42,6 +42,18 @@ public class BoardServiceImpl implements BoardService {
 
 		boardDao.removeBoard(dc);
 	}
+
+	@Override
+	public BoardVO read(int BOARD_NO) {
+		// TODO Auto-generated method stub
+		return boardDao.read(BOARD_NO);
+	}
+
+	@Override
+	public List<Object> ajaxlist() {
+		
+ 		return boardDao.ajaxlist();
+	}
  
  
 }

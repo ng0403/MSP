@@ -48,7 +48,7 @@
 						</tr>
  						<c:forEach items="${boardlist}" var="boardVO"> 
 							<tr>
-								<td scope="row"><input type="checkbox" name="del_code" value="${boardVO.BOARD_NO}"></td>
+								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
    								<td>${boardVO.BOARD_NO}</td>
 								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
 								<td>${boardVO.CREATED_BY} </td>
@@ -97,8 +97,57 @@ $("#board_add_fbtn").on("click", function(){
 		if (confirm("정보를 삭제 하시겠습니까?")) {
 
 			//삭제처리 후 다시 불러올 리스트 url
- 			$("form[name='delAllForm']").attr("action", "${ctx}/board/board_remove").submit();
+ 			/* $("form[name='delAllForm']").attr("action", "${ctx}/board/board_remove").submit(); */
+			 
+			alert("delcode" + del_code);
+ 			 
+ 			$.ajax({
+				url : '/board/board_remove',
+				headers : {
+		            "Content-Type" : "application/json",
+		            "X-HTTP-Method-Override" : "POST"
+		         },
+				data : del_code,
+				dataType : 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success : function(result) {
+					alert("hello ajax");
+					var ajaxList = result.data;
+					
+					var liststr = "";
+					
+					for(var i=0;i<ajaxList.length;i++) {
+						liststr  +=    				"<tr>" +
+													"<td scope=\"row\"><input type=\"checkbox\" name=\"del_code\" value=" +${boardVO.BOARD_NO} +"\"></td>" +
+													
+						   								"<td>" + ${boardVO.BOARD_NO} + "</td>" +
+														"<td><a href=\"/board/board_detail?BOARD_NO=" + ${boardVO.BOARD_NO} + "\">" + ${boardVO.TITLE} + "\</a> </td>" +
+														"<td>" + ${boardVO.CREATED_BY} + "</td>" +
+														"<td>" +${boardVO.CREATED} + "</td>" +
+														"<td>" + ${boardVO.VIEW_CNT} + "</td>" +
+													"</tr>";
+					}					
+					
+					var friendtable = document.getElementById("list1_div");
+					friendtable.innerHTML = liststr;
+					
+				}
+		         ,  error:function(request,status,error){
+		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		          } 
+ 			})
+			
+			
+			
+			
+			
+			
+			
  		}
+		
+		
 	}
  
  
@@ -113,6 +162,10 @@ $("#board_add_fbtn").on("click", function(){
 		}
 
 	}) 
+	
+	
+	
+	
 	
 </script>
 
