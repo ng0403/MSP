@@ -92,11 +92,9 @@
 	function deptSave(){
 		$.ajax({
 			url:"insert",
-			type:"POST",
-			header:{
-				"Content-type":"application/json"/* , "X-HTTP-Method-Override":"POST" */
-			},
-			dataType:"text",
+			type:"post",
+			contentType:"application/json; charset=UTF-8",/* "X-HTTP-Method-Override":"POST" */
+			dataType:"json",
 			data:JSON.stringify({
 				dept_nm:$("#dept_nm").val(),
 				dept_num1:$("#dept_num1 option:selected").val(),
