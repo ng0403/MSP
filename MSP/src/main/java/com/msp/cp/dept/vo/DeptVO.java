@@ -5,14 +5,24 @@ public class DeptVO {
 	public String dept_cd;
 	public String dept_nm;
 	public String dept_num1;
-	public String dept_unm2;
+	public String dept_num2;
 	public String dept_num3;
 	public String dept_fnum1;
 	public String dept_fnum2;
 	public String dept_fnum3;
 	public String active_flg;
 	
+	public String dept_leader;
+	
 	public String keyword;
+	
+	public String getDept_leader() {
+		return dept_leader;
+	}
+
+	public void setDept_leader(String dept_leader) {
+		this.dept_leader = dept_leader;
+	}
 
 	public String getDept_cd() {
 		return dept_cd;
@@ -38,12 +48,12 @@ public class DeptVO {
 		this.dept_num1 = dept_num1;
 	}
 
-	public String getDept_unm2() {
-		return dept_unm2;
+	public String getDept_num2() {
+		return dept_num2;
 	}
 
-	public void setDept_unm2(String dept_unm2) {
-		this.dept_unm2 = dept_unm2;
+	public void setDept_num2(String dept_num2) {
+		this.dept_num2 = dept_num2;
 	}
 
 	public String getDept_num3() {
@@ -96,8 +106,8 @@ public class DeptVO {
 
 	@Override
 	public String toString() {
-		return "DeptVO [dept_cd=" + dept_cd + ", dept_nm=" + dept_nm + ", dept_num1=" + dept_num1 + ", dept_unm2="
-				+ dept_unm2 + ", dept_num3=" + dept_num3 + ", dept_fnum1=" + dept_fnum1 + ", dept_fnum2=" + dept_fnum2
+		return "DeptVO [dept_cd=" + dept_cd + ", dept_nm=" + dept_nm + ", dept_num1=" + dept_num1 + ", dept_num2="
+				+ dept_num2 + ", dept_num3=" + dept_num3 + ", dept_fnum1=" + dept_fnum1 + ", dept_fnum2=" + dept_fnum2
 				+ ", dept_fnum3=" + dept_fnum3 + ", active_flg=" + active_flg + ", keyword=" + keyword + "]";
 	}
 

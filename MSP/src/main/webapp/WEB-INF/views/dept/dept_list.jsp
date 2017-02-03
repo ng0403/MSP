@@ -81,7 +81,7 @@
 				var dept_fnum1 = this.dept_fnum1;
 				var dept_fnum2 = this.dept_fnum2;
 				var dept_fnum3 = this.dept_fnum3;
-				var actice_flg = this.action_flg;
+				var active_flg = this.active_flg;
 				detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg);
 			})
 		}).fail(function(){
@@ -94,7 +94,7 @@
 			url:"insert",
 			type:"post",
 			contentType:"application/json; charset=UTF-8",/* "X-HTTP-Method-Override":"POST" */
-			dataType:"json",
+			dataType:"text",
 			data:JSON.stringify({
 				dept_nm:$("#dept_nm").val(),
 				dept_num1:$("#dept_num1 option:selected").val(),
@@ -122,9 +122,10 @@
 		$.ajax({
 			url:"update",
 			type:"post",
-			header:{
+			/* header:{
 				"Content-type":"application/json","X-HTTP-Method-Override":"POST"
-			},
+			}, */
+			contentType:"application/json; charset=UTF-8",
 			dataType:"text",
 			data:JSON.stringify({
 				dept_cd:$("#dept_cd").val(),
@@ -142,7 +143,7 @@
 			},
 			success:function(resultData){
 				if(resultData == "SUCCESS"){
-					warning("부서 등록이 완료되었습니다.");
+					warning("부서 수정이 완료되었습니다.");
 					dataReset();
 					deptListInqr();
 				}
@@ -173,14 +174,14 @@
 	function detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg){
 		dataReset();
 		
-		$("#dept_cd").attr("value", dept_cd);
-		$("#dept_nm").attr("value", dept_nm);
+		$("#dept_cd").val(dept_cd);
+		$("#dept_nm").val(dept_nm);
 		$("#dept_num1").val(dept_num1).attr("selected","selected");
-		$("#dept_num2").attr("value", dept_num2);
-		$("#dept_num3").attr("value", dept_num3);
+		$("#dept_num2").val(dept_num2);
+		$("#dept_num3").val(dept_num3);
 		$("#dept_fnum1").val(dept_fnum1).attr("selected","selected");
-		$("#dept_fnum2").attr("value", dept_fnum2);
-		$("#dept_fnum3").attr("value", dept_fnum3);
+		$("#dept_fnum2").val(dept_fnum2);
+		$("#dept_fnum3").val(dept_fnum3);
 		$(".active_flg:radio[value='"+active_flg+"']").attr("checked", true);
 	}
 	/*상세정보 초기화*/
@@ -239,18 +240,18 @@
 								<c:when test="${not empty dept_list}">
 									<c:forEach var="dept_list" items="${dept_list}">
 										<tr data_num="${dept_list.dept_cd}">
-											<th>
+											<td>
 												<input type="checkbox" class="del_point" name="del_code" value="${dept_list.dept_cd}">
-											</th>
-											<th>
+											</td>
+											<td>
 												<span class="open_detail">${dept_list.dept_nm}</span>
-											</th>
-											<th>${dept_list.dept_num1}-${dept_list.dept_num2}-${dept_list.dept_num3}</th>
-											<th>${dept_list.dept_leader}</th>
-											<th>
+											</td>
+											<td>${dept_list.dept_num1}-${dept_list.dept_num2}-${dept_list.dept_num3}</td>
+											<td>${dept_list.dept_leader}</td>
+											<td>
 												<c:if test="${dept_list.active_flg eq 'Y'}">활성화</c:if>
 												<c:if test="${dept_list.active_flg eq 'N'}">비활성화</c:if>
-											</th>
+											</td>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -262,6 +263,12 @@
 						</tbody>
 					</table>
 				</form>
+			</div>
+			<div class="paging2_div">
+				<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
+				<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">
+				<input type="button" id="dept_exIm_fbtn" class="func_btn" value="excelImport">
+				<input type="button" id="dept_exEx_fbtn" class="func_btn" value="excelExport">
 			</div>
 			<div id="dept_detail_div">
 				<form id="dept_detail_form" name="dept_detail_form">
@@ -355,12 +362,6 @@
 					</div>
 				</form>
 			</div>
-		</div>
-		<div class="paging_div">
-			<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
-			<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">
-			<input type="button" id="dept_exIm_fbtn" class="func_btn" value="excelImport">
-			<input type="button" id="dept_exEx_fbtn" class="func_btn" value="excelExport">
 		</div>
 	</div>
 </body>

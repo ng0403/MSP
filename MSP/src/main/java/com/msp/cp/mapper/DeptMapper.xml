@@ -22,7 +22,7 @@
 		</where>
 	</select>
 	
-	<select id="selectDetailDept" parameterType="com.msp.cp.dept.vo.DeptVO"
+	<select id="selectDetailDept" parameterType="string"
 		resultType="com.msp.cp.dept.vo.DeptVO">
 		SELECT
 			dept_cd
@@ -40,7 +40,7 @@
 			AND del_flg = 'N'
 	</select>
 
-	<insert id="insertDept" parameterType="com.msp.cp.dept.vo.DeptVO">
+	<update id="insertDept" parameterType="com.msp.cp.dept.vo.DeptVO">
 		INSERT INTO TB_DEPT (
 			dept_cd
 			,dept_nm
@@ -52,10 +52,10 @@
 			,dept_fnum3
 			,active_flg
 			,created_by
-			)
+		)
 		VALUES (
 			(SELECT /*+INDEX_DESC(TB_DEPT TB_DEPT_PK)*/
-				DECODE(SUBSTR(MAX(dept_cd), 1, 3), null, 'DEP1000001', SUBSTR(MAX(dept_cd), 1, 3)||(SUBSTR(MAX(dept_cd), 4, 7))+1)dept_cd
+				DECODE(SUBSTR(MAX(dept_cd), 1, 3), null, 'DEP1000001', SUBSTR(MAX(dept_cd), 1, 3)||(SUBSTR(MAX(dept_cd), 4, 7)+1))dept_cd
 			FROM TB_DEPT
 			WHERE
 				ROWNUM = 1)
@@ -67,9 +67,9 @@
 			,#{dept_fnum2}
 			,#{dept_fnum3}
 			,#{active_flg}
-			,#{created_by}
+			,'admin'<!-- #{created_by} -->
 		)
-	</insert>
+	</update>
 	
 	
 	<update id="updateDept" parameterType="com.msp.cp.dept.vo.DeptVO">
@@ -83,10 +83,10 @@
 			,dept_fnum2 = #{dept_fnum2}
 			,dept_fnum3 = #{dept_fnum3}
 			,active_flg = #{active_flg}
-			,updated_by = #{created_by}
+			,updated_by = 'admin'<!-- #{created_by} -->
 			,updated = sysdate
 		WHERE
-			WHERE DEPT_CD = #{dept_cd}
+			dept_cd = #{dept_cd}
 	</update>
 
 	<update id="deleteDept" parameterType="com.msp.cp.dept.vo.DeptVO">

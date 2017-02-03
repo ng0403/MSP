@@ -49,7 +49,7 @@ public class DeptController {
 	public ResponseEntity<List<DeptVO>> deptDetailList(@PathVariable("dept_cd") String dept_cd){
 		
 		ResponseEntity<List<DeptVO>> entity = null;
-		System.out.println(dept_cd);
+		
 		try{
 			entity = new ResponseEntity<>(deptService.deptDetailList(dept_cd), HttpStatus.OK);
 		}catch(Exception e){
@@ -102,7 +102,7 @@ public class DeptController {
 	
 	@RequestMapping(value="/delete", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptDelete(@RequestParam(value="del_code") String del_code){
-		
+		System.out.println(del_code);
 		String[] delcode = del_code.split(",");
 		
 		ModelAndView mav = new ModelAndView();

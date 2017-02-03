@@ -8,7 +8,7 @@ public interface DeptDao {
 
 	public List<DeptVO> codeList(DeptVO dvo);
 
-	public List<DeptVO> codeDetailList(DeptVO dvo);
+	public List<DeptVO> codeDetailList(String dept_cd);
 
 	public int deptInsert(DeptVO dvo);
 

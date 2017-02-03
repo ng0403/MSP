@@ -8,7 +8,7 @@ public interface DeptService {
 
 	public List<DeptVO> deptList(DeptVO dvo);
 
-	public List<DeptVO> deptDetailList(DeptVO dvo);
+	public List<DeptVO> deptDetailList(String dept_cd);
 
 	public int deptInsert(DeptVO dvo);
 
