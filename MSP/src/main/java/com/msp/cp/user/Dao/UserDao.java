@@ -17,4 +17,6 @@ public interface UserDao {
 	public userVO searchListUserOne(String user_id);
 
 	public void userMdfy(userVO vo);
+
+	int UserListCount(String string, Map<String, Object> map);
 }

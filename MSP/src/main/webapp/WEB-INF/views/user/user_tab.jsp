@@ -313,7 +313,7 @@
 						<tr>	
 							<th colspan="2" align="left">사용자명</th>
 							<td colspan="2" align="left">
-								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" style="width:90%" value="${user_nm}"></input>
+								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" maxlength="10" style="width:90%" value="${user_nm}"></input>
 							</td>
 						</tr>
 						<tr>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.msp.cp.common.PagerVO;
 import com.msp.cp.user.Service.UserService;
 import com.msp.cp.user.vo.userVO;
 
@@ -27,7 +28,8 @@ public class UserController {
 	UserService userService;
 	
 	@RequestMapping(value="/userlist", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model, 
+	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum,
 			@RequestParam(value = "searchnotice", defaultValue="") String searchnotice,
 			userVO userVO,
@@ -38,6 +40,7 @@ public class UserController {
 		String user_nm_sch = request.getParameter("user_nm_sch");
 		String dept_nm_sch = request.getParameter("dept_cd_sch");
 		System.out.println("user Controller");
+		map.put("pageNum", pageNum);
 		map.put("user_id_sch", user_id_sch);
 		map.put("user_nm_sch", user_nm_sch);
 		map.put("dept_nm_sch", dept_nm_sch);
@@ -45,10 +48,12 @@ public class UserController {
 		System.out.println("user_nm_sch : " + user_nm_sch);
 		System.out.println("dept_nm_sch : " + dept_nm_sch);
 		
-		List<userVO> list = userService.searchListUser(map);
+		PagerVO page=userService.getUserListCount(map);
+		
+		List<userVO> user_list = userService.searchListUser(map);
 
-		System.out.println("User Search list" + list);
-		ModelAndView mov = new ModelAndView("/user/user_list", "list", list);
+		System.out.println("User Search list" +user_list);
+		ModelAndView mov = new ModelAndView("/user/user_list", "user_list", user_list);
 		
 		return mov;
 		

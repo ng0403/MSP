@@ -77,6 +77,82 @@
 			location.href = "${ctx}/user/userDel?user_id=" + del_code;
 		}
 	}
+	
+	//페이지 엔터키 기능
+	function userpageNumEnter(event) {
+		$(document).ready(function() {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				var pageNum = parseInt($("#pageInput").val());
+				if (pageNum == '') {
+					alert("페이지 번호를 입력하세요.")
+					$("#pageInput").focus();
+				} else if(pageNum > parseInt($("#endPageNum").val())) {
+					alert("페이지 번호가 너무 큽니다.");
+					$("#pageInput").val($("#userPageNum").val());
+					$("#pageInput").focus();
+				} else {
+					userPaging(pageNum);
+				}
+			}
+			event.stopPropagation();
+		});
+	}
+	
+	//사용자관리 페이징
+	function userPaging(pageNum) {
+		$(document).ready(function() {
+			var ctx = $("#ctx").val();
+			var $form = $('#userlistPagingForm');
+		    
+		    var pageNum_input = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');
+
+		    $form.append(pageNum_input);
+		    $form.submit();
+		});
+	}
+	//검색 엔터키
+	function userEnterSearch(event) {
+		$(document).ready(function() {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				user_goSearch();
+			}
+		});
+	}
+	
+	//사용자관리 조회 버튼기능
+	function user_goSearch(){
+		
+		var user_id_sch = $("#user_id_sch").val();
+		var user_nm_sch = $("#user_nm_sch").val();
+		var dept_cd_sch = $("#dept_cd_sch").val();
+		
+		$("#userSearchForm").submit();
+			
+	}
+	
+	//페이지 엔터키 기능
+	function userpageNumEnter(event) {
+		$(document).ready(function() {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				var pageNum = parseInt($("#pageInput").val());
+				if (pageNum == '') {
+					alert("페이지 번호를 입력하세요.")
+					$("#pageInput").focus();
+				} else if(pageNum > parseInt($("#endPageNum").val())) {
+					alert("페이지 번호가 너무 큽니다.");
+					$("#pageInput").val($("#userPageNum").val());
+					$("#pageInput").focus();
+				} else {
+					uesrPaging(pageNum);
+				}
+			}
+			event.stopPropagation();
+		});
+	}
+
 </script>
 
 </head>
@@ -92,16 +168,22 @@
 		
 		<!-- Search1 Div  -->
 		<div class="search1_div">
-			<form name="searchForm" method="post" action="${ctx}/user/userlist">
+			<form name="userSearchForm" method="post" action="${ctx}/user/userlist">
 					<tr>
 						<th>사용자ID</th>
-						<td><input type="text" id="user_id_sch" name="user_id_sch" value="${user_id_sch}"></td>
+						<td><input type="text" id="user_id_sch" name="user_id_sch" value="${user_id_sch}" onkeypress="userEnterSearch(event);"></td>
 						<th>사용자명</th>
-						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}"></td>
+						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}" onkeypress="userEnterSearch(event);"></td>
 						<th>부서명</th>
-						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}"></td>&nbsp;
-					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn">검색</button></td>
+						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}" onkeypress="userEnterSearch(event);"></td>&nbsp;
+					    <td><button id="search_fbtn" type="button" class="user_serach_fbtn" onclick="user_goSearch();">검색</button></td>
 					</tr>
+			</form>
+			<!-- 페이징 전용 폼 -->
+			<form  action="${ctx}/user/userlist" id="userlistPagingForm" method="post">
+				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
+				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
+				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
 			</form>
 		</div>
 	</div>
@@ -121,13 +203,14 @@
 						<td style="width: 10%;">사용자명</td>
 						<td style="width: 10%;">조직명</td>
 						<td style="width: 20%;">이메일</td>
-						<td style="width: 20%;">연락처</td>
+						<td style="width: 25%;">연락처</td>
 						<td style="width: 10%;">권한</td>
 						<td style="width: 10%;">상태</td>
 					</tr>
 				</thead>
 				<tbody id="usertbody">
-					<c:forEach var="list" items="${list}">
+				<c:if test="${not empty user_list}">
+					<c:forEach var="list" items="${user_list}">
 						<tr>
 							<th scope="row"><input type="checkbox" class="ab" name="del_code" value="${list.USER_ID}">
 							 <input	type="hidden" id="user_id_h" value="${list.USER_ID}" /></th>
@@ -144,12 +227,45 @@
 							<td style="width: 20%;" class="active_flg">${list.ACTIVE_FLG}</td>
 						</tr>
 					</c:forEach>
+				</c:if>
+				<c:if test="${user_list.size() == 0}">
+					<tr style="cursor: default; background-color: white;">
+						<td colspan="9" style="height: 274px;"><b>검색 결과가 없습니다.</b></td>
+					</tr>
+				</c:if>
 				</tbody>
 			</table>
 		</form>
 		</div>
 	<!-- Paging Div -->
-	<div class="paging_div">
+	<div class="paging_div" style="width: 100%;">
+		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+		<input type="hidden" id="userPageNum" value="${pageNum}"/>
+		<c:choose>
+			<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
+				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);"/>  
+				<a style="color: black; text-decoration: none;"> / 1</a>
+				<a style="color: black; text-decoration: none;"> ▶ </a>
+			</c:when>
+			<c:when test="${pageNum == page.startPageNum}">
+				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);"/>  
+				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
+				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+			</c:when>
+			<c:when test="${pageNum == page.endPageNum}">
+				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum"> ◀ </a>
+				<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="userpageNumEnter(event);"/> 
+				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+				<a style="color: black; text-decoration: none;"> ▶ </a>
+			</c:when>
+			<c:otherwise>
+				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum" > ◀ </a>
+				<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="userpageNumEnter(event);"/>  
+				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+			</c:otherwise>
+		</c:choose>
 		<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
 		<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
 	</div>
