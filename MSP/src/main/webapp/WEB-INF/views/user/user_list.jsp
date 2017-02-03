@@ -12,7 +12,6 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userList.css" type="text/css" /> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
