@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="code">
+
+	<select id="searchCodeList" parameterType="string" resultType="map">
+		SELECT
+   			*
+		FROM 
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+		WHERE
+			TM.GRP_CD = TD.GRP_CD
+		ORDER BY
+			TM.GRP_CD, TD.CODE1
+	</select>
+	
+	<select id="searchCodeDetail" parameterType="com.msp.cp.code.vo.CodeVO" resultType="com.msp.cp.code.vo.CodeVO">
+		SELECT
+			*
+		FROM
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+		WHERE
+			TM.GRP_CD = TD.GRP_CD
+			AND CODE1 = #{code1}
+		ORDER BY
+			TM.GRP_CD, TD.CODE1
+	</select>
+	
+	<insert id="insertCodeMaster" parameterType="com.msp.cp.code.vo.CodeVO">
+		INSERT INTO TB_CODE_MASTER
+			(grp_cd, grp_nm, grp_desc, created_by) 
+        VALUES 
+        	(#{grp_cd}, #{grp_nm}, #{grp_desc}, #{created_by}) 
+	</insert>
+	
+	<insert id="insertCodeDetail" parameterType="com.msp.cp.code.vo.CodeVO">
+		INSERT INTO TB_CODE_DETAIL
+			(grp_cd, code1, code_txt, code_desc, created_by)
+		VALUES
+			(#{grp_cd}, #{code1}, #{code_txt}, #{code_desc}, #{created_by})
+	</insert>
+	
+	<delete id="deleteCodeMaster" parameterType="com.msp.cp.code.vo.CodeVO">
+		DELETE 
+			tb_code_master
+		WHERE
+			grp_cd = #{grp_cd}					
+	</delete>
+	
+	<delete id="deleteCodeDetail" parameterType="com.msp.cp.code.vo.CodeVO">
+		DELETE
+			tb_code_detail
+		WHERE
+			code1 = #{code1}
+	</delete>
+
+</mapper>

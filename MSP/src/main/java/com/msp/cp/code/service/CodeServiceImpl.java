@@ -15,9 +15,50 @@ public class CodeServiceImpl implements CodeService {
 	CodeDao codeDao;
 
 	@Override
-	public List<CodeVO> list() {
+	public List<Object> searchCodeList() {
+		List<Object> obj = codeDao.searchCodeList();
 		
- 		return codeDao.list();
+ 		return obj;
+	}
+	
+	@Override
+	public List<CodeVO> searchCodeDetail(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		List<CodeVO> obj = codeDao.searchCodeDetail(codeVo);
+		
+		return obj;
+	}
+	
+	@Override
+	public void insertCodeMaster(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		System.out.println("insertCodeMaster 서비스");
+		
+		codeDao.insertCodeMaster(codeVo);
+	}
+
+	@Override
+	public void insertCodeDetail(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		System.out.println("insertCodeDetail 서비스");
+		
+		codeDao.insertCodeDetail(codeVo);
+	}
+
+	@Override
+	public void deleteCodeMaster(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		System.out.println("deleteCodeMaster 서비스");
+		
+		codeDao.deleteCodeMaster(codeVo);
+	}
+
+	@Override
+	public void deleteCodeDetail(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		System.out.println("deleteCodeDetail 서비스");
+		
+		codeDao.deleteCodeDetail(codeVo);
 	}
 
 }

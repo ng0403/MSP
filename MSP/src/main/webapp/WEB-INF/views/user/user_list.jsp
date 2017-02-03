@@ -108,7 +108,6 @@
 	
 	<!-- List1 Cover Div -->
 	<div class="">
-		
 		<!-- List1 Div -->
 		<div class="list1_div">
 			<form name="delAllForm" id="delAllForm" method="post"

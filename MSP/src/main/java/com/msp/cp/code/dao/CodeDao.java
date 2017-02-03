@@ -6,6 +6,12 @@ import com.msp.cp.code.vo.CodeVO;
 
 public interface CodeDao {
 	
-	public List<CodeVO> list();
+	public List<Object> searchCodeList();
+	public List<CodeVO> searchCodeDetail(CodeVO codeVo);
+	
+	public void insertCodeMaster(CodeVO codeVo);
+	public void insertCodeDetail(CodeVO codeVo);
+	public void deleteCodeMaster(CodeVO codeVo);
+	public void deleteCodeDetail(CodeVO codeVo);
 
 }
