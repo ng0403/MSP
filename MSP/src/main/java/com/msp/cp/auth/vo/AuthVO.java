@@ -11,6 +11,14 @@ public class AuthVO {
 	private String updated_by;
 	private String updated;
 	
+	@Override
+	public String toString() {
+		return "AutnVO = [auth_id= " +  auth_id + ", auth_nm=" + auth_nm 
+				 			+ ", active_flg=" + active_flg + ", del_flg=" + del_flg 
+							+ ", created_by=" + created_by + ",created=" + created 
+							+ ", updated_by=" + updated_by + ", updated=" + updated + "]";
+	}
+	
 	public String getAuth_id() {
 		return auth_id;
 	}

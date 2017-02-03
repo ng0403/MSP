@@ -1,12 +1,14 @@
 package com.msp.cp.auth.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.msp.cp.auth.vo.AuthVO;
+import com.msp.cp.user.vo.userVO;
 
 @Repository
 public class AuthDaoImpl implements AuthDao {
@@ -19,9 +21,14 @@ public class AuthDaoImpl implements AuthDao {
 	}
 	
 	@Override
-	public List<Object> searchListAuth() {
+	public List<AuthVO> searchListAuth(Map map) {
 		
-		List<Object> obj = sqlSession.selectList("searchListAuth");
+		System.out.println("auth Search Dao Impl");
+		
+		List<AuthVO> obj = sqlSession.selectList("searchListAuth", map);
+		
+		System.out.println("auth List Search Dao Impl" + obj);
+		
 		return obj;
 	}
 
@@ -51,6 +58,5 @@ public class AuthDaoImpl implements AuthDao {
 		sqlSession.delete("deleteAuth", dc);
 		
 	}
-	
 		
 }
