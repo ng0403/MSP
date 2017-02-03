@@ -31,7 +31,6 @@ public class UserController {
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum,
 			@RequestParam(value = "searchnotice", defaultValue="") String searchnotice,
 			userVO userVO,
-			@RequestParam(value = "keyword", defaultValue="") String keyword,
 			@RequestParam(value = "code", defaultValue="empty") String selectcode,
 			@RequestParam Map<String, Object> map)
 	{

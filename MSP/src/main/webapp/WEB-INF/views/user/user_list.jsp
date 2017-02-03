@@ -95,11 +95,11 @@
 			<form name="searchForm" method="post" action="${ctx}/user/userlist">
 					<tr>
 						<th>사용자ID</th>
-						<td><input type="text" id="user_id_sch" value=""></td>
+						<td><input type="text" id="user_id_sch" name="user_id_sch" value="${user_id_sch}"></td>
 						<th>사용자명</th>
-						<td><input type="text" id="user_nm_sch" value=""></td>
+						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}"></td>
 						<th>부서명</th>
-						<td><input type="text" id="dept_cd_sch" value=""></td>&nbsp;
+						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}"></td>&nbsp;
 					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn">검색</button></td>
 					</tr>
 			</form>
