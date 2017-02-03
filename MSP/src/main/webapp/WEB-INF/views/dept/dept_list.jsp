@@ -163,11 +163,11 @@
 			alert("삭제할 대상을 선택해 주세요");
 			return false;
 		}else{
-			$("delAll_form").attr({
+			$("#delAll_form").attr({
 				"method":"post",
 				"action":"delete"
 			});
-			$("delAll_form").submit();
+			$("#delAll_form").submit();
 		}
 	}
 	/*부서 상세정보 출력 함수*/
