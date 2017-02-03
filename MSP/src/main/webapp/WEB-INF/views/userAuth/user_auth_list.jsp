@@ -193,8 +193,8 @@
 	    }
 	    
     //메뉴 상세 팝업
-    function fn_menuPop(){
-	    	var user_id = $("#popMenuId1").val();
+    function fn_userAuthPop(){
+	    	var user_id = $("#popUserAuthId1").val();
 	    	
 	    	var tbody_general = $('#generalTbody');
 	    	
@@ -210,15 +210,12 @@
 	    			
 	    			var user_id = data.user_id;
 	    			var user_nm = data.user_nm;
-	    			var menu_url = data.menu_url;
-	    			var p_user_id = data.p_user_id;
-	    			var menu_level = data.menu_level;
-	    			var default_flg = data.default_flg;
+	    			var dept_nm = data.dept_nm;
+	    			var email_id = data.email_id;
+	    			var email_domain = data.email_domain;
 	    			var active_flg = data.active_flg;
-	    			var c_user_id = data.c_user_id;
-	    			var cdate = data.cdate;
-	    			var u_user_id = data.u_user_id;
-	    			var udate = data.udate;
+	    			var user_auth_list = data.user_auth_list;
+	    			var auth_list = data.auth_list;
 	    			
 	    			contents="<tr height='15px'>"+
 							"<th style=' width: 12%; text-align: right;'><span style='color:red;'>*</span>메뉴ID&nbsp;&nbsp;</th>"+
@@ -363,9 +360,9 @@
 	//메뉴 팝업 호출
 	function userAuthPop1(user_id2){		
 		
-		$("#popMenuId1").val(user_id2);
+		$("#popUserAuthId1").val(user_id2);
 					
-		fn_menuPop();
+		fn_userAuthPop();
 		
 		$('.userAuthOpen').click();
 		
@@ -399,7 +396,7 @@
 		});
 
 		//닫기 버튼을 눌렀을 때
-		$('.userAuthWindow #menuClose').click(function(e) {
+		$('.userAuthWindow #userAuthClose').click(function(e) {
 			//링크 기본동작은 작동하지 않도록 한다.
 			e.preventDefault();
 			$('#generalTbody').empty();
@@ -424,7 +421,7 @@ $(document).ready(function(){
 <body>
 	<input type="hidden" id="ctx" value="${ctx}">
 	<input type="hidden" id="userNo" value="${userNo}">
-	<input type="hidden" id="popMenuId1">
+	<input type="hidden" id="popUserAuthId1">
     <div style="margin-left:1%;"><h4>권한관리>사용자권한 리스트</h4></div>
     
 	<div id="container" style="margin-top:2%;">

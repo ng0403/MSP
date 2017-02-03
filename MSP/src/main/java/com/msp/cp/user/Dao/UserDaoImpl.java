@@ -1,6 +1,7 @@
 package com.msp.cp.user.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public List<Object> searchListUser() {
+	public List<userVO> searchListUser(Map map) {
 		System.out.println("User List Search Dao Impl");
-		List<Object> obj = sqlSession.selectList("searchListUser");
+		List<userVO> obj = sqlSession.selectList("searchListUser", map);
 		System.out.println("User List Search Dao Impl" + obj);
 		
 		return obj;

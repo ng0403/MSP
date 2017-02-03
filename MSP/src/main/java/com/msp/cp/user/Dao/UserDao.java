@@ -1,11 +1,12 @@
 package com.msp.cp.user.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.msp.cp.user.vo.userVO;
 
 public interface UserDao {
-	public List<Object> searchListUser();
+	public List<userVO> searchListUser(Map map);
 
 	public Object selectOnes(String root, Object obj);
 
