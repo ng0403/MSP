@@ -259,11 +259,11 @@
 					
 						<tr>
 							<th>사용자ID</th>
-							<td>
+							<td style="width: 25%;">
 								<input type="hidden" id="user_id_h" value="${user_id}">
 								<input type="hidden" id="created_by" value="">
 								<input type="hidden" id="active_flg" value="${active_flg}">
- 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:40%" value="${user_id}"onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="iuser_txt" style=" width:40%" value="${emp_no}"/>
+ 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:100%" value="${user_id}"onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="iuser_txt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th>직급</th>
  							<td>
@@ -311,13 +311,13 @@
 							</td>
 						</tr>
 						<tr>	
-							<th colspan="2" align="left">사용자명</th>
+							<th  align="left">사용자명</th>
 							<td colspan="2" align="left">
 								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" maxlength="10" style="width:90%" value="${user_nm}"></input>
 							</td>
 						</tr>
 						<tr>
-							<th colspan="2" align="left">휴대 전화</th>
+							<th  align="left">휴대 전화</th>
 							<td colspan="2" align="left">
 								<select name="cphone_num1" id="cphone_num1" class="iuser_txt"  style="width:25%">
 									<option value="010">010</option>
@@ -328,13 +328,13 @@
 							</td>
 						</tr>
 						<tr>
-							<th colspan="2" align="left">이메일</th>
+							<th  align="left">이메일</th>
 							<td colspan="2" align="left">
-								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:50%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
+								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
  							</td>
  						</tr>
 						<tr>
-							<th colspan="2" align="left">부서</th>
+							<th  align="left">부서</th>
 							<td colspan="2" align="left">
 								<%-- <input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> --%> 
 								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}" style="width:65%"/>
@@ -342,7 +342,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th colspan="2" align="left">내선전화</th>
+							<th  align="left">내선전화</th>
 							<td colspan="2" align="left">
 							<select name="phone_num1" id="phone_num1" class="iuser_txt" style="width:25%">
 									<option value="02">02</option>
