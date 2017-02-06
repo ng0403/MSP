@@ -4,22 +4,22 @@
 
 	<select id="selectDept" parameterType="com.msp.cp.dept.vo.DeptVO" resultType="com.msp.cp.dept.vo.DeptVO">
 		SELECT
-			dept_cd
-			,dept_nm
-			,dept_num1
-			,dept_num2
-			,dept_num3
-			,dept_fnum1
-			,dept_fnum2
-			,dept_fnum3
-			,active_flg
-		FROM TB_DEPT
-		<where>
-			del_flg='N'
-			<if test="keyword != null">
-				and dept_nm like '%'||#{keyword}||'%'
+			d.dept_cd
+			,d.dept_nm
+			,d.dept_num1
+			,d.dept_num2
+			,d.dept_num3
+			,(SELECT DISTINCT USER_NM FROM TB_USER WHERE DEPT_CD = d.dept_cd and duty_cd='DC01') as user_nm
+			,d.active_flg
+		FROM TB_DEPT d
+		where
+			d.del_flg='N'
+			<if test="dept_nm_key != null">
+				and d.dept_nm like '%'||#{dept_nm_key}||'%'
 			</if>
-		</where>
+			<if test="active_key != null and active_key != ''">
+				and d.active_flg=#{active_key}
+			</if>
 	</select>
 	
 	<select id="selectDetailDept" parameterType="string"
