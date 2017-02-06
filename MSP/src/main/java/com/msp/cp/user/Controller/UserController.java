@@ -39,21 +39,31 @@ public class UserController {
 		String user_id_sch = request.getParameter("user_id_sch");
 		String user_nm_sch = request.getParameter("user_nm_sch");
 		String dept_nm_sch = request.getParameter("dept_cd_sch");
+		
 		System.out.println("user Controller");
+		
 		map.put("pageNum", pageNum);
 		map.put("user_id_sch", user_id_sch);
 		map.put("user_nm_sch", user_nm_sch);
 		map.put("dept_nm_sch", dept_nm_sch);
+		
 		System.out.println("user_id_sch : " + user_id_sch);
 		System.out.println("user_nm_sch : " + user_nm_sch);
 		System.out.println("dept_nm_sch : " + dept_nm_sch);
 		
 		PagerVO page=userService.getUserListCount(map);
 		
+		map.put("page", page);
+		if(page.getEndRow() == 1){
+			page.setEndRow(0);
+		}
+		
 		List<userVO> user_list = userService.searchListUser(map);
 
 		System.out.println("User Search list" +user_list);
 		ModelAndView mov = new ModelAndView("/user/user_list", "user_list", user_list);
+		mov.addObject("page",  page);
+		mov.addObject("pageNum",  pageNum);
 		
 		return mov;
 		

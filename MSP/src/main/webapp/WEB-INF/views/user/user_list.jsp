@@ -19,6 +19,23 @@
 
 <title>리스트</title>
 <script type="text/javascript">
+$(document).ready(function() {
+$('table.paginated').each(function() {
+	var currentPage = 0;
+	var numPerPage = 5;
+	var $table = $(this);
+	var repaginate = function() {
+	$table.find('tbody tr').hide()
+	//기본적으로 모두 감춘다
+	.slice(currentPage * numPerPage,
+	(currentPage + 1) * numPerPage)
+	.show();
+	//현재페이지+1 곱하기 현재페이지까지 보여준다
+	};   
+});
+</script>
+
+<script type="text/javascript">
 
 
 	$("#navisub11").show();
@@ -76,28 +93,41 @@
 	}
 	
 	//페이지 엔터키 기능
-	/* function userpageNumEnter(event) {
+	function userpageNumEnter(event, url) {
 		$(document).ready(function() {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13') {
 				var pageNum = parseInt($("#pageInput").val());
-				if (pageNum == '') {
+				if ($("#pageInput").val() == '') {
 					alert("페이지 번호를 입력하세요.")
 					$("#pageInput").focus();
-				} else if(pageNum > parseInt($("#endPageNum").val())) {
+				} else if(parseInt($("#pageInput").val()) > parseInt($("#endPageNum").val())) {
 					alert("페이지 번호가 너무 큽니다.");
-					$("#pageInput").val($("#userPageNum").val());
+					$("#pageInput").val($("#pageNum").val());
 					$("#pageInput").focus();
 				} else {
-					userPaging(pageNum);
+					// 컨트롤러로 전송
+					var ctx = $("#ctx").val();
+					// 동적 폼생성 POST 전송
+					var $form = $('<form></form>');
+					$form.attr('action', ctx + url);
+					$form.attr('method', 'post');
+					$form.appendTo('body');
+					
+					var pageNumInput = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');
+					
+					$form.append(pageNumInput);
+					$form.submit();
 				}
 			}
 			event.stopPropagation();
 		});
-	} */
+	}
+	
+	
 	
 	//사용자관리 페이징
-	/* function userPaging(pageNum) {
+	function userPaging(pageNum) {
 		$(document).ready(function() {
 			var ctx = $("#ctx").val();
 			var $form = $('#userlistPagingForm');
@@ -107,7 +137,7 @@
 		    $form.append(pageNum_input);
 		    $form.submit();
 		});
-	} */
+	}
 	//검색 엔터키
 	function userEnterSearch(event) {
 		$(document).ready(function() {
@@ -215,36 +245,39 @@
 		</form>
 		</div>
 	<!-- Paging Div -->
-	<div class="paging_div" style="width: 100%;">
+	<div class="paging_div" style="width: 100%; text-align: center;">
+	
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
 		<input type="hidden" id="userPageNum" value="${pageNum}"/>
 		<c:choose>
 			<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);"/>  
+				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/>  
 				<a style="color: black; text-decoration: none;"> / 1</a>
 				<a style="color: black; text-decoration: none;"> ▶ </a>
 			</c:when>
 			<c:when test="${pageNum == page.startPageNum}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);"/>  
+				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/>  
 				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
 				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
 			</c:when>
 			<c:when test="${pageNum == page.endPageNum}">
 				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum"> ◀ </a>
-				<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="userpageNumEnter(event);"/> 
+				<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/> 
 				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
 				<a style="color: black; text-decoration: none;"> ▶ </a>
 			</c:when>
 			<c:otherwise>
 				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum" > ◀ </a>
-				<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="userpageNumEnter(event);"/>  
+				<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/>  
 				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
 				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
 			</c:otherwise>
 		</c:choose>
-		<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
-		<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
+		<div class="" style="text-align: right;">
+			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
+			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
+		</div>
 	</div>
 	</div>
 	
