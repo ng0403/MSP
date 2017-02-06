@@ -64,6 +64,9 @@ public class UserController {
 		ModelAndView mov = new ModelAndView("/user/user_list", "user_list", user_list);
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
+		mov.addObject("user_id_sch", user_id_sch);
+		mov.addObject("user_nm_sch", user_nm_sch);
+		mov.addObject("dept_nm_sch", dept_nm_sch);
 		
 		return mov;
 		
