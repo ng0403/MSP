@@ -22,7 +22,7 @@ import com.msp.cp.dept.service.DeptService;
 import com.msp.cp.dept.vo.DeptVO;
 
 @Controller
-@RequestMapping(value="/dept")
+@RequestMapping(value="/dept/*")
 public class DeptController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DeptController.class);
@@ -40,6 +40,7 @@ public class DeptController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("dept_list", list);
+		mav.addObject("data", dvo);
 		mav.setViewName("/dept/dept_list");
 		
 		return mav;
