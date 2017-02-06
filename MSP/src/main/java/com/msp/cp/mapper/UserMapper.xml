@@ -19,10 +19,13 @@
 	</select>
 
 	<select id="searchListUser" parameterType="string" resultType="map">
-		SELECT *
-		FROM TB_USER
-		where del_flg='N'  
-		<if test="user_id_sch != null and user_id_sch != ''">   
+		SELECT * 
+		FROM (SELECT user_id, user_nm, dept_cd, email_id, email_domain
+				, cphone_num1,cphone_num2,cphone_num3, ACTIVE_FLG
+				, ROW_NUMBER() OVER (ORDER BY created desc) R 
+				FROM TB_USER 
+				where del_flg='N'
+				<if test="user_id_sch != null and user_id_sch != ''">   
         		and user_id like '%'||#{user_id_sch}||'%' 
         	</if>
 	 	<if test="user_nm_sch != null and user_nm_sch != ''">   
@@ -30,9 +33,9 @@
         	</if>
 	 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
         		and dept_cd like '%'||#{dept_cd_sch}||'%' 
-        	</if>
-	 	
-		 	
+        	</if> ) tb_user 
+		WHERE R BETWEEN #{page.endRow} and #{page.pageSize}
+		
 	</select>
 
 	<update id="userInsert" parameterType="com.msp.cp.user.vo.userVO">
