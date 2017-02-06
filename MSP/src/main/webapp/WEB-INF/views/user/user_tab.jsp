@@ -285,7 +285,7 @@
 						<tr>
 							<th>비밀번호</th>
 							<td>
-								<input type="password" name="user_pwd" id="user_pwd" class="iuser_txt" style="width:45%" value="${user_pwd}"></input>
+								<input type="password" name="user_pwd" id="user_pwd" class="iuser_txt" maxlength="20" style="width:45%" value="${user_pwd}"></input>
 							</td>
 							<th>조직ID</th>
 							<td>
@@ -330,7 +330,7 @@
 						<tr>
 							<th  align="left">이메일</th>
 							<td colspan="2" align="left">
-								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
+								<input type="text" name="email_id" id="email_id" class="iuser_txt" maxlength="20" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" maxlength="20" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
  							</td>
  						</tr>
 						<tr>

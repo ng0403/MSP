@@ -21,6 +21,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<userVO> searchListUser(Map map) {
 		System.out.println("User List Search Dao Impl");
+		System.out.println(map.toString());
 		List<userVO> obj = sqlSession.selectList("searchListUser", map);
 		System.out.println("User List Search Dao Impl" + obj);
 		

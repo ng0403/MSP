@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,8 +83,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/board_remove", method=RequestMethod.POST)
 	@ResponseBody 
- 	public Map<String, Object> board_remove(@RequestBody 
- 			String del_code ){ 
+ 	public Map<String, Object> board_remove(@RequestBody String del_code ){ 
 		
 		System.out.println("remove insert" + del_code);
  
@@ -109,8 +106,6 @@ public class BoardController {
 	     
 		return map;
 		
-  	  
-
  	}
  
 }

@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		
 		int totalRowCount = userDao.UserListCount("userListCount", map);
 		
-		PagerVO page = new PagerVO(userPageNum, totalRowCount, 10, 999);
+		PagerVO page = new PagerVO(userPageNum, totalRowCount, 5, 999);
 		
 		return page;
 	}

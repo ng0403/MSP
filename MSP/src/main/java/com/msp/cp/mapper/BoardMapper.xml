@@ -12,7 +12,7 @@ FROM tb_board
  <select id="ajaxList" resultType="map">
  
  SELECT
-  *
+  BOARD_NO, TITLE, CONTENT, CREATED_BY, CREATED, VIEW_CNT
 FROM tb_board
 WHERE ACTIVE_FLG='Y'
  </select>
