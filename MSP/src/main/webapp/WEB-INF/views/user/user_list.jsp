@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
- <%@include file="../include/header.jsp"%>
  
 <!DOCTYPE html>
 <html>
@@ -10,12 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userList.css" type="text/css" /> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 <!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -27,7 +25,7 @@
 	$("#naviuser").css("font-weight", "bold");
 
 	function userTabOpen() {
-		
+
 		var popUrl = "userTab";
 		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
 		window.open(popUrl, "", popOption);
@@ -78,7 +76,7 @@
 	}
 	
 	//페이지 엔터키 기능
-	function userpageNumEnter(event) {
+	/* function userpageNumEnter(event) {
 		$(document).ready(function() {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13') {
@@ -96,10 +94,10 @@
 			}
 			event.stopPropagation();
 		});
-	}
+	} */
 	
 	//사용자관리 페이징
-	function userPaging(pageNum) {
+	/* function userPaging(pageNum) {
 		$(document).ready(function() {
 			var ctx = $("#ctx").val();
 			var $form = $('#userlistPagingForm');
@@ -109,7 +107,7 @@
 		    $form.append(pageNum_input);
 		    $form.submit();
 		});
-	}
+	} */
 	//검색 엔터키
 	function userEnterSearch(event) {
 		$(document).ready(function() {
@@ -130,32 +128,12 @@
 		$("#userSearchForm").submit();
 			
 	}
-	
-	//페이지 엔터키 기능
-	function userpageNumEnter(event) {
-		$(document).ready(function() {
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if (keycode == '13') {
-				var pageNum = parseInt($("#pageInput").val());
-				if (pageNum == '') {
-					alert("페이지 번호를 입력하세요.")
-					$("#pageInput").focus();
-				} else if(pageNum > parseInt($("#endPageNum").val())) {
-					alert("페이지 번호가 너무 큽니다.");
-					$("#pageInput").val($("#userPageNum").val());
-					$("#pageInput").focus();
-				} else {
-					uesrPaging(pageNum);
-				}
-			}
-			event.stopPropagation();
-		});
-	}
 
 </script>
 
 </head>
 <body>
+ <%@include file="../include/header.jsp"%>
 
 <!--Main_Div  -->
 <div class="main_div">
