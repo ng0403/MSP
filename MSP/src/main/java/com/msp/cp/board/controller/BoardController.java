@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,32 +84,33 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board_remove", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> board_remove(@RequestBody String del_code){ 
+	@ResponseBody 
+ 	public Map<String, Object> board_remove(@RequestBody 
+ 			String del_code ){ 
 		
 		System.out.println("remove insert" + del_code);
  
 		String[] delcode = del_code.split(",");
-		System.out.println("delcode" + delcode);
-		
+
 		for(int i = 0; i < delcode.length; i++)
 		{
 			String dc = delcode[i];
 			System.out.println("delete..." + dc);
 			boardService.removeBoard(dc);
-			 
-		}
+			System.out.println("success"); 
+		} 
 		
-		List<Object> ajaxlist =  boardService.ajaxlist();
-		
+
 		Map<String, Object> map = new HashMap<String, Object>(); 
+
+		 List<Object> ajaxlist =  boardService.ajaxlist(); 
 	     map.put("data", ajaxlist);
- 	     System.out.println("ajax map? " + map.toString()); 
+	     System.out.println("ajax map? " + map.toString());
 	     
-	     return map;
+		return map;
+		
+  	  
 
  	}
-	
  
-
 }

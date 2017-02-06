@@ -33,9 +33,9 @@
 </div>
 </div>
 
-<div class= list_div>
-<div class= list1_div >
- 
+<div class= "list_div">
+
+<div class= "list1_div" id="list1_div">  
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table class="table table-bordered" style ="width: 90%">
 						<tr>
@@ -45,7 +45,7 @@
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-						</tr>
+						</tr> 
  						<c:forEach items="${boardlist}" var="boardVO"> 
 							<tr>
 								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
@@ -57,9 +57,10 @@
 								<td>${boardVO.VIEW_CNT}</td>
 							</tr> 
 						</c:forEach>
+						 
 					</table>
 					</form>
-					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction()"/>
+					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
 					
 </div>
 </div>
@@ -78,7 +79,7 @@ $("#board_add_fbtn").on("click", function(){
 	location.href="/board/board_insert";
 	
 })
-
+  
 
 /* 삭제(체크박스된 것 전부) */
 	function deleteAction() {
@@ -96,61 +97,66 @@ $("#board_add_fbtn").on("click", function(){
  
 		if (confirm("정보를 삭제 하시겠습니까?")) {
 
-			//삭제처리 후 다시 불러올 리스트 url
- 			/* $("form[name='delAllForm']").attr("action", "${ctx}/board/board_remove").submit(); */
-			 
-			alert("delcode" + del_code);
- 			 
  			$.ajax({
-				url : '/board/board_remove',
-				headers : {
-		            "Content-Type" : "application/json",
-		            "X-HTTP-Method-Override" : "POST"
-		         },
-				data : del_code,
-				dataType : 'text',
-				processData: false,
-				contentType: false,
-				type: 'POST',
-				success : function(result) {
-					alert("hello ajax");
-					var ajaxList = result.data;
+ 				url : '/board/board_remove',
+ 				headers : {
+ 		            "Content-Type" : "application/json",
+ 		            "X-HTTP-Method-Override" : "POST"
+ 		         },
+ 				data : del_code,
+ 				dataType : 'json',
+ 				processData: false,
+ 				contentType: false,
+ 				type: 'POST',
+ 				success : function(result) {
+ 					alert("hello ajax");
+ 					
+ 					var ajaxList = result.data; 
+ 						
+ 					var liststr = "";
+ 					var liststr1 = "";
+ 					var liststr2 = "";
+ 				 	var list = ajaxList.length;
+ 				 	alert("list" + list); 
+
+					 	
+ 				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
+										"<tr>" +
+									"<th>" +
+										"<input id='checkall' type='checkbox'/>" +
+									"<th>번호</th>" +
+									"<th>제목</th>" +
+									"<th>작성자</th>" +
+									"<th>작성일</th>" +
+									"<th>조회수</th>" +
+									"</tr>";
+ 				 	
+					for(var i=0 ; i<ajaxList.length; i++) {  
+						 liststr1  +=    "<tr>" +
+  										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_NO + "/>" +
+ 										"<td>" + ajaxList[i].BOARD_NO + "</td>" +
+ 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_NO + "\">" + ajaxList[i].TITLE + "\</a> </td>" +
+ 										"<td>" + ajaxList[i].CREATED_BY + "</td>" +
+ 										"<td>" + ajaxList[i].CREATED + "</td>" +
+ 										"<td>" + ajaxList[i].VIEW_CNT + "</td>" +
+ 										"</tr>";
+  								
+ 				 	}
 					
-					var liststr = "";
-					
-					for(var i=0;i<ajaxList.length;i++) {
-						liststr  +=    				"<tr>" +
-													"<td scope=\"row\"><input type=\"checkbox\" name=\"del_code\" value=" +${boardVO.BOARD_NO} +"\"></td>" +
-													
-						   								"<td>" + ${boardVO.BOARD_NO} + "</td>" +
-														"<td><a href=\"/board/board_detail?BOARD_NO=" + ${boardVO.BOARD_NO} + "\">" + ${boardVO.TITLE} + "\</a> </td>" +
-														"<td>" + ${boardVO.CREATED_BY} + "</td>" +
-														"<td>" +${boardVO.CREATED} + "</td>" +
-														"<td>" + ${boardVO.VIEW_CNT} + "</td>" +
-													"</tr>";
-					}					
-					
-					var friendtable = document.getElementById("list1_div");
-					friendtable.innerHTML = liststr;
-					
-				}
-		         ,  error:function(request,status,error){
+					liststr2 +=  "</table>";
+ 					
+ 					var boardtable = document.getElementById("list1_div");
+ 					boardtable.innerHTML = liststr + liststr1 + liststr2;
+  					 
+
+ 				} ,  error:function(request,status,error){
 		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		          } 
- 			})
+ 				}) 
 			
-			
-			
-			
-			
-			
-			
- 		}
-		
-		
-	}
- 
- 
+  		} 
+ 	}
+  
  
 	$("#checkall").on("click", function() {
 
@@ -162,9 +168,8 @@ $("#board_add_fbtn").on("click", function(){
 		}
 
 	}) 
-	
-	
-	
+	 
+ 
 	
 	
 </script>
