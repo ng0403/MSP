@@ -71,5 +71,17 @@ public class UserDaoImpl implements UserDao {
 		System.out.println("Before userMdfyDaoImpl : " + vo);
 		
 	}
+
+	@Override
+	public int UserListCount(String string, Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			totalCount = sqlSession.selectOne("user.userListCount", map);
+			System.out.println("totalCount : " + totalCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
 }
 

@@ -102,7 +102,7 @@ public class DeptController {
 	
 	@RequestMapping(value="/delete", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptDelete(@RequestParam(value="del_code") String del_code){
-		System.out.println(del_code);
+
 		String[] delcode = del_code.split(",");
 		
 		ModelAndView mav = new ModelAndView();

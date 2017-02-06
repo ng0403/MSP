@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.msp.cp.common.PagerVO;
 import com.msp.cp.user.Dao.UserDao;
 import com.msp.cp.user.vo.userVO;
 
@@ -56,5 +57,16 @@ public class UserServiceImpl implements UserService {
 		System.out.println("After userMdfy ServiceImpl : " + vo);
 		userDao.userMdfy(vo);
 		System.out.println("Before userMdfy ServiceImpl : " + vo);
+	}
+
+	@Override
+	public PagerVO getUserListCount(Map<String, Object> map) {
+		int userPageNum = (Integer)map.get("pageNum");
+		
+		int totalRowCount = userDao.UserListCount("userListCount", map);
+		
+		PagerVO page = new PagerVO(userPageNum, totalRowCount, 10, 999);
+		
+		return page;
 	}
 }
