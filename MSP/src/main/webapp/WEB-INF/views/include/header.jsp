@@ -3,7 +3,7 @@
    
 <!DOCTYPE html>
 <html>
-  <head>
+  <head> 
   <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
  <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
