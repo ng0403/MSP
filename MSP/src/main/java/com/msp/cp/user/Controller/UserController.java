@@ -44,6 +44,7 @@ public class UserController {
 		map.put("user_id_sch", user_id_sch);
 		map.put("user_nm_sch", user_nm_sch);
 		map.put("dept_nm_sch", dept_nm_sch);
+		
 		System.out.println("1. USER List Controller pageNum : " + pageNum);
 		
 		System.out.println("2. user_id_sch : " + user_id_sch);
