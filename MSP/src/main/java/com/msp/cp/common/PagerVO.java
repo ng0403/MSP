@@ -20,11 +20,11 @@ public class PagerVO {
 		this.pageSize=pageSize;
 		this.pageBlockSize=pageBlockSize;
 		startRow = (currentPageNum-1)*pageSize+1;
-		if(startRow != 1){
+		/*if(startRow != 1){
 			endRow  = startRow-1;
-		} else {
-			endRow = startRow;
-		}
+		} else {*/
+			endRow = startRow+10;
+		//}
 		totalPageCount = (int) Math.ceil((double)totalCount/pageSize);
 		
 		startPageNum = (int)((currentPageNum-1)/pageBlockSize)*pageBlockSize+1;

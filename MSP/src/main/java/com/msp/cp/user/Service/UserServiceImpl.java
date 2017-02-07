@@ -17,9 +17,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<userVO> searchListUser(Map map) {
-		System.out.println("User List Search Service Impl");
+		System.out.println("8. ServiceImpl User List Search Service Impl");
 		List<userVO> obj = userDao.searchListUser(map);
-		System.out.println("User List Search Service Impl" + obj.toString());
+		System.out.println("14. ServiceImpl User List Search Service Impl" + obj.toString());
 		return obj;
 	}
 
@@ -62,10 +62,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public PagerVO getUserListCount(Map<String, Object> map) {
 		int userPageNum = (Integer)map.get("pageNum");
-		
+		System.out.println("5. ServiceImpl Page userPageNum : " + userPageNum);
 		int totalRowCount = userDao.UserListCount("userListCount", map);
+		System.out.println("7. ServiceImpl Page totalRowCount : " + totalRowCount);
 		
-		PagerVO page = new PagerVO(userPageNum, totalRowCount, 5, 999);
+		PagerVO page = new PagerVO(userPageNum, totalRowCount, 10, 999);
 		
 		return page;
 	}

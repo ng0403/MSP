@@ -20,10 +20,12 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public List<userVO> searchListUser(Map map) {
-		System.out.println("User List Search Dao Impl");
-		System.out.println(map.toString());
+		System.out.println("9. DaoImpl User List Search Dao Impl");
+		System.out.println("10. DaoImpl map. toString : " + map.toString());
+		System.out.println("11. DaoImpl endRow : " + map.get("endRow"));
+		System.out.println("12. DaoImpl pageSize : " + map.get("pageSize"));
 		List<userVO> obj = sqlSession.selectList("searchListUser", map);
-		System.out.println("User List Search Dao Impl" + obj);
+		System.out.println("13. DaoImpl User List Search Dao Impl" + obj);
 		
 		return obj;
 
@@ -78,7 +80,7 @@ public class UserDaoImpl implements UserDao {
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("user.userListCount", map);
-			System.out.println("totalCount : " + totalCount);
+			System.out.println("6. DAoImpl totalCount : " + totalCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
