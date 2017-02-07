@@ -30,8 +30,8 @@ public class DeptController {
 	@Autowired
 	DeptService deptService;
 	
-	/*@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView deptList(@ModelAttribute DeptVO dvo){
+	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView deptList1(@ModelAttribute DeptVO dvo){
 		
 		logger.info("list 컨트롤러 호출");
 		
@@ -44,10 +44,10 @@ public class DeptController {
 		mav.setViewName("/dept/dept_list");
 		
 		return mav;
-	}*/
+	}
 	
-	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
-	public ResponseEntity<List<DeptVO>> deptList(@RequestBody DeptVO dvo){
+	@RequestMapping(value="/search_list", method={RequestMethod.GET,RequestMethod.POST})
+	public ResponseEntity<List<DeptVO>> deptList(@ModelAttribute DeptVO dvo){
 		
 		ResponseEntity<List<DeptVO>> entity = null;
 		
@@ -57,7 +57,7 @@ public class DeptController {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-				
+
 		return entity;
 	}
 	
