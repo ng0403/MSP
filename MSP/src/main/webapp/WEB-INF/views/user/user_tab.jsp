@@ -35,7 +35,9 @@
 			$('#submit_btn').css('display','none');
 			$('#joinform').find('input[type="text"]').attr('disabled',true);
 		    $('#joinform').find('input[type="password"]').attr('disabled',true);
+		    $('#joinform').find('input[type="button"]').attr('disabled',true);
 	        $('#joinform').find('input[type="email"]').attr('disabled',true);
+	        $('#joinform').find('select').attr('disabled',true);
 			//$('#addsave_btn').css('visibility',"hidden");
 			
 		} 
@@ -73,6 +75,8 @@
 				if(entry_flg != 1){
 					$('#joinform').find('input[type="text"]').attr('disabled',false);
 					$('#joinform').find('input[type="password"]').attr('disabled',false);
+					$('#joinform').find('input[type="button"]').attr('disabled',false);
+					$('#joinform').find('select').attr('disabled',false);
 					$('#user_id').attr("readonly", true);
 					$('#emp_no').attr("readonly", true);
 					$('#addsave_btn').css("visibility","hidden");

@@ -1,0 +1,70 @@
+package com.msp.cp.board.vo;
+
+public class ReplyVO {
+	
+	String BOARD_NO;
+	String REPLY_NO;
+	String REPLY_CONTENT;
+	String CREATED_BY;
+	String CREATED;
+	String UPDATED_BY;
+	String UPDATED;
+	 
+	public String getBOARD_NO() {
+		return BOARD_NO;
+	}
+ 
+	public void setBOARD_NO(String bOARD_NO) {
+		BOARD_NO = bOARD_NO;
+	}  
+
+	public String getREPLY_NO() {
+		return REPLY_NO;
+	} 
+	public void setREPLY_NO(String rEPLY_NO) {
+		REPLY_NO = rEPLY_NO;
+	} 
+	public String getREPLY_CONTENT() {
+		return REPLY_CONTENT;
+	} 
+	public void setREPLY_CONTENT(String rEPLY_CONTENT) {
+		REPLY_CONTENT = rEPLY_CONTENT;
+	} 
+	public String getCREATED_BY() {
+		return CREATED_BY;
+	} 
+	public void setCREATED_BY(String cREATED_BY) {
+		CREATED_BY = cREATED_BY;
+	} 
+	public String getCREATED() {
+		return CREATED;
+	}
+ 
+	public void setCREATED(String cREATED) {
+		CREATED = cREATED;
+	} 
+	public String getUPDATED_BY() {
+		return UPDATED_BY;
+	}
+ 
+	public void setUPDATED_BY(String uPDATED_BY) {
+		UPDATED_BY = uPDATED_BY;
+	}
+ 
+	public String getUPDATED() {
+		return UPDATED;
+	}
+ 
+	public void setUPDATED(String uPDATED) {
+		UPDATED = uPDATED;
+	} 
+	@Override
+	public String toString() {
+		return "ReplyVO [BOARD_NO=" + BOARD_NO + ", REPLY_NO=" + REPLY_NO + ", REPLY_CONTENT=" + REPLY_CONTENT
+				+ ", CREATED_BY=" + CREATED_BY + ", CREATED=" + CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED="
+				+ UPDATED + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
+ 
+
+}

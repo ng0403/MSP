@@ -145,13 +145,13 @@ $(document).ready(function() {
 <!--Main_Div  -->
 <div class="main_div">
 	<!-- Navigation Div -->
-	<div class="navi_div">■ 사용자관리</div>
+	<div class="navi_div" style="margin-bottom: 1%; margin-top: 1%;">■ 사용자관리</div>
 	
 	<!-- Search1 Cover Div -->
 	<div class="">
 		
 		<!-- Search1 Div  -->
-		<div class="search1_div">
+		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
 			<form name="userSearchForm" method="post" action="${ctx}/user/userlist">
 					<tr>
 						<th>사용자ID</th>
@@ -175,7 +175,7 @@ $(document).ready(function() {
 	<!-- List1 Cover Div -->
 	<div class="">
 		<!-- List1 Div -->
-		<div class="list1_div">
+		<div class="list1_div" style=" margin-left: 1%;">
 			<form name="delAllForm" id="delAllForm" method="post"
 			action="${ctx}/userDel">
 			<table id="mastertable" class="table table-bordered" style ="width: 90%">
@@ -250,9 +250,9 @@ $(document).ready(function() {
 				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
 			</c:otherwise>
 		</c:choose>
-		<div class="" style="text-align: right;">
-			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
-			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
+		<div class="" style="text-align: right; margin-right: 10%;">
+			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
+			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
 		</div>
 	</div>
 	</div>
