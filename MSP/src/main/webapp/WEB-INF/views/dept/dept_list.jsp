@@ -224,16 +224,14 @@
 	}
 	/*부서 리스트 출력 함수*/
 	function deptListOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, user_nm, active_flg){
-		
-		
-		/* if(dept_cd==null && dept_nm==null && dept_num1==null && dept_num2==null && dept_num3==null && user_nm==null && active_flg==null){
+		if(dept_cd==null && dept_nm==null && dept_num1==null && dept_num2==null && dept_num3==null && user_nm==null && active_flg==null){
 			var dept_tr = $("<tr>");
 			var dept_td = $("<td>");
 			dept_td.attr("colspan", "5");
 			dept_td.html("등록된 부서가 존재하지 않습니다.");
 			
 			dept_tr.append(dept_td);
-		}else{ */
+		}else{
 			var dept_tr = $("<tr>");
 			dept_tr.addClass("open_detail");
 			dept_tr.attr("data_num",dept_cd);
@@ -258,11 +256,12 @@
 			}
 			
 			dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td).append(active_flg_td);
-			
+		}		
 			$(".dept_list").append(dept_tr);
 			
-		/* } */
 	}
+	
+	
 	/*부서 상세정보 출력 함수*/
 	function detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg){
 		dataReset();
@@ -289,6 +288,33 @@
 		$("#dept_fnum3").val("");
 		$(".active_flg:radio[value='Y']").attr("checked", true);
 	}
+	
+	// 검색 페이징 엔터키
+    function pageInputRepUser(event) {	
+    	$(document).ready(function() {
+    		var keycode = (event.keyCode ? event.keyCode : event.which);
+    		if (keycode == '13') {
+    			var pageNum = parseInt($("#pageInput").val());
+    			if ($("#pageInput").val() == '') {
+    				alert("Input page number.")
+    				$("#pageInput").val($("#pageNum").val());
+    				$("#pageInput").focus();
+    			} else if(pageNum > parseInt($("#endPageNum").val())) {
+    				alert("The page number is too large.");
+    				$("#pageInput").val($("#pageNum").val());
+    				$("#pageInput").focus();
+    			} else if (1 > pageNum) {
+    				alert("The page number is too small.");
+    				$("#pageInput").val($("#pageNum").val());
+    				$("#pageInput").focus();
+    			} else {
+    				fn_menuSearchList(pageNum);
+    			}
+    		}
+    		event.stopPropagation();
+    	});
+    }
+	
 	/*경고창 출력함수*/
 	function warning(str){
 		alert(str);
@@ -368,6 +394,34 @@
 			<div class="paging2_div">
 				<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
 				<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">
+				
+				<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+				<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+				<input type="hidden" id="PageNum" value="${pageNum}"/>
+				<c:choose>
+					<c:when test="${page.endPageNum == 1}">
+						<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/>  
+						<a style="color: black;"> / ${page.endPageNum}</a>
+						<a style="color: black;"> ▶ </a>
+					</c:when>
+					<c:when test="${pageNum == page.startPageNum}">
+						◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/> /&nbsp;
+						<a href="#" onclick="fn_menuSearchList('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+						<a href="#" onclick="fn_menuSearchList('${pageNum+1}');" id="pNum"> ▶ </a>
+					</c:when>
+					<c:when test="${pageNum == page.endPageNum}">
+						<a href="#" onclick="fn_menuSearchList('${pageNum-1}');" id="pNum"> ◀ </a>
+						<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/> /&nbsp;
+						<a href="#" onclick="fn_menuSearchList('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+					</c:when>
+					<c:otherwise>
+						<a href="#" onclick="fn_menuSearchList('${pageNum-1}');" id="pNum" > ◀ </a>
+						<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/> /&nbsp;
+						<a href="#" onclick="fn_menuSearchList('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+						<a href="#" onclick="fn_menuSearchList('${pageNum+1}');" id="pNum"> ▶ </a>
+					</c:otherwise>
+				</c:choose>
+				
 				<input type="button" id="dept_exIm_fbtn" class="func_btn" value="excelImport">
 				<input type="button" id="dept_exEx_fbtn" class="func_btn" value="excelExport">
 			</div>
