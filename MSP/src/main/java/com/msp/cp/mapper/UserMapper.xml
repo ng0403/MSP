@@ -19,25 +19,27 @@
 	</select>
 
 	<select id="searchListUser" parameterType="string" resultType="map">
-		SELECT * 
-		FROM (SELECT user_id, user_nm, dept_cd, email_id, email_domain
-				, cphone_num1,cphone_num2,cphone_num3, ACTIVE_FLG
-				, ROW_NUMBER() OVER (ORDER BY created desc) RNUM
-				FROM TB_USER 
-				where del_flg='N'
-				<if test="user_id_sch != null and user_id_sch != ''">   
+		select X.*
+		from ( 
+		    select rownum as rnum, A.*
+		      from (
+		            select *
+		            from tb_user
+		            where del_flg='N'
+		            <if test="user_id_sch != null and user_id_sch != ''">   
         			and user_id like '%'||#{user_id_sch}||'%' 
-        		</if>
-			 	<if test="user_nm_sch != null and user_nm_sch != ''">   
-		        	and user_nm like '%'||#{user_nm_sch}||'%'
-		        </if>
-			 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
-		        	and dept_cd like '%'||#{dept_cd_sch}||'%'
-		        </if>)tb_user
-		<![CDATA[
-		WHERE tb_user.RNUM>=#{page.startRow} and tb_user.RNUM<=#{page.endRow}
-		]]>
-		
+	        		</if>
+				 	<if test="user_nm_sch != null and user_nm_sch != ''">   
+			        	and user_nm like '%'||#{user_nm_sch}||'%'
+			        </if>
+				 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
+			        	and dept_cd like '%'||#{dept_cd_sch}||'%'
+			        </if>
+		            order by created desc) A
+		    ) X
+		    <![CDATA[
+				where X.rnum >= #{page.startRow} and X.rnum <= #{page.endRow}
+			]]>
 	</select>
 
 	<update id="userInsert" parameterType="com.msp.cp.user.vo.userVO">
