@@ -12,7 +12,7 @@
 			TM.GRP_CD = TB.GRP_CD
 	</select>
 
-	<select id="searchCodeList" parameterType="string" resultType="map">
+	<select id="searchCodeList" parameterType="String" resultType="map">
 		SELECT	*
 		FROM 
      	 (

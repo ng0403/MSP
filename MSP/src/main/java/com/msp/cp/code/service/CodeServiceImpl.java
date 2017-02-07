@@ -18,12 +18,6 @@ public class CodeServiceImpl implements CodeService {
 
 	@Override
 	public List<Object> searchCodeList(Map map) {
-		
-		System.out.println("service page map " + map.toString());
-		System.out.println(map.get("endRow"));
-		System.out.println("service page map endRow " + map.get("totalCount"));
-		System.out.println("service page map endRow " + map.get("endRow"));
-		System.out.println("service page map endRow " + map.get("pageSize"));
 		List<Object> obj = codeDao.searchCodeList(map);
 		
  		return obj;

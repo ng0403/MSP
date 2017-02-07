@@ -22,10 +22,7 @@ public class CodeDaoImpl implements CodeDao {
 	
 	@Override
 	public List<Object> searchCodeList(Map map) {
-		System.out.println("endRow " + map.get("endRow"));
-		System.out.println("pageSize " + map.get("pageSize"));
-		
-		List<Object> obj = sqlSession.selectList("searchCodeList");
+		List<Object> obj = sqlSession.selectList("searchCodeList", map);
 		
 		return obj;
 	}
