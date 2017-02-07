@@ -1,5 +1,7 @@
 package com.msp.cp.common;
 
+import java.util.Map;
+
 public class PagerVO {
 	private int totalCount; //전체게시글의 총갯수
 	private int pageSize;	//한 페이지에 보여줄 게시물 갯수--
@@ -14,17 +16,21 @@ public class PagerVO {
 	
 	public PagerVO(){}
 
+	
+	/*현재 게시물 10개 기준 endRow = startRow+10
+	 * 변경 시 service Impl PagerVO getUserListCount(Map<String, Object> map) page 갯수 함께 수정해줄 것. */
 	public PagerVO(int currentPageNum, int totalCount, int pageSize, int pageBlockSize) {
 		this.totalCount = totalCount;
 		this.currentPageNum = currentPageNum;
 		this.pageSize=pageSize;
 		this.pageBlockSize=pageBlockSize;
 		startRow = (currentPageNum-1)*pageSize+1;
-		if(startRow != 1){
+		/*if(startRow != 1){
 			endRow  = startRow-1;
-		} else {
-			endRow = startRow;
-		}
+		} else {*/
+		
+			endRow = startRow+10;
+		//}
 		totalPageCount = (int) Math.ceil((double)totalCount/pageSize);
 		
 		startPageNum = (int)((currentPageNum-1)/pageBlockSize)*pageBlockSize+1;

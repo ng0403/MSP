@@ -18,22 +18,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function() {
-$('table.paginated').each(function() {
-	var currentPage = 0;
-	var numPerPage = 5;
-	var $table = $(this);
-	var repaginate = function() {
-	$table.find('tbody tr').hide()
-	//기본적으로 모두 감춘다
-	.slice(currentPage * numPerPage,
-	(currentPage + 1) * numPerPage)
-	.show();
-	//현재페이지+1 곱하기 현재페이지까지 보여준다
-	};   
-});
-</script>
+
+</script> -->
 
 <script type="text/javascript">
 
@@ -93,31 +81,20 @@ $('table.paginated').each(function() {
 	}
 	
 	//페이지 엔터키 기능
-	function userpageNumEnter(event, url) {
+	function userpageNumEnter(event) {
 		$(document).ready(function() {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13') {
 				var pageNum = parseInt($("#pageInput").val());
-				if ($("#pageInput").val() == '') {
+				if (pageNum == '') {
 					alert("페이지 번호를 입력하세요.")
 					$("#pageInput").focus();
-				} else if(parseInt($("#pageInput").val()) > parseInt($("#endPageNum").val())) {
+				} else if(pageNum > parseInt($("#endPageNum").val())) {
 					alert("페이지 번호가 너무 큽니다.");
-					$("#pageInput").val($("#pageNum").val());
+					$("#pageInput").val($("#userPageNum").val());
 					$("#pageInput").focus();
 				} else {
-					// 컨트롤러로 전송
-					var ctx = $("#ctx").val();
-					// 동적 폼생성 POST 전송
-					var $form = $('<form></form>');
-					$form.attr('action', ctx + url);
-					$form.attr('method', 'post');
-					$form.appendTo('body');
-					
-					var pageNumInput = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');
-					
-					$form.append(pageNumInput);
-					$form.submit();
+					userPaging(pageNum);
 				}
 			}
 			event.stopPropagation();
@@ -168,13 +145,13 @@ $('table.paginated').each(function() {
 <!--Main_Div  -->
 <div class="main_div">
 	<!-- Navigation Div -->
-	<div class="navi_div">■ 사용자관리</div>
+	<div class="navi_div" style="margin-bottom: 1%; margin-top: 1%;">■ 사용자관리</div>
 	
 	<!-- Search1 Cover Div -->
 	<div class="">
 		
 		<!-- Search1 Div  -->
-		<div class="search1_div">
+		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
 			<form name="userSearchForm" method="post" action="${ctx}/user/userlist">
 					<tr>
 						<th>사용자ID</th>
@@ -197,9 +174,8 @@ $('table.paginated').each(function() {
 	
 	<!-- List1 Cover Div -->
 	<div class="">
-		
 		<!-- List1 Div -->
-		<div class="list1_div">
+		<div class="list1_div" style=" margin-left: 1%;">
 			<form name="delAllForm" id="delAllForm" method="post"
 			action="${ctx}/userDel">
 			<table id="mastertable" class="table table-bordered" style ="width: 90%">
@@ -237,7 +213,7 @@ $('table.paginated').each(function() {
 				</c:if>
 				<c:if test="${user_list.size() == 0}">
 					<tr style="cursor: default; background-color: white;">
-						<td colspan="9" style="height: 274px;"><b>검색 결과가 없습니다.</b></td>
+						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
 					</tr>
 				</c:if>
 				</tbody>
@@ -269,14 +245,14 @@ $('table.paginated').each(function() {
 			</c:when>
 			<c:otherwise>
 				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum" > ◀ </a>
-				<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/>  
+				<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="(event);" style="width: 2%;"/>  
 				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
 				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
 			</c:otherwise>
 		</c:choose>
-		<div class="" style="text-align: right;">
-			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
-			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
+		<div class="" style="text-align: right; margin-right: 10%;">
+			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
+			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
 		</div>
 	</div>
 	</div>

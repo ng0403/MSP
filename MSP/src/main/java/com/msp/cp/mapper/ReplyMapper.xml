@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="reply">
+
+ <insert id="addReply">
+  INSERT INTO TB_REPLY (REPLY_NO, BOARD_NO, REPLY_CONTENT, CREATED_BY, UPDATED_BY)
+  values (seq_reply.nextval, #{BOARD_NO}, #{REPLY_CONTENT},'이준석', #{UPDATED_BY})
+ </insert> 
+
+<select id ="replyList" parameterType="int" resultType="com.msp.cp.board.vo.ReplyVO">
+SELECT
+*
+FROM TB_REPLY
+WHERE BOARD_NO = #{BOARD_NO}
+
+</select>
+
+
+
+
+
+
+
+
+</mapper>

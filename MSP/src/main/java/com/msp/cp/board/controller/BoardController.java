@@ -83,12 +83,13 @@ public class BoardController {
 	
 	@RequestMapping(value="/board_remove", method=RequestMethod.POST)
 	@ResponseBody 
- 	public Map<String, Object> board_remove(@RequestBody String del_code ){ 
+ 	public Map<String, Object> board_remove(@RequestBody String del_code){ 
 		
 		System.out.println("remove insert" + del_code);
  
 		String[] delcode = del_code.split(",");
-
+		
+		
 		for(int i = 0; i < delcode.length; i++)
 		{
 			String dc = delcode[i];
