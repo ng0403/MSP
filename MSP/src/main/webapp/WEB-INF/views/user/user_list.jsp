@@ -213,7 +213,7 @@ $(document).ready(function() {
 				</c:if>
 				<c:if test="${user_list.size() == 0}">
 					<tr style="cursor: default; background-color: white;">
-						<td colspan="9" style="height: 274px;"><b>검색 결과가 없습니다.</b></td>
+						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
 					</tr>
 				</c:if>
 				</tbody>

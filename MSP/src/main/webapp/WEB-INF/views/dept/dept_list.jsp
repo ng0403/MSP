@@ -15,15 +15,16 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>부서관리화면</title>
-</head>
+
 <script type="text/javascript">
 	var dept_cd = "";
 	var save_cd = "";
 	
 	$(function(){
-		$(Document).ready(function(){
-			deptListInqr();
-		})
+		/* $(".dept_list").load(function(){
+			deptListInqr(active_key, dept_nm_key);
+		}) */
+		
 		/* 검색 후 검색 대상과 검색 단어 출력 */
 		/* if("<c:out value='${data.active_key}'/>" != ""){
 			$("#active_key").val("<c:out value='${data.active_key}'/>").attr("selected","selected");
@@ -38,7 +39,7 @@
 			deptListInqr(active_key, dept_nm_key);
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
-		$(".open_detail").click(function(){
+		$(document).on("click", ".open_detail", function(){
 			dept_cd = $(this).attr("data_num");
 			deptDetailInqr(dept_cd);
 		})
@@ -79,6 +80,7 @@
 		      }
 		})
 	})
+	
 	/*부서 리스트 출력및 페이징 처리 함수*/
 	function deptListInqr(active_key, dept_nm_key){
 		/* $("#searchForm").attr({
@@ -86,7 +88,8 @@
 			"action":"list"
 		})
 		$("#searchForm").submit(); */
-		$.post("list",{"active_key":active_key, "dept_nm_key":dept_nm_key}, function(data){
+		$(".dept_list").html("");
+		$.getJSON("search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key}, function(data){
 			$(data).each(function(){
 				var dept_cd = this.dept_cd;
 				var dept_nm = this.dept_nm;
@@ -195,28 +198,45 @@
 			alert("삭제할 대상을 선택해 주세요");
 			return false;
 		}else{
-			$("#delAll_form").attr({
+			/* $("#delAll_form").attr({
 				"method":"post",
 				"action":"delete"
 			});
-			$("#delAll_form").submit();
+			$("#delAll_form").submit(); */
+			$.ajax({
+				url:"delete",
+				type:"post",
+				contentType:"application/json; charset=UTF-8",
+				dataType:"text",
+				data:"del_code=" + del_code,
+				error:function(){
+					warning("시스템 오류 입니다. 관리자에게 문의하세요.");
+				},
+				success:function(resultData){
+					if(resultData == "SUCCESS"){
+						warning("부서 수정이 완료되었습니다.");
+						dataReset();
+						deptListInqr();
+					}
+				}
+			})
 		}
 	}
 	/*부서 리스트 출력 함수*/
 	function deptListOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, user_nm, active_flg){
-		$(".dept_list").empty();
 		
-		if(dept_cd==null && dept_nm==null && dept_num1==null && dept_num2==null && dept_num3==null && user_nm==null && active_flg==null){
+		
+		/* if(dept_cd==null && dept_nm==null && dept_num1==null && dept_num2==null && dept_num3==null && user_nm==null && active_flg==null){
 			var dept_tr = $("<tr>");
 			var dept_td = $("<td>");
 			dept_td.attr("colspan", "5");
 			dept_td.html("등록된 부서가 존재하지 않습니다.");
 			
 			dept_tr.append(dept_td);
-		}else{
+		}else{ */
 			var dept_tr = $("<tr>");
 			dept_tr.addClass("open_detail");
-			dept_tr.attr("data-num",dept_cd);
+			dept_tr.attr("data_num",dept_cd);
 			
 			var del_code_td = $("<td>");
 			del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + dept_cd + "'>");
@@ -241,7 +261,7 @@
 			
 			$(".dept_list").append(dept_tr);
 			
-		}
+		/* } */
 	}
 	/*부서 상세정보 출력 함수*/
 	function detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg){
@@ -275,6 +295,7 @@
 	}
 	
 </script>
+</head>
 <body>
 <%@include file="../include/header.jsp"%>
 	<div class="main_div">
@@ -299,7 +320,7 @@
 		<div class="list_div">
 			<div class="list2_div">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list" class="table table-bordered" style ="width: 45%">
+					<table summary="dept_list_tb" class="table table-bordered" style ="width: 45%">
 						<colgroup>
 							<col width="10%">
 							<col width="35%">
@@ -317,7 +338,7 @@
 							</tr>
 						</thead>
 						<tbody class="dept_list">
-							<%-- <c:choose>
+							<c:choose>
 								<c:when test="${not empty dept_list}">
 									<c:forEach var="dept_list" items="${dept_list}">
 										<tr class="open_detail" data_num="${dept_list.dept_cd}">
@@ -339,7 +360,7 @@
 										<td colspan="5">등록된 부서가 존재하지 않습니다.</td>
 									</tr>
 								</c:otherwise>
-							</c:choose> --%>
+							</c:choose>
 						</tbody>
 					</table>
 				</form>
