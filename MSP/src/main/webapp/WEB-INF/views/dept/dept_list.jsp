@@ -21,16 +21,21 @@
 	var save_cd = "";
 	
 	$(function(){
+		$(Document).ready(function(){
+			deptListInqr();
+		})
 		/* 검색 후 검색 대상과 검색 단어 출력 */
-		if("<c:out value='${data.active_key}'/>" != ""){
+		/* if("<c:out value='${data.active_key}'/>" != ""){
 			$("#active_key").val("<c:out value='${data.active_key}'/>").attr("selected","selected");
 		}
 		if("<c:out value='${data.dept_nm_key}'/>" != ""){
 			$("#dept_nm_key").val("<c:out value='${data.dept_nm_key}'/>");
-		}
+		} */
 		/*검색버튼 클릭 시 처리 이벤트*/
 		$("#dept_inqr_fbtn").click(function(){
-			deptListInqr();
+			var active_key = $("#active_key").val();
+			var dept_nm_key = $("#dept_nm_key").val();
+			deptListInqr(active_key, dept_nm_key);
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(".open_detail").click(function(){
@@ -226,6 +231,15 @@
 			user_nm_td.html(user_nm);
 			
 			var active_flg_td = $("<td>");
+			if(active_flg=='Y'){
+				active_flg_td.html("활성화");
+			}else if(active_flg=='N'){
+				active_flg_td.html("비활성화");
+			}
+			
+			dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td).append(active_flg_td);
+			
+			$(".dept_list").append(dept_tr);
 			
 		}
 	}
@@ -303,7 +317,7 @@
 							</tr>
 						</thead>
 						<tbody class="dept_list">
-							<c:choose>
+							<%-- <c:choose>
 								<c:when test="${not empty dept_list}">
 									<c:forEach var="dept_list" items="${dept_list}">
 										<tr class="open_detail" data_num="${dept_list.dept_cd}">
@@ -325,7 +339,7 @@
 										<td colspan="5">등록된 부서가 존재하지 않습니다.</td>
 									</tr>
 								</c:otherwise>
-							</c:choose>
+							</c:choose> --%>
 						</tbody>
 					</table>
 				</form>
