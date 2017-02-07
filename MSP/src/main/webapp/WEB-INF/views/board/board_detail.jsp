@@ -110,25 +110,19 @@ $(document).ready(function(){
 	 var REPLY_CONTENT_OBJ = $("#reply_content");
 	 var REPLY_CONTENT = REPLY_CONTENT_OBJ.val();
  	 var CREATED_BY = '이준석';
-	 
-	 $.ajax({
-			type: 'post', 
-			url : '/reply/reply_add/',
-			headers : {
-	            "Content-Type" : "application/json",
-	            "X-HTTP-Method-Override" : "POST"
-	         },
-			data : JSON.stringify({BOARD_NO:BOARD_NO, CREATED_BY:CREATED_BY,  REPLY_CONTENT:REPLY_CONTENT}),
-			dataType : 'text',
-			processData: false,
-			contentType: false,
-			success : function(result) {
-				 alert("성공");
-			},  error:function(request,status,error){
-		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		       }
-	         
-			}) 
+ 		 
+ 	$.ajax({
+		type:'post',
+		url:'/reply/reply_add',
+		headers: { 
+		      "Content-Type": "application/json",
+		      "X-HTTP-Method-Override": "POST" },
+		dataType:'text',
+		data: JSON.stringify({BOARD_NO:BOARD_NO, REPLY_CONTENT:REPLY_CONTENT, CREATED_BY:CREATED_BY}),
+		success:function(result){
+				alert("hello ajax");			 
+			
+	}});
 	 
 	 
  })

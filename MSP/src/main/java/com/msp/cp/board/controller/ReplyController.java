@@ -2,6 +2,7 @@ package com.msp.cp.board.controller;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,8 @@ public class ReplyController {
 	@Autowired
 	ReplyService replyService;
 	
-	
-	@RequestMapping(value="/reply_add", method=RequestMethod.POST)
-	public ResponseEntity<String> replyadd(@RequestBody  ReplyVO vo ){
+	@RequestMapping(value="/reply_add", method=RequestMethod.POST) 
+	public ResponseEntity<String> replyadd(@RequestBody ReplyVO vo){
 		System.out.println("hello add reply");
 		ResponseEntity<String> entity = null;
 		    try {

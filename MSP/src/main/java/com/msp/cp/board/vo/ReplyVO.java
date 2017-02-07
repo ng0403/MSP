@@ -1,20 +1,22 @@
 package com.msp.cp.board.vo;
 
+import java.util.Date;
+
 public class ReplyVO {
 	
-	String BOARD_NO;
-	String REPLY_NO;
-	String REPLY_CONTENT;
-	String CREATED_BY;
-	String CREATED;
-	String UPDATED_BY;
-	String UPDATED;
+	private Integer BOARD_NO;
+	private String REPLY_NO;
+	private String REPLY_CONTENT;
+	private String CREATED_BY;
+	private String CREATED;
+	private String UPDATED_BY;
+	private String UPDATED;
 	 
-	public String getBOARD_NO() {
+	public Integer getBOARD_NO() {
 		return BOARD_NO;
 	}
  
-	public void setBOARD_NO(String bOARD_NO) {
+	public void setBOARD_NO(Integer bOARD_NO) {
 		BOARD_NO = bOARD_NO;
 	}  
 
