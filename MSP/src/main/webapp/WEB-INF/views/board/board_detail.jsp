@@ -23,7 +23,7 @@
 </form>
  
 
-<div> <!-- 전체 div-->
+<div class="container" style=" width:90%" > <!-- 전체 div-->
 
 <div> <!-- 제목 div-->
  <input type="text" class="form-control" id="title" value= "${boardlist.TITLE}"  readonly="readonly" />
@@ -39,17 +39,35 @@
  <textarea class="form-control" rows="10" id="content"  readonly="readonly" >${boardlist.CONTENT}</textarea>
 </div> 
 
-
-<div>   <!-- 댓글div -->
-</div>
  
 <div> <!-- 버튼 div  -->
-<input type="button" id="board_modify_fbtn" class = "btn btn-default" value="편집"/> <input type="button" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+<input type="button" id="board_modify_fbtn" class = "btn btn-default" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
 </div>
 
 
-
+ <!-- 댓글div -->
+<div class="timeline-body" style ="height:100px; margin-top:10px"> 
+ <div>
+ <div class="col-sm-10" style=" height:40px">
+ <textarea id = "reply_content" class="form-control" rows="2" id="content" ></textarea>
+ </div>
+ 
+  <!-- 댓글 등록 버튼 -->
+ <div class="col-md-2" >
+ <input type="button" id="reply_add_fbtn" class = "btn btn-default" value="저장"/>
+ </div>
 </div>
+ 
+ 
+ <div class="col-md-12" id="reply_list" style="margin-top:10px">
+ 
+ <table id = "reply_table" class="table">
+ 
+ </table>
+ 
+ </div> 
+
+</div>	
 
 
 
@@ -62,9 +80,14 @@ $("#board_list_fbtn").on("click", function(){
  	})
  
 $(document).ready(function(){ 
-	
-	var formObj = $("form[role='form']");
-	console.log(formObj);
+
+	  
+	 var BOARD_NO = $("#BOARD_NO").val();
+	 var liststr = "";
+	 var liststr1 ="";
+	 var liststr2 = ""; 
+     var formObj = $("form[role='form']");
+	 console.log(formObj);
 	
  $("#board_modify_fbtn").on("click", function(){
 	 	formObj.attr("action", "/board/board_modify");
@@ -73,6 +96,78 @@ $(document).ready(function(){
 	 /* $("form[name='form_modify']").attr("action", "${ctx}/board/board_read?BOARD_NO=?").submit();  */
 	 
  })
+ 
+ $("#board_remove_fbtn").on("click", function(){
+	 formObj.attr("action", "/board/board_remove");
+	 formObj.attr("method", "post");
+	 formObj.submit();
+ })
+ 
+ 
+ $("#reply_add_fbtn").on("click", function() {
+	 alert("addbtn");
+ 
+	 var REPLY_CONTENT_OBJ = $("#reply_content");
+	 var REPLY_CONTENT = REPLY_CONTENT_OBJ.val();
+ 	 var CREATED_BY = '이준석';
+	 
+	 $.ajax({
+			type: 'post', 
+			url : '/reply/reply_add/',
+			headers : {
+	            "Content-Type" : "application/json",
+	            "X-HTTP-Method-Override" : "POST"
+	         },
+			data : JSON.stringify({BOARD_NO:BOARD_NO, CREATED_BY:CREATED_BY,  REPLY_CONTENT:REPLY_CONTENT}),
+			dataType : 'text',
+			processData: false,
+			contentType: false,
+			success : function(result) {
+				 alert("성공");
+			},  error:function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+	         
+			}) 
+	 
+	 
+ })
+ 
+ 
+ 	 
+	 $.ajax({
+			url : '/reply/reply_list/' + BOARD_NO,
+			headers : {
+	            "Content-Type" : "application/json",
+	            "X-HTTP-Method-Override" : "POST"
+	         },
+			data : "",
+			dataType : 'json',
+			processData: false,
+			contentType: false,
+			type: 'GET',
+			success : function(result) {
+				var ajaxList = result;
+   				
+ 				 liststr    += " <table class='table'>";
+
+				for(var i=0 ; i<ajaxList.length; i++) {  
+   				liststr1 +=   "<thead>" +
+ 				 			  "<th class='col-sm-1'>" + ajaxList[i].created_BY + "</th> <th class='col-sm-10'>" +ajaxList[i].reply_CONTENT+ "</th>";
+				 }
+
+				liststr2 +=  "</table>";
+				 
+			var replytable = document.getElementById("reply_table");
+				replytable.innerHTML = liststr + liststr1 + liststr2;
+	 
+			} 
+	         
+			}) 
+ 
+  
+ 
+ 
 })
  
 </script>
