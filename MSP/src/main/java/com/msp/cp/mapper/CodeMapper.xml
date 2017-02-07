@@ -3,15 +3,33 @@
 
 <mapper namespace="code">
 
-	<select id="searchCodeList" parameterType="string" resultType="map">
+	<select id="codeListCount" parameterType="java.util.Map" resultType="int">
 		SELECT
-   			*
-		FROM 
-			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+			count(*) as cnt
+		FROM
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TB
 		WHERE
-			TM.GRP_CD = TD.GRP_CD
-		ORDER BY
-			TM.GRP_CD, TD.CODE1
+			TM.GRP_CD = TB.GRP_CD
+	</select>
+
+	<select id="searchCodeList" parameterType="string" resultType="map">
+		SELECT	*
+		FROM 
+     	 (
+        	select rownum as rnum
+       		from (
+               		 SELECT *
+               		 FROM 
+               		 	TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+                	 WHERE 
+                	 	TM.GRP_CD = TD.GRP_CD
+               		 ORDER BY 
+               		 	TM.GRP_CD, TD.CODE1
+             	  )
+     	 )
+     	 <![CDATA[
+		WHERE rnum >= #{page.startRow} and rnum <= #{page.endRow};
+		]]>
 	</select>
 	
 	<select id="searchCodeDetail" parameterType="com.msp.cp.code.vo.CodeVO" resultType="com.msp.cp.code.vo.CodeVO">
@@ -22,6 +40,18 @@
 		WHERE
 			TM.GRP_CD = TD.GRP_CD
 			AND CODE1 = #{code1}
+		ORDER BY
+			TM.GRP_CD, TD.CODE1
+	</select>
+	
+	<select id="searchGrpList" parameterType="com.msp.cp.code.vo.CodeVO" resultType="com.msp.cp.code.vo.CodeVO">
+		SELECT
+			*
+		FROM	
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+		WHERE
+			TM.GRP_CD = TD.GRP_CD
+			AND TM.GRP_CD = #{grp_cd}
 		ORDER BY
 			TM.GRP_CD, TD.CODE1
 	</select>

@@ -1,6 +1,7 @@
 package com.msp.cp.code.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ public class CodeDaoImpl implements CodeDao {
 	}
 	
 	@Override
-	public List<Object> searchCodeList() {
+	public List<Object> searchCodeList(Map map) {
+		System.out.println("endRow " + map.get("endRow"));
+		System.out.println("pageSize " + map.get("pageSize"));
+		
 		List<Object> obj = sqlSession.selectList("searchCodeList");
 		
 		return obj;
@@ -30,6 +34,14 @@ public class CodeDaoImpl implements CodeDao {
 	public List<CodeVO> searchCodeDetail(CodeVO codeVo) {
 		// TODO Auto-generated method stub
 		List<CodeVO> obj = sqlSession.selectList("searchCodeDetail", codeVo);
+		
+		return obj;
+	}
+	
+	@Override
+	public List<CodeVO> searchGrpList(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		List<CodeVO> obj = sqlSession.selectList("searchGrpList", codeVo);
 		
 		return obj;
 	}
@@ -56,6 +68,23 @@ public class CodeDaoImpl implements CodeDao {
 	public void deleteCodeDetail(CodeVO codeVo) {
 		// TODO Auto-generated method stub
 		sqlSession.delete("deleteCodeDetail", codeVo);
+	}
+
+	@Override
+	public int CodeListCount(String string, Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("code.codeListCount", map);
+			System.out.println("totalCount : " + totalCount);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
 	}
 
 }

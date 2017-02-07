@@ -1,12 +1,14 @@
 package com.msp.cp.code.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msp.cp.code.dao.CodeDao;
 import com.msp.cp.code.vo.CodeVO;
+import com.msp.cp.common.PagerVO;
 
 @Service
 public class CodeServiceImpl implements CodeService {
@@ -15,8 +17,14 @@ public class CodeServiceImpl implements CodeService {
 	CodeDao codeDao;
 
 	@Override
-	public List<Object> searchCodeList() {
-		List<Object> obj = codeDao.searchCodeList();
+	public List<Object> searchCodeList(Map map) {
+		
+		System.out.println("service page map " + map.toString());
+		System.out.println(map.get("endRow"));
+		System.out.println("service page map endRow " + map.get("totalCount"));
+		System.out.println("service page map endRow " + map.get("endRow"));
+		System.out.println("service page map endRow " + map.get("pageSize"));
+		List<Object> obj = codeDao.searchCodeList(map);
 		
  		return obj;
 	}
@@ -25,6 +33,14 @@ public class CodeServiceImpl implements CodeService {
 	public List<CodeVO> searchCodeDetail(CodeVO codeVo) {
 		// TODO Auto-generated method stub
 		List<CodeVO> obj = codeDao.searchCodeDetail(codeVo);
+		
+		return obj;
+	}
+	
+	@Override
+	public List<CodeVO> searchGrpList(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		List<CodeVO> obj = codeDao.searchGrpList(codeVo);
 		
 		return obj;
 	}
@@ -59,6 +75,19 @@ public class CodeServiceImpl implements CodeService {
 		System.out.println("deleteCodeDetail 서비스");
 		
 		codeDao.deleteCodeDetail(codeVo);
+	}
+
+	@Override
+	public PagerVO getCodeListCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int codePageNum = (Integer)map.get("pageNum");
+		int totalRowCount = codeDao.CodeListCount("codeListCount", map);
+		
+		System.out.println(codePageNum + " : " + totalRowCount);
+		
+		PagerVO page = new PagerVO(codePageNum, totalRowCount, 10, 999);
+		
+		return page;
 	}
 
 }
