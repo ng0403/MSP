@@ -22,7 +22,7 @@ import com.msp.cp.dept.service.DeptService;
 import com.msp.cp.dept.vo.DeptVO;
 
 @Controller
-@RequestMapping(value="/dept")
+@RequestMapping(value="/dept/*")
 public class DeptController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DeptController.class);
@@ -30,7 +30,7 @@ public class DeptController {
 	@Autowired
 	DeptService deptService;
 	
-	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+	/*@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptList(@ModelAttribute DeptVO dvo){
 		
 		logger.info("list 컨트롤러 호출");
@@ -40,9 +40,25 @@ public class DeptController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("dept_list", list);
+		mav.addObject("data", dvo);
 		mav.setViewName("/dept/dept_list");
 		
 		return mav;
+	}*/
+	
+	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+	public ResponseEntity<List<DeptVO>> deptList(@RequestBody DeptVO dvo){
+		
+		ResponseEntity<List<DeptVO>> entity = null;
+		
+		try{
+			entity = new ResponseEntity<>(deptService.deptList(dvo), HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+				
+		return entity;
 	}
 	
 	@RequestMapping(value="/detail_list/{dept_cd}", method={RequestMethod.GET,RequestMethod.POST})
@@ -100,7 +116,7 @@ public class DeptController {
 		return entity;
 	}
 	
-	@RequestMapping(value="/delete", method={RequestMethod.GET,RequestMethod.POST})
+	/*@RequestMapping(value="/delete", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptDelete(@RequestParam(value="del_code") String del_code){
 
 		String[] delcode = del_code.split(",");
@@ -117,6 +133,31 @@ public class DeptController {
 		mav.setViewName("redirect:/dept/list");
 		
 		return mav;
+	}*/
+	
+	@RequestMapping(value="/delete", method={RequestMethod.POST})
+	public ResponseEntity<String> deptDelete(@PathVariable("del_code") String del_code){
+		
+		ResponseEntity<String> entity = null;
+		int result;
+		
+		String[] delcode = del_code.split(",");
+		
+		for(int i = 0; i < delcode.length; i++)
+		{
+			try{
+				String dc = delcode[i];
+				result = deptService.deptDelete(dc);
+				
+				if(result==1){
+					entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+		}		
+		return entity;
 	}
 
 }

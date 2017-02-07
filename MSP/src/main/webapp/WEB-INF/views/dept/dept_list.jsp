@@ -8,6 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>부서관리화면</title>
 </head>
 <script type="text/javascript">
@@ -15,13 +21,25 @@
 	var save_cd = "";
 	
 	$(function(){
+		$(Document).ready(function(){
+			deptListInqr();
+		})
+		/* 검색 후 검색 대상과 검색 단어 출력 */
+		/* if("<c:out value='${data.active_key}'/>" != ""){
+			$("#active_key").val("<c:out value='${data.active_key}'/>").attr("selected","selected");
+		}
+		if("<c:out value='${data.dept_nm_key}'/>" != ""){
+			$("#dept_nm_key").val("<c:out value='${data.dept_nm_key}'/>");
+		} */
 		/*검색버튼 클릭 시 처리 이벤트*/
 		$("#dept_inqr_fbtn").click(function(){
-			deptListInqr();
+			var active_key = $("#active_key").val();
+			var dept_nm_key = $("#dept_nm_key").val();
+			deptListInqr(active_key, dept_nm_key);
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(".open_detail").click(function(){
-			dept_cd = $(this).parents("tr").attr("data_num");
+			dept_cd = $(this).attr("data_num");
 			deptDetailInqr(dept_cd);
 		})
 		/*추가버튼 클릭 시 처리 이벤트*/
@@ -62,12 +80,26 @@
 		})
 	})
 	/*부서 리스트 출력및 페이징 처리 함수*/
-	function deptListInqr(){
-		$("#searchForm").attr({
+	function deptListInqr(active_key, dept_nm_key){
+		/* $("#searchForm").attr({
 			"method":"post",
 			"action":"list"
 		})
-		$("#searchForm").submit();
+		$("#searchForm").submit(); */
+		$.post("list",{"active_key":active_key, "dept_nm_key":dept_nm_key}, function(data){
+			$(data).each(function(){
+				var dept_cd = this.dept_cd;
+				var dept_nm = this.dept_nm;
+				var dept_num1 = this.dept_num1;
+				var dept_num2 = this.dept_num2;
+				var dept_num3 = this.dept_num3;
+				var user_nm = this.user_nm;
+				var active_flg = this.active_flg;
+				deptListOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, user_nm, active_flg);
+			})
+		}).fail(function(){
+			warning("부서 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+		})
 	}
 	/*부서 상세정보 요청 함수*/
 	function deptDetailInqr(dept_cd){
@@ -170,6 +202,47 @@
 			$("#delAll_form").submit();
 		}
 	}
+	/*부서 리스트 출력 함수*/
+	function deptListOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, user_nm, active_flg){
+		$(".dept_list").empty();
+		
+		if(dept_cd==null && dept_nm==null && dept_num1==null && dept_num2==null && dept_num3==null && user_nm==null && active_flg==null){
+			var dept_tr = $("<tr>");
+			var dept_td = $("<td>");
+			dept_td.attr("colspan", "5");
+			dept_td.html("등록된 부서가 존재하지 않습니다.");
+			
+			dept_tr.append(dept_td);
+		}else{
+			var dept_tr = $("<tr>");
+			dept_tr.addClass("open_detail");
+			dept_tr.attr("data-num",dept_cd);
+			
+			var del_code_td = $("<td>");
+			del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + dept_cd + "'>");
+			
+			var dept_nm_td = $("<td>");
+			dept_nm_td.html(dept_nm);
+			
+			var dept_num_td = $("<td>");
+			dept_num_td.html(dept_num1 + "-" + dept_num2 + "-" + dept_num3);
+			
+			var user_nm_td = $("<td>");
+			user_nm_td.html(user_nm);
+			
+			var active_flg_td = $("<td>");
+			if(active_flg=='Y'){
+				active_flg_td.html("활성화");
+			}else if(active_flg=='N'){
+				active_flg_td.html("비활성화");
+			}
+			
+			dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td).append(active_flg_td);
+			
+			$(".dept_list").append(dept_tr);
+			
+		}
+	}
 	/*부서 상세정보 출력 함수*/
 	function detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg){
 		dataReset();
@@ -203,6 +276,7 @@
 	
 </script>
 <body>
+<%@include file="../include/header.jsp"%>
 	<div class="main_div">
 		<div class="navi_div">
 			사용자 > 부서관리
@@ -210,7 +284,14 @@
 		<div class="search_div">
 			<div class="search2_div">
 				<form id="searchForm" name="searchForm">
-					<input type="text" id="keyword" name="keyword"> &nbsp;
+					<label>활성상태</label>
+					<select id="active_key" name="active_key" >
+						<option value="" selected="selected">전체</option>
+						<option value="Y">활성화</option>
+						<option value="N">비활성화</option>
+					</select>
+					<label>부서명</label>
+					<input type="text" id="dept_nm_key" name="dept_nm_key" > &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
 				</form>
 			</div>
@@ -218,7 +299,7 @@
 		<div class="list_div">
 			<div class="list2_div">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list">
+					<table summary="dept_list" class="table table-bordered" style ="width: 45%">
 						<colgroup>
 							<col width="10%">
 							<col width="35%">
@@ -235,23 +316,22 @@
 								<td>활성화여부</td>
 							</tr>
 						</thead>
-						<tbody>
-							<c:choose>
+						<tbody class="dept_list">
+							<%-- <c:choose>
 								<c:when test="${not empty dept_list}">
 									<c:forEach var="dept_list" items="${dept_list}">
-										<tr data_num="${dept_list.dept_cd}">
+										<tr class="open_detail" data_num="${dept_list.dept_cd}">
 											<td>
 												<input type="checkbox" class="del_point" name="del_code" value="${dept_list.dept_cd}">
 											</td>
-											<td>
-												<span class="open_detail">${dept_list.dept_nm}</span>
-											</td>
+											<td>${dept_list.dept_nm}</td>
 											<td>${dept_list.dept_num1}-${dept_list.dept_num2}-${dept_list.dept_num3}</td>
-											<td>${dept_list.dept_leader}</td>
+											<td>${dept_list.user_nm}</td>
 											<td>
 												<c:if test="${dept_list.active_flg eq 'Y'}">활성화</c:if>
 												<c:if test="${dept_list.active_flg eq 'N'}">비활성화</c:if>
 											</td>
+										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -259,7 +339,7 @@
 										<td colspan="5">등록된 부서가 존재하지 않습니다.</td>
 									</tr>
 								</c:otherwise>
-							</c:choose>
+							</c:choose> --%>
 						</tbody>
 					</table>
 				</form>
@@ -281,20 +361,20 @@
 							<tr>
 								<td class="dc">부서코드</td>
 								<td>
-									<input type="text" id="dept_cd" name="dept_cd" value="${dept_detail.dept_cd}">
+									<input type="text" id="dept_cd" name="dept_cd">
 								</td>
 							</tr>
 							<tr>
 								<td class="dc">부서명</td>
 								<td>
-									<input type="text" id="dept_nm" name="dept_nm" value="${dept_detail.dept_nm}">
+									<input type="text" id="dept_nm" name="dept_nm">
 								</td>
 							</tr>
 							<tr>
 								<td class="dc">부서전화</td>
 								<td>
 									<select id="dept_num1" name="dept_num1">
-										<option value="02"<%-- <c:if test="${dept_detail.dept_num1 eq '02'}">selected="selected"</c:if> --%>>02</option>
+										<option value="02">02</option>
 										<option value="031">031</option>
 										<option value="032">032</option>
 										<option value="033">033</option>
@@ -313,16 +393,16 @@
 										<option value="064">064</option>
 									</select>
 									<label>-</label>
-									<input type="text" id="dept_num2" name="dept_num2" value="${dept_detail.dept_num2}">
+									<input type="text" id="dept_num2" name="dept_num2">
 									<label>-</label>
-									<input type="text" id="dept_num3" name="dept_num3" value="${dept_detail.dept_num3}">
+									<input type="text" id="dept_num3" name="dept_num3">
 								</td>
 							</tr>
 							<tr>
 								<td class="dc">팩스번호</td>
 								<td>
 									<select id="dept_fnum1" name="dept_fnum1">
-										<option value="02"<%-- <c:if test="${dept_detail.dept_num1 eq '02'}">selected="selected"</c:if> --%>>02</option>
+										<option value="02">02</option>
 										<option value="031">031</option>
 										<option value="032">032</option>
 										<option value="033">033</option>
@@ -341,9 +421,9 @@
 										<option value="064">064</option>
 									</select>
 									<label>-</label>
-									<input type="text" id="dept_fnum2" name="dept_fnum2" value="${dept_detail.dept_fnum2}">
+									<input type="text" id="dept_fnum2" name="dept_fnum2">
 									<label>-</label>
-									<input type="text" id="dept_fnum3" name="dept_fnum3" value="${dept_detail.dept_fnum3}">
+									<input type="text" id="dept_fnum3" name="dept_fnum3">
 								</td>
 							</tr>
 							<tr>
@@ -366,3 +446,4 @@
 	</div>
 </body>
 </html>
+<%@include file="../include/footer.jsp"%>

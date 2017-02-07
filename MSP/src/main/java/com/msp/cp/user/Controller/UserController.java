@@ -30,15 +30,13 @@ public class UserController {
 	@RequestMapping(value="/userlist", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum,
-			@RequestParam(value = "searchnotice", defaultValue="") String searchnotice,
-			userVO userVO,
+			userVO userVO,String user_id_sch, String user_nm_sch, String dept_nm_sch ,
 			@RequestParam(value = "code", defaultValue="empty") String selectcode,
 			@RequestParam Map<String, Object> map)
 	{
-		String user_id_sch = request.getParameter("user_id_sch");
-		String user_nm_sch = request.getParameter("user_nm_sch");
-		String dept_nm_sch = request.getParameter("dept_cd_sch");
+		user_id_sch = request.getParameter("user_id_sch");
+		user_nm_sch = request.getParameter("user_nm_sch");
+		dept_nm_sch = request.getParameter("dept_cd_sch");
 		
 		System.out.println("user Controller");
 		
@@ -46,21 +44,22 @@ public class UserController {
 		map.put("user_id_sch", user_id_sch);
 		map.put("user_nm_sch", user_nm_sch);
 		map.put("dept_nm_sch", dept_nm_sch);
+		System.out.println("1. USER List Controller pageNum : " + pageNum);
 		
-		System.out.println("user_id_sch : " + user_id_sch);
-		System.out.println("user_nm_sch : " + user_nm_sch);
-		System.out.println("dept_nm_sch : " + dept_nm_sch);
+		System.out.println("2. user_id_sch : " + user_id_sch);
+		System.out.println("3. user_nm_sch : " + user_nm_sch);
+		System.out.println("4. dept_nm_sch : " + dept_nm_sch);
 		
 		PagerVO page=userService.getUserListCount(map);
-		
 		map.put("page", page);
+		System.out.println("7. Controller USER_LIST Page : " + page.toString());
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
 		}
 		
 		List<userVO> user_list = userService.searchListUser(map);
 
-		System.out.println("User Search list" +user_list);
+		System.out.println("15. User Search list : " +user_list);
 		ModelAndView mov = new ModelAndView("/user/user_list", "user_list", user_list);
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
