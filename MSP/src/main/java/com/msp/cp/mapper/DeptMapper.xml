@@ -2,24 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dept">
 
-	<select id="selectDept" parameterType="com.msp.cp.dept.vo.DeptVO" resultType="com.msp.cp.dept.vo.DeptVO">
+	<select id="selectDept" parameterType="map" resultType="com.msp.cp.dept.vo.DeptVO">
+		SELECT *
+		FROM 
+		(
+			SELECT
+				ROWNUM AS rnum, d.*
+			FROM 
+			(
+				SELECT
+					DISTINCT
+					d.dept_cd
+					,d.dept_nm
+					,d.dept_num1
+					,d.dept_num2
+					,d.dept_num3
+					,(
+						SELECT DISTINCT USER_NM 
+						FROM TB_USER 
+						WHERE DEPT_CD = d.dept_cd 
+							and duty_cd='DC01'
+					  ) as user_nm
+					,d.active_flg
+				FROM TB_DEPT d
+				WHERE
+					d.del_flg='N'
+					<if test="dept_nm_key != null">
+						and d.dept_nm like '%'||#{dept_nm_key}||'%'
+					</if>
+					<if test="active_key != null and active_key != ''">
+						and d.active_flg=#{active_key}
+					</if>
+				ORDER BY d.dept_cd DESC
+				) d
+			)
+		<![CDATA[
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 검색 결과 list의 수 -->
+	<select id="deptCount" parameterType="map" resultType="int">
 		SELECT
-			d.dept_cd
-			,d.dept_nm
-			,d.dept_num1
-			,d.dept_num2
-			,d.dept_num3
-			,(SELECT DISTINCT USER_NM FROM TB_USER WHERE DEPT_CD = d.dept_cd and duty_cd='DC01') as user_nm
-			,d.active_flg
-		FROM TB_DEPT d
-		where
-			d.del_flg='N'
-			<if test="dept_nm_key != null">
-				and d.dept_nm like '%'||#{dept_nm_key}||'%'
+		    COUNT(*)
+		FROM TB_DEPT
+		WHERE 
+			del_flg='N'
+		    <if test="dept_nm_key != null">
+				and dept_nm like '%'||#{dept_nm_key}||'%'
 			</if>
 			<if test="active_key != null and active_key != ''">
-				and d.active_flg=#{active_key}
+				and active_flg=#{active_key}
 			</if>
+			ORDER BY dept_cd DESC
 	</select>
 	
 	<select id="selectDetailDept" parameterType="string"
