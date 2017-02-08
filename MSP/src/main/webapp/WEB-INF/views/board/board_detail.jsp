@@ -78,9 +78,14 @@
 $("#board_list_fbtn").on("click", function(){  
     	location.href = "/board/board_list";
  	})
+ 	
+ 	 
+ 	
+ 	
+ 	
+ 	
  
 $(document).ready(function(){ 
-
 	  
 	 var BOARD_NO = $("#BOARD_NO").val();
 	 var liststr = "";
@@ -102,34 +107,8 @@ $(document).ready(function(){
 	 formObj.attr("method", "post");
 	 formObj.submit();
  })
- 
- 
- $("#reply_add_fbtn").on("click", function() {
-	 alert("addbtn");
- 
-	 var REPLY_CONTENT_OBJ = $("#reply_content");
-	 var REPLY_CONTENT = REPLY_CONTENT_OBJ.val();
- 	 var CREATED_BY = '이준석';
- 		 
- 	$.ajax({
-		type:'post',
-		url:'/reply/reply_add',
-		headers: { 
-		      "Content-Type": "application/json",
-		      "X-HTTP-Method-Override": "POST" },
-		dataType:'text',
-		data: JSON.stringify({BOARD_NO:BOARD_NO, REPLY_CONTENT:REPLY_CONTENT, CREATED_BY:CREATED_BY}),
-		success:function(result){
-				alert("hello ajax");			 
-			
-	}});
-	 
-	 
- })
- 
- 
- 	 
-	 $.ajax({
+  function ajax_list(){
+ 	 $.ajax({
 			url : '/reply/reply_list/' + BOARD_NO,
 			headers : {
 	            "Content-Type" : "application/json",
@@ -142,26 +121,58 @@ $(document).ready(function(){
 			type: 'GET',
 			success : function(result) {
 				var ajaxList = result;
-   				
- 				 liststr    += " <table class='table'>";
-
+			
+      				 liststr    += " <table class='table'>";
 				for(var i=0 ; i<ajaxList.length; i++) {  
    				liststr1 +=   "<thead>" +
  				 			  "<th class='col-sm-1'>" + ajaxList[i].created_BY + "</th> <th class='col-sm-10'>" +ajaxList[i].reply_CONTENT+ "</th>";
-				 }
-
+				 } 
+				
 				liststr2 +=  "</table>";
-				 
-			var replytable = document.getElementById("reply_table");
-				replytable.innerHTML = liststr + liststr1 + liststr2;
-	 
+				var replytable = document.getElementById("reply_table");
+ 				 replytable.innerHTML = liststr + liststr1 + liststr2;
+ 				 liststr = "";
+ 				 liststr1= "";
+ 				 liststr2 = "";
+ 				 
 			} 
 	         
-			}) 
- 
+			})  
+ }
   
+ ajax_list();
  
  
+ 
+ $("#reply_add_fbtn").on("click", function() {
+  
+	 var REPLY_CONTENT_OBJ = $("#reply_content");
+	 var REPLY_CONTENT = REPLY_CONTENT_OBJ.val();
+  	 var CREATED_BY = '이준석';
+  	 
+  	$.ajax({
+		type:'POST',
+		url:'/reply/reply_add',
+		headers: { 
+		      "Content-Type": "application/json",
+		      "X-HTTP-Method-Override": "POST" },
+		dataType:'text',
+		processData: false,
+		contentType: false,
+		data:  JSON.stringify({"board_NO":BOARD_NO, "reply_CONTENT":REPLY_CONTENT, "created_BY":CREATED_BY}),
+		success:function(result){
+  				ajax_list();
+   				$("#reply_content").blur();
+	 
+			} 
+	          
+		      });
+
+	 
+ }) 
+
+ 
+
 })
  
 </script>
