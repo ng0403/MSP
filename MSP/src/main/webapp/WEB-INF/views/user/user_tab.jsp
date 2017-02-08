@@ -9,6 +9,9 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userTab.css" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <title>Insert title here</title>
  <c:if test="${result=='1'}" var = "result"> 
 	<script type="text/javascript">
@@ -347,9 +350,9 @@
 						<tr>
 							<th  align="left">부서</th>
 							<td colspan="2" align="left">
-								<%-- <input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> --%> 
-								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}" style="width:65%"/>
-								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색"/>
+								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
+								<input type="text" id="dept_nm" name="dept_nm" value="${dept_nm}" style="width:65%"/>
+								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" data-toggle="modal" data-target="#myModal">
 							</td>
 						</tr>
 						<tr>
@@ -381,6 +384,24 @@
 		
 	</div>
 	
+	
+	<!-- Modal PopUp -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+		
+	    <div class="modalM_main_div">
+	      Modal content
+	      <div class="modal-content">
+	          <h4 class="modal-title">Modal Header</h4>
+	        <div class="modal-body">
+	          <p>Some text in the modal.</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+		  </div>    
+	 </div>
+  </div>
 </body>
 </html>
 

@@ -130,6 +130,7 @@ public class UserController {
 		String user_pwd = vo.getUser_pwd();
 		String emp_no = vo.getEmp_no();
 		String dept_cd = vo.getDept_cd();
+		String dept_nm = vo.getDept_nm();
 		String rank_cd = vo.getRank_cd();
 		String rank_nm = vo.getRank_nm();
 		String duty_cd = vo.getDuty_cd();
@@ -174,6 +175,7 @@ public class UserController {
 		mov.addObject("entry_flg", entry_flg);
 		mov.addObject("rank_cd_list", rank_cd_list);
 		mov.addObject("duty_cd_list", duty_cd_list);
+		mov.addObject("dept_nm", dept_nm);
 		
 		return mov;
 	}
