@@ -347,8 +347,8 @@
 						<tr>
 							<th  align="left">부서</th>
 							<td colspan="2" align="left">
-								<%-- <input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> --%> 
-								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}" style="width:65%"/>
+								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
+								<input type="text" id="dept_nm" name="dept_nm" value="${dept_nm}" style="width:65%"/>
 								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색"/>
 							</td>
 						</tr>
