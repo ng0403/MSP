@@ -5,8 +5,9 @@
 <mapper namespace="reply">
 
  <insert id="addReply">
-  INSERT INTO TB_REPLY (REPLY_NO, BOARD_NO, REPLY_CONTENT, CREATED_BY, UPDATED_BY)
-  values (seq_reply.nextval, #{BOARD_NO}, #{REPLY_CONTENT},'이준석', #{UPDATED_BY})
+  INSERT INTO TB_REPLY (REPLY_NO, BOARD_NO, REPLY_CONTENT, CREATED_BY)
+  values
+   (reply_seq.nextval, #{BOARD_NO ,jdbcType=VARCHAR}, #{REPLY_CONTENT ,jdbcType=VARCHAR}, #{CREATED_BY, jdbcType=VARCHAR})
  </insert> 
 
 <select id ="replyList" parameterType="int" resultType="com.msp.cp.board.vo.ReplyVO">
