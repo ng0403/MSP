@@ -19,4 +19,6 @@ public interface UserDao {
 	public void userMdfy(userVO vo);
 
 	int UserListCount(String string, Map<String, Object> map);
+
+	public List<userVO> rankCdList();
 }

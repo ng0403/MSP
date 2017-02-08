@@ -77,8 +77,11 @@ public class UserController {
 	{
 		int entry_flg = 1;
 		System.out.println("userTab Controller");
+		List<userVO> rank_cd_list = userService.rankCdList();
+		System.out.println("UserTab : " + rank_cd_list);
 		ModelAndView mov = new ModelAndView("/user/user_tab");
 		mov.addObject("entry_flg", entry_flg);
+		mov.addObject("rank_cd_list", rank_cd_list);
 		
 		return mov;
 	}
@@ -126,6 +129,7 @@ public class UserController {
 		String emp_no = vo.getEmp_no();
 		String dept_cd = vo.getDept_cd();
 		String rank_cd = vo.getRank_cd();
+		String rank_nm = vo.getRank_nm();
 		String duty_cd = vo.getDuty_cd();
 		String cphone_num1 = vo.getCphone_num1();
 		String cphone_num2 = vo.getCphone_num2();
@@ -139,7 +143,8 @@ public class UserController {
 		String retiredate = vo.getRetiredate();
 		String active_flg = vo.getActive_flg();
 		String del_flg = vo.getDel_flg();
-		
+		List<userVO> rank_cd_list = userService.rankCdList();
+		System.out.println("UserTab rank_cd_list : " + rank_cd_list);
 		
 		
 		
@@ -149,6 +154,7 @@ public class UserController {
 		mov.addObject("emp_no",emp_no);
 		mov.addObject("dept_cd",dept_cd);
 		mov.addObject("rank_cd",rank_cd);
+		mov.addObject("rank_nm",rank_nm);
 		mov.addObject("duty_cd",duty_cd);
 		mov.addObject("cphone_num1",cphone_num1);
 		mov.addObject("cphone_num2",cphone_num2);
@@ -163,6 +169,7 @@ public class UserController {
 		mov.addObject("active_flg",active_flg);
 		mov.addObject("del_flg", del_flg);
 		mov.addObject("entry_flg", entry_flg);
+		mov.addObject("rank_cd_list", rank_cd_list);
 		
 		return mov;
 	}

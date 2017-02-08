@@ -160,7 +160,7 @@ $(document).ready(function() {
 						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}" onkeypress="userEnterSearch(event);"></td>
 						<th>부서명</th>
 						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}" onkeypress="userEnterSearch(event);"></td>&nbsp;
-					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn" />검색</button></td>
+					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn"  style="margin-left: 34%;"/>검색</button></td>
 					</tr>
 			</form>
 			<!-- 페이징 전용 폼 -->

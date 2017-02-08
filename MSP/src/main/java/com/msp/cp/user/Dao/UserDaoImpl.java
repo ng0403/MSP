@@ -86,5 +86,17 @@ public class UserDaoImpl implements UserDao {
 		}
 		return totalCount;
 	}
+
+	@Override
+	public List<userVO> rankCdList() {
+		List<userVO> rankCdList = null;
+		try {
+			rankCdList = sqlSession.selectList("user.rankCDList");
+			System.out.println("rank_cd_list DAo Impl : " + rankCdList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rankCdList;
+	}
 }
 

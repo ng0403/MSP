@@ -21,6 +21,7 @@
 	$(document).ready(function() {
 		var entry_flg = ${entry_flg}
 		var tmp = $('#user_id').val();
+		
 		if(entry_flg == 1)
 		{
 			//$('#addsave_btn').CSS('display', "hidden");
@@ -49,6 +50,7 @@
 				var tmp = $('#user_id').val();
 				var user_pwd = $('#user_pwd').val();
 				var user_pwd_chk = $('#user_pwd_chk').val();
+				var rank_cd = $("#rank_cd option:selected").val();
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
@@ -92,6 +94,7 @@
 				var tmp = $('#user_id').val();
 				var user_pwd = $('#user_pwd');
 				var user_pwd_chk = $('#user_pwd_chk');
+				var rank_cd = $("#rank_cd option:selected").val();
 				var tmplength = tmp.length;
 				if(entry_flg != 1){
 					//passwordCheck();
@@ -100,13 +103,13 @@
 					}
 					
 				}else{
-					alert("신규 데잍를 입력하세요.");
+					alert("신규 데이터를 입력하세요.");
 				}
 			});
 		
-		var tmp = $('#user_id').val();
+		 var tmp = $('#user_id').val(); 
 		
-		//한글입력 안되게 처리
+		/* // 한글입력 안되게 처리
 
 		  $("input[name=aaa]").keyup(function(event){ 
 
@@ -118,16 +121,30 @@
 
 		   }
 
-		  });
+		  });*/
 		//form 내부 전체 input tag 초기화
 		  $("#btnReset_btn").click(function() {  
 		         $("form").each(function() {  
 		            this.reset();  
 		         });  
 		    });  
-	});
+	}); 
 		
 		
+ </script>
+ 
+ <script type="text/javascript">
+/*  function changeDiscType(){
+		if( $("#rank_cd option:selected").val() == "1"){
+			$('.discount_cost').text("*할인율");
+			$('#td_disc_type').html("<input name='disc_rate' id='disc_rate' type='text' maxlength='2' max='99'>%")
+		}else if($("#cb_disc_type option:selected").val() == "2"){
+			$('.discount_cost').text("*할인금액");
+			$('#td_disc_type').html("<input name='disc_amt' id='disc_amt' type='text' maxlength='6' max='999999'>원")
+		}else{
+			return;
+		}
+	} */
  </script>
  
  
@@ -271,19 +288,25 @@
  							</td>
  							<th>직급</th>
  							<td>
- 								<select id="rank_cd" name="rank_cd" style="width: 55%; height: 70%;">
+ 							<%-- 	<select id="rank_cd" name="rank_cd" style="width: 55%; height: 70%;" ><!-- onchange="changeDiscType()" -->
+									<option value="0">==선택==</option>
+									<c:forEach var="rank_cd" items="${rank_cd_list}">
+										<option value="${rank_cd.rank_cd}">${rank_cd.rank_nm}</option>
+									</c:forEach>
+								</select> --%>
+ 								<!-- <select id="rank_cd" name="rank_cd" >
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
-								</select>
- 								<%-- <select name="rank_cd"  >
-									<c:forEach var="rankCD" items="${rank_cd}" varStatus="status2">
-										<option value="<c:out value="${rankCD.CODE1}" />" 
-											<c:if test="${result.useYn == rankCD.CODE1 }">selected="selected"</c:if>>
-											<c:out value="${rankCD.CODE_TXT}" />
+								</select> -->
+ 								 <select name="rank_cd"  >
+									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
+										<option value="<c:out value="${rankCd.rank_cd}" />" 
+											<c:if test="${rank_cd == rankCd.rank_cd }">selected="selected"</c:if>>
+											${rankCd.rank_nm}
 										</option>
 									</c:forEach>
-								</select> --%>
+								</select> 
  							</td>
 						</tr>
 						<tr>
@@ -334,7 +357,7 @@
 						<tr>
 							<th  align="left">이메일</th>
 							<td colspan="2" align="left">
-								<input type="text" name="email_id" id="email_id" class="iuser_txt" maxlength="20" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" maxlength="20" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
+								<input type="text" name="email_id" id="email_id" class="onlyEng" maxlength="20" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" maxlength="20" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
  							</td>
  						</tr>
 						<tr>
