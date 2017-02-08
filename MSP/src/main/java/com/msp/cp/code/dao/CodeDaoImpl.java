@@ -42,6 +42,14 @@ public class CodeDaoImpl implements CodeDao {
 		
 		return obj;
 	}
+	
+	@Override
+	public List<CodeVO> searchGrpList2(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<CodeVO> obj = sqlSession.selectList("searchGrpList2", map);
+
+		return obj;
+	}
 
 	@Override
 	public void insertCodeMaster(CodeVO codeVo) {

@@ -11,6 +11,7 @@ public interface CodeService {
 	  public List<Object> searchCodeList(Map map);
 	  public List<CodeVO> searchCodeDetail(CodeVO codeVo);
 	  public List<CodeVO> searchGrpList(CodeVO codeVo);
+	  public List<CodeVO> searchGrpList2(Map<String, Object> map);
 	  
 	  public void insertCodeMaster(CodeVO codeVo);
 	  public void insertCodeDetail(CodeVO codeVo);

@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<userVO> searchListUser(Map map) {
 		System.out.println("8. ServiceImpl User List Search Service Impl");
+		System.out.println("service test : " + map.get("endRow"));
 		List<userVO> obj = userDao.searchListUser(map);
 		System.out.println("14. ServiceImpl User List Search Service Impl" + obj.toString());
 		return obj;

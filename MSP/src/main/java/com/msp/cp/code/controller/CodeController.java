@@ -58,6 +58,7 @@ public class CodeController {
 			page.setEndRow(0);
 		}
 		
+		System.out.println("page map :" + map.get("page"));
 		List<Object> codeInqrList = codeService.searchCodeList(map);
 		
 		ModelAndView mov = new ModelAndView("/code/code_list");
@@ -65,8 +66,7 @@ public class CodeController {
 		mov.addObject("page", page);
 		mov.addObject("pageNum", pageNum);
 		mov.addObject("codeInqrList", codeInqrList);
-		
-		
+			
 		return mov;
 	}
 	
@@ -128,6 +128,14 @@ public class CodeController {
 		return "redirect:/code/codeInqr";
 	}
 	
+	/**
+	 * 업 무 명 : 상세보기 화면
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/06
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 리스트 행을 클릭 했을 시 해당 정보를 띄어준다. 
+	 * */
 	@RequestMapping(value="/codeDetail_list/{code1}", method={RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<List<CodeVO>> codeDetail(@PathVariable("code1") String code1)
 	{
@@ -148,6 +156,14 @@ public class CodeController {
 		return entity;
 	}
 	
+	/**
+	 * 업 무 명 : Search 코드조회 화면 (처음)
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/07
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 조건에 맞는 공통코드를 검색한다. 
+	 * */
 	@RequestMapping(value="/codeSearch_list/{grp_cd}", method={RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<List<CodeVO>> searchGrpList(@PathVariable("grp_cd") String grp_cd)
 	{
@@ -166,4 +182,66 @@ public class CodeController {
 		return entity;
 	}
 	
+	/**
+	 * 업 무 명 : Search 코드조회 화면(수정본)
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/08
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 조건에 맞는 공통코드를 검색한다. 
+	 * */	
+	@RequestMapping(value="/codeSearch_list2", method={RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody Map<String, Object> searchGrpList2(ModelMap model, HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
+	{
+		System.out.println("Search GrpCode");
+		String grp_cd = request.getParameter("grp_cd").trim();
+		
+		if(grp_cd == null)
+		{
+			grp_cd = "";
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("grp_cd", grp_cd);
+		map.put("pageNum", pageNum);
+		
+		PagerVO page = codeService.getCodeListCount(map);
+		
+		if(page.getEndRow() == 1)
+		{
+			page.setEndRow(0);
+		}
+		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		List<CodeVO> codeInqrList = codeService.searchGrpList2(map);
+		
+		model.addAttribute("codeInqrList", codeInqrList);
+		model.addAttribute("page", page);
+		model.addAttribute("pageNum", pageNum);
+		
+		return model;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

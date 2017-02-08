@@ -35,16 +35,20 @@
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
-			<form name="searchForm" method="post">
+			<form name="searchForm">
 					<tr>
 						<th>공통코드명</th>
 						<td>
 							<input type="text" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}">
 						</td>
 					   	 <td>
-					    	<input type="button" id="search_fbtn" class="user_serach_fbtn" value="검색">
+					    	<input type="button" id="search_fbtn" class="user_serach_fbtn" onclick="fn_search(1)" value="검색">
 					    </td>
 					</tr>
+			</form>
+			<!-- Paging Form -->
+			<form id="codelistPagingForm" method="post" action="codeInqr">
+			
 			</form>
 		</div>
 	</div>
@@ -91,7 +95,7 @@
 		</div>
 		
 		<!-- Paging Div -->
-		<div class="paging_div" style="width: 100%; text-align: center;">
+		<div id="codePagingDiv" class="paging_div" style="width: 100%; text-align: center;">
 	
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
 		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
@@ -124,7 +128,7 @@
 			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
 			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
 		</div>
-	</div>
+		</div>
 		
 		<div class="paging_div">
 			<input type="button" id="code_add_btn" class="btn btn-default" value="추가"/>
@@ -230,6 +234,7 @@
 						}
 						else 
 						{
+							userPaging(pageNum);
 							alert("TEST");
 						}
 					}
@@ -240,15 +245,108 @@
 				
 			//사용자관리 페이징
 			function userPaging(pageNum) {
-				
-			}		
+				$(document).ready(function(){
+					var ctx = $("#ctx").val();
+					var $form = $("#codelistPagingForm");
+					var pageNum_input = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');	// Hidden 태크를 이용해 page number를 넘겨준다.
 					
-				
+					$form.append(pageNum_input);
+					$form.submit();
+					
+				});
+			}		
+			
 			// 검색 버튼 클릭시
-			$(function(){
-				$("#search_fbtn").click(function(){
+			function fn_search(pageNum)
+			{
 					var grp_cd = $("#grp_nm_sch").val();
-					var url = "codeSearch_list/"+grp_cd;
+					var tbody = $("#codeListTbody");
+					var contents = "";
+					var pageContent = "";
+					
+					$.ajax({
+						url      : 'codeSearch_list2',
+						type     : 'POST',
+						dataType : 'json',
+						data     : {
+							"grp_cd":grp_cd, "pageNum":pageNum
+						},
+						success  : function(data) {						
+							tbody.empty();
+							var codeInqrList = data.codeInqrList;
+														
+							if(codeInqrList.lenght != 0)
+							{
+								for(var i=0; i<codeInqrList.length; i++)
+								{
+									var grp_cd1 = codeInqrList[i].grp_cd;
+									var grp_nm  = codeInqrList[i].grp_nm;
+									var code1   = codeInqrList[i].code1;
+									var code_txt = codeInqrList[i].code_txt;
+									
+									contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background='#c0c4cb'' onmouseout='this.style.background='white''>"
+									+"<td align='center' scope='row'>"
+									+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
+				    				+"<td align='center'>"+grp_cd1+"</td>"
+				    				+"<td>"+grp_nm+"</td>"
+				    				+"<td align='center'>"+code1+"</td>"
+									+"<td>"+code_txt+"</td>"
+									+"</tr>";
+								}
+							}
+							
+							tbody.append(contents);
+							
+							$("#codePagingDiv").empty();
+							
+							if(data.page.endPageNum == 1)
+							{
+								pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+								+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
+								+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
+							}
+							else if(data.page.startPageNum == data.page.endPageNum)
+							{
+								pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
+								+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+								+"<a style='color:black; text-decoration: none;'>▶</a>";
+							}
+							else if(data.pageNum == 1)
+							{
+								pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+								+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
+							}
+							else if(data.pageNum == data.page.endPageNum)
+							{
+								pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
+								+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+								+"<a style='color:black; text-decoration: none;'>▶</a>";
+							}
+							else
+							{
+								pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
+								+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+								+"<a style='cursor: pointer;' onclick=fn_menuSearchList("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
+							}
+							$("#codePagingDiv").append(pageContent);
+						}
+					});
+			}
+				
+			// 검색 버튼 클릭시 - 기존
+			$(function(){
+				$("#search_fbtn1").click(function(){
+					var grp_cd = $("#grp_nm_sch").val();
+					//var url = "codeSearch_list/"+grp_cd;
+					var url = "codeSearch_list2";
 					var tbody = $("#codeListTbody");
 					var contents = "";
 					
