@@ -109,7 +109,7 @@ $("#board_add_fbtn").on("click", function(){
  				contentType: false,
  				type: 'POST',
  				success : function(result) {
- 					alert("hello ajax");	
+ 					alert("hello ajax");
  					
  					var ajaxList = result.data; 
  						

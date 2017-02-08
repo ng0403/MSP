@@ -2,11 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
-
-<select id="BoardList" resultType="map">
-SELECT
-  *
-FROM tb_board
+<!-- 전체 행의 개수 -->
+	<select id="boardListCount" parameterType="java.util.Map" resultType="int">
+	    select count(*) as cnt
+		 FROM TB_BOARD
+		where del_flg='N'   
+	</select>
+	
+<select id="BoardList" parameterType="int" resultType="map">
+select X.*
+		from ( 
+		    select rownum as rnum, A.*
+		        from (
+		SELECT
+ 		 *
+		FROM tb_board
+) A
+	  ) X
+ <![CDATA[
+		 where X.rnum > #{page.startRow} and X.rnum <= #{page.endRow}
+			]]>
  </select>
  
  <select id="ajaxList" resultType="map">
