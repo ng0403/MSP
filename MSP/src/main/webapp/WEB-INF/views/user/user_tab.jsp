@@ -288,17 +288,6 @@
  							</td>
  							<th>직급</th>
  							<td>
- 							<%-- 	<select id="rank_cd" name="rank_cd" style="width: 55%; height: 70%;" ><!-- onchange="changeDiscType()" -->
-									<option value="0">==선택==</option>
-									<c:forEach var="rank_cd" items="${rank_cd_list}">
-										<option value="${rank_cd.rank_cd}">${rank_cd.rank_nm}</option>
-									</c:forEach>
-								</select> --%>
- 								<!-- <select id="rank_cd" name="rank_cd" >
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select> -->
  								 <select name="rank_cd"  >
 									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
 										<option value="<c:out value="${rankCd.rank_cd}" />" 
@@ -316,19 +305,14 @@
 							</td>
 							<th>조직ID</th>
 							<td>
-								<select id="duty_cd" name="duty_cd" style="width: 55%; height: 70%;">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
-								<%-- <select name="duty_cd"  >
-									<c:forEach var="dutyCD" items="${duty_cd}" varStatus="status2">
-										<option value="<c:out value="${dutyCD.CODE1}" />" 
-											<c:if test="${result.useYn == dutyCD.CODE1 }">selected="selected"</c:if>>
-											<c:out value="${dutyCD.CODE_TXT}" />
+								 <select name="duty_cd"  >
+									<c:forEach var="dutyCd" items="${duty_cd_list}" varStatus="status2">
+										<option value="<c:out value="${dutyCd.duty_cd}" />" 
+											<c:if test="${duty_cd == dutyCd.duty_cd }">selected="selected"</c:if>>
+											${dutyCd.duty_nm}
 										</option>
 									</c:forEach>
-								</select>  --%>
+								</select> 
 							</td>
 						</tr>
 						<tr>

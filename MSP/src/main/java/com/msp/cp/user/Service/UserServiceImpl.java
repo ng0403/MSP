@@ -77,4 +77,11 @@ public class UserServiceImpl implements UserService {
 		System.out.println("rank_cd_list DAo Impl : " + rank_cd_list);
 		return rank_cd_list;
 	}
+
+	@Override
+	public List<userVO> dutyCdList() {
+		List<userVO> duty_cd_list = userDao.dutyCdList();
+		
+		return duty_cd_list;
+	}
 }

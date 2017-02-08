@@ -24,5 +24,7 @@ public interface UserService {
 
 	public List<userVO> rankCdList();
 
+	public List<userVO> dutyCdList();
+
 
 }

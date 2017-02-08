@@ -98,5 +98,19 @@ public class UserDaoImpl implements UserDao {
 		}
 		return rankCdList;
 	}
+
+	@Override
+	public List<userVO> dutyCdList() {
+		List<userVO> dutyCdList = null;
+		try {
+			dutyCdList = sqlSession.selectList("user.dutyCDList");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return dutyCdList;
+	}
 }
 

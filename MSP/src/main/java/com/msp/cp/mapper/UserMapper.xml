@@ -127,4 +127,13 @@
 		and a.grp_cd = b.GRP_CD
 		and a.grp_cd = 01
 	</select>	
+	
+	<!-- 직책구분리스트  -->
+	<select id="dutyCDList" resultType="com.msp.cp.user.vo.userVO">
+		select a.code_txt duty_nm, a.code1 duty_cd
+		from tb_code_detail a, tb_code_master b
+		where 1=1
+		and a.grp_cd = b.GRP_CD
+		and a.grp_cd = 02
+	</select>	
 </mapper>
