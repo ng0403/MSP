@@ -40,7 +40,7 @@
                 and A.DEPT_CD = td.DEPT_CD
 		    ) X
 		    <![CDATA[
-				where X.rnum >= #{page.startRow} and X.rnum <= #{page.endRow}
+				where X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
 			]]>
 	</select>
 

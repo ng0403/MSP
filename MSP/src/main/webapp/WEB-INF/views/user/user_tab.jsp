@@ -388,13 +388,53 @@
 	<!-- Modal PopUp -->
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-		
 	    <div class="modalM_main_div">
 	      Modal content
 	      <div class="modal-content">
-	          <h4 class="modal-title">Modal Header</h4>
+	      	<tr>
+	          <td><h4 class="modal-title" style="margin-bottom: 1%;"><b>부서검색</b></h4></td>
+	      	</tr>
+	      	<tr>
+	      		<td>
+			      <select id="sch_condition" name="sch_condition">
+			      	<option value="">부서명</option>
+			      	<option value="">부사장</option>
+			      	<option value="">전화번호</option>
+			      </select>
+	      		</td>
+	      		<td><input type="text" id="dept_sch" name="dept_sch"/></td>
+	      		<td><input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn" value="검색"/></td>
+	      	</tr>
+	      	
 	        <div class="modal-body">
-	          <p>Some text in the modal.</p>
+	         <form name="delAllForm" id="delAllForm" method="post"
+			action="${ctx}/userDel">
+			<table id="mastertable" class="table table-bordered" style ="width: 90%">
+				<thead>
+					<tr>
+						<td style="width: 10%;">부서명</td>
+						<td style="width: 10%;">부서장</td>
+						<td style="width: 10%;">전화번호</td>
+					</tr>
+				</thead>
+				<tbody id="usertbody">
+				<c:if test="${not empty user_list}">
+					<c:forEach var="list" items="${user_list}">
+						<tr>
+							<a href="#"><td style="width: 10%;" name="dept_cd" id="" onclick="onPopup(this.id);"></td></a>
+							<td style="width: 10%;" class="user_name_tag"></td>
+							<td style="width: 10%;" class="org_name_tag"></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${user_list.size() == 0}">
+					<tr style="cursor: default; background-color: white;">
+						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
+					</tr>
+				</c:if>
+				</tbody>
+			</table>
+		</form>
 	        </div>
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
