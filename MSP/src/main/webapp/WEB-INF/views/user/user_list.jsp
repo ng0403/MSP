@@ -250,7 +250,10 @@ $(document).ready(function() {
 				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
 			</c:otherwise>
 		</c:choose>
-		 
+		<div class="" style="text-align: right; margin-right: 10%;">
+			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
+			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
+		</div>
 	</div>
 	</div>
 	
