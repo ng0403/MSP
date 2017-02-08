@@ -22,5 +22,9 @@ public interface UserService {
 
 	PagerVO getUserListCount(Map<String, Object> map);
 
+	public List<userVO> rankCdList();
+
+	public List<userVO> dutyCdList();
+
 
 }
