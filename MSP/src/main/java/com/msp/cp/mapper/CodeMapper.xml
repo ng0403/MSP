@@ -31,7 +31,7 @@
              	  ) A
      	 ) X
      	 <![CDATA[
-		WHERE X.rnum >= #{page.startRow} and X.rnum <= #{page.endRow}
+		WHERE X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
 		]]>
 	</select>
 	
