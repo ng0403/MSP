@@ -3,7 +3,7 @@
 
 <mapper namespace="code">
 
-   <select id="codeListCount" parameterType="java.util.Map" resultType="int">
+<select id="codeListCount" parameterType="java.util.Map" resultType="int">
       SELECT
          count(*) as cnt
       FROM
@@ -15,6 +15,17 @@
       </if>
    </select>
 
+	<select id="codeListCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+			count(*) as cnt
+		FROM
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TB
+		WHERE
+			TM.GRP_CD = TB.GRP_CD
+		<if test="grp_cd != null and grp_cd != ''">
+			AND TM.grp_cd = #{grp_cd}
+		</if>
+	</select>
    <select id="searchCodeList" parameterType="int" resultType="map">
       SELECT   X.*
       FROM 
@@ -74,6 +85,66 @@
    <insert id="insertCodeMaster" parameterType="com.msp.cp.code.vo.CodeVO">
       INSERT INTO TB_CODE_MASTER
          (grp_cd, grp_nm, grp_desc, created_by) 
+   </insert>
+	<select id="searchCodeList" parameterType="int" resultType="map">
+		SELECT	X.*
+		FROM 
+     	 (
+        	select rownum as rnum, A.*
+       		from (
+               		 SELECT tm.grp_cd, tm.grp_nm, td.code1, td.code_txt
+               		 FROM 
+               		 	TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+                	 WHERE 
+                	 	TM.GRP_CD = TD.GRP_CD
+               		 ORDER BY 
+               		 	TM.GRP_CD, TD.CODE1
+             	  ) A
+     	 ) X
+     	 <![CDATA[
+		WHERE X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
+		]]>
+	</select>
+	
+	<select id="searchCodeDetail" parameterType="com.msp.cp.code.vo.CodeVO" resultType="com.msp.cp.code.vo.CodeVO">
+		SELECT
+			*
+		FROM
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+		WHERE
+			TM.GRP_CD = TD.GRP_CD
+			AND CODE1 = #{code1}
+		ORDER BY
+			TM.GRP_CD, TD.CODE1
+	</select>
+	
+	<select id="searchGrpList" parameterType="com.msp.cp.code.vo.CodeVO" resultType="com.msp.cp.code.vo.CodeVO">
+		SELECT
+			*
+		FROM	
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+		WHERE
+			TM.GRP_CD = TD.GRP_CD
+			AND TM.GRP_CD = #{grp_cd}
+		ORDER BY
+			TM.GRP_CD, TD.CODE1
+	</select>
+	
+	<select id="searchGrpList2" parameterType="java.util.Map" resultType="com.msp.cp.code.vo.CodeVO">
+		SELECT
+			*
+		FROM	
+			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+		WHERE
+			TM.GRP_CD = TD.GRP_CD
+			AND TM.GRP_CD = #{grp_cd}
+		ORDER BY
+			TM.GRP_CD, TD.CODE1
+	</select>
+	
+	<insert id="insertCodeMaster" parameterType="com.msp.cp.code.vo.CodeVO">
+		INSERT INTO TB_CODE_MASTER
+			(grp_cd, grp_nm, grp_desc, created_by) 
         VALUES 
            (#{grp_cd}, #{grp_nm}, #{grp_desc}, #{created_by}) 
    </insert>
