@@ -85,7 +85,7 @@ public class UserAuthController {
 	    내 용 : 사용자권한 list의 조회한 결과 화면을 보여준다.
 	   *참고사항 :
 	  -------------------------------*/ 
-     @RequestMapping(value = "/userAuthSearchList")
+     @RequestMapping(value = "/user_auth_list")
 	 public @ResponseBody Map<String, Object> userAuthSearchList(ModelMap model,
 				HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		    String user_id=request.getParameter("user_id").trim();                      
@@ -139,44 +139,55 @@ public class UserAuthController {
  	    내 용 : 선택한 사용자권한 상세화면을 보여준다.
  	   *참고사항 :
  	   -------------------------------*/ 
-     @RequestMapping(value = "/openUserAuthDetail")
+     @RequestMapping(value = "/user_auth_popup")
      public @ResponseBody Map<String, Object> openUserAuthDetail(HttpServletRequest request,
     		 Locale locale, ModelMap model) {
   	    String user_id = request.getParameter("user_id").trim(); 
-  	    //메뉴 상세정보 호출
-  	    UserAuthVO mv = userAuthService.openUserAuthDetail(user_id);
+  	    //사용자권한 상세정보 호출
+  	    UserAuthVO uav = userAuthService.openUserAuthDetail(user_id);
   	    
-        /*String user_nm = mv.getUser_nm();							
-        String p_user_id = mv.getP_user_id();							
-        String menu_level = mv.getMenu_level();					
-        String menu_url = mv.getMenu_url();						
-        String default_flg = mv.getDefault_flg();				
-        String active_flg = mv.getActive_flg();			
-        String c_user_id = mv.getC_user_id();			
-        String cdate = mv.getCdate();			
-        String u_user_id = mv.getU_user_id();			
-        String udate = mv.getUdate();
-        if(u_user_id == null){
-        	u_user_id = "";
+        String user_nm = uav.getUser_nm();							
+        String auth_nm = uav.getAuth_nm();							
+        String dept_nm = uav.getDept_nm();					
+        String email = uav.getEmail();						
+        String email_id = uav.getEmail_id();						
+        String email_domain = uav.getEmail_domain();				
+        String active_flg = uav.getActive_flg();			
+        String created_by = uav.getCreated_by();			
+        String created = uav.getCreated();			
+        String updated_by = uav.getUpdated_by();			
+        String updated = uav.getUpdated();			
+        if(updated_by == null){
+        	updated_by = "";
         }
-        if(udate == null){
-        	udate = "";
+        if(updated == null){
+        	updated = "";
         }
-        if(p_user_id == null){
-        	p_user_id = "";
-        }*/
+        if(email == null){
+        	email = "";
+        }
+        if(email_id == null){
+        	email_id = "";
+        }
+        if(email_domain == null){
+        	email_domain = "";
+        }
+        if(dept_nm == null){
+        	dept_nm = "";
+        }
         
-        /*model.addAttribute("user_id", user_id);
+        model.addAttribute("user_id", user_id);
         model.addAttribute("user_nm", user_nm);
-        model.addAttribute("p_user_id", p_user_id);
-        model.addAttribute("menu_level", menu_level);
-        model.addAttribute("menu_url", menu_url);
-        model.addAttribute("default_flg", default_flg);
+        model.addAttribute("auth_nm", auth_nm);
+        model.addAttribute("dept_nm", dept_nm);
+        model.addAttribute("email", email);
+        model.addAttribute("email_id", email_id);
+        model.addAttribute("email_domain", email_domain);
         model.addAttribute("active_flg", active_flg);
-        model.addAttribute("c_user_id", c_user_id);
-        model.addAttribute("cdate", cdate);
-        model.addAttribute("u_user_id", u_user_id);
-        model.addAttribute("udate", udate);*/
+        model.addAttribute("created_by", created_by);
+        model.addAttribute("created", created);
+        model.addAttribute("updated_by", updated_by);
+        model.addAttribute("updated", updated);
         
         return model;
      }
@@ -187,30 +198,41 @@ public class UserAuthController {
  	    작 성 일 : 2017/02/01
  	    수 정 자 : 공재원 (jwjy0223@naver.com)
  	    수 정 일 : 2017/02/01
- 	    내 용 : menu를 등록, 저장한다.
+ 	    내 용 : 사용자권한을 등록, 저장한다.
  	   *참고사항 :
  	 -------------------------------*/ 
-     @RequestMapping(value = "/createMenu", method = RequestMethod.POST)
+     @RequestMapping(value = "/createUserAuth", method = RequestMethod.POST)
      public String createUserAuth(Locale locale, Model model, HttpServletRequest request) {
+         				
+         String[] auth_id = request.getParameterValues("auth_id3");
          String user_id = request.getParameter("user_id3").trim();                  	
-         String user_nm = request.getParameter("user_nm3").trim();				
-         String p_user_id = request.getParameter("p_user_id3").trim();					
-         String menu_level = request.getParameter("menu_level3").trim();					
-         String menu_url=request.getParameter("menu_url3").trim();				
-         String default_flg = request.getParameter("default_flg3").trim();			
+         String user_nm = request.getParameter("user_nm3").trim();
+         String dept_cd = request.getParameter("dept_cd3").trim();					
+         String dept_nm = request.getParameter("dept_nm3").trim();					
+         String email_id=request.getParameter("email_id3").trim();				
+         String email_domain = request.getParameter("email_domain3").trim();			
          String active_flg = request.getParameter("active_flg3").trim();			
        
-         UserAuthVO mv = new UserAuthVO();
-               
-         /*mv.setuser_id(user_id);
-         mv.setuser_nm(user_nm);
-         mv.setP_user_id(p_user_id);
-         mv.setMenu_level(menu_level);
-         mv.setMenu_url(menu_url);
-         mv.setDefault_flg(default_flg);
-         mv.setActive_flg(active_flg);*/
+         UserAuthVO uav = new UserAuthVO();
+         
+         if(auth_id.length == 0){
+  			System.out.println("입력할 사용자권한 데이터가 없습니다.");
+  		 }else{
+  		     for(int i=0;i<auth_id.length;i++){
+  			     /*UserAuthVO uav = userAuthService.openUserAuthDetail(checks[i]);*/
+  		    	 uav.setUser_id(user_id);
+  		         uav.setUser_nm(user_nm);
+  		         uav.setAuth_id(auth_id[i]);
+  		         uav.setDept_cd(dept_cd);
+  		         uav.setDept_nm(dept_nm);
+  		         uav.setEmail_id(email_id);
+  		         uav.setEmail_domain(email_domain);
+  		         uav.setActive_flg(active_flg);   
+  			     userAuthService.createUserAuth(uav);
+  		     }
+  		     System.out.println("저장이 완료되었습니다.");
+  		 }
 
-         //userAuthService.createMenu(mv);
          return "redirect:"+"/userAuth/view";
      }
      
@@ -227,21 +249,25 @@ public class UserAuthController {
      public String updateUserAuth(Locale locale, Model model, 
            HttpServletRequest request) {
     	String user_id = request.getParameter("user_id1").trim();
-        String user_nm=request.getParameter("user_nm1").trim();			
-        String p_user_id=request.getParameter("p_user_id1").trim();			
-        String menu_level=request.getParameter("menu_level1").trim();			
-        String menu_url=request.getParameter("menu_url1").trim();			
-        String default_flg=request.getParameter("default_flg1").trim();			
+        //String user_nm=request.getParameter("user_nm1").trim();			
+        String[] auth_id=request.getParameterValues("auth_id1");			
+        //String dept_cd=request.getParameter("dept_cd1").trim();			
+        //String dept_nm=request.getParameter("dept_nm1").trim();			
+        //String email_id=request.getParameter("email_id1").trim();			
+        //String email_domain=request.getParameter("email_domain1").trim();			
         String active_flg=request.getParameter("active_flg1").trim();			
-        /*UserAuthVO mv = userAuthService.openMenuDetail(user_id);
+        UserAuthVO uav = userAuthService.openUserAuthDetail(user_id);
         
-        mv.setuser_id(user_id);
-        mv.setuser_nm(user_nm);
-        mv.setMenu_level(menu_level);
-        mv.setMenu_url(menu_url);
-        mv.setDefault_flg(default_flg);
-        mv.setActive_flg(active_flg);
-        userAuthService.updateMenu(mv);*/
+        if(auth_id.length == 0){
+  			System.out.println("입력할 사용자권한 데이터가 없습니다.");
+  		}else{
+  		    for(int i=0;i<auth_id.length;i++){
+  		        uav.setAuth_id(auth_id[i]);
+  		        uav.setActive_flg(active_flg);   
+  			    userAuthService.updateUserAuth(uav);
+  		    }
+  		    System.out.println("수정이 완료되었습니다.");
+  		}
         return "redirect:" + "/userAuth/view";
      }
      
@@ -254,7 +280,7 @@ public class UserAuthController {
  	    내 용 : 선택한 사용자권한을 삭제한다.
  	   *참고사항 :
  	-------------------------------*/ 
- 	 /*@RequestMapping(value = "/deleteUserAuth", method = RequestMethod.POST)
+ 	 @RequestMapping(value = "/deleteUserAuth", method = RequestMethod.POST)
  	 public String deleteUserAuth(Locale locale, Model model, 
  			 HttpServletRequest request) {
  		 String[] checks = request.getParameterValues("chk");
@@ -262,12 +288,12 @@ public class UserAuthController {
  			System.out.println("삭제할 데이터가 없습니다.");
  		 }else{
  		     for(int i=0;i<checks.length;i++){
- 			     UserAuthVO mv = userAuthService.openMenuDetail(checks[i]);
+ 			     UserAuthVO uav = userAuthService.openUserAuthDetail(checks[i]);
  			
- 			     userAuthService.deleteMenu(mv);
+ 			     userAuthService.deleteUserAuth(uav);
  		     }
  		     System.out.println("삭제가 완료되었습니다.");
  		 }
- 		 return "redirect:" + "/menu/view";
- 	 }*/
+ 		 return "redirect:" + "/userAuth/view";
+ 	 }
 }
