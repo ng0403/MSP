@@ -1,12 +1,14 @@
 package com.msp.cp.dept.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msp.cp.dept.dao.DeptDao;
 import com.msp.cp.dept.vo.DeptVO;
+import com.msp.cp.utils.PagerVO;
 
 @Service
 public class DeptServiceImpl implements DeptService{
@@ -15,16 +17,26 @@ public class DeptServiceImpl implements DeptService{
 	DeptDao deptDao;
 	
 	@Override
-	public List<DeptVO> deptList(DeptVO dvo) {
+	public List<DeptVO> deptList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		List<DeptVO> list = deptDao.codeList(dvo);
+		List<DeptVO> list = deptDao.deptList(map);
 		return list;
+	}
+	
+	@Override
+	public PagerVO getDeptCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int PageNum = (Integer) map.get("pageNum");
+		int pageListCount = deptDao.getDeptCount(map);
+		
+		PagerVO page = new PagerVO(PageNum, pageListCount, 2, 10);
+		return page;
 	}
 
 	@Override
 	public List<DeptVO> deptDetailList(String dept_cd) {
 		// TODO Auto-generated method stub
-		List<DeptVO> list = deptDao.codeDetailList(dept_cd);
+		List<DeptVO> list = deptDao.deptDetailList(dept_cd);
 		return list;
 	}
 

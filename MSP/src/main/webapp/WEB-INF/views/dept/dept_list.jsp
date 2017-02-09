@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<script src="${ctx}/resources/common/js/jquery-1.12.2.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
@@ -34,9 +34,7 @@
 		} */
 		/*검색버튼 클릭 시 처리 이벤트*/
 		$("#dept_inqr_fbtn").click(function(){
-			var active_key = $("#active_key").val();
-			var dept_nm_key = $("#dept_nm_key").val();
-			deptListInqr(active_key, dept_nm_key);
+			deptListInqr(1);
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
@@ -82,14 +80,16 @@
 	})
 	
 	/*부서 리스트 출력및 페이징 처리 함수*/
-	function deptListInqr(active_key, dept_nm_key){
+	function deptListInqr(pageNum){
 		/* $("#searchForm").attr({
 			"method":"post",
 			"action":"list"
 		})
 		$("#searchForm").submit(); */
+		var active_key = $("#active_key").val();
+		var dept_nm_key = $("#dept_nm_key").val();
 		$(".dept_list").html("");
-		$.getJSON("search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key}, function(data){
+		$.post("search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
 			$(data).each(function(){
 				var dept_cd = this.dept_cd;
 				var dept_nm = this.dept_nm;
@@ -101,7 +101,7 @@
 				deptListOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, user_nm, active_flg);
 			})
 		}).fail(function(){
-			warning("부서 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+			alert("부서 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
 	}
 	/*부서 상세정보 요청 함수*/
@@ -120,7 +120,7 @@
 				detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg);
 			})
 		}).fail(function(){
-			warning("부서 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+			alert("부서 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
 	}
 	/*부서 입력 요청 함수*/
@@ -141,11 +141,11 @@
 				active_flg:$(".active_flg:checked").val()
 			}),
 			error:function(){
-				warning("시스템 오류 입니다. 관리자에게 문의하세요.");
+				alert("시스템 오류 입니다. 관리자에게 문의하세요.");
 			},
 			success:function(resultData){
 				if(resultData == "SUCCESS"){
-					warning("부서 등록이 완료되었습니다.");
+					alert("부서 등록이 완료되었습니다.");
 					dataReset();
 					deptListInqr();
 				}
@@ -174,11 +174,11 @@
 				active_flg:$(".active_flg:checked").val()
 			}),
 			error:function(){
-				warning("시스템 오류 입니다. 관리자에게 문의하세요.");
+				alert("시스템 오류 입니다. 관리자에게 문의하세요.");
 			},
 			success:function(resultData){
 				if(resultData == "SUCCESS"){
-					warning("부서 수정이 완료되었습니다.");
+					alert("부서 수정이 완료되었습니다.");
 					dataReset();
 					deptListInqr();
 				}
@@ -210,11 +210,11 @@
 				dataType:"text",
 				data:"del_code=" + del_code,
 				error:function(){
-					warning("시스템 오류 입니다. 관리자에게 문의하세요.");
+					alert("시스템 오류 입니다. 관리자에게 문의하세요.");
 				},
 				success:function(resultData){
 					if(resultData == "SUCCESS"){
-						warning("부서 수정이 완료되었습니다.");
+						alert("부서 수정이 완료되었습니다.");
 						dataReset();
 						deptListInqr();
 					}
@@ -224,40 +224,33 @@
 	}
 	/*부서 리스트 출력 함수*/
 	function deptListOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, user_nm, active_flg){
-		if(dept_cd==null && dept_nm==null && dept_num1==null && dept_num2==null && dept_num3==null && user_nm==null && active_flg==null){
-			var dept_tr = $("<tr>");
-			var dept_td = $("<td>");
-			dept_td.attr("colspan", "5");
-			dept_td.html("등록된 부서가 존재하지 않습니다.");
-			
-			dept_tr.append(dept_td);
-		}else{
-			var dept_tr = $("<tr>");
-			dept_tr.addClass("open_detail");
-			dept_tr.attr("data_num",dept_cd);
-			
-			var del_code_td = $("<td>");
-			del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + dept_cd + "'>");
-			
-			var dept_nm_td = $("<td>");
-			dept_nm_td.html(dept_nm);
-			
-			var dept_num_td = $("<td>");
-			dept_num_td.html(dept_num1 + "-" + dept_num2 + "-" + dept_num3);
-			
-			var user_nm_td = $("<td>");
-			user_nm_td.html(user_nm);
-			
-			var active_flg_td = $("<td>");
-			if(active_flg=='Y'){
-				active_flg_td.html("활성화");
-			}else if(active_flg=='N'){
-				active_flg_td.html("비활성화");
-			}
-			
-			dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td).append(active_flg_td);
-		}		
-			$(".dept_list").append(dept_tr);
+		
+		var dept_tr = $("<tr>");
+		dept_tr.addClass("open_detail");
+		dept_tr.attr("data_num",dept_cd);
+		
+		var del_code_td = $("<td>");
+		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + dept_cd + "'>");
+		
+		var dept_nm_td = $("<td>");
+		dept_nm_td.html(dept_nm);
+		
+		var dept_num_td = $("<td>");
+		dept_num_td.html(dept_num1 + "-" + dept_num2 + "-" + dept_num3);
+		
+		var user_nm_td = $("<td>");
+		user_nm_td.html(user_nm);
+		
+		var active_flg_td = $("<td>");
+		if(active_flg=='Y'){
+			active_flg_td.html("활성화");
+		}else if(active_flg=='N'){
+			active_flg_td.html("비활성화");
+		}
+		
+		dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td).append(active_flg_td);
+				
+		$(".dept_list").append(dept_tr);
 			
 	}
 	
@@ -315,11 +308,15 @@
     	});
     }
 	
-	/*경고창 출력함수*/
-	function warning(str){
-		alert(str);
-	}
-	
+  //검색 엔터키
+    function enterSearch(event) {		
+    	var keycode = (event.keyCode ? event.keyCode : event.which);
+    	if (keycode == '13') {
+    		fn_menuSearchList(1);
+    	}
+    	event.stopPropagation();
+    }
+
 </script>
 </head>
 <body>
@@ -400,25 +397,25 @@
 				<input type="hidden" id="PageNum" value="${pageNum}"/>
 				<c:choose>
 					<c:when test="${page.endPageNum == 1}">
-						<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/>  
+						<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRepUser(event);" style='width: 50px; padding: 3px; '/>  
 						<a style="color: black;"> / ${page.endPageNum}</a>
 						<a style="color: black;"> ▶ </a>
 					</c:when>
 					<c:when test="${pageNum == page.startPageNum}">
-						◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/> /&nbsp;
-						<a href="#" onclick="fn_menuSearchList('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
-						<a href="#" onclick="fn_menuSearchList('${pageNum+1}');" id="pNum"> ▶ </a>
+						◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepUser(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+						<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+						<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 					</c:when>
 					<c:when test="${pageNum == page.endPageNum}">
-						<a href="#" onclick="fn_menuSearchList('${pageNum-1}');" id="pNum"> ◀ </a>
-						<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/> /&nbsp;
-						<a href="#" onclick="fn_menuSearchList('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+						<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
+						<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepUser(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+						<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
 					</c:when>
 					<c:otherwise>
-						<a href="#" onclick="fn_menuSearchList('${pageNum-1}');" id="pNum" > ◀ </a>
-						<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageNumInputEnter(event, '/menu/view');" style='width: 50px; padding: 3px; '/> /&nbsp;
-						<a href="#" onclick="fn_menuSearchList('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
-						<a href="#" onclick="fn_menuSearchList('${pageNum+1}');" id="pNum"> ▶ </a>
+						<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
+						<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepUser(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+						<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+						<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 					</c:otherwise>
 				</c:choose>
 				
