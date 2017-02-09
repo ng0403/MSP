@@ -40,6 +40,22 @@ public class CodeServiceImpl implements CodeService {
 	}
 	
 	@Override
+	public List<CodeVO> searchGrpList2(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<CodeVO> obj = codeDao.searchGrpList2(map);
+
+		return obj;
+	}
+	
+	@Override
+	public List<CodeVO> searchGrpPop() {
+		// TODO Auto-generated method stub
+		List<CodeVO> obj = codeDao.searchGrpPop();
+		
+		return obj;
+	}
+	
+	@Override
 	public void insertCodeMaster(CodeVO codeVo) {
 		// TODO Auto-generated method stub
 		System.out.println("insertCodeMaster 서비스");
