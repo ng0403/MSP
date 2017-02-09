@@ -325,7 +325,7 @@
                 <li><a href="/resources/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
               </ul>
             </li>
-            <li class="treeview">
+           <!--  <li class="treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Layout Options</span>
@@ -337,13 +337,13 @@
                 <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
                 <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
               </ul>
-            </li>
+            </li> -->
             <li>
-              <a href="../widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
+              <a href="/auth/authlist">
+                <i class="fa fa-th"></i> <span>권한관리</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
-            <li class="treeview">
+           <!--  <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>
                 <span>Charts</span>
@@ -355,8 +355,8 @@
                 <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
                 <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
               </ul>
-            </li>
-            <li class="treeview">
+            </li> -->
+           <!--  <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>UI Elements</span>
@@ -370,41 +370,41 @@
                 <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
                 <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
               </ul>
-            </li>
+            </li> -->
             <li class="treeview active">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
+              <a href="${ctx}/board/board_list">
+                <i class="fa fa-edit"></i> <span>게시판관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
+              <!-- <ul class="treeview-menu">
                 <li class="active"><a href="general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
                 <li><a href="advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
                 <li><a href="editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-              </ul>
+              </ul> -->
             </li>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-table"></i> <span>Tables</span>
+              <a href="${ctx}/code/codeInqr">
+                <i class="fa fa-table"></i> <span>공통코드관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
+              <!-- <ul class="treeview-menu">
                 <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
                 <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-              </ul>
+              </ul> -->
             </li>
             <li>
-              <a href="../calendar.html">
-                <i class="fa fa-calendar"></i> <span>Calendar</span>
+              <a href="${ctx}/dept/list">
+                <i class="fa fa-calendar"></i> <span>부서관리</span>
                 <small class="label pull-right bg-red">3</small>
               </a>
             </li>
             <li>
-              <a href="../mailbox/mailbox.html">
-                <i class="fa fa-envelope"></i> <span>Mailbox</span>
+              <a href="${ctx}/userAuth/view">
+                <i class="fa fa-envelope"></i> <span>사용자권한</span>
                 <small class="label pull-right bg-yellow">12</small>
               </a>
             </li>
-            <li class="treeview">
+           <!--  <li class="treeview">
               <a href="#">
                 <i class="fa fa-folder"></i> <span>Examples</span>
                 <i class="fa fa-angle-left pull-right"></i>
@@ -446,7 +446,7 @@
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
           </ul>
         </section>
         <!-- /.sidebar -->
