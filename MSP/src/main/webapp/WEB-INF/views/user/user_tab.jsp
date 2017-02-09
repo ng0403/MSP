@@ -9,6 +9,9 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userTab.css" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <title>Insert title here</title>
  <c:if test="${result=='1'}" var = "result"> 
 	<script type="text/javascript">
@@ -21,6 +24,7 @@
 	$(document).ready(function() {
 		var entry_flg = ${entry_flg}
 		var tmp = $('#user_id').val();
+		
 		if(entry_flg == 1)
 		{
 			//$('#addsave_btn').CSS('display', "hidden");
@@ -49,6 +53,7 @@
 				var tmp = $('#user_id').val();
 				var user_pwd = $('#user_pwd').val();
 				var user_pwd_chk = $('#user_pwd_chk').val();
+				var rank_cd = $("#rank_cd option:selected").val();
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
@@ -92,6 +97,7 @@
 				var tmp = $('#user_id').val();
 				var user_pwd = $('#user_pwd');
 				var user_pwd_chk = $('#user_pwd_chk');
+				var rank_cd = $("#rank_cd option:selected").val();
 				var tmplength = tmp.length;
 				if(entry_flg != 1){
 					//passwordCheck();
@@ -100,13 +106,13 @@
 					}
 					
 				}else{
-					alert("신규 데잍를 입력하세요.");
+					alert("신규 데이터를 입력하세요.");
 				}
 			});
 		
-		var tmp = $('#user_id').val();
+		 var tmp = $('#user_id').val(); 
 		
-		//한글입력 안되게 처리
+		/* // 한글입력 안되게 처리
 
 		  $("input[name=aaa]").keyup(function(event){ 
 
@@ -118,16 +124,30 @@
 
 		   }
 
-		  });
+		  });*/
 		//form 내부 전체 input tag 초기화
 		  $("#btnReset_btn").click(function() {  
 		         $("form").each(function() {  
 		            this.reset();  
 		         });  
 		    });  
-	});
+	}); 
 		
 		
+ </script>
+ 
+ <script type="text/javascript">
+/*  function changeDiscType(){
+		if( $("#rank_cd option:selected").val() == "1"){
+			$('.discount_cost').text("*할인율");
+			$('#td_disc_type').html("<input name='disc_rate' id='disc_rate' type='text' maxlength='2' max='99'>%")
+		}else if($("#cb_disc_type option:selected").val() == "2"){
+			$('.discount_cost').text("*할인금액");
+			$('#td_disc_type').html("<input name='disc_amt' id='disc_amt' type='text' maxlength='6' max='999999'>원")
+		}else{
+			return;
+		}
+	} */
  </script>
  
  
@@ -271,19 +291,14 @@
  							</td>
  							<th>직급</th>
  							<td>
- 								<select id="rank_cd" name="rank_cd" style="width: 55%; height: 70%;">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
- 								<%-- <select name="rank_cd"  >
-									<c:forEach var="rankCD" items="${rank_cd}" varStatus="status2">
-										<option value="<c:out value="${rankCD.CODE1}" />" 
-											<c:if test="${result.useYn == rankCD.CODE1 }">selected="selected"</c:if>>
-											<c:out value="${rankCD.CODE_TXT}" />
+ 								 <select name="rank_cd"  >
+									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
+										<option value="<c:out value="${rankCd.rank_cd}" />" 
+											<c:if test="${rank_cd == rankCd.rank_cd }">selected="selected"</c:if>>
+											${rankCd.rank_nm}
 										</option>
 									</c:forEach>
-								</select> --%>
+								</select> 
  							</td>
 						</tr>
 						<tr>
@@ -293,19 +308,14 @@
 							</td>
 							<th>조직ID</th>
 							<td>
-								<select id="duty_cd" name="duty_cd" style="width: 55%; height: 70%;">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
-								<%-- <select name="duty_cd"  >
-									<c:forEach var="dutyCD" items="${duty_cd}" varStatus="status2">
-										<option value="<c:out value="${dutyCD.CODE1}" />" 
-											<c:if test="${result.useYn == dutyCD.CODE1 }">selected="selected"</c:if>>
-											<c:out value="${dutyCD.CODE_TXT}" />
+								 <select name="duty_cd"  >
+									<c:forEach var="dutyCd" items="${duty_cd_list}" varStatus="status2">
+										<option value="<c:out value="${dutyCd.duty_cd}" />" 
+											<c:if test="${duty_cd == dutyCd.duty_cd }">selected="selected"</c:if>>
+											${dutyCd.duty_nm}
 										</option>
 									</c:forEach>
-								</select>  --%>
+								</select> 
 							</td>
 						</tr>
 						<tr>
@@ -334,15 +344,15 @@
 						<tr>
 							<th  align="left">이메일</th>
 							<td colspan="2" align="left">
-								<input type="text" name="email_id" id="email_id" class="iuser_txt" maxlength="20" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" maxlength="20" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
+								<input type="text" name="email_id" id="email_id" class="onlyEng" maxlength="20" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" maxlength="20" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
  							</td>
  						</tr>
 						<tr>
 							<th  align="left">부서</th>
 							<td colspan="2" align="left">
-								<%-- <input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> --%> 
-								<input type="text" id="dept_cd" name="dept_cd" value="${dept_cd}" style="width:65%"/>
-								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색"/>
+								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
+								<input type="text" id="dept_nm" name="dept_nm" value="${dept_nm}" style="width:65%"/>
+								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" data-toggle="modal" data-target="#myModal">
 							</td>
 						</tr>
 						<tr>
@@ -374,6 +384,64 @@
 		
 	</div>
 	
+	
+	<!-- Modal PopUp -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modalM_main_div">
+	      Modal content
+	      <div class="modal-content">
+	      	<tr>
+	          <td><h4 class="modal-title" style="margin-bottom: 1%;"><b>부서검색</b></h4></td>
+	      	</tr>
+	      	<tr>
+	      		<td>
+			      <select id="sch_condition" name="sch_condition">
+			      	<option value="">부서명</option>
+			      	<option value="">부사장</option>
+			      	<option value="">전화번호</option>
+			      </select>
+	      		</td>
+	      		<td><input type="text" id="dept_sch" name="dept_sch"/></td>
+	      		<td><input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn" value="검색"/></td>
+	      	</tr>
+	      	
+	        <div class="modal-body">
+	         <form name="delAllForm" id="delAllForm" method="post"
+			action="${ctx}/userDel">
+			<table id="mastertable" class="table table-bordered" style ="width: 90%">
+				<thead>
+					<tr>
+						<td style="width: 10%;">부서명</td>
+						<td style="width: 10%;">부서장</td>
+						<td style="width: 10%;">전화번호</td>
+					</tr>
+				</thead>
+				<tbody id="usertbody">
+				<c:if test="${not empty user_list}">
+					<c:forEach var="list" items="${user_list}">
+						<tr>
+							<a href="#"><td style="width: 10%;" name="dept_cd" id="" onclick="onPopup(this.id);"></td></a>
+							<td style="width: 10%;" class="user_name_tag"></td>
+							<td style="width: 10%;" class="org_name_tag"></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${user_list.size() == 0}">
+					<tr style="cursor: default; background-color: white;">
+						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
+					</tr>
+				</c:if>
+				</tbody>
+			</table>
+		</form>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+		  </div>    
+	 </div>
+  </div>
 </body>
 </html>
 

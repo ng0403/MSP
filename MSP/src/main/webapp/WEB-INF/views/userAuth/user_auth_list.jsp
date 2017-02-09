@@ -93,7 +93,7 @@
 	    	var tbody = $('#userAuthListTbody');
 	    	var contents="";
 	    	$.ajax({
-	    		url : '/cp/userAuth/userAuthSearchList',
+	    		url : '/userAuth/userAuthSearchList',
 	    		type : 'POST',
 	    		dataType :'json',
 	    		data : {
@@ -201,7 +201,7 @@
 	    	var contents="";
 	    	
 	    	$.ajax({
-	    		url : '/cp/userAuth/openUserAuthDetail',
+	    		url : '/userAuth/openUserAuthDetail',
 	    		type : 'POST',
 	    		dataType :'json',
 	    		data : { "user_id":user_id },
@@ -426,7 +426,7 @@ $(document).ready(function(){
     
 	<div id="container" style="margin-top:2%;">
 	    <!-- 사용자권한 리스트,조회화면 -->
-	    <form name="frm_userAuth" id="frm_userAuth" action="/cp/userAuth/deleteUserAuth"	enctype="multipart/form-data"  method="post">
+	    <form name="frm_userAuth" id="frm_userAuth" action="/userAuth/deleteUserAuth"	enctype="multipart/form-data"  method="post">
 		<div id="inputDiv" style="font-size:11.8px;width:100%;font-family:Helvetica, sans-serif;">
 				<label for="user_id">사용자 ID :</label>
 					<input type="text" id="user_id" name="user_id" style="width: 80px" />&nbsp;
@@ -554,7 +554,7 @@ $(document).ready(function(){
 			    <span style="float:left;margin-left:1%;margin-top:1%; font-size:15px;">
 		            <strong>사용자권한 등록</strong></span>
 		        
-		        <form name="frm_promo1" id="frm_promo1" action="/cp/userAuth/createUserAuth"	enctype="multipart/form-data" method="post">
+		        <form name="frm_promo1" id="frm_promo1" action="/userAuth/createUserAuth"	enctype="multipart/form-data" method="post">
 		        <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
 		        <input type="button" class="btn btn-default" id="write" value="저장" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;" onclick="fn_checkRequired();"/><!-- submit으로 보내는 것이 post,  value값 직접 전달이get -->
 		        

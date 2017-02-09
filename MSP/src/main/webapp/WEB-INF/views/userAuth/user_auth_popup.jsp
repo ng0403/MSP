@@ -55,7 +55,7 @@
 			<!-- General -->
 			<div>
 				<br />
-				<form name="frm_promo" id="frm_promo" action="/cp/userAuth/updateUserAuth" enctype="multipart/form-data" method="post">
+				<form name="frm_promo" id="frm_promo" action="/userAuth/updateUserAuth" enctype="multipart/form-data" method="post">
 				<div align="center" style="width: 100%">
 					<table class="board_view" style="font-size:12px;width: 100%">
 					

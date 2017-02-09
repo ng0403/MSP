@@ -54,8 +54,7 @@
 $("#board_list_fbtn").on("click", function(){  
     	location.href = "/board/board_list";
  	})
- 
- 	
+  
 </script>
 
  

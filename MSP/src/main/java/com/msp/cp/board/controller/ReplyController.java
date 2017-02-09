@@ -2,6 +2,7 @@ package com.msp.cp.board.controller;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,18 +22,20 @@ public class ReplyController {
 	@Autowired
 	ReplyService replyService;
 	
-	
-	@RequestMapping(value="/reply_add", method=RequestMethod.POST)
-	public ResponseEntity<String> replyadd(@RequestBody  ReplyVO vo ){
+	@RequestMapping(value="/reply_add", method=RequestMethod.POST) 
+	public ResponseEntity<List<ReplyVO>> replyadd(@RequestBody ReplyVO vo){
 		System.out.println("hello add reply");
-		ResponseEntity<String> entity = null;
+		System.out.println("vovo" + vo);
+		int BOARD_NO = vo.getBOARD_NO();
+		ResponseEntity<List<ReplyVO>> entity = null;
 		    try {
  		      replyService.addReply(vo); 
-		      entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		      entity = new ResponseEntity<>(replyService.listReply(BOARD_NO), HttpStatus.OK);
+		      System.out.println("entity? "+ entity);
 		      System.out.println("insert entity" + entity);
 		    } catch (Exception e) {
 		      e.printStackTrace();
-		      entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);
 		    }
 		    return entity;
 	}
@@ -51,7 +54,7 @@ public class ReplyController {
 	      e.printStackTrace();
 	      entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	    }
-
+	    
 	    return entity;
 	  }
 

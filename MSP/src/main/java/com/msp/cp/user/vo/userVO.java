@@ -11,7 +11,9 @@ public class userVO {
 	String dept_cd;
 	String dept_nm;
 	String rank_cd;
+	String rank_nm;
 	String duty_cd;
+	String duty_nm;
 	String cphone_num1;
 	String cphone_num2;
 	String cphone_num3;
@@ -25,9 +27,43 @@ public class userVO {
 	String retiredate;
 	String active_flg;
 	String del_flg;
+	String grp_cd;
+	String code1;
+	String code1_txt;
 	
 	
 	
+	
+	public String getDuty_nm() {
+		return duty_nm;
+	}
+	public void setDuty_nm(String duty_nm) {
+		this.duty_nm = duty_nm;
+	}
+	public String getRank_nm() {
+		return rank_nm;
+	}
+	public void setRank_nm(String rank_nm) {
+		this.rank_nm = rank_nm;
+	}
+	public String getGrp_cd() {
+		return grp_cd;
+	}
+	public void setGrp_cd(String grp_cd) {
+		this.grp_cd = grp_cd;
+	}
+	public String getCode1() {
+		return code1;
+	}
+	public void setCode1(String code1) {
+		this.code1 = code1;
+	}
+	public String getCode1_txt() {
+		return code1_txt;
+	}
+	public void setCode1_txt(String code1_txt) {
+		this.code1_txt = code1_txt;
+	}
 	public String getDept_nm() {
 		return dept_nm;
 	}
@@ -156,13 +192,18 @@ public class userVO {
 	}
 	@Override
 	public String toString() {
-		return "userVO [user_id=" + user_id + ",user_pwd=" + user_pwd + ", emp_no=" + emp_no + ", user_nm=" + user_nm + ", dept_cd=" + dept_cd+ ", dept_nm=" + dept_nm
-				+ ", rank_cd=" + rank_cd + ", duty_cd=" + duty_cd + ", cphone_num1=" + cphone_num1 + ", cphone_num2="
+		return "userVO [user_id=" + user_id + ", user_pwd=" + user_pwd + ", emp_no=" + emp_no + ", user_nm=" + user_nm
+				+ ", dept_cd=" + dept_cd + ", dept_nm=" + dept_nm + ", rank_cd=" + rank_cd + ", rank_nm=" + rank_nm
+				+ ", duty_cd=" + duty_cd + ", duty_nm=" + duty_nm + ", cphone_num1=" + cphone_num1 + ", cphone_num2="
 				+ cphone_num2 + ", cphone_num3=" + cphone_num3 + ", phone_num1=" + phone_num1 + ", phone_num2="
 				+ phone_num2 + ", phone_num3=" + phone_num3 + ", email_id=" + email_id + ", email_domain="
-				+ email_domain + ", hiredate=" + hiredate + ",retiredate=" + retiredate + ", created_by=" + created_by + ", active_flg=" + active_flg+ ", del_flg=" + del_flg
-				+ "]";
+				+ email_domain + ", hiredate=" + hiredate + ", created_by=" + created_by + ", retiredate=" + retiredate
+				+ ", active_flg=" + active_flg + ", del_flg=" + del_flg + ", grp_cd=" + grp_cd + ", code1=" + code1
+				+ ", code1_txt=" + code1_txt + "]";
 	}
+	
+	
+	
 	
 	
 }

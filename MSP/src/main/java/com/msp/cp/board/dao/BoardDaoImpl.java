@@ -1,12 +1,14 @@
 package com.msp.cp.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.msp.cp.board.vo.BoardVO;
+import com.msp.cp.common.PagerVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -18,9 +20,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<Object> list() {	
+	public List<Object> list(Map map) {	
 		 
-		return sqlSession.selectList("BoardList");
+		return sqlSession.selectList("BoardList", map);
 	}
 
 	@Override
@@ -57,6 +59,18 @@ public class BoardDaoImpl implements BoardDao {
 	public List<Object> ajaxlist() {
 		 
 		return sqlSession.selectList("ajaxList");
+	}
+
+	@Override
+	public int BoardListCount(String string, Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			totalCount = sqlSession.selectOne("board.boardListCount", map);
+			System.out.println("6. DAoImpl totalCount : " + totalCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return totalCount;
 	}
 
 }

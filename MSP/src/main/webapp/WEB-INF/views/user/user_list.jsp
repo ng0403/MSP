@@ -160,7 +160,7 @@ $(document).ready(function() {
 						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}" onkeypress="userEnterSearch(event);"></td>
 						<th>부서명</th>
 						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}" onkeypress="userEnterSearch(event);"></td>&nbsp;
-					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn" />검색</button></td>
+					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn"  style="margin-left: 34%;"/>검색</button></td>
 					</tr>
 			</form>
 			<!-- 페이징 전용 폼 -->
@@ -184,7 +184,7 @@ $(document).ready(function() {
 						<th><input id="checkall" name="checkAll" type="checkbox" onclick="allChk();" /></th>
 						<td style="width: 10%;">사용자ID</td>
 						<td style="width: 10%;">사용자명</td>
-						<td style="width: 10%;">조직명</td>
+						<td style="width: 10%;">부서명</td>
 						<td style="width: 20%;">이메일</td>
 						<td style="width: 25%;">연락처</td>
 						<td style="width: 10%;">권한</td>
@@ -199,7 +199,7 @@ $(document).ready(function() {
 							 <input	type="hidden" id="user_id_h" value="${list.USER_ID}" /></th>
 							<a href="#"><td style="width: 10%;" name="user_id" id="${list.USER_ID}" onclick="onPopup(this.id);">${list.USER_ID}</td></a>
 							<td style="width: 10%;" class="user_name_tag">${list.USER_NM}</td>
-							<td style="width: 10%;" class="org_name_tag">${list.DEPT_CD}</td>
+							<td style="width: 10%;" class="org_name_tag">${list.DEPT_NM}<input type="hidden" id="dept_cd" value="${list.DEPT_CD}"/></td>
 							<td style="width: 20%;" class="email_tag">${list.EMAIL_ID}@${list.EMAIL_DOMAIN}</td>
 							<td style="width: 20%;" class="cell_phone_tag">${list.CPHONE_NUM1}-${list.CPHONE_NUM2}-${list.CPHONE_NUM3}</td>
 							<td style="width: 10%;" class="auth_name_tag">

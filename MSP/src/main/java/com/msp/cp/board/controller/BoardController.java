@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.board.service.BoardService;
 import com.msp.cp.board.vo.BoardVO;
+import com.msp.cp.common.PagerVO;
 
 @Controller
 @RequestMapping("/board/*")
@@ -25,14 +26,29 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping(value="/board_list", method = RequestMethod.GET)
-	public ModelAndView boardList( ) throws Exception{
+	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
 		
 		System.out.println("board_list Insert ");
+		System.out.println("pagenum" + pageNum);
+		map.put("pageNum", pageNum);
+
+		PagerVO page=boardService.getBoardListCount(map); 
+		System.out.println("pagevo" + page.toString());
+		map.put("page", page);
 		
- 		List<Object> boardlist = boardService.list();
+		if(page.getEndRow() == 1){
+			page.setEndRow(0);
+		}
+ 		List<Object> boardlist = boardService.list(map); 
+ 		
 		ModelAndView mov = new ModelAndView("/board/board_list");
 		mov.addObject("boardlist", boardlist);
+		mov.addObject("page",  page);
+		mov.addObject("pageNum",  pageNum);
 		
+		
+		
+
 		System.out.println("board_list" + mov);
 		return mov; 
 	}

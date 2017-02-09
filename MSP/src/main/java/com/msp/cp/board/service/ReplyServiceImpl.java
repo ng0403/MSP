@@ -1,12 +1,14 @@
 package com.msp.cp.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msp.cp.board.dao.ReplyDao;
 import com.msp.cp.board.vo.ReplyVO;
+import com.msp.cp.common.PagerVO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
@@ -25,5 +27,7 @@ public class ReplyServiceImpl implements ReplyService {
  		
 		  replyDao.addReply(vo);
 	}
+
+	
 
 }
