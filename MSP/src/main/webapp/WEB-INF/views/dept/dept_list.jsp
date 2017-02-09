@@ -91,7 +91,9 @@
 		$(".dept_list").html("");
 		$.post("search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
 			$(data).each(function(){
-				var dept_cd = this.dept_cd;
+				console.log(data.toSource());
+				alert(data.dept_list.dept_num1.toSource());
+ 				var dept_cd = this.dept_cd;
 				var dept_nm = this.dept_nm;
 				var dept_num1 = this.dept_num1;
 				var dept_num2 = this.dept_num2;
