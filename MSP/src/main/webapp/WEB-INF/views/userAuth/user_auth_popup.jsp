@@ -44,7 +44,7 @@
 <div id="userAuthMask"></div> 
 	<div class="userAuthWindow" >
 		<div id="mainDiv" style="width:100%;" align="center">
-			<span style="margin-top:1%;font-size: 15px; float:left; margin-left:1%;"><strong>메 뉴</strong></span>
+			<span style="margin-top:1%;font-size: 15px; float:left; margin-left:1%;"><strong>권한관리>사용자권한>상세정보</strong></span>
 			<!-- <input type="button" class="btn btn-default" data-dismiss="modal" style="float:right;font-size:11px;margin-right:1%;margin-top:1%;" value="닫기" onclick="clearTdFunc();"/> -->
 			<div>
 			<input type="button" href="#" id="userAuthClose" class="func_btn" data-dismiss="modal" style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
@@ -55,7 +55,7 @@
 			<!-- General -->
 			<div>
 				<br />
-				<form name="frm_promo" id="frm_promo" action="/userAuth/updateUserAuth" enctype="multipart/form-data" method="post">
+				<form name="frm_userAuth" id="frm_userAuth" action="/userAuth/updateUserAuth" enctype="multipart/form-data" method="post">
 				<div align="center" style="width: 100%">
 					<table class="board_view" style="font-size:12px;width: 100%">
 					
