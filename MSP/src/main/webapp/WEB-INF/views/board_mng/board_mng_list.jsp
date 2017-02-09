@@ -33,28 +33,28 @@
 </div>
 </div>
 
-<div class= "list_div">
+<div class= "container" style="width :90%">
 
 <div class= "list1_div" id="list1_div">  
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table class="table table-bordered" style ="width: 90%">
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>조회수</th>
+							<th>게시판관리번호</th>
+							<th>게시판구분</th>
+							<th>게시판이름</th>
+							<th>생성일</th>
+							<th>사용여부</th>
 						</tr> 
- 						<c:forEach items="${boardlist}" var="boardVO"> 
+ 						<c:forEach items="${boardmnglist}" var="boardMngVO"> 
 							<tr>
-								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
-   								<td>${boardVO.BOARD_NO}</td>
-								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
-								<td>${boardVO.CREATED_BY} </td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${boardVO.CREATED}" /></td>
-								<td>${boardVO.VIEW_CNT}</td>
+								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardMngVO.BOARD_MNG_NO}"></td>
+   								<td>${boardMngVO.BOARD_MNG_NO}</td>
+   								<td>${boardMngVO.BOARD_MNG_CD}</td>
+								<td><a href="/board_mng/board_mng_detail?BOARD_MNG_NO=${boardMngVO.BOARD_MNG_NO}">${boardMngVO.BOARD_NM}</a> </td>
+ 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+										value="${boardMngVO.CREATED}" /> </td>
+								<td>${boardMngVO.ACTIVE_FLG}</td>
 							</tr> 
 						</c:forEach>
 						 

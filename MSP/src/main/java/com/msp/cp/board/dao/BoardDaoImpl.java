@@ -28,7 +28,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public BoardVO detail(int BOARD_NO) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("ReadPage", BOARD_NO);
+		return sqlSession.selectOne("board.ReadPage", BOARD_NO);
 	}
 
 	@Override

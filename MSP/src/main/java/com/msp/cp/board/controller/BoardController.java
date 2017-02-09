@@ -25,7 +25,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping(value="/board_list", method = RequestMethod.GET)
+	@RequestMapping(value="/board_list", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
 		
 		System.out.println("board_list Insert ");
