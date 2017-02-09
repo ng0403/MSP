@@ -84,7 +84,7 @@
 
 <script type="text/javascript">
 
-    //검색된 메뉴 리스트
+    //검색된 사용자권한 리스트
     function fn_userAuthSearchList(pageNum){
 	    	var user_id=$("#user_id").val();
 	    	var user_nm=$("#user_nm").val();
@@ -192,7 +192,7 @@
 	    	}); 
 	    }
 	    
-    //메뉴 상세 팝업
+    //사용자권한 상세 팝업
     function fn_userAuthPop(){
 	    	var user_id = $("#popUserAuthId1").val();
 	    	
@@ -218,11 +218,11 @@
 	    			var auth_list = data.auth_list;
 	    			
 	    			contents="<tr height='15px'>"+
-							"<th style=' width: 12%; text-align: right;'><span style='color:red;'>*</span>메뉴ID&nbsp;&nbsp;</th>"+
+							"<th style=' width: 12%; text-align: right;'><span style='color:red;'>*</span>사용자ID&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
 								"<input type = 'text' id='user_id1' name='user_id1' value = '"+user_id+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
 							"</td>"+
-							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>메뉴명&nbsp;&nbsp;</th>"+
+							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>사용자명&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
 								"<input type='text' id='user_nm1' name='user_nm1' value='"+user_nm+"' style='width: 80%;'/>"+
 							"</td>"+
@@ -230,64 +230,32 @@
 						"<tr height='15px'></tr>"+
 
 						"<tr height='15px'>"+
-							"<th style='width: 12%; text-align: right;'>상위메뉴명&nbsp;&nbsp;</th>"+
+							"<th style='width: 12%; text-align: right;'>부서명&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' id='p_user_id1' name='p_user_id1' value='"+p_user_id+"' style='width: 80%;'/>"+
+								"<input type='text' id='dept_nm1' name='dept_nm1' value='"+dept_nm+"' style='width: 80%;'/>"+
 							"</td>"+
-							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>메뉴레벨&nbsp;&nbsp;</th>"+
+							"<th style='width: 12%; text-align: right;'>이메일&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' id='menu_level1' name='menu_level1' value='"+menu_level+"' style='width: 80%;'/>"+
-							"</td>"+
-						"</tr>"+
-						"<tr height='15px'></tr>"+
-						"<tr height='15px'>"+
-							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>메뉴 URL&nbsp;&nbsp;</th>"+
-							"<td colspan='3' style='width: 88%; text-align: left;'>"+
-								"<input type='text' id='menu_url1' name='menu_url1' value='"+menu_url+"' style='width: 90%;'/>"+
+								"<input type='text' id='email_id1' name='email_id1' value='"+email_id+"' style='width: 35%;'/>"+"@"+
+								"<input type='text' id='email_domain1' name='email_domain1' value='"+email_domain+"' style='width: 35%;'/>"+
 							"</td>"+
 						"</tr>"+
 						"<tr height='15px'></tr>"+
 						"<tr height='15px'>"+
-							"<th style='width:12%; text-align: right;'><span style='color:red;'>*</span>디폴트여부&nbsp;&nbsp;</th>"+
-							"<td style='width: 38%; text-align: left;'>"+
-							    "<select id='default_flg1' name='default_flg1' style='width: 30%;'>"+
-							        "<option value='"+default_flg+"'>"+default_flg+"</option>"+
-							        "<option value=''>"+"-----"+"</option>"+
-							        "<option value='Y'>"+"Y"+"</option>"+
-							        "<option value='N'>"+"N"+"</option>"+
-							    "</select>"+
 							"</td>"+
 							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>상태&nbsp;&nbsp;</th>"+
+							"<td style='width: 38%; text-align: left;'>"
+							    if(active_flg =="Y"){
+							    					   
+								+"<input type='radio' name='active_flg1' id='active_flg1' value='Y' checked='checked'>"+
+								"<input type='radio' name='active_flg1' id='active_flg1' value='N'>"
+								}else if(active_flg=="N"){
+								"<input type='radio' name='active_flg1' id='active_flg1' value='Y'>"+
+								"<input type='radio' name='active_flg1' id='active_flg1' value='N' checked='checked'>"
+								}
+							+"</td>"+
+							"<th style='width:12%; text-align: right;'></th>"+
 							"<td style='width: 38%; text-align: left;'>"+
-								"<select id='active_flg1' name='active_flg1' style='width: 30%;'>"+
-							        "<option value='"+active_flg+"'>"+active_flg+"</option>"+
-							        "<option value=''>"+"-----"+"</option>"+
-							        "<option value='Y'>"+"Y"+"</option>"+
-							        "<option value='N'>"+"N"+"</option>"+
-							    "</select>"+
-							"</td>"+
-						"</tr>"+
-						"<tr height='15px'></tr>"+
-						"<tr height='15px'>"+
-							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>최초등록자&nbsp;&nbsp;</th>"+
-							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' value='"+c_user_id+"' id='c_user_id1' name='c_user_id1' style='width: 80%;background-color:#F2F2F2;' readonly='readonly' />"+
-							"</td>"+
-							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>최초등록일시&nbsp;&nbsp;</th>"+
-							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' value='"+cdate+"' id='cdate1' name='cdate1' style='width: 80%;background-color:#F2F2F2;' readonly='readonly' />"+
-							"</td>"+
-						"</tr>"+
-						"<tr height='15px'></tr>"+
-						"<tr height='15px'>"+
-							"<th style='width: 12%; text-align: right;'>최종등록자&nbsp;&nbsp;</th>"+
-							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' value='"+u_user_id+"' id='u_user_id1' name='u_user_id1' style='width: 80%;background-color:#F2F2F2;' readonly='readonly' />"+
-							"</td>"+
-							"<th style='width: 12%; text-align: right;'>최종변경일시&nbsp;&nbsp;</th>"+
-							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' value='"+udate+"' id='udate1' name='udate1' style='width: 80%;background-color:#F2F2F2;' readonly='readonly' />"+
-							"</td>"+
 						"</tr>"+
 						"<tr height='15px'></tr>"+
 						"<tr>"+
@@ -357,7 +325,7 @@
 	   $('#viewLoadingImg').fadeOut();   
 	}
 	
-	//메뉴 팝업 호출
+	//사용자권한 팝업 호출
 	function userAuthPop1(user_id2){		
 		
 		$("#popUserAuthId1").val(user_id2);
@@ -547,7 +515,7 @@ $(document).ready(function(){
          <img src="${ctx}/resources/image/viewLoading.gif">
     </div> 
     
-    <!--  메뉴 등록 창띄우기 -->
+    <!--  사용자권한 등록 창띄우기 -->
     <div class="modal fade" id="userAuthWriteLayer" style="display: none;">
 		<div class="modal-dialog modal-lg">   <!-- modal-lg -->
 			<div class="modal-content">
@@ -563,11 +531,11 @@ $(document).ready(function(){
 					<div align="center" style="width: 100%">
 					<table class="board_view" style="font-size:12px;width: 100%">
 						<tr height="15px">
-							<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴ID&nbsp;&nbsp;</th>
+							<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>사용자권한ID&nbsp;&nbsp;</th>
 							<td style="width: 38%; text-align: left;">
 								<input type = "text" id="user_id3" name ="user_id3" style="width:80%; background-color:#F2F2F2;" value = "${user_id5}" readonly="readonly"/>
 							</td>
-							<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴명&nbsp;&nbsp;</th>
+							<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>사용자권한명&nbsp;&nbsp;</th>
 							<td style="width: 38%; text-align: left;">
 								<input type="text" id="user_nm3" name="user_nm3" style="width: 80%;"	/>
 							</td>
@@ -575,18 +543,18 @@ $(document).ready(function(){
 						<tr height="15px"></tr>
 
 						<tr height="15px">
-							<th style="width: 12%; text-align: right;">상위메뉴명&nbsp;&nbsp;</th>
+							<th style="width: 12%; text-align: right;">상위사용자권한명&nbsp;&nbsp;</th>
 							<td style="width: 38%; text-align: left;">
 								<input class="text" type="text" id="p_user_id3" name="p_user_id3" style="width: 80%;"	/>
 							</td>
-							<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴레벨&nbsp;&nbsp;</th>
+							<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>사용자권한레벨&nbsp;&nbsp;</th>
 							<td style="width: 38%; text-align: left;">
 								<input class="text" type="text" id="menu_level3" name="menu_level3" style="width: 80%;"	/>
 							</td>
 						</tr>
 						<tr height="15px"></tr>
 						<tr height="15px">
-							<th style="width: 12%; text-align: right;">메뉴 URL&nbsp;&nbsp;</th>
+							<th style="width: 12%; text-align: right;">사용자권한 URL&nbsp;&nbsp;</th>
 							<td colspan="3" style="width: 88%; text-align: left;">
 								<input type="text" id="menu_url3" name="menu_url3" style="width: 90%;"/>
 							</td>
@@ -617,7 +585,7 @@ $(document).ready(function(){
 			</div>
         </div>
 	</div>
-    <!-- //메뉴 등록 창띄우기 -->
+    <!-- //사용자권한 등록 창띄우기 -->
 </div>
     
     <!-- menu detail 팝업 -->
@@ -643,12 +611,12 @@ $(document).ready(function(){
 			alert("필수 값을 모두 입력해주세요.");
 			return;
 		}else{
-		    $('form#frm_promo1')[0].submit();
+		    $('form#frm_userAuth1')[0].submit();
 		}
 	}
-	/* //메뉴 등록 시 필수 값 입력 확인 */
+	/* //사용자권한 등록 시 필수 값 입력 확인 */
 	
-	/* 메뉴 수정 시 필수 값 입력 확인 */
+	/* 사용자권한 수정 시 필수 값 입력 확인 */
 	function fn_checkRequired1(){
 	    var user_id1=$('#user_id1').val();
 		var user_nm1=$('#user_nm1').val();
@@ -667,7 +635,7 @@ $(document).ready(function(){
 		    $('form#frm_promo')[0].submit();
 		}
 	}
-	/* //메뉴 수정 시 필수 값 입력 확인 */
+	/* //사용자권한 수정 시 필수 값 입력 확인 */
 	
 	/* 체크박스 전체선택 */
 	$(document).ready(function(){
@@ -687,7 +655,7 @@ $(document).ready(function(){
 	/* //체크박스 전체선택 */
 	
 	var selected = new Array();
-	/* 메뉴 삭제 */
+	/* 사용자권한 삭제 */
 	function fn_delete(){
 	    $("input:checkbox[name=chk]:checked").each(function() {
             selected.push($(this).val());
@@ -700,7 +668,7 @@ $(document).ready(function(){
 	        $('form#frm_userAuth')[0].submit();
 	    }
 	}
-	/* //메뉴 삭제 */
+	/* //사용자권한 삭제 */
 	
 	</script>
 </body>
