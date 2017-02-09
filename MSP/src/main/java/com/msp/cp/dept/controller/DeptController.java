@@ -40,8 +40,6 @@ public class DeptController {
 	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptList1(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
 		
-		logger.info("list 컨트롤러 호출");
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("pageNum", pageNum);
 		//페이징 처리
