@@ -1,0 +1,147 @@
+@CHARSET "UTF-8";
+
+#main_div {
+	
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+
+}
+
+.navi_div {
+	
+	font-size: 15pt;
+	font-weight: bold;
+	margin: 15px;;
+	
+}
+
+.search_div {
+	
+	width: 100%;
+	height: 60px;
+	
+}
+
+.search2_div {
+	
+	margin-top: 10px;
+	float: left;
+	width: 48%;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.search3_div {
+	
+	padding: 10px;
+	margin-left: 5px;
+	float: left;
+	width: 48%;
+}
+
+select {
+	
+	width: 100px;
+	height: 30px;
+	padding: 3px;
+	
+}
+
+#title_text {
+	
+	width: 200px;
+	height: 28px;
+}
+
+span {
+	
+	margin: 15px;
+}
+
+#search_btn {
+	
+	width: 80px;
+	height: 30px;
+	padding: 3px;
+	
+}
+
+.list_div {
+
+	margin-left: 10px;
+	width: 100%;
+	
+}
+
+.list2_div {
+	
+	padding: 10px;	
+	float: left;
+	width: 48%;
+	
+}
+
+.list3_div {
+	
+	padding: 10px;
+	margin-top: 35px; 
+	margin-left: 20px;
+	width: 48%;
+	display: inline-block;
+	
+	
+}
+
+td, tr, th {
+	
+	text-align: center;
+	vertical-align: middle;
+}
+
+.checkall {
+	
+	text-align: center;
+	vertical-align: middle;
+}
+
+.paging_div {
+	
+	width: 100%;
+	margin-top: 5px;
+	clear: both;
+	
+}
+
+.btn01 {
+	
+	float: left;
+	width: 48%;
+	
+}
+
+.left {
+	
+	float: left;
+	
+}
+
+.page {
+	
+	width: 20%;
+	text-align: center;
+	float: inherit;
+	margin-left: 135px;
+	
+}
+
+.right {
+	
+	float: right;
+	margin-right: 10px;
+	
+}
+
+.main-footer {
+	
+	clear: both;
+}

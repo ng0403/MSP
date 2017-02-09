@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.msp.cp.auth.dao.AuthDao;
 import com.msp.cp.auth.vo.AuthVO;
+import com.msp.cp.common.PagerVO;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -17,11 +18,10 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Override
 	public List<AuthVO> searchListAuth(Map map) {
-		
-		System.out.println("searchListAuth Search Service Impl");
+		System.out.println("08. ServiceImpl List Search Service Impl");
 		
 		List<AuthVO> obj = authDao.searchListAuth(map);
-		
+		System.out.println("14. ServiceImpl User List Search Service Impl" + obj.toString());
 		System.out.println("searchListAuth Search Service Impl" + obj.toString());
 		return obj;
 		
@@ -54,6 +54,20 @@ public class AuthServiceImpl implements AuthService {
 		
 		authDao.deleteAuth(dc);
 		
+	}
+
+	@Override
+	public PagerVO getAuthListCount(Map<String, Object> map) {
+		
+		int userPageNum = (Integer)map.get("pageNum");
+		System.out.println("05. ServiceImpl Page userPageNum : " + userPageNum);
+		
+		int totalRowCount = authDao.AuthListCount("userListCount", map);
+		System.out.println("07. ServiceImpl Page totalRowCount : " + totalRowCount);
+		
+		PagerVO page = new PagerVO(userPageNum, totalRowCount, 5, 999);
+		
+		return page;
 	}
 
 	
