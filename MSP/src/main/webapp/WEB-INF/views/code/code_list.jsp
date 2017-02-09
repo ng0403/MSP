@@ -124,10 +124,6 @@
 				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
 			</c:otherwise>
 		</c:choose>
-		<div class="" style="text-align: right;">
-			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="iuser_bt" value="등록" />
-			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="iuser_bt" value="삭제" />
-		</div>
 		</div>
 		
 		<div class="paging_div">
@@ -235,7 +231,6 @@
 						else 
 						{
 							userPaging(pageNum);
-							alert("TEST");
 						}
 					}
 					event.stopPropagation();
