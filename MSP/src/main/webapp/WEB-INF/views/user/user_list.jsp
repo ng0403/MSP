@@ -18,10 +18,41 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
-
-</script> -->
+	//검색버튼 클릭
+	$("#searchButton").click(function(){
+	    var objParams = {
+	            user_id_sch : $("input[name=user_id_sch]").val(), //검색할 코드 (실제로 예제에서는 사용 안함)
+	            user_nm_sch : $("input[name=user_nm_sch]").val(), //검색할 코드 (실제로 예제에서는 사용 안함)
+	            dept_nm_sch : $("input[name=dept_nm_sch]").val() //검색할 코드 (실제로 예제에서는 사용 안함)
+	    }
+	 
+	    var values = []; //ArrayList 값을 받을 변수를 선언
+	 
+	    //검색할 코드를 넘겨서 값을 가져온다.      
+	    $.post(
+	        "http://www.test.com/get", 
+	        objParams,
+	        function(retVal) {
+	            if(retVal.code == "OK") { //controller에서 넘겨준 성공여부 코드
+	                 
+	                values = retVal.bookList ; //java에서 정의한 ArrayList명을 적어준다.
+	                 
+	                $.each(values, function( index, value ) {
+	                   console.log( index + " : " + value.name ); //Book.java 의 변수명을 써주면 된다.
+	                });
+	                 
+	                alert("성공");
+	            }
+	            else {
+	                alert("실패");
+	            }                   
+	        }
+	    );
+	     
+	});
+</script>
 
 <script type="text/javascript">
 

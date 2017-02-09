@@ -35,7 +35,7 @@
 			        	and A.user_nm like '%'||#{user_nm_sch}||'%'
 			        </if>
 				 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
-			        	and A.dept_cd like '%'||#{dept_cd_sch}||'%'
+			        	and td.DEPT_NM like '%'||#{dept_cd_sch}||'%'
 			        </if>
                 and A.DEPT_CD = td.DEPT_CD
 		    ) X

@@ -352,7 +352,7 @@
 							<td colspan="2" align="left">
 								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
 								<input type="text" id="dept_nm" name="dept_nm" value="${dept_nm}" style="width:65%"/>
-								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" data-toggle="modal" data-target="#myModal">
+								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" data-toggle="modal" data-target="#myModal" data-backdrop="static" >
 							</td>
 						</tr>
 						<tr>
@@ -408,7 +408,7 @@
 	      	
 	        <div class="modal-body">
 	         <form name="delAllForm" id="delAllForm" method="post"
-			action="${ctx}/userDel">
+			action="${ctx}/list">
 			<table id="mastertable" class="table table-bordered" style ="width: 90%">
 				<thead>
 					<tr>
@@ -419,15 +419,15 @@
 				</thead>
 				<tbody id="usertbody">
 				<c:if test="${not empty user_list}">
-					<c:forEach var="list" items="${user_list}">
+					<c:forEach var="list" items="${dept_list}">
 						<tr>
-							<a href="#"><td style="width: 10%;" name="dept_cd" id="" onclick="onPopup(this.id);"></td></a>
-							<td style="width: 10%;" class="user_name_tag"></td>
-							<td style="width: 10%;" class="org_name_tag"></td>
+							<a href="#"><td style="width: 10%;" name="dept_cd" id="" onclick="onPopup(this.id);"> temp </td></a>
+							<td style="width: 10%;" class="user_name_tag"> temp </td>
+							<td style="width: 10%;" class="org_name_tag"> temp </td>
 						</tr>
 					</c:forEach>
 				</c:if>
-				<c:if test="${user_list.size() == 0}">
+				<c:if test="${dept_list.size() == 0}">
 					<tr style="cursor: default; background-color: white;">
 						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
 					</tr>
