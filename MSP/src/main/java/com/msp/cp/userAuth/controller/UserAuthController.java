@@ -85,7 +85,7 @@ public class UserAuthController {
 	    내 용 : 사용자권한 list의 조회한 결과 화면을 보여준다.
 	   *참고사항 :
 	  -------------------------------*/ 
-     @RequestMapping(value = "/user_auth_list")
+     @RequestMapping(value = "/userAuthSearchList")
 	 public @ResponseBody Map<String, Object> userAuthSearchList(ModelMap model,
 				HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		    String user_id=request.getParameter("user_id").trim();                      
@@ -139,7 +139,7 @@ public class UserAuthController {
  	    내 용 : 선택한 사용자권한 상세화면을 보여준다.
  	   *참고사항 :
  	   -------------------------------*/ 
-     @RequestMapping(value = "/user_auth_popup")
+     @RequestMapping(value = "/openUserAuthDetail")
      public @ResponseBody Map<String, Object> openUserAuthDetail(HttpServletRequest request,
     		 Locale locale, ModelMap model) {
   	    String user_id = request.getParameter("user_id").trim(); 
@@ -147,7 +147,8 @@ public class UserAuthController {
   	    UserAuthVO uav = userAuthService.openUserAuthDetail(user_id);
   	    
         String user_nm = uav.getUser_nm();							
-        String auth_nm = uav.getAuth_nm();							
+        String agg_auth_id = uav.getAgg_auth_id();							
+        String agg_auth_nm = uav.getAgg_auth_nm();							
         String dept_nm = uav.getDept_nm();					
         String email = uav.getEmail();						
         String email_id = uav.getEmail_id();						
@@ -178,7 +179,8 @@ public class UserAuthController {
         
         model.addAttribute("user_id", user_id);
         model.addAttribute("user_nm", user_nm);
-        model.addAttribute("auth_nm", auth_nm);
+        model.addAttribute("agg_auth_id", agg_auth_id);
+        model.addAttribute("agg_auth_nm", agg_auth_nm);
         model.addAttribute("dept_nm", dept_nm);
         model.addAttribute("email", email);
         model.addAttribute("email_id", email_id);

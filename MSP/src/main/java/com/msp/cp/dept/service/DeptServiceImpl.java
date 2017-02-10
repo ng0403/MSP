@@ -29,7 +29,7 @@ public class DeptServiceImpl implements DeptService{
 		int PageNum = (Integer) map.get("pageNum");
 		int pageListCount = deptDao.getDeptCount(map);
 		
-		PagerVO page = new PagerVO(PageNum, pageListCount, 2, 10);
+		PagerVO page = new PagerVO(PageNum, pageListCount, 10, 10);
 		return page;
 	}
 

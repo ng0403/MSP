@@ -42,6 +42,13 @@ public class UserAuthServiceImpl implements UserAuthService{
 		List<AuthVO> list = userAuthDao.authList(map);
 		return list;
 	}
+	
+	//상세 사용자권한 리스트
+	@Override
+	public List<AuthVO> user_authList(Map<String,Object> map){
+		List<AuthVO> list = userAuthDao.user_authList(map);
+		return list;
+	}
 		
 	//사용자권한 상세정보 확인
 	@Override

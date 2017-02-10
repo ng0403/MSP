@@ -12,6 +12,7 @@ public interface UserAuthService {
 	public List<UserAuthVO> userAuthList(Map<String,Object> map);
 	public PagerVO getUserAuthCount(Map<String, Object> map);
 	public List<AuthVO> authList(Map<String,Object> map);
+	public List<AuthVO> user_authList(Map<String,Object> map);
 	public UserAuthVO openUserAuthDetail(String user_id);
 	public int createUserAuth(UserAuthVO userAuthVO);
 	public int updateUserAuth(UserAuthVO userAuthVO);

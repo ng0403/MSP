@@ -32,6 +32,8 @@
 		if("<c:out value='${data.dept_nm_key}'/>" != ""){
 			$("#dept_nm_key").val("<c:out value='${data.dept_nm_key}'/>");
 		} */
+		pageReady(true);
+		
 		/*검색버튼 클릭 시 처리 이벤트*/
 		$("#dept_inqr_fbtn").click(function(){
 			deptListInqr(1);
@@ -44,6 +46,7 @@
 		/*추가버튼 클릭 시 처리 이벤트*/
 		$("#dept_add_fbtn").click(function(){
 			dataReset();
+			pageReady(false);
 			$("#dept_nm").focus();
 			save_cd = "insert";
 		})
@@ -53,6 +56,7 @@
 		})
 		/*편집버튼 클릭 시 처리 이벤트*/
 		$("#dept_edit_nfbtn").click(function(){
+			pageReady(false);
 			$("#dept_nm").focus();
 			save_cd = "update";
 		})
@@ -60,13 +64,16 @@
 		$("#dept_reset_nfbtn").click(function(){
 			dataReset();
 			save_cd = "";
+			pageReady(true);
 		})
 		/*저장버튼 클릭 시 처리 이벤트*/
 		$("#dept_save_fbtn").click(function(){
 			if(save_cd == "insert"){
 				deptSave();
+				pageReady(true);
 			}else if(save_cd == "update"){
 				deptMdfy();
+				pageReady(true);
 			}
 		})
 		/* 체크박스 전체선택, 전체해제 */
@@ -121,7 +128,7 @@
 	}
 	/*부서 상세정보 요청 함수*/
 	function deptDetailInqr(dept_cd){
-		$.getJSON("detail_list/"+dept_cd, function(data){
+		$.post("detail_list/"+dept_cd, function(data){
 			$(data).each(function(){
 				var dept_cd = this.dept_cd;
 				var dept_nm = this.dept_nm;
@@ -207,9 +214,9 @@
 			  del_code = del_code + $(this).val()+"," ;
 		});
 		
-		del_code = del_code.split(","); //맨끝 콤마 지우기
+		var delCode = del_code.split(","); //맨끝 콤마 지우기
 		
-		if(del_code == ""){
+		if(delCode == ""){
 			alert("삭제할 대상을 선택해 주세요");
 			return false;
 		}else{
@@ -218,12 +225,14 @@
 				"action":"delete"
 			});
 			$("#delAll_form").submit(); */
+			console.log(delCode);
+			console.log(del_code);
 			$.ajax({
-				url:"delete",
+				url:"delete/"+del_code,
 				type:"post",
 				contentType:"application/json; charset=UTF-8",
 				dataType:"text",
-				data:"del_code=" + del_code,
+				//data:JSON.stringify({del_code : del_code}),
 				error:function(){
 					alert("시스템 오류 입니다. 관리자에게 문의하세요.");
 				},
@@ -322,7 +331,9 @@
 		$("#dept_fnum1").val(dept_fnum1).attr("selected","selected");
 		$("#dept_fnum2").val(dept_fnum2);
 		$("#dept_fnum3").val(dept_fnum3);
-		$(".active_flg:radio[value='"+active_flg+"']").attr("checked", true);
+		//$(".active_flg").attr("disabled",false);
+		$(".active_flg:radio[value='"+active_flg+"']").attr("checked", "checked");
+		//$(".active_flg").attr("disabled",true);
 	}
 	/*상세정보 초기화*/
 	function dataReset(){
@@ -334,7 +345,28 @@
 		$("#dept_fnum1").index(0);
 		$("#dept_fnum2").val("");
 		$("#dept_fnum3").val("");
-		$(".active_flg:radio[value='Y']").attr("checked", true);
+		//$(".active_flg").attr("disabled",false);
+		$(".active_flg:radio[value='Y']").attr("checked", "checked");
+		//$(".active_flg").attr("disabled",true);
+	}
+	//페이지 처음 출력시 이벤트
+	function pageReady(boolean){
+		if(boolean == true){
+			$("#dept_save_fbtn").hide();
+			$("#dept_edit_nfbtn").show();
+		}else if(boolean == false){
+			$("#dept_save_fbtn").show();
+			$("#dept_edit_nfbtn").hide();
+		}
+		$("#dept_cd").attr("readonly",true);
+		$("#dept_nm").attr("readonly",boolean);
+		$("#dept_num1").attr("readonly",boolean);
+		$("#dept_num2").attr("readonly",boolean);
+		$("#dept_num3").attr("readonly",boolean);
+		$("#dept_fnum1").attr("readonly",boolean);
+		$("#dept_fnum2").attr("readonly",boolean);
+		$("#dept_fnum3").attr("readonly",boolean);
+		//$(".active_flg").attr("disabled",boolean);
 	}
 	
 	// 검색 페이징 엔터키

@@ -98,6 +98,16 @@
 	    ORDER BY AUTH_ID
 	</select>
 	
+	<!-- 사용자권한리스트 -->
+	<select id="user_authList" parameterType="java.util.Map" resultType="com.msp.cp.auth.vo.AuthVO">
+	    SELECT 
+	        DISTINCT AUTH_ID, 
+	        AUTH_NM
+	    FROM TB_AUTH
+	    WHERE UPPER(USER_ID) = UPPER(#{user_id})
+	    ORDER BY AUTH_ID
+	</select>
+	
 	<!-- 사용자권한 view -->
 	<select id="userAuthDetail" parameterType="java.util.Map" resultType="com.msp.cp.userAuth.vo.UserAuthVO">
 	    SELECT

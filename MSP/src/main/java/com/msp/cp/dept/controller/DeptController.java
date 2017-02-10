@@ -188,7 +188,7 @@ public class DeptController {
 		return mav;
 	}*/
 	
-	@RequestMapping(value="/delete", method={RequestMethod.POST})
+	@RequestMapping(value="/delete/{del_code}", method={RequestMethod.POST})
 	public ResponseEntity<String> deptDelete(@PathVariable("del_code") String del_code){
 		
 		ResponseEntity<String> entity = null;
@@ -201,7 +201,6 @@ public class DeptController {
 			try{
 				String dc = delcode[i];
 				result = deptService.deptDelete(dc);
-				
 				if(result==1){
 					entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 				}

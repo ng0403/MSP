@@ -22,7 +22,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" type="text/css" />
 <script type="text/javascript" src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
 <script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 <%-- <script type="text/javascript" src="${ctx}/resources/common/js/jquery-ui.js"></script> --%>
 <script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script>
@@ -100,6 +101,7 @@
 	    			"user_id":user_id,"user_nm":user_nm,"auth_id":auth_id,"pageNum":pageNum},
 	    		success : function(data){
 	    			tbody.empty();
+	    			
 	    			var list_userAuth=data.list;
 	    			if(list_userAuth.length!=0){
 	    			for(var i=0;i<list_userAuth.length;i++){
@@ -119,7 +121,13 @@
 	    				    cphone = "";
 	    				}
 	    				var created_by_nm=list_userAuth[i].created_by_nm;
+	    				if(created_by_nm == null){
+	    				    created_by_nm = "";
+	    				}
 	    				var created=list_userAuth[i].created;
+	    				if(created == null){
+	    				    created = "";
+	    				}
 	    				var active_flg=list_userAuth[i].active_flg;
 	    				
 	    				contents += "<tr><td><input type='checkbox' id='chk' name='chk' value='"+user_id2+"'/></td>"
@@ -199,6 +207,10 @@
 	    	var tbody_general = $('#generalTbody');
 	    	
 	    	var contents="";
+	    	var contents1="";
+	    	var contents2="";
+	    	var contents_radio1="";
+	    	var contents_radio2="";
 	    	
 	    	$.ajax({
 	    		url : '/userAuth/openUserAuthDetail',
@@ -210,52 +222,45 @@
 	    			
 	    			var user_id = data.user_id;
 	    			var user_nm = data.user_nm;
+	    			var agg_auth_id = data.agg_auth_id;
+	    			var agg_auth_nm = data.agg_auth_nm;
 	    			var dept_nm = data.dept_nm;
 	    			var email_id = data.email_id;
 	    			var email_domain = data.email_domain;
 	    			var active_flg = data.active_flg;
 	    			var user_auth_list = data.user_auth_list;
 	    			var auth_list = data.auth_list;
-	    			
-	    			contents="<tr height='15px'>"+
+	    			contents1 = "<tr height='15px'>"+
 							"<th style=' width: 12%; text-align: right;'><span style='color:red;'>*</span>사용자ID&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
 								"<input type = 'text' id='user_id1' name='user_id1' value = '"+user_id+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
 							"</td>"+
 							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>사용자명&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' id='user_nm1' name='user_nm1' value='"+user_nm+"' style='width: 80%;'/>"+
+								"<input type='text' id='user_nm1' name='user_nm1' value='"+user_nm+"' style='width: 80%;' readonly='readonly'/>"+
 							"</td>"+
 						"</tr>"+
 						"<tr height='15px'></tr>"+
 
 						"<tr height='15px'>"+
-							"<th style='width: 12%; text-align: right;'>부서명&nbsp;&nbsp;</th>"+
+							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>부서명&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' id='dept_nm1' name='dept_nm1' value='"+dept_nm+"' style='width: 80%;'/>"+
+								"<input type='text' id='dept_nm1' name='dept_nm1' value='"+dept_nm+"' style='width: 80%;' readonly='readonly'/>"+
 							"</td>"+
-							"<th style='width: 12%; text-align: right;'>이메일&nbsp;&nbsp;</th>"+
+							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>이메일&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
-								"<input type='text' id='email_id1' name='email_id1' value='"+email_id+"' style='width: 35%;'/>"+"@"+
-								"<input type='text' id='email_domain1' name='email_domain1' value='"+email_domain+"' style='width: 35%;'/>"+
+								"<input type='text' id='email_id1' name='email_id1' value='"+email_id+"' style='width: 35%;' readonly='readonly'/>"+"@"+
+								"<input type='text' id='email_domain1' name='email_domain1' value='"+email_domain+"' style='width: 35%;' readonly='readonly'/>"+
 							"</td>"+
 						"</tr>"+
 						"<tr height='15px'></tr>"+
 						"<tr height='15px'>"+
 							"</td>"+
-							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>상태&nbsp;&nbsp;</th>"+
-							"<td style='width: 38%; text-align: left;'>"
-							    if(active_flg =="Y"){
-							    					   
-								+"<input type='radio' name='active_flg1' id='active_flg1' value='Y' checked='checked'>"+
-								"<input type='radio' name='active_flg1' id='active_flg1' value='N'>"
-								}else if(active_flg=="N"){
-								"<input type='radio' name='active_flg1' id='active_flg1' value='Y'>"+
-								"<input type='radio' name='active_flg1' id='active_flg1' value='N' checked='checked'>"
-								}
-							+"</td>"+
-							"<th style='width:12%; text-align: right;'></th>"+
+							"<th style='width: 12%; text-align: right;'><span style='color:red;'>*</span>상태&nbsp;&nbsp;</th>";
+					contents2="<th style='width:12%; text-align: right;'><span style='color:red;'>*</span>권한&nbsp;&nbsp;</th>"+
 							"<td style='width: 38%; text-align: left;'>"+
+							"<input type='text' id='agg_auth_nm1' name='agg_auth_nm1' value='"+agg_auth_nm+"' style='width: 80%;' readonly='readonly'/>"+
+							"</td>"+
 						"</tr>"+
 						"<tr height='15px'></tr>"+
 						"<tr>"+
@@ -263,6 +268,20 @@
 								"<input type='button' class='btn btn-default' id='update' value='저장' style='font-size:11.5px;float:right;margin-right:1%;margin-top:1%;' onclick='fn_checkRequired1();'/>"+
 							"</tr>"+
 						"<tr height='5px'></tr>";
+					contents_radio1 = "<td style='width: 38%; text-align: left;'>"				   
+								+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+								"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+								+"</td>";
+					contents_radio2 = "<td style='width: 38%; text-align: left;'>"				   
+								+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+								"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+								+"</td>";
+								
+					if(active_flg=='Y'){
+					    contents=contents1+contents_radio1+contents2;
+					}else{
+					    contents=contents1+contents_radio2+contents2;
+					}
 						
 						tbody_general.append(contents);
 	    		},

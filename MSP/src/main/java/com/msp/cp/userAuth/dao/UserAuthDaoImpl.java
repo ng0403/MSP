@@ -52,7 +52,19 @@ public class UserAuthDaoImpl implements UserAuthDao{
       		e.printStackTrace();
       	}
       	return list;
-      }
+    }
+  	
+  	//상세 사용자권한 리스트
+  	@Override
+  	public List<AuthVO> user_authList(Map<String, Object> map) {
+  		List<AuthVO> list = null;
+  		try {
+  			list = sqlSession.selectList("userAuth.user_authList", map);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  		}
+  		return list;
+  	}
     
     //사용자권한 상세 확인
     @Override
