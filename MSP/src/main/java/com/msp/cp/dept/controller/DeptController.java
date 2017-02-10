@@ -29,7 +29,7 @@ import com.msp.cp.dept.service.DeptService;
 import com.msp.cp.dept.vo.DeptVO;
 
 @Controller
-@RequestMapping(value="/dept/*")
+@RequestMapping(value="/dept")
 public class DeptController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DeptController.class);
@@ -110,7 +110,7 @@ public class DeptController {
 		model.addAttribute("page", page);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("dept_list", list);
-		System.out.println(model);
+
 		return model;
 	}
 	
@@ -211,6 +211,40 @@ public class DeptController {
 			}
 		}		
 		return entity;
+	}
+	
+	@RequestMapping(value="/search_list_pop", method={RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String, Object> searchListPop(ModelMap model,
+			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
+		
+		String active_key=request.getParameter("active_key").trim();                      
+	    String dept_nm_key=request.getParameter("dept_nm_key").trim(); 
+		
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    
+	    map.put("active_key", active_key);
+		map.put("dept_nm_key", dept_nm_key);
+		map.put("pageNum", pageNum);
+
+		PagerVO page = deptService.getDeptCount(map);
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
+		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+
+		List<DeptVO> list = deptService.searchListPop(map);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("dept_list", list);
+
+		return model;
 	}
 
 }

@@ -51,4 +51,10 @@ public class DeptDaoImpl implements DeptDao{
 		return sqlSession.update("dept.deleteDept", dc);
 	}
 
+	@Override
+	public List<DeptVO> searchListPop(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("dept.selectDeptPop", map);
+	}
+
 }

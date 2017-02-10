@@ -19,4 +19,6 @@ public interface DeptDao {
 
 	public int getDeptCount(Map<String, Object> map);
 
+	public List<DeptVO> searchListPop(Map<String, Object> map);
+
 }

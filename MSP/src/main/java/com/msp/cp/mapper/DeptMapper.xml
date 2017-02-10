@@ -129,5 +129,42 @@
 		SET DEL_FLG = 'Y'
 		WHERE DEPT_CD = #{dept_cd}
 	</update>
+	<!-- 부서검색 Pop -->
+	<select id="selectDeptPop" parameterType="map" resultType="com.msp.cp.dept.vo.DeptVO">
+		SELECT *
+		FROM 
+		(
+			SELECT
+				ROWNUM AS rnum, d.*
+			FROM 
+			(
+				SELECT
+					DISTINCT
+					d.dept_cd
+					,d.dept_nm
+					,d.dept_num1
+					,d.dept_num2
+					,d.dept_num3
+					,(
+						SELECT DISTINCT USER_NM 
+						FROM TB_USER 
+						WHERE DEPT_CD = d.dept_cd 
+							and duty_cd='DC01'
+					  ) as user_nm
+					
+				FROM TB_DEPT d
+				WHERE
+					d.del_flg='N'
+					and d.active_flg='N'
+					<if test="dept_nm_key != null">
+						and d.dept_nm like '%'||#{dept_nm_key}||'%'
+					</if>
+				ORDER BY d.dept_cd DESC
+				) d
+			)
+		<![CDATA[
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
+		]]>
+	</select>
 
 </mapper>

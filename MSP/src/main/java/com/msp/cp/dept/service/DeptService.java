@@ -20,4 +20,6 @@ public interface DeptService {
 
 	public PagerVO getDeptCount(Map<String, Object> map);
 
+	public List<DeptVO> searchListPop(Map<String, Object> map);
+
 }

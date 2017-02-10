@@ -64,4 +64,11 @@ public class DeptServiceImpl implements DeptService{
 		return result;
 	}
 
+	@Override
+	public List<DeptVO> searchListPop(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<DeptVO> list = deptDao.searchListPop(map);
+		return list;
+	}
+
 }
