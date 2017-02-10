@@ -1,5 +1,6 @@
 package com.msp.cp.user.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -7,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.common.PagerVO;
+import com.msp.cp.dept.service.DeptService;
+import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.Service.UserService;
 import com.msp.cp.user.vo.userVO;
 
@@ -26,6 +28,9 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	DeptService deptService;
 	
 	@RequestMapping(value="/userlist", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model,
@@ -73,12 +78,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/userTab", method=RequestMethod.GET)
-	public ModelAndView userTabListPage(HttpSession session, Locale locale)
+	public ModelAndView userTabListPage(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{
 		int entry_flg = 1;
 		System.out.println("userTab Controller");
+		
 		List<userVO> rank_cd_list = userService.rankCdList();
 		List<userVO> duty_cd_list = userService.dutyCdList();
+		
 		System.out.println("UserTab : " + rank_cd_list);
 		ModelAndView mov = new ModelAndView("/user/user_tab");
 		mov.addObject("entry_flg", entry_flg);
@@ -187,7 +194,7 @@ public class UserController {
 		String user_id = vo.getUser_id();
 		
 		vo.setUser_id(user_id);
-		System.out.println("�젙蹂댁닔�젙 controller " + vo.getUser_id());
+		System.out.println("userModfy controller " + vo.getUser_id());
 		userService.userMdfy(vo);
 		System.out.println("insert success");
 		ModelAndView mov = new ModelAndView("/user/user_tab");

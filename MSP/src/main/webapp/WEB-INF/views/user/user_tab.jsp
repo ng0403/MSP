@@ -19,6 +19,7 @@
 		opener.parent.location.href = "userlist";
 	</script>
  </c:if>
+
  
 <script>
 	$(document).ready(function() {
@@ -111,6 +112,18 @@
 			});
 		
 		 var tmp = $('#user_id').val(); 
+		 
+		 
+		 $("#modal_trigger").leanModal({ top: 200, overlay: 0.6, closeButton: ".modal_close" });
+
+	        $(function () {
+	            // Calling Login Form
+	            //$("#login_form").click(function () {
+	            //$(".user_login").show();
+	            //return false;
+	            //});
+
+	        })
 		
 		/* // 한글입력 안되게 처리
 
@@ -387,7 +400,7 @@
 	
 	<!-- Modal PopUp -->
 <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+ <%--  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modalM_main_div">
 	      Modal content
 	      <div class="modal-content">
@@ -441,7 +454,7 @@
 	        </div>
 		  </div>    
 	 </div>
-  </div>
+  </div> --%>
 </body>
 </html>
 
