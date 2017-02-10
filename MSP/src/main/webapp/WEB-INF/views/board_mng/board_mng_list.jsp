@@ -114,7 +114,7 @@
  
  
 $("#board_add_fbtn").on("click", function(){
-	location.href="/board/board_insert";
+	location.href="/board_mng/board_mng_add";
 	
 })
   

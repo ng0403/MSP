@@ -45,4 +45,10 @@ public class BoardMngDaoImpl implements BoardMngDao {
 	public void modify(BoardMngVO vo) {
 		sqlSession.update("boardmng.Modify", vo);
 	}
+
+	@Override
+	public void add(BoardMngVO vo) {
+		sqlSession.insert("boardmng.Add", vo);
+		
+	}
 }

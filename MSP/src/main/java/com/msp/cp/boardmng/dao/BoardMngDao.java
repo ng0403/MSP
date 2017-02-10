@@ -10,4 +10,5 @@ public interface BoardMngDao {
 	public List<Object> list(Map map);
 	public BoardMngVO detail(String BOARD_MNG_NO);
 	public void modify(BoardMngVO vo);
+	public void add(BoardMngVO vo);
 }

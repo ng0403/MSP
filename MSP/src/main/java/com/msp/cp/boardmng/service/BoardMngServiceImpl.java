@@ -46,4 +46,10 @@ public class BoardMngServiceImpl implements BoardMngService {
 		boardmngDao.modify(vo);
 	}
 
+	@Override
+	public void add(BoardMngVO vo) {
+
+		boardmngDao.add(vo);
+	}
+
 }

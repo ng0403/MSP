@@ -73,5 +73,20 @@ public class BoardMngController {
 		System.out.println("modify success" + vo.toString());
 		return "redirect:/board_mng/board_mng_list";
 	}
+	
+	@RequestMapping(value="/board_mng_add" ,method=RequestMethod.GET)
+	public void board_mng_add() {
+		
+	}
+	
+	
+	@RequestMapping(value="/board_mng_add" ,method=RequestMethod.POST)
+	public void board_mng_add_post(BoardMngVO vo) {
+		
+		System.out.println("enter board_mng_add...");
+		System.out.println("vo is  " + vo);
+		boardmngService.add(vo);
+		
+	}
 
 }

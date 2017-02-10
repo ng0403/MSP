@@ -28,12 +28,11 @@
  <input type="text" class="form-control" name="TITLE" value= "${boardVO.TITLE}" />
 </div> 
 
-<div>	
-<label for="created_by">${boardVO.CREATED_BY}</label> 
-<label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardVO.CREATED}" /></label> 
-<label for="view_cnt">조회 : ${boardVO.VIEW_CNT}</label>
-</div> 
 
+<div> <span class="glyphicon glyphicon-file"></span> 파일 업로드
+<a data-toggle="modal" href="#myModal">Open Modal</a> 
+ 
+</div><!-- 파일 업로드  -->
 <div> <!-- 내용 div -->
  <textarea class="form-control" rows="10" name="CONTENT" >${boardVO.CONTENT}</textarea>
 </div> 
@@ -54,6 +53,30 @@
 </div>
 
 
+
+<div class="modal fade" id="myModal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <!-- 닫기(x) 버튼 -->
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <!-- header title -->
+        <h4 class="modal-title">Header</h4>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+            Body
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+        Footer
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 
 
 <script>

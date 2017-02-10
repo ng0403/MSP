@@ -121,8 +121,7 @@ $(document).ready(function(){
 			type: 'GET',
 			success : function(result) {
 				var ajaxList = result;
-			
-      				 liststr    += " <table class='table'>";
+       				 liststr    += " <table class='table'>";
 				for(var i=0 ; i<ajaxList.length; i++) {  
    				liststr1 +=   "<thead>" +
  				 			  "<th class='col-sm-1'>" + ajaxList[i].created_BY + "</th> <th class='col-sm-10'>" +ajaxList[i].reply_CONTENT+ "</th>";

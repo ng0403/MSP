@@ -14,7 +14,14 @@ public class BoardMngVO {
 	private String CREATED;
 	private String UPDATED_BY;
 	private String UPDATED;
+	private String BOARD_MNG_NM;
 	
+	public String getBOARD_MNG_NM() {
+		return BOARD_MNG_NM;
+	}
+	public void setBOARD_MNG_NM(String bOARD_MNG_NM) {
+		BOARD_MNG_NM = bOARD_MNG_NM;
+	}
 	public String getBOARD_MNG_NO() {
 		return BOARD_MNG_NO;
 	}
@@ -94,7 +101,8 @@ public class BoardMngVO {
 		return "BoardMngVO [BOARD_MNG_NO=" + BOARD_MNG_NO + ", BOARD_MNG_CD=" + BOARD_MNG_CD + ", BOARD_NM=" + BOARD_NM
 				+ ", REPLY_FLG=" + REPLY_FLG + ", FILE_ATTACH_FLG=" + FILE_ATTACH_FLG + ", NOTICE_FLG=" + NOTICE_FLG
 				+ ", ACTIVE_FLG=" + ACTIVE_FLG + ", DEL_FLG=" + DEL_FLG + ", CREATED_BY=" + CREATED_BY + ", CREATED="
-				+ CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED + "]";
+				+ CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED + ", BOARD_MNG_NM=" + BOARD_MNG_NM
+				+ "]";
 	}
 	
 	
