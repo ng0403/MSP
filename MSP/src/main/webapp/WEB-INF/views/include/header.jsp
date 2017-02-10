@@ -44,6 +44,8 @@
           <span class="logo-lg"><b>Membership</b> Point</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
+        
+        <!-- 상단메뉴바 -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -246,14 +248,14 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>   -->
-                  <span class="hidden-xs">관리자 ${user_nm} }</span>	<!-- 사용자NM -->
+                  <span class="hidden-xs">${user_nm}</span>	<!-- 사용자NM -->
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      관리자 ${duty_nm} <!-- 직책입력 -->
+                      ${duty_nm} <!-- 직책입력 -->
                       <small>${emp_no}<!-- 사번 입력창 --></small>
                     </p>
                   </li>
@@ -288,17 +290,17 @@
           </div>
         </nav>
       </header>
-      <!-- Left side column. contains the logo and sidebar -->
+      <!-- 왼쪽 메뉴-->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+               <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" /> 
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
+              <p>${user_nm}</p>
 
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -457,8 +459,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            General Form Elements
-            <small>Preview</small>
+            메뉴 네비게이션 표시창
+            <small>네비게이션 위치</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
