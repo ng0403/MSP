@@ -32,6 +32,7 @@ public class UserController {
 	@Autowired
 	DeptService deptService;
 	
+	//사용자관리 리스트
 	@RequestMapping(value="/userlist", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
@@ -76,7 +77,8 @@ public class UserController {
 		return mov;
 		
 	}
-
+	
+	//상세정보 팝업
 	@RequestMapping(value="/userTab", method=RequestMethod.GET)
 	public ModelAndView userTabListPage(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{
@@ -85,9 +87,28 @@ public class UserController {
 		
 		List<userVO> rank_cd_list = userService.rankCdList();
 		List<userVO> duty_cd_list = userService.dutyCdList();
+		System.out.println("dept_sch_list Controller");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pageNum", pageNum);
+		//페이징 처리
+		com.msp.cp.utils.PagerVO page = deptService.getDeptCount(map);
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
 		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		//검색 결과 list
+		List<DeptVO> dept_list = userService.dept_list(map);
 		System.out.println("UserTab : " + rank_cd_list);
 		ModelAndView mov = new ModelAndView("/user/user_tab");
+		
+		System.out.println("DeptTab : " + dept_list);
+		
+		mov.addObject("dept_list", dept_list);
 		mov.addObject("entry_flg", entry_flg);
 		mov.addObject("rank_cd_list", rank_cd_list);
 		mov.addObject("duty_cd_list", duty_cd_list);
@@ -95,6 +116,7 @@ public class UserController {
 		return mov;
 	}
 	
+	//사용자 추가
 	@RequestMapping(value="/userInsert", method=RequestMethod.POST)
 	public ModelAndView userInsert(userVO vo, HttpSession session) {
 		System.out.println("userInsert Controller : " + vo.toString());
@@ -108,6 +130,7 @@ public class UserController {
 		return mov;
 	}
 	
+	//사용자 삭제
 	@RequestMapping(value="userDel", method={RequestMethod.GET, RequestMethod.POST})
 	public String userDel(String user_id) throws Exception { 
 		System.out.println("del controller enter");
@@ -119,9 +142,9 @@ public class UserController {
 		return "redirect:/user/userlist";
 	}
 	
-	//userMdfyPop
+	//userMdfyPop 사용자 정보 수정 팝업
 	@RequestMapping(value="/userMdfyPop", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView userMdfyPop(HttpSession session, Locale locale, HttpServletRequest req)
+	public ModelAndView userMdfyPop(HttpSession session, Locale locale, HttpServletRequest req,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{
 		String user_id = req.getParameter("user_id");
 		int entry_flg = 2;
@@ -130,8 +153,23 @@ public class UserController {
 		userVO vo= userService.searchListUserOne(user_id);
 		System.out.println("After Service : " + vo);
 		System.out.println("由ъ뒪�듃 : " + vo);
-		ModelAndView mov = new ModelAndView("/user/user_tab");
+		ModelAndView mov = new ModelAndView("/user/user_detail");
+		System.out.println("dept_sch_list Controller");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pageNum", pageNum);
+		//페이징 처리
+		com.msp.cp.utils.PagerVO page = deptService.getDeptCount(map);
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
 		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		//검색 결과 list
+		List<DeptVO> dept_list = userService.dept_list(map);
 		user_id = vo.getUser_id();
 		String user_nm = vo.getUser_nm();
 		String user_pwd = vo.getUser_pwd();
@@ -158,7 +196,8 @@ public class UserController {
 		System.out.println("UserTab rank_cd_list : " + rank_cd_list);
 		
 		
-		
+		System.out.println("DeptTab : " + dept_list);
+		mov.addObject("dept_list", dept_list);
 		mov.addObject("user_id",user_id);
 		mov.addObject("user_nm",user_nm);
 		mov.addObject("user_pwd",user_pwd);
@@ -187,7 +226,7 @@ public class UserController {
 		return mov;
 	}
 	
-	//userMdfy
+	//userMdfy 사용자 정보 수정
 	@RequestMapping(value="/userMdfy", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userMdfy(userVO vo, HttpServletRequest req)
 	{
@@ -197,7 +236,7 @@ public class UserController {
 		System.out.println("userModfy controller " + vo.getUser_id());
 		userService.userMdfy(vo);
 		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/user/user_tab");
+		ModelAndView mov = new ModelAndView("/user/user_detail");
 		int result = 1;
 		mov.addObject("result", result);
 		System.out.println(mov);
@@ -205,4 +244,46 @@ public class UserController {
 		
 		
 	}
+	
+
+	//부서 검색 팝업
+	@RequestMapping(value="/dept_Pop_sch_list", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView dept_sch_list(HttpSession session, Locale locale
+			,HttpServletRequest request, Model model
+			,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+			,DeptVO deptVO, String dept_cd_sch, String sch_pop_condition)
+	{
+		dept_cd_sch = request.getParameter("dept_sch");
+		sch_pop_condition = request.getParameter("sch_pop_condition");
+		
+		System.out.println("dept_sch_list Controller");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("pageNum", pageNum);
+		map.put("dept_sch", dept_cd_sch);
+		map.put("sch_pop_condition", sch_pop_condition);
+		//페이징 처리
+		com.msp.cp.utils.PagerVO page = deptService.getDeptCount(map);
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
+		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		//검색 결과 list
+		List<DeptVO> dept_list = userService.dept_list(map);
+		
+		ModelAndView mov = new ModelAndView("/user/user_tab");
+		System.out.println("DeptTab : " + dept_list);
+		mov.addObject("dept_list", dept_list);
+		mov.addObject("dept_cd_sch", dept_cd_sch);
+		mov.addObject("sch_pop_condition", sch_pop_condition);
+		
+		return mov;
+	}
+	
 }

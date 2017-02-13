@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msp.cp.common.PagerVO;
+import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.vo.userVO;
 
 public interface UserService {
@@ -25,6 +26,8 @@ public interface UserService {
 	public List<userVO> rankCdList();
 
 	public List<userVO> dutyCdList();
+
+	public List<DeptVO> dept_list(Map<String, Object> map);
 
 
 }

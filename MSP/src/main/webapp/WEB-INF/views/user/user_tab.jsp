@@ -64,7 +64,7 @@
 					if(tmplength > 0){
 						//passwordCheck();
 						if(passwordCheck() == true){
-							$('form').attr("action", "${ctx}/user/userInsert").submit();
+							$('#joinform').attr("action", "${ctx}/user/userInsert").submit(); 
 						}
 					}else{
 							alert("사용자 아이디가 없습니다.");
@@ -144,6 +144,18 @@
 		            this.reset();  
 		         });  
 		    });  
+		  
+	      //부서검색버튼 클릭 
+	     	$("#dept_sch_fbtn").on("click", function() {
+	     		
+	    			var popUrl = "dept_Pop_sch_list";
+	    			var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+	    			window.open(popUrl, "", popOption);
+	    		});
+
+	     
+	      
+
 	}); 
 		
 		
@@ -166,7 +178,22 @@
  
  <!-- 숫자키와 편집버튼만 입력하는 function -->
  <script>
-
+ 
+ 	/* function popTrClick(){
+ 		var dept_cd_pop = (this).$('#dept_cd_pop').val();
+		var dept_nm_pop = (this).$('#user_nm_pop').val();
+		$('#dept_cd').val(dept_cd_pop);
+		$('#dept_nm').val(dept_nm_pop);
+ 	} */
+ 	
+ 	/*부서명 클릭 시 상세정보 출력 이벤트*/
+	$(document).on("click", ".deptTrPop", function(){
+		var dept_cd_pop = $(this).attr("dept_cd_pop");
+		var user_nm_pop = $(this).attr("user_nm_pop");
+		$('#dept_cd').val(dept_cd_pop);
+		$('#dept_nm').val(user_nm_pop);
+	})
+ 	
 	function onlyNumber(event){
 	 	event = event || window.event;
 	 	var keyID = (event.which) ? event.which : event.keyCode;
@@ -300,7 +327,7 @@
 								<input type="hidden" id="user_id_h" value="${user_id}">
 								<input type="hidden" id="created_by" value="">
 								<input type="hidden" id="active_flg" value="${active_flg}">
- 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:100%" value="${user_id}"onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="iuser_txt" style=" width:100%" value="${emp_no}"/>
+ 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:100%" value="" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="iuser_txt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th>직급</th>
  							<td>
@@ -340,7 +367,7 @@
 						<tr>	
 							<th  align="left">사용자명</th>
 							<td colspan="2" align="left">
-								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" maxlength="10" style="width:90%" value="${user_nm}"></input>
+								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" maxlength="10" style="width:90%" value=""></input>
 							</td>
 						</tr>
 						<tr>
@@ -398,31 +425,33 @@
 	</div>
 	
 	
+		
 	<!-- Modal PopUp -->
 <!-- Modal -->
- <%--  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modalM_main_div">
 	      Modal content
 	      <div class="modal-content">
 	      	<tr>
 	          <td><h4 class="modal-title" style="margin-bottom: 1%;"><b>부서검색</b></h4></td>
 	      	</tr>
+	      	<form name="deptPopSearchForm" method="post" action="${ctx}/user/dept_Pop_sch_list">
 	      	<tr>
 	      		<td>
-			      <select id="sch_condition" name="sch_condition">
-			      	<option value="">부서명</option>
-			      	<option value="">부사장</option>
-			      	<option value="">전화번호</option>
+			      <select id="sch_pop_condition" name="sch_pop_condition">
+			      	<option value="dept_nm">부서명</option>
+			      	<option value="user_nm">부서장</option>
 			      </select>
 	      		</td>
 	      		<td><input type="text" id="dept_sch" name="dept_sch"/></td>
-	      		<td><input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn" value="검색"/></td>
+	      		<td><input type="submit" id="dept_pop_sch_fbtn" name="dept_pop_sch_fbtn" value="검색"/></td>
 	      	</tr>
+	      	</form>
 	      	
 	        <div class="modal-body">
-	         <form name="delAllForm" id="delAllForm" method="post"
-			action="${ctx}/list">
-			<table id="mastertable" class="table table-bordered" style ="width: 90%">
+	         <form name="deptPopForm" id="deptPopForm" method="post"
+			action="${ctx}/userTab">
+			<table id="mastertableDept" class="table table-bordered" style ="width: 90%">
 				<thead>
 					<tr>
 						<td style="width: 10%;">부서명</td>
@@ -431,12 +460,12 @@
 					</tr>
 				</thead>
 				<tbody id="usertbody">
-				<c:if test="${not empty user_list}">
-					<c:forEach var="list" items="${dept_list}">
-						<tr>
-							<a href="#"><td style="width: 10%;" name="dept_cd" id="" onclick="onPopup(this.id);"> temp </td></a>
-							<td style="width: 10%;" class="user_name_tag"> temp </td>
-							<td style="width: 10%;" class="org_name_tag"> temp </td>
+				<c:if test="${not empty dept_list}">
+					<c:forEach var="listPop" items="${dept_list}">
+						<tr class="deptTrPop" id="popTrClick" name="popTrClick" data-dismiss="modal" dept_cd_pop="${listPop.dept_cd}" user_nm_pop="${listPop.user_nm}">
+							<td id="dept_nm" name="dept_nm" style=" width: 45%;"><input type="hidden" id="dept_cd_pop" name="dept_cd_pop" value="${listPop.dept_cd}">	${listPop.dept_nm}</td>
+							<td style="width: 45%;" ><input type="hidden"  id="user_nm_pop" name="user_nm_pop" value="${listPop.user_nm}">${listPop.user_nm}</td>
+							<td style="width: 45%;" >${listPop.dept_num1}-${listPop.dept_num2}-${listPop.dept_num3}</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -454,7 +483,11 @@
 	        </div>
 		  </div>    
 	 </div>
-  </div> --%>
+	 <form  action="${ctx}/user/dept_Pop_sch_list" id="deptPoplistPagingForm" method="post">
+				<input type="hidden" name="dept_nm_sch" value="${dept_cd_sch}"/>
+				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
+			</form>
+  </div> 
 </body>
 </html>
 

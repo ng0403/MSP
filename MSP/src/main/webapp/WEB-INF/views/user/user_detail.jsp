@@ -8,12 +8,308 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/iuser/iuserTab.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/userTab.css" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <title>Insert title here</title>
+ <c:if test="${result=='1'}" var = "result"> 
+	<script type="text/javascript">
+		window.close();
+		opener.parent.location.href = "userlist";
+	</script>
+ </c:if>
+
+ 
+<script>
+	$(document).ready(function() {
+		var entry_flg = ${entry_flg}
+		var tmp = $('#user_id').val();
+		
+		if(entry_flg == 1)
+		{
+			//$('#addsave_btn').CSS('display', "hidden");
+			$('#joinform').find('input[type="text"]').attr('disabled',false).attr('readonly', false);
+			$('#emp_no').css('display','none');
+			$('#modifysave_btn').css('display','none');
+			//$('#modifysave_btn').css("visibility","hidden");
+
+		}else{
+			$('#user_id').attr("readonly", true);
+			$('#emp_no').css('display','block');
+			$('#submit_btn').css('display','none');
+			$('#joinform').find('input[type="text"]').attr('disabled',true);
+		    $('#joinform').find('input[type="password"]').attr('disabled',true);
+		    $('#joinform').find('input[type="button"]').attr('disabled',true);
+	        $('#joinform').find('input[type="email"]').attr('disabled',true);
+	        $('#joinform').find('select').attr('disabled',true);
+			//$('#addsave_btn').css('visibility',"hidden");
+			
+		} 
+			
+		
+		//추가 버튼
+			$("#submit_btn").on("click", function() {
+				var entry_flg = ${entry_flg}
+				var tmp = $('#user_id').val();
+				var user_pwd = $('#user_pwd').val();
+				var user_pwd_chk = $('#user_pwd_chk').val();
+				var rank_cd = $("#rank_cd option:selected").val();
+				
+				$('created_by').val(tmp);
+				var tmplength = tmp.length;
+				if(entry_flg != 1){
+					alert("이미 존재하는 계정입니다.");
+				}else{
+					if(tmplength > 0){
+						//passwordCheck();
+						if(passwordCheck() == true){
+							$('#joinform').attr("action", "${ctx}/user/userInsert").submit(); 
+						}
+					}else{
+							alert("사용자 아이디가 없습니다.");
+						}
+				}
+			});
+		//편집 버튼 
+			$("#modify_btn").on("click", function() {
+				var entry_flg = ${entry_flg}
+				var tmp = $('#user_id').val();
+				$('created_by').val(tmp);
+				
+				var tmplength = tmp.length;
+				if(entry_flg != 1){
+					$('#joinform').find('input[type="text"]').attr('disabled',false);
+					$('#joinform').find('input[type="password"]').attr('disabled',false);
+					$('#joinform').find('input[type="button"]').attr('disabled',false);
+					$('#joinform').find('select').attr('disabled',false);
+					$('#user_id').attr("readonly", true);
+					$('#emp_no').attr("readonly", true);
+					$('#addsave_btn').css("visibility","hidden");
+					$('#modify_btn').attr("disabled", true);
+					$('#submit_btn').attr("disabled", true);
+				}else{
+					alert("신규 데잍를 입력하세요.");
+				}
+			});
+		//편집 저장 버튼
+			$("#modifysave_btn").on("click", function() {
+				var entry_flg = ${entry_flg}
+				var tmp = $('#user_id').val();
+				alert(tmp);
+				var user_pwd = $('#user_pwd');
+				var user_pwd_chk = $('#user_pwd_chk');
+				var rank_cd = $("#rank_cd option:selected").val();
+				var tmplength = tmp.length;
+				if(entry_flg != 1){
+					//passwordCheck();
+					if(passwordCheck() == true){
+						$('#joinform').attr("action", "${ctx}/user/userMdfy?user_id = "+tmp).submit();
+					}
+					
+				}else{
+					alert("신규 데이터를 입력하세요.");
+				}
+			});
+		
+		 var tmp = $('#user_id').val(); 
+		 
+		 
+		 $("#modal_trigger").leanModal({ top: 200, overlay: 0.6, closeButton: ".modal_close" });
+
+	        $(function () {
+	            // Calling Login Form
+	            //$("#login_form").click(function () {
+	            //$(".user_login").show();
+	            //return false;
+	            //});
+
+	        })
+		
+		/* // 한글입력 안되게 처리
+
+		  $("input[name=aaa]").keyup(function(event){ 
+
+		   if (!(event.keyCode >=37 && event.keyCode<=40)) {
+
+		    var inputVal = $(this).val();
+
+		    $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+
+		   }
+
+		  });*/
+		//form 내부 전체 input tag 초기화
+		  $("#btnReset_btn").click(function() {  
+		         $("form").each(function() {  
+		            this.reset();  
+		         });  
+		    });  
+		  
+	      //부서검색버튼 클릭 
+	     	$("#dept_sch_fbtn").on("click", function() {
+	     		
+	    			var popUrl = "dept_Pop_sch_list";
+	    			var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+	    			window.open(popUrl, "", popOption);
+	    		});
+
+	     
+	      
+
+	}); 
+		
+		
+ </script>
+ 
+ <script type="text/javascript">
+/*  function changeDiscType(){
+		if( $("#rank_cd option:selected").val() == "1"){
+			$('.discount_cost').text("*할인율");
+			$('#td_disc_type').html("<input name='disc_rate' id='disc_rate' type='text' maxlength='2' max='99'>%")
+		}else if($("#cb_disc_type option:selected").val() == "2"){
+			$('.discount_cost').text("*할인금액");
+			$('#td_disc_type').html("<input name='disc_amt' id='disc_amt' type='text' maxlength='6' max='999999'>원")
+		}else{
+			return;
+		}
+	} */
+ </script>
+ 
+ 
+ <!-- 숫자키와 편집버튼만 입력하는 function -->
+ <script>
+ 
+ 	/* function popTrClick(){
+ 		var dept_cd_pop = (this).$('#dept_cd_pop').val();
+		var dept_nm_pop = (this).$('#user_nm_pop').val();
+		$('#dept_cd').val(dept_cd_pop);
+		$('#dept_nm').val(dept_nm_pop);
+ 	} */
+ 	
+ 	/*부서명 클릭 시 상세정보 출력 이벤트*/
+	$(document).on("click", ".deptTrPop", function(){
+		var dept_cd_pop = $(this).attr("dept_cd_pop");
+		var user_nm_pop = $(this).attr("user_nm_pop");
+		$('#dept_cd').val(dept_cd_pop);
+		$('#dept_nm').val(user_nm_pop);
+	})
+ 	
+	function onlyNumber(event){
+	 	event = event || window.event;
+	 	var keyID = (event.which) ? event.which : event.keyCode;
+	 	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8|| keyID == 9|| keyID == 18 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+	 		return;
+	 	else
+	 		return false;
+	 }
+	 function removeChar(event) {
+	 	event = event || window.event;
+	 	var keyID = (event.which) ? event.which : event.keyCode;
+	 	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+	 		return;
+	 	else
+	 		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+	 }
+	 /* 숫자만 입력받기 */
+	   function fn_press(event, type) {
+	       if(type == "numbers") {
+	           if(event.keyCode < 48 || event.keyCode > 57) return false;
+	           //onKeyDown일 경우 좌, 우, tab, backspace, delete키 허용 정의 필요
+	       }
+	   }
+	 /* 한글입력 방지 */
+	    function fn_press_han(obj)
+	    {
+	        //좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
+	        if(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39
+	        || event.keyCode == 46 ) return;
+	        //obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+	        obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+	    }
+	 
+	    //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
+		  function passwordCheck() {
+			var userID = document.getElementById("user_id").value;
+			var user_pwd = document.getElementById("user_pwd").value; 
+			var user_pwd_chk = document.getElementById("user_pwd_chk").value; 
+			
+			// 재입력 일치 여부 
+			if (user_pwd != user_pwd_chk) { 
+				alert("입력한 두 개의 비밀번호가 서로 일치하지 않습니다.");
+				return ; 
+				} 
+			// 길이 
+			if(!/^[a-zA-Z0-9!@#$%^&*()?_~]{6,15}$/.test(user_pwd_chk)) 
+			{ 
+				alert("비밀번호는 숫자, 영문, 특수문자 조합으로 6~15자리를 사용해야 합니다.");
+				return ;
+			} 
+			// 영문, 숫자, 특수문자 2종 이상 혼용 
+			var chk = 0; 
+			if(user_pwd.search(/[0-9]/g) != -1 ) chk ++; 
+			if(user_pwd_chk.search(/[a-z]/ig) != -1 ) chk ++; 
+			if(user_pwd_chk.search(/[!@#$%^&*()?_~]/g) != -1 ) chk ++; 
+			if(chk < 2) {
+				alert("비밀번호는 숫자, 영문, 특수문자를 두가지이상 혼용하여야 합니다."); 
+				return ; 
+				}
+			// 동일한 문자/숫자 4이상, 연속된 문자 
+			if(/(\w)\1\1\1/.test(user_pwd_chk) || isContinuedValue(user_pwd_chk)) 
+			{
+				alert("비밀번호에 4자 이상의 연속 또는 반복 문자 및 숫자를 사용하실 수 없습니다."); 
+				return ; 
+				}
+			// 아이디 포함 여부 
+			if(user_pwd_chk.search(userID)>-1) 
+			{
+				alert("ID가 포함된 비밀번호는 사용하실 수 없습니다."); 
+				return ;
+				}
+			/* // 기존 비밀번호와 새 비밀번호 일치 여부 
+			if (user_pwd == user_pwd_chk) 
+			{
+				alert("기존 비밀본호와 새 비밀번호가 일치합니다."); 
+				return false; 
+				} */ 
+				
+				return true;
+			} 
+	
+		  function isContinuedValue(value) {
+			  console.log("value = " + value);
+			  var intCnt1 = 0; 
+			  var intCnt2 = 0; 
+			  var temp0 = ""; 
+			  var temp1 = ""; 
+			  var temp2 = ""; 
+			  var temp3 = ""; 
+			  for (var i = 0; i < value.length-3; i++) {
+				  console.log("=========================");
+				  temp0 = value.charAt(i); 
+				  temp1 = value.charAt(i + 1); 
+				  temp2 = value.charAt(i + 2); 
+				  temp3 = value.charAt(i + 3); 
+				  console.log(temp0); console.log(temp1); console.log(temp2); console.log(temp3);
+				  if (temp0.charCodeAt(0) - temp1.charCodeAt(0) == 1 && temp1.charCodeAt(0) - temp2.charCodeAt(0) == 1 && temp2.charCodeAt(0) - temp3.charCodeAt(0) == 1) {
+					  intCnt1 = intCnt1 + 1;
+				  } 
+				  if (temp0.charCodeAt(0) - temp1.charCodeAt(0) == -1 && temp1.charCodeAt(0) - temp2.charCodeAt(0) == -1 && temp2.charCodeAt(0) - temp3.charCodeAt(0) == -1) {
+					  intCnt2 = intCnt2 + 1;
+				  }
+				  console.log("=========================");
+				  } 
+			  console.log(intCnt1 > 0 || intCnt2 > 0); 
+			  return (intCnt1 > 0 || intCnt2 > 0); 
+			  }
+
+	 
+
+	</script>
 </head>
 <body>
 	<input type="hidden" id="ctx" value="${ctx}">
-	<!-- Modal Main Div -->
+		<!-- Modal Main Div -->
 	<div class="modalL_main_div">
 		
 		<!-- Modal Navigation Div -->
@@ -25,144 +321,173 @@
 			<form method="post" id="joinform" >
 				<table class="table">
 					<tbody id="tbody1">
+					
 						<tr>
 							<th>사용자ID</th>
-							<td>
-								<input type="hidden" id="user_id_h" value="${list.user_id}">
-								<input type="hidden" id="active_flg" value="${list.active_flg}">
- 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:90%" value="${list.user_id}"></input>
+							<td style="width: 25%;">
+								<input type="hidden" id="user_id_h" value="${user_id}">
+								<input type="hidden" id="created_by" value="">
+								<input type="hidden" id="active_flg" value="${active_flg}">
+ 								<input type="text" name="user_id" id="user_id" class="iuser_txt" style=" width:100%" value="${user_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="iuser_txt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th>직급</th>
  							<td>
- 								<select>
-									<option></option>
-									<option></option>
-									<option></option>
-								</select>
- 								<%-- <select name="rank_cd"  >
-									<c:forEach var="rankCD" items="${rank_cd}" varStatus="status2">
-										<option value="<c:out value="${rankCD.CODE1}" />" 
-											<c:if test="${result.useYn == rankCD.CODE1 }">selected="selected"</c:if>>
-											<c:out value="${rankCD.CODE_TXT}" />
+ 								 <select name="rank_cd"  >
+									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
+										<option value="<c:out value="${rankCd.rank_cd}" />" 
+											<c:if test="${rank_cd == rankCd.rank_cd }">selected="selected"</c:if>>
+											${rankCd.rank_nm}
 										</option>
 									</c:forEach>
-								</select> --%>
+								</select> 
  							</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
 							<td>
-								<input type="password" name="user_pwd" id="user_pwd" class="iuser_txt" style="width:90%" value="${list.user_pwd}"></input>
+								<input type="password" name="user_pwd" id="user_pwd" class="iuser_txt" maxlength="20" style="width:45%" value="${user_pwd}"></input>
 							</td>
 							<th>조직ID</th>
 							<td>
-								<select>
-									<option></option>
-									<option></option>
-									<option></option>
-								</select>
-								<%-- <select name="duty_cd"  >
-									<c:forEach var="dutyCD" items="${duty_cd}" varStatus="status2">
-										<option value="<c:out value="${dutyCD.CODE1}" />" 
-											<c:if test="${result.useYn == dutyCD.CODE1 }">selected="selected"</c:if>>
-											<c:out value="${dutyCD.CODE_TXT}" />
+								 <select name="duty_cd"  >
+									<c:forEach var="dutyCd" items="${duty_cd_list}" varStatus="status2">
+										<option value="<c:out value="${dutyCd.duty_cd}" />" 
+											<c:if test="${duty_cd == dutyCd.duty_cd }">selected="selected"</c:if>>
+											${dutyCd.duty_nm}
 										</option>
 									</c:forEach>
-								</select>  --%>
+								</select> 
 							</td>
 						</tr>
 						<tr>
 							<th>비밀번호확인</th>
 							<td>
-								<input type="password" name="user_pwd_chk" id="user_pwd_chk" class="iuser_txt" style="width:90%"></input>
+								<input type="password" name="user_pwd_chk" id="user_pwd_chk" class="iuser_txt" style="width:45%"></input>
 							</td>
 						</tr>
 						<tr>	
-							<th>사용자명</th>
-							<td>
-								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" style="width:90%" value="${list.user_nm}"></input>
+							<th  align="left">사용자명</th>
+							<td colspan="2" align="left">
+								<input type="text" name="user_nm" id="user_nm" class="iuser_txt" maxlength="10" style="width:90%" value="${user_nm}"></input>
 							</td>
 						</tr>
 						<tr>
-							<th>휴대 전화</th>
-							<td>
-								<select name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:90%" value="${list.cphone_num1}">
-									<option name="cphone_num1" id="cphone_num1" class="iuser_txt" maxlength="" style="width:90%"value="010">010</option>
+							<th  align="left">휴대 전화</th>
+							<td colspan="2" align="left">
+								<select name="cphone_num1" id="cphone_num1" class="iuser_txt"  style="width:25%">
+									<option value="010">010</option>
 									<option value="011">011</option>
 									<option value="016">016</option>
 									<option value="019">019</option>
-								</select>-<input type="text" name="cphone_num2" id="cphone_num2" class="iuser_txt" maxlength="4" style="width:90%" value="${list.cphone_num2}"/>-<input type="text" name="cphone_num3" id="cphone_num3" class="iuser_txt" maxlength="4" style="width:90%" value="${list.cphone_num3}"/> 
+								</select>-<input type="text" name="cphone_num2" id="cphone_num2" class="iuser_txt" maxlength="4" style="width:25%" value="${cphone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>-<input type="text" name="cphone_num3" id="cphone_num3" class="iuser_txt" maxlength="4" style="width:25%" value="${cphone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/> 
 							</td>
 						</tr>
 						<tr>
-							<th>이메일</th>
-							<td>
-								<input type="text" name="email_id" id="email_id" class="iuser_txt" style="width:90%" value="${list.email_id}">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" style="width:90%" value="${list.email_domain}"> 
+							<th  align="left">이메일</th>
+							<td colspan="2" align="left">
+								<input type="text" name="email_id" id="email_id" class="onlyEng" maxlength="20" style="width:35%" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">@<input type="text" name="email_domain" id="email_domain" class="iuser_txt" maxlength="20" style="width:50%" value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
  							</td>
  						</tr>
 						<tr>
-							<th>부서</th>
-							<td>
-								<input type="hidden" id="dept_cd" name="dept_cd" value="${list.dept_cd}"/> 
-								<input type="text" id="dept_nm" name="dept_nm" value="${list.dept_nm}"/>
-								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색"/>
+							<th  align="left">부서</th>
+							<td colspan="2" align="left">
+								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
+								<input type="text" id="dept_nm" name="dept_nm" value="${dept_nm}" style="width:65%"/>
+								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" data-toggle="modal" data-target="#myModal" data-backdrop="static" >
 							</td>
 						</tr>
 						<tr>
-							<th>내선전화</th>
-							<td>
-							<select name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="" style="width:90%" value="${list.phone_num1}">
-									<option name="phone_num1" id="phone_num1" class="iuser_txt" maxlength="3" style="width:90%"value="02">02</option>
+							<th  align="left">내선전화</th>
+							<td colspan="2" align="left">
+							<select name="phone_num1" id="phone_num1" class="iuser_txt" style="width:25%">
+									<option value="02">02</option>
 									<option value="031">031</option>
 									<option value="032">032</option>
 									<option value="033">033</option>
-								</select>-<input type="text" name="phone_num2" id="phone_num2" class="iuser_txt" maxlength="4" style="width:90%" value="${list.phone_num2}"/>-<input type="text" name="phone_num3" id="phone_num3" class="iuser_txt" maxlength="4" style="width:90%" value="${list.phone_num3}"/> 
+								</select>-<input type="text" name="phone_num2" id="phone_num2" class="iuser_txt" maxlength="4" style="width:25%" value="${phone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>-<input type="text" name="phone_num3" id="phone_num3" class="iuser_txt" maxlength="4" style="width:25%" value="${phone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/> 
 							</td>
 							
 						</tr>
+						
 					</tbody>
 				</table>
 				
 			</form>
-		</div>
-		
 		<!-- Modal Btn Div -->
 		<div class="modalL_btn_div">
-			<input type="button" id="submitbtn" class="iuser_tab_bt" value="추가"/>
-			<input type="button" id="modifybtn" class="iuser_tab_bt" value="편집"/>
-			<input type="reset" id="cancelbtn" class="iuser_tab_bt" value="취소"/>
-			<input type="button" id="addsavebtn" class="iuser_tab_bt" value="저장"/>
-			<input type="button" id="modifysavebtn" class="iuser_tab_bt" style="display:none;" value="저장"/>
+			<input type="button" id="submit_btn" class="iuser_tab_bt" value="추가"/>
+			<input type="button" id="modify_btn" class="iuser_tab_bt" value="편집" />
+			<input type="reset" id="btnReset_btn" class="iuser_tab_bt" value="취소"/>
+			<!-- <input type="button" id="addsave_btn" class="iuser_tab_bt" value="저장"/> -->
+			<input type="button" id="modifysave_btn" class="iuser_tab_bt"  value="저장"/>
 		</div>
+		</div>
+		
 	</div>
-
-	
-<c:if test="${result=='1'}" var = "result"> 
-	<script type="text/javascript">
-		window.close();
-		opener.parent.location.href = "userlist";
-	</script>
- </c:if>
- 
-	<script>
-		$(document).ready(function() {
-
-			$("#submitbtn").on("click", function() {
-			 
-				$('form').attr("action", "${ctx}/usertest/userInsert").submit();
-				
-				
-			});
-			
- 
-		});
-	</script>
 	
 	
-			
-	
-	
-
+	<!-- Modal PopUp -->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modalM_main_div">
+	      Modal content
+	      <div class="modal-content">
+	      	<tr>
+	          <td><h4 class="modal-title" style="margin-bottom: 1%;"><b>부서검색</b></h4></td>
+	      	</tr>
+	      	<form name="deptPopSearchForm" method="post" action="${ctx}/user/dept_Pop_sch_list">
+	      	<tr>
+	      		<td>
+			      <select id="sch_pop_condition" name="sch_pop_condition">
+			      	<option value="dept_nm">부서명</option>
+			      	<option value="user_nm">부서장</option>
+			      </select>
+	      		</td>
+	      		<td><input type="text" id="dept_sch" name="dept_sch"/></td>
+	      		<td><input type="submit" id="dept_pop_sch_fbtn" name="dept_pop_sch_fbtn" value="검색"/></td>
+	      	</tr>
+	      	</form>
+	      	
+	        <div class="modal-body">
+	         <form name="deptPopForm" id="deptPopForm" method="post"
+			action="${ctx}/userTab">
+			<table id="mastertableDept" class="table table-bordered" style ="width: 90%">
+				<thead>
+					<tr>
+						<td style="width: 10%;">부서명</td>
+						<td style="width: 10%;">부서장</td>
+						<td style="width: 10%;">전화번호</td>
+					</tr>
+				</thead>
+				<tbody id="usertbody">
+				<c:if test="${not empty dept_list}">
+					<c:forEach var="listPop" items="${dept_list}">
+						<tr class="deptTrPop" id="popTrClick" name="popTrClick" data-dismiss="modal" dept_cd_pop="${listPop.dept_cd}" user_nm_pop="${listPop.user_nm}">
+							<td id="dept_nm" name="dept_nm" style=" width: 45%;"><input type="hidden" id="dept_cd_pop" name="dept_cd_pop" value="${listPop.dept_cd}">	${listPop.dept_nm}</td>
+							<td style="width: 45%;" ><input type="hidden"  id="user_nm_pop" name="user_nm_pop" value="${listPop.user_nm}">${listPop.user_nm}</td>
+							<td style="width: 45%;" >${listPop.dept_num1}-${listPop.dept_num2}-${listPop.dept_num3}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${dept_list.size() == 0}">
+					<tr style="cursor: default; background-color: white;">
+						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
+					</tr>
+				</c:if>
+				</tbody>
+			</table>
+		</form>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+		  </div>    
+	 </div>
+	 <form  action="${ctx}/user/dept_Pop_sch_list" id="deptPoplistPagingForm" method="post">
+				<input type="hidden" name="dept_nm_sch" value="${dept_cd_sch}"/>
+				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
+			</form>
+  </div> 
 </body>
 </html>
 

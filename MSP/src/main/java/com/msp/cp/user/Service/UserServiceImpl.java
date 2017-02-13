@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msp.cp.common.PagerVO;
+import com.msp.cp.dept.dao.DeptDao;
+import com.msp.cp.dept.service.DeptService;
+import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.Dao.UserDao;
 import com.msp.cp.user.vo.userVO;
 
@@ -14,6 +17,8 @@ import com.msp.cp.user.vo.userVO;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	DeptDao deptDao;
 
 	@Override
 	public List<userVO> searchListUser(Map map) {
@@ -83,5 +88,11 @@ public class UserServiceImpl implements UserService {
 		List<userVO> duty_cd_list = userDao.dutyCdList();
 		
 		return duty_cd_list;
+	}
+
+	@Override
+	public List<DeptVO> dept_list(Map<String, Object> map) {
+		List<DeptVO> dept_list = deptDao.searchListPop(map);
+		return dept_list;
 	}
 }
