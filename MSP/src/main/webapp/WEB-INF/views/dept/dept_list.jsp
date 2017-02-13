@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
 <title>부서관리화면</title>
 
 <script type="text/javascript">
@@ -225,8 +227,8 @@
 				"action":"delete"
 			});
 			$("#delAll_form").submit(); */
-			console.log(delCode);
-			console.log(del_code);
+			/* console.log(delCode);
+			console.log(del_code); */
 			$.ajax({
 				url:"delete/"+del_code,
 				type:"post",
@@ -331,9 +333,7 @@
 		$("#dept_fnum1").val(dept_fnum1).attr("selected","selected");
 		$("#dept_fnum2").val(dept_fnum2);
 		$("#dept_fnum3").val(dept_fnum3);
-		//$(".active_flg").attr("disabled",false);
-		$(".active_flg:radio[value='"+active_flg+"']").attr("checked", "checked");
-		//$(".active_flg").attr("disabled",true);
+		$(".active_flg:radio[value='"+active_flg+"']").prop("checked", "checked");
 	}
 	/*상세정보 초기화*/
 	function dataReset(){
@@ -345,9 +345,7 @@
 		$("#dept_fnum1").index(0);
 		$("#dept_fnum2").val("");
 		$("#dept_fnum3").val("");
-		//$(".active_flg").attr("disabled",false);
-		$(".active_flg:radio[value='Y']").attr("checked", "checked");
-		//$(".active_flg").attr("disabled",true);
+		$("input:radio[name='active_flg']").removeAttr("checked");
 	}
 	//페이지 처음 출력시 이벤트
 	function pageReady(boolean){
@@ -366,7 +364,7 @@
 		$("#dept_fnum1").attr("readonly",boolean);
 		$("#dept_fnum2").attr("readonly",boolean);
 		$("#dept_fnum3").attr("readonly",boolean);
-		//$(".active_flg").attr("disabled",boolean);
+		$(".active_flg").attr("disabled",boolean);
 	}
 	
 	// 검색 페이징 엔터키
@@ -416,21 +414,21 @@
 			<div class="search2_div">
 				<form id="searchForm" name="searchForm">
 					<label>활성상태</label>
-					<select id="active_key" name="active_key" >
+					<select id="active_key" name="active_key" class="selectField">
 						<option value="" selected="selected">전체</option>
 						<option value="Y">활성화</option>
 						<option value="N">비활성화</option>
 					</select>
 					<label>부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key" > &nbsp;
-					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
+					<input type="button" id="dept_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 				</form>
 			</div>
 		</div>
 		<div class="list_div">
 			<div class="list2_div">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list_tb" class="table table-bordered" style ="width: 45%">
+					<table summary="dept_list_tb" class="table table-hover">
 						<colgroup>
 							<col width="10%">
 							<col width="35%">
@@ -476,9 +474,11 @@
 				</form>
 			</div>
 			<div class="paging2_div">
-				<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
-				<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">
-				<div class="paging_div" id="paging_div">	
+				<div class="left">
+					<input type="button" id="dept_add_fbtn" class="btn btn-primary btn-sm" value="추가">
+					<input type="button" id="dept_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
+				</div>
+				<div class="page" id="paging_div">	
 					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
 					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
 					<input type="hidden" id="PageNum" value="${pageNum}"/>
@@ -506,8 +506,10 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<input type="button" id="dept_exIm_fbtn" class="func_btn" value="excelImport">
-				<input type="button" id="dept_exEx_fbtn" class="func_btn" value="excelExport">
+				<div class="right">
+					<input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excelImport">
+					<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excelExport">
+				</div>
 			</div>
 			<div id="dept_detail_div">
 				<form id="dept_detail_form" name="dept_detail_form">
@@ -595,9 +597,11 @@
 						</tbody>
 					</table>
 					<div class="btn_div">
-						<input type="button" id="dept_save_fbtn" class="func_btn" value="저장">
-						<input type="button" id="dept_edit_nfbtn" class="nonfunc_btn" value="편집">
-						<input type="button" id="dept_reset_nfbtn" class="nonfunc_btn" value="초기화">
+						<div class="right">
+							<input type="button" id="dept_save_fbtn" class="btn btn-primary btn-sm" value="저장">
+							<input type="button" id="dept_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
+							<input type="button" id="dept_reset_nfbtn" class="btn btn-info btn-sm" value="초기화">
+						</div>
 					</div>
 				</form>
 			</div>
