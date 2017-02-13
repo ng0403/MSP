@@ -157,11 +157,11 @@
 					d.del_flg='N'
 					and d.active_flg='Y'
 					<if test="sch_pop_condition == 'dept_nm' and dept_cd_sch != null ">
-                 	and d.dept_nm like '%'||#{dept_cd_sch}||'%'
-	               </if>
-	               <if test="sch_pop_condition == 'user_nm' and dept_cd_sch != null ">
-	                  and d.user_nm like '%'||#{dept_cd_sch}||'%'
-	               </if>
+						and d.dept_nm like '%'||#{dept_cd_sch}||'%'
+					</if>
+					<if test="sch_pop_condition == 'user_nm' and dept_cd_sch != null ">
+						and d.user_nm like '%'||#{dept_cd_sch}||'%'
+					</if>
 				ORDER BY d.dept_cd DESC
 				) d
 			)
