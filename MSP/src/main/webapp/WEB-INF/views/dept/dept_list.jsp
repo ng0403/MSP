@@ -19,7 +19,7 @@
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>부서관리화면</title>
 <style type="text/css">
-	@media screen and (min-width:1000px){
+	@media screen and (min-width:1100px){
 		.list_div{
 			position:relative;
 			width:100%;
@@ -29,13 +29,13 @@
 			/* position:float; */
 			padding: 10px;	
 			float: left;
-			width: 48%;
+			width: 58%;
 		}
 		.list3_div{
 			padding: 10px;
 			margin-top: 35px; 
 			margin-left: 20px;
-			width: 48%;
+			width: 38%;
 			display: inline-block;
 		}
 	}
@@ -45,26 +45,33 @@
 	}
 	.paging_div {
 		width: 100%;
+		height: auto;
+		text-align: center;
 		margin-top: 5px;
-		float: left;
-		border:1px solid black;
+		clear: both;
 	}
 	.left {
 		float: left;
-		border:1px solid black;
+		vertical-align: top;
+		margin:0;
 	}
 
 	.page {
-		width: 20%;
-		text-align: center;
+		width: auto;
 		clear: both;
-		border:1px solid black;
+		display: inline-block;
+		text-align: center;
+		vertical-align: top;
+		margin:0 auto;
 	}
 	
 	.right {
 		float: right;
-		margin-right: 10px;
-		border:1px solid black;
+		vertical-align: top;
+	}
+	
+	.pNum{
+	
 	}
 </style>
 <script type="text/javascript">
