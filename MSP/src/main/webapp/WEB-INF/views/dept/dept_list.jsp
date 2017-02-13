@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -15,9 +16,57 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>부서관리화면</title>
+<style type="text/css">
+	@media screen and (min-width:1000px){
+		.list_div{
+			position:relative;
+			width:100%;
+			overflow:auto;
+		}
+		.list2_div{
+			/* position:float; */
+			padding: 10px;	
+			float: left;
+			width: 48%;
+		}
+		.list3_div{
+			padding: 10px;
+			margin-top: 35px; 
+			margin-left: 20px;
+			width: 48%;
+			display: inline-block;
+		}
+	}
+	.checkall {
+		text-align: center;
+		vertical-align: middle;
+	}
+	.paging_div {
+		width: 100%;
+		margin-top: 5px;
+		float: left;
+		border:1px solid black;
+	}
+	.left {
+		float: left;
+		border:1px solid black;
+	}
 
+	.page {
+		width: 20%;
+		text-align: center;
+		clear: both;
+		border:1px solid black;
+	}
+	
+	.right {
+		float: right;
+		margin-right: 10px;
+		border:1px solid black;
+	}
+</style>
 <script type="text/javascript">
 	var dept_cd = "";
 	var save_cd = "";
@@ -98,7 +147,7 @@
 		var active_key = $("#active_key").val();
 		var dept_nm_key = $("#dept_nm_key").val();
 		
-		$.post("search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
+		$.post("/dept/search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
 			$(".dept_list").html("");
 			$(data.dept_list).each(function(){
  				var dept_cd = this.dept_cd;
@@ -130,7 +179,7 @@
 	}
 	/*부서 상세정보 요청 함수*/
 	function deptDetailInqr(dept_cd){
-		$.post("detail_list/"+dept_cd, function(data){
+		$.post("/dept/detail_list/"+dept_cd, function(data){
 			$(data).each(function(){
 				var dept_cd = this.dept_cd;
 				var dept_nm = this.dept_nm;
@@ -150,7 +199,7 @@
 	/*부서 입력 요청 함수*/
 	function deptSave(){
 		$.ajax({
-			url:"insert",
+			url:"/dept/insert",
 			type:"post",
 			contentType:"application/json; charset=UTF-8",/* "X-HTTP-Method-Override":"POST" */
 			dataType:"text",
@@ -179,7 +228,7 @@
 	/*부서 수정 요청 함수*/
 	function deptMdfy(){
 		$.ajax({
-			url:"update",
+			url:"/dept/update",
 			type:"post",
 			/* header:{
 				"Content-type":"application/json","X-HTTP-Method-Override":"POST"
@@ -230,7 +279,7 @@
 			/* console.log(delCode);
 			console.log(del_code); */
 			$.ajax({
-				url:"delete/"+del_code,
+				url:"/dept/delete/"+del_code,
 				type:"post",
 				contentType:"application/json; charset=UTF-8",
 				dataType:"text",
@@ -430,15 +479,15 @@
 				<form id="delAll_form" name="delAll_form">
 					<table summary="dept_list_tb" class="table table-hover">
 						<colgroup>
-							<col width="10%">
+							<col width="5%">
 							<col width="35%">
-							<col width="20%">
+							<col width="25%">
 							<col width="15%">
 							<col width="20%">
 						</colgroup>
 						<thead>
 							<tr>
-								<th><input type="checkbox" id="allCheck"></th>
+								<th><input type="checkbox" id="checkall"></th>
 								<td>부서명</td>
 								<td>연락처</td>
 								<td>대표자명</td>
@@ -472,8 +521,8 @@
 						</tbody>
 					</table>
 				</form>
-			</div>
-			<div class="paging2_div">
+			<!-- </div> -->
+			<div class="paging_div">
 				<div class="left">
 					<input type="button" id="dept_add_fbtn" class="btn btn-primary btn-sm" value="추가">
 					<input type="button" id="dept_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
@@ -507,13 +556,14 @@
 					</c:choose>
 				</div>
 				<div class="right">
-					<input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excelImport">
-					<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excelExport">
+					<input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excel입력">
+					<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excel출력">
 				</div>
 			</div>
-			<div id="dept_detail_div">
+			</div>
+			<div id="dept_detail_div" class="list3_div">
 				<form id="dept_detail_form" name="dept_detail_form">
-					<table summary="dept_detail">
+					<table summary="dept_detail" class="table table-hover">
 						<colgroup>
 							<col width="35%">
 							<col width="65%">
