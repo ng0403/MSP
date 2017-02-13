@@ -90,7 +90,6 @@ public class CodeDaoImpl implements CodeDao {
 		
 		try {
 			totalCount = sqlSession.selectOne("code.codeListCount", map);
-			System.out.println("totalCount : " + totalCount);
 			
 		} catch (Exception e) {
 			// TODO: handle exception

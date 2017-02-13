@@ -48,7 +48,7 @@ public class CodeController {
 			@RequestParam Map<String, Object> map, Model model, CodeVO vo) throws Exception {
 		
 		System.out.println("code 진입");
-		
+		System.out.println(pageNum);
 		map.put("pageNum", pageNum);
 		
 		PagerVO page = codeService.getCodeListCount(map);
@@ -60,6 +60,7 @@ public class CodeController {
 		
 		System.out.println("page map :" + map.get("page"));
 		List<Object> codeInqrList = codeService.searchCodeList(map);
+		System.out.println(codeInqrList.toString());
 		
 		ModelAndView mov = new ModelAndView("/code/code_list");
 		
@@ -70,7 +71,14 @@ public class CodeController {
 		return mov;
 	}
 	
-	// 공통코드
+	/**
+	 * 업 무 명 : 공통코드 등록
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/01
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 공통코드 등록한다. 
+	 * */
 	@RequestMapping(value="/codeMasterAdd", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeMasterInsert(CodeVO codeVo)
 	{
@@ -82,25 +90,32 @@ public class CodeController {
 		return "redirect:/code/codeInqr";
 	}
 	
-	// 상세코드
+	/**
+	 * 업 무 명 : 상세코드 등록
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/01
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 공통코드를 선택 후에 상세코드를 등록한다. 
+	 * */
 	@RequestMapping(value="/codeDetailAdd", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeDetailInsert(CodeVO codeVo)
 	{
-		System.out.println("codeDetail insert");
-
-		codeVo.setGrp_cd("06");
 		codeVo.setCreated_by("ADMIN");
 		
-		System.out.println(codeVo.getGrp_cd());
-		
 		codeService.insertCodeDetail(codeVo);
-		
-		
-		System.out.println("insert 완료");
 		
 		return "redirect:/code/codeInqr";
 	}
 	
+	/**
+	 * 업 무 명 : 공통코드 삭제
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/02
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 선택한 공통코드를 삭제한다. 
+	 * */
 	@RequestMapping(value="/codeMasterDel", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeMasterDelete(CodeVO codeVo)
 	{
@@ -109,6 +124,14 @@ public class CodeController {
 		return "redirect:/code/codeInqr";
 	}
 	
+	/**
+	 * 업 무 명 : 상세코드 삭제
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/02
+     * 수 정 자 : 이재욱
+     * 수 정 일 : 2017/02/03
+	 * 내     용 : 전체 선택을 한 후에 모든 정보(해당된 상세코드의 정보)를 삭제를 한다. 
+	 * */
 	@RequestMapping(value="/codeDetailDel", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeDetailDelete(CodeVO codeVo, String del_code)
 	{
@@ -186,14 +209,16 @@ public class CodeController {
 	 * 업 무 명 : Search 코드조회 화면(수정본)
 	 * 작 성 자 : 이재욱
      * 작 성 일 : 2017/02/08
-     * 수 정 자 : 
-     * 수 정 일 : 
-	 * 내     용 : 조건에 맞는 공통코드를 검색한다. 
+     * 수 정 자 : 이재욱
+     * 수 정 일 : 2017/02/13
+	 * 내     용 : 조건에 맞는 공통코드를 검색한다.
+	 *        공통코드를 입력하지 않았을 경우에는 전체 리스트를 페이징 처리하여 띄어준다.(17/02/13) 
 	 * */	
 	@RequestMapping(value="/codeSearch_list2", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map<String, Object> searchGrpList2(ModelMap model, HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{
 		System.out.println("Search GrpCode");
+		
 		String grp_cd = request.getParameter("grp_cd").trim();
 		
 		if(grp_cd == null)
@@ -207,6 +232,7 @@ public class CodeController {
 		map.put("pageNum", pageNum);
 		
 		PagerVO page = codeService.getCodeListCount(map);
+		map.put("page", page);
 		
 		if(page.getEndRow() == 1)
 		{
@@ -228,12 +254,22 @@ public class CodeController {
 		return model;
 	}
 	
+	/**
+	 * 업 무 명 : 공통코드 선택팝업
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/10
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 공통코드를 선택할 수 있는 팝업을 띄어준다. 
+	 * */
 	@RequestMapping(value="/searchGrpPop", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map<String, Object> searchGrpPopup(ModelMap model)
 	{
 		System.out.println("grp_cd popup");
 		
 		List<CodeVO> grpPop = codeService.searchGrpPop();
+		
+		System.out.println(grpPop.toString());
 		
 		model.addAttribute("grpPop", grpPop);
 		

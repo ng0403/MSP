@@ -93,8 +93,6 @@ public class CodeServiceImpl implements CodeService {
 		int codePageNum = (Integer)map.get("pageNum");
 		int totalRowCount = codeDao.CodeListCount("codeListCount", map);
 		
-		System.out.println(codePageNum + " : " + totalRowCount);
-		
 		PagerVO page = new PagerVO(codePageNum, totalRowCount, 10, 999);
 		
 		return page;

@@ -60,15 +60,27 @@
 	</select>
 	
 	<select id="searchGrpList2" parameterType="java.util.Map" resultType="com.msp.cp.code.vo.CodeVO">
-		SELECT
-			*
-		FROM	
-			TB_CODE_MASTER TM, TB_CODE_DETAIL TD
-		WHERE
-			TM.GRP_CD = TD.GRP_CD
-			AND TM.GRP_CD = #{grp_cd}
-		ORDER BY
-			TM.GRP_CD, TD.CODE1
+		SELECT	X.*
+		FROM 
+     	 (
+        	select rownum as rnum, A.*
+       		from (
+               		 SELECT tm.grp_cd, tm.grp_nm, td.code1, td.code_txt
+               		 FROM 
+               		 	TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+                	 WHERE 
+                	 	TM.GRP_CD = TD.GRP_CD
+			<if test="grp_cd != null and grp_cd != ''">
+				AND TM.grp_cd = #{grp_cd}
+			</if>
+               		 ORDER BY 
+               		 	TM.GRP_CD, TD.CODE1
+             	  ) A
+     	 ) X
+     	 <![CDATA[
+		WHERE X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
+		]]>
+		
 	</select>
 	
 	<select id="searchGrpPop" parameterType="java.util.Map" resultType="com.msp.cp.code.vo.CodeVO">
