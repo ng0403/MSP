@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.msp.cp.auth.vo.AuthVO;
+import com.msp.cp.code.vo.CodeVO;
 import com.msp.cp.user.vo.userVO;
 
 @Repository
@@ -68,6 +69,21 @@ public class AuthDaoImpl implements AuthDao {
 			e.printStackTrace();
 		}
 		return totalCount;
+	}
+
+	@Override
+	public List<AuthVO> searchAuthDetail(AuthVO authVO) {
+		
+		List<AuthVO> obj = sqlSession.selectList("searchAuthDetail", authVO);
+		
+		return obj;
+	}
+
+	@Override
+	public void insertAuthMaster(AuthVO authVO) {
+		
+		sqlSession.insert("insertAuthMaster", authVO);
+		
 	}
 		
 }

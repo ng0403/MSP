@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msp.cp.auth.vo.AuthVO;
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 
 public interface AuthService {
 
@@ -16,5 +16,8 @@ public interface AuthService {
 	public void deleteAuth(String dc);
 	
 	PagerVO getAuthListCount(Map<String, Object> map);
+	
+	public List<AuthVO> searchAuthDetail(AuthVO authVO);
+	public void insertAuthMaster(AuthVO authVO);
 
 }

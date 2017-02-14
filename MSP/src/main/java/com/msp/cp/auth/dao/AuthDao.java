@@ -14,5 +14,8 @@ public interface AuthDao {
 	public void updateAuth(AuthVO authVO);
 	public void deleteAuth(String dc);
 	public int AuthListCount(String string, Map<String, Object> map);
+	
+	public List<AuthVO> searchAuthDetail(AuthVO authVO);
+	public void insertAuthMaster(AuthVO authVO);
 
 }

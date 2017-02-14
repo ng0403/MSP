@@ -3,37 +3,38 @@
 <mapper namespace="auth">
 
 <!-- 전체 행의 개수 -->
-<select id="authListCount" parameterType="java.util.Map" resultType="int">
+<select id="authListCount" parameterType="java.util.Map" resultType="int" >
     SELECT COUNT(*) AS CNT
 	FROM TB_AUTH
-	WHERE ACTIVE_FLG = 'Y'
-	<if test="active_flg == 'N'" >   
-    	AND ACTIVE_FLG = 'N'
-	</if>  
+	WHERE DEL_FLG = 'N'
+	<if test="active_key != null and active_key != '' ">   
+		AND ACTIVE_FLG = #{active_key}
+	</if>
 	<if test="keyword != null and keyword != ''">   
    		AND AUTH_NM LIKE '%'||#{keyword}||'%' 
     </if>
  </select>
 	
-<select id="searchListAuth"  parameterType="string" resultType="map">
+<select id="searchListAuth"  parameterType="map" resultType="com.msp.cp.auth.vo.AuthVO">
 SELECT X.*
 FROM ( SELECT ROWNUM AS RNUM, A.*
        FROM (
          SELECT *
          FROM TB_AUTH
-         WHERE ACTIVE_FLG = 'Y'
-         <if test="active_flg =='N'" >   
-             AND ACTIVE_FLG = 'N'
-		 </if>
-		 <if test="keyword != null and keyword != ''" >   
-             AND AUTH_NM LIKE '%' || #{keyword} || '%'
-         </if>
+         WHERE 
+         	DEL_FLG = 'N'
+       	 	<if test="active_key != null and active_key != '' " >   
+            	AND ACTIVE_FLG = #{active_key}
+		 	</if>
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND AUTH_NM LIKE '%' || #{keyword} || '%'
+         	</if>
          ORDER BY AUTH_ID ASC ) A
      ) X
      <![CDATA[
         WHERE X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
 	 ]]>
-</select >
+</select>
 
 <select id="selectOne" parameterType="string" resultType="map" >
 SELECT
@@ -64,6 +65,17 @@ FROM TB_AUTH
 WHERE AUTH_ID = #{AUTH_ID}
 </select>
 
+<select id="searchAuthDetail" parameterType="com.msp.cp.auth.vo.AuthVO" resultType="com.msp.cp.auth.vo.AuthVO">
+
+SELECT
+	*
+FROM TB_AUTH
+WHERE AUTH_ID = #{auth_id}
+ORDER BY AUTH_ID ASC
+			
+</select>
+
+
 <insert id = "insertAuth" parameterType = "com.msp.cp.auth.vo.AuthVO"> 
 INSERT INTO TB_AUTH
 ( 
@@ -83,14 +95,43 @@ VALUES
     FROM TB_AUTH
     WHERE ROWNUM=1),
     #{auth_nm},
-    #{active_flg},
-    'Y',
+    #{active_flg, jdbcType=VARCHAR},
+    'N',
     '관리자',
     SYSDATE,
     '',
     ''
 )	
 </insert>
+
+<insert id="insertAuthMaster" parameterType="com.msp.cp.auth.vo.AuthVO">
+INSERT INTO TB_AUTH
+( 
+	AUTH_ID,
+    AUTH_NM,
+    ACTIVE_FLG,
+    DEL_FLG,
+    CREATED_BY,
+    CREATED,
+    UPDATED_BY,
+    UPDATED
+) 
+VALUES 
+(
+	 (SELECT
+        DECODE(MAX(AUTH_ID),NULL,'AUT1000001',SUBSTR(MAX(AUTH_ID),1,3)||(SUBSTR(MAX(AUTH_ID),4,10)+1))AUTH_ID
+    FROM TB_AUTH
+    WHERE ROWNUM=1),
+    #{auth_nm}, 
+    #{active_flg}, 
+    'Y',
+    #{created_by},
+    SYSDATE,
+    '',
+    ''
+) 
+</insert>
+	
 	
 <update id = "updateAuth" parameterType = "com.msp.cp.auth.vo.AuthVO"> 
 UPDATE TB_AUTH
