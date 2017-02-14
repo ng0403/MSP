@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+
+	<select id="selectMenu" parameterType="map" resultType="com.msp.cp.menu.vo.MenuVO">
+		SELECT *
+		FROM 
+		(
+			SELECT
+				ROWNUM AS rnum, m.*
+			FROM 
+			(
+				SELECT
+					DISTINCT
+					m.menu_cd
+					,m.menu_nm
+					,m.menu_url
+					,m.menu_level
+					,(
+						SELECT DISTINCT up_menu_nm 
+						FROM TB_menu
+						WHERE up_menu_cd = m.up_menu_cd
+					  ) as up_menu_nm
+					,m.active_flg
+				FROM TB_MENU m
+				WHERE
+					m.del_flg='N'
+					<if test="menu_nm_key != null">
+						and m.menu_nm like '%'||#{menu_nm_key}||'%'
+					</if>
+					<if test="active_key != null and active_key != ''">
+						and m.active_flg=#{active_key}
+					</if>
+				ORDER BY m.menu_cd DESC
+				) m
+			)
+		<![CDATA[
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
+		]]>
+	</select>
+	
+	<!-- 검색 결과 list의 수 -->
+	<select id="menuCount" parameterType="map" resultType="int">
+		SELECT
+		    COUNT(*)
+		FROM TB_MENU
+		WHERE 
+			del_flg='N'
+		    <if test="menu_nm_key != null">
+				and menu_nm like '%'||#{menu_nm_key}||'%'
+			</if>
+			<if test="active_key != null and active_key != ''">
+				and active_flg=#{active_key}
+			</if>
+			ORDER BY menu_cd DESC
+	</select>
+	
+	<select id="selectDetailMenu" parameterType="string"
+		resultType="com.msp.cp.menu.vo.MenuVO">
+		SELECT
+			menu_cd
+			,menu_nm
+			,menu_url
+			,menu_level
+			,up_menu_cd
+			,(
+				SELECT DISTINCT up_menu_nm 
+				FROM TB_menu
+				WHERE up_menu_cd = m.up_menu_cd
+			) as up_menu_nm
+			,active_flg
+		FROM TB_MENU
+		WHERE
+			menu_cd = #{menu_cd}
+			AND del_flg = 'N'
+	</select>
+
+	<update id="insertMenu" parameterType="com.msp.cp.menu.vo.MenuVO">
+		INSERT INTO TB_MENU (
+			menu_cd
+			,menu_nm
+			,menu_url
+			,menu_level
+			,up_menu_cd
+			,active_flg
+			,created_by
+		)
+		VALUES (
+			(SELECT /*+INDEX_DESC(TB_MENU TB_MENU_PK)*/
+				DECODE(SUBSTR(MAX(menu_cd), 1, 3), null, 'MEN1000001', SUBSTR(MAX(menu_cd), 1, 3)||(SUBSTR(MAX(menu_cd), 4, 7)+1))menu_cd
+			FROM TB_MENU
+			WHERE
+				ROWNUM = 1)
+			,#{menu_cd}
+			,#{menu_nm}
+			,#{menu_url}
+			,#{menu_level}
+			,#{active_flg}
+			,'admin'<!-- #{created_by} -->
+		)
+	</update>
+	
+	
+	<update id="updateMenu" parameterType="com.msp.cp.menu.vo.MenuVO">
+		UPDATE TB_DEPT
+		SET
+			menu_nm = #{menu_nm}
+			,menu_url = #{menu_url}
+			,menu_level = #{menu_level}
+			,up_menu_cd = #{up_menu_cd}
+			,active_flg = #{active_flg}
+			,updated_by = 'admin'<!-- #{created_by} -->
+			,updated = sysdate
+		WHERE
+			menu_cd = #{menu_cd}
+	</update>
+
+	<update id="deleteMenu" parameterType="com.msp.cp.menu.vo.MenuVO">
+		UPDATE TB_MENU
+		SET DEL_FLG = 'Y'
+		WHERE menu_cd = #{menu_cd}
+	</update>
+	<!-- 부서검색 Pop -->
+	<select id="selectMenuPop" parameterType="map" resultType="com.msp.cp.menu.vo.MenuVO">
+		SELECT *
+		FROM 
+		(
+			SELECT
+				ROWNUM AS rnum, m.*
+			FROM 
+			(
+				SELECT
+					DISTINCT
+					m.menu_cd
+					,m.menu_nm
+					,m.menu_url
+					,(
+						SELECT DISTINCT up_menu_nm 
+						FROM TB_menu
+						WHERE up_menu_cd = m.up_menu_cd
+					  ) as up_menu_nm
+					,m.active_flg
+				FROM TB_MENU m
+				WHERE
+					m.del_flg='N'
+					<if test="menu_nm_key != null">
+						and m.menu_nm like '%'||#{menu_nm_key}||'%'
+					</if>
+				ORDER BY m.dept_cd DESC
+				) m
+			)
+		<![CDATA[
+		WHERE RNUM >= #{startRow} AND RNUM <= #{endRow}
+		]]>
+	</select>
+
+</mapper>
