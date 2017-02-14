@@ -71,7 +71,7 @@
 	}
 	
 	.pNum{
-	
+		width: 25%;
 	}
 </style>
 <script type="text/javascript">
@@ -342,6 +342,7 @@
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepDept(event);'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
+			+"<a style='color:black; text-decoration: none;'>▶</a>"
 		}
 		else if(startPageNum == endPageNum)
 		{
@@ -495,10 +496,10 @@
 						<thead>
 							<tr>
 								<th><input type="checkbox" id="checkall"></th>
-								<td>부서명</td>
-								<td>연락처</td>
-								<td>대표자명</td>
-								<td>활성화여부</td>
+								<th>부서명</th>
+								<th>연락처</tH>
+								<th>대표자명</tH>
+								<tH>활성화여부</tH>
 							</tr>
 						</thead>
 						<tbody class="dept_list">
@@ -577,19 +578,19 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="dc">부서코드</td>
+								<th class="dc">부서코드</th>
 								<td>
 									<input type="text" id="dept_cd" name="dept_cd">
 								</td>
 							</tr>
 							<tr>
-								<td class="dc">부서명</td>
+								<th class="dc">부서명</th>
 								<td>
 									<input type="text" id="dept_nm" name="dept_nm">
 								</td>
 							</tr>
 							<tr>
-								<td class="dc">부서전화</td>
+								<th class="dc">부서전화</th>
 								<td>
 									<select id="dept_num1" name="dept_num1">
 										<option value="02">02</option>
@@ -611,13 +612,13 @@
 										<option value="064">064</option>
 									</select>
 									<label>-</label>
-									<input type="text" id="dept_num2" name="dept_num2">
+									<input type="text" id="dept_num2" name="dept_num2" class="pNum">
 									<label>-</label>
-									<input type="text" id="dept_num3" name="dept_num3">
+									<input type="text" id="dept_num3" name="dept_num3" class="pNum">
 								</td>
 							</tr>
 							<tr>
-								<td class="dc">팩스번호</td>
+								<th class="dc">팩스번호</th>
 								<td>
 									<select id="dept_fnum1" name="dept_fnum1">
 										<option value="02">02</option>
@@ -639,13 +640,13 @@
 										<option value="064">064</option>
 									</select>
 									<label>-</label>
-									<input type="text" id="dept_fnum2" name="dept_fnum2">
+									<input type="text" id="dept_fnum2" name="dept_fnum2" class="pNum">
 									<label>-</label>
-									<input type="text" id="dept_fnum3" name="dept_fnum3">
+									<input type="text" id="dept_fnum3" name="dept_fnum3" class="pNum">
 								</td>
 							</tr>
 							<tr>
-								<td class="dc">활성화여부</td>
+								<th class="dc">활성화여부</th>
 								<td>
 									<input type="radio" class="active_flg" name="active_flg" value="Y"/>Y
 									<input type="radio" class="active_flg" name="active_flg" value="N"/>N
