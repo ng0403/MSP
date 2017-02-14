@@ -17,5 +17,5 @@ public interface AuthDao {
 	
 	public List<AuthVO> searchAuthDetail(AuthVO authVO);
 	public void insertAuthMaster(AuthVO authVO);
-
+ 
 }

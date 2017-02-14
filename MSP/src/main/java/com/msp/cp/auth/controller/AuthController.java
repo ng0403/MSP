@@ -23,7 +23,7 @@ import com.msp.cp.auth.service.AuthService;
 import com.msp.cp.auth.vo.AuthVO;
 import com.msp.cp.code.vo.CodeVO;
 import com.msp.cp.utils.PagerVO;
-
+    
 @Controller
 @RequestMapping(value="/auth")
 public class AuthController {
@@ -76,6 +76,7 @@ public class AuthController {
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
+		
 		
 		List<AuthVO> list = authService.searchListAuth(map);
 		 

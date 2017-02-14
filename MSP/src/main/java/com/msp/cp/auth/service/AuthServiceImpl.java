@@ -15,7 +15,7 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Autowired
 	AuthDao authDao;
-	
+	 
 	@Override
 	public List<AuthVO> searchListAuth(Map map) {
 		System.out.println("08. ServiceImpl List Search Service Impl");

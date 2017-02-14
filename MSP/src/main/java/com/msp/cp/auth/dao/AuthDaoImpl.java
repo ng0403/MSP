@@ -19,7 +19,7 @@ public class AuthDaoImpl implements AuthDao {
 	public void setSqlSessionTemplate(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	
+	 
 	@Override
 	public List<AuthVO> searchListAuth(Map map) {
 		System.out.println("09. DaoImpl User List Search Dao Impl");

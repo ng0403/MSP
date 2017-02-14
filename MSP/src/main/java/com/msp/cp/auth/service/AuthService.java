@@ -14,7 +14,7 @@ public interface AuthService {
 	public void insertAuth(AuthVO authVO);
 	public void updateAuth(AuthVO authVO);
 	public void deleteAuth(String dc);
-	
+	 
 	PagerVO getAuthListCount(Map<String, Object> map);
 	
 	public List<AuthVO> searchAuthDetail(AuthVO authVO);
