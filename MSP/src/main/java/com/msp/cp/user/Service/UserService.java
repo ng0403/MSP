@@ -29,5 +29,7 @@ public interface UserService {
 
 	public List<DeptVO> dept_list(Map<String, Object> map);
 
+	public List<userVO> userExcel(Map<String, Object> map);
+
 
 }

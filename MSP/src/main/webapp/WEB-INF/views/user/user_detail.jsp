@@ -19,10 +19,29 @@
 		opener.parent.location.href = "userlist";
 	</script>
  </c:if>
+<style type="text/css">
+body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; }
 
+#dept_pop_div { position:absolute; top:50%; left:50%; width:300px; height:200px;}
+
+</style>
  
 <script>
 	$(document).ready(function() {
+ 		$('#dept_pop_div').hide();
+	      //부서검색버튼 클릭 
+   	$("#dept_sch_fbtn").on("click", function() {
+   		$("#dept_pop_div").show();
+   		$("#dept_pop_div").center();
+   		deptListInqrPop(1);
+   		
+  		});
+   	jQuery.fn.center = function () {
+   	    this.css("position","absolute");
+   	    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
+   	    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+   	    return this;
+   	}
 		var entry_flg = ${entry_flg}
 		var tmp = $('#user_id').val();
 		
@@ -194,6 +213,11 @@
 		$('#dept_cd').val(dept_cd_pop);
 		$('#dept_nm').val(user_nm_pop);
 	})
+	
+	/* 리스트 클릭 시 팝업 숨김. */
+	function hideModal(){
+ 		$('#dept_pop_div').hide();
+ 	}
  	
 	function onlyNumber(event){
 	 	event = event || window.event;
@@ -422,11 +446,10 @@
 			<input type="button" id="modifysave_btn" class="iuser_tab_bt"  value="저장"/>
 		</div>
 		</div>
-		
-	</div>
-	<div style="font-size:11.5px;">
-		<jsp:include page="../user/deptSch_pop.jsp"></jsp:include>
-	</div>	
+</div>	
+	<div id="dept_pop_div" style="font-size:11.5px;">
+		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include>
+	</div> 
 	
 
 </body>

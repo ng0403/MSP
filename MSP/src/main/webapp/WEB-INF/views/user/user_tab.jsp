@@ -19,13 +19,29 @@
 		opener.parent.location.href = "userlist";
 	</script>
  </c:if>
+<style type="text/css">
+body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; }
 
- 
+#dept_pop_div { position:absolute; top:50%; left:50%; width:300px; height:200px;}
+
+</style>
+
 <script>
 	$(document).ready(function() {
-		$('#dept_pop_div').hide();
-		
-		
+ 		$('#dept_pop_div').hide();
+	      //부서검색버튼 클릭 
+     	$("#dept_sch_fbtn").on("click", function() {
+     		$("#dept_pop_div").show();
+     		$("#dept_pop_div").center();
+     		deptListInqrPop(1);
+     		
+    		});
+     	jQuery.fn.center = function () {
+     	    this.css("position","absolute");
+     	    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
+     	    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+     	    return this;
+     	}
 		
 		var entry_flg = ${entry_flg}
 		var tmp = $('#user_id').val();
@@ -149,15 +165,6 @@
 		         });  
 		    });  
 		  
-	      //부서검색버튼 클릭 
-	     	$("#dept_sch_fbtn").on("click", function() {
-	     		$('#dept_pop_div').show();
-	     		
-	    		});
-
-	     
-	      
-
 	}); 
 		
 		
@@ -181,7 +188,7 @@
  <!-- 숫자키와 편집버튼만 입력하는 function -->
  <script>
  
- 
+ 	
  	
  	/* function popTrClick(){
  		var dept_cd_pop = (this).$('#dept_cd_pop').val();
@@ -197,6 +204,11 @@
 		$('#dept_cd').val(dept_cd_pop);
 		$('#dept_nm').val(user_nm_pop);
 	})
+	
+	/* 리스트 클릭 시 팝업 숨김. */
+	function hideModal(){
+ 		$('#dept_pop_div').hide();
+ 	}
  	
 	function onlyNumber(event){
 	 	event = event || window.event;
@@ -396,7 +408,7 @@
 							<td colspan="2" align="left">
 								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
 								<input type="text" id="dept_nm" name="dept_nm" value="${dept_nm}" style="width:65%"/>
-								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" onclick="deptListInqrPop(1);" >
+								<input type="button" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" >
 							</td>
 						</tr>
 						<tr>

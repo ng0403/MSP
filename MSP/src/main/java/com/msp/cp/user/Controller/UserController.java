@@ -38,6 +38,8 @@ public class UserController {
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			userVO userVO,String user_id_sch, String user_nm_sch, String dept_nm_sch ,
 			@RequestParam(value = "code", defaultValue="empty") String selectcode,
+			String excel, 
+			@RequestParam Map<String, Object> userMap, 
 			@RequestParam Map<String, Object> map)
 	{
 		user_id_sch = request.getParameter("user_id_sch");
@@ -64,6 +66,14 @@ public class UserController {
 			page.setEndRow(0);
 		}
 		
+		if(excel != null){
+			if(excel.equals("true")){
+				ModelAndView mav = new ModelAndView("/user/user_list_excel");
+				List<userVO> userExcel = userService.userExcel(userMap);
+				mav.addObject("userExcel", userExcel);
+				return mav;
+			}
+		}
 		List<userVO> user_list = userService.searchListUser(map);
 
 		System.out.println("15. User Search list : " +user_list);

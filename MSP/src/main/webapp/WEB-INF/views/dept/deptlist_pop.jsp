@@ -28,8 +28,12 @@
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
-			dept_cd = $(this).attr("data_num");
+			var dept_cd_pop = $(this).attr("dept_cd_pop");
+			var dept_nm_pop = $(this).attr("dept_nm_pop");
+			$('#dept_cd').val(dept_cd_pop);
+			$('#dept_nm').val(dept_nm_pop);
 			//deptDetailInqr(dept_cd);
+			hideModal();
 		})
 		/*초기화버튼 클릭 시 처리 이벤트*/
 		$("#dept_reset_nfbtn").click(function(){
@@ -48,15 +52,11 @@
 	})
 	/*부서 리스트 출력및 페이징 처리 함수*/
 	function deptListInqrPop(pageNum){
-		/* $("#searchForm").attr({
-			"method":"post",
-			"action":"list"
-		})
-		$("#searchForm").submit(); */
-		var active_key = $("#active_key").val();
+
+//		var active_key = $("#active_key").val();
 		var dept_nm_key = $("#dept_nm_key").val();
 		
-		$.post("search_list_pop",{"dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
+		$.post("/dept/search_list_pop",{"dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
 			$(".dept_list").html("");
 			$(data.dept_list).each(function(){
  				var dept_cd = this.dept_cd;
@@ -90,10 +90,9 @@
 		
 		var dept_tr = $("<tr>");
 		dept_tr.addClass("open_detail");
-		dept_tr.attr("data_num",dept_cd);
+		dept_tr.attr("dept_cd_pop",dept_cd);
+		dept_tr.attr("dept_nm_pop",dept_nm);
 		
-		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + dept_cd + "'>");
 		
 		var dept_nm_td = $("<td>");
 		dept_nm_td.html(dept_nm);
@@ -104,7 +103,7 @@
 		var user_nm_td = $("<td>");
 		user_nm_td.html(user_nm);
 		
-		dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td);
+		dept_tr.append(dept_nm_td).append(dept_num_td).append(user_nm_td);
 				
 		$(".dept_list").append(dept_tr);
 			
@@ -151,30 +150,6 @@
 		$("#paging_div").append(pageContent);
 
 	}
-	/*부서 상세정보 출력 함수*/
-	/* function detailOutput(dept_cd, dept_nm, dept_num1, dept_num2, dept_num3, dept_fnum1, dept_fnum2, dept_fnum3, active_flg){
-		dataReset();
-		
-		$("#dept_cd").val(dept_cd);
-		$("#dept_nm").val(dept_nm);
-		$("#dept_num1").val(dept_num1).attr("selected","selected");
-		$("#dept_num2").val(dept_num2);
-		$("#dept_num3").val(dept_num3);
-		$("#dept_fnum1").val(dept_fnum1).attr("selected","selected");
-		$("#dept_fnum2").val(dept_fnum2);
-		$("#dept_fnum3").val(dept_fnum3);
-	} */
-	/*상세정보 초기화*/
-	/* function dataReset(){
-		$("#dept_cd").val("");
-		$("#dept_nm").val("");
-		$("#dept_num1").index(0);
-		$("#dept_num2").val("");
-		$("#dept_num3").val("");
-		$("#dept_fnum1").index(0);
-		$("#dept_fnum2").val("");
-		$("#dept_fnum3").val("");
-	} */
 	
 	// 검색 페이징 엔터키
     function pageInputRepDept(event) {	
@@ -214,9 +189,9 @@
 </script>
 </head>
 <body>
-	<div class="main_div">
+	<div class="main_div" style=" background: beige;">
 		<div class="navi_div">
-			사용자 > 부서관리
+			부서검색
 		</div>
 		<div class="search_div">
 			<div class="search2_div">
@@ -235,65 +210,23 @@
 							<col width="10%">
 							<col width="35%">
 							<col width="20%">
-							<col width="15%">
-							<col width="20%">
 						</colgroup>
 						<thead>
-							<tr>
+							<tr style="width: 100%;">
 								<td>부서명</td>
 								<td>연락처</td>
 								<td>대표자명</td>
 							</tr>
 						</thead>
 						<tbody class="dept_list">
-							<%-- <c:choose>
-								<c:when test="${not empty dept_list}">
-									<c:forEach var="dept_list" items="${dept_list}">
-										<tr class="open_detail" data_num="${dept_list.dept_cd}">
-											<td>${dept_list.dept_nm}</td>
-											<td>${dept_list.dept_num1}-${dept_list.dept_num2}-${dept_list.dept_num3}</td>
-											<td>${dept_list.user_nm}</td>
-										</tr>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td colspan="5">등록된 부서가 존재하지 않습니다.</td>
-									</tr>
-								</c:otherwise>
-							</c:choose> --%>
+
 						</tbody>
 					</table>
 				</form>
 			</div>
 			<div class="paging2_div">
 				<div class="paging_div" id="paging_div">	
-					<%-- <input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
-					<input type="hidden" id="PageNum" value="${pageNum}"/>
-					<c:choose>
-						<c:when test="${page.endPageNum == 1}">
-							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/>  
-							<a style="color: black;"> / ${page.endPageNum}</a>
-							<a style="color: black;"> ▶ </a>
-						</c:when>
-						<c:when test="${pageNum == page.startPageNum}">
-							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
-							<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
-						</c:when>
-						<c:when test="${pageNum == page.endPageNum}">
-							<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
-							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
-						</c:when>
-						<c:otherwise>
-							<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
-							<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
-							<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
-						</c:otherwise>
-					</c:choose> --%>
+					
 				</div>
 				<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
 				<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">

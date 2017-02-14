@@ -112,5 +112,18 @@ public class UserDaoImpl implements UserDao {
 		
 		return dutyCdList;
 	}
+
+	@Override
+	public List<userVO> userExcel(Map<String, Object> map) {
+		List<userVO> userExcel = null;
+		
+		try {
+			userExcel = sqlSession.selectList("user.userlist_excel",map);
+			System.out.println("userExcel Dao Impl : " + userExcel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userExcel;
+	}
 }
 

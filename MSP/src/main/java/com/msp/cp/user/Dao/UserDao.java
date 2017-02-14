@@ -23,4 +23,6 @@ public interface UserDao {
 	public List<userVO> rankCdList();
 
 	public List<userVO> dutyCdList();
+
+	public List<userVO> userExcel(Map<String, Object> map);
 }

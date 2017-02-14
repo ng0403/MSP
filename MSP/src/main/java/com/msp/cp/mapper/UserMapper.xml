@@ -18,6 +18,7 @@
         	</if>
 	</select>
 
+<!-- User List 출력  -->
 	<select id="searchListUser" parameterType="string" resultType="map">
 		select X.*
 		from ( 
@@ -139,4 +140,31 @@
 		and a.grp_cd = b.GRP_CD
 		and a.grp_cd = 02
 	</select>	
+	
+	<!-- User List Excel  -->
+	<select id="userlist_excel" parameterType="string" resultType="map">
+		select X.*
+		from ( 
+		    select rownum as rnum, A.*, td.DEPT_NM
+		      from (
+		            select *
+		            from tb_user
+		            where del_flg='N'
+		             order by created desc) A, tb_dept td
+                where 1=1
+                <if test="user_id_sch != null and user_id_sch != ''">   
+        			and A.user_id like '%'||#{user_id_sch}||'%' 
+	        		</if>
+				 	<if test="user_nm_sch != null and user_nm_sch != ''">   
+			        	and A.user_nm like '%'||#{user_nm_sch}||'%'
+			        </if>
+				 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
+			        	and td.DEPT_NM like '%'||#{dept_cd_sch}||'%'
+			        </if>
+                and A.DEPT_CD = td.DEPT_CD
+		    ) X
+		    
+	</select>
+
+	
 </mapper>

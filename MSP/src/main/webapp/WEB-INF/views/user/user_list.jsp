@@ -18,7 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function() {
 	//검색버튼 클릭
 	$("#searchButton").click(function(){
@@ -52,7 +52,7 @@ $(document).ready(function() {
 	    );
 	     
 	});
-</script>
+</script> -->
 
 <script type="text/javascript">
 
@@ -76,9 +76,22 @@ $(document).ready(function() {
 
 		window.open(popUrl, "", popOption);
 	};
+	
+	
 </script>
 
 <script type="text/javascript">
+	
+ 	//AS-ID 엑셀 다운로드 적용 함수
+	function download_list_Excel(formID){
+		var ctx = $("#ctx").val();
+		var form = $("#"+formID);
+		var excel = $('<input type="hidden" value="true" name="excel">');
+		form.append(excel);
+		form.submit();
+ 		alert("submit 지남.");
+		$("input[name=excel]").val("");
+ 	}
 	// 1.모두 체크
 	/* 체크박스 전체선택, 전체해제 */
 	function allChk() {
@@ -200,6 +213,7 @@ $(document).ready(function() {
 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
 			</form>
+			<form action="${ctx}/user/userlist" id="userlistExcelForm" method="post"></form>
 		</div>
 	</div>
 	
@@ -207,8 +221,7 @@ $(document).ready(function() {
 	<div class="">
 		<!-- List1 Div -->
 		<div class="list1_div" style=" margin-left: 1%;">
-			<form name="delAllForm" id="delAllForm" method="post"
-			action="${ctx}/userDel">
+			<form name="delAllForm" id="delAllForm" method="post" action="${ctx}/userDel">
 			<table id="mastertable" class="table table-bordered" style ="width: 90%">
 				<thead>
 					<tr>
@@ -282,6 +295,7 @@ $(document).ready(function() {
 			</c:otherwise>
 		</c:choose>
 		<div class="" style="text-align: right; margin-right: 10%;">
+			<input type="button" value="엑셀출력" class="func_btn" onclick="download_list_Excel('userlistExcelForm');" style="float: left;">
 			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
 			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
 		</div>

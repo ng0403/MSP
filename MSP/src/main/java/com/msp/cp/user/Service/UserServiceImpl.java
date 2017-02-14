@@ -95,4 +95,11 @@ public class UserServiceImpl implements UserService {
 		List<DeptVO> dept_list = deptDao.searchListPop(map);
 		return dept_list;
 	}
+
+	@Override
+	public List<userVO> userExcel(Map<String, Object> map) {
+		List<userVO> userExcel = userDao.userExcel(map);
+		System.out.println("userExcel Service Impl : "  + userExcel);
+		return userExcel;
+	}
 }
