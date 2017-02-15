@@ -17,9 +17,9 @@
 					,m.menu_url
 					,m.menu_level
 					,(
-						SELECT DISTINCT up_menu_nm 
+						SELECT DISTINCT menu_nm 
 						FROM TB_menu
-						WHERE up_menu_cd = m.up_menu_cd
+						WHERE up_menu_cd = m.menu_cd
 					  ) as up_menu_nm
 					,m.active_flg
 				FROM TB_MENU m
@@ -58,18 +58,18 @@
 	<select id="selectDetailMenu" parameterType="string"
 		resultType="com.msp.cp.menu.vo.MenuVO">
 		SELECT
-			menu_cd
-			,menu_nm
-			,menu_url
-			,menu_level
-			,up_menu_cd
+			m.menu_cd
+			,m.menu_nm
+			,m.menu_url
+			,m.menu_level
+			,m.up_menu_cd
 			,(
-				SELECT DISTINCT up_menu_nm 
+				SELECT DISTINCT menu_nm 
 				FROM TB_menu
-				WHERE up_menu_cd = m.up_menu_cd
+				WHERE up_menu_cd = m.menu_cd
 			) as up_menu_nm
-			,active_flg
-		FROM TB_MENU
+			,m.active_flg
+		FROM TB_MENU m
 		WHERE
 			menu_cd = #{menu_cd}
 			AND del_flg = 'N'
@@ -91,10 +91,10 @@
 			FROM TB_MENU
 			WHERE
 				ROWNUM = 1)
-			,#{menu_cd}
 			,#{menu_nm}
 			,#{menu_url}
 			,#{menu_level}
+			,#{up_menu_cd}
 			,#{active_flg}
 			,'admin'<!-- #{created_by} -->
 		)
@@ -102,7 +102,7 @@
 	
 	
 	<update id="updateMenu" parameterType="com.msp.cp.menu.vo.MenuVO">
-		UPDATE TB_DEPT
+		UPDATE TB_MENU
 		SET
 			menu_nm = #{menu_nm}
 			,menu_url = #{menu_url}
@@ -135,9 +135,9 @@
 					,m.menu_nm
 					,m.menu_url
 					,(
-						SELECT DISTINCT up_menu_nm 
+						SELECT DISTINCT menu_nm 
 						FROM TB_menu
-						WHERE up_menu_cd = m.up_menu_cd
+						WHERE up_menu_cd = m.menu_cd
 					  ) as up_menu_nm
 					,m.active_flg
 				FROM TB_MENU m

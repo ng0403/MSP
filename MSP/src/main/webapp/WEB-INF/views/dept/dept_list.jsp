@@ -384,10 +384,10 @@
 		
 		$("#dept_cd").val(dept_cd);
 		$("#dept_nm").val(dept_nm);
-		$("#dept_num1").val(dept_num1).attr("selected","selected");
+		$("#dept_num1").val(dept_num1).prop("selected","selected");
 		$("#dept_num2").val(dept_num2);
 		$("#dept_num3").val(dept_num3);
-		$("#dept_fnum1").val(dept_fnum1).attr("selected","selected");
+		$("#dept_fnum1").val(dept_fnum1).prop("selected","selected");
 		$("#dept_fnum2").val(dept_fnum2);
 		$("#dept_fnum3").val(dept_fnum3);
 		$(".active_flg:radio[value='"+active_flg+"']").prop("checked", "checked");
@@ -396,10 +396,10 @@
 	function dataReset(){
 		$("#dept_cd").val("");
 		$("#dept_nm").val("");
-		$("#dept_num1").index(0);
+		$("#dept_num1").find("option:eq(0)").prop("selected","selected");
 		$("#dept_num2").val("");
 		$("#dept_num3").val("");
-		$("#dept_fnum1").index(0);
+		$("#dept_fnum1").find("option:eq(0)").prop("selected","selected");
 		$("#dept_fnum2").val("");
 		$("#dept_fnum3").val("");
 		$("input:radio[name='active_flg']").removeAttr("checked");
@@ -415,10 +415,10 @@
 		}
 		$("#dept_cd").attr("readonly",true);
 		$("#dept_nm").attr("readonly",boolean);
-		$("#dept_num1").attr("readonly",boolean);
+		$("#dept_num1").attr("disabled",boolean);
 		$("#dept_num2").attr("readonly",boolean);
 		$("#dept_num3").attr("readonly",boolean);
-		$("#dept_fnum1").attr("readonly",boolean);
+		$("#dept_fnum1").attr("disabled",boolean);
 		$("#dept_fnum2").attr("readonly",boolean);
 		$("#dept_fnum3").attr("readonly",boolean);
 		$(".active_flg").attr("disabled",boolean);

@@ -17,7 +17,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
-<title>부서관리화면</title>
+<title>메뉴관리화면</title>
 <style type="text/css">
 	@media screen and (min-width:1100px){
 		.list_div{
@@ -103,7 +103,7 @@
 			menuDetailInqr(menu_cd);
 		})
 		/*추가버튼 클릭 시 처리 이벤트*/
-		$("#menu_add_fbtn").click(function(){
+		$("#menu_add_nfbtn").click(function(){
 			dataReset();
 			pageReady(false);
 			$("#menu_nm").focus();
@@ -145,7 +145,7 @@
 		})
 	})
 	
-	/*부서 리스트 출력및 페이징 처리 함수*/
+	/*메뉴 리스트 출력및 페이징 처리 함수*/
 	function menuListInqr(pageNum){
 		/* $("#searchForm").attr({
 			"method":"post",
@@ -183,7 +183,7 @@
 			alert("부서 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
 	}
-	/*부서 상세정보 요청 함수*/
+	/*메뉴 상세정보 요청 함수*/
 	function menuDetailInqr(dept_cd){
 		$.post("/menu/detail_list/"+menu_cd, function(data){
 			$(data).each(function(){
@@ -200,7 +200,7 @@
 			alert("부서 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
 	}
-	/*부서 입력 요청 함수*/
+	/*메뉴 입력 요청 함수*/
 	function menuSave(){
 		$.ajax({
 			url:"/menu/insert",
@@ -219,15 +219,15 @@
 			},
 			success:function(resultData){
 				if(resultData == "SUCCESS"){
-					alert("부서 등록이 완료되었습니다.");
+					alert("메뉴 등록이 완료되었습니다.");
 					dataReset();
 					menuListInqr(1);
 				}
 			}
 		})
 	}
-	/*부서 수정 요청 함수*/
-	function deptMdfy(){
+	/*메뉴 수정 요청 함수*/
+	function menuMdfy(){
 		$.ajax({
 			url:"/menu/update",
 			type:"post",
@@ -249,15 +249,15 @@
 			},
 			success:function(resultData){
 				if(resultData == "SUCCESS"){
-					alert("부서 수정이 완료되었습니다.");
+					alert("메뉴 수정이 완료되었습니다.");
 					dataReset();
 					menuListInqr(1);
 				}
 			}
 		})
 	}
-	/*부서 삭제 요청 함수*/
-	function deptDel(){
+	/*메뉴 삭제 요청 함수*/
+	function menuDel(){
 		var del_code = "";
 		$( "input[name='del_code']:checked" ).each (function (){
 			  del_code = del_code + $(this).val()+"," ;
@@ -287,7 +287,7 @@
 				},
 				success:function(resultData){
 					if(resultData == "SUCCESS"){
-						alert("부서 수정이 완료되었습니다.");
+						alert("메뉴 삭제가 완료되었습니다.");
 						dataReset();
 						menuListInqr(1);
 					}
@@ -295,24 +295,24 @@
 			})
 		}
 	}
-	/*부서 리스트 출력 함수*/
+	/*메뉴 리스트 출력 함수*/
 	function menuListOutput(menu_cd, menu_nm, menu_url, up_menu_nm, active_flg){
 		
-		var dept_tr = $("<tr>");
-		dept_tr.addClass("open_detail");
-		dept_tr.attr("data_num",dept_cd);
+		var menu_tr = $("<tr>");
+		menu_tr.addClass("open_detail");
+		menu_tr.attr("data_num",menu_cd);
 		
 		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + dept_cd + "'>");
+		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + menu_cd + "'>");
 		
-		var dept_nm_td = $("<td>");
-		dept_nm_td.html(dept_nm);
+		var menu_nm_td = $("<td>");
+		menu_nm_td.html(menu_nm);
 		
-		var dept_num_td = $("<td>");
-		dept_num_td.html(dept_num1 + "-" + dept_num2 + "-" + dept_num3);
+		var up_menu_nm_td = $("<td>");
+		up_menu_nm_td.html(up_menu_nm);
 		
-		var user_nm_td = $("<td>");
-		user_nm_td.html(user_nm);
+		var menu_url_td = $("<td>");
+		menu_url_td.html(menu_url);
 		
 		var active_flg_td = $("<td>");
 		if(active_flg=='Y'){
@@ -321,9 +321,9 @@
 			active_flg_td.html("비활성화");
 		}
 		
-		dept_tr.append(del_code_td).append(dept_nm_td).append(dept_num_td).append(user_nm_td).append(active_flg_td);
+		menu_tr.append(del_code_td).append(menu_nm_td).append(up_menu_nm_td).append(menu_url_td).append(active_flg_td);
 				
-		$(".menu_list").append(dept_tr);
+		$(".menu_list").append(menu_tr);
 			
 	}
 	/*페이징 출력 함수*/
@@ -331,52 +331,52 @@
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepDept(event);'/>"  
+			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepMenu(event);'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
 			+"<a style='color:black; text-decoration: none;'>▶</a>"
 		}
 		else if(startPageNum == endPageNum)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=menuListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else if(pageNum == 1)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
+			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>" 
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		else if(pageNum == endPageNum)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>" 
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		$("#paging_div").append(pageContent);
 
 	}
-	/*부서 상세정보 출력 함수*/
+	/*메뉴 상세정보 출력 함수*/
 	function detailOutput(menu_cd, menu_nm, menu_url, menu_level, up_menu_cd, up_menu_nm, active_flg){
 		dataReset();
 		
 		$("#menu_cd").val(menu_cd);
 		$("#menu_nm").val(menu_nm);
 		$("#menu_url").val(menu_url);
-		$("#menu_level").val(menu_level).attr("selected","selected");
+		$("#menu_level").val(menu_level).prop("selected","selected");
 		$("#up_menu_cd").val(up_menu_cd);
 		$("#up_menu_nm").val(up_menu_nm);
 		$(".active_flg:radio[value='"+active_flg+"']").prop("checked", "checked");
@@ -386,7 +386,7 @@
 		$("#menu_cd").val("");
 		$("#menu_nm").val("");
 		$("#menu_url").val("");
-		$("#menu_level").index(0);
+		$("#menu_level").find("option:eq(0)").prop("selected","selected");
 		$("#up_menu_cd").val("");
 		$("#up_menu_nm").val("");
 		$("input:radio[name='active_flg']").removeAttr("checked");
@@ -403,8 +403,8 @@
 		$("#menu_cd").attr("readonly",true);
 		$("#menu_nm").attr("readonly",boolean);
 		$("#menu_url").attr("readonly",boolean);
-		$("#menu_level").attr("readonly",boolean);
-		$("#up_menu_cd").attr("readonly",boolean);
+		$("#menu_level").attr("disabled",boolean);
+		$("#up_menu_cd").attr("readonly",true);
 		$("#up_menu_nm").attr("readonly",true);
 		$(".active_flg").attr("disabled",boolean);
 	}
@@ -450,7 +450,7 @@
 <%@include file="../include/header.jsp"%>
 	<div class="main_div">
 		<div class="navi_div">
-			사용자 > 부서관리
+			마스터 > 메뉴관리
 		</div>
 		<div class="search_div">
 			<div class="search2_div">
@@ -499,8 +499,8 @@
 											<td>${menu_list.up_menu_nm}</td>
 											<td>${menu_list.menu_url}</td>
 											<td>
-												<c:if test="${dept_list.active_flg eq 'Y'}">활성화</c:if>
-												<c:if test="${dept_list.active_flg eq 'N'}">비활성화</c:if>
+												<c:if test="${menu_list.active_flg eq 'Y'}">활성화</c:if>
+												<c:if test="${menu_list.active_flg eq 'N'}">비활성화</c:if>
 											</td>
 										</tr>
 									</c:forEach>
@@ -517,7 +517,7 @@
 			<!-- </div> -->
 			<div class="paging_div">
 				<div class="left">
-					<input type="button" id="menu_add_fbtn" class="btn btn-primary btn-sm" value="추가">
+					<input type="button" id="menu_add_nfbtn" class="btn btn-primary btn-sm" value="추가">
 					<input type="button" id="menu_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
 				</div>
 				<div class="page" id="paging_div">	
@@ -584,17 +584,31 @@
 								<th class="dc">메뉴레벨</th>
 								<td>
 									<select id="menu_level" name="menu_level">
+										<option value="0">메뉴 계층을 선택해주세요.</option>
 										<c:choose>
 											<c:when test="${not empty level_list}">
-												<c:forEach var="menu_list" items="${level_list}">
+												<c:forEach var="level_list" items="${level_list}">
 													<option value="${level_list.code1 }">${level_list.code_txt }</option>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<option>공통코드를 확인하세요</option>
+												<option>공통코드 목록이 존재하지 않습니다.</option>
 											</c:otherwise>
 										</c:choose>
 									</select>
+								</td>
+							</tr>
+							<tr>
+								<th class="dc">상위메뉴ID</th>
+								<td>
+									<input type="text" id="up_menu_cd" name="up_menu_cd">
+									<input type="button" id="menuinqr_pop_nfbtn" class="btn btn-default btn-sm" value="저장">
+								</td>
+							</tr>
+							<tr>
+								<th class="dc">상위메뉴명</th>
+								<td>
+									<input type="text" id="up_menu_nm" name="up_menu_nm">
 								</td>
 							</tr>
 							<tr>
@@ -608,9 +622,9 @@
 					</table>
 					<div class="btn_div">
 						<div class="right">
-							<input type="button" id="dept_save_fbtn" class="btn btn-primary btn-sm" value="저장">
-							<input type="button" id="dept_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
-							<input type="button" id="dept_reset_nfbtn" class="btn btn-info btn-sm" value="초기화">
+							<input type="button" id="menu_save_fbtn" class="btn btn-primary btn-sm" value="저장">
+							<input type="button" id="menu_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
+							<input type="button" id="menu_reset_nfbtn" class="btn btn-info btn-sm" value="초기화">
 						</div>
 					</div>
 				</form>
