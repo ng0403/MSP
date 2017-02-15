@@ -20,9 +20,10 @@
 	</script>
  </c:if>
 <style type="text/css">
-body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; }
+/* body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; } */
 
-#dept_pop_div { position:absolute; top:50%; left:50%; width:300px; height:200px;}
+#dept_pop_div { display: none; position:absolute; width:50%; height:75%; left:80%; top:30%; 
+				background-color: #c0c4cb	; overflow: auto;}
 
 </style>
  

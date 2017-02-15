@@ -18,9 +18,44 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
-<!-- <script type="text/javascript">
-$(document).ready(function() {
-	//검색버튼 클릭
+ <script type="text/javascript">
+ 
+ //엑셀 파일 추가 fucntion
+ function checkFileType(filePath) {
+                var fileFormat = filePath.split(".");
+                if (fileFormat.indexOf("xlsx") > -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+ 
+            }
+ 
+            function check() {
+                var file = $("#excelFile").val();
+                if (file == "" || file == null) {
+                    alert("파일을 선택해주세요.");
+                    return false;
+                } else if (!checkFileType(file)) {
+                    alert("엑셀 파일만 업로드 가능합니다.");
+                    return false;
+                }
+ 
+                if (confirm("업로드 하시겠습니까?")) {
+                    var options = {
+                        success : function(data) {
+                            alert("모든 데이터가 업로드 되었습니다.");
+ 
+                        },
+                        type : "POST"
+                    };
+                    $("#excelUploadForm").ajaxSubmit(options);
+    
+                }
+            }
+<!--<$(document).ready(function() {
+	
+	/* //검색버튼 클릭
 	$("#searchButton").click(function(){
 	    var objParams = {
 	            user_id_sch : $("input[name=user_id_sch]").val(), //검색할 코드 (실제로 예제에서는 사용 안함)
@@ -50,9 +85,9 @@ $(document).ready(function() {
 	            }                   
 	        }
 	    );
-	     
 	});
-</script> -->
+	 */-->
+</script> 
 
 <script type="text/javascript">
 
@@ -61,21 +96,18 @@ $(document).ready(function() {
 	$("#naviuser").css("font-weight", "bold");
 
 	function userTabOpen() {
-
 		var popUrl = "userTab";
 		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
 		window.open(popUrl, "", popOption);
 	}
-
 	//수정
 	function onPopup(id) {
 		var tmp = id;//$("#user_id_h").val();
-
 		var popUrl = "userMdfyPop?user_id=" + tmp; //팝업창에 출력될 페이지 URL
 		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;"; //팝업창 옵션(optoin)
 
 		window.open(popUrl, "", popOption);
-	};
+	}
 	
 	
 </script>
@@ -204,7 +236,7 @@ $(document).ready(function() {
 						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}" onkeypress="userEnterSearch(event);"></td>
 						<th>부서명</th>
 						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}" onkeypress="userEnterSearch(event);"></td>&nbsp;
-					    <td><button id="search_fbtn" type="submit" class="user_serach_fbtn"  style="margin-left: 34%;"/>검색</button></td>
+						<td><button id="search_fbtn" type="submit" class="user_serach_fbtn"  style="margin-left: 34%;"/>검색</button></td>
 					</tr>
 			</form>
 			<!-- 페이징 전용 폼 -->
@@ -216,7 +248,7 @@ $(document).ready(function() {
 			<form action="${ctx}/user/userlist" id="userlistExcelForm" method="post"></form>
 		</div>
 	</div>
-	
+
 	<!-- List1 Cover Div -->
 	<div class="">
 		<!-- List1 Div -->

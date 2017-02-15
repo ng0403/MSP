@@ -20,9 +20,10 @@
 	</script>
  </c:if>
 <style type="text/css">
-body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; }
+/* body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; } */
 
-#dept_pop_div { position:absolute; top:50%; left:50%; width:300px; height:200px;}
+#dept_pop_div { display: none; position:absolute; width:50%; height:75%; left:80%; top:30%; 
+				background-color: #c0c4cb	; overflow: auto;}
 
 </style>
 
@@ -170,33 +171,10 @@ body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px;
 		
  </script>
  
- <script type="text/javascript">
-/*  function changeDiscType(){
-		if( $("#rank_cd option:selected").val() == "1"){
-			$('.discount_cost').text("*할인율");
-			$('#td_disc_type').html("<input name='disc_rate' id='disc_rate' type='text' maxlength='2' max='99'>%")
-		}else if($("#cb_disc_type option:selected").val() == "2"){
-			$('.discount_cost').text("*할인금액");
-			$('#td_disc_type').html("<input name='disc_amt' id='disc_amt' type='text' maxlength='6' max='999999'>원")
-		}else{
-			return;
-		}
-	} */
- </script>
  
  
  <!-- 숫자키와 편집버튼만 입력하는 function -->
  <script>
- 
- 	
- 	
- 	/* function popTrClick(){
- 		var dept_cd_pop = (this).$('#dept_cd_pop').val();
-		var dept_nm_pop = (this).$('#user_nm_pop').val();
-		$('#dept_cd').val(dept_cd_pop);
-		$('#dept_nm').val(dept_nm_pop);
- 	} */
- 	
  	/*부서명 클릭 시 상세정보 출력 이벤트*/
 	$(document).on("click", ".deptTrPop", function(){
 		var dept_cd_pop = $(this).attr("dept_cd_pop");

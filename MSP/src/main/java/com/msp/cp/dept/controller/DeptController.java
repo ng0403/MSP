@@ -213,7 +213,7 @@ public class DeptController {
 	}
 	
 	@RequestMapping(value="/search_list_pop", method={RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody Map<String, Object> searchListPop(ModelMap model,
+	public @ResponseBody Map<String,  Object> searchListPop(ModelMap model,
 			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
 		
 		//String active_key=request.getParameter("active_key").trim();                      

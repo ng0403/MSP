@@ -22,10 +22,7 @@
 		$("#dept_inqr_fbtn").click(function(){
 			deptListInqrPop(1);
 		})
-		/*검색조건 엔터 시 처리 이벤트*/
-		$("#dept_nm_key").keypress(function(){
-			enterSearch(event);
-		})
+		
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
 			var dept_cd_pop = $(this).attr("dept_cd_pop");
@@ -35,25 +32,11 @@
 			//deptDetailInqr(dept_cd);
 			hideModal();
 		})
-		/*초기화버튼 클릭 시 처리 이벤트*/
-		$("#dept_reset_nfbtn").click(function(){
-			dataReset();
-			save_cd = "";
-		})
-		/*저장버튼 클릭 시 처리 이벤트*/
-		$("#dept_save_fbtn").click(function(){
-			if(save_cd == "insert"){
-				deptSave();
-			}else if(save_cd == "update"){
-				deptMdfy();
-			}
-		})
 		
 	})
 	/*부서 리스트 출력및 페이징 처리 함수*/
 	function deptListInqrPop(pageNum){
 
-//		var active_key = $("#active_key").val();
 		var dept_nm_key = $("#dept_nm_key").val();
 		
 		$.post("/dept/search_list_pop",{"dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
@@ -113,21 +96,21 @@
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepDept(event);'/>"  
+			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 10%; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepDept(event);'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
 		}
 		else if(startPageNum == endPageNum)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
+			+"<input type='text' style='width: 10%; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else if(pageNum == 1)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
+			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 10%; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
@@ -135,7 +118,7 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
+			+"<input type='text' style='width: 10%; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
@@ -143,7 +126,7 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
+			+"<input type='text' style='width: 10%; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
@@ -177,14 +160,14 @@
     	});
     }
 	
-  //검색 엔터키
+/*    //검색 엔터키
     function enterSearch(event) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
     	if (keycode == '13') {
     		deptListInqrPop(1);
     	}
     	event.stopPropagation();
-    }
+    }  */
 
 </script>
 </head>
@@ -197,7 +180,7 @@
 			<div class="search2_div">
 				<form id="searchForm" name="searchForm">
 					<label>부서명</label>
-					<input type="text" id="dept_nm_key" name="dept_nm_key" > &nbsp;
+					<input type="text" id="dept_nm_key" name="dept_nm_key" onkeypress="deptListInqrPop(1);"> &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
 				</form>
 			</div>
@@ -205,11 +188,11 @@
 		<div class="list_div">
 			<div class="list2_div">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list_tb" class="table table-bordered" style ="width: 45%">
+					<table summary="dept_list_tb" class="table table-bordered" style ="width: 100%;">
 						<colgroup>
-							<col width="10%">
-							<col width="35%">
-							<col width="20%">
+							<col width="30%">
+							<col width="30%">
+							<col width="40%">
 						</colgroup>
 						<thead>
 							<tr style="width: 100%;">
