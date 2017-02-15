@@ -102,33 +102,33 @@
 		else if(startPageNum == endPageNum)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 10%; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=deptListInqrtPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else if(pageNum == 1)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 10%; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		else if(pageNum == endPageNum)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 10%; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 10%; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=deptListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=deptListInqrPop("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		$("#paging_div").append(pageContent);
 
@@ -196,9 +196,9 @@
 						</colgroup>
 						<thead>
 							<tr style="width: 100%;">
-								<td>부서명</td>
-								<td>연락처</td>
-								<td>대표자명</td>
+								<th>부서명</th>
+								<th>연락처</th>
+								<th>대표자명</th>
 							</tr>
 						</thead>
 						<tbody class="dept_list">
@@ -206,13 +206,11 @@
 						</tbody>
 					</table>
 				</form>
-			</div>
-			<div class="paging2_div">
-				<div class="paging_div" id="paging_div">	
-					
+				<div class="paging2_div">
+					<div class="page" id="paging_div">	
+						
+					</div>
 				</div>
-				<input type="button" id="dept_add_fbtn" class="func_btn" value="추가">
-				<input type="button" id="dept_del_fbtn" class="func_btn" value="삭제">
 			</div>
 		</div>
 	</div>
