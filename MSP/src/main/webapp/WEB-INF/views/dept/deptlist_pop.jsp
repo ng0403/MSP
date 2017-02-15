@@ -22,7 +22,9 @@
 		$("#dept_inqr_fbtn").click(function(){
 			deptListInqrPop(1);
 		})
-		
+		$("#dept_nm_key").keypress(function(){
+			enterSearch(event)
+		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
 			var dept_cd_pop = $(this).attr("dept_cd_pop");
@@ -159,14 +161,14 @@
     	});
     }
 	
-/*    //검색 엔터키
+    //검색 엔터키
     function enterSearch(event) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
     	if (keycode == '13') {
     		deptListInqrPop(1);
     	}
     	event.stopPropagation();
-    }  */
+    }
 
 </script>
 </head>
@@ -177,11 +179,9 @@
 		</div>
 		<div class="search_div">
 			<div class="search2_div">
-				<form id="searchForm" name="searchForm">
 					<label>부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key" onkeypress="deptListInqrPop(1);"> &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
-				</form>
 			</div>
 		</div>
 		<div class="list_div">
