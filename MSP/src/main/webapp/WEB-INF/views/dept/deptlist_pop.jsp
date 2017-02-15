@@ -32,7 +32,6 @@
 			//deptDetailInqr(dept_cd);
 			hideModal();
 		})
-		
 	})
 	/*부서 리스트 출력및 페이징 처리 함수*/
 	function deptListInqrPop(pageNum){
