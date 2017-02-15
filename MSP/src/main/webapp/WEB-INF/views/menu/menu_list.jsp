@@ -454,7 +454,7 @@
 		</div>
 		<div class="search_div">
 			<div class="search2_div">
-				<form id="searchForm" name="searchForm">
+				<!-- <form id="searchForm" name="searchForm"> -->
 					<label>활성상태</label>
 					<select id="active_key" name="active_key" class="selectField">
 						<option value="" selected="selected">전체</option>
@@ -464,7 +464,7 @@
 					<label>메뉴명</label>
 					<input type="text" id="menu_nm_key" name="menu_nm_key" > &nbsp;
 					<input type="button" id="menu_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
-				</form>
+				<!-- </form> -->
 			</div>
 		</div>
 		<div class="list_div">

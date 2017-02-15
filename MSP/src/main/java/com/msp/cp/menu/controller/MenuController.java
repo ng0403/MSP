@@ -63,7 +63,7 @@ public class MenuController {
 		
 		//검색 결과 list
 		List<MenuVO> list = menuService.menuList(map);
-		System.out.println(list);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("page", page);
