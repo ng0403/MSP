@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.SynchronousQueue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -91,6 +90,22 @@ public class CodeController {
 	}
 	
 	/**
+	 * 업 무 명 : 공통코드 삭제
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/02
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 선택한 공통코드를 삭제한다. 
+	 * */
+	@RequestMapping(value="/codeMasterDel", method={RequestMethod.GET, RequestMethod.POST})
+	public String codeMasterDelete(CodeVO codeVo)
+	{
+		codeService.deleteCodeMaster(codeVo);
+		
+		return "redirect:/code/codeInqr";
+	}
+	
+	/**
 	 * 업 무 명 : 상세코드 등록
 	 * 작 성 자 : 이재욱
      * 작 성 일 : 2017/02/01
@@ -109,19 +124,21 @@ public class CodeController {
 	}
 	
 	/**
-	 * 업 무 명 : 공통코드 삭제
+	 * 업 무 명 : 상세코드 수정
 	 * 작 성 자 : 이재욱
-     * 작 성 일 : 2017/02/02
+     * 작 성 일 : 2017/02/13
      * 수 정 자 : 
      * 수 정 일 : 
-	 * 내     용 : 선택한 공통코드를 삭제한다. 
+	 * 내     용 : 해당 상세코드 수정
 	 * */
-	@RequestMapping(value="/codeMasterDel", method={RequestMethod.GET, RequestMethod.POST})
-	public String codeMasterDelete(CodeVO codeVo)
+	@RequestMapping(value = "codeDetailMdfy", method={RequestMethod.GET, RequestMethod.POST})
+	public String codeDetailModify(CodeVO codeVo)
 	{
-		codeService.deleteCodeMaster(codeVo);
+		System.out.println(codeVo);
 		
-		return "redirect:/code/codeInqr";
+		codeService.modifyCodeDetail(codeVo);
+		
+		return "redirect:/code/codeInqr"; 
 	}
 	
 	/**

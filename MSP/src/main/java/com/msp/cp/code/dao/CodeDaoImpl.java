@@ -70,6 +70,12 @@ public class CodeDaoImpl implements CodeDao {
 		// TODO Auto-generated method stub
 		sqlSession.insert("insertCodeDetail", codeVo);
 	}
+	
+	@Override
+	public void modifyCodeDetail(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		sqlSession.update("modifyCodeDetail", codeVo);
+	}
 
 	@Override
 	public void deleteCodeMaster(CodeVO codeVo) {

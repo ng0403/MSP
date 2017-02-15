@@ -106,6 +106,16 @@
 			(#{grp_cd}, #{code1}, #{code_txt}, #{code_desc}, #{created_by})
 	</insert>
 	
+	<update id="modifyCodeDetail" parameterType="com.msp.cp.code.vo.CodeVO">
+		UPDATE
+			TB_CODE_DETAIL
+		SET
+			CODE_TXT  = #{code_txt},
+			CODE_DESC = #{code_desc}
+		WHERE
+			GRP_CD = #{grp_cd} AND CODE1 = #{code1}
+	</update>
+	
 	<delete id="deleteCodeMaster" parameterType="com.msp.cp.code.vo.CodeVO">
 		DELETE 
 			tb_code_master

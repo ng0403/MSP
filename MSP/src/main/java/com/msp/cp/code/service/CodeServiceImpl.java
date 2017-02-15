@@ -70,6 +70,12 @@ public class CodeServiceImpl implements CodeService {
 		
 		codeDao.insertCodeDetail(codeVo);
 	}
+	
+	@Override
+	public void modifyCodeDetail(CodeVO codeVo) {
+		// TODO Auto-generated method stub
+		codeDao.modifyCodeDetail(codeVo);
+	}
 
 	@Override
 	public void deleteCodeMaster(CodeVO codeVo) {

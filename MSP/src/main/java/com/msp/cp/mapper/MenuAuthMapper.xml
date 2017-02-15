@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="menuAuth">
+	<select id="menuAuthListCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+			count(*) as cnt
+		FROM
+			TB_MENU_AUTH
+		WHERE
+			ACTIVE_FLG = 'Y'
+		<if test="grp_cd != null and grp_cd != ''">
+			AND TM.grp_cd = #{grp_cd}
+		</if>
+	</select>
+	
+	<select id="searchListAuthList"  parameterType="string" resultType="map">
+		SELECT 
+			X.*
+		FROM 
+			( SELECT 
+				ROWNUM AS RNUM, A.*
+       		  FROM (
+         		SELECT 
+         			menu_cd,
+         			(SELECT
+              			menu_nm
+           			 FROM
+              			TB_MENU 
+           			 WHERE
+              			menu_cd = tma.menu_cd
+          			) as menu_nm,
+          			(SELECT
+              			auth_nm
+           			 FROM
+              			TB_AUTH
+           			 WHERE
+              			auth_id = tma.auth_id
+          			) auth_nm,
+          			inqr_auth,
+		            add_auth,
+     		        mdfy_auth,
+       	   		    del_auth,
+          		    menu_acc_auth
+         		FROM 
+         			TB_MENU_AUTH tma
+         		WHERE 
+         			ACTIVE_FLG = 'Y'
+         		<if test="active_flg =='N'" >   
+             		AND ACTIVE_FLG = 'N'
+		 		</if>
+		 		<if test="menuAuth_sch != null and menuAuth_sch != ''" >   
+             		AND AUTH_ID LIKE '%' || #{menuAuth_sch} || '%'
+         		</if>
+         		ORDER BY AUTH_ID ASC ) A
+     		) X
+     	<![CDATA[
+        WHERE 
+        	X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
+	 	]]>
+	</select >
+</mapper>

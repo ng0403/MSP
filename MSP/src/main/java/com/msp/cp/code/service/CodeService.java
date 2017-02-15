@@ -16,6 +16,7 @@ public interface CodeService {
 	  
 	  public void insertCodeMaster(CodeVO codeVo);
 	  public void insertCodeDetail(CodeVO codeVo);
+	  public void modifyCodeDetail(CodeVO codeVo);
 	  public void deleteCodeMaster(CodeVO codeVo);
 	  public void deleteCodeDetail(CodeVO codeVo);
 	  

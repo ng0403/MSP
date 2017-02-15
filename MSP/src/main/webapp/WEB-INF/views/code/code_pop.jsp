@@ -37,24 +37,23 @@
 				<input type="button" href="#" id="menuClose" class="func_btn" data-dismiss="modal" 
 					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
 			</div>
-		<div class="block_div">
-		
-		<div style="height:100px; width:98%;">
-			<!-- General -->
-			<div>
-				<br/>
-				<div align="center" style="width: 100%">
-					<table class="code_view" style="font-size: 12px; width: 100%" border="1">
-						<tbody id="generalTbody">
-						
-						</tbody>
-					</table>
+			<div class="block_div">
+				<div style="height:100px; width:98%;">
+					<!-- General -->
+					<div>
+						<br/>
+						<div align="center" style="width: 100%">
+							<table class="code_view" style="font-size: 12px; width: 100%" border="1">
+								<tbody id="generalTbody">
+								
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
-
-		</div>
-	</div>
 		
+		</div>
 	</div> 
 	<a href="#" class="menuOpen"></a>
 </body>

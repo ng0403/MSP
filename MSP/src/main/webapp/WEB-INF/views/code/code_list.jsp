@@ -36,6 +36,14 @@
 .modal.fade.in {
   top: 5%;
 }
+
+.page1 {
+	width: 15%;
+	text-align: center;
+	float: inherit;
+	
+}
+
 </style>
 
 <script type="text/javascript">
@@ -43,6 +51,8 @@ function menuByMask() {
 	//화면의 높이와 너비를 구한다.
 	var maskHeight = $(document).height();
 	var maskWidth = $(window).width();
+	
+	alert("Height : " + maskHeight + " Width :" + maskWidth);
 	
 	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
 	$("#menuMask").css({
@@ -144,85 +154,17 @@ $(document).ready(function() {
 						</tbody>
 					</table>
 				</form>
-			</div>
-
-			<div class="list3_div">
-			<h4>공통코드 상세</h4>
-				<form method="post" id="joinform1" action="codeMasterAdd">
-					<table class="table">
-						<tbody id="tbody1">
-							<tr>
-								<th>공통코드</th>
-								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" />
-								</td>
-								<th>공통코드명</th>
-								<td>
-									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" />
-								</td>
-							</tr>
-							<tr>
-								<th>공통코드 설명</th>
-								<td><input type="text" name="grp_desc" id="grp_desc"
-									class="iuser_txt" style="width: 90%" value="${grp_desc}" /></td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			</div>
-			
-			<div class="btn02">
-				<div class="left">
-					<input type="button" id="codeMaster_add_btn" class="btn btn-default" value="추가" style="display: none" /> 
-					<input type="button" id="codeMaster_del_btn" class="btn btn-default" value="취소" style="display: none" />
-				</div>
-			</div>
-
-			<div class="list3_div">
-			<h4>상세코드 상세</h4>
-				<form method="post" id="joinform2" action="codeDetailAdd">
-					<table class="table">
-						<tbody id="tbody1">
-							<tr>
-								<th>공통코드</th>
-								<td>
-									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
-								</td>
-								<td>
-									<input type="button" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none" /> <!--  onclick="fn_selectPop()" -->
-								</td>
-							</tr>
-							<tr>
-								<th>상세코드</th>
-								<td>
-									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" />
-								</td>
-								<th>상세코드명</th>
-								<td>
-									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" />
-								</td>
-							</tr>
-							<tr>	
-								<th>상세코드 설명</th>
-								<td>
-									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" />
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-				</form>
-			</div>
-			
-			<!-- Paging Div -->
-			<div id="codePagingDiv1" class="paging_div">
+				
+				<!-- Button Div -->
 				<div class="btn01">
 					<div class="left">
 						<input type="button" id="code_add_btn" class="btn btn-default" value="추가" /> 
 						<input type="button" id="code_del_btn" class="btn btn-default" value="삭제" />
 					</div>
-
-					<div id="codePagingDiv" class="page">
+				</div>
+				
+				<!-- Pagine Div -->
+				<div id="codePagingDiv" class="page1">
 						<input type="hidden" id="endPageNum" value="${page.endPageNum}" />
 						<input type="hidden" id="startPageNum" value="${page.startPageNum}" />
 						<input type="hidden" id="userPageNum" value="${pageNum}" />
@@ -253,17 +195,87 @@ $(document).ready(function() {
 							</c:otherwise>
 						</c:choose>
 					</div>
-				</div>
+			</div>
 
+			<div class="list3_div">
+			<h4>공통코드 상세</h4>
+				<form method="post" id="joinform1" action="codeMasterAdd">
+					<table class="table">
+						<tbody id="tbody1">
+							<tr>
+								<th>공통코드</th>
+								<td>
+									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" />
+								</td>
+								<th>공통코드명</th>
+								<td>
+									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" />
+								</td>
+							</tr>
+							<tr>
+								<th>공통코드 설명</th>
+								<td><input type="text" name="grp_desc" id="grp_desc"
+									class="iuser_txt" style="width: 90%" value="${grp_desc}" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				
+				<!-- Button Div -->
+				<div class="btn02">
+					<div class="left">
+						<input type="button" id="codeMaster_add_btn" class="btn btn-default" value="추가" style="display: none" /> 
+						<input type="button" id="codeMaster_reset_btn" class="btn btn-default" value="취소" style="display: none" />
+					</div>
+				</div>
+				
+				<br><br><br>
+				
+				<h4>상세코드 상세</h4>
+				<form method="post" id="joinform2">
+					<table class="table">
+						<tbody id="tbody1">
+							<tr>
+								<th>공통코드</th>
+								<td>
+									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
+								</td>
+								<td>
+									<input type="button" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none" /> <!--  onclick="fn_selectPop()" -->
+								</td>
+							</tr>
+							<tr>
+								<th>상세코드</th>
+								<td>
+									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" />
+								</td>
+								<th>상세코드명</th>
+								<td>
+									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" />
+								</td>
+							</tr>
+							<tr>	
+								<th>상세코드 설명</th>
+								<td>
+									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				
 				<!-- Button Div -->
 				<div class="btn02">
 					<div class="left">
 						<input type="button" id="codeDetail_add_btn" class="btn btn-default" value="추가" style="display: none" /> 
 						<input type="button" id="codeDetail_mdfy_btn" class="btn btn-default" value="수정" style="display: none" /> 
-						<input type="button" id="codeDetail_del_btn" class="btn btn-default" value="취소" style="display: none" />
+						<input type="button" id="codeDetail_reset_btn" class="btn btn-default" value="취소" style="display: none" />
 					</div>
 				</div>
-				
+			</div>
+			
+			<!-- POPUP Div -->
+			<div id="codePagingDiv1" class="paging_div">
 				<div id="menuDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="menuDetail-tab" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
        				 <div class="modal-dialog modal-lg">
            				 <div class="modal-content">
@@ -314,23 +326,7 @@ $(document).ready(function() {
 				event.stopPropagation();
 			});
 		}				
-
-		//사용자관리 페이징
-		function userPaging1(pageNum) 
-		{
-			$(document).ready(function(){
-				var ctx = $("#ctx").val();
-				var $form = $("#codelistPagingForm");
-				var pageNum_input = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');	// Hidden 태크를 이용해 page number를 넘겨준다.
-				
-				// Ajax를 이용해서 페이지 리스트 출력해줘야 하는부분
-				
-				$form.append(pageNum_input);
-				$form.submit();
-				
-			});
-		}
-			
+	
 		//사용자관리 페이징
 		function userPaging(pageNum) 
 		{
@@ -338,7 +334,6 @@ $(document).ready(function() {
 			var tbody = $("#codeListTbody");
 			var contents = "";
 			
-			alert(pageNum);
 			// Ajax를 이용해서 페이지 리스트 출력해줘야 하는부분.
 			$.ajax({
 				url      : 'codeSearch_list2',
@@ -360,7 +355,7 @@ $(document).ready(function() {
 							var code1   = codeInqrList[i].code1;
 							var code_txt = codeInqrList[i].code_txt;
 							
-							contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background='#c0c4cb'' onmouseout='this.style.background='white''>"
+							contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
 							+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
 		    				+"<td align='center'>"+grp_cd1+"</td>"
@@ -446,7 +441,7 @@ $(document).ready(function() {
 								var code1   = codeInqrList[i].code1;
 								var code_txt = codeInqrList[i].code_txt;
 								
-								contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background='#c0c4cb'' onmouseout='this.style.background='white''>"
+								contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background=#c0c4cb' onmouseout='this.style.background='white''>"
 								+"<td align='center' scope='row'>"
 								+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
 			    				+"<td align='center'>"+grp_cd1+"</td>"
@@ -571,6 +566,7 @@ $(document).ready(function() {
 			$('.menuOpen').click();
 		});
 		
+		// Mainc창에 상세코드 상세보기란에 있는 공통코드 부분에 값을 넣는다.
 		function pop_grpCode(grpCode)
 		{
 			var tmp = grpCode;
@@ -581,10 +577,10 @@ $(document).ready(function() {
 		$("#code_add_btn").on("click", function(){
 			// 숨겨놓은 각각의 버튼을 보여준다.
 			$("#codeMaster_add_btn").show();
-			$("#codeMaster_del_btn").show();
+			$("#codeMaster_reset_btn").show();
 			$("#codeDetail_add_btn").show();
-			$("#codeDetail_mdfy_btn").show();
-			$("#codeDetail_del_btn").show();
+			$("#codeDetail_mdfy_btn").hide();
+			$("#codeDetail_reset_btn").show();
 			$("#sel_grp").show();
 			
 			// 상세보기로 내용이 있을 경우 reset해준다.
@@ -600,7 +596,6 @@ $(document).ready(function() {
 		// 코드 삭제버튼 클릭 시
 		$("#code_del_btn").on("click", function(){
 			var check = document.getElementsByName("del_code");
-				
 			var check_len = check.length;
 			var checked = 0;
 			
@@ -652,6 +647,17 @@ $(document).ready(function() {
 				});
 				
 			});
+	
+			// 수정을 하지 말아야 할 것들은 readOnly로 바꿔준다.
+			$("#grp_cd").attr("readOnly", true);
+			$("#grp_nm").attr("readOnly", true);
+			$("#grp_desc").attr("readOnly", true);
+			$("#code1").attr("readOnly", true);
+			
+			// 추가 버튼이 아닌 수정버튼이 보이도록 해준다.
+			$("#codeDetail_add_btn").hide();
+			$("#codeDetail_mdfy_btn").show();
+			$("#codeDetail_reset_btn").show();
 		}	
 	
 		// 공통코드 상세보기 추가 버튼
@@ -677,16 +683,16 @@ $(document).ready(function() {
 		});
 		
 		// 공통코드 상세보기 삭제버튼
-		$("#codeMaster_del_btn").on("click", function(){
+		$("#codeMaster_reset_btn").on("click", function(){
 			$("#grp_cd").val("");
 		});
 			
 		// 상세코드 상세보기 추가버튼 
 		$("#codeDetail_add_btn").on("click", function(){
-			//if($("#grp_cd1").val() == "" || $("#grp_cd1").val() == null){
-			//	alert("공통코드를 선택해주세요");
-			//	return false;
-			//}
+			if($("#grp_cd1").val() == "" || $("#grp_cd1").val() == null){
+				alert("공통코드를 선택해주세요");
+				return false;
+			}
 			if($("#code1").val() == "" || $("#code1").val() == null){
 				alert("상세코드를 입력해주세요");
 				return false;
@@ -704,12 +710,15 @@ $(document).ready(function() {
 			else
 			{
 				alert("상세코드가 등록 되었습니다.");
+				$('form').attr("action", "codeDetailAdd");
 				$("#joinform2").submit();
 			}
 		});
 		
 		// 상세코드 상세보기 수정버튼
 		$("#codeDetail_mdfy_btn").on("click", function(){
+			$("#code1").readOnly = true;
+			
 			if($("#code_txt").val() == "" || $("#code_txt").val() == null)
 			{
 				alert("상세코드명를 입력해주세요");
@@ -722,7 +731,7 @@ $(document).ready(function() {
 			}
 			else
 			{	 
-				$('form').attr("action", "${ctx}/employee/employee_update").submit(); 
+				$('form').attr("action", "codeDetailMdfy"); 
 				alert("상세코드가 수정 되었습니다.");
 				$("#joinform2").submit();
 			}
