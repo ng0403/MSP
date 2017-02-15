@@ -83,8 +83,8 @@
 		})
 		
 		/* 체크박스 전체선택, 전체해제 */
-		$("#allCheck").on("click", function(){
-		      if( $("#allCheck").is(':checked') ){
+		$("#checkall").on("click", function(){
+		      if( $("#checkall").is(':checked') ){
 		        $("input[name=del_code]").prop("checked", true);
 		      }else{
 		        $("input[name=del_code]").prop("checked", false);
@@ -245,7 +245,7 @@
 		}
 		
 		/* 삭제 요청 함수 */
-		function deptDel(){
+		function authDel(){
 			
 			var del_code = "";
 			
@@ -269,7 +269,7 @@
 					},
 					success:function(resultData){
 						if(resultData == "SUCCESS"){
-							alert("부서 수정이 완료되었습니다.");
+							alert("삭제가 완료되었습니다.");
 							dataReset();
 							authListInqr(1);
 						}
