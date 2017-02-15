@@ -497,9 +497,9 @@
 							<tr>
 								<th><input type="checkbox" id="checkall"></th>
 								<th>부서명</th>
-								<th>연락처</tH>
-								<th>대표자명</tH>
-								<tH>활성화여부</tH>
+								<th>연락처</th>
+								<th>대표자명</th>
+								<tH>활성화여부</th>
 							</tr>
 						</thead>
 						<tbody class="dept_list">
@@ -530,44 +530,44 @@
 					</table>
 				</form>
 			<!-- </div> -->
-			<div class="paging_div">
-				<div class="left">
-					<input type="button" id="dept_add_fbtn" class="btn btn-primary btn-sm" value="추가">
-					<input type="button" id="dept_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
+				<div class="paging_div">
+					<div class="left">
+						<input type="button" id="dept_add_fbtn" class="btn btn-primary btn-sm" value="추가">
+						<input type="button" id="dept_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
+					</div>
+					<div class="page" id="paging_div">	
+						<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+						<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+						<input type="hidden" id="PageNum" value="${pageNum}"/>
+						<c:choose>
+							<c:when test="${page.endPageNum == 1}">
+								<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/>  
+								<a style="color: black;"> / ${page.endPageNum}</a>
+								<a style="color: black;"> ▶ </a>
+							</c:when>
+							<c:when test="${pageNum == page.startPageNum}">
+								◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+								<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+								<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+							</c:when>
+							<c:when test="${pageNum == page.endPageNum}">
+								<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
+								<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+								<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+							</c:when>
+							<c:otherwise>
+								<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
+								<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+								<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+								<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<div class="right">
+						<input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excel입력">
+						<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excel출력">
+					</div>
 				</div>
-				<div class="page" id="paging_div">	
-					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
-					<input type="hidden" id="PageNum" value="${pageNum}"/>
-					<c:choose>
-						<c:when test="${page.endPageNum == 1}">
-							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/>  
-							<a style="color: black;"> / ${page.endPageNum}</a>
-							<a style="color: black;"> ▶ </a>
-						</c:when>
-						<c:when test="${pageNum == page.startPageNum}">
-							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
-							<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
-						</c:when>
-						<c:when test="${pageNum == page.endPageNum}">
-							<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
-							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
-						</c:when>
-						<c:otherwise>
-							<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
-							<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
-							<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<div class="right">
-					<input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excel입력">
-					<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excel출력">
-				</div>
-			</div>
 			</div>
 			<div id="dept_detail_div" class="list3_div">
 				<form id="dept_detail_form" name="dept_detail_form">

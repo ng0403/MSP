@@ -184,7 +184,7 @@
 		})
 	}
 	/*메뉴 상세정보 요청 함수*/
-	function menuDetailInqr(dept_cd){
+	function menuDetailInqr(menu_cd){
 		$.post("/menu/detail_list/"+menu_cd, function(data){
 			$(data).each(function(){
 				var menu_cd = this.menu_cd;
@@ -362,7 +362,7 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
+			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>"
 			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
@@ -410,7 +410,7 @@
 	}
 	
 	// 검색 페이징 엔터키
-    function pageInputRepDept(event) {	
+    function pageInputRepMenu(event) {	
     	$(document).ready(function() {
     		var keycode = (event.keyCode ? event.keyCode : event.which);
     		if (keycode == '13') {
@@ -482,9 +482,9 @@
 							<tr>
 								<th><input type="checkbox" id="checkall"></th>
 								<th>메뉴명</th>
-								<th>상위메뉴명</tH>
+								<th>상위메뉴명</th>
 								<th>URL</tH>
-								<tH>활성화여부</tH>
+								<tH>활성화여부</th>
 							</tr>
 						</thead>
 						<tbody class="menu_list">

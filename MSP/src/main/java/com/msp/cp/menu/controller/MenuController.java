@@ -222,15 +222,12 @@ public class MenuController {
 	@RequestMapping(value="/search_list_pop", method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String, Object> searchListPop(ModelMap model,
 			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
+		               
+	    String menu_nm_key=request.getParameter("menu_nm_key").trim(); 
 		
-		String active_key=request.getParameter("active_key").trim();                      
-	    String dept_nm_key=request.getParameter("menu_nm_key").trim(); 
-		
-	    
 	    Map<String,Object> map = new HashMap<String,Object>();
 	    
-	    map.put("active_key", active_key);
-		map.put("dept_nm_key", dept_nm_key);
+		map.put("menu_nm_key", menu_nm_key);
 		map.put("pageNum", pageNum);
 
 		PagerVO page = menuService.getMenuCount(map);
