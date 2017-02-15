@@ -3,7 +3,7 @@
 <mapper namespace="auth">
 
 <!-- 전체 행의 개수 -->
-<select id="authListCount" parameterType="java.util.Map" resultType="int" >
+<select id="authCount" parameterType="java.util.Map" resultType="int" >
     SELECT COUNT(*) AS CNT
 	FROM TB_AUTH
 	WHERE DEL_FLG = 'N'
@@ -16,7 +16,7 @@
     </if>
  </select>
 	
-<select id="searchListAuth"  parameterType="map" resultType="com.msp.cp.auth.vo.AuthVO">
+<select id="selectAuth"  parameterType="map" resultType="com.msp.cp.auth.vo.AuthVO">
 SELECT X.*
 FROM ( SELECT ROWNUM AS RNUM, A.*
        FROM (
@@ -33,7 +33,7 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
          ORDER BY AUTH_ID ASC ) A
      ) X
      <![CDATA[
-        WHERE X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
+        WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
 	 ]]>
 </select>
 
@@ -54,7 +54,7 @@ ORDER BY AUTH_ID ASC
 
 <select id="authCheck" parameterType="com.msp.cp.auth.vo.AuthVO" resultType="map">
 SELECT
-   AUTH_ID,
+    AUTH_ID,
     AUTH_NM,
     ACTIVE_FLG,
     DEL_FLG,
@@ -63,7 +63,7 @@ SELECT
     UPDATED_BY,
     UPDATED 
 FROM TB_AUTH
-WHERE AUTH_ID = #{AUTH_ID}
+WHERE AUTH_ID = #{auth_id}
 </select>
 
 <select id="searchAuthDetail" parameterType="com.msp.cp.auth.vo.AuthVO" resultType="com.msp.cp.auth.vo.AuthVO">
@@ -76,6 +76,22 @@ ORDER BY AUTH_ID ASC
 			
 </select>
 
+<select id="selectDetailAuth" parameterType="string" resultType="com.msp.cp.auth.vo.AuthVO">
+
+SELECT
+	AUTH_ID,
+    AUTH_NM,
+    ACTIVE_FLG,
+    DEL_FLG,
+    CREATED_BY,
+    CREATED,
+    UPDATED_BY,
+    UPDATED 
+FROM TB_AUTH
+WHERE AUTH_ID = #{auth_id}
+	  AND ACTIVE_FLG = 'Y'
+
+</select>
 
 <insert id = "insertAuth" parameterType = "com.msp.cp.auth.vo.AuthVO"> 
 INSERT INTO TB_AUTH
@@ -96,7 +112,7 @@ VALUES
     FROM TB_AUTH
     WHERE ROWNUM=1),
     #{auth_nm},
-    #{active_flg, jdbcType=VARCHAR},
+    #{active_flg},
     'N',
     '관리자',
     SYSDATE,
@@ -125,8 +141,8 @@ VALUES
     WHERE ROWNUM=1),
     #{auth_nm}, 
     #{active_flg}, 
-    'Y',
-    #{created_by},
+    'N',
+    '관리자',
     SYSDATE,
     '',
     ''
@@ -136,12 +152,12 @@ VALUES
 	
 <update id = "updateAuth" parameterType = "com.msp.cp.auth.vo.AuthVO"> 
 UPDATE TB_AUTH
-SET AUTH_NM = #{auth_nm, jdbcType=VARCHAR},
-    ACTIVE_FLG = #{active_flg, jdbcType=VARCHAR}
+SET AUTH_NM = #{auth_nm},
+    ACTIVE_FLG = #{active_flg}
 WHERE  AUTH_ID = #{auth_id}
 </update>
 	
-<update id = "deleteAuth" parameterType="String">
+<update id = "deleteAuth" parameterType="com.msp.cp.auth.vo.AuthVO">
 UPDATE TB_AUTH
 SET ACTIVE_FLG = 'N'
 WHERE  AUTH_ID = #{auth_id}

@@ -15,80 +15,57 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Autowired
 	AuthDao authDao;
-	 
+
 	@Override
-	public List<AuthVO> searchListAuth(Map map) {
-		System.out.println("08. ServiceImpl List Search Service Impl");
+	public List<AuthVO> authList(Map<String, Object> map) {
 		
-		List<AuthVO> obj = authDao.searchListAuth(map);
-		System.out.println("14. ServiceImpl auth List Search Service Impl" + obj.toString());
-		System.out.println("searchListAuth Search Service Impl" + obj.toString());
-		return obj;
-		
-	}
-	
-	@Override
-	public void insertAuth(AuthVO authVO) {
-		
-		System.out.println("서비스 임플 등장");
-		authDao.insertAuth(authVO);
-		
+		List<AuthVO> list = authDao.authList(map);
+		return list;
 	}
 
 	@Override
-	public void updateAuth(AuthVO authVO) {
+	public PagerVO getAuthCount(Map<String, Object> map) {
 		
-		authDao.updateAuth(authVO);
+		int PageNum = (Integer) map.get("pageNum");
+		int pageListCount = authDao.getAuthCount(map);
 		
-	}
-	
-	@Override
-	public List<Object> authCheck(String check) {
-		
-		List<Object> obj = authDao.authCheck(check);
-		return obj;
-	}
-
-	@Override
-	public void deleteAuth(String dc) {
-		
-		authDao.deleteAuth(dc);
-		
-	}
-
-	@Override
-	public PagerVO getAuthListCount(Map<String, Object> map) {
-		
-		int PageNum = (Integer)map.get("pageNum");
-		System.out.println("05. ServiceImpl Page userPageNum : " + PageNum);
-		
-		int totalRowCount = authDao.AuthListCount("authListCount", map);
-		System.out.println("07. ServiceImpl Page totalRowCount : " + totalRowCount);
-		
-		PagerVO page = new PagerVO(PageNum, totalRowCount, 5, 999);
-		
+		PagerVO page = new PagerVO(PageNum, pageListCount, 5, 20);
 		return page;
 	}
-	
+
 	@Override
-	public List<AuthVO> searchAuthDetail(AuthVO authVO) {
+	public List<AuthVO> authDetailList(String auth_id) {
 		
-		List<AuthVO> obj = authDao.searchAuthDetail(authVO);
-		
-		return obj;
+		List<AuthVO> list = authDao.authDetailList(auth_id);
+		return list;
 	}
 
 	@Override
-	public void insertAuthMaster(AuthVO authVO) {
+	public int authInsert(AuthVO authVO) {
 		
-		System.out.println("insertAuthMaster 서비스");
-		
-		authDao.insertAuthMaster(authVO);
-		
+		int result = 0;
+		result = authDao.authInsert(authVO);
+		return result;
 	}
 
-	
-	
+	@Override
+	public int authUpdate(AuthVO authVO) {
+		
+		int result = 0;
+		result = authDao.authUpdate(authVO);
+		return result;
+	}
+
+	@Override
+	public int authDelete(String dc) {
+		
+		int result = 0;
+		result = authDao.authDelete(dc);
+		return result;
+	}
+
+
+	 
 	
 	
 
