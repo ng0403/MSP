@@ -206,7 +206,7 @@
 						</tbody>
 					</table>
 				</form>
-				<div class="paging2_div">
+				<div class="paging_div">
 					<div class="page" id="paging_div">	
 						
 					</div>
