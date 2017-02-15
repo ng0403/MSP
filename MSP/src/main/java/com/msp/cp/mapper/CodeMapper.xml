@@ -130,4 +130,14 @@
 			code1 = #{code1}
 	</delete>
 
+	<!-- menu_level 검색 -->
+	<select id="searchmenuLevel" resultType="com.msp.cp.code.vo.CodeVO">
+		SELECT
+			code1
+			,code_txt
+		FROM TB_CODE_DETAIL
+		WHERE
+			grp_cd = '03'
+		ORDER BY code1 ASC
+	</select>
 </mapper>

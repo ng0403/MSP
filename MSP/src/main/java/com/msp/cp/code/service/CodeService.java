@@ -22,4 +22,7 @@ public interface CodeService {
 	  
 	  // Paging
 	  PagerVO getCodeListCount(Map<String, Object> map);
+	  
+	  // menu_level 검색
+	  public List<CodeVO> menuLevel();
 }

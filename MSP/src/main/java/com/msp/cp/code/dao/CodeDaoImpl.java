@@ -105,4 +105,11 @@ public class CodeDaoImpl implements CodeDao {
 		return totalCount;
 	}
 
+	// menu_level 검색
+	@Override
+	public List<CodeVO> menuLevel() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.searchmenuLevel");
+	}
+
 }

@@ -104,4 +104,12 @@ public class CodeServiceImpl implements CodeService {
 		return page;
 	}
 
+	// menu_level 검색
+	@Override
+	public List<CodeVO> menuLevel() {
+		// TODO Auto-generated method stub
+		List<CodeVO> mLevel = codeDao.menuLevel();
+		return mLevel;
+	}
+
 }

@@ -21,5 +21,8 @@ public interface CodeDao {
 	
 	// Paging
 	int CodeListCount(String string, Map<String, Object> map);
+	
+	// menu_level 검색
+	public List<CodeVO> menuLevel();
 
 }
