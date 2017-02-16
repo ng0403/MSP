@@ -18,81 +18,36 @@
 
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>메뉴관리화면</title>
-<style type="text/css">
-	@media screen and (min-width:1100px){
-		.list_div{
-			position:relative;
-			width:100%;
-			overflow:auto;
-		}
-		.list2_div{
-			/* position:float; */
-			padding: 10px;	
-			float: left;
-			width: 58%;
-		}
-		.list3_div{
-			padding: 10px;
-			margin-top: 35px; 
-			margin-left: 20px;
-			width: 38%;
-			display: inline-block;
-		}
-	}
-	.checkall {
-		text-align: center;
-		vertical-align: middle;
-	}
-	.paging_div {
-		width: 100%;
-		height: auto;
-		text-align: center;
-		margin-top: 5px;
-		clear: both;
-	}
-	.left {
-		float: left;
-		vertical-align: top;
-		margin:0;
-	}
 
-	.page {
-		width: auto;
-		clear: both;
-		display: inline-block;
-		text-align: center;
-		vertical-align: top;
-		margin:0 auto;
-	}
-	
-	.right {
-		float: right;
-		vertical-align: top;
-	}
-	
-	.pNum{
-		width: 25%;
-	}
-</style>
 <script type="text/javascript">	
 	$(function(){
 		/*검색버튼 클릭 시 처리 이벤트*/
-		$("#menu_inqr_fbtn").click(function(){
+		$("#menuInqr_pop_fbtn").click(function(){
 			menuListInqrPop(1);
 		})
+		/*검색창 엔터 시 처리 이벤트*/
+		$("#menu_nm_key_pop").click(function(){
+			enterSearchPop(event);
+		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
-		$(document).on("click", ".open_detail", function(){
+		$(document).on("click", ".open_menuList", function(){
 			var menu_cd = $(this).attr("data_num");
 			var menu_nm = $(this).children().eq(0).val();
 			$('#menu_cd').val(menu_cd);
 			$('#menu_nm').val(menu_nm);
-		})		
+		})
+		//닫기 버튼을 눌렀을 때
+		$('#menuInpr_close_nfbtn').click(function(e) {
+			$('.menu_list_pop, #paging_pop_div').html("");
+			$('#menuMask, #menuWindow').hide();
+		});
 	})
 	
 	/*메뉴 리스트 출력및 페이징 처리 함수*/
 	function menuListInqrPop(pageNum){
-		var menu_nm_key = $("#menu_nm_key").val();
+		var menu_nm_key = $("#menu_nm_key_pop").val();
 		
+		viewLoadingShow();
 		$.post("/menu/search_list_Pop",{"menu_nm_key":menu_nm_key, "pageNum":pageNum}, function(data){
 			$(".menu_list").html("");
 			$(data.menu_list).each(function(){
@@ -100,7 +55,7 @@
 				var menu_nm = this.menu_nm;
 				var menu_url = this.menu_url;
 				var up_menu_nm = this.up_menu_nm;
-				menuListOutput(menu_cd, menu_nm, menu_url, up_menu_nm);
+				menuListPopOutput(menu_cd, menu_nm, menu_url, up_menu_nm);
 			})
 			$("#paging_div").html("");
 			$(data).each(function(){
@@ -114,17 +69,18 @@
 				var endPageNum = this.page.endPageNum;
 				var currentPageNum = this.page.currentPageNum;
 				var totalPageCount = this.page.totalPageCount;
-				pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
+				pagePopOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
 			})
 		}).fail(function(){
 			alert("메뉴 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
+		viewLoadingHide();
 	}
 	/*메뉴 리스트 출력 함수*/
-	function menuListOutput(menu_cd, menu_nm, menu_url, up_menu_nm){
+	function menuListPopOutput(menu_cd, menu_nm, menu_url, up_menu_nm){
 		
 		var menu_tr = $("<tr>");
-		menu_tr.addClass("open_detail");
+		menu_tr.addClass("open_menuList");
 		menu_tr.attr("data_num",menu_cd);
 		
 		var menu_nm_td = $("<td>");
@@ -138,11 +94,11 @@
 		
 		menu_tr.append(menu_nm_td).append(up_menu_nm_td).append(menu_url_td);
 		
-		$(".menu_list").append(menu_tr);
+		$(".menu_list_pop").append(menu_tr);
 			
 	}
 	/*페이징 출력 함수*/
-	function pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
+	function pagePopOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
@@ -181,7 +137,7 @@
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
-		$("#paging_div").append(pageContent);
+		$("#paging_pop_div").append(pageContent);
 
 	}
 	// 검색 페이징 엔터키
@@ -203,7 +159,7 @@
     				$("#pageInput").val($("#pageNum").val());
     				$("#pageInput").focus();
     			} else {
-    				menuListInqr(pageNum);
+    				menuListInqrPop(pageNum);
     			}
     		}
     		event.stopPropagation();
@@ -211,10 +167,10 @@
     }
 	
   //검색 엔터키
-    function enterSearch(event) {		
+    function enterSearchPop(event) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
     	if (keycode == '13') {
-    		menuListInqr(1);
+    		menuListInqrPop(1);
     	}
     	event.stopPropagation();
     }
@@ -222,29 +178,30 @@
 </script>
 </head>
 <body>
-	<div class="main_div">
+	<div class="main_div" id="menuWindow">
 		<div class="navi_div">
 			마스터 > 메뉴관리
+			<div>
+				<input type="button" id="menuInpr_close_nfbtn" class="func_btn" data-dismiss="modal" style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
+			</div>
 		</div>
+		<div class="block_div"></div><div class="block_div"></div>
 		<div class="search_div">
 			<div class="search2_div">
-				<form id="searchForm" name="searchForm">
+				<!-- <form id="searchForm" name="searchForm"> -->
 					<label>메뉴명</label>
-					<input type="text" id="menu_nm_key" name="menu_nm_key" > &nbsp;
-					<input type="button" id="menu_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
-				</form>
+					<input type="text" id="menu_nm_key_pop" name="menu_nm_key" > &nbsp;
+					<input type="button" id="menuInqr_pop_fbtn" class="btn btn-default btn-sm" value="검색">
+				<!-- </form> -->
 			</div>
 		</div>
 		<div class="list_div">
 			<div class="list2_div">
-				<form id="delAll_form" name="delAll_form">
 					<table summary="menu_list_tb" class="table table-hover">
 						<colgroup>
-							<col width="5%">
-							<col width="25%">
-							<col width="25%">
-							<col width="25%">
-							<col width="20%">
+							<col width="30%">
+							<col width="30%">
+							<col width="40%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -253,13 +210,12 @@
 								<th>URL</th>
 							</tr>
 						</thead>
-						<tbody class="menu_list">
+						<tbody class="menu_list_pop">
 							
 						</tbody>
 					</table>
-				</form>
 				<div class="paging_div">
-					<div class="page" id="paging_div">	
+					<div class="page" id="paging_pop_div">	
 						
 					</div>
 				</div>

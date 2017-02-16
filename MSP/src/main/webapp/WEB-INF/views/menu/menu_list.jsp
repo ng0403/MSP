@@ -73,6 +73,28 @@
 	.pNum{
 		width: 25%;
 	}
+	
+	#menuMask {
+		position:absolute; 
+		z-index:9000; 
+		background-color:#000;  
+		left:0; 
+		top:0;
+	} 
+	#menuWindow{
+		position:absolute; 
+		width:60%; 
+		height:55%; 
+		left:20%; 
+		top:15%; 
+		z-index:10000; 
+		background-color: white; 
+		overflow: auto;
+	}
+	.block_div{display:block; 
+		height: 10px; 
+		clear: both;
+	}
 </style>
 <script type="text/javascript">
 	var menu_cd = "";
@@ -90,6 +112,9 @@
 		if("<c:out value='${data.dept_nm_key}'/>" != ""){
 			$("#dept_nm_key").val("<c:out value='${data.dept_nm_key}'/>");
 		} */
+		//팝업찬 숨기기
+		$('#menuMask, #menuWindow').hide();
+		
 		/*테스트 입력제어*/
 		pageReady(true);
 		
@@ -143,6 +168,17 @@
 		        $("input[name=del_code]").prop("checked", false);
 		      }
 		})
+		//메뉴검색 버튼 클릭시 이벤트
+		$("#menuInqr_popup_fbtn").click(){
+			menuListInqrPop(1);
+			menuByMask();
+		}
+		
+		//검은 막을 눌렀을 때
+		$('#menuMask').click(function() {
+			$(this).hide();
+			$('#menuWindow').hide();
+		});
 	})
 	
 	/*메뉴 리스트 출력및 페이징 처리 함수*/
@@ -443,6 +479,38 @@
     	}
     	event.stopPropagation();
     }
+	
+    function viewLoadingShow(){
+	    $('#viewLoadingImg').css('position', 'absolute');
+	     $('#viewLoadingImg').css('left', '45%');
+	     $('#viewLoadingImg').css('top', '45%');
+	     $('#viewLoadingImg').css('z-index', '1200');
+	     $('#viewLoadingImg').show().fadeIn(500);
+	}
+
+	function viewLoadingHide(){
+	   $('#viewLoadingImg').fadeOut();   
+	}
+	
+	//menuDetail image popup
+	function menuByMask() {
+		//화면의 높이와 너비를 구한다.
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+
+		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+		$('#menuMask').css({
+			'width' : maskWidth,
+			'height' : maskHeight
+		});
+
+		//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
+		$('#menuMask').fadeIn(1000);
+		$('#menuMask').fadeTo("slow", 0.5);
+
+		//윈도우 같은 거 띄운다.
+		$('#menuWindow').show();
+	}
 
 </script>
 </head>
@@ -602,7 +670,7 @@
 								<th class="dc">상위메뉴ID</th>
 								<td>
 									<input type="text" id="up_menu_cd" name="up_menu_cd">
-									<input type="button" id="menuinqr_pop_nfbtn" class="btn btn-default btn-sm" value="저장">
+									<input type="button" id="menuInqr_popup_fbtn" class="btn btn-default btn-sm" value="메뉴검색">
 								</td>
 							</tr>
 							<tr>
@@ -629,6 +697,12 @@
 					</div>
 				</form>
 			</div>
+		</div>
+		<div id="viewLoadingImg" style="display: none;">
+			<img src="${ctx}/resources/image/viewLoading.gif">
+		</div> 
+		<div id="menuMask">
+			<jsp:include page="../menu/menulist_pop.jsp">
 		</div>
 	</div>
 </body>
