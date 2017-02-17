@@ -1,14 +1,17 @@
 package com.msp.cp.boardmng.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.boardmng.service.BoardMngService;
@@ -66,8 +69,8 @@ public class BoardMngController {
 	
 	@RequestMapping(value="/board_mng_modify", method=RequestMethod.POST)
 	public String board_mng_modify(BoardMngVO vo){
-		
-		System.out.println("BOARD_MNG_MODIFY ENTERING");
+			
+		System.out.println("BOARD_MNG_MODIFY ENTERING" + vo.toString());
 		
 		boardmngService.modify(vo);
 		System.out.println("modify success" + vo.toString());
@@ -81,12 +84,55 @@ public class BoardMngController {
 	
 	
 	@RequestMapping(value="/board_mng_add" ,method=RequestMethod.POST)
-	public void board_mng_add_post(BoardMngVO vo) {
+	public String board_mng_add_post(BoardMngVO vo) {
 		
 		System.out.println("enter board_mng_add...");
 		System.out.println("vo is  " + vo);
 		boardmngService.add(vo);
 		
+		return "redirect:/board_mng/board_mng_list";
+		
+	}
+	
+	
+	@RequestMapping(value="/board_mng_remove" ,method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> board_mng_remove(@RequestBody String del_code){
+		System.out.println("remove insert" + del_code);
+		 
+		String[] delcode = del_code.split(",");
+		
+		
+		for(int i = 0; i < delcode.length; i++)
+		{
+			String dc = delcode[i];
+			System.out.println("delete..." + dc);
+			boardmngService.remove(dc);
+			System.out.println("success"); 
+		} 
+		
+		Map<String, Object> map = new HashMap<String, Object>(); 
+
+		 List<Object> ajaxlist =  boardmngService.ajaxlist(); 
+	     map.put("data", ajaxlist);
+	     System.out.println("ajax map? " + map.toString());
+		
+ 	     
+		return map;
+		
+	}
+	
+	@RequestMapping(value="/board_mng_codetxt", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> board_mng_codetxt(@RequestBody String CODE_TXT ) {
+		
+		System.out.println("hello codetxt" + CODE_TXT);
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		List<Object> codelist = boardmngService.codetxt(CODE_TXT);
+		map.put("data", codelist);
+		
+		System.out.println(map);
+		return map;
 	}
 
 }

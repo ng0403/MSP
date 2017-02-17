@@ -19,7 +19,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <form role="form" name = "form_modify" method="post">
- <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"> 
+ <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"/> 
+ <input type='hidden' id="REPLY_FLG" name='REPLY_FLG' value="${boardlist.REPLY_FLG}"/>
 </form>
  
 
@@ -46,7 +47,7 @@
 
 
  <!-- 댓글div -->
-<div class="timeline-body" style ="height:100px; margin-top:10px"> 
+<div id="reply_div" class="timeline-body" style ="height:100px; margin-top:10px "> 
  <div>
  <div class="col-sm-10" style=" height:40px">
  <textarea id = "reply_content" class="form-control" rows="2" id="content" ></textarea>
@@ -68,27 +69,21 @@
  </div> 
 
 </div>	
-
-
-
-
+ 
 <script>
  
  
 $("#board_list_fbtn").on("click", function(){  
     	location.href = "/board/board_list";
  	})
- 	
  	 
- 	
- 	
  	
  	
  
 $(document).ready(function(){ 
-	  
+	 var REPLY_FLG = $("#REPLY_FLG").val(); 
 	 var BOARD_NO = $("#BOARD_NO").val();
-	 var liststr = "";
+ 	 var liststr = "";
 	 var liststr1 ="";
 	 var liststr2 = ""; 
      var formObj = $("form[role='form']");
@@ -107,6 +102,8 @@ $(document).ready(function(){
 	 formObj.attr("method", "post");
 	 formObj.submit();
  })
+  
+ 
   function ajax_list(){
  	 $.ajax({
 			url : '/reply/reply_list/' + BOARD_NO,
@@ -138,9 +135,6 @@ $(document).ready(function(){
 	         
 			})  
  }
-  
- ajax_list();
- 
  
  
  $("#reply_add_fbtn").on("click", function() {

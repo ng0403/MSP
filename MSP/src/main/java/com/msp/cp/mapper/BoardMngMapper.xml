@@ -26,23 +26,65 @@ select X.*
  
  
  <select id="ReadPage"  resultType="com.msp.cp.boardmng.vo.BoardMngVO">
- SELECT BOARD_MNG_NO, BOARD_MNG_CD, BOARD_NM, REPLY_FLG, ACTIVE_FLG, FILE_ATTACH_FLG, NOTICE_FLG 
- FROM TB_BOARD_MNG
- WHERE BOARD_MNG_NO = #{BOARD_MNG_NO}
+ SELECT A.BOARD_MNG_NO, A.BOARD_MNG_CD, A.BOARD_NM, A.REPLY_FLG, A.ACTIVE_FLG, A.FILE_ATTACH_FLG, A.NOTICE_FLG, B.CODE_TXT
+ FROM TB_BOARD_MNG A , TB_CODE_DETAIL B
+ WHERE BOARD_MNG_NO = #{BOARD_MNG_NO} AND A.BOARD_MNG_CD = B.CODE1
  </select>
  
   <update id="Modify" >
  
- update tb_board_mng set title = #{BOARD_NM}, #{REPLY_FLG}, #{REPLY_FLG}, #{ACTIVE_FLG}, #{NOTICE_FLG}
+ update tb_board_mng set BOARD_NM = #{BOARD_NM}, FILE_ATTACH_FLG =  #{FILE_ATTACH_FLG}, REPLY_FLG =  #{REPLY_FLG},
+ ACTIVE_FLG =  #{ACTIVE_FLG}, NOTICE_FLG =  #{NOTICE_FLG}
  where BOARD_MNG_NO = #{BOARD_MNG_NO}
  
  </update>
  
  <insert id ="Add">
-INSERT INTO TB_BOARD_MNG ( BOARD_MNG_NO	, BOARD_MNG_CD, BOARD_NM, REPLY_FLG, FILE_ATTACH_FLG, NOTICE_FLG, ACTIVE_FLG, CREATED_BY )
-VALUES('BMG1000003', 'BG01', #{BOARD_NM}, #{REPLY_FLG}, #{FILE_ATTACH_FLG}, #{NOTICE_FLG}, #{ACTIVE_FLG}, 'ADMIN' )
+ 
+insert into tb_board_mng (board_mng_no, board_mng_cd, board_nm, reply_flg, file_attach_flg, notice_flg, active_flg, created_by)
+values (
+  (
+    SELECT /*+INDEX_DESC(TB_BOARD_MNG TB_BOARD_MNG_PK)*/
+      DECODE(MAX(board_mng_no), NULL, 'BMG1000001', SUBSTR(MAX(board_mng_no), 1, 3) || (SUBSTR(MAX(board_mng_no), 4, 7)+1)) board_mng_no
+    FROM tb_board_mng
+     <![CDATA[
+    WHERE board_mng_no < CONCAT('BMG', '9999999')
+          AND ROWNUM = 1
+          	]]>
+   ),
+   
+   #{BOARD_MNG_CD},
+   #{BOARD_NM},
+   #{REPLY_FLG},
+   #{FILE_ATTACH_FLG}, 
+   #{NOTICE_FLG},
+   #{ACTIVE_FLG},
+    'ADMIN' 
+)
  
  </insert>
+ 
+ 
+ <delete id="Delete">
+ DELETE TB_BOARD_MNG
+ WHERE BOARD_MNG_NO = #{BOARD_MNG_NO}
+ </delete>
+ 
+ 
+ <select id="ajaxList" resultType="map">
+ 
+ SELECT
+  BOARD_MNG_NO, BOARD_MNG_CD, BOARD_NM, CREATED, ACTIVE_FLG
+FROM TB_BOARD_MNG
+WHERE ACTIVE_FLG='Y'
+ </select>
+ 
+ <select id="codetxt" parameterType="String" resultType="map">
+ select CODE1, CODE_TXT
+from TB_CODE_DETAIL
+where CODE_TXT = #{CODE_TXT}
+ </select>
+ 
   
 
 </mapper>

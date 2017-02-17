@@ -25,14 +25,12 @@
 	 <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardVO.BOARD_NO}"> 
 
 <div> <!-- 제목 div-->
- <input type="text" class="form-control" name="TITLE" value= "${boardVO.TITLE}" />
+   
+ <input type="text" class="form-control" name="TITLE" value= "${boardVO.TITLE }"/>
+ 
 </div> 
 
-
-<div> 
-<a href="/board/board_file_attach"><span class="glyphicon glyphicon-file"></span> 파일 업로드</a>  
-</div><!-- 파일 업로드  -->
-<div> <!-- 내용 div -->
+ <div> <!-- 내용 div -->
  <textarea class="form-control" rows="10" name="CONTENT" >${boardVO.CONTENT}</textarea>
 </div> 	
 
@@ -87,7 +85,7 @@ var formObj = $("form[role='form']");
 console.log(formObj);
  
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/board_list";
+    	location.href = "/board/QnA_List";
  	})
  	
 $("#board_modify_fbtn").on("click", function(){

@@ -54,13 +54,16 @@
 								<td><a href="/board_mng/board_mng_detail?BOARD_MNG_NO=${boardMngVO.BOARD_MNG_NO}">${boardMngVO.BOARD_NM}</a> </td>
  								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardMngVO.CREATED}" /> </td>
-								<td>${boardMngVO.ACTIVE_FLG}</td>
+								<td><c:if test="${boardMngVO.ACTIVE_FLG eq 'Y'}">활성화</c:if>
+									<c:if test="${boardMngVO.ACTIVE_FLG eq 'N'}">비활성화</c:if>
+								
+								</td>
 							</tr> 
 						</c:forEach>
 						 
 					</table>
 					</form>
-					
+	</div>				
 					<div class="paging_div" style="width: 100%; text-align: center;">
 	
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
@@ -94,7 +97,7 @@
 					
 					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
 					
-</div>
+
 </div>
 
 <div class = paging_div>
@@ -136,7 +139,7 @@ $("#board_add_fbtn").on("click", function(){
 		if (confirm("정보를 삭제 하시겠습니까?")) {
 
  			$.ajax({
- 				url : '/board/board_remove',
+ 				url : '/board_mng/board_mng_remove',
  				headers : {
  		            "Content-Type" : "application/json",
  		            "X-HTTP-Method-Override" : "POST"
@@ -162,22 +165,22 @@ $("#board_add_fbtn").on("click", function(){
 										"<tr>" +
 									"<th>" +
 										"<input id='checkall' type='checkbox'/>" +
-									"<th>번호</th>" +
-									"<th>제목</th>" +
-									"<th>작성자</th>" +
-									"<th>작성일</th>" +
-									"<th>조회수</th>" +
+									"<th>게시판관리번호</th>" +
+									"<th>게시판구분</th>" +
+									"<th>게시판이름</th>" +
+									"<th>생성일</th>" +
+									"<th>사용여부</th>" +
 									"</tr>";
  				 	
 					for(var i=0 ; i<ajaxList.length; i++) {  
 						 liststr1  +=    "<tr>" +
-  										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_NO + "/>" +
- 										"<td>" + ajaxList[i].BOARD_NO + "</td>" +
- 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_NO + "\">" + ajaxList[i].TITLE + "\</a> </td>" +
- 										"<td>" + ajaxList[i].CREATED_BY + "</td>" +
+  										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_MNG_NO + "/>" +
+ 										"<td>" + ajaxList[i].BOARD_MNG_NO + "</td>" +
+ 										"<td>" + ajaxList[i].BOARD_MNG_CD + "</td>" +
+ 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_MNG_NO + "\">" + ajaxList[i].BOARD_NM + "\</a> </td>" +
  										"<td>" + ajaxList[i].CREATED + "</td>" +
- 										"<td>" + ajaxList[i].VIEW_CNT + "</td>" +
- 										"</tr>";
+ 										"<td>" + ajaxList[i].ACTIVE_FLG + "</td>" +
+  										"</tr>";
   								
  				 	}
 					

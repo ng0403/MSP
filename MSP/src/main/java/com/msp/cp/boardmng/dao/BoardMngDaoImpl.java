@@ -51,4 +51,23 @@ public class BoardMngDaoImpl implements BoardMngDao {
 		sqlSession.insert("boardmng.Add", vo);
 		
 	}
+
+	@Override
+	public void remove(String dc) {
+
+		sqlSession.delete("boardmng.Delete", dc);
+	}
+
+	@Override
+	public List<Object> ajaxlist() {
+		
+		return sqlSession.selectList("boardmng.ajaxList");
+	}
+
+	@Override
+	public List<Object> codetxt(String CODE_TXT) {
+		
+	return sqlSession.selectList("boardmng.codetxt", CODE_TXT);
+		
+	}
 }

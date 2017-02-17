@@ -58,7 +58,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Object> ajaxlist() {
 		 
-		return sqlSession.selectList("ajaxList");
+		return sqlSession.selectList("board.ajaxList");
 	}
 
 	@Override
@@ -72,5 +72,6 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		return totalCount;
 	}
+
 
 }

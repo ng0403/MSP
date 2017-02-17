@@ -15,7 +15,14 @@ public class BoardMngVO {
 	private String UPDATED_BY;
 	private String UPDATED;
 	private String BOARD_MNG_NM;
+	private String CODE_TXT;
 	
+	public String getCODE_TXT() {
+		return CODE_TXT;
+	}
+	public void setCODE_TXT(String cODE_TXT) {
+		CODE_TXT = cODE_TXT;
+	}
 	public String getBOARD_MNG_NM() {
 		return BOARD_MNG_NM;
 	}
@@ -102,7 +109,7 @@ public class BoardMngVO {
 				+ ", REPLY_FLG=" + REPLY_FLG + ", FILE_ATTACH_FLG=" + FILE_ATTACH_FLG + ", NOTICE_FLG=" + NOTICE_FLG
 				+ ", ACTIVE_FLG=" + ACTIVE_FLG + ", DEL_FLG=" + DEL_FLG + ", CREATED_BY=" + CREATED_BY + ", CREATED="
 				+ CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED + ", BOARD_MNG_NM=" + BOARD_MNG_NM
-				+ "]";
+				+ ", CODE_TXT=" + CODE_TXT + "]";
 	}
 	
 	

@@ -27,47 +27,69 @@
 
 </div>
 
-<!-- Q&A 리스트, 조회화면 -->
+<div class= search_div>
+<div class= search1_div>
+
+</div>
+</div>
+
+ 
+<div class= "container" id="list1_div" style="width:90%">  
+
+ <!-- Q&A 리스트, 조회화면 -->
 	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
 		<div id="inputDiv" style="font-size:11.8px;width:100%;font-family:Helvetica, sans-serif;">
-			  		 
+				<label for="user_id">질문유형 :</label>
+					 <select id="qna_type" name="qna_type" style="width:80px;font-size:10px;">
+					    <option value=""> -- 선택 -- </option>
+ 							<option value="Y">Y</option>
+ 							<option value="N">N</option>
+ 					</select>
+						<label>답변	 :</label>
+					<select id="qna_answer" name="qna_answer" style="width:80px;font-size:10px;">
+					    <option value=""> -- 답변 -- </option>
+ 							<option value="Y">Y</option>
+ 							<option value="N">N</option>
+ 					</select>
 				<label for="keyword">제목 :</label>
 					<input type="text" id="keyword" name="keyword" style="width: 100px" />&nbsp;
 			
 				</form> 
-					<input type="button" class="button-default" onclick="boardListInqr(1);" value="조회" style="font-size:11px;float:right;margin-right:1%;
+					<input type="button" class="button-default" onclick="QnAListInqr(1);" value="조회" style="font-size:11px;float:right;margin-right:1%;
 					    background-color:#81BEF7;font-color:white;"/> 
 					 
 		</div>
 
-<div class= "list_div">
+ 
 
-<div class= "board_list1" id="board_list1">  
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table class="table table-bordered" style ="width: 90%">
-	<thead>
+						<thead>
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
 							<th>번호</th>
+							<th>질문유형</th>
+							<th>답변상태</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-						</tr>
-						</thead> 
+						</tr> 
+						</thead>
  						<c:forEach items="${boardlist}" var="boardVO"> 
- 					 
- 						<tbody class="board_list">
+ 					   <tbody class="qna_list">
+ 						
 							<tr>
 								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
    								<td>${boardVO.BOARD_NO}</td>
-								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
+   								<td>${boardVO.QUESTION_TYPE_CD}</td>
+   								<td>${boardVO.ANSWER_FLG}</td>
+								<td><a href="/board/QnA_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
 								<td>${boardVO.CREATED_BY} </td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.CREATED}" /></td>
 								<td>${boardVO.VIEW_CNT}</td>
 							</tr> 
-						
 						</c:forEach>
 						 </tbody>
 					</table>
@@ -107,8 +129,7 @@
 					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
 					
 </div>
-</div>
-
+  
 <div class = paging_div>
 
 </div> 
@@ -116,7 +137,7 @@
 </div>
 
 <!-- 페이징 전용 폼 -->
-			<form  action="${ctx}/board/board_list" id="boardlistPagingForm" method="post">
+			<form  action="${ctx}/board/board_QnA_list" id="boardlistPagingForm" method="post">
 				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
@@ -162,7 +183,7 @@ $("#board_add_fbtn").on("click", function(){
  					alert("hello ajax");
  					
  					var ajaxList = result.data; 
- 					alert(ajaxList + "gg");	
+ 						
  					var liststr = "";
  					var liststr1 = "";
  					var liststr2 = "";
@@ -268,21 +289,23 @@ $("#board_add_fbtn").on("click", function(){
 	}
 	
 	
+	
 	/*리스트 출력및 페이징 처리 함수*/
-	function boardListInqr(pageNum){
+	function QnAListInqr(pageNum){
+ 		var qna_answer = $("#qna_answer").val();
+		var keyword    = $("#keyword").val();
 		
- 		var keyword    = $("#keyword").val();
- 		$.post("/board/search_QnA_list",{"keyword":keyword, "pageNum":pageNum}, function(data){
-			$(".board_list").html("");
+		$.post("/board/search_QnA_list",{"qna_answer":qna_answer, "keyword":keyword, "pageNum":pageNum}, function(data){
+			$(".qna_list").html("");
 			$(data.qna_list).each(function(){
-				var aa = data.qna_list.length;
-				alert(aa);
   				var BOARD_NO = this.board_NO;
-  				var TITLE = this.title;
+				var QUESTION_TYPE_CD = this.question_TYPE_CD;
+				var ANSWER_FLG = this.answer_FLG;
+				var TITLE = this.title;
 				var CREATED_BY = this.created_BY;
 				var CREATED  = this.created;
 				var VIEW_CNT = this.view_CNT;
-				boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
+				qnaListOutput(BOARD_NO, QUESTION_TYPE_CD, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
 			$("#paging_div").html("");
 			$(data).each(function(){
@@ -303,38 +326,7 @@ $("#board_add_fbtn").on("click", function(){
 		})
 	}
 	
-	
-	
-	/* 리스트 출력 함수 */
-	function boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT){
- 		
-		var board_Tr = $("<tr>");
- 	
-		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + BOARD_NO + "'>");
-		
-		var board_no_td = $("<td>");
- 		board_no_td.html(BOARD_NO); 
- 		
-		var title_td = $("<td>");
-		title_td.html("<a href=\"/board/board_detail?BOARD_NO=" + BOARD_NO + "\">" + TITLE + "\</a>");
-		
-		var created_by_td =$("<td>");
-		created_by_td.html(CREATED_BY);
-		
-		var created_td =$("<td>");
-		created_td.html(CREATED_BY);
-		
-		var view_cnt_td =$("<td>");
-		view_cnt_td.html(VIEW_CNT);
-		
-		board_Tr.append(del_code_td).append(board_no_td).append(title_td).append(created_by_td).append(created_td).append(view_cnt_td);
-				
-		$(".board_list").append(board_Tr);
- 			
-	}
-
-	
+	 
 	
 	
 	/*페이징 출력 함수*/
@@ -380,6 +372,46 @@ $("#board_add_fbtn").on("click", function(){
 		$("#paging_div").append(pageContent);
 
 	}
+	
+	
+	
+	/* 리스트 출력 함수 */
+	function qnaListOutput(BOARD_NO, QUESTION_TYPE_CD, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT){
+	
+		var qna_Tr = $("<tr>");
+ 	
+		var del_code_td = $("<td>");
+		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + BOARD_NO + "'>");
+		
+		var board_no_td = $("<td>");
+ 		board_no_td.html(BOARD_NO);
+		
+		var question_type_cd_td = $("<td>");
+		question_type_cd_td.html(QUESTION_TYPE_CD);
+		
+		var answer_flg_td = $("<td>");
+		if(ANSWER_FLG=='Y'){
+			answer_flg_td.html("Y");
+		}else if(ANSWER_FLG=='N'){
+			answer_flg_td.html("N");
+		}
+		
+		var title_td = $("<td>");
+		title_td.html("<a href=\"/board/QnA_detail?BOARD_NO=" + BOARD_NO + "\">" + TITLE + "\</a>");
+		
+		var created_by_td =$("<td>");
+		created_by_td.html(CREATED_BY);
+		
+		var created_td =$("<td>");
+		created_td.html(CREATED_BY);
+		
+		var view_cnt_td =$("<td>");
+		view_cnt_td.html(VIEW_CNT);
+		
+		qna_Tr.append(del_code_td).append(board_no_td).append(question_type_cd_td).append(answer_flg_td).append(title_td).append(created_by_td).append(created_td).append(view_cnt_td);
+				
+		$(".qna_list").append(qna_Tr);
+ 	}
 
 	
 </script>

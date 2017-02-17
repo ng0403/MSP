@@ -11,4 +11,7 @@ public interface BoardMngDao {
 	public BoardMngVO detail(String BOARD_MNG_NO);
 	public void modify(BoardMngVO vo);
 	public void add(BoardMngVO vo);
+	public void remove(String dc);
+	public List<Object> ajaxlist();
+	public List<Object> codetxt(String CODE_TXT);
 }

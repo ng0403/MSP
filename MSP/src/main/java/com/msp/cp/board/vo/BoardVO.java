@@ -18,7 +18,44 @@ public class BoardVO {
 	private Date CREATED;
 	private String UPDATED_BY;
 	private String UPDATED;
+	private String delcode;
+	private String BOARD_MNG_CD;
+	private String REPLY_FLG;
+	private String QUESTION_TITLE;
+	private String CODE_TXT;
 	
+	
+ 	
+	public String getCODE_TXT() {
+		return CODE_TXT;
+	}
+	public void setCODE_TXT(String cODE_TXT) {
+		CODE_TXT = cODE_TXT;
+	}
+	public String getQUESTION_TITLE() {
+		return QUESTION_TITLE;
+	}
+	public void setQUESTION_TITLE(String qUESTION_TITLE) {
+		QUESTION_TITLE = qUESTION_TITLE;
+	}
+	public String getREPLY_FLG() {
+		return REPLY_FLG;
+	}
+	public void setREPLY_FLG(String rEPLY_FLG) {
+		REPLY_FLG = rEPLY_FLG;
+	}
+	public String getBOARD_MNG_CD() {
+		return BOARD_MNG_CD;
+	}
+	public void setBOARD_MNG_CD(String bOARD_MNG_CD) {
+		BOARD_MNG_CD = bOARD_MNG_CD;
+	}
+	public String getDelcode() {
+		return delcode;
+	}
+	public void setDelcode(String delcode) {
+		this.delcode = delcode;
+	}
 	public Integer getBOARD_NO() {
 		return BOARD_NO;
 	}
@@ -109,7 +146,9 @@ public class BoardVO {
 		return "BoardVO [BOARD_NO=" + BOARD_NO + ", BOARD_MNG_NO=" + BOARD_MNG_NO + ", FILE_CD=" + FILE_CD + ", TITLE="
 				+ TITLE + ", CONTENT=" + CONTENT + ", VIEW_CNT=" + VIEW_CNT + ", QUESTION_TYPE_CD=" + QUESTION_TYPE_CD
 				+ ", ANSWER_FLG=" + ANSWER_FLG + ", ACTIVE_FLG=" + ACTIVE_FLG + ", DEL_FLG=" + DEL_FLG + ", CREATED_BY="
-				+ CREATED_BY + ", CREATED=" + CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED + "]";
+				+ CREATED_BY + ", CREATED=" + CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED
+				+ ", delcode=" + delcode + ", BOARD_MNG_CD=" + BOARD_MNG_CD + ", REPLY_FLG=" + REPLY_FLG
+				+ ", QUESTION_TITLE=" + QUESTION_TITLE + ", CODE_TXT=" + CODE_TXT + "]";
 	} 
 	 
   

@@ -1,4 +1,4 @@
-package com.msp.cp.boardmng.service;
+	package com.msp.cp.boardmng.service;
 
 import java.util.List;
 import java.util.Map;
@@ -50,6 +50,26 @@ public class BoardMngServiceImpl implements BoardMngService {
 	public void add(BoardMngVO vo) {
 
 		boardmngDao.add(vo);
+	}
+
+	@Override
+	public void remove(String dc) {
+
+		boardmngDao.remove(dc);
+		
+	}
+
+	@Override
+	public List<Object> ajaxlist() {
+
+		return boardmngDao.ajaxlist();
+	}
+
+	@Override
+	public List<Object> codetxt(String CODE_TXT) {
+		
+		return boardmngDao.codetxt(CODE_TXT);
+		
 	}
 
 }

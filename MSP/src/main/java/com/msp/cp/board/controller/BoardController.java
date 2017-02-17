@@ -45,13 +45,12 @@ public class BoardController {
 		mov.addObject("boardlist", boardlist);
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
-		
-		
-		
-
+		 
 		System.out.println("board_list" + mov);
 		return mov; 
 	}
+	
+	  
 	
 	@RequestMapping(value="/board_detail", method= RequestMethod.GET)
 	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
@@ -97,9 +96,9 @@ public class BoardController {
 		return "redirect:/board/board_list";
 	}
 	
-	@RequestMapping(value="/board_remove", method=RequestMethod.POST)
-	@ResponseBody 
- 	public Map<String, Object> board_remove(@RequestBody String del_code){ 
+	@RequestMapping(value="/board_remove", method=RequestMethod.POST) 
+	 @ResponseBody
+	public Map<String, Object> board_remove(@RequestBody String del_code){ 
 		
 		System.out.println("remove insert" + del_code);
  
@@ -124,5 +123,8 @@ public class BoardController {
 		return map;
 		
  	}
+	
+	
+ 	
  
 }
