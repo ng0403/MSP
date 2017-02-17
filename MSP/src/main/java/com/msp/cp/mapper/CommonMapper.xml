@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common">
+
+	<update id="userExcelInsert" parameterType="java.util.List">
+		INSERT INTO tb_user (user_id, user_pwd, emp_no, user_nm, dept_cd
+			, rank_cd, duty_cd, cphone_num1, cphone_num2, cphone_num3
+			, phone_num1, phone_num2, phone_num3, email_id, email_domain
+			, hiredate, created_by) 
+		VALUES(#{A}, #{B}, #{C}, #{D}, #{E}, #{F}, #{G}, #{H}, #{I}, #{J}, #{K}, #{L}, #{M}, #{N}, #{O}, #{P}, #{Q})      
+	</update>	
+	
+</mapper>

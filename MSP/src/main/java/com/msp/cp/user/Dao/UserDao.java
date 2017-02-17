@@ -1,5 +1,6 @@
 package com.msp.cp.user.Dao;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +26,6 @@ public interface UserDao {
 	public List<userVO> dutyCdList();
 
 	public List<userVO> userExcel(Map<String, Object> map);
+
+	public int userUpLoadExcel(File destFile);
 }

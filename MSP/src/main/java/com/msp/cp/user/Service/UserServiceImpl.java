@@ -1,5 +1,6 @@
 package com.msp.cp.user.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import com.msp.cp.dept.dao.DeptDao;
 import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.Dao.UserDao;
 import com.msp.cp.user.vo.userVO;
+import com.msp.cp.utils.ExcelRead;
+import com.msp.cp.utils.ExcelReadOption;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,6 +22,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	DeptDao deptDao;
 
+	
+//	사용자관리 리스트
 	@Override
 	public List<userVO> searchListUser(Map map) {
 		System.out.println("8. ServiceImpl User List Search Service Impl");
@@ -27,12 +32,14 @@ public class UserServiceImpl implements UserService {
 		return obj;
 	}
 
+	
 	@Override
 	public Object userOneSelectByIdNM(Object user_id) {
 		Object obj = userDao.selectOnes("user.userIDOneSelect", "user_id");
 		return obj;
 	}
 
+//	사용자 신규 추가
 	@Override
 	public void insertUser(userVO vo) {
 		System.out.println("insert start ServiceImpl");
@@ -41,6 +48,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+//	사용자 삭제
 	@Override
 	public void userDel(String dc) {
 		userDao.userDel(dc);
@@ -102,5 +110,13 @@ public class UserServiceImpl implements UserService {
 		return userExcel;
 	}
 
+
+	@Override
+    public int excelUpload(File destFile) throws Exception{
+		System.out.println("Excel Service Impl 시작 : ");
+		int result = userDao.userUpLoadExcel(destFile);
+		
+		return result;
+	}
 	
 }

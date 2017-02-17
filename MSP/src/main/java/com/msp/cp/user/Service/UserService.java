@@ -32,4 +32,6 @@ public interface UserService {
 
 	public List<userVO> userExcel(Map<String, Object> map);
 
+	public int excelUpload(File destFile) throws Exception;
+
 }

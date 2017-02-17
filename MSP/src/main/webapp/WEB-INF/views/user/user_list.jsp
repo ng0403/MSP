@@ -18,6 +18,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
+<!-- <script type="text/javascript"> -->
+<!-- // $(document).ready(function() { -->
+<%-- // 	var result = ${result} --%>
+	
+<!-- // } -->
+<!-- </script> -->
  <script type="text/javascript">
  
  //엑셀 파일 추가 fucntion
@@ -31,62 +37,25 @@
  
             }
  
-            function check() {
-                var file = $("#excelFile").val();
-                if (file == "" || file == null) {
-                    alert("파일을 선택해주세요.");
-                    return false;
-                } else if (!checkFileType(file)) {
-                    alert("엑셀 파일만 업로드 가능합니다.");
-                    return false;
-                }
+function check() {
+    var excelFile = $("#excelFile").val();
+    alert(excelFile);
+    if (excelFile == "" || excelFile == null) {
+        alert("파일을 선택해주세요.");
+        return false;
+    } else if (!checkFileType(excelFile)) {
+        alert("엑셀 파일만 업로드 가능합니다.");
+        return false;
+    }
+
+    if (confirm("업로드 하시겠습니까?")) {
+              $("#excelUploadForm").append(excelFile);
+              $("#excelUploadForm").submit();
  
-                if (confirm("업로드 하시겠습니까?")) {
-                    var options = {
-                        success : function(data) {
-                            alert("모든 데이터가 업로드 되었습니다.");
- 
-                        },
-                        type : "POST"
-                    };
-                    $("#excelUploadForm").ajaxSubmit(options);
-    
-                }
-            }
-<!--<$(document).ready(function() {
-	
-	/* //검색버튼 클릭
-	$("#searchButton").click(function(){
-	    var objParams = {
-	            user_id_sch : $("input[name=user_id_sch]").val(), //검색할 코드 (실제로 예제에서는 사용 안함)
-	            user_nm_sch : $("input[name=user_nm_sch]").val(), //검색할 코드 (실제로 예제에서는 사용 안함)
-	            dept_nm_sch : $("input[name=dept_nm_sch]").val() //검색할 코드 (실제로 예제에서는 사용 안함)
-	    }
-	 
-	    var values = []; //ArrayList 값을 받을 변수를 선언
-	 
-	    //검색할 코드를 넘겨서 값을 가져온다.      
-	    $.post(
-	        "http://www.test.com/get", 
-	        objParams,
-	        function(retVal) {
-	            if(retVal.code == "OK") { //controller에서 넘겨준 성공여부 코드
-	                 
-	                values = retVal.bookList ; //java에서 정의한 ArrayList명을 적어준다.
-	                 
-	                $.each(values, function( index, value ) {
-	                   console.log( index + " : " + value.name ); //Book.java 의 변수명을 써주면 된다.
-	                });
-	                 
-	                alert("성공");
-	            }
-	            else {
-	                alert("실패");
-	            }                   
-	        }
-	    );
-	});
-	 */-->
+                };
+              alert("모든 데이터가 업로드 되었습니다.");
+                user_goSearch();
+        }
 </script> 
 
 <script type="text/javascript">
@@ -207,6 +176,7 @@
 		var user_id_sch = $("#user_id_sch").val();
 		var user_nm_sch = $("#user_nm_sch").val();
 		var dept_cd_sch = $("#dept_cd_sch").val();
+		var pageNum = $("#pageNum").val();
 		
 		$("#userSearchForm").submit();
 			
@@ -327,9 +297,13 @@
 			</c:otherwise>
 		</c:choose>
 		<div class="" style="text-align: right; margin-right: 10%;">
-			<input type="button" value="엑셀출력" class="func_btn" onclick="download_list_Excel('userlistExcelForm');" style="float: left;">
-			<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
-			<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
+			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax"> 
+				<input type="button" value="엑셀출력" class="func_btn" onclick="download_list_Excel('userlistExcelForm');" style="float: left;">
+	            <input id="excelFile" type="file" name="excelFile"/>
+		        <input type="button" id="addExcelImpoartBtn" class="btn" onclick="check();" value="업로드"> 
+				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
+				<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
+			</form>
 		</div>
 	</div>
 	</div>
