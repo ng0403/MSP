@@ -52,7 +52,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Object> ajaxlist() {
+	public List<BoardVO> ajaxlist() {
 		
  		return boardDao.ajaxlist();
 	}
@@ -68,6 +68,12 @@ public class BoardServiceImpl implements BoardService {
 		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 10, 999);
 		
 		return page;
+	}
+
+	@Override
+	public List<BoardVO> SearchList(Map<String, Object> map) {
+		List<BoardVO> list = boardDao.SearchList(map);
+		return list;
 	}
 
  

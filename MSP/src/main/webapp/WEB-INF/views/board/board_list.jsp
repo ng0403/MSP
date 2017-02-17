@@ -70,12 +70,11 @@
 							</tr> 
 						
 						</c:forEach>
- 					
-				
+ 					 
 						 </tbody>
 					</table>
 					</form>
-					
+ </div>	
 					<div class="paging_div" style="width: 100%; text-align: center;">
 	
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
@@ -109,7 +108,7 @@
 					
 					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
 					
-</div>
+
 </div>
 
 <div class = paging_div>
@@ -140,9 +139,7 @@ $("#board_add_fbtn").on("click", function(){
 		$("input[name='del_code']:checked").each(function() {
 			del_code = del_code + $(this).val() + ",";
  		}); 
-		
- 		alert(del_code);
-
+		 
 		if (del_code == '') {
 			alert("삭제할 대상을 선택하세요.");
 			return false;
@@ -157,14 +154,12 @@ $("#board_add_fbtn").on("click", function(){
  		            "X-HTTP-Method-Override" : "POST"
  		         },
  				data : del_code,
- 				dataType : 'json',
+ 				dataType : 'text',
  				processData: false,
  				contentType: false,
  				type: 'POST',
  				success : function(result) {
- 					alert("hello ajax");
- 					alert("h" + result.data);
- 					if(result.data =="success")
+  					if(result =="success")
  						{
  						ajaxList();
  						}
@@ -195,17 +190,14 @@ $("#board_add_fbtn").on("click", function(){
 				contentType: false,
 				type: 'POST',
 				success : function(result) {
-					alert("hello ajax List");
-					
-					var ajaxList = result.data; 
-					alert(ajaxList + "gg");	
-					var liststr = "";
+   
+					 var ajaxList = result; 
+ 					var liststr = "";
 					var liststr1 = "";
 					var liststr2 = "";
 					
 				 	var list = ajaxList.length;
-				 	alert("list" + list);  
-				 	
+ 				 	
 				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
 									"<tr>" +
 								"<th>" +
@@ -219,25 +211,23 @@ $("#board_add_fbtn").on("click", function(){
 				 	
 				for(var i=0 ; i<ajaxList.length; i++) {  
 					 liststr1  +=    "<tr>" +
-										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_NO + "/>" +
-										"<td>" + ajaxList[i].BOARD_NO + "</td>" +
-										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_NO + "\">" + ajaxList[i].TITLE + "\</a> </td>" +
-										"<td>" + ajaxList[i].CREATED_BY + "</td>" +
-										"<td>" + ajaxList[i].CREATED + "</td>" +
-										"<td>" + ajaxList[i].VIEW_CNT + "</td>" +
+										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].board_NO + "/>" +
+										"<td>" + ajaxList[i].board_NO + "</td>" +
+										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].board_NO + "\">" + ajaxList[i].title + "\</a> </td>" +
+										"<td>" + ajaxList[i].created_BY + "</td>" +
+										"<td>"+ ajaxList[i].created +" </td>" + 
+										"<td>" + ajaxList[i].view_CNT + "</td>" +
 										"</tr>";
 								
 				 	}
 				
 				liststr2 +=  "</table>";
 					
-					var boardtable = document.getElementById("list1_div");
-					boardtable.innerHTML = liststr + liststr1 + liststr2;
+					var boardtable = document.getElementById("board_list1");
+					boardtable.innerHTML = liststr + liststr1 + liststr2; 
 					 
 
-				} ,  error:function(request,status,error){
-	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	          } 
+				}  
 				})
  	}
   
@@ -306,21 +296,21 @@ $("#board_add_fbtn").on("click", function(){
 	function boardListInqr(pageNum){
 		
  		var keyword    = $("#keyword").val();
- 		$.post("/board/search_QnA_list",{"keyword":keyword, "pageNum":pageNum}, function(data){
+ 		$.post("/board/search_board_list",{"keyword":keyword, "pageNum":pageNum}, function(data){
 			
  			$(".board_list").html(""); 
-			$(data.qna_list).each(function(){ 
+			$(data.qna_list).each(function(){
+				alert("gg");
    				var BOARD_NO = this.board_NO;
   				var TITLE = this.title;
 				var CREATED_BY = this.created_BY;
 				var CREATED  = this.created;
 				var VIEW_CNT = this.view_CNT;
-					boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
+				boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
 			$("#paging_div").html("");
 			$(data).each(function(){
 				var pageNum = this.pageNum;
-				var totalCount = this.page.totalCount;
 				var pageSize = this.page.pageSize;
 				var pageBlockSize = this.page.pageBlockSize;
 				var startRow = this.page.startRow;

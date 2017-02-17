@@ -10,7 +10,7 @@ import com.msp.cp.common.PagerVO;
 public interface BoardService {
 	
 	  public List<Object> list(Map map);
-	  public List<Object> ajaxlist();
+	  public List<BoardVO> ajaxlist();
 	  public BoardVO detail(int BOARD_NO);
 	  public BoardVO read(int BOARD_NO); 
 	  public void modify(BoardVO vo);
@@ -18,5 +18,6 @@ public interface BoardService {
 	  public void insert(BoardVO vo);
 	  public void removeBoard(String dc);
 	  PagerVO getBoardListCount(Map<String, Object> map);
+	  public List<BoardVO> SearchList(Map<String, Object> map);
 
 }

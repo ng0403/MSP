@@ -24,10 +24,10 @@ select X.*
 			]]>
  </select>
  
- <select id="ajaxList" resultType="map">
+ <select id="ajaxList" resultType="com.msp.cp.board.vo.BoardVO">
  
  SELECT
-  BOARD_NO, TITLE, CONTENT, CREATED_BY, CREATED, VIEW_CNT
+  BOARD_NO, TITLE, CONTENT, CREATED_BY, to_char(CREATED, 'yy-mm-dd hh:mm' ), VIEW_CNT
 FROM tb_board
 WHERE ACTIVE_FLG='Y'
  </select>
@@ -110,5 +110,27 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
         WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
 	 ]]>
 </select>
+
+ <select id="SearchList"  parameterType="map" resultType="com.msp.cp.board.vo.BoardVO">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT *
+         FROM TB_BOARD
+         WHERE 
+         	DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000002'
+       	 	<if test="active_key != null and active_key != '' " >   
+            	AND ANSWER_FLG = #{active_key}
+		 	</if>
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND TITLE LIKE '%' || #{keyword} || '%'
+         	</if>
+         ORDER BY BOARD_NO ASC ) A
+     ) X
+     <![CDATA[
+        WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
+	 ]]>
+</select>
+ 
 
 </mapper>

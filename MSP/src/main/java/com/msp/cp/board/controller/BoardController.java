@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -107,7 +110,7 @@ public class BoardController {
 
 		String[] delcode = del_code.split(",");
 		ResponseEntity<String> entity = null;
-		
+
 		
 		for(int i = 0; i < delcode.length; i++)
 		{
@@ -116,12 +119,13 @@ public class BoardController {
 			boardService.removeBoard(dc);
 			System.out.println("success"); 
 			
-			if(i == delcode.length-1){
-		    entity = new ResponseEntity<>("success", HttpStatus.OK); 
-			} 
-		} 
-		 
-	    System.out.println("entity?" + entity);
+			if(i == delcode.length-1)
+			{
+		 	      entity = new ResponseEntity<>("success", HttpStatus.OK);
+		 	      System.out.println(entity);
+			}
+		}  
+	     
 	    return entity;
 	}
 	
@@ -129,20 +133,58 @@ public class BoardController {
 	
 	@RequestMapping(value="/ajax_list", method=RequestMethod.POST) 
 	 @ResponseBody
-	public Map<String, Object> ajax_list(){ 
+	public ResponseEntity<List<BoardVO>> ajax_list(){ 
 		
 		System.out.println("ajax List Entering");
-
- 		 
-		Map<String, Object> map = new HashMap<String, Object>(); 
-
-		 List<Object> ajaxlist =  boardService.ajaxlist(); 
-	     map.put("data", ajaxlist);
-	     System.out.println("ajax map? " + map.toString());
-	     
-		return map; 
+ 
+		ResponseEntity<List<BoardVO>> entity = null;
+	    try {
+ 	      entity = new ResponseEntity<>(boardService.ajaxlist(), HttpStatus.OK);
+	      System.out.println("entity? "+ entity);
+	      System.out.println("insert entity" + entity);
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+	    }
+	    return entity;
+		 
+		
 	}
 	
+	
+	
+	@RequestMapping(value="/search_board_list", method={RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String, Object> search_QnA_list( ModelMap model, HttpServletRequest request,
+													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+		System.out.println("search entering");
+ 		String keyword    = request.getParameter("keyword");
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    
+ 		map.put("keyword", keyword);
+		map.put("pageNum", pageNum);
+
+		PagerVO page = boardService.getBoardListCount(map);
+		System.out.println("page?" + page.toString());
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
+		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+
+		List<BoardVO> list = boardService.SearchList(map);
+		System.out.println("list?" + list.toString());
+		
+		model.addAttribute("page", page);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("qna_list", list);
+
+		return model;
+	}
  
 	 
 	

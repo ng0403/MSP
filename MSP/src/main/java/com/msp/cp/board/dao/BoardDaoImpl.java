@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -56,7 +55,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<Object> ajaxlist() {
+	public List<BoardVO> ajaxlist() {
 		 
 		return sqlSession.selectList("board.ajaxList");
 	}
@@ -71,6 +70,13 @@ public class BoardDaoImpl implements BoardDao {
 			e.printStackTrace();
 		}
 		return totalCount;
+	}
+
+	@Override
+	public List<BoardVO> SearchList(Map<String, Object> map) {
+		
+		return sqlSession.selectList("board.SearchList", map);
+
 	}
 
 
