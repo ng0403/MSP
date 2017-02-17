@@ -31,10 +31,14 @@
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_menuList", function(){
-			var menu_cd = $(this).attr("data_num");
-			var menu_nm = $(this).children().eq(0).val();
-			$('#menu_cd').val(menu_cd);
-			$('#menu_nm').val(menu_nm);
+			if(save_cd == "insert" || save_cd == "update"){
+				var menu_cd = $(this).attr("data_num");
+				var menu_nm = $(this).children("td").eq(0).html();
+				$('#up_menu_cd').val(menu_cd);
+				$('#up_menu_nm').val(menu_nm);
+				$('.menu_list_pop, #paging_pop_div').html("");
+				$('#menuMask, #menuWindow').hide();
+			}
 		})
 		//닫기 버튼을 눌렀을 때
 		$('#menuInpr_close_nfbtn').click(function(e) {
@@ -48,8 +52,8 @@
 		var menu_nm_key = $("#menu_nm_key_pop").val();
 		
 		viewLoadingShow();
-		$.post("/menu/search_list_Pop",{"menu_nm_key":menu_nm_key, "pageNum":pageNum}, function(data){
-			$(".menu_list").html("");
+		$.post("/menu/search_list_pop",{"menu_nm_key":menu_nm_key, "pageNum":pageNum}, function(data){
+			$(".menu_list_pop").html("");
 			$(data.menu_list).each(function(){
  				var menu_cd = this.menu_cd;
 				var menu_nm = this.menu_nm;
@@ -57,7 +61,7 @@
 				var up_menu_nm = this.up_menu_nm;
 				menuListPopOutput(menu_cd, menu_nm, menu_url, up_menu_nm);
 			})
-			$("#paging_div").html("");
+			$("#paging_pop_div").html("");
 			$(data).each(function(){
 				var pageNum = this.pageNum;
 				var totalCount = this.page.totalCount;
@@ -187,7 +191,7 @@
 		</div>
 		<div class="block_div"></div><div class="block_div"></div>
 		<div class="search_div">
-			<div class="search2_div">
+			<div class="modal_search_div">
 				<!-- <form id="searchForm" name="searchForm"> -->
 					<label>메뉴명</label>
 					<input type="text" id="menu_nm_key_pop" name="menu_nm_key" > &nbsp;
@@ -196,7 +200,7 @@
 			</div>
 		</div>
 		<div class="list_div">
-			<div class="list2_div">
+			<div class="modal_list_div">
 					<table summary="menu_list_tb" class="table table-hover">
 						<colgroup>
 							<col width="30%">
@@ -214,7 +218,7 @@
 							
 						</tbody>
 					</table>
-				<div class="paging_div">
+				<div class="modal_paging_div">
 					<div class="page" id="paging_pop_div">	
 						
 					</div>

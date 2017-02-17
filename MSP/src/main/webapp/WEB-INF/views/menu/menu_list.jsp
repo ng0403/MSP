@@ -75,25 +75,36 @@
 	}
 	
 	#menuMask {
+		display: none;
 		position:absolute; 
 		z-index:9000; 
 		background-color:#000;  
 		left:0; 
 		top:0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
 	} 
 	#menuWindow{
+		display: none;
 		position:absolute; 
-		width:60%; 
+		width:40%; 
 		height:55%; 
-		left:20%; 
+		left:40%; 
 		top:15%; 
 		z-index:10000; 
-		background-color: white; 
+		background-color: #FFFFFF; 
 		overflow: auto;
 	}
 	.block_div{display:block; 
 		height: 10px; 
 		clear: both;
+	}
+	#menuInpr_close_nfbtn{
+		font-size:11px;
+		margin-top:1%; 
+		margin-right:1%; 
+		float: right;
 	}
 </style>
 <script type="text/javascript">
@@ -113,7 +124,7 @@
 			$("#dept_nm_key").val("<c:out value='${data.dept_nm_key}'/>");
 		} */
 		//팝업찬 숨기기
-		$('#menuMask, #menuWindow').hide();
+		//$('#menuMask, #menuWindow').hide();
 		
 		/*테스트 입력제어*/
 		pageReady(true);
@@ -169,10 +180,10 @@
 		      }
 		})
 		//메뉴검색 버튼 클릭시 이벤트
-		$("#menuInqr_popup_fbtn").click(){
+		$("#menuInqr_popup_fbtn").click(function(){
 			menuListInqrPop(1);
 			menuByMask();
-		}
+		})
 		
 		//검은 막을 눌렀을 때
 		$('#menuMask').click(function() {
@@ -701,9 +712,8 @@
 		<div id="viewLoadingImg" style="display: none;">
 			<img src="${ctx}/resources/image/viewLoading.gif">
 		</div> 
-		<div id="menuMask">
-			<jsp:include page="../menu/menulist_pop.jsp">
-		</div>
+		<div id="menuMask"></div>
+		<jsp:include page="../menu/menulist_pop.jsp"/>
 	</div>
 </body>
 </html>

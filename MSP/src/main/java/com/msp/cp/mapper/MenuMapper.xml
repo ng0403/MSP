@@ -146,7 +146,7 @@
 					<if test="menu_nm_key != null">
 						and m.menu_nm like '%'||#{menu_nm_key}||'%'
 					</if>
-				ORDER BY m.dept_cd DESC
+				ORDER BY m.menu_cd DESC
 				) m
 			)
 		<![CDATA[
