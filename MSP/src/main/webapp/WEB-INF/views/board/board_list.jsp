@@ -55,10 +55,11 @@
 							<th>조회수</th>
 						</tr>
 						</thead> 
- 						<c:forEach items="${boardlist}" var="boardVO"> 
  					 
  						<tbody class="board_list">
-							<tr>
+ 						 <c:forEach items="${boardlist}" var="boardVO"> 
+						
+							<tr class="open_list">
 								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
    								<td>${boardVO.BOARD_NO}</td>
 								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
@@ -69,6 +70,8 @@
 							</tr> 
 						
 						</c:forEach>
+ 					
+				
 						 </tbody>
 					</table>
 					</form>
@@ -160,51 +163,82 @@ $("#board_add_fbtn").on("click", function(){
  				type: 'POST',
  				success : function(result) {
  					alert("hello ajax");
- 					
- 					var ajaxList = result.data; 
- 					alert(ajaxList + "gg");	
- 					var liststr = "";
- 					var liststr1 = "";
- 					var liststr2 = "";
- 					
- 				 	var list = ajaxList.length;
- 				 	alert("list" + list);  
- 				 	
- 				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
-										"<tr>" +
-									"<th>" +
-										"<input id='checkall' type='checkbox'/>" +
-									"<th>번호</th>" +
-									"<th>제목</th>" +
-									"<th>작성자</th>" +
-									"<th>작성일</th>" +
-									"<th>조회수</th>" +
-									"</tr>";
- 				 	
-					for(var i=0 ; i<ajaxList.length; i++) {  
-						 liststr1  +=    "<tr>" +
-  										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_NO + "/>" +
- 										"<td>" + ajaxList[i].BOARD_NO + "</td>" +
- 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_NO + "\">" + ajaxList[i].TITLE + "\</a> </td>" +
- 										"<td>" + ajaxList[i].CREATED_BY + "</td>" +
- 										"<td>" + ajaxList[i].CREATED + "</td>" +
- 										"<td>" + ajaxList[i].VIEW_CNT + "</td>" +
- 										"</tr>";
-  								
- 				 	}
-					
-					liststr2 +=  "</table>";
- 					
- 					var boardtable = document.getElementById("list1_div");
- 					boardtable.innerHTML = liststr + liststr1 + liststr2;
-  					 
-
- 				} ,  error:function(request,status,error){
-		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		          } 
+ 					alert("h" + result.data);
+ 					if(result.data =="success")
+ 						{
+ 						ajaxList();
+ 						}
+ 					else{
+ 						alert("오류!");
+ 					}
+ 				
+ 				}
  				}) 
 			
   		} 
+ 	}
+ 	
+ 	
+ 	
+ 	
+ 	function ajaxList() {
+ 		
+ 		$.ajax({
+				url : '/board/ajax_list',
+				headers : {
+		            "Content-Type" : "application/json",
+		            "X-HTTP-Method-Override" : "POST"
+		         },
+				data : "",
+				dataType : 'json',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success : function(result) {
+					alert("hello ajax List");
+					
+					var ajaxList = result.data; 
+					alert(ajaxList + "gg");	
+					var liststr = "";
+					var liststr1 = "";
+					var liststr2 = "";
+					
+				 	var list = ajaxList.length;
+				 	alert("list" + list);  
+				 	
+				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
+									"<tr>" +
+								"<th>" +
+									"<input id='checkall' type='checkbox'/>" +
+								"<th>번호</th>" +
+								"<th>제목</th>" +
+								"<th>작성자</th>" +
+								"<th>작성일</th>" +
+								"<th>조회수</th>" +
+								"</tr>";
+				 	
+				for(var i=0 ; i<ajaxList.length; i++) {  
+					 liststr1  +=    "<tr>" +
+										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_NO + "/>" +
+										"<td>" + ajaxList[i].BOARD_NO + "</td>" +
+										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_NO + "\">" + ajaxList[i].TITLE + "\</a> </td>" +
+										"<td>" + ajaxList[i].CREATED_BY + "</td>" +
+										"<td>" + ajaxList[i].CREATED + "</td>" +
+										"<td>" + ajaxList[i].VIEW_CNT + "</td>" +
+										"</tr>";
+								
+				 	}
+				
+				liststr2 +=  "</table>";
+					
+					var boardtable = document.getElementById("list1_div");
+					boardtable.innerHTML = liststr + liststr1 + liststr2;
+					 
+
+				} ,  error:function(request,status,error){
+	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	          } 
+				})
  	}
   
  
@@ -273,16 +307,15 @@ $("#board_add_fbtn").on("click", function(){
 		
  		var keyword    = $("#keyword").val();
  		$.post("/board/search_QnA_list",{"keyword":keyword, "pageNum":pageNum}, function(data){
-			$(".board_list").html("");
-			$(data.qna_list).each(function(){
-				var aa = data.qna_list.length;
-				alert(aa);
-  				var BOARD_NO = this.board_NO;
+			
+ 			$(".board_list").html(""); 
+			$(data.qna_list).each(function(){ 
+   				var BOARD_NO = this.board_NO;
   				var TITLE = this.title;
 				var CREATED_BY = this.created_BY;
 				var CREATED  = this.created;
 				var VIEW_CNT = this.view_CNT;
-				boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
+					boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
 			$("#paging_div").html("");
 			$(data).each(function(){
@@ -302,14 +335,13 @@ $("#board_add_fbtn").on("click", function(){
 			alert("목록을 불러오는데 실패하였습니다.")
 		})
 	}
-	
-	
+	 
 	
 	/* 리스트 출력 함수 */
 	function boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT){
- 		
+		 
 		var board_Tr = $("<tr>");
- 	
+ 
 		var del_code_td = $("<td>");
 		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + BOARD_NO + "'>");
 		
@@ -358,24 +390,24 @@ $("#board_add_fbtn").on("click", function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		else if(pageNum == endPageNum)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
-			+"<a style='cursor: pointer;' onclick=authListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		$("#paging_div").append(pageContent);
 

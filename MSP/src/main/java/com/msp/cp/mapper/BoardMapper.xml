@@ -54,7 +54,7 @@ VALUES(board_seq.nextval, 'BMG1000003','', #{TITLE}, #{CONTENT}, '1', 'abcd', 'ì
  
  </select>
  
- <update id="removeBoard" parameterType="String"> 
+ <update id="removeBoard" parameterType="String" > 
  update tb_board set active_flg = 'N'
  	where BOARD_NO = #{BOARD_NO}
  </update>

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.board.service.BoardService;
 import com.msp.cp.board.vo.BoardVO;
+import com.msp.cp.board.vo.ReplyVO;
 import com.msp.cp.common.PagerVO;
 
 @Controller
@@ -98,11 +101,12 @@ public class BoardController {
 	
 	@RequestMapping(value="/board_remove", method=RequestMethod.POST) 
 	 @ResponseBody
-	public Map<String, Object> board_remove(@RequestBody String del_code){ 
+	public ResponseEntity<String> board_remove(@RequestBody String del_code){ 
 		
 		System.out.println("remove insert" + del_code);
- 
+
 		String[] delcode = del_code.split(",");
+		ResponseEntity<String> entity = null;
 		
 		
 		for(int i = 0; i < delcode.length; i++)
@@ -111,19 +115,36 @@ public class BoardController {
 			System.out.println("delete..." + dc);
 			boardService.removeBoard(dc);
 			System.out.println("success"); 
+			
+			if(i == delcode.length-1){
+		    entity = new ResponseEntity<>("success", HttpStatus.OK); 
+			} 
 		} 
+		 
+	    System.out.println("entity?" + entity);
+	    return entity;
+	}
+	
+	
+	
+	@RequestMapping(value="/ajax_list", method=RequestMethod.POST) 
+	 @ResponseBody
+	public Map<String, Object> ajax_list(){ 
 		
+		System.out.println("ajax List Entering");
 
+ 		 
 		Map<String, Object> map = new HashMap<String, Object>(); 
 
 		 List<Object> ajaxlist =  boardService.ajaxlist(); 
 	     map.put("data", ajaxlist);
 	     System.out.println("ajax map? " + map.toString());
 	     
-		return map;
-		
- 	}
+		return map; 
+	}
 	
+ 
+	 
 	
  	
  

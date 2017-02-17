@@ -74,12 +74,13 @@
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-						</tr> 
+						</tr > 
 						</thead>
- 						<c:forEach items="${boardlist}" var="boardVO"> 
  					   <tbody class="qna_list">
+ 				 <c:forEach items="${boardlist}" var="boardVO"> 
  						
-							<tr>
+						    <tr class="open_list">
+
 								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
    								<td>${boardVO.BOARD_NO}</td>
    								<td>${boardVO.QUESTION_TYPE_CD}</td>
@@ -158,8 +159,7 @@ $("#board_add_fbtn").on("click", function(){
 		$("input[name='del_code']:checked").each(function() {
 			del_code = del_code + $(this).val() + ",";
  		}); 
-		
- 		alert(del_code);
+	 
 
 		if (del_code == '') {
 			alert("삭제할 대상을 선택하세요.");
