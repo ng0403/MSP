@@ -5,9 +5,14 @@
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/org/orgDetail.css" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>권한 등록</title>
 <script type="text/javascript">
 var save_cd = "";
@@ -207,9 +212,9 @@ $(function(){
 		<div class="modal_list_div">
 			<table summary="auth_list_tb" class="table table-hover">
 				<colgroup>
-							<col width="50%">
-							<col width="50%">
-						</colgroup>
+					<col width="50%">
+					<col width="50%">
+				</colgroup>
 				<thead>
 					<tr>
 						<td>권한ID</td>
