@@ -206,11 +206,14 @@ $(function(){
 	<div class="list_div">
 		<div class="modal_list_div">
 			<table summary="auth_list_tb" class="table table-hover">
+				<colgroup>
+							<col width="50%">
+							<col width="50%">
+						</colgroup>
 				<thead>
-					<tr style="width:100%;">
-						<th><input type="checkbox" id="checkall" ></th>
-						<td style="width:50%; font-weight: bold;">권한ID</td>
-						<td style="width:50%; font-weight: bold;">권한명</td>
+					<tr>
+						<td>권한ID</td>
+						<td>권한명</td>
 					</tr>
 				</thead>
 				<tbody class="auth_list_pop" >
