@@ -18,7 +18,40 @@
 
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>메뉴관리화면</title>
-
+<style type="text/css">
+	#menuMask {
+		display: none;
+		position:absolute; 
+		z-index:9000; 
+		background-color:#000;  
+		left:0; 
+		top:0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+	} 
+	#menuWindow{
+		display: none;
+		position:absolute; 
+		width:40%; 
+		height:55%; 
+		left:40%; 
+		top:15%; 
+		z-index:10000; 
+		background-color: #FFFFFF; 
+		overflow: auto;
+	}
+	.block_div{display:block; 
+		height: 10px; 
+		clear: both;
+	}
+	#menuInpr_close_nfbtn{
+		font-size:11px;
+		margin-top:1%; 
+		margin-right:1%; 
+		float: right;
+	}
+</style>
 <script type="text/javascript">	
 	$(function(){
 		/*검색버튼 클릭 시 처리 이벤트*/
@@ -28,7 +61,12 @@
 		/*검색창 엔터 시 처리 이벤트*/
 		$("#menu_nm_key_pop").click(function(){
 			enterSearchPop(event);
-		})
+		})		
+		//검은 막을 눌렀을 때
+		$('#menuMask').click(function() {
+			$(this).hide();
+			$('#menuWindow').hide();
+		});
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_menuList", function(){
 			if(save_cd == "insert" || save_cd == "update"){
@@ -170,7 +208,7 @@
     	});
     }
 	
-  //검색 엔터키
+  	//검색 엔터키
     function enterSearchPop(event) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
     	if (keycode == '13') {
@@ -179,9 +217,41 @@
     	event.stopPropagation();
     }
 
+    function viewLoadingShow(){
+	    $('#viewLoadingImg').css('position', 'absolute');
+	     $('#viewLoadingImg').css('left', '45%');
+	     $('#viewLoadingImg').css('top', '45%');
+	     $('#viewLoadingImg').css('z-index', '1200');
+	     $('#viewLoadingImg').show().fadeIn(500);
+	}
+
+	function viewLoadingHide(){
+	   $('#viewLoadingImg').fadeOut();   
+	}
+	
+	//menuDetail image popup
+	function menuByMask() {
+		//화면의 높이와 너비를 구한다.
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+
+		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+		$('#menuMask').css({
+			'width' : maskWidth,
+			'height' : maskHeight
+		});
+
+		//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
+		$('#menuMask').fadeIn(1000);
+		$('#menuMask').fadeTo("slow", 0.5);
+
+		//윈도우 같은 거 띄운다.
+		$('#menuWindow').show();
+	}
 </script>
 </head>
 <body>
+	<div id="menuMask"></div>
 	<div class="main_div" id="menuWindow">
 		<div class="navi_div">
 			마스터 > 메뉴관리

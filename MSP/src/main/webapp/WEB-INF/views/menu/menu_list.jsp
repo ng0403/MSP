@@ -74,38 +74,6 @@
 		width: 25%;
 	}
 	
-	#menuMask {
-		display: none;
-		position:absolute; 
-		z-index:9000; 
-		background-color:#000;  
-		left:0; 
-		top:0;
-		width: 100%;
-		height: 100%;
-		overflow: auto;
-	} 
-	#menuWindow{
-		display: none;
-		position:absolute; 
-		width:40%; 
-		height:55%; 
-		left:40%; 
-		top:15%; 
-		z-index:10000; 
-		background-color: #FFFFFF; 
-		overflow: auto;
-	}
-	.block_div{display:block; 
-		height: 10px; 
-		clear: both;
-	}
-	#menuInpr_close_nfbtn{
-		font-size:11px;
-		margin-top:1%; 
-		margin-right:1%; 
-		float: right;
-	}
 </style>
 <script type="text/javascript">
 	var menu_cd = "";
@@ -184,12 +152,6 @@
 			menuListInqrPop(1);
 			menuByMask();
 		})
-		
-		//검은 막을 눌렀을 때
-		$('#menuMask').click(function() {
-			$(this).hide();
-			$('#menuWindow').hide();
-		});
 	})
 	
 	/*메뉴 리스트 출력및 페이징 처리 함수*/
@@ -490,38 +452,6 @@
     	}
     	event.stopPropagation();
     }
-	
-    function viewLoadingShow(){
-	    $('#viewLoadingImg').css('position', 'absolute');
-	     $('#viewLoadingImg').css('left', '45%');
-	     $('#viewLoadingImg').css('top', '45%');
-	     $('#viewLoadingImg').css('z-index', '1200');
-	     $('#viewLoadingImg').show().fadeIn(500);
-	}
-
-	function viewLoadingHide(){
-	   $('#viewLoadingImg').fadeOut();   
-	}
-	
-	//menuDetail image popup
-	function menuByMask() {
-		//화면의 높이와 너비를 구한다.
-		var maskHeight = $(document).height();
-		var maskWidth = $(window).width();
-
-		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-		$('#menuMask').css({
-			'width' : maskWidth,
-			'height' : maskHeight
-		});
-
-		//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
-		$('#menuMask').fadeIn(1000);
-		$('#menuMask').fadeTo("slow", 0.5);
-
-		//윈도우 같은 거 띄운다.
-		$('#menuWindow').show();
-	}
 
 </script>
 </head>
@@ -712,7 +642,6 @@
 		<div id="viewLoadingImg" style="display: none;">
 			<img src="${ctx}/resources/image/viewLoading.gif">
 		</div> 
-		<div id="menuMask"></div>
 		<jsp:include page="../menu/menulist_pop.jsp"/>
 	</div>
 </body>
