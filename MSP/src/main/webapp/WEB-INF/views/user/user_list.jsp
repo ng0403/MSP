@@ -20,14 +20,10 @@
 
 <title>리스트</title>
 <script type="text/javascript">
-
-
-	$("#navisub11").show();
-	$("#naviuser").css("font-weight", "bold");
-
-	
-	
-	
+	$(document).ready(function() {
+		$("#navisub11").show();
+		$("#naviuser").css("font-weight", "bold");
+	});
 </script>
 
 </head>
@@ -144,11 +140,11 @@
 		</c:choose>
 		<div class="" style="text-align: right; margin-right: 10%;">
 			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax"> 
-				<input type="button" value="엑셀출력" class="func_btn" onclick="download_list_Excel('userlistExcelForm');" style="float: left;">
-	            <input id="excelFile" type="file" name="excelFile"/>
-		        <input type="button" id="addExcelImpoartBtn" class="btn" onclick="check();" value="업로드"> 
-				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" />
-				<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" />
+				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" style="float: left;"/>
+				<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제"  style="float: left;"/>
+				<input type="button" value="엑셀출력" class="btn btn-default" onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
+	            <input id="excelFile" type="file" class="btn btn-default" name="excelFile" style="float: right;"/>
+		        <input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: right;"> 
 			</form>
 		</div>
 	</div>

@@ -14,12 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <title>Insert title here</title>
- <c:if test="${result=='1'}" var = "result"> 
-	<script type="text/javascript">
-		window.close();
-		opener.parent.location.href = "userlist";
-	</script>
- </c:if>
+
 <style type="text/css">
 /* body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; } */
 
@@ -30,6 +25,12 @@
 
 <script>
 	$(document).ready(function() {
+		var result=${result};
+		alert(result);
+		if(result == 1){
+				window.close();
+				opener.parent.location.href = "userlist";
+		}
  		$('#dept_pop_div').hide();
 	      //부서검색버튼 클릭 
      	$("#dept_sch_fbtn").on("click", function() {

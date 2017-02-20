@@ -329,6 +329,6 @@ public class UserController {
         {
         	System.out.println("Excel Insert 실패");
         }
-        return new ModelAndView("redirect:/user/userlist");
+        return new ModelAndView("redirect:/user/userlist", "result", result);
     }
 }
