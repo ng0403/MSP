@@ -26,11 +26,10 @@
 <script>
 	$(document).ready(function() {
 		var result=${result};
-		alert(result);
-		if(result == 1){
-				window.close();
-				opener.parent.location.href = "userlist";
-		}
+// 		if(result == 1){
+// 				window.close();
+// 				opener.parent.location.href = "userlist";
+// 		}
  		$('#dept_pop_div').hide();
 	      //부서검색버튼 클릭 
      	$("#dept_sch_fbtn").on("click", function() {

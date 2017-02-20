@@ -109,14 +109,13 @@
 					$('#modify_btn').attr("disabled", true);
 					$('#submit_btn').attr("disabled", true);
 				}else{
-					alert("신규 데잍를 입력하세요.");
+					alert("신규 데이터를 입력하세요.");
 				}
 			});
 		//편집 저장 버튼
 			$("#modifysave_btn").on("click", function() {
 				var entry_flg = ${entry_flg}
 				var tmp = $('#user_id').val();
-				alert(tmp);
 				var user_pwd = $('#user_pwd');
 				var user_pwd_chk = $('#user_pwd_chk');
 				var rank_cd = $("#rank_cd option:selected").val();

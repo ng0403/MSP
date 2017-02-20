@@ -27,7 +27,6 @@ function userTabOpen() {
 //엑셀파일 insert
  function check() {
      var excelFile = $("#excelFile").val();
-     alert(excelFile);
      if (excelFile == "" || excelFile == null) {
          alert("파일을 선택해주세요.");
          return false;
@@ -52,7 +51,6 @@ function userTabOpen() {
 		var excel = $('<input type="hidden" value="true" name="excel">');
 		form.append(excel);
 		form.submit();
-		alert("submit 지남.");
 		$("input[name=excel]").val("");
 	}
 	// 1.모두 체크
