@@ -56,6 +56,8 @@
 </style>
 
 <script type="text/javascript">
+var save_cd;
+
 function menuAuthByMask() {
 	//화면의 높이와 너비를 구한다.
 	var maskHeight = $(document).height();
@@ -76,14 +78,20 @@ function menuAuthByMask() {
 }
 
 $(document).ready(function() {
-	// 등록할 때 메뉴검색 팝업 눌렀을 때
-	$("#menu_pop_div").hide();
+	$("#auth_id_pop").on("click", function(){
+		authListInqrPop(1);
+		popByMask("authMask", "authWindow");
+	});
 	
+	// 등록할 때 메뉴검색 팝업 눌렀을 때
 	$("#menu_cd_pop").on("click", function(){
-		$("#menu_pop_div").show();
-		$("#menu_pop_div").center();
 		menuListInqrPop(1);
-		menuByMask();
+		popByMask("menuMask", "menuWindow");
+	});
+	
+	// 추가할 때 메뉴선택 팝업클릭 시
+	$("#menuAuth_add_btn").on("click", function(){
+		save_cd = "insert";
 	});
 	
 	//검은 막 띄우기
@@ -91,19 +99,32 @@ $(document).ready(function() {
 		e.preventDefault();
 		menuAuthByMask();
 	});
+	
+	// 상세보기 수정버튼 클릭 시
+	$(".menuAuthWindow #menuAuthMdfy_btn").click(function(e){
+		//menuAuthMdfy();
+		$("#menuAuthMdfyForm").submit();
+	});
 
-	//닫기 버튼을 눌렀을 때
+	// 상세보기 닫기 버튼을 눌렀을 때
 	$('.menuAuthWindow #menuClose').click(function(e) {
-		//링크 기본동작은 작동하지 않도록 한다.
-		e.preventDefault();
+		//링크 기본동작은 작동하지 않도록 한다.	
 		$("#generalTbody").empty();
 		$("#menuAuthMask, .menuAuthWindow").hide();
 	});
 
-	//검은 막을 눌렀을 때
+	// 검은 막을 눌렀을 때
 	$("#menuAuthMask").click(function() {
 		$(this).hide();
 		$('.menuAuthWindow').hide();
+	});
+	
+	// 등록 팝업 취소버튼 클릭 시
+	$("#menuAuthClose").click(function(){
+		$("#up_menu_nm").val("");
+		$("#up_menu_cd").val("");
+		$("#auth_id").val("");
+		$("#auth_nm").val("");
 	});
 });
 
@@ -206,7 +227,7 @@ function viewLoadingHide(){
 				<!-- Button Div -->
 				<div class="btn01">
 					<div class="left">
-						<input type="button" id="menuAuth_add_btn" class="btn btn-default" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가" /> 
+						<input type="button" id="menuAuth_add_btn" class="btn btn-default" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가"/> 
 						<input type="button" id="menuAuth_del_btn" class="btn btn-default" value="삭제" />
 					</div>
 				</div>
@@ -278,22 +299,24 @@ function viewLoadingHide(){
 						<strong>메뉴권한 등록</strong></span>
 		        
 		        <form name="menuAuthAdd" id="menuAuthAdd" action="menuAuthAdd"	enctype="multipart/form-data" method="post">
-		        	<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
-		        	<input type="button" class="btn btn-default" id="menuAuth_save_btn" value="저장" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/><!-- submit으로 보내는 것이 post,  value값 직접 전달이get -->
+		        	<input type="button" id="menuAuthClose" class="btn btn-default" data-dismiss="modal" value="닫기" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
+		        	<input type="button" class="btn btn-default" id="menuAuth_save_btn" name="menuAuth_save_btn" value="저장" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/><!-- submit으로 보내는 것이 post,  value값 직접 전달이get -->
 		        
 	            	<div class="block_div"></div><div class="block_div"></div><div class="block_div"></div>
 	           
 					<div align="center" style="width: 100%">
 						<table class="board_view" style="font-size:12px;width: 100%">
 							<tr height="15px">
-								<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>권한ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>권한명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<input type="text" id="auth_id3" name ="auth_id3" style="width:80%; background-color:#F2F2F2;" value="${auth_id3}" readonly="readonly"/>
-									<input type="button" id="auth_pop" name="auth_pop" value="선택">
+									<input type="text" id="auth_nm" name ="auth_nm" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
+									<input type="hidden" id="auth_id" name="auth_id">
+									<input type="button" id="auth_id_pop" name="auth_id_pop" value="선택">
 								</td>
-								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴코드&nbsp;&nbsp;</th>
+								<th style="width: 12%; text-align: left;"><span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>메뉴명&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<input type="text" id="menu_cd3" name="menu_cd3" style="width: 80%;"/>
+									<input type="text" id="up_menu_nm" name="menu_nm" style="width: 50%;"/>
+									<input type="hidden" id="up_menu_cd" name="menu_cd">
 									<input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택">
 								</td>
 							</tr>
@@ -363,15 +386,14 @@ function viewLoadingHide(){
 		        </form>
 				</div>
 			</div>
+			
+			<jsp:include page="../menu/menulist_pop.jsp"></jsp:include>
+			<jsp:include page="../auth/authlist_pop.jsp"></jsp:include>
+			
 		<!-- 등록 DIV -->
     	</div>	
 	<!-- class="main_div" -->
 	</div>
-	
-	<div id="menu_pop_div" style="font-size:11.5px;">
-		<jsp:include page="../menu/menulist_pop.jsp"></jsp:include>
-	</div>
-	
 	
 	<script type="text/javascript">
 		
@@ -636,7 +658,8 @@ function viewLoadingHide(){
 					
 					for(var i=0; i<menuAuthDetail.length; i++)
 					{
-						var auth_id = menuAuthDetail[i].AUTH_NM;
+						var auth_id = menuAuthDetail[i].AUTH_ID;
+						var auth_nm = menuAuthDetail[i].AUTH_NM;
 						var menu_cd = menuAuthDetail[i].MENU_CD;
 						var menu_nm = menuAuthDetail[i].MENU_NM;
 						var up_menu_cd = menuAuthDetail[i].UP_MENU_CD;
@@ -652,7 +675,8 @@ function viewLoadingHide(){
 	 					contents1 ="<tr height='15px'>"+
 	 					"<th style=' width: 12%; text-align: center;'>권한ID&nbsp;&nbsp;</th>"+
 	 					"<td style='width: 38%; text-align: left;'>"+
-						"<input type = 'text' id='auth_id1' name='auth_id1' value='"+auth_id+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
+						"<input type = 'text' id='auth_id1' name='auth_nm' value='"+auth_nm+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
+						"<input type = 'hidden' id='auth_id2' name='auth_id2' value='"+auth_id+"'>"+
 						"</td>"+
 						"<th style=' width: 12%; text-align: center;'>메뉴코드&nbsp;&nbsp;</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
@@ -683,68 +707,68 @@ function viewLoadingHide(){
 						
 						active_radio1 = "<tr><th style='width: 12%; text-align: center;'>활성화 상태&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
-							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
+							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td>";
 						active_radio2 = "<tr><th style='width: 12%; text-align: center;'>활성화 상태&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
-							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
+							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td>";
 							
 						inqr_radio1 = "<th style='width: 12%; text-align: center;'>조회권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
-							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
+							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='true false;'/>N"
 							+"</td></tr>";
 						inqr_radio2 = "<th style='width: 12%; text-align: center;'>조회권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
-							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
+							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td></tr>";
 							
 						add_radio1 = "<tr><th style='width: 12%; text-align: center;'>생성권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
-							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
+							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td>";
 						add_radio2 = "<tr><th style='width: 12%; text-align: center;'>생성권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
-							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
+							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td>";
 							
 						mdfy_radio1 = "<th style='width: 12%; text-align: center;'>수정권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
-							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
+							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td></tr>";
 						mdfy_radio2 = "<th style='width: 12%; text-align: center;'>수정권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
-							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
+							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td></tr>";
 							
 						del_radio1 = "<tr><th style='width: 12%; text-align: center;'>삭제권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
-							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
+							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td>";
 						del_radio2 = "<tr><th style='width: 12%; text-align: center;'>삭제권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
-							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
+							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td>";
 						
 						menu_acc_radio1 = "<th style='width: 12%; text-align: center;'>메뉴접근권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
-							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
+							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td></tr>";
 						menu_acc_radio2 = "<th style='width: 12%; text-align: center;'>메뉴접근권한&nbsp;&nbsp;</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
-							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
-							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
+							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td></tr>";	
 							
 						if(active_flg == 'Y') {
@@ -795,6 +819,12 @@ function viewLoadingHide(){
 			});
 			
 			$('.menuOpen').click();
+		}
+		
+		// 상세보기 수정버튼
+		function menuAuthMdfy()
+		{
+			alert("수정버튼");
 		}
 		
 		// 추가버튼 눌렀을 때

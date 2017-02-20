@@ -66,4 +66,11 @@ public class MenuAuthDaoImpl implements MenuAuthDao {
 		// TODO Auto-generated method stub
 		sqlSession.insert("menuAuthAdd", menuAuthVo);
 	}
+
+	@Override
+	public void mdfyMenuAuth(MenuAuthVO menuAuthVo) {
+		// TODO Auto-generated method stub
+		sqlSession.update("menuAuthMdfy", menuAuthVo);
+		
+	}
 }

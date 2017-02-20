@@ -173,13 +173,16 @@ public class MenuAuthController {
 	@RequestMapping(value="/menuAuthAdd", method={RequestMethod.GET, RequestMethod.POST})
 	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpServletRequest request)
 	{
-		String auth_id = request.getParameter("auth_id3");
-		String menu_cd = request.getParameter("menu_cd3");
+		String auth_id = request.getParameter("auth_id");
+		String menu_cd = request.getParameter("menu_cd");
 		String inqr_auth = request.getParameter("inqr_auth3");
 		String add_auth = request.getParameter("add_auth3");
 		String mdfy_auth = request.getParameter("mdfy_auth3");
 		String del_auth = request.getParameter("del_auth3");
 		String menu_acc_auth = request.getParameter("menu_acc_auth3");
+		
+		System.out.println(auth_id);
+		System.out.println(inqr_auth);
 		
 		menuAuthVo.setAuth_id(auth_id);
 		menuAuthVo.setMenu_cd(menu_cd);
@@ -191,6 +194,40 @@ public class MenuAuthController {
 		menuAuthVo.setCreated_by("ADMIN");
 		
 		menuAuthService.insertMenuAuth(menuAuthVo);
+		
+		return "redirect:/menuAuth/menuAuthInqr";
+	}
+	
+	/**
+	 * 업 무 명 : 메뉴권한 수정
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/20
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 공통코드 수정한다. 
+	 * */
+	@RequestMapping(value="/menuAuthMdfy", method={RequestMethod.GET, RequestMethod.POST})
+	public String menuAuthMdfy(MenuAuthVO menuAuthVo, HttpServletRequest request)
+	{
+		String auth_id    = request.getParameter("auth_id2");
+		String menu_cd    = request.getParameter("menu_cd1");
+		String active_flg = request.getParameter("active_flg1");
+		String inqr_auth  = request.getParameter("inqr_auth1");
+		String add_auth   = request.getParameter("add_auth1");
+		String mdfy_auth  = request.getParameter("mdfy_auth1");
+		String del_auth   = request.getParameter("del_auth1");
+		String menu_acc_auth = request.getParameter("menu_acc_auth1");
+		
+		menuAuthVo.setAuth_id(auth_id);
+		menuAuthVo.setMenu_cd(menu_cd);
+		menuAuthVo.setActive_flg(active_flg);
+		menuAuthVo.setInqr_auth(inqr_auth);
+		menuAuthVo.setAdd_auth(add_auth);
+		menuAuthVo.setMdfy_auth(mdfy_auth);
+		menuAuthVo.setDel_auth(del_auth);
+		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
+		
+		menuAuthService.mdfyMenuAuth(menuAuthVo);
 		
 		return "redirect:/menuAuth/menuAuthInqr";
 	}

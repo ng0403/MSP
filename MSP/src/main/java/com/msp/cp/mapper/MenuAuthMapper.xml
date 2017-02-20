@@ -65,6 +65,7 @@
 	
 	<select id="menuAuthDetail" parameterType="string" resultType="map">
 		SELECT
+		 auth_id,
  		 (SELECT auth_nm
   		  FROM tb_auth
    		  WHERE auth_id = TMA.auth_id) AS auth_nm,
@@ -101,4 +102,18 @@
 		VALUES
 			(#{auth_id}, #{menu_cd}, #{inqr_auth}, #{add_auth}, #{mdfy_auth}, #{del_auth}, #{menu_acc_auth}, #{created_by} )
 	</insert>
+	
+	<update id="menuAuthMdfy" parameterType="com.msp.cp.menuAuth.vo.MenuAuthVO">
+		UPDATE 
+			TB_MENU_AUTH
+		SET
+			ACTIVE_FLG = #{active_flg},
+			INQR_AUTH  = #{inqr_auth},
+			ADD_AUTH   = #{add_auth},
+			MDFY_AUTH  = #{mdfy_auth},
+			DEL_AUTH   = #{del_auth},
+			MENU_ACC_AUTH = #{menu_acc_auth}
+		WHERE
+			AUTH_ID = #{auth_id} AND MENU_CD = #{menu_cd}
+	</update>
 </mapper>

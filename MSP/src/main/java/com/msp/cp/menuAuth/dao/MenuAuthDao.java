@@ -12,6 +12,7 @@ public interface MenuAuthDao {
 	public List<MenuAuthVO> menuAuthDetail(Map<String, Object> map);
 
 	public void insertMenuAuth(MenuAuthVO menuAuthVo);
+	public void mdfyMenuAuth(MenuAuthVO menuAuthVo);
 	
 	// Paging
 	int MenuAuthListCount(String string, Map<String, Object> map);
