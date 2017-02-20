@@ -1,3 +1,10 @@
+<!--
+ 페이징처리가 되지않은 엑셀 출력용 jsp 파일입니다.
+각 페이지별로 엑셀 다운로드 컨트롤러 만드시고, 페이징 처리되지 않은 dao, service, query 만드시고
+본 페이지처럼 출력용 페이지 만드셔서 쓰시면 됩니다.
+ -->
+
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8" isELIgnored="false"%>
 <%@ page import="org.springframework.web.util.UriUtils" %>
@@ -5,6 +12,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<!-- 파일다운로드 시 파일을 생성하는 부분입니다.-영화씨 한줄 씩 봐가면서 복붙해요 -->
 <%
 	SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyyMMddHHmmss", Locale.KOREA );
 	Date currentTime = new Date();

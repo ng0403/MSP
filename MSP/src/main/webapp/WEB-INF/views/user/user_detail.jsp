@@ -29,9 +29,10 @@
 </style>
  
 <script>
-	$(document).ready(function() {
- 		$('#dept_pop_div').hide();
-	      //부서검색버튼 클릭 
+$(document).ready(function() {
+ 	$('#dept_pop_div').hide();
+ 	
+	//부서검색버튼 클릭 
    	$("#dept_sch_fbtn").on("click", function() {
    		$("#dept_pop_div").show();
    		$("#dept_pop_div").center();
@@ -63,6 +64,7 @@
 		    $('#joinform').find('input[type="button"]').attr('disabled',true);
 	        $('#joinform').find('input[type="email"]').attr('disabled',true);
 	        $('#joinform').find('select').attr('disabled',true);
+	        $('#joinform').find('select').css('color',rgb(84, 84, 84));
 			//$('#addsave_btn').css('visibility',"hidden");
 			
 		} 
@@ -108,6 +110,7 @@
 					$('#addsave_btn').css("visibility","hidden");
 					$('#modify_btn').attr("disabled", true);
 					$('#submit_btn').attr("disabled", true);
+					$('#joinform').find('select').css('color',rgb(84, 84, 84));
 				}else{
 					alert("신규 데이터를 입력하세요.");
 				}
