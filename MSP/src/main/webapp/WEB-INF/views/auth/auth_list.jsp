@@ -408,6 +408,49 @@
 			$(".active_flg").attr("disabled",boolean);
 		}
 		
+		//엑셀 파일 추가 fucntion
+		 function checkFileType(filePath) {
+	         
+			var fileFormat = filePath.split(".");
+	         if (fileFormat.indexOf("xlsx") > -1) {
+	             return true;
+	         } else {
+	             return false;
+	         }
+	     }
+
+		//엑셀파일 insert
+		function check() {
+			
+		     var excelFile = $("#excelFile").val();
+		     if (excelFile == "" || excelFile == null) {
+		         alert("파일을 선택해주세요.");
+		         return false;
+		     } else if (!checkFileType(excelFile)) {
+		         alert("엑셀 파일만 업로드 가능합니다.");
+		         return false;
+		     }
+
+		     if (confirm("업로드 하시겠습니까?")) {
+		               $("#excelUploadForm").append(excelFile);
+		               $("#excelUploadForm").submit();
+		  
+		     };
+		     alert("모든 데이터가 업로드 되었습니다.");
+		     auth_goSearch();
+		}
+		 
+		//AS-ID 엑셀 다운로드 적용 함수
+		function download_list_Excel(formID){
+			
+			var ctx = $("#ctx").val();
+			var form = $("#"+formID);
+			var excel = $('<input type="hidden" value="true" name="excel">');
+			form.append(excel);
+			form.submit();
+			$("input[name=excel]").val("");
+		}
+		
 		function authAdd() {
 			
 			// 숨겨놓은 각각의 버튼을 보여준다.
@@ -418,7 +461,6 @@
 			$("#joinform").each(function(){
 				this.reset();
 			})
-			
 		}
 			
 		//상세정보 저장버튼
@@ -430,20 +472,14 @@
 			} else {	 
 				alert("권한이 저장 되었습니다.");
 				$("#joinform").submit();
-				
 			}
-			
 		}
 		
 		function resertDetail() {
 			
 			$("#auth_nm").val("");
 			$(".active_flg:radio[value='Y']").attr("checked", "checked");
-			
-			
 		}
-		
-		
 </script>
 </head>
 <body>
@@ -475,6 +511,7 @@
 				<input type="hidden" name="active_key" value="${active_key}"/>
 				<input type="hidden" name="keyword" value="${keyword}"/>
 			</form>
+			<form action="${ctx}/auth/list" id="authListExcelForm" method="post"></form>
 			
 		</div>
 		<div class="search3_div">
@@ -561,9 +598,13 @@
 				</div>
 				
 				<div class="right">
-					<input type="button" id="excelImport" class="btn btn-info btn-sm" value="excel입력"/>
-		  			<input type="button" id="excelExport" class="btn btn-info btn-sm" value="excel출력"/>
+					<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post" action="${ctx}/auth/excelUploadAjax"> 
+				        <input type="button" id="excelImportBtn" class="btn btn-info btn-sm" value="Import"   onclick="check();"> 
+						<input type="button" id="excel"          class="btn btn-info btn-sm" value="Export" onclick="download_list_Excel('authListExcelForm');"  >
+			            <input type="file"   id="excelFile"      class="btn btn-default btn-sm" name="excelFile" style="width: 200px;"/>
+					</form>
 				</div>
+				
 				
 			</div>
 		</div>

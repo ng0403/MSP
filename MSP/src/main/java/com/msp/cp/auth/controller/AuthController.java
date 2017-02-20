@@ -1,5 +1,7 @@
 package com.msp.cp.auth.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import com.msp.cp.auth.service.AuthService;
 import com.msp.cp.auth.vo.AuthVO;
+import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.PagerVO;
 
 @Controller
@@ -48,7 +53,9 @@ public class AuthController {
 	 ------------------------------- */ 
 	
 	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView authList1(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
+	public ModelAndView authList1(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") 
+									int pageNum , String excel,
+									@RequestParam Map<String, Object> authMap ){
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("pageNum", pageNum);
@@ -57,6 +64,15 @@ public class AuthController {
 		PagerVO page = authService.getAuthCount(map);
 		if(page.getEndRow()==1){
 			page.setEndRow(0);
+		}
+		
+		if(excel != null){
+			if(excel.equals("true")){
+				ModelAndView mav = new ModelAndView("/auth/auth_list_excel");
+				List<userVO> authExcel = authService.authExcel(authMap);
+				mav.addObject("authExcel", authExcel);
+				return mav;
+			}
 		}
 		
 		int startRow = page.getStartRow();
@@ -229,4 +245,41 @@ public class AuthController {
 		return model;
 	}
 	
+	//	Excel Data Import
+    @RequestMapping(value = "/excelUploadAjax", method = RequestMethod.POST)
+    public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception{
+        
+    	MultipartFile excelFile =request.getFile("excelFile");
+        System.out.println("excelFile : " + excelFile);
+        System.out.println("엑셀 파일 업로드 컨트롤러");
+        
+        if(excelFile==null || excelFile.isEmpty()){
+        	
+            throw new RuntimeException("엑셀파일을 선택 해 주세요.");
+        }
+        
+        //파일 저장경로
+        File destFile = new File("C:\\"+excelFile.getOriginalFilename());
+        System.out.println("destFile : " + destFile);
+        
+        try{
+            excelFile.transferTo(destFile);
+            
+        }catch(IllegalStateException | IOException e){
+        	
+            throw new RuntimeException(e.getMessage(),e);
+        }
+        
+        int result = authService.excelUpload(destFile);
+        System.out.println("result : " + result);
+        
+        if(result == 1){
+        	
+        	System.out.println("Excel Insert 성공");
+        	
+        }else {
+        	System.out.println("Excel Insert 실패");
+        }
+        return new ModelAndView("redirect:/auth/list", "result", result);
+    }
 }

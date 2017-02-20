@@ -183,4 +183,24 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
         WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
 	 ]]>
 </select>
+
+<select id="auth_list_excel" parameterType="string" resultType="map">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT *
+         FROM TB_AUTH
+         WHERE 
+         	DEL_FLG = 'N'
+       	 	<if test="active_key != null and active_key != '' " >   
+            	AND ACTIVE_FLG = #{active_key}
+		 	</if>
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND AUTH_NM LIKE '%' || #{keyword} || '%'
+         	</if>
+         ORDER BY AUTH_ID ASC ) A
+     ) X
+</select>
+
+
 </mapper>
