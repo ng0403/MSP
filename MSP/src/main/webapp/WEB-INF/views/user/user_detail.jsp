@@ -64,7 +64,6 @@ $(document).ready(function() {
 		    $('#joinform').find('input[type="button"]').attr('disabled',true);
 	        $('#joinform').find('input[type="email"]').attr('disabled',true);
 	        $('#joinform').find('select').attr('disabled',true);
-	        $('#joinform').find('select').css('color',rgb(84, 84, 84));
 			//$('#addsave_btn').css('visibility',"hidden");
 			
 		} 
@@ -110,7 +109,6 @@ $(document).ready(function() {
 					$('#addsave_btn').css("visibility","hidden");
 					$('#modify_btn').attr("disabled", true);
 					$('#submit_btn').attr("disabled", true);
-					$('#joinform').find('select').css('color',rgb(84, 84, 84));
 				}else{
 					alert("신규 데이터를 입력하세요.");
 				}
