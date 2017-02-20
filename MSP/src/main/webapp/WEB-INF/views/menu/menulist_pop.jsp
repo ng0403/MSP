@@ -111,7 +111,7 @@
 				var endPageNum = this.page.endPageNum;
 				var currentPageNum = this.page.currentPageNum;
 				var totalPageCount = this.page.totalPageCount;
-				pagePopOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
+				menupagePopOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
 			})
 		}).fail(function(){
 			alert("메뉴 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
