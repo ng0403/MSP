@@ -20,6 +20,8 @@ public interface AuthDao {
 
 	public int authDelete(String dc);
 
+	public List<AuthVO> searchListPop(Map<String, Object> map);
+
 
 
  

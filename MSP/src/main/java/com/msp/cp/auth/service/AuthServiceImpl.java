@@ -64,6 +64,13 @@ public class AuthServiceImpl implements AuthService {
 		return result;
 	}
 
+	@Override
+	public List<AuthVO> searchListPop(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<AuthVO> list = authDao.searchListPop(map);
+		return list;
+	}
+
 
 	 
 	

@@ -197,6 +197,36 @@ public class AuthController {
 		return entity;
 	}
 	
+	@RequestMapping(value="/search_list_pop", method={RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String, Object> searchListPop( ModelMap model, HttpServletRequest request,
+													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+		                      
+		String keyword    = request.getParameter("keyword");
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    
+		map.put("keyword", keyword);
+		map.put("pageNum", pageNum);
+
+		PagerVO page = authService.getAuthCount(map);
 		
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
+		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+
+		List<AuthVO> list = authService.searchListPop(map);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("auth_list", list);
+
+		return model;
+	}
 	
 }

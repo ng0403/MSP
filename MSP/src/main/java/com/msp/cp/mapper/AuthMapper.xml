@@ -163,4 +163,24 @@ SET ACTIVE_FLG = 'N'
 WHERE  AUTH_ID = #{auth_id}
 </update>
 
+<select id="selectAuthPop"  parameterType="map" resultType="com.msp.cp.auth.vo.AuthVO">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT 
+         	auth_id
+         	,auth_nm
+         FROM TB_AUTH
+         WHERE 
+         	DEL_FLG = 'N'
+         	AND ACTIVE_FLG = 'Y'
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND AUTH_NM LIKE '%' || #{keyword} || '%'
+         	</if>
+         ORDER BY AUTH_ID ASC ) A
+     ) X
+     <![CDATA[
+        WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
+	 ]]>
+</select>
 </mapper>

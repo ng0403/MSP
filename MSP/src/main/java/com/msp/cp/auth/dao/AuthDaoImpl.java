@@ -49,6 +49,11 @@ public class AuthDaoImpl implements AuthDao {
 		
 		return sqlSession.update("auth.deleteAuth", dc);
 	}
+	@Override
+	public List<AuthVO> searchListPop(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("auth.selectAuthPop", map);
+	}
 	 
 	
 }

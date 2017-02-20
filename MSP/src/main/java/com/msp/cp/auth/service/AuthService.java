@@ -21,6 +21,8 @@ public interface AuthService {
 
 	public int authDelete(String dc);
 
+	public List<AuthVO> searchListPop(Map<String, Object> map);
+
 
 
 

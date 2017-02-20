@@ -19,7 +19,7 @@
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>메뉴관리화면</title>
 <style type="text/css">
-	#menuMask {
+	.mask_div {
 		display: none;
 		position:absolute; 
 		z-index:9000; 
@@ -30,7 +30,7 @@
 		height: 100%;
 		overflow: auto;
 	} 
-	#menuWindow{
+	.pop_main_div{
 		display: none;
 		position:absolute; 
 		width:40%; 
@@ -59,7 +59,7 @@
 			menuListInqrPop(1);
 		})
 		/*검색창 엔터 시 처리 이벤트*/
-		$("#menu_nm_key_pop").click(function(){
+		$("#menu_nm_key_pop").keypress(function(){
 			enterSearchPop(event);
 		})		
 		//검은 막을 눌렀을 때
@@ -74,13 +74,13 @@
 				var menu_nm = $(this).children("td").eq(0).html();
 				$('#up_menu_cd').val(menu_cd);
 				$('#up_menu_nm').val(menu_nm);
-				$('.menu_list_pop, #paging_pop_div').html("");
+				$('.menu_list_pop, #paging_menuPop_div').html("");
 				$('#menuMask, #menuWindow').hide();
 			}
 		})
 		//닫기 버튼을 눌렀을 때
 		$('#menuInpr_close_nfbtn').click(function(e) {
-			$('.menu_list_pop, #paging_pop_div').html("");
+			$('.menu_list_pop, #paging_menuPop_div').html("");
 			$('#menuMask, #menuWindow').hide();
 		});
 	})
@@ -99,7 +99,7 @@
 				var up_menu_nm = this.up_menu_nm;
 				menuListPopOutput(menu_cd, menu_nm, menu_url, up_menu_nm);
 			})
-			$("#paging_pop_div").html("");
+			$("#paging_menuPop_div").html("");
 			$(data).each(function(){
 				var pageNum = this.pageNum;
 				var totalCount = this.page.totalCount;
@@ -140,11 +140,11 @@
 			
 	}
 	/*페이징 출력 함수*/
-	function pagePopOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
+	function menuPagePopOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepMenu(event);'/>"  
+			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='menuPageInputRepPop(event);'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
 			+"<a style='color:black; text-decoration: none;'>▶</a>"
 		}
@@ -152,14 +152,14 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
+			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"menuPageInputRepPop(event);\"/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrtPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else if(pageNum == 1)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>" 
+			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"menuPageInputRepPop(event);\"/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
@@ -167,7 +167,7 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>" 
+			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"menuPageInputRepPop(event);\"/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
@@ -175,15 +175,15 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>"
+			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"menuPageInputRepPop(event);\"/>"
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick=menuListInqrPop("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
-		$("#paging_pop_div").append(pageContent);
+		$("#paging_menuPop_div").append(pageContent);
 
 	}
 	// 검색 페이징 엔터키
-    function pageInputRepMenu(event) {	
+    function menuPageInputRepPop(event) {	
     	$(document).ready(function() {
     		var keycode = (event.keyCode ? event.keyCode : event.which);
     		if (keycode == '13') {
@@ -209,7 +209,7 @@
     }
 	
   	//검색 엔터키
-    function enterSearchPop(event) {		
+    function menuEnterSearchPop(event) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
     	if (keycode == '13') {
     		menuListInqrPop(1);
@@ -230,33 +230,33 @@
 	}
 	
 	//menuDetail image popup
-	function menuByMask() {
+	function popByMask(message1,message2) {
 		//화면의 높이와 너비를 구한다.
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
 
 		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-		$('#menuMask').css({
+		$('#'+message1+'').css({
 			'width' : maskWidth,
 			'height' : maskHeight
 		});
 
 		//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
-		$('#menuMask').fadeIn(1000);
-		$('#menuMask').fadeTo("slow", 0.5);
+		$('#'+message1+'').fadeIn(1000);
+		$('#'+message1+'').fadeTo("slow", 0.5);
 
 		//윈도우 같은 거 띄운다.
-		$('#menuWindow').show();
+		$('#'+message2+'').show();
 	}
 </script>
 </head>
 <body>
-	<div id="menuMask"></div>
-	<div class="main_div" id="menuWindow">
+	<div id="menuMask" class="mask_div"></div>
+	<div class="pop_main_div" id="menuWindow">
 		<div class="navi_div">
 			마스터 > 메뉴관리
 			<div>
-				<input type="button" id="menuInpr_close_nfbtn" class="func_btn" data-dismiss="modal" style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
+				<input type="button" id="menuInpr_close_nfbtn" class="func_btn" style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
 			</div>
 		</div>
 		<div class="block_div"></div><div class="block_div"></div>
@@ -264,7 +264,7 @@
 			<div class="modal_search_div">
 				<!-- <form id="searchForm" name="searchForm"> -->
 					<label>메뉴명</label>
-					<input type="text" id="menu_nm_key_pop" name="menu_nm_key" > &nbsp;
+					<input type="text" id="menu_nm_key_pop" name="menu_nm_key" class="int_search"> &nbsp;
 					<input type="button" id="menuInqr_pop_fbtn" class="btn btn-default btn-sm" value="검색">
 				<!-- </form> -->
 			</div>
@@ -289,7 +289,7 @@
 						</tbody>
 					</table>
 				<div class="modal_paging_div">
-					<div class="page" id="paging_pop_div">	
+					<div class="page" id="paging_menuPop_div">	
 						
 					</div>
 				</div>
