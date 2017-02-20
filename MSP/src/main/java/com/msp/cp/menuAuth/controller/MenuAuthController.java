@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.msp.cp.code.vo.CodeVO;
 import com.msp.cp.common.PagerVO;
 import com.msp.cp.menuAuth.service.MenuAuthService;
 import com.msp.cp.menuAuth.vo.MenuAuthVO;
@@ -173,19 +174,18 @@ public class MenuAuthController {
 	@RequestMapping(value="/menuAuthAdd", method={RequestMethod.GET, RequestMethod.POST})
 	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpServletRequest request)
 	{
-		String auth_id = request.getParameter("auth_id");
-		String menu_cd = request.getParameter("menu_cd");
-		String inqr_auth = request.getParameter("inqr_auth3");
-		String add_auth = request.getParameter("add_auth3");
-		String mdfy_auth = request.getParameter("mdfy_auth3");
-		String del_auth = request.getParameter("del_auth3");
+		String auth_id    = request.getParameter("auth_id");
+		String menu_cd    = request.getParameter("menu_cd");
+		String active_flg = request.getParameter("active_flg3"); 
+		String inqr_auth  = request.getParameter("inqr_auth3");
+		String add_auth   = request.getParameter("add_auth3");
+		String mdfy_auth  = request.getParameter("mdfy_auth3");
+		String del_auth   = request.getParameter("del_auth3");
 		String menu_acc_auth = request.getParameter("menu_acc_auth3");
-		
-		System.out.println(auth_id);
-		System.out.println(inqr_auth);
 		
 		menuAuthVo.setAuth_id(auth_id);
 		menuAuthVo.setMenu_cd(menu_cd);
+		menuAuthVo.setActive_flg(active_flg);
 		menuAuthVo.setInqr_auth(inqr_auth);
 		menuAuthVo.setAdd_auth(add_auth);
 		menuAuthVo.setMdfy_auth(mdfy_auth);
@@ -193,6 +193,16 @@ public class MenuAuthController {
 		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
 		menuAuthVo.setCreated_by("ADMIN");
 		
+		System.out.println(menuAuthVo.getAuth_id());
+		System.out.println(menuAuthVo.getMenu_cd());
+		System.out.println(menuAuthVo.getActive_flg());
+		System.out.println(menuAuthVo.getInqr_auth());
+		System.out.println(menuAuthVo.getAdd_auth());
+		System.out.println(menuAuthVo.getMdfy_auth());
+		System.out.println(menuAuthVo.getDel_auth());
+		System.out.println(menuAuthVo.getMenu_acc_auth());
+		System.out.println(menuAuthVo.getCreated_by());
+
 		menuAuthService.insertMenuAuth(menuAuthVo);
 		
 		return "redirect:/menuAuth/menuAuthInqr";
@@ -227,7 +237,34 @@ public class MenuAuthController {
 		menuAuthVo.setDel_auth(del_auth);
 		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
 		
+		System.out.println(auth_id);
+		
 		menuAuthService.mdfyMenuAuth(menuAuthVo);
+		
+		return "redirect:/menuAuth/menuAuthInqr";
+	}
+	
+	//menuAuthDetailDel
+	
+	@RequestMapping(value="/menuAuthDetailDel", method={RequestMethod.GET, RequestMethod.POST})
+	public String menuAuthDelete(MenuAuthVO menuAuthVo, String del_menuAuth)
+	{
+		String menu_cd = "";
+		String auth_id = "";
+		String[] delmenuAuth = del_menuAuth.split(",");
+		
+		for(int i=0; i<delmenuAuth.length; i++)
+		{
+			String del[] = delmenuAuth[i].split(":");
+			
+			menu_cd = del[0];
+			auth_id = del[1];
+			
+			menuAuthVo.setAuth_id(auth_id);
+			menuAuthVo.setMenu_cd(menu_cd);
+			
+			menuAuthService.deleteMenuAuth(menuAuthVo);
+		}
 		
 		return "redirect:/menuAuth/menuAuthInqr";
 	}

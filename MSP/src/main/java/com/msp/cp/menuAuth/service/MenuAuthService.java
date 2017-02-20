@@ -14,8 +14,10 @@ public interface MenuAuthService {
 	
 	public void insertMenuAuth(MenuAuthVO menuAuthVo);
 	public void mdfyMenuAuth(MenuAuthVO menuAuthVo);
+	public void deleteMenuAuth(MenuAuthVO menuAuthVo);
 	
 	// Paging
 	PagerVO getMenuAuthListCount(Map<String, Object> map);
+	
 
 }

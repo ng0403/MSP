@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
 import org.springframework.stereotype.Repository;
 
 import com.msp.cp.menuAuth.vo.MenuAuthVO;
@@ -64,6 +65,7 @@ public class MenuAuthDaoImpl implements MenuAuthDao {
 	@Override
 	public void insertMenuAuth(MenuAuthVO menuAuthVo) {
 		// TODO Auto-generated method stub
+		System.out.println("DAO : " + menuAuthVo.getAuth_id());
 		sqlSession.insert("menuAuthAdd", menuAuthVo);
 	}
 
@@ -72,5 +74,11 @@ public class MenuAuthDaoImpl implements MenuAuthDao {
 		// TODO Auto-generated method stub
 		sqlSession.update("menuAuthMdfy", menuAuthVo);
 		
+	}
+
+	@Override
+	public void deleteMenuAuth(MenuAuthVO menuAuthVo) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("menuAuthDel", menuAuthVo);
 	}
 }

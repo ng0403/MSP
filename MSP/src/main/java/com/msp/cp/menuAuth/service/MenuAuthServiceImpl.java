@@ -64,4 +64,12 @@ public class MenuAuthServiceImpl implements MenuAuthService{
 		menuAuthDao.mdfyMenuAuth(menuAuthVo);
 	}
 
+	@Override
+	public void deleteMenuAuth(MenuAuthVO menuAuthVo) {
+		// TODO Auto-generated method stub
+		menuAuthDao.deleteMenuAuth(menuAuthVo);
+	}
+
+
+
 }

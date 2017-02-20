@@ -13,7 +13,9 @@ public interface MenuAuthDao {
 
 	public void insertMenuAuth(MenuAuthVO menuAuthVo);
 	public void mdfyMenuAuth(MenuAuthVO menuAuthVo);
+	public void deleteMenuAuth(MenuAuthVO menuAuthVo);
 	
 	// Paging
 	int MenuAuthListCount(String string, Map<String, Object> map);
+	
 }

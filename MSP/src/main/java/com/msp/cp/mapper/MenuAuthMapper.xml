@@ -30,6 +30,7 @@
            			 WHERE
               			menu_cd = tma.menu_cd
           			) as menu_nm,
+          			 auth_id,
           			(SELECT
               			auth_nm
            			 FROM
@@ -96,12 +97,12 @@
 						   WHERE auth_nm = #{auth_nm})
 	</select>
 	
-	<insert id="menuAuthAdd" parameterType="com.msp.cp.menuAuth.vo.MenuAuthVO">
+	<update id="menuAuthAdd" parameterType="com.msp.cp.menuAuth.vo.MenuAuthVO">
 		INSERT INTO TB_MENU_AUTH
-			(auth_id, menu_cd, inqr_auth, add_auth, mdfy_auth, del_auth, menu_acc_auth, created_by)
+			(auth_id, menu_cd, active_flg, inqr_auth, add_auth, mdfy_auth, del_auth, menu_acc_auth, created_by)
 		VALUES
-			(#{auth_id}, #{menu_cd}, #{inqr_auth}, #{add_auth}, #{mdfy_auth}, #{del_auth}, #{menu_acc_auth}, #{created_by} )
-	</insert>
+			(#{auth_id}, #{menu_cd}, #{active_flg}, #{inqr_auth}, #{add_auth}, #{mdfy_auth}, #{del_auth}, #{menu_acc_auth}, #{created_by} )
+	</update>
 	
 	<update id="menuAuthMdfy" parameterType="com.msp.cp.menuAuth.vo.MenuAuthVO">
 		UPDATE 
@@ -116,4 +117,11 @@
 		WHERE
 			AUTH_ID = #{auth_id} AND MENU_CD = #{menu_cd}
 	</update>
+	
+	<delete id="menuAuthDel" parameterType="com.msp.cp.menuAuth.vo.MenuAuthVO">
+		DELETE
+			TB_MENU_AUTH
+		WHERE
+			AUTH_ID = #{auth_id} AND MENU_CD = #{menu_cd}
+	</delete>
 </mapper>

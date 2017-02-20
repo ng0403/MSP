@@ -206,7 +206,7 @@ function viewLoadingHide(){
 								<tr class="open_detail" data_num="${menuAuthInqrList.MENU_CD}" 
 									onmouseover="this.style.background='#c0c4cb'" onmouseout="this.style.background='white'">
 									<td align="center" scope="row">
-										<input type="checkbox" name="del_menuAuth" id="del_menuAuth" value="${menuAuthInqrList.MENU_CD}" />
+										<input type="checkbox" name="del_menuAuth" id="del_menuAuth" value="${menuAuthInqrList.MENU_CD}:${menuAuthInqrList.AUTH_ID}" />
 									</td>
 									<td>
 										<a href="javascript:void(0)" onclick="fn_menuAuthPop('${menuAuthInqrList.MENU_CD}', '${menuAuthInqrList.AUTH_NM }')">${menuAuthInqrList.MENU_CD}</a>
@@ -298,7 +298,7 @@ function viewLoadingHide(){
 					<span style="float:left;margin-left:1%;margin-top:1%; font-size:15px;">
 						<strong>메뉴권한 등록</strong></span>
 		        
-		        <form name="menuAuthAdd" id="menuAuthAdd" action="menuAuthAdd"	enctype="multipart/form-data" method="post">
+		        <form name="menuAuthAdd" id="menuAuthAdd" action="menuAuthAdd" method="post"> <!-- enctype="multipart/form-data" -->
 		        	<input type="button" id="menuAuthClose" class="btn btn-default" data-dismiss="modal" value="닫기" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
 		        	<input type="button" class="btn btn-default" id="menuAuth_save_btn" name="menuAuth_save_btn" value="저장" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/><!-- submit으로 보내는 것이 post,  value값 직접 전달이get -->
 		        
@@ -309,14 +309,14 @@ function viewLoadingHide(){
 							<tr height="15px">
 								<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>권한명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<input type="text" id="auth_nm" name ="auth_nm" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
-									<input type="hidden" id="auth_id" name="auth_id">
+									<input type="text" id="auth_nm" name ="auth_nm" value="${auth_nm}" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
+									<input type="hidden" id="auth_id" name="auth_id" value="${auth_id}">
 									<input type="button" id="auth_id_pop" name="auth_id_pop" value="선택">
 								</td>
 								<th style="width: 12%; text-align: left;"><span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>메뉴명&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
 									<input type="text" id="up_menu_nm" name="menu_nm" style="width: 50%;"/>
-									<input type="hidden" id="up_menu_cd" name="menu_cd">
+									<input type="hidden" id="up_menu_cd" name="menu_cd" value="${menu_cd}">
 									<input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택">
 								</td>
 							</tr>
@@ -324,7 +324,7 @@ function viewLoadingHide(){
 							<tr height="15px">
 								<th style="width:20%; text-align: right;"><span style="color:red;">*</span>활성화여부&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="avtive_flg3" name="avtive_flg3" style="width: 30%;font-size:10.5px;">
+									<select id="active_flg3" name="active_flg3" style="width: 30%;font-size:10.5px;">
 									    <option value="">선택</option>
 									    <option value="Y">Y</option>
 									    <option value="N">N</option>
@@ -842,7 +842,7 @@ function viewLoadingHide(){
 			{
 				if(check[i].checked == true)
 				{
-					alert("OH~!");
+					$("#delAllForm").submit();
 					checked++;
 				}
 			}
