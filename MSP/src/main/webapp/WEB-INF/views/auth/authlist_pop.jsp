@@ -130,7 +130,7 @@ $(function(){
 		var auth_nm_td = $("<td>");
 		auth_nm_td.html(auth_nm);
 				
-		auth_tr.append(del_code_td).append(auth_id_td).append(auth_nm_td);
+		auth_tr.append(auth_id_td).append(auth_nm_td);
 				
 		$(".auth_list_pop").append(auth_tr);
 			
