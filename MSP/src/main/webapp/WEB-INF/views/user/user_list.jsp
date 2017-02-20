@@ -25,19 +25,7 @@
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
 
-	function userTabOpen() {
-		var popUrl = "userTab";
-		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-		window.open(popUrl, "", popOption);
-	}
-	//수정
-	function onPopup(id) {
-		var tmp = id;//$("#user_id_h").val();
-		var popUrl = "userMdfyPop?user_id=" + tmp; //팝업창에 출력될 페이지 URL
-		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;"; //팝업창 옵션(optoin)
-
-		window.open(popUrl, "", popOption);
-	}
+	
 	
 	
 </script>

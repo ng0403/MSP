@@ -1,3 +1,18 @@
+//사용자 신규등록 팝업	
+function userTabOpen() {
+		var popUrl = "userTab";
+		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+		window.open(popUrl, "", popOption);
+	}
+	//사용자 정보 수정 팝업
+	function onPopup(id) {
+		var tmp = id;//$("#user_id_h").val();
+		var popUrl = "userMdfyPop?user_id=" + tmp; //팝업창에 출력될 페이지 URL
+		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;"; //팝업창 옵션(optoin)
+
+		window.open(popUrl, "", popOption);
+	}
+
 //엑셀 파일 추가 fucntion
  function checkFileType(filePath) {
                 var fileFormat = filePath.split(".");
