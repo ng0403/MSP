@@ -37,7 +37,7 @@ $(function(){
 	$(document).on("click", ".open_authList", function(){
 		if(save_cd == "insert"||save_cd == "update"){
 			var auth_id = $(this).attr("data_num");
-			var auth_nm = $(this).children("td").eq(0).html();
+			var auth_nm = $(this).children("td").eq(1).html();
 			$('#auth_id').val(auth_id);
 			$('#auth_nm').val(auth_nm);
 			$('.auth_list_pop, #paging_authPop_div').html("");
