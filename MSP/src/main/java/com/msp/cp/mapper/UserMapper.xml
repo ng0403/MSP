@@ -87,8 +87,7 @@
 		where user_id = #{user_id}
 	</update>
 
-	<select id="userDetail" parameterType="string"
-		resultType="com.msp.cp.user.vo.userVO">
+	<select id="userDetail" parameterType="string" resultType="com.msp.cp.user.vo.userVO">
 		SELECT TU.*, TD.DEPT_NM
 		FROM(select *
 			   FROM TB_USER

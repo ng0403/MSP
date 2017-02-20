@@ -49,9 +49,11 @@ function userTabOpen() {
 		var ctx = $("#ctx").val();
 		var form = $("#"+formID);
 		var excel = $('<input type="hidden" value="true" name="excel">');
-		form.append(excel);
-		form.submit();
-		$("input[name=excel]").val("");
+		if(confirm("리스트를 출력하시겠습니까?")){
+			form.append(excel);
+			form.submit();
+			$("input[name=excel]").val("");
+		}
 	}
 	// 1.모두 체크
 	/* 체크박스 전체선택, 전체해제 */
@@ -81,7 +83,7 @@ function userTabOpen() {
 
 			//삭제처리 후 다시 불러올 리스트 url      
 
-			location.href = "${ctx}/user/userDel?user_id=" + del_code;
+			location.href = "/user/userDel?user_id=" + del_code;
 		}
 	}
 	
