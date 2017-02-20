@@ -18,8 +18,6 @@
 var save_cd = "";
 
 $(function(){
-
-	
 	/*검색버튼 클릭 시 처리 이벤트*/
 	$("#auth_inqr_fbtn").click(function(){
 		authListInqrPop(1);
