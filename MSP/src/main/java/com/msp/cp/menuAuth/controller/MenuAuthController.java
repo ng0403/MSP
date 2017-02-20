@@ -9,12 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,16 +79,22 @@ public class MenuAuthController {
 	{
 		System.out.println(pageNum);
 		
-		String menuAuth_sch = request.getParameter("menuAuth_sch").trim();
+		String auth_id_sch = request.getParameter("auth_id_sch").trim();
+		String menu_nm_sch = request.getParameter("menu_nm_sch").trim();
 		
-		if(menuAuth_sch == null)
+		if(auth_id_sch == null)
 		{
-			menuAuth_sch = "";
+			auth_id_sch = "";
+		}
+		if(menu_nm_sch == null)
+		{
+			menu_nm_sch = "";
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("menuAuth_sch", menuAuth_sch);
+		map.put("auth_id_sch", auth_id_sch);
+		map.put("menu_nm_sch", menu_nm_sch);
 		map.put("pageNum", pageNum);
 		
 		PagerVO page = menuAuthService.getMenuAuthListCount(map);
@@ -120,10 +123,76 @@ public class MenuAuthController {
 		return model;
 	}
 	
+	/**
+	 * 업 무 명 : 메뉴권한상세보기
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/15
+     * 수 정 자 : 이재욱
+     * 수 정 일 : 2017/02/16
+	 * 내     용 : 해당 클릭한 값의 상세정보를 띄어준다.
+	 * 		    팝업위치 및 CSS 수정 
+	 * */
+	@RequestMapping(value="/menuAuthDetail", method={RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody Map<String, Object> menuAuthDeatail(ModelMap model, HttpServletRequest request)
+	{
+		String menu_cd = request.getParameter("menu_cd").trim();
+		String auth_nm = request.getParameter("auth_nm").trim();
+		
+		if(menu_cd == null)
+		{
+			menu_cd = "";
+		}
+		if(auth_nm == null)
+		{
+			auth_nm = "";
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("menu_cd", menu_cd);
+		map.put("auth_nm", auth_nm);
+		
+		List<MenuAuthVO> menuAuthDetail = menuAuthService.menuAuthDetail(map);
+		
+		System.out.println("맵 : " + map);
+		System.out.println("리스트 : " + menuAuthDetail);
+		
+		model.addAttribute("menuAuthDetail", menuAuthDetail);
+		
+		return model;
+	}
 	
-	
-	
-	
-	
+	/**
+	 * 업 무 명 : 메뉴권한 등록
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/17
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 공통코드 등록한다. 
+	 * */
+	@RequestMapping(value="/menuAuthAdd", method={RequestMethod.GET, RequestMethod.POST})
+	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpServletRequest request)
+	{
+		String auth_id = request.getParameter("auth_id3");
+		String menu_cd = request.getParameter("menu_cd3");
+		String inqr_auth = request.getParameter("inqr_auth3");
+		String add_auth = request.getParameter("add_auth3");
+		String mdfy_auth = request.getParameter("mdfy_auth3");
+		String del_auth = request.getParameter("del_auth3");
+		String menu_acc_auth = request.getParameter("menu_acc_auth3");
+		
+		menuAuthVo.setAuth_id(auth_id);
+		menuAuthVo.setMenu_cd(menu_cd);
+		menuAuthVo.setInqr_auth(inqr_auth);
+		menuAuthVo.setAdd_auth(add_auth);
+		menuAuthVo.setMdfy_auth(mdfy_auth);
+		menuAuthVo.setDel_auth(del_auth);
+		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
+		menuAuthVo.setCreated_by("ADMIN");
+		
+		menuAuthService.insertMenuAuth(menuAuthVo);
+		
+		return "redirect:/menuAuth/menuAuthInqr";
+	}
 	
 }

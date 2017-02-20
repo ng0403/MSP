@@ -44,4 +44,18 @@ public class MenuAuthServiceImpl implements MenuAuthService{
 		return obj;
 	}
 
+	@Override
+	public List<MenuAuthVO> menuAuthDetail(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<MenuAuthVO> obj = menuAuthDao.menuAuthDetail(map);
+		
+		return obj;
+	}
+
+	@Override
+	public void insertMenuAuth(MenuAuthVO menuAuthVo) {
+		// TODO Auto-generated method stub
+		menuAuthDao.insertMenuAuth(menuAuthVo);
+	}
+
 }

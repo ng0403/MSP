@@ -52,4 +52,18 @@ public class MenuAuthDaoImpl implements MenuAuthDao {
 		
 		return obj;
 	}
+
+	@Override
+	public List<MenuAuthVO> menuAuthDetail(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<MenuAuthVO> obj = sqlSession.selectList("menuAuthDetail", map);
+		
+		return obj;
+	}
+
+	@Override
+	public void insertMenuAuth(MenuAuthVO menuAuthVo) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("menuAuthAdd", menuAuthVo);
+	}
 }

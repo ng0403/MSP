@@ -49,14 +49,56 @@
          		<if test="active_flg =='N'" >   
              		AND ACTIVE_FLG = 'N'
 		 		</if>
-		 		<if test="menuAuth_sch != null and menuAuth_sch != ''" >   
-             		AND AUTH_ID LIKE '%' || #{menuAuth_sch} || '%'
-         		</if>
          		ORDER BY AUTH_ID ASC ) A
      		) X
      	<![CDATA[
         WHERE 
         	X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
 	 	]]>
+	 		<if test="auth_id_sch != null and auth_id_sch != ''" >   
+            	AND auth_nm LIKE '%' || #{auth_id_sch} || '%'
+         	</if>
+         	<if test="menu_nm_sch != null and menu_nm_sch != ''">
+         		AND menu_nm LIKE '%' || #{menu_nm_sch} || '%'
+         	</if>
 	</select >
+	
+	<select id="menuAuthDetail" parameterType="string" resultType="map">
+		SELECT
+ 		 (SELECT auth_nm
+  		  FROM tb_auth
+   		  WHERE auth_id = TMA.auth_id) AS auth_nm,
+  		 menu_cd,
+  		 (SELECT menu_nm
+   		  FROM tb_menu
+   		  WHERE menu_cd = TMA.menu_cd) AS menu_nm,
+  		 (SELECT up_menu_cd
+   		  FROM tb_menu
+   		  WHERE menu_cd = TMA.menu_cd) AS up_menu_cd,
+  		 (SELECT menu_nm
+   		  FROM tb_menu
+   		  WHERE up_menu_cd = TMA.menu_cd) AS up_menu_nm,
+  		 (SELECT menu_url
+   	      FROM tb_menu
+   		  WHERE menu_cd = TMA.menu_cd) AS menu_url,
+  		 active_flg,
+  		 inqr_auth,
+         add_auth,
+  		 mdfy_auth,
+  		 del_auth
+		FROM 
+			tb_menu_auth TMA
+		WHERE 
+			TMA.menu_cd = #{menu_cd}
+			AND auth_id = (SELECT auth_id
+						   FROM tb_auth
+						   WHERE auth_nm = #{auth_nm})
+	</select>
+	
+	<insert id="menuAuthAdd" parameterType="com.msp.cp.menuAuth.vo.MenuAuthVO">
+		INSERT INTO TB_MENU_AUTH
+			(auth_id, menu_cd, inqr_auth, add_auth, mdfy_auth, del_auth, menu_acc_auth, created_by)
+		VALUES
+			(#{auth_id}, #{menu_cd}, #{inqr_auth}, #{add_auth}, #{mdfy_auth}, #{del_auth}, #{menu_acc_auth}, #{created_by} )
+	</insert>
 </mapper>

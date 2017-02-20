@@ -9,21 +9,23 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 
-<!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
-<title>Code List</title>
+
+<!--  -->
+
+<title>MenuAuth List</title>
 
 <style type="text/css">
-.menuWindow{display: none; position:absolute; width:15%; height:15%; left:80%; top:30%; 
-				background-color: #c0c4cb	; overflow: auto;}	
+#menuAuthMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;} 
+#menu_pop_div { display: none; position:absolute; width:50%; height:75%; left:80%; top:30%; 
+				background-color: #c0c4cb	; overflow: auto; }
 
-.menuOpen{display: none;}	
-	
+.menuAuthWindow {display: none; position:absolute; width:50%; height:50%; left:30%; top:30%; z-index:10000;
+				background-color: white; overflow: auto;}	
+.menuOpen{display: none;}		
 .block_div{display:block; height: 10px; clear: both;}
 
 .modal.fade {
@@ -33,6 +35,7 @@
   -o-transition: opacity .3s linear, top .3s ease-out;
   transition: opacity .3s linear, top .3s ease-out;
 }
+
 .modal.fade.in {
   top: 5%;
 }
@@ -43,47 +46,78 @@
 	float: inherit;
 }
 
+.search1_div {
+	margin-top: 10px;
+	margin-left: 20px;
+	float: left;
+	width: 48%;
+}
+
 </style>
 
 <script type="text/javascript">
-function menuByMask() {
+function menuAuthByMask() {
 	//화면의 높이와 너비를 구한다.
 	var maskHeight = $(document).height();
 	var maskWidth = $(window).width();
 	
-	alert("Height : " + maskHeight + " Width :" + maskWidth);
-	
 	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-	$("#menuMask").css({
+	$("#menuAuthMask").css({
 		'width' : maskWidth,
 		'height' : maskHeight
 	});
+	
+	//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
+	$('#menuAuthMask').fadeIn(1000);
+	$('#menuAuthMask').fadeTo("slow", 0.5);
 
 	//윈도우 같은 거 띄운다.
-	$('.menuWindow').show();
+	$('.menuAuthWindow').show();
 }
 
 $(document).ready(function() {
+	// 등록할 때 메뉴검색 팝업 눌렀을 때
+	$("#menu_pop_div").hide();
+	
+	$("#menu_cd_pop").on("click", function(){
+		$("#menu_pop_div").show();
+		$("#menu_pop_div").center();
+		menuListInqrPop(1);
+		menuByMask();
+	});
+	
 	//검은 막 띄우기
 	$('.menuOpen').click(function(e) {
 		e.preventDefault();
-		menuByMask();
+		menuAuthByMask();
 	});
 
 	//닫기 버튼을 눌렀을 때
-	$('.menuWindow #menuClose').click(function(e) {
+	$('.menuAuthWindow #menuClose').click(function(e) {
 		//링크 기본동작은 작동하지 않도록 한다.
 		e.preventDefault();
 		$("#generalTbody").empty();
-		$("#menuMask, .menuWindow").hide();
+		$("#menuAuthMask, .menuAuthWindow").hide();
 	});
 
 	//검은 막을 눌렀을 때
-	$("#menuMask").click(function() {
+	$("#menuAuthMask").click(function() {
 		$(this).hide();
-		$('.menuWindow').hide();
+		$('.menuAuthWindow').hide();
 	});
 });
+
+function viewLoadingShow(){
+     $('#viewLoadingImg').css('position', 'absolute');
+     $('#viewLoadingImg').css('left', '45%');
+     $('#viewLoadingImg').css('top', '45%');
+     $('#viewLoadingImg').css('z-index', '1200');
+     $('#viewLoadingImg').show().fadeIn(500);
+}
+
+function viewLoadingHide(){
+   $('#viewLoadingImg').fadeOut();   
+}
 
 </script>
 
@@ -99,18 +133,24 @@ $(document).ready(function() {
 		<br><br>
 		
 		<!-- Search Cover Div -->
-		<div class="search_div">
-			<div class="search2_div">
+		<div class="">
+			<div class="search1_div">
 				<form name="searchForm">
+					<table>
 						<tr>
-							<th>권한ID명</th>
+							<th>권한명</th>
 							<td>
-								<input type="text" id="menuAuth_sch" name="menuAuth_sch" value="${menuAuth_sch}">
+								<input type="text" id="auth_id_sch" name="auth_id_sch" value="${auth_id_sch}">
 							</td>
-						   	 <td>
+						    <th>메뉴명</th>
+							<td>
+								<input type="text" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
+							</td>
+						   	<td>
 						    	<input type="button" id="search_fbtn" class="user_serach_fbtn" onclick="fn_search(1)" value="검색">
 						    </td>
 						</tr>
+					</table>
 				</form>
 				<!-- Paging Form -->
 				<form id="menuAuthlistPagingForm" method="post" action="menuAuthInqr">
@@ -147,7 +187,9 @@ $(document).ready(function() {
 									<td align="center" scope="row">
 										<input type="checkbox" name="del_menuAuth" id="del_menuAuth" value="${menuAuthInqrList.MENU_CD}" />
 									</td>
-									<td>${menuAuthInqrList.MENU_CD}</td>
+									<td>
+										<a href="javascript:void(0)" onclick="fn_menuAuthPop('${menuAuthInqrList.MENU_CD}', '${menuAuthInqrList.AUTH_NM }')">${menuAuthInqrList.MENU_CD}</a>
+									</td>
 									<td>${menuAuthInqrList.MENU_NM}</td>
 									<td>${menuAuthInqrList.AUTH_NM}</td>
 									<td>${menuAuthInqrList.INQR_AUTH}</td>
@@ -164,7 +206,7 @@ $(document).ready(function() {
 				<!-- Button Div -->
 				<div class="btn01">
 					<div class="left">
-						<input type="button" id="menuAuth_add_btn" class="btn btn-default" value="추가" /> 
+						<input type="button" id="menuAuth_add_btn" class="btn btn-default" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가" /> 
 						<input type="button" id="menuAuth_del_btn" class="btn btn-default" value="삭제" />
 					</div>
 				</div>
@@ -208,11 +250,128 @@ $(document).ready(function() {
 			</div>
 		
 		<!-- class="list_div" -->
-		</div>	
+		</div>
 		
-	
+		<!-- 메뉴권한 상세정보 창 띄우기(취소 - 부트스트랩을 mask모달로 변경) -->
+		<div id="menuAuthDetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="menuAuthDetail-tab" aria-hidden="true" data-backdrop="static" data-keyboard="true" >
+     	   <div class="modal-dialog modal-lg">
+     	       <div class="modal-content">
+     	       </div>
+    	    </div>
+		</div>
+		
+		<div id="viewLoadingImg" style="display: none;">
+			<img src="${ctx}/resources/image/viewLoading.gif">
+   		</div>
+		
+		 <!-- menu detail 팝업 -->
+		<div style="font-size:11.5px;">
+	    	<jsp:include page="../menuAuth/menuAuth_pop.jsp"></jsp:include>
+		</div>
+		<!-- //menu detail 팝업 -->
+		
+		<!--  메뉴권한 등록 창띄우기 -->
+    	<div class="modal fade" id="menuAuthAddLayer" style="display: none;">
+			<div class="modal-dialog modal-lg">   <!-- modal-lg -->
+				<div class="modal-content">
+					<span style="float:left;margin-left:1%;margin-top:1%; font-size:15px;">
+						<strong>메뉴권한 등록</strong></span>
+		        
+		        <form name="menuAuthAdd" id="menuAuthAdd" action="menuAuthAdd"	enctype="multipart/form-data" method="post">
+		        	<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
+		        	<input type="button" class="btn btn-default" id="menuAuth_save_btn" value="저장" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/><!-- submit으로 보내는 것이 post,  value값 직접 전달이get -->
+		        
+	            	<div class="block_div"></div><div class="block_div"></div><div class="block_div"></div>
+	           
+					<div align="center" style="width: 100%">
+						<table class="board_view" style="font-size:12px;width: 100%">
+							<tr height="15px">
+								<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>권한ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<input type="text" id="auth_id3" name ="auth_id3" style="width:80%; background-color:#F2F2F2;" value="${auth_id3}" readonly="readonly"/>
+									<input type="button" id="auth_pop" name="auth_pop" value="선택">
+								</td>
+								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴코드&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<input type="text" id="menu_cd3" name="menu_cd3" style="width: 80%;"/>
+									<input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택">
+								</td>
+							</tr>
+							<tr height="15px"></tr>
+							<tr height="15px">
+								<th style="width:20%; text-align: right;"><span style="color:red;">*</span>활성화여부&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<select id="avtive_flg3" name="avtive_flg3" style="width: 30%;font-size:10.5px;">
+									    <option value="">선택</option>
+									    <option value="Y">Y</option>
+									    <option value="N">N</option>
+									</select>
+								</td>
+							</tr>
+							<tr height="15px"></tr>
+							<tr height="15px">
+								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>조회권한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<select id="inqr_auth3" name="inqr_auth3" style="width: 30%;font-size:10.5px;">
+									    <option value="">선택</option>
+									    <option value="Y">Y</option>
+									    <option value="N">N</option>
+									</select>
+								</td>
+								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>생성권한&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<select id="add_auth3" name="add_auth3" style="width: 30%;font-size:10.5px;">
+									    <option value="">선택</option>
+									    <option value="Y">Y</option>
+									    <option value="N">N</option>
+									</select>
+								</td>
+							</tr>
+							<tr height="15px"></tr>
+							<tr height="15px">
+								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>수정권한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<select id="mdfy_auth3" name="mdfy_auth3" style="width: 30%;font-size:10.5px;">
+									    <option value="">선택</option>
+									    <option value="Y">Y</option>
+									    <option value="N">N</option>
+									</select>
+								</td>
+								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>삭제권한&nbsp;&nbsp;</th>
+								<td style="width: 38%; text-align: left;">
+									<select id="del_auth3" name="del_auth3" style="width: 30%;font-size:10.5px;">
+									    <option value="">선택</option>
+									    <option value="Y">Y</option>
+									    <option value="N">N</option>
+									</select>
+								</td>
+							</tr>
+							<tr height="15px"></tr>
+							<tr height="15px">
+								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴접근권한</th>
+								<td style="width: 38%; text-align: left;">
+									<select id="menu_acc_auth3" name="menu_acc_auth3" style="width: 30%;font-size:10.5px;">
+									    <option value="">선택</option>
+									    <option value="Y">Y</option>
+									    <option value="N">N</option>
+									</select>
+								</td>
+							</tr>
+							<tr height="50px"></tr>
+						</table>
+					</div>
+		        </form>
+				</div>
+			</div>
+		<!-- 등록 DIV -->
+    	</div>	
 	<!-- class="main_div" -->
 	</div>
+	
+	<div id="menu_pop_div" style="font-size:11.5px;">
+		<jsp:include page="../menu/menulist_pop.jsp"></jsp:include>
+	</div>
+	
 	
 	<script type="text/javascript">
 		
@@ -254,7 +413,8 @@ $(document).ready(function() {
 		//사용자관리 페이징
 		function userPaging(pageNum) 
 		{
-			var menuAuth_sch = $("#menuAuth_sch").val();
+			var auth_id_sch = $("#auth_id_sch").val();
+			var menu_nm_sch = $("#menu_nm_sch").val();
 			var tbody = $("#menuAuthListTbody");
 			var contents = "";
 			
@@ -264,7 +424,7 @@ $(document).ready(function() {
 				type     : 'POST',
 				dataType : 'json',
 				data     : {
-					"menuAuth_sch":menuAuth_sch, "pageNum":pageNum
+					"auth_id_sch":auth_id_sch, "menu_nm_sch":menu_nm_sch, "pageNum":pageNum
 				},
 				success  : function(data) {
 					tbody.empty();
@@ -286,7 +446,7 @@ $(document).ready(function() {
 							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
 							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+"'></td>"
-		    				+"<td>"+menu_cd+"</td>"
+							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
 		    				+"<td>"+menu_nm+"</td>"
 		    				+"<td>"+auth_nm+"</td>"
 							+"<td>"+inqr_auth+"</td>"
@@ -348,7 +508,8 @@ $(document).ready(function() {
 		// 검색 버튼 클릭시
 		function fn_search(pageNum)
 		{
-			var menuAuth_sch = $("#menuAuth_sch").val();
+			var auth_id_sch = $("#auth_id_sch").val();
+			var menu_nm_sch = $("#menu_nm_sch").val();
 			var tbody = $("#menuAuthListTbody");
 			var contents = "";
 			var pageContent = "";
@@ -358,7 +519,7 @@ $(document).ready(function() {
 				type     : 'POST',
 				dataType : 'json',
 				data     : {
-					"menuAuth_sch":menuAuth_sch, "pageNum":pageNum
+					"auth_id_sch":auth_id_sch, "menu_nm_sch":menu_nm_sch, "pageNum":pageNum
 				},
 				success  : function(data) {						
 					tbody.empty();
@@ -380,7 +541,7 @@ $(document).ready(function() {
 							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
 							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+"'></td>"
-		    				+"<td>"+menu_cd+"</td>"
+							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
 		    				+"<td>"+menu_nm+"</td>"
 		    				+"<td>"+auth_nm+"</td>"
 							+"<td>"+inqr_auth+"</td>"
@@ -438,8 +599,229 @@ $(document).ready(function() {
 				}
 			});
 		}
+	
+		// 상세보기 팝업
+		function fn_menuAuthPop(menu_cd, auth_nm)
+		{
+			var menu_cd = menu_cd;
+			var auth_nm = auth_nm;
+			
+			var tbody = $("#generalTbody");
+			var contents  = "";
+			var contents1 = "";
+			
+			var active_radio1 = "";
+			var active_radio2 = "";
+			var inqr_radio1 = "";
+			var inqr_radio2 = "";
+			var add_radio1 = "";
+			var add_radio2 = "";
+			var mdfy_radio1 = "";
+			var mdfy_radio2 = "";
+			var del_radio1 = "";
+			var del_radio2 = "";
+			var menu_acc_radio1 = "";
+			var menu_acc_radio2 = "";
+			
+			$.ajax({
+				url		 : 'menuAuthDetail',
+				type	 : 'POST',
+				dataType : 'json',
+				data	 : {
+					"menu_cd":menu_cd, "auth_nm":auth_nm
+				},
+				success  : function(data){
+					tbody.empty();
+					var menuAuthDetail = data.menuAuthDetail;
+					
+					for(var i=0; i<menuAuthDetail.length; i++)
+					{
+						var auth_id = menuAuthDetail[i].AUTH_NM;
+						var menu_cd = menuAuthDetail[i].MENU_CD;
+						var menu_nm = menuAuthDetail[i].MENU_NM;
+						var up_menu_cd = menuAuthDetail[i].UP_MENU_CD;
+	 					var up_menu_nm = menuAuthDetail[i].UP_MENU_NM;
+	 					var menu_url   = menuAuthDetail[i].MENU_URL;
+	 					var active_flg = menuAuthDetail[i].ACTIVE_FLG;
+	 					var inqr_auth  = menuAuthDetail[i].INQR_AUTH;
+						var add_auth   = menuAuthDetail[i].ADD_AUTH;
+						var mdfy_auth  = menuAuthDetail[i].MDFY_AUTH;
+	 					var del_auth   = menuAuthDetail[i].DEL_AUTH;
+	 					var menu_acc_auth = menuAuthDetail[i].menu_acc_auth;
+	 					
+	 					contents1 ="<tr height='15px'>"+
+	 					"<th style=' width: 12%; text-align: center;'>권한ID&nbsp;&nbsp;</th>"+
+	 					"<td style='width: 38%; text-align: left;'>"+
+						"<input type = 'text' id='auth_id1' name='auth_id1' value='"+auth_id+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
+						"</td>"+
+						"<th style=' width: 12%; text-align: center;'>메뉴코드&nbsp;&nbsp;</th>"+
+						"<td style='width: 38%; text-align: left;'>"+
+							"<input type = 'text' id='menu_cd1' name='menu_cd1' value='"+menu_cd+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
+						"</td>"+
+						"</tr>"+
+						"<tr height='15px'>"+
+						"<th style='width: 12%; text-align: center;'>메뉴명&nbsp;&nbsp;</th>"+
+						"<td style='width: 38%; text-align: left;'>"+
+							"<input type='text' id='menu_nm1' name='menu_nm1' value='"+menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
+						"</td>"+
+						"<th style='width: 12%; text-align: center;'>상위메뉴코드&nbsp;&nbsp;</th>"+
+						"<td style='width: 38%; text-align: left;'>"+
+							"<input type='text' id='up_menu_cd1' name='up_menu_cd1' value='"+up_menu_cd+"' style='width: 80%;' readonly='readonly'/>"+
+						"</td>"+
+						"</tr>"+
+						"<tr height='15px'>"+
+						"<th style='width: 12%; text-align: center;'>상위메뉴명&nbsp;&nbsp;</th>"+
+						"<td style='width: 38%; text-align: left;'>"+
+							"<input type='text' id='up_menu_nm1' name='up_menu_nm1' value='"+up_menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
+						"</td>"+
+						"</td>"+
+						"<th style='width: 12%; text-align: center;'>메뉴URL&nbsp;&nbsp;</th>"+
+						"<td style='width: 38%; text-align: left;'>"+
+							"<input type='text' id='menu_url1' name='menu_url1' value='"+menu_url+"' style='width: 80%;' readonly='readonly'/>"+
+						"</td>"+
+						"</tr>";
+						
+						active_radio1 = "<tr><th style='width: 12%; text-align: center;'>활성화 상태&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"</td>";
+						active_radio2 = "<tr><th style='width: 12%; text-align: center;'>활성화 상태&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"</td>";
+							
+						inqr_radio1 = "<th style='width: 12%; text-align: center;'>조회권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"</td></tr>";
+						inqr_radio2 = "<th style='width: 12%; text-align: center;'>조회권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"</td></tr>";
+							
+						add_radio1 = "<tr><th style='width: 12%; text-align: center;'>생성권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"</td>";
+						add_radio2 = "<tr><th style='width: 12%; text-align: center;'>생성권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"</td>";
+							
+						mdfy_radio1 = "<th style='width: 12%; text-align: center;'>수정권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"</td></tr>";
+						mdfy_radio2 = "<th style='width: 12%; text-align: center;'>수정권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"</td></tr>";
+							
+						del_radio1 = "<tr><th style='width: 12%; text-align: center;'>삭제권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"</td>";
+						del_radio2 = "<tr><th style='width: 12%; text-align: center;'>삭제권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"</td>";
+						
+						menu_acc_radio1 = "<th style='width: 12%; text-align: center;'>메뉴접근권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;' checked/>Y"+
+							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;'/>N"
+							+"</td></tr>";
+						menu_acc_radio2 = "<th style='width: 12%; text-align: center;'>메뉴접근권한&nbsp;&nbsp;</th>"+ 
+							"<td style='width: 38%; text-align: left;'>"				   
+							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return false;'/>Y"+
+							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return false;' checked/>N"
+							+"</td></tr>";	
+							
+						if(active_flg == 'Y') {
+							contents = contents1 + active_radio1;
+						}
+						else {
+							contents = contents1 + active_ardio2;
+						}
+						
+						if(inqr_auth == 'Y') {
+							contents = contents + inqr_radio1;
+						}
+						else {
+							contents = contents + inqr_radio2;
+						}
+						
+						if(add_auth == 'Y') {
+							contents = contents + add_radio1;
+						}
+						else {
+							contents = contents + add_radio2;
+						}
+						
+						if(mdfy_auth == 'Y') {
+							contents = contents + mdfy_radio1;
+						}
+						else {
+							contents = contents + mdfy_radio2;
+						}
+						
+						if(del_auth == 'Y') {
+							contents = contents + del_radio1;
+						}
+						else {
+							contents = contents + del_radio2;
+						}
+						
+						if(menu_acc_auth == 'Y') {
+							contents = contents + menu_acc_radio1;
+						}
+						else {
+							contents = contents + menu_acc_radio2;
+						}
+						
+						tbody.append(contents);
+					}
+				}
+			});
+			
+			$('.menuOpen').click();
+		}
 		
+		// 추가버튼 눌렀을 때
+		$("#menuAuth_save_btn").on("click", function(){
+			$("#menuAuthAdd").submit();
+		});
 		
+		// 삭제 버튼 눌렀을 때
+		$("#menuAuth_del_btn").on("click", function(){
+			var check = document.getElementsByName("del_menuAuth");
+			var check_len = check.length;
+			var checked = 0;
+			
+			for(i=0; i<check_len; i++)
+			{
+				if(check[i].checked == true)
+				{
+					alert("OH~!");
+					checked++;
+				}
+			}
+			
+			if(checked == 0)
+			{
+				alert("체크박스를 체크하세요.");
+			}
+		});
 
 	</script>
 
