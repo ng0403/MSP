@@ -14,7 +14,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <title>Insert title here</title>
-
+ <c:if test="${result=='1'}" var = "result"> 
+	<script type="text/javascript">
+		window.close();
+		opener.parent.location.href = "userlist";
+	</script>
+ </c:if>
 <style type="text/css">
 /* body { margin-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; } */
 
@@ -25,11 +30,6 @@
 
 <script>
 	$(document).ready(function() {
-		var result=${result};
-// 		if(result == 1){
-// 				window.close();
-// 				opener.parent.location.href = "userlist";
-// 		}
  		$('#dept_pop_div').hide();
 	      //부서검색버튼 클릭 
      	$("#dept_sch_fbtn").on("click", function() {
@@ -55,6 +55,7 @@
 			$('#emp_no').css('display','none');
 			$('#modifysave_btn').css('display','none');
 			//$('#modifysave_btn').css("visibility","hidden");
+
 		}else{
 			$('#user_id').attr("readonly", true);
 			$('#emp_no').css('display','block');
@@ -65,8 +66,10 @@
 	        $('#joinform').find('input[type="email"]').attr('disabled',true);
 	        $('#joinform').find('select').attr('disabled',true);
 			//$('#addsave_btn').css('visibility',"hidden");
+			
 		} 
 			
+		
 		//추가 버튼
 			$("#submit_btn").on("click", function() {
 				var entry_flg = ${entry_flg}
@@ -124,6 +127,7 @@
 					if(passwordCheck() == true){
 						$('form').attr("action", "${ctx}/user/userMdfy?user_id = "+tmp).submit();
 					}
+					
 				}else{
 					alert("신규 데이터를 입력하세요.");
 				}
@@ -140,13 +144,21 @@
 	            //$(".user_login").show();
 	            //return false;
 	            //});
+
 	        })
+		
 		/* // 한글입력 안되게 처리
+
 		  $("input[name=aaa]").keyup(function(event){ 
+
 		   if (!(event.keyCode >=37 && event.keyCode<=40)) {
+
 		    var inputVal = $(this).val();
+
 		    $(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+
 		   }
+
 		  });*/
 		//form 내부 전체 input tag 초기화
 		  $("#btnReset_btn").click(function() {  
@@ -154,20 +166,17 @@
 		            this.reset();  
 		         });  
 		    });  
+	 	/*부서명 클릭 시 상세정보 출력 이벤트*/
+		$(document).on("click", ".deptTrPop", function(){
+			var dept_cd_pop = $(this).attr("dept_cd_pop");
+			var user_nm_pop = $(this).attr("user_nm_pop");
+			$('#dept_cd').val(dept_cd_pop);
+			$('#dept_nm').val(user_nm_pop);
+		});
 	}); 
+		
+		
  </script>
- 
- <!-- 숫자키와 편집버튼만 입력하는 function -->
- <script>
- 	/*부서명 클릭 시 상세정보 출력 이벤트*/
-	$(document).on("click", ".deptTrPop", function(){
-		var dept_cd_pop = $(this).attr("dept_cd_pop");
-		var user_nm_pop = $(this).attr("user_nm_pop");
-		$('#dept_cd').val(dept_cd_pop);
-		$('#dept_nm').val(user_nm_pop);
-	})
-	
-	</script>
 </head>
 <body>
 	<input type="hidden" id="ctx" value="${ctx}">

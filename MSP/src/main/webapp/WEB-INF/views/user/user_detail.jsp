@@ -29,14 +29,14 @@
 </style>
  
 <script>
-$(document).ready(function() {
- 	$('#dept_pop_div').hide();
- 	
-	//부서검색버튼 클릭 
+	$(document).ready(function() {
+ 		$('#dept_pop_div').hide();
+	      //부서검색버튼 클릭 
    	$("#dept_sch_fbtn").on("click", function() {
    		$("#dept_pop_div").show();
    		$("#dept_pop_div").center();
    		deptListInqrPop(1);
+   		
   		});
    	jQuery.fn.center = function () {
    	    this.css("position","absolute");
@@ -110,13 +110,14 @@ $(document).ready(function() {
 					$('#modify_btn').attr("disabled", true);
 					$('#submit_btn').attr("disabled", true);
 				}else{
-					alert("신규 데이터를 입력하세요.");
+					alert("신규 데잍를 입력하세요.");
 				}
 			});
 		//편집 저장 버튼
 			$("#modifysave_btn").on("click", function() {
 				var entry_flg = ${entry_flg}
 				var tmp = $('#user_id').val();
+				alert(tmp);
 				var user_pwd = $('#user_pwd');
 				var user_pwd_chk = $('#user_pwd_chk');
 				var rank_cd = $("#rank_cd option:selected").val();
@@ -133,6 +134,7 @@ $(document).ready(function() {
 			});
 		
 		 var tmp = $('#user_id').val(); 
+		 
 		 
 		 $("#modal_trigger").leanModal({ top: 200, overlay: 0.6, closeButton: ".modal_close" });
 
@@ -172,7 +174,15 @@ $(document).ready(function() {
 	    			var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
 	    			window.open(popUrl, "", popOption);
 	    		});
+	     	/*부서명 클릭 시 상세정보 출력 이벤트*/
+	    	$(document).on("click", ".deptTrPop", function(){
+	    		var dept_cd_pop = $(this).attr("dept_cd_pop");
+	    		var user_nm_pop = $(this).attr("user_nm_pop");
+	    		$('#dept_cd').val(dept_cd_pop);
+	    		$('#dept_nm').val(user_nm_pop);
+	    	});
 	}); 
+		
 		
  </script>
  
@@ -189,29 +199,6 @@ $(document).ready(function() {
 		}
 	} */
  </script>
- 
- 
- <!-- 숫자키와 편집버튼만 입력하는 function -->
- <script>
- 
- 	/* function popTrClick(){
- 		var dept_cd_pop = (this).$('#dept_cd_pop').val();
-		var dept_nm_pop = (this).$('#user_nm_pop').val();
-		$('#dept_cd').val(dept_cd_pop);
-		$('#dept_nm').val(dept_nm_pop);
- 	} */
- 	
- 	/*부서명 클릭 시 상세정보 출력 이벤트*/
-	$(document).on("click", ".deptTrPop", function(){
-		var dept_cd_pop = $(this).attr("dept_cd_pop");
-		var user_nm_pop = $(this).attr("user_nm_pop");
-		$('#dept_cd').val(dept_cd_pop);
-		$('#dept_nm').val(user_nm_pop);
-	})
-	
-	
-
-	</script>
 </head>
 <body>
 	<input type="hidden" id="ctx" value="${ctx}">

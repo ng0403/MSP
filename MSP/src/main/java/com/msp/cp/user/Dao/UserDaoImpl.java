@@ -146,8 +146,7 @@ public class UserDaoImpl implements UserDao {
 		int result=0;
 		ExcelReadOption excelReadOption = new ExcelReadOption();
         excelReadOption.setFilePath(destFile.getAbsolutePath());
-/*        A, B, C ... 엑셀 시트 상의 셀 이름입니다. 그냥 두시고 사용하세요 갯수만 본인의 데이터 수만큼 바꾸고 쓰시면 됩니다.
- * -이지용 2017_02_17*/
+/*        A, B, C ... 엑셀 시트 상의 셀 이름입니다. 그냥 두시고 사용하세요 갯수만 본인의 데이터 수만큼 바꾸고 쓰시면 됩니다.-이지용 2017_02_17*/
         excelReadOption.setOutputColumns("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q");
         excelReadOption.setStartRow(2);
         

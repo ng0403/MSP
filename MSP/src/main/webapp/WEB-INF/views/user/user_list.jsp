@@ -19,11 +19,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
+<!-- <script type="text/javascript"> -->
+<!-- // $(document).ready(function() { -->
+<%-- // 	var result = ${result} --%>
+	
+<!-- // } -->
+<!-- </script> -->
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#navisub11").show();
-		$("#naviuser").css("font-weight", "bold");
-	});
+	$("#navisub11").show();
+	$("#naviuser").css("font-weight", "bold");
 </script>
 
 </head>
@@ -140,11 +144,11 @@
 		</c:choose>
 		<div class="" style="text-align: right; margin-right: 10%;">
 			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax"> 
-				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" style="float: left;"/>
-				<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제"  style="float: left;"/>
 				<input type="button" value="엑셀출력" class="btn btn-default" onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-	            <input id="excelFile" type="file" class="btn btn-default" name="excelFile" style="float: right;"/>
+	            <input id="excelFile" type="file" name="excelFile" class="btn btn-default" style="float: right;"/>
 		        <input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: right;"> 
+				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" style="float: left;" />
+				<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" style="float: left;"  />
 			</form>
 		</div>
 	</div>
