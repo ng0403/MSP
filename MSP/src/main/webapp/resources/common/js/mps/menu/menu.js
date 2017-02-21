@@ -41,7 +41,9 @@
 		})
 		/*삭제버튼 클릭 시 처리 이벤트*/
 		$("#menu_del_fbtn").click(function(){
-			menuDel();
+			if (confirm("정보를 삭제 하시겠습니까?")) {
+				menuDel();
+			}
 		})
 		/*편집버튼 클릭 시 처리 이벤트*/
 		$("#menu_edit_nfbtn").click(function(){
@@ -78,6 +80,7 @@
 			menuListInqrPop(1);
 			popByMask("menuMask", "menuWindow");
 		})
+		//페이지 엔터시 이벤트
 		$(document).on("keypress","#pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
     		if (keycode == '13') {

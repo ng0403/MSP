@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	
 //	사용자관리 리스트
 	@Override
-	public List<userVO> searchListUser(Map map) {
+	public List<userVO> searchListUser(Map<String,Object> map) {
 		System.out.println("8. ServiceImpl User List Search Service Impl");
 		List<userVO> obj = userDao.searchListUser(map);
 		System.out.println("14. ServiceImpl User List Search Service Impl" + obj.toString());

@@ -128,7 +128,7 @@ public class UserController {
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-		map.put("page", page);
+		//map.put("page", page);
 
 		List<userVO> user_list = userService.searchListUser(map);
 		

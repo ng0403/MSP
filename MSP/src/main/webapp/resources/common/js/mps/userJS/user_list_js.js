@@ -15,9 +15,9 @@
 //			$(data.user_list).each(function(){
 			$(values).each(function(){
 				alert(data.user_list);
-				alert(this.User_ID);
-				alert(data.user_list.User_ID);
- 				var user_id = this.USER_ID;
+				alert(this.user_id);
+				alert(data.user_list.user_id);
+ 				/*var user_id = this.USER_ID;
 				var user_nm = this.USER_NM;
 				var dept_nm = this.DEPT_NM;
 				var cphone_num1 = this.CPHONE_NUM1;
@@ -26,7 +26,17 @@
 				var email_id = this.EMAIL_ID;
 				var email_domain = this.EMAIL_DOMAIN;			
 				var auth_nm = this.AUTH_NM;			
-				var active_flg = this.ACTIVE_FLG;
+				var active_flg = this.ACTIVE_FLG;*/
+				var user_id = this.user_id;
+				var user_nm = this.user_nm;
+				var dept_nm = this.dept_nm;
+				var cphone_num1 = this.cphone_num1;
+				var cphone_num2 = this.cphone_num2;
+				var cphone_num3 = this.cphone_num3;
+				var email_id = this.email_id;
+				var email_domain = this.email_domain;			
+				var auth_nm = this.auth_nm;			
+				var active_flg = this.active_flg;
 				userListOutput(user_id, user_nm, dept_nm, email_id, email_domain, cphone_num1 ,cphone_num2, cphone_num3, auth_nm, active_flg);  
 			})
 //			paging(data,"#paging_div", "userListInqr");

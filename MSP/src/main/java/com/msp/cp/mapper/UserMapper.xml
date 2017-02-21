@@ -19,7 +19,7 @@
 	</select>
 
 <!-- User List 출력  -->
-	<select id="searchListUser" parameterType="string" resultType="map">
+	<select id="searchListUser" parameterType="map" resultType="com.msp.cp.user.vo.userVO"><!-- parameterType="string" resultType="map" -->
 		select X.*
 		from ( 
 		    select rownum as rnum, A.*, td.DEPT_NM
@@ -40,8 +40,11 @@
 			        </if>
                 and A.DEPT_CD = td.DEPT_CD
 		    ) X
-		    <![CDATA[
+		    <!-- <![CDATA[
 				where X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
+			]]> -->
+			<![CDATA[
+				where X.rnum >= #{startRow} and X.rnum < #{endRow}
 			]]>
 	</select>
 
