@@ -16,9 +16,8 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>메뉴관리화면</title>
-<style type="text/css">
+<!-- <style type="text/css">
 	.mask_div {
 		display: none;
 		position:absolute; 
@@ -51,7 +50,7 @@
 		margin-right:1%; 
 		float: right;
 	}
-</style>
+</style> -->
 <script type="text/javascript">	
 	$(function(){
 		/*검색버튼 클릭 시 처리 이벤트*/
