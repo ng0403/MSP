@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
  
 <!DOCTYPE html>
 <html>
@@ -25,7 +24,7 @@ $(document).ready(function() {
 	alert(result);
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
-}
+});
 </script>
 
 </head>
@@ -42,44 +41,39 @@ $(document).ready(function() {
 		
 		<!-- Search1 Div  -->
 		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
-			<form name="userSearchForm" method="post" action="${ctx}/user/userInqr">
-					<tr>
-						<th>사용자ID</th>
-						<td><input type="text" id="user_id_sch" name="user_id_sch" value="${user_id_sch}" onkeypress="userEnterSearch(event);"></td>
-						<th>사용자명</th>
-						<td><input type="text" id="user_nm_sch" name="user_nm_sch" value="${user_nm_sch}" onkeypress="userEnterSearch(event);"></td>
-						<th>부서명</th>
-						<td><input type="text" id="dept_cd_sch" name="dept_cd_sch" value="${dept_cd_sch}" onkeypress="userEnterSearch(event);"></td>&nbsp;
-						<td><button id="search_fbtn" type="submit" class="user_serach_fbtn"  style="margin-left: 34%;"/>검색</button></td>
-					</tr>
-			</form>
+<%-- 			<form name="userSearchForm" method="post" action="${ctx}/user/userInqr"> --%>
+				<select id="active_key" name="active_key" class="selectField" >
+					<option value="" selected="selected">-검색조건-</option>
+					<option value="user_id_sch">사용자ID</option>
+					<option value="user_nm_sch">사용자명</option>
+					<option value="dept_cd_sch">부서명</option>
+				</select>	
+				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>검색
+<!-- 			</form> -->
 			<!-- 페이징 전용 폼 -->
-			<form  action="${ctx}/user/userInqr" id="userlistPagingForm" method="post">
-				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
-				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
-				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
-			</form>
-			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form>
+<%-- 			<form  action="${ctx}/user/userInqr" id="userlistPagingForm" method="post"> --%>
+<%-- 				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/> --%>
+<%-- 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/> --%>
+<%-- 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/> --%>
+<!-- 			</form> -->
+<%-- 			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form> --%>
 		</div>
 	</div>
 
 	<!-- List1 Cover Div -->
-	<div class="">
+	<div class="list_div">
 		<!-- List1 Div -->
 		<div class="list1_div" style=" margin-left: 1%;">
-			<form name="delAllForm" id="delAllForm" method="post" action="${ctx}/userDel">
-			<table id="mastertable" class="table table-bordered" style ="width: 90%">
+			<form id="delAll_form" name="delAll_form">
+			<table summary="menu_list_tb" class="table table-hover">
 				<thead>
-					<tr>
-						<th><input id="checkall" name="checkAll" type="checkbox" onclick="allChk();" /></th>
-						<td style="width: 10%;">사용자ID</td>
-						<td style="width: 10%;">사용자명</td>
-						<td style="width: 10%;">부서명</td>
-						<td style="width: 20%;">이메일</td>
-						<td style="width: 25%;">연락처</td>
-						<td style="width: 10%;">권한</td>
-						<td style="width: 10%;">상태</td>
-					</tr>
+					<colgroup>
+						<col width="5%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
+						<col width="20%">
+					</colgroup>
 				</thead>
 				<tbody id="usertbody">
 				<c:if test="${not empty user_list}">
