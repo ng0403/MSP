@@ -270,7 +270,7 @@ public class AuthController {
         }
         
         //파일 저장경로
-        File destFile = new File("C:\\"+excelFile.getOriginalFilename());
+        File destFile = new File("E:\\"+excelFile.getOriginalFilename());
         System.out.println("destFile : " + destFile);
         
         try{

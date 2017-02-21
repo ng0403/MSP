@@ -14,8 +14,14 @@
 
 	<!-- 	권한관리	 -->
 	<update id="authExcelInsert" parameterType="java.util.List">
-		INSERT INTO TB_AUTH (auth_id, auth_nm, active_flg, del_flg) 
-		VALUES(#{A}, #{B}, #{C}, #{D})      
+		INSERT INTO TB_AUTH ( 
+			AUTH_ID,
+		    AUTH_NM,
+		    ACTIVE_FLG,
+		    DEL_FLG,
+		    CREATED_BY
+		   ) 
+		VALUES(#{A}, #{B}, #{C}, #{D}, #{E})      
 	</update>	
 	
 </mapper>

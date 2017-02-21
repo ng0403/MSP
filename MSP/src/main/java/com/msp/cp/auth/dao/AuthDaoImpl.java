@@ -93,7 +93,7 @@ public class AuthDaoImpl implements AuthDao {
         excelReadOption.setFilePath(destFile.getAbsolutePath());
         
         /*엑셀 시트 상의 셀 이름, 본인의 데이터 수만큼 바꾸고 쓰시면 됩니다*/
-        excelReadOption.setOutputColumns("A", "B", "C", "D");
+        excelReadOption.setOutputColumns("A", "B", "C", "D", "E");
         excelReadOption.setStartRow(2);
         
         List<Map<String, String>>excelContent =ExcelRead.read(excelReadOption);
