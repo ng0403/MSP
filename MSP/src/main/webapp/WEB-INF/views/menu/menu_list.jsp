@@ -158,7 +158,7 @@
 			menuListInqrPop(1);
 			popByMask("menuMask", "menuWindow");
 		})
-		$("#pageInput").keypress(function(){
+		$(document).on("keypress","#pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
     		if (keycode == '13') {
 				pageInputRep(event, menuListInqr);
