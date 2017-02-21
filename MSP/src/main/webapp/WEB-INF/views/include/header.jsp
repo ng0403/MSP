@@ -341,7 +341,7 @@
               </ul>
             </li> -->
             <li>
-              <a href="/auth/authlist">
+              <a href="/auth/list">
                 <i class="fa fa-th"></i> <span>권한관리</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
