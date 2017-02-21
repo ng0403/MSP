@@ -212,7 +212,7 @@ public class CodeController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("grp_cd", grp_cd);
-		map.put("gpr_nm", grp_nm);
+		map.put("grp_nm", grp_nm);
 		map.put("pageNum", pageNum);
 		
 		PagerVO page = codeService.getCodeListCount(map);
