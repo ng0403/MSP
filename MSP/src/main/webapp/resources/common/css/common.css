@@ -98,11 +98,11 @@ span {
 .table_div{
 	height:450px;
 }
-td, tr, th {
+/* td, tr, th {
 	text-align: center;
 	vertical-align: middle;
 }
-
+ */
 .checkall {
 	text-align: center;
 	vertical-align: middle;
