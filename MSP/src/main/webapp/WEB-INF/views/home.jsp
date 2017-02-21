@@ -62,7 +62,7 @@ function initLogin() {
        <c:if test="${not empty sessionScope.user_id}"> 
         <div id="loginalign">
              로그인 중입니다.<br><br>
-          <a href="${ctx}/user/userlist" class="loging">메인</a>
+          <a href="${ctx}/user/userInqr" class="loging">메인</a>
           </div>
        </c:if>  
        <c:if test="${empty sessionScope.user}">

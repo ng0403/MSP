@@ -38,7 +38,7 @@ public class UserController {
 	DeptService deptService;
 	
 	//사용자관리 리스트
-	@RequestMapping(value="/userlist", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/userInqr", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			userVO userVO,String user_id_sch, String user_nm_sch, String dept_nm_sch ,
@@ -154,7 +154,7 @@ public class UserController {
 			System.out.println(arrIdx[i]);
 			userService.userDel(arrIdx[i]);
 		}
-		return "redirect:/user/userlist";
+		return "redirect:/user/userInqr";
 	}
 	
 	//userMdfyPop 사용자 정보 수정 팝업

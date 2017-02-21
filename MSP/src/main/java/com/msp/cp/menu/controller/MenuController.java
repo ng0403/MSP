@@ -42,7 +42,7 @@ public class MenuController {
 	@Autowired
 	CodeService codeService;
 	
-	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/menuInpr", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptList1(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
 		
 		Map<String,Object> map = new HashMap<String,Object>();

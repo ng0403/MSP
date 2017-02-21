@@ -37,7 +37,7 @@ public class DeptController {
 	@Autowired
 	DeptService deptService;
 	
-	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/deptInpr", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView deptList1(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
 		
 		Map<String,Object> map = new HashMap<String,Object>();
