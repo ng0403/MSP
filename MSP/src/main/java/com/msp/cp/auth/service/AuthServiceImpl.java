@@ -82,7 +82,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public int excelUpload(File destFile) {
+	public int excelUpload(File destFile) throws Exception {
 		
 		System.out.println("Excel Service Impl 시작 : ");
 		int result = authDao.authUpLoadExcel(destFile);

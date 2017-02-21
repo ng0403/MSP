@@ -64,6 +64,7 @@ public class AuthDaoImpl implements AuthDao {
 		return sqlSession.selectList("auth.selectAuthPop", map);
 	}
 	
+	//사용자리스트 엑셀 출력
 	@Override
 	public List<userVO> authExcel(Map<String, Object> map) {
 		
@@ -71,15 +72,17 @@ public class AuthDaoImpl implements AuthDao {
 		
 		try {
 			
-			authExcel = sqlSession.selectList("auth.auth_list_excel", map);
+			authExcel = sqlSession.selectList("auth.auth_list_excel",map);
 			System.out.println("authExcel Dao Impl : " + authExcel);
 			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		return authExcel;
 	}
-	
+
+	//Excel Data Import
 	@Override
 	public int authUpLoadExcel(File destFile) {
 		
@@ -89,8 +92,8 @@ public class AuthDaoImpl implements AuthDao {
 		ExcelReadOption excelReadOption = new ExcelReadOption();
         excelReadOption.setFilePath(destFile.getAbsolutePath());
         
-        //엑셀 시트 상의 셀 이름, 데이터 수만큼 바꾸고 쓰시면 됨
-        excelReadOption.setOutputColumns("A", "B", "C", "D", "E", "F", "G", "H");
+        /*엑셀 시트 상의 셀 이름, 본인의 데이터 수만큼 바꾸고 쓰시면 됩니다*/
+        excelReadOption.setOutputColumns("A", "B", "C", "D");
         excelReadOption.setStartRow(2);
         
         List<Map<String, String>>excelContent =ExcelRead.read(excelReadOption);
@@ -104,6 +107,5 @@ public class AuthDaoImpl implements AuthDao {
 		return result;
 	}
 
-	
 	
 }

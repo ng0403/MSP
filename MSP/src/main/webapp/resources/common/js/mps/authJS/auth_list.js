@@ -391,7 +391,6 @@ function checkFileType(filePath) {
     } else {
         return false;
     }
-
 }
 
 //엑셀파일 insert
