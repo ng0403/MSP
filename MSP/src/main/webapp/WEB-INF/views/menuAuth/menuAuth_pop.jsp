@@ -34,9 +34,9 @@
 		<div id="mainDiv" style="align="center">
 			<span style="margin-top:1%; font-size: 15px; float:center; margin-left:1%;"><strong style="text-align: center;">메뉴 권한 상세보기</strong></span>
 			<div>
-				<input type="button" id="menuClose" class="func_btn" data-dismiss="modal" 
+				<input type="button" id="menuAuthClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
 					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
-				<input type="button" id="menuAuthMdfy_btn" class="func_btn" data-dismiss="modal" 
+				<input type="button" id="menuAuthMdfy_btn" class="btn btn-primary btn-sm" data-dismiss="modal" 
 					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="수정"/>
 			</div>
 			<div class="block_div"></div>
