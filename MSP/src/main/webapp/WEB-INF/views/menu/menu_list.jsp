@@ -104,7 +104,7 @@
 			menuListInqr(1);
 		})
 		$("#menu_nm_key").keypress(function(){
-			enterSearch(event, "menuListInqr");
+			enterSearch(event, menuListInqr(1));
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
