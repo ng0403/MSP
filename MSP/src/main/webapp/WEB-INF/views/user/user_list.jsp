@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 </head>
 <body>
- <%@include file="../include/header.jsp"%>
+<%--  <%@include file="../include/header.jsp"%> --%>
 
 <!--Main_Div  -->
 <div class="main_div">
@@ -153,4 +153,4 @@ $(document).ready(function() {
 
 </body>
 </html>
-<%@include file="../include/footer.jsp"%>
+<%-- <%@include file="../include/footer.jsp"%> --%>
