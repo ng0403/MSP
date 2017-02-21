@@ -56,5 +56,25 @@ public class ReplyController {
 	    
 	    return entity;
 	  }
+	 
+	 
+	 @RequestMapping(value="/reply_remove", method=RequestMethod.POST) 
+		public ResponseEntity<String> reply_remove(@RequestBody String REPLY_NO){
+			
+		 System.out.println("hello delete reply");
+			System.out.println("vovo" + REPLY_NO);
+			 
+			ResponseEntity<String> entity = null;
+			    try {
+	 		      replyService.removeReply(REPLY_NO); 
+			      entity = new ResponseEntity<>("success", HttpStatus.OK);
+			      System.out.println("entity? "+ entity);
+			      System.out.println("insert entity" + entity);
+			    } catch (Exception e) {
+			      e.printStackTrace();
+			      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+			    }
+			    return entity;
+		}
 
 }

@@ -1,10 +1,15 @@
 package com.msp.cp.board.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,19 +22,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.board.service.BoardService;
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.board.vo.ReplyVO;
 import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.FileManager;
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	
+	private static final String[] filename = null;
 	@Autowired
-	BoardService boardService;
+	BoardService boardService; 
 	
 	@RequestMapping(value="/board_list", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
@@ -61,8 +69,23 @@ public class BoardController {
 	@RequestMapping(value="/board_detail", method= RequestMethod.GET)
 	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
 		System.out.println("hi detail" + BOARD_NO);
-  		model.addAttribute("boardlist", boardService.detail(BOARD_NO));
-		System.out.println("board_detail" + model.toString()); 
+		BoardVO vo = boardService.detail(BOARD_NO);
+		String FILE_CD = vo.getFILE_CD();
+		System.out.println("fileCD" + FILE_CD);
+		
+		if(FILE_CD == null)
+		{
+		System.out.println("filecd 없어");
+		 model.addAttribute("boardlist", boardService.detail(BOARD_NO));
+		}
+		else
+		{
+		System.out.println("filecd 있어");
+		
+		 model.addAttribute("boardlist", boardService.ReadFilePage(BOARD_NO));
+		}
+			
+  		System.out.println("board_detail" + model.toString()); 
 		 
 	}
 	
@@ -73,19 +96,118 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
-	public String board_insert(BoardVO vo) {
-		System.out.println("insert entering" + vo);
-		boardService.insert(vo);
+	public String  board_insert(MultipartHttpServletRequest multi, HttpServletRequest request, BoardVO attach) { 
+ 		  
+		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+		 Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	     MultipartFile multipartFile = null; 
+ 	     
+ 	     
+ 	     	 
+ 	    	 
+	     while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	        	
+ 	 		    attach.setFILE_NM(multipartFile.getOriginalFilename());
+ 	 		    String name = multipartFile.getOriginalFilename();
+ 	 		     
+ 	 		    StringTokenizer toke = new StringTokenizer(name, ".");
+ 	 		    System.out.println("filename length" + name.toString());
+ 	 		    String[] filename = new String[2];
+ 	 		    
+ 	 		    for(int i= 0; toke.hasMoreElements() ; i++)
+ 	 		    {
+  	 		     filename[i] = toke.nextToken();
+  	 		   
+  	 		     System.out.println("ggg" +  filename[i] ); 
+  	 		    }
+ 	 		   
+ 	 		    attach.setFILE_NM(filename[0]);
+ 	 		    attach.setFILE_EXT(filename[1]);  
+ 	 		    
+ 	        }
+	    } 
+		
+	    if(attach.getFILE_NM() != null){ 
+		FileManager fileManager = new FileManager(); 
+		
+		List<MultipartFile> file = multi.getFiles("filedata");
+	
+		for(int i=0; i<file.size(); i++){
+			
+			String uploadpath = fileManager.doFileUpload(file.get(i), request);
+		
+			attach.setFILE_PATH(uploadpath);
+			System.out.println("딩가딩가오" + attach.toString());
+			boardService.insertAttachData(attach);
+		
+		}
+	    }
+		
+		boardService.insert(attach);  
+   
 		System.out.println("board_insert success....");
-
+ 
+	 
 		return "redirect:/board/board_list"; 
+		 
 	} 
+	
+	/*@RequestMapping(value = "/file_insert", method = RequestMethod.POST)
+	public void fileInsert(MultipartHttpServletRequest multi, HttpServletRequest request, BoardVO attach)
+	{ 
+		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+		 Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	     MultipartFile multipartFile = null; 
+ 	    
+		while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	        	
+ 	 		    attach.setFILE_NM(multipartFile.getOriginalFilename());
+ 	 		    String name = multipartFile.getOriginalFilename();
+ 	 		     
+ 	 		    StringTokenizer toke = new StringTokenizer(name, ".");
+ 	 		    System.out.println("filename length" + name.toString());
+ 	 		    String[] filename = new String[2];
+ 	 		    
+ 	 		    for(int i= 0; toke.hasMoreElements() ; i++)
+ 	 		    {
+  	 		     filename[i] = toke.nextToken();
+  	 		   
+  	 		     System.out.println("ggg" +  filename[i] ); 
+  	 		    }
+ 	 		   
+ 	 		    attach.setFILE_NM(filename[0]);
+ 	 		    attach.setFILE_EXT(filename[1]);  
+ 	 		    
+ 	        }
+	    } 
+		
+		FileManager fileManager = new FileManager(); 
+		
+		List<MultipartFile> file = multi.getFiles("filedata");
+	
+		for(int i=0; i<file.size(); i++){
+			
+			String uploadpath = fileManager.doFileUpload(file.get(i), request);
+		
+			attach.setFILE_PATH(uploadpath);
+			System.out.println("딩가딩가오" + attach.toString());
+			boardService.insertAttachData(attach);
+		
+		}
+		 
+	}*/
+	
+	
 	
 	@RequestMapping(value="/board_modify", method=RequestMethod.GET)
 	public void board_modifyPage(int BOARD_NO, Model model)
 	{
 		System.out.println("hi MODIFY" + BOARD_NO);
-
+	
 		System.out.println("modify Page Entering");
 		model.addAttribute( "boardVO", boardService.read(BOARD_NO));
 		System.out.println("modify string" + model.toString());
@@ -185,7 +307,55 @@ public class BoardController {
 
 		return model;
 	}
- 
+	
+	@RequestMapping(value = "/file_down", method = RequestMethod.GET)
+	public void downloadFile(
+			@RequestParam(value = "FILE_CD") String FILE_CD,
+			HttpServletResponse response, HttpServletRequest request) {
+		System.out.println("Hello down " + FILE_CD);
+		
+		Map<?, ?> map = (Map<?, ?>) boardService.searchOneFiledata(FILE_CD);
+		
+		
+ 		System.out.println("map??" +map);
+		
+		if (map != null) {
+
+			String fileroot = map.get("FILE_ROOT").toString();
+			String[] temp = fileroot.split("\\\\");
+			String fileName = temp[temp.length - 1];
+			String root = "x`x`";
+
+			for (int i = 0; i < (temp.length - 2); i++) {
+				root += temp[i] + "\\";
+			}
+
+			FileManager fileManager = new FileManager();
+			boolean existfile = fileManager.doFileDownload(fileName, root, response);
+
+			if (!existfile) {
+				try {
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('다운로드에 실패하였습니다.');history.back();</script>");
+				} catch (Exception e) {
+				}
+			}
+
+		} else {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.print("<script>alert('파일이 없습니다.');history.back();</script>");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			return;
+		}
+
+	}
 	 
 	
  	

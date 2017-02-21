@@ -15,7 +15,7 @@ public class BoardVO {
 	private String ACTIVE_FLG;
 	private String DEL_FLG;
 	private String CREATED_BY;
-	private String CREATED;
+	private Date CREATED;
 	private String UPDATED_BY;
 	private String UPDATED;
 	private String delcode;
@@ -23,9 +23,36 @@ public class BoardVO {
 	private String REPLY_FLG;
 	private String QUESTION_TITLE;
 	private String CODE_TXT;
-	
-	
+ 	private int FILE_NO;
+	private String FILE_PATH;
+	private String FILE_NM;
+	private String FILE_EXT;
  	
+ 	
+	public int getFILE_NO() {
+		return FILE_NO;
+	}
+	public void setFILE_NO(int fILE_NO) {
+		FILE_NO = fILE_NO;
+	}
+	public String getFILE_PATH() {
+		return FILE_PATH;
+	}
+	public void setFILE_PATH(String fILE_PATH) {
+		FILE_PATH = fILE_PATH;
+	}
+	public String getFILE_NM() {
+		return FILE_NM;
+	}
+	public void setFILE_NM(String fILE_NM) {
+		FILE_NM = fILE_NM;
+	}
+	public String getFILE_EXT() {
+		return FILE_EXT;
+	}
+	public void setFILE_EXT(String fILE_EXT) {
+		FILE_EXT = fILE_EXT;
+	}
 	public String getCODE_TXT() {
 		return CODE_TXT;
 	}
@@ -123,10 +150,10 @@ public class BoardVO {
 		CREATED_BY = cREATED_BY;
 	}
 	 
-	public String getCREATED() {
+	public Date getCREATED() {
 		return CREATED;
 	}
-	public void setCREATED(String cREATED) {
+	public void setCREATED(Date cREATED) {
 		CREATED = cREATED;
 	}
 	public String getUPDATED_BY() {
@@ -148,7 +175,8 @@ public class BoardVO {
 				+ ", ANSWER_FLG=" + ANSWER_FLG + ", ACTIVE_FLG=" + ACTIVE_FLG + ", DEL_FLG=" + DEL_FLG + ", CREATED_BY="
 				+ CREATED_BY + ", CREATED=" + CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED
 				+ ", delcode=" + delcode + ", BOARD_MNG_CD=" + BOARD_MNG_CD + ", REPLY_FLG=" + REPLY_FLG
-				+ ", QUESTION_TITLE=" + QUESTION_TITLE + ", CODE_TXT=" + CODE_TXT + "]";
+				+ ", QUESTION_TITLE=" + QUESTION_TITLE + ", CODE_TXT=" + CODE_TXT + ", FILE_NO=" + FILE_NO
+				+ ", FILE_PATH=" + FILE_PATH + ", FILE_NM=" + FILE_NM + ", FILE_EXT=" + FILE_EXT + "]";
 	} 
 	 
   

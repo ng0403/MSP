@@ -29,4 +29,11 @@ public class ReplyDaoImpl implements ReplyDao {
 		
 	}
 
+	@Override
+	public void removeReply(String REPLY_NO) {
+		
+		sqlSession.delete("removeReply", REPLY_NO);
+		
+	}
+
 }

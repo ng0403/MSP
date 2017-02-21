@@ -13,6 +13,7 @@ public interface ReplyService {
 
 	  public List<ReplyVO> listReply(Integer bno) throws Exception;
 	  public void addReply(ReplyVO vo) throws Exception;
+	  public void removeReply(String REPLY_NO);
 
 	  
 }

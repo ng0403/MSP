@@ -79,5 +79,27 @@ public class BoardDaoImpl implements BoardDao {
 
 	}
 
+	@Override
+	public void insertAttachData(BoardVO attach) {
+		
+		sqlSession.insert("board.insertAttachData", attach);
+		
+	}
+
+	@Override
+	public Object searchOneFiledata(String FILE_CD) {
+  		Object obj = sqlSession.selectOne("board.searchOneFiledata", FILE_CD);
+ 		System.out.println("obj " + obj);
+ 		return obj;
+	}
+
+	@Override
+	public BoardVO ReadFilePage(int BOARD_NO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board.ReadFilePage", BOARD_NO);
+		 
+	}
+
+ 
 
 }

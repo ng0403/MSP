@@ -62,7 +62,8 @@ public class FileManager {
 	}
 	
 	public String doFileUpload(MultipartFile file, HttpServletRequest request){
-		
+		System.out.println("Hello? Entering");
+ 		
 		String filePath = "downloads\\";
 		String folderPath = "";
 		String random = "";

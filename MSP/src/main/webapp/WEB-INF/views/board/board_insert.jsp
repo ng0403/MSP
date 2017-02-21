@@ -24,36 +24,68 @@
 
 <div> <!-- 전체 div-->
 
-<form role="form" method="post">
+<form role="form" method="post" enctype="multipart/form-data">
 <div> <!-- 제목 div-->
- <input type="text" class="form-control" name="TITLE" placeholder="제목을 입력해 주세요."  />
+ <input type="text" class="form-control" id="TITLE" name="TITLE" placeholder="제목을 입력해 주세요."  />
 </div> 
-
-<div><!-- 파일 div  -->
-</div> 
-
+  
 <div> <!-- 내용 div -->
- <textarea class="form-control" rows="10" name="CONTENT" placeholder="내용을 입력해 주세요." ></textarea>
+ <textarea class="form-control" rows="10" id="CONTENT" name="CONTENT" placeholder="내용을 입력해 주세요." ></textarea>
+</div> 
+
+ 
+   <div>
+ 	<input type="file" multiple="multiple" name="filedata" id="filedata"> 
+ </div> 
+  </form>
 </div> 
  
  
 <div> <!-- 버튼 div  -->
-<!-- <input type="button" id ="board_add_fbtn" class = "btn btn-default" value="저장"/> -->
-<button type="submit" class="btn btn-default">저장</button>
+<input type="button" id="fileuploadPop" value="파일업로드" class="btn btn-default"> 
+<input type="button" id ="board_add_fbtn" class = "btn btn-default" value="저장"/>
+
+<!-- <button type="submit" class="btn btn-default">저장</button> -->
  <input type="button" id="board_list_fbtn" class="btn btn-default" value="취소"/> 
 </div>
-</form>
 
-
-</div>
-
+ 
 
 <script> 
  
 
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/board_list";
+    	 location.href = "/board/board_list"; 
+    	
+ 	}) 
+ 	
+ 	$("#board_add_fbtn").on("click", function(){
+ 	     var formObj = $("form[role='form']");
+  	     
+ 		 formObj.attr("action", "/board/board_insert");
+ 		 formObj.attr("method", "post");
+ 		 formObj.submit(); 
+ 		 
  	})
+ 	
+ 	
+ 	$("#fileuploadPop").on("click",function(){
+	     var formObj = $("form[role='form1']");
+
+ 		 formObj.attr("action", "/board/file_insert");
+ 		 formObj.attr("method", "post");
+ 		 formObj.submit(); 
+ 		
+ 	})
+  
+	 
+ 	
+ 	
+ 	
+ 	
+ 	 
+ 
+ 	
   
 </script>
 

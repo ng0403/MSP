@@ -28,6 +28,13 @@ public class ReplyServiceImpl implements ReplyService {
 		  replyDao.addReply(vo);
 	}
 
+	@Override
+	public void removeReply(String REPLY_NO) {
+		
+		replyDao.removeReply(REPLY_NO);
+		
+	}
+
 	
 
 }

@@ -14,9 +14,13 @@
 SELECT
 *
 FROM TB_REPLY
-WHERE BOARD_NO = #{BOARD_NO}
-
+WHERE BOARD_NO = #{BOARD_NO} 
 </select>
+
+ <delete id="removeReply" parameterType="String" > 
+ delete tb_reply
+ 	where REPLY_NO = #{REPLY_NO}
+ </delete>
 
 
 

@@ -5,8 +5,11 @@
 	<settings>
 		<setting name="cacheEnabled" value="false" />
 		<setting name="useGeneratedKeys" value="true" />
-		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="defaultExecutorType" value="REUSE" /> 
+		<setting name="jdbcTypeForNull" value="NULL" />   
 	</settings>
+	
+	
 	
 	<!-- 별명 -->
     <typeAliases>

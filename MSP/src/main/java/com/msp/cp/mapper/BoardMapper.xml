@@ -17,10 +17,13 @@ select X.*
 		SELECT
  		 *
 		FROM tb_board
+		WHERE ACTIVE_FLG='Y'
+	    ORDER BY BOARD_NO DESC
 ) A
 	  ) X
  <![CDATA[
 		 where X.rnum > #{page.startRow} and X.rnum <= #{page.endRow}
+		 
 			]]>
  </select>
  
@@ -34,23 +37,28 @@ WHERE ACTIVE_FLG='Y'
  
  
  <select id="ReadPage"  resultType="com.msp.cp.board.vo.BoardVO">
- SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD
+ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, A.FILE_CD
  FROM TB_BOARD A, TB_BOARD_MNG B
- WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO 
+ WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO
  </select>
  
+ <select id="ReadFilePage" resultType="com.msp.cp.board.vo.BoardVO">
+  SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, C.FILE_CD, C.FILE_NM
+ FROM TB_BOARD A, TB_BOARD_MNG B, TB_FILE C
+ WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO AND A.FILE_CD = C.FILE_CD
+ </select>
  
- <insert id="InsertBoard">
+ <insert id="InsertBoard" parameterType="com.msp.cp.board.vo.BoardVO">
 INSERT INTO TB_BOARD (BOARD_NO, BOARD_MNG_NO, FILE_CD, TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
-VALUES(board_seq.nextval, 'BMG1000003','', #{TITLE}, #{CONTENT}, '1', 'abcd', '진수거', '')
+VALUES(board_seq.nextval, 'BMG1000003',(SELECT FILE_CD FROM TB_FILE WHERE FILE_NM =#{FILE_NM}), #{TITLE}, #{CONTENT}, '1', 'abcd', '진수거', '')
 
  </insert>
  
  <select id="readBoard"  resultType="com.msp.cp.board.vo.BoardVO">
  
- SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD
- FROM TB_BOARD A, TB_BOARD_MNG B
- WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO 
+SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, C.FILE_NM
+ FROM TB_BOARD A, TB_BOARD_MNG B, TB_FILE C
+ WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO AND C.FILE_CD = A.FILE_CD
  
  </select>
  
@@ -131,6 +139,39 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
         WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
 	 ]]>
 </select>
+
+
+
+
+ 	<insert id="insertAttachData" parameterType="com.msp.cp.board.vo.BoardVO">
+	
+	insert into TB_FILE (FILE_CD, FILE_NO, FILE_PATH, FILE_NM, FILE_EXT, CREATED_BY)
+values (
+  (
+    SELECT /*+INDEX_DESC(TB_FILE TB_FILE)*/
+      DECODE(MAX(FILE_CD), NULL, 'FIL1000001', SUBSTR(MAX(FILE_CD), 1, 3) || (SUBSTR(MAX(FILE_CD), 4, 7)+1)) FILE_CD
+    FROM TB_FILE
+     <![CDATA[
+    WHERE FILE_CD < CONCAT('FIL', '9999999')
+          AND ROWNUM = 1
+          	]]>
+   ), 
+   FILE_SEQ.NEXTVAL,
+   #{FILE_PATH},
+   #{FILE_NM}, 
+   #{FILE_EXT}, 
+    'ADMIN' 
+)
+ 
+	</insert>  
+	
+	<select id="searchOneFiledata" parameterType="java.lang.String" resultType="java.util.Map">
+	
+	SELECT FILE_PATH
+	FROM TB_FILE
+	WHERE FILE_CD=#{FILE_CD}
+	
+	</select>
  
 
 </mapper>

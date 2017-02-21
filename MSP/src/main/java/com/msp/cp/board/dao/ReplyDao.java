@@ -10,6 +10,6 @@ public interface ReplyDao {
 
 	  public List<ReplyVO> listReply(Integer BOARD_NO) throws Exception;
 	  public void addReply(ReplyVO vo) throws Exception;
-
+	  public void removeReply(String REPLY_NO);
 	
 }

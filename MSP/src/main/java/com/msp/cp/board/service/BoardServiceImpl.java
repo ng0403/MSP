@@ -76,6 +76,25 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
+	@Override
+	public void insertAttachData(BoardVO attach) {
+		boardDao.insertAttachData(attach);
+	}
+
+	@Override
+	public Object searchOneFiledata(String FILE_CD) {
+		
+		Object obj =  boardDao.searchOneFiledata(FILE_CD); 
+
+		return obj;
+	}
+
+	@Override
+	public BoardVO ReadFilePage(int BOARD_NO) {
+		// TODO Auto-generated method stub
+		return boardDao.ReadFilePage(BOARD_NO);
+	}
+ 
  
  
  

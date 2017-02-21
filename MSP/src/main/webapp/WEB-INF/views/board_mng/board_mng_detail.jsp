@@ -50,7 +50,7 @@
    </td>
 	</tr>
 	<tr>
-	<td>관리자</td> <td></td> <td>게시판코드</td> <td>${board_mng_list.BOARD_MNG_CD} </td>
+	<td>관리자</td> <td></td> <td>게시판코드</td> <td><div id="board_cd_div">${board_mng_list.BOARD_MNG_CD}</div> </td>
 	</tr>
 	<tr>
 	<td>
@@ -109,8 +109,8 @@
 	</div>
 	
 	<div id = "button_div1">
-	<input type="button" id="board_mng_add_fbtn" class = "btn btn-default" value="저장"/>
-	<input type="button" class="btn btn-default" id="board_cancle_fbtn" value="취소"/>
+		<input type="button" id="board_mng_add_fbtn" class = "btn btn-default" value="저장"/>
+		<input type="button" class="btn btn-default" id="board_cancle_fbtn" value="취소"/>
 	</div>
 
 </div>
@@ -226,35 +226,15 @@ $("#board_list_fbtn").on("click", function(){
 	 	 					
 		 					var ajaxList = result.data; 
 		 					
-	 	 					var liststr = "";
-		 					 
-		 				 	liststr    +=  	"<table class='table'>" +
-		 					"<tr>" +
-		 					"<td>게시판이름</td> <td><input type='text' class='form-control' id='BOARD_NM' name='BOARD_NM'  value='${board_mng_list.BOARD_NM} ' style='width:50%' /></td> " +
-		 					"<td>게시판분류</td>" +
-		 					"<td>" +
-		 					"<select class='form-control' id='sel1' onchange = fn_SelectBox(this.value); >" +
-		 				    "<option value='공지사항'>공지사항</option>" +
-		 				    "<option value='게시판'>게시판</option>" +
-		 				    "<option value='Q&A'>Q&A</option>" +
-		 				  " </select>" +
-		 					"</td>" +
-		 					"</tr>" +
-		 					"<tr>" +
-		 					"<td>관리자</td> <td></td> <td>게시판코드</td> <td>" + ajaxList[0].CODE1  + "</td>" +
-		 					"</tr>" +
-		 					"<tr>" +
-		 					"<td>댓글여부</td><td><label  class='radio-inline'><input type='radio' name='REPLY_FLG' value='Y'>Y</label> <label class='radio-inline'><input type='radio' name='REPLY_FLG' value='N'>N</label></td><td>게시판활성여부</td><td><label class='radio-inline'><input type='radio' name='ACTIVE_FLG' value='Y'>Y</label> <label class='radio-inline'><input type='radio' name='ACTIVE_FLG' value='N'>N</label></td>" +
-		 					"</tr>" +
-		 					"<tr>"  +
-		 					"<td>파일업로드</td><td><label class='radio-inline'><input type='radio' name='FILE_ATTACH_FLG' value='Y'>Y</label> <label class='radio-inline'><input type='radio' name='FILE_ATTACH_FLG' value='N'>N</label></td><td>공지활성화</td><td><label class='radio-inline'><input type='radio' name='NOTICE_FLG' value='Y'>Y</label> <label class='radio-inline'><input type='radio' name='NOTICE_FLG' value='N'>N</label></td>" +
-		 					"</tr>" +
-		 					"</table>" ; 
+	 	 					var liststr = ""; 
 		 					
-		 					var boardtable = document.getElementById("board_mng_detail");
-		 					boardtable.innerHTML = liststr;
+		 					liststr  += ajaxList[0].CODE1;
+		 					
+		 					var boardcddiv = document.getElementById("board_cd_div");
+		 					boardcddiv.innerHTML = liststr; 
 		 					
 							 $(".form-control option[value='"+ ajaxList[0].CODE_TXT+"']").attr("selected", true); 
+							 
 		 				} 
 		 		 
 		 })

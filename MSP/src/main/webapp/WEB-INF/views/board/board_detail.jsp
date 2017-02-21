@@ -34,7 +34,9 @@
 <label for="created_by">${boardlist.CREATED_BY}</label> 
 <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label> 
 <label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label>
+<label> <a href="/board/file_down?FILE_CD='${boardlist.FILE_CD}'">${boardlist.FILE_NM}</a></label>
 </div> 
+ 
 
 <div> <!-- 내용 div -->
  <textarea class="form-control" rows="10" id="content"  readonly="readonly" >${boardlist.CONTENT}</textarea>
@@ -71,16 +73,79 @@
 </div>	
  
 <script>
- 
- 
+  
 $("#board_list_fbtn").on("click", function(){  
     	location.href = "/board/board_list";
  	})
  	 
- 	
- 	
+
+ function remove_reply(e){ 
+		var REPLY_NO = e;
+		 
+		 $.ajax({
+				url : '/reply/reply_remove/',
+				headers : {
+		            "Content-Type" : "application/json",
+		            "X-HTTP-Method-Override" : "POST"
+		         },
+				data : REPLY_NO,
+				dataType : 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success : function(result) {
+					 
+					if(result=="success"){
+						ajax_list();
+					}
+					  
+				} 
+		         
+				}) 
+		 
+	}
+	
+function ajax_list(){
+	 var BOARD_NO = $("#BOARD_NO").val();
+	 var liststr = "";
+	 var liststr1 ="";
+	 var liststr2 = ""; 
+	 $.ajax({
+			url : '/reply/reply_list/' + BOARD_NO,
+			headers : {
+	            "Content-Type" : "application/json",
+	            "X-HTTP-Method-Override" : "POST"
+	         },
+			data : "",
+			dataType : 'json',
+			processData: false,
+			contentType: false,
+			type: 'GET',
+			success : function(result) {
+				var ajaxList = result;
+      				 liststr    += " <table class='table'>";
+				for(var i=0 ; i<ajaxList.length; i++) {  
+  				liststr1 +=   "<thead>" +
+				 			  "<th class='col-sm-1'>" + ajaxList[i].created_BY + "</th> <th class='col-sm-10'>" +ajaxList[i].reply_CONTENT+ "<span style='float:right' class='glyphicon glyphicon-remove' id = '"+ajaxList[i].reply_NO+"' onclick='remove_reply(this.id);'></span> </th>";
+				 } 
+				
+				liststr2 +=  "</table>";
+				var replytable = document.getElementById("reply_table");
+				 replytable.innerHTML = liststr + liststr1 + liststr2;
+				 liststr = "";
+				 liststr1= "";
+				 liststr2 = "";
+				 
+			} 
+	         
+			})  
+}
+
+	
+	 
  
 $(document).ready(function(){ 
+
 	 var REPLY_FLG = $("#REPLY_FLG").val(); 
 	 var BOARD_NO = $("#BOARD_NO").val();
  	 var liststr = "";
@@ -89,6 +154,9 @@ $(document).ready(function(){
      var formObj = $("form[role='form']");
 	 console.log(formObj);
 	
+	 ajax_list(); 
+		
+	 
  $("#board_modify_fbtn").on("click", function(){
 	 	formObj.attr("action", "/board/board_modify");
 		formObj.attr("method", "get");		
@@ -97,11 +165,16 @@ $(document).ready(function(){
 	 
  })
  
+ 
+ 
+ 
  $("#board_remove_fbtn").on("click", function(){
 	 formObj.attr("action", "/board/board_remove");
 	 formObj.attr("method", "post");
 	 formObj.submit();
- })
+ }) 
+ 
+ 
   
  
   function ajax_list(){
@@ -121,7 +194,7 @@ $(document).ready(function(){
        				 liststr    += " <table class='table'>";
 				for(var i=0 ; i<ajaxList.length; i++) {  
    				liststr1 +=   "<thead>" +
- 				 			  "<th class='col-sm-1'>" + ajaxList[i].created_BY + "</th> <th class='col-sm-10'>" +ajaxList[i].reply_CONTENT+ "</th>";
+ 				 			  "<th class='col-sm-1'>" + ajaxList[i].created_BY + "</th> <th class='col-sm-10'>" +ajaxList[i].reply_CONTENT+ "<span style='float:right' class='glyphicon glyphicon-remove' id = '"+ajaxList[i].reply_NO+"' onclick='remove_reply(this.id);'></span> </th>";
 				 } 
 				
 				liststr2 +=  "</table>";
@@ -159,10 +232,12 @@ $(document).ready(function(){
 	 
 			} 
 	          
-		      });
-
-	 
+		      }); 
  }) 
+ 
+ 
+ 
+ 
 
  
 

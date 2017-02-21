@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
 
 public interface BoardDao {
 	
@@ -16,9 +15,14 @@ public interface BoardDao {
 	public BoardVO read(int BOARD_NO);  
 	public void modify(BoardVO vo);
 	public void insert(BoardVO vo);
-	
+	public BoardVO ReadFilePage(int BOARD_NO);
 	
 	public List<BoardVO> SearchList(Map<String, Object> map); 
 	public void removeBoard(String dc);
 	int BoardListCount(String string, Map<String, Object> map);
+	public void insertAttachData(BoardVO attach);
+    public Object searchOneFiledata(String FILE_CD);
+
+	
+ 
 }
