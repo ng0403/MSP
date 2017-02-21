@@ -385,18 +385,19 @@ function viewLoadingHide(){
 					{
 						for(var i=0; i<menuAuthInqrList.length; i++)
 						{
-							var menu_cd = menuAuthInqrList[i].MENU_CD;
-							var menu_nm  = menuAuthInqrList[i].MENU_NM;
+							var menu_cd   = menuAuthInqrList[i].MENU_CD;
+							var menu_nm   = menuAuthInqrList[i].MENU_NM;
+							var auth_id   = menuAuthInqrList[i].AUTH_ID;
 							var auth_nm   = menuAuthInqrList[i].AUTH_NM;
 							var inqr_auth = menuAuthInqrList[i].INQR_AUTH;
-							var add_auth = menuAuthInqrList[i].ADD_AUTH;
+							var add_auth  = menuAuthInqrList[i].ADD_AUTH;
 							var mdfy_auth = menuAuthInqrList[i].MDFY_AUTH;
-							var del_auth = menuAuthInqrList[i].DEL_AUTH;
+							var del_auth  = menuAuthInqrList[i].DEL_AUTH;
 							var menu_acc_auth = menuAuthInqrList[i].MENU_ACC_AUTH;
 							
 							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
-							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+"'></td>"
+							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+":"+auth_id+"'></td>"
 							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
 		    				+"<td>"+menu_nm+"</td>"
 		    				+"<td>"+auth_nm+"</td>"
@@ -443,6 +444,7 @@ function viewLoadingHide(){
 						{
 							var menu_cd = menuAuthInqrList[i].MENU_CD;
 							var menu_nm  = menuAuthInqrList[i].MENU_NM;
+							var auth_id   = menuAuthInqrList[i].AUTH_ID;
 							var auth_nm   = menuAuthInqrList[i].AUTH_NM;
 							var inqr_auth = menuAuthInqrList[i].INQR_AUTH;
 							var add_auth = menuAuthInqrList[i].ADD_AUTH;
@@ -452,7 +454,7 @@ function viewLoadingHide(){
 							
 							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
-							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+"'></td>"
+							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+":"+auth_id+"'></td>"
 							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
 		    				+"<td>"+menu_nm+"</td>"
 		    				+"<td>"+auth_nm+"</td>"
@@ -685,23 +687,30 @@ function viewLoadingHide(){
 		
 		// 삭제 버튼 눌렀을 때
 		$("#menuAuth_del_btn").on("click", function(){
-			var check = document.getElementsByName("del_menuAuth");
-			var check_len = check.length;
-			var checked = 0;
 			
-			for(i=0; i<check_len; i++)
-			{
-				if(check[i].checked == true)
+			if(confirm("선택한 컬럼을 삭제 하시겠습니까?")) {
+				var check = document.getElementsByName("del_menuAuth");
+				var check_len = check.length;
+				var checked = 0;
+				
+				for(i=0; i<check_len; i++)
 				{
-					$("#delAllForm").submit();
-					checked++;
+					if(check[i].checked == true)
+					{
+						$("#delAllForm").submit();
+						checked++;
+					}
+				}
+				
+				if(checked == 0)
+				{
+					alert("체크박스를 체크하세요.");
 				}
 			}
-			
-			if(checked == 0)
-			{
-				alert("체크박스를 체크하세요.");
+			else {
+				return false;
 			}
+
 		});
 	
 

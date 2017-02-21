@@ -380,7 +380,7 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
-					
+					//paging(data, "#codePagingDiv", "fn_search");
 					$("#codePagingDiv").empty();
 					
 					if(data.page.endPageNum == 1)
@@ -468,8 +468,6 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
-					
-					//paging(data, "#codePagingDiv", "fn_search");
 					
 					$("#codePagingDiv").empty();
 						
