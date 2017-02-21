@@ -75,4 +75,22 @@ public class QnABoardDaoImpl implements QnABoardDao {
 
 	}
 
+
+
+	@Override
+	public void insert(BoardVO vo) {
+		
+		sqlSession.insert("board.QnAInsert" , vo);
+		
+	}
+	
+
+	@Override
+	public BoardVO CODE(String QUESTION_TYPE_CD) {
+		// TODO Auto-generated method stub
+		System.out.println("question_type_cd?SSS" + QUESTION_TYPE_CD);
+
+		return  sqlSession.selectOne("CODE", QUESTION_TYPE_CD);
+	}
+
 }

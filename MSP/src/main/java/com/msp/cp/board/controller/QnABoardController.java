@@ -1,8 +1,10 @@
 package com.msp.cp.board.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.auth.vo.AuthVO;
 import com.msp.cp.board.service.QnABoardService;
 import com.msp.cp.board.vo.BoardVO;
 import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.FileManager;
 
 @Controller
 @RequestMapping("/board/*")
@@ -62,19 +67,43 @@ public class QnABoardController {
 		BoardVO vo = new BoardVO();
 		vo = qnaService.detail(BOARD_NO);
 		String QUESTION_TYPE_CD = vo.getQUESTION_TYPE_CD();
+		System.out.println("question_type_cd?" + QUESTION_TYPE_CD);
 		String TITLE = vo.getTITLE();
-		System.out.println("11" + QUESTION_TYPE_CD + "TITLE"  + TITLE);
 		
-		String QUESTION_TITLE = "[" + QUESTION_TYPE_CD + "] " + "    " + TITLE;
+		BoardVO vo1 = new BoardVO();
+		vo1 = (BoardVO) qnaService.CODE(QUESTION_TYPE_CD);
+		
+		String CODE_TXT = vo1.getCODE_TXT();
+		
+		String QUESTION_TITLE = "[" + CODE_TXT + "] " + "    " + TITLE;
 		
 		
-		System.out.println("gg" + QUESTION_TITLE );
-		vo.setQUESTION_TITLE(QUESTION_TITLE);
+ 		vo.setQUESTION_TITLE(QUESTION_TITLE);
 		
   		model.addAttribute("boardlist", vo );
 		System.out.println("QnA_detail" + model.toString()); 
 		 
 	}
+	 
+	
+	@RequestMapping(value="/QnA_insert", method=RequestMethod.GET)
+	public void board_add() {
+		  
+	}
+	
+	@RequestMapping(value="/QnA_insert", method=RequestMethod.POST)
+	public String  board_insert(BoardVO vo) { 
+		System.out.println("QnA Insert Entering");
+		System.out.println("QnA vo?" + vo.toString());
+		qnaService.insert(vo);  
+   
+		System.out.println("board_insert success....");
+ 
+	 
+		return "redirect:/board/QnAInqr"; 
+		 
+	} 
+	
 	
 	@RequestMapping(value="/QnA_modify", method=RequestMethod.GET)
 	public void board_modifyPage(int BOARD_NO, Model model)
