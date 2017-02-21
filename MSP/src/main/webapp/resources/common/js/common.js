@@ -27,8 +27,10 @@
   //검색 엔터키
     function enterSearch(event, fMessage) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
+    	alert(keycode);
     	if (keycode == '13') {
-    		fMessage + (1);
+    		alert(keycode);
+    		fMessage+"(1)";
     	}
     	event.stopPropagation();
     }
