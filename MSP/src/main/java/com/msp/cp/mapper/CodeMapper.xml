@@ -70,7 +70,7 @@
      	 ) X
     	<![CDATA[
         WHERE 
-        	X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
+        	X.RNUM >= #{page.startRow} AND X.RNUM < #{page.endRow}
 	 	]]>
 	 	
 		
