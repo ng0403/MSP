@@ -44,7 +44,7 @@ public class LoginController {
 		String destPage="";
 		if(result.equals("LOGIN_SUCCESS")){
 			// 로그인이 성공한 경우, 모니터링 - 통합상황판 페이지로 이동
-			destPage ="redirect:/user/userlist";
+			destPage ="redirect:/user/userInqr";
 //			destPage = "redirect:/"+menu_url+"?menu_id="+menu_id;
 		}else{
 			// 로그인이 실패한 경우
