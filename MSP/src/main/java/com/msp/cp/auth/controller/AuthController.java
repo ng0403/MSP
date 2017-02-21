@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +54,7 @@ public class AuthController {
 	   *참고사항 :
 	 ------------------------------- */ 
 	
-	@RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/authInqr", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView authList1(HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") 
 									int pageNum , String excel,
 									@RequestParam Map<String, Object> authMap ){
@@ -245,41 +247,50 @@ public class AuthController {
 		return model;
 	}
 	
-	//	Excel Data Import
-    @RequestMapping(value = "/excelUploadAjax", method = RequestMethod.POST)
-    public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception{
-        
-    	MultipartFile excelFile =request.getFile("excelFile");
-        System.out.println("excelFile : " + excelFile);
-        System.out.println("엑셀 파일 업로드 컨트롤러");
-        
-        if(excelFile==null || excelFile.isEmpty()){
-        	
-            throw new RuntimeException("엑셀파일을 선택 해 주세요.");
-        }
-        
-        //파일 저장경로
-        File destFile = new File("C:\\"+excelFile.getOriginalFilename());
-        System.out.println("destFile : " + destFile);
-        
-        try{
-            excelFile.transferTo(destFile);
-            
-        }catch(IllegalStateException | IOException e){
-        	
-            throw new RuntimeException(e.getMessage(),e);
-        }
-        
-        int result = authService.excelUpload(destFile);
-        System.out.println("result : " + result);
-        
-        if(result == 1){
-        	
-        	System.out.println("Excel Insert 성공");
-        	
-        }else {
-        	System.out.println("Excel Insert 실패");
-        }
-        return new ModelAndView("redirect:/auth/list", "result", result);
-    }
+	//상세정보 팝업
+	@RequestMapping(value="/excelImportTab", method=RequestMethod.GET)
+	public ModelAndView excelImportTab(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
+	{
+		System.out.println("ExcelTab Controller");
+		ModelAndView mov = new ModelAndView("/auth/excel_import");
+		return mov;
+	}
+	
+	//Excel Data Import
+	@RequestMapping(value = "/excelUploadAjax", headers = "content-type=multipart/*", method = RequestMethod.POST)
+	public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception{
+	
+		MultipartFile excelFile =request.getFile("excelFile");
+		System.out.println("excelFile : " + excelFile);
+		System.out.println("엑셀 파일 업로드 컨트롤러");
+		
+		if(excelFile==null || excelFile.isEmpty()){
+		    throw new RuntimeException("엑셀파일을 선택 해 주세요.");
+		}
+		
+		//파일 저장경로입니다.
+		File destFile = new File("C:\\"+excelFile.getOriginalFilename());
+		System.out.println("destFile : " + destFile);
+		
+		try{
+		    excelFile.transferTo(destFile);
+		    
+		}catch(IllegalStateException | IOException e){
+			
+		    throw new RuntimeException(e.getMessage(),e);
+		}
+		
+		int result = authService.excelUpload(destFile);
+		System.out.println("result : " + result);
+		
+		if(result == 1){
+			
+			System.out.println("Excel Insert 성공");
+			
+		}else {
+			
+			System.out.println("Excel Insert 실패");
+		}
+		return new ModelAndView("/auth/authInqr", "result", result);
+	}
 }
