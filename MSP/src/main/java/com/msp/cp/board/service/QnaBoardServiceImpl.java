@@ -68,6 +68,19 @@ public class QnaBoardServiceImpl implements QnABoardService {
 		List<BoardVO> list = qnaboardDao.QnAList(map);
 		return list;
 	}
+
+	@Override
+	public void insert(BoardVO vo) {
+		
+		qnaboardDao.insert(vo);
+		
+	}
+
+	@Override
+	public BoardVO CODE(String QUESTION_TYPE_CD) {
+		 
+		return qnaboardDao.CODE(QUESTION_TYPE_CD);
+	}
 	
 	
 

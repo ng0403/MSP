@@ -6,64 +6,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="${ctx}/resources/common/js/common.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
-<%@include file="../include/header.jsp"%>
+<%-- <%@include file="../include/header.jsp"%> --%>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 
 
-<div class="container" style=" width:90%">
+<div class="main_div">
 
-<div class = navi_div>
-
+<div class="navi_div">
+	Q&A > 리스트
 </div>
 
-<div class= search_div>
-<div class= search1_div>
-
-</div>
-</div>
-
- 
-<div class= "container" id="list1_div" style="width:90%">  
-
- <!-- Q&A 리스트, 조회화면 -->
+<div class="search_div">
+ <div class="search2_div">
+<!-- Q&A 리스트, 조회화면 -->
 	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
-		<div id="inputDiv" style="font-size:11.8px;width:100%;font-family:Helvetica, sans-serif;">
+		<div id="inputDiv">
 				<label for="user_id">질문유형 :</label>
-					 <select id="qna_type" name="qna_type" style="width:80px;font-size:10px;">
+					 <select id="qna_type" name="qna_type">
 					    <option value=""> -- 선택 -- </option>
  							<option value="Y">Y</option>
  							<option value="N">N</option>
  					</select>
 						<label>답변	 :</label>
-					<select id="qna_answer" name="qna_answer" style="width:80px;font-size:10px;">
+					<select id="qna_answer" name="qna_answer">
 					    <option value=""> -- 답변 -- </option>
  							<option value="Y">Y</option>
  							<option value="N">N</option>
  					</select>
 				<label for="keyword">제목 :</label>
-					<input type="text" id="keyword" name="keyword" style="width: 100px" />&nbsp;
-			
+					<input type="text" id="keyword" name="keyword"	/>&nbsp; 
+				 <input type="button" class="btn btn-default btn-sm" onclick="QnAListInqr(1);" value="검색">
 				</form> 
-					<input type="button" class="button-default" onclick="QnAListInqr(1);" value="조회" style="font-size:11px;float:right;margin-right:1%;
-					    background-color:#81BEF7;font-color:white;"/> 
-					 
-		</div>
-
+</div>
+</div>
  
-
+ 
+<div class="list_div">
+ <div class="list1_div">
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
-	<table class="table table-bordered">
+	<table class="table table-hover">
 						<thead>
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
@@ -95,9 +90,13 @@
 						 </tbody>
 					</table>
 					</form>
-					
-					<div class="paging_div" style="width: 100%; text-align: center;">
-	
+				</div>
+				</div>	
+		 <div class="paging_div">
+		 <div class="left">
+		 <input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
+		 
+		</div>
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
 		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
 		<input type="hidden" id="boardPageNum" value="${pageNum}"/>
@@ -127,7 +126,6 @@
 		</c:choose>
 		</div>
 					
-					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
 					
 </div>
   
@@ -148,7 +146,7 @@
  
  
 $("#board_add_fbtn").on("click", function(){
-	location.href="/board/board_insert";
+	location.href="/board/QnA_insert";
 	
 })
   
@@ -307,74 +305,13 @@ $("#board_add_fbtn").on("click", function(){
 				var VIEW_CNT = this.view_CNT;
 				qnaListOutput(BOARD_NO, QUESTION_TYPE_CD, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
-			$("#paging_div").html("");
-			$(data).each(function(){
-				var pageNum = this.pageNum;
-				var totalCount = this.page.totalCount;
-				var pageSize = this.page.pageSize;
-				var pageBlockSize = this.page.pageBlockSize;
-				var startRow = this.page.startRow;
-				var endRow = this.page.endRow;
-				var startPageNum = this.page.startPageNum;
-				var endPageNum = this.page.endPageNum;
-				var currentPageNum = this.page.currentPageNum;
-				var totalPageCount = this.page.totalPageCount;
-				pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
-			})
+			paging(data,"#paging_div", "QnAListInqr");
 		}).fail(function(){
 			alert("목록을 불러오는데 실패하였습니다.")
 		})
 	}
 	
-	 
-	
-	
-	/*페이징 출력 함수*/
-	function pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
-		if(endPageNum == 1)
-		{
-			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepDept(event);'/>"  
-			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
-			+"<a style='color:black; text-decoration: none;'>▶</a>"
-		}
-		else if(startPageNum == endPageNum)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='color:black; text-decoration: none;'>▶</a>";
-		}
-		else if(pageNum == 1)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
-		else if(pageNum == endPageNum)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='color:black; text-decoration: none;'>▶</a>";
-		}
-		else
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
-			+"<a style='cursor: pointer;' onclick=authListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
-		$("#paging_div").append(pageContent);
-
-	}
-	
-	
-	
+	  
 	/* 리스트 출력 함수 */
 	function qnaListOutput(BOARD_NO, QUESTION_TYPE_CD, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT){
 	
@@ -419,4 +356,4 @@ $("#board_add_fbtn").on("click", function(){
 
 </body>
 </html>
-<%@include file="../include/footer.jsp"%>
+<%-- <%@include file="../include/footer.jsp"%> --%>

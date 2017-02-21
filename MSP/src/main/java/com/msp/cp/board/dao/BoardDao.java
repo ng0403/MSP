@@ -17,7 +17,6 @@ public interface BoardDao {
 	public void modify(BoardVO vo);
 	public void insert(BoardVO vo);
 	public BoardVO ReadFilePage(int BOARD_NO);
-	
 	public List<BoardVO> SearchList(Map<String, Object> map); 
 	public void removeBoard(String dc);
 	 public void removeDetail(int BOARD_NO);
