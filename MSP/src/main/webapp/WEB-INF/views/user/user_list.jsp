@@ -19,15 +19,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
-<!-- <script type="text/javascript"> -->
-<!-- // $(document).ready(function() { -->
-<%-- // 	var result = ${result} --%>
-	
-<!-- // } -->
-<!-- </script> -->
 <script type="text/javascript">
+$(document).ready(function() { 
+	var result = ${result}
+	alert(result);
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
+}
 </script>
 
 </head>

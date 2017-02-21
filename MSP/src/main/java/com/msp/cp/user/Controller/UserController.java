@@ -301,6 +301,14 @@ public class UserController {
 		return mov;
 	}
 	
+	//상세정보 팝업
+	@RequestMapping(value="/excelImportTab", method=RequestMethod.GET)
+	public ModelAndView excelImportTab(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
+	{
+		System.out.println("ExcelTab Controller");
+		ModelAndView mov = new ModelAndView("/user/excel_import_tab");
+		return mov;
+	}
 //	Excel Data Import
     @RequestMapping(value = "/excelUploadAjax", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception{
@@ -329,14 +337,6 @@ public class UserController {
         {
         	System.out.println("Excel Insert 실패");
         }
-        return new ModelAndView("redirect:/user/userlist");
-    }
-    //상세정보 팝업
-    @RequestMapping(value="/excelImportTab", method=RequestMethod.GET)
-    public ModelAndView excelImportTab(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
-    {
-    	System.out.println("ExcelTab Controller");
-    	ModelAndView mov = new ModelAndView("/user/excel_import_tab");
-    	return mov;
+        return new ModelAndView("/user/user_list", "result", result);
     }
 }

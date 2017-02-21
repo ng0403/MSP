@@ -47,8 +47,10 @@ function check() {
               $("#excelUploadForm").submit();
  
                 };
-              alert("모든 데이터가 업로드 되었습니다.");
+                opener.parent.location.reload();
                 user_goSearch();
+//                window.open("about:blank","_self").close();
+                
         }
  
 //AS-ID 엑셀 다운로드 적용 함수
