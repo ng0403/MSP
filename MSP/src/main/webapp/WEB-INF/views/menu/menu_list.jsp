@@ -17,6 +17,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
+<script src="${ctx}/resources/common/js/common.js"></script>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>메뉴관리화면</title>
 <!-- <style type="text/css">
@@ -102,6 +103,9 @@
 		$("#menu_inqr_fbtn").click(function(){
 			menuListInqr(1);
 		})
+		$("#menu_nm_key").keypress(function(){
+			enterSearch(event, "menuListInqr");
+		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
 			menu_cd = $(this).attr("data_num");
@@ -151,7 +155,7 @@
 		//메뉴검색 버튼 클릭시 이벤트
 		$("#menuInqr_popup_fbtn").click(function(){
 			menuListInqrPop(1);
-			menuByMask();
+			popByMask("menuMask", "menuWindow");
 		})
 	})
 	
@@ -175,20 +179,7 @@
 				var active_flg = this.active_flg;
 				menuListOutput(menu_cd, menu_nm, menu_url, up_menu_nm, active_flg);
 			})
-			$("#paging_div").html("");
-			$(data).each(function(){
-				var pageNum = this.pageNum;
-				var totalCount = this.page.totalCount;
-				var pageSize = this.page.pageSize;
-				var pageBlockSize = this.page.pageBlockSize;
-				var startRow = this.page.startRow;
-				var endRow = this.page.endRow;
-				var startPageNum = this.page.startPageNum;
-				var endPageNum = this.page.endPageNum;
-				var currentPageNum = this.page.currentPageNum;
-				var totalPageCount = this.page.totalPageCount;
-				pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
-			})
+			paging(data,"#paging_div", "menuListInqr");
 		}).fail(function(){
 			alert("부서 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
@@ -336,49 +327,7 @@
 		$(".menu_list").append(menu_tr);
 			
 	}
-	/*페이징 출력 함수*/
-	function pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
-		if(endPageNum == 1)
-		{
-			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepMenu(event);'/>"  
-			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
-			+"<a style='color:black; text-decoration: none;'>▶</a>"
-		}
-		else if(startPageNum == endPageNum)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='color:black; text-decoration: none;'>▶</a>";
-		}
-		else if(pageNum == 1)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
-		else if(pageNum == endPageNum)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='color:black; text-decoration: none;'>▶</a>";
-		}
-		else
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepMenu(event);\"/>"
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=menuListInqr("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
-		$("#paging_div").append(pageContent);
-
-	}
+	
 	/*메뉴 상세정보 출력 함수*/
 	function detailOutput(menu_cd, menu_nm, menu_url, menu_level, up_menu_cd, up_menu_nm, active_flg){
 		dataReset();
@@ -419,40 +368,7 @@
 		$(".active_flg").attr("disabled",boolean);
 	}
 	
-	// 검색 페이징 엔터키
-    function pageInputRepMenu(event) {	
-    	$(document).ready(function() {
-    		var keycode = (event.keyCode ? event.keyCode : event.which);
-    		if (keycode == '13') {
-    			var pageNum = parseInt($("#pageInput").val());
-    			if ($("#pageInput").val() == '') {
-    				alert("Input page number.")
-    				$("#pageInput").val($("#pageNum").val());
-    				$("#pageInput").focus();
-    			} else if(pageNum > parseInt($("#endPageNum").val())) {
-    				alert("The page number is too large.");
-    				$("#pageInput").val($("#pageNum").val());
-    				$("#pageInput").focus();
-    			} else if (1 > pageNum) {
-    				alert("The page number is too small.");
-    				$("#pageInput").val($("#pageNum").val());
-    				$("#pageInput").focus();
-    			} else {
-    				menuListInqr(pageNum);
-    			}
-    		}
-    		event.stopPropagation();
-    	});
-    }
 	
-  //검색 엔터키
-    function enterSearch(event) {		
-    	var keycode = (event.keyCode ? event.keyCode : event.which);
-    	if (keycode == '13') {
-    		menuListInqr(1);
-    	}
-    	event.stopPropagation();
-    }
 
 </script>
 </head>
