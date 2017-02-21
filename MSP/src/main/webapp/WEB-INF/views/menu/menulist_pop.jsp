@@ -216,37 +216,6 @@
     	event.stopPropagation();
     }
 
-    function viewLoadingShow(){
-	    $('#viewLoadingImg').css('position', 'absolute');
-	     $('#viewLoadingImg').css('left', '45%');
-	     $('#viewLoadingImg').css('top', '45%');
-	     $('#viewLoadingImg').css('z-index', '1200');
-	     $('#viewLoadingImg').show().fadeIn(500);
-	}
-
-	function viewLoadingHide(){
-	   $('#viewLoadingImg').fadeOut();   
-	}
-	
-	//menuDetail image popup
-	function popByMask(message1,message2) {
-		//화면의 높이와 너비를 구한다.
-		var maskHeight = $(document).height();
-		var maskWidth = $(window).width();
-
-		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-		$('#'+message1+'').css({
-			'width' : maskWidth,
-			'height' : maskHeight
-		});
-
-		//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
-		$('#'+message1+'').fadeIn(1000);
-		$('#'+message1+'').fadeTo("slow", 0.5);
-
-		//윈도우 같은 거 띄운다.
-		$('#'+message2+'').show();
-	}
 </script>
 </head>
 <body>
