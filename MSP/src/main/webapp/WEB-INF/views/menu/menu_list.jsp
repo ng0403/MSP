@@ -104,7 +104,7 @@
 			menuListInqr(1);
 		})
 		$("#menu_nm_key").keypress(function(){
-			enterSearch(event, menuListInqr(1));
+			enterSearch(event, menuListInqr);
 		})
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
@@ -157,6 +157,13 @@
 			menuListInqrPop(1);
 			popByMask("menuMask", "menuWindow");
 		})
+		$("#pageInput").keypress(function(){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+    		if (keycode == '13') {
+				pageInputRep(event, menuListInqr);
+    		}
+		})
+		
 	})
 	
 	/*메뉴 리스트 출력및 페이징 처리 함수*/
@@ -453,23 +460,23 @@
 					<input type="hidden" id="PageNum" value="${pageNum}"/>
 					<c:choose>
 						<c:when test="${page.endPageNum == 1}">
-							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRepMenu(event);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/>  
 							<a style="color: black;"> / ${page.endPageNum}</a>
 							<a style="color: black;"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
-							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepMenu(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="menuListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
 							<a href="#" onclick="menuListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
 							<a href="#" onclick="menuListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
-							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepMenu(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="menuListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
 						</c:when>
 						<c:otherwise>
 							<a href="#" onclick="menuListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
-							<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepMenu(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<input type="text" id="pageInput" value="${pageNum}" style='width: 50px; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="menuListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
 							<a href="#" onclick="menuListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 						</c:otherwise>

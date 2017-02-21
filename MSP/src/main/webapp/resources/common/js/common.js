@@ -17,7 +17,7 @@
     				$("#pageInput").val($("#pageNum").val());
     				$("#pageInput").focus();
     			} else {
-    				fMessage+(pageNum);
+    				fMessage(pageNum);
     			}
     		}
     		event.stopPropagation();
@@ -28,8 +28,7 @@
     function enterSearch(event, fMessage) {		
     	var keycode = (event.keyCode ? event.keyCode : event.which);
     	if (keycode == '13') {
-    		alert(keycode);
-    		fMessage;
+    		fMessage(1);
     	}
     	event.stopPropagation();
     }
@@ -56,7 +55,7 @@
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRep(event,"+fMessage+");'/>"  
+			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\'pageInputRep(event,"+fMessage+");\'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
 			+"<a style='color:black; text-decoration: none;'>▶</a>"
 		}
@@ -64,14 +63,14 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress='pageInputRep(event,"+fMessage+");'/>" 
+			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\'pageInputRep(event,"+fMessage+");\'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else if(pageNum == 1)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRep(event,"+fMessage+");'/>" 
+			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\'pageInputRep(event,"+fMessage+");\'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
@@ -79,7 +78,7 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress='pageInputRep(event,"+fMessage+");'/>" 
+			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\'pageInputRep(event,"+fMessage+");\'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
@@ -87,7 +86,7 @@
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+""+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress='pageInputRep(event,"+fMessage+");'/>"
+			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\'pageInputRep(event,"+fMessage+");\'/>"
 			+"<a style='cursor: pointer;' onclick="+fMessage+""+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
