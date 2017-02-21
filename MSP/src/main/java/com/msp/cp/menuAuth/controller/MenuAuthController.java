@@ -78,8 +78,6 @@ public class MenuAuthController {
 	@RequestMapping(value="/menuAuth_list", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map<String, Object> searchMenuAuthList(ModelMap model, HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{
-		System.out.println(pageNum);
-		
 		String auth_id_sch = request.getParameter("auth_id_sch").trim();
 		String menu_nm_sch = request.getParameter("menu_nm_sch").trim();
 		
@@ -113,9 +111,6 @@ public class MenuAuthController {
 		map.put("endRow", endRow);
 		
 		List<MenuAuthVO> menuAuthInqrList = menuAuthService.searchMenuAuth(map);
-		
-		System.out.println("맵 : " + map);
-		System.out.println("리스트 : " + menuAuthInqrList);
 		
 		model.addAttribute("menuAuthInqrList", menuAuthInqrList);
 		model.addAttribute("page", page);
@@ -154,10 +149,7 @@ public class MenuAuthController {
 		map.put("auth_nm", auth_nm);
 		
 		List<MenuAuthVO> menuAuthDetail = menuAuthService.menuAuthDetail(map);
-		
-		System.out.println("맵 : " + map);
-		System.out.println("리스트 : " + menuAuthDetail);
-		
+
 		model.addAttribute("menuAuthDetail", menuAuthDetail);
 		
 		return model;
@@ -193,16 +185,6 @@ public class MenuAuthController {
 		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
 		menuAuthVo.setCreated_by("ADMIN");
 		
-		System.out.println(menuAuthVo.getAuth_id());
-		System.out.println(menuAuthVo.getMenu_cd());
-		System.out.println(menuAuthVo.getActive_flg());
-		System.out.println(menuAuthVo.getInqr_auth());
-		System.out.println(menuAuthVo.getAdd_auth());
-		System.out.println(menuAuthVo.getMdfy_auth());
-		System.out.println(menuAuthVo.getDel_auth());
-		System.out.println(menuAuthVo.getMenu_acc_auth());
-		System.out.println(menuAuthVo.getCreated_by());
-
 		menuAuthService.insertMenuAuth(menuAuthVo);
 		
 		return "redirect:/menuAuth/menuAuthInqr";
@@ -237,8 +219,6 @@ public class MenuAuthController {
 		menuAuthVo.setDel_auth(del_auth);
 		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
 		
-		System.out.println(auth_id);
-		
 		menuAuthService.mdfyMenuAuth(menuAuthVo);
 		
 		return "redirect:/menuAuth/menuAuthInqr";
@@ -258,7 +238,7 @@ public class MenuAuthController {
 		String menu_cd = "";
 		String auth_id = "";
 		String[] delmenuAuth = del_menuAuth.split(",");
-		
+				
 		for(int i=0; i<delmenuAuth.length; i++)
 		{
 			String del[] = delmenuAuth[i].split(":");
