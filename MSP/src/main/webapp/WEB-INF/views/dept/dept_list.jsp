@@ -484,52 +484,53 @@
 		</div>
 		<div class="list_div">
 			<div class="list2_div">
-				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list_tb" class="table table-hover">
-						<colgroup>
-							<col width="5%">
-							<col width="35%">
-							<col width="25%">
-							<col width="15%">
-							<col width="20%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th><input type="checkbox" id="checkall"></th>
-								<th>부서명</th>
-								<th>연락처</th>
-								<th>대표자명</th>
-								<tH>활성화여부</th>
-							</tr>
-						</thead>
-						<tbody class="dept_list">
-							<c:choose>
-								<c:when test="${not empty dept_list}">
-									<c:forEach var="dept_list" items="${dept_list}">
-										<tr class="open_detail" data_num="${dept_list.dept_cd}">
-											<td>
-												<input type="checkbox" class="del_point" name="del_code" value="${dept_list.dept_cd}">
-											</td>
-											<td>${dept_list.dept_nm}</td>
-											<td>${dept_list.dept_num1}-${dept_list.dept_num2}-${dept_list.dept_num3}</td>
-											<td>${dept_list.user_nm}</td>
-											<td>
-												<c:if test="${dept_list.active_flg eq 'Y'}">활성화</c:if>
-												<c:if test="${dept_list.active_flg eq 'N'}">비활성화</c:if>
-											</td>
+				<div class="table_div">
+					<form id="delAll_form" name="delAll_form">
+						<table summary="dept_list_tb" class="table table-hover">
+							<colgroup>
+								<col width="5%">
+								<col width="35%">
+								<col width="25%">
+								<col width="15%">
+								<col width="20%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th><input type="checkbox" id="checkall"></th>
+									<th>부서명</th>
+									<th>연락처</th>
+									<th>대표자명</th>
+									<tH>활성화여부</th>
+								</tr>
+							</thead>
+							<tbody class="dept_list">
+								<c:choose>
+									<c:when test="${not empty dept_list}">
+										<c:forEach var="dept_list" items="${dept_list}">
+											<tr class="open_detail" data_num="${dept_list.dept_cd}">
+												<td>
+													<input type="checkbox" class="del_point" name="del_code" value="${dept_list.dept_cd}">
+												</td>
+												<td>${dept_list.dept_nm}</td>
+												<td>${dept_list.dept_num1}-${dept_list.dept_num2}-${dept_list.dept_num3}</td>
+												<td>${dept_list.user_nm}</td>
+												<td>
+													<c:if test="${dept_list.active_flg eq 'Y'}">활성화</c:if>
+													<c:if test="${dept_list.active_flg eq 'N'}">비활성화</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="5">등록된 부서가 존재하지 않습니다.</td>
 										</tr>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td colspan="5">등록된 부서가 존재하지 않습니다.</td>
-									</tr>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
-				</form>
-			<!-- </div> -->
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
+					</form>
+				</div>
 				<div class="paging_div">
 					<div class="left">
 						<input type="button" id="dept_add_fbtn" class="btn btn-primary btn-sm" value="추가">
