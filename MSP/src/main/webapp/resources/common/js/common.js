@@ -32,6 +32,7 @@
     	}
     	event.stopPropagation();
     }
+    
     /*페이징 ajax()*/
     function paging(data, divMessage, fMessage){
     	$(divMessage).html("");

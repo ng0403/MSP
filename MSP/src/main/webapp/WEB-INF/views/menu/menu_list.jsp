@@ -106,6 +106,7 @@
 		$("#menu_nm_key").keypress(function(){
 			enterSearch(event, menuListInqr);
 		})
+		
 		/*부서명 클릭 시 상세정보 출력 이벤트*/
 		$(document).on("click", ".open_detail", function(){
 			menu_cd = $(this).attr("data_num");
