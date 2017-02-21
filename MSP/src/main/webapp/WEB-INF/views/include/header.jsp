@@ -406,6 +406,12 @@
                 <small class="label pull-right bg-yellow">12</small>
               </a>
             </li>
+            <li>
+              <a href="${ctx}/menuAuth/menuAuthInqr">
+                <i class="fa fa-envelope"></i> <span>메뉴권한</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+            </li>
            <!--  <li class="treeview">
               <a href="#">
                 <i class="fa fa-folder"></i> <span>Examples</span>
