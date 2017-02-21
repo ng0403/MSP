@@ -395,52 +395,53 @@
 		</div>
 		<div class="list_div">
 			<div class="list2_div">
-				<form id="delAll_form" name="delAll_form">
-					<table summary="menu_list_tb" class="table table-hover">
-						<colgroup>
-							<col width="5%">
-							<col width="25%">
-							<col width="25%">
-							<col width="25%">
-							<col width="20%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th><input type="checkbox" id="checkall"></th>
-								<th>메뉴명</th>
-								<th>상위메뉴명</th>
-								<th>URL</tH>
-								<tH>활성화여부</th>
-							</tr>
-						</thead>
-						<tbody class="menu_list">
-							<c:choose>
-								<c:when test="${not empty menu_list}">
-									<c:forEach var="menu_list" items="${menu_list}">
-										<tr class="open_detail" data_num="${menu_list.menu_cd}">
-											<td>
-												<input type="checkbox" class="del_point" name="del_code" value="${menu_list.menu_cd}">
-											</td>
-											<td>${menu_list.menu_nm}</td>
-											<td>${menu_list.up_menu_nm}</td>
-											<td>${menu_list.menu_url}</td>
-											<td>
-												<c:if test="${menu_list.active_flg eq 'Y'}">활성화</c:if>
-												<c:if test="${menu_list.active_flg eq 'N'}">비활성화</c:if>
-											</td>
+				<div class="table_div">
+					<form id="delAll_form" name="delAll_form">
+						<table summary="menu_list_tb" class="table table-hover">
+							<colgroup>
+								<col width="5%">
+								<col width="25%">
+								<col width="25%">
+								<col width="25%">
+								<col width="20%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th><input type="checkbox" id="checkall"></th>
+									<th>메뉴명</th>
+									<th>상위메뉴명</th>
+									<th>URL</tH>
+									<tH>활성화여부</th>
+								</tr>
+							</thead>
+							<tbody class="menu_list">
+								<c:choose>
+									<c:when test="${not empty menu_list}">
+										<c:forEach var="menu_list" items="${menu_list}">
+											<tr class="open_detail" data_num="${menu_list.menu_cd}">
+												<td>
+													<input type="checkbox" class="del_point" name="del_code" value="${menu_list.menu_cd}">
+												</td>
+												<td>${menu_list.menu_nm}</td>
+												<td>${menu_list.up_menu_nm}</td>
+												<td>${menu_list.menu_url}</td>
+												<td>
+													<c:if test="${menu_list.active_flg eq 'Y'}">활성화</c:if>
+													<c:if test="${menu_list.active_flg eq 'N'}">비활성화</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="5">등록된 메뉴가 존재하지 않습니다.</td>
 										</tr>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td colspan="5">등록된 메뉴가 존재하지 않습니다.</td>
-									</tr>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
-				</form>
-			<!-- </div> -->
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
+					</form>
+				</div>
 			<div class="paging_div">
 				<div class="left">
 					<input type="button" id="menu_add_nfbtn" class="btn btn-primary btn-sm" value="추가">
