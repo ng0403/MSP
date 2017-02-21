@@ -39,7 +39,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService; 
 	
-	@RequestMapping(value="/board_list", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/boardInqr", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
 		
 		System.out.println("board_list Insert ");
@@ -62,9 +62,7 @@ public class BoardController {
 		 
 		System.out.println("board_list" + mov);
 		return mov; 
-	}
-	
-	  
+	} 
 	
 	@RequestMapping(value="/board_detail", method= RequestMethod.GET)
 	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
@@ -75,13 +73,10 @@ public class BoardController {
 		
 		if(FILE_CD == null)
 		{
-		System.out.println("filecd 없어");
-		 model.addAttribute("boardlist", boardService.detail(BOARD_NO));
+ 		 model.addAttribute("boardlist", boardService.detail(BOARD_NO));
 		}
 		else
-		{
-		System.out.println("filecd 있어");
-		
+		{ 
 		 model.addAttribute("boardlist", boardService.ReadFilePage(BOARD_NO));
 		}
 			
@@ -150,67 +145,31 @@ public class BoardController {
 		System.out.println("board_insert success....");
  
 	 
-		return "redirect:/board/board_list"; 
+		return "redirect:/board/boardInqr"; 
 		 
 	} 
-	
-	/*@RequestMapping(value = "/file_insert", method = RequestMethod.POST)
-	public void fileInsert(MultipartHttpServletRequest multi, HttpServletRequest request, BoardVO attach)
-	{ 
-		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-		 Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-	     MultipartFile multipartFile = null; 
- 	    
-		while(iterator.hasNext()){
-	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-	        if(multipartFile.isEmpty() == false){
-	        	
- 	 		    attach.setFILE_NM(multipartFile.getOriginalFilename());
- 	 		    String name = multipartFile.getOriginalFilename();
- 	 		     
- 	 		    StringTokenizer toke = new StringTokenizer(name, ".");
- 	 		    System.out.println("filename length" + name.toString());
- 	 		    String[] filename = new String[2];
- 	 		    
- 	 		    for(int i= 0; toke.hasMoreElements() ; i++)
- 	 		    {
-  	 		     filename[i] = toke.nextToken();
-  	 		   
-  	 		     System.out.println("ggg" +  filename[i] ); 
-  	 		    }
- 	 		   
- 	 		    attach.setFILE_NM(filename[0]);
- 	 		    attach.setFILE_EXT(filename[1]);  
- 	 		    
- 	        }
-	    } 
-		
-		FileManager fileManager = new FileManager(); 
-		
-		List<MultipartFile> file = multi.getFiles("filedata");
-	
-		for(int i=0; i<file.size(); i++){
-			
-			String uploadpath = fileManager.doFileUpload(file.get(i), request);
-		
-			attach.setFILE_PATH(uploadpath);
-			System.out.println("딩가딩가오" + attach.toString());
-			boardService.insertAttachData(attach);
-		
-		}
-		 
-	}*/
-	
-	
+	  
 	
 	@RequestMapping(value="/board_modify", method=RequestMethod.GET)
 	public void board_modifyPage(int BOARD_NO, Model model)
-	{
+	{ 
 		System.out.println("hi MODIFY" + BOARD_NO);
-	
-		System.out.println("modify Page Entering");
-		model.addAttribute( "boardVO", boardService.read(BOARD_NO));
-		System.out.println("modify string" + model.toString());
+		
+		BoardVO vo = boardService.detail(BOARD_NO);
+		String FILE_CD = vo.getFILE_CD();
+		System.out.println("fileCD" + FILE_CD);
+		
+		if(FILE_CD != null){
+			System.out.println("File_CD 있다");
+			model.addAttribute("boardVO", boardService.readFileModify(BOARD_NO));
+		}
+		else{
+			System.out.println("File_CD 없다");
+			model.addAttribute( "boardVO", boardService.read(BOARD_NO)); 
+		}
+	  
+		
+		
 	}
 	
 	@RequestMapping(value="/board_modify", method=RequestMethod.POST)
@@ -221,7 +180,7 @@ public class BoardController {
 		boardService.modify(vo);
 		System.out.println("modify success" + vo.toString());
 		
-		return "redirect:/board/board_list";
+		return "redirect:/board/boardInqr";
 	}
 	
 	@RequestMapping(value="/board_remove", method=RequestMethod.POST) 
@@ -252,6 +211,18 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping(value="/detail_remove", method=RequestMethod.POST) 
+	public String detailRemove(int BOARD_NO){ 
+		
+		System.out.println("remove insert" + BOARD_NO);
+
+		 
+			boardService.removeDetail(BOARD_NO); 
+	     
+	    return "redirect:/board/boardInqr";
+	}
+	
+	
 	
 	@RequestMapping(value="/ajax_list", method=RequestMethod.POST) 
 	 @ResponseBody
@@ -275,7 +246,7 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping(value="/search_board_list", method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/search_boardInqr", method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String, Object> search_QnA_list( ModelMap model, HttpServletRequest request,
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		System.out.println("search entering");

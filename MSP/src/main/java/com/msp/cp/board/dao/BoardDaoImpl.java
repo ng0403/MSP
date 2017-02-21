@@ -100,6 +100,18 @@ public class BoardDaoImpl implements BoardDao {
 		 
 	}
 
+	@Override
+	public BoardVO readFileModify(int BOARD_NO) {
+		 
+		return sqlSession.selectOne("readBoardFile", BOARD_NO);
+	}
+
+	@Override
+	public void removeDetail(int BOARD_NO) {
+		sqlSession.update("removeDetail", BOARD_NO);
+		
+	}
+
  
 
 }

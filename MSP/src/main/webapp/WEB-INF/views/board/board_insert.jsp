@@ -22,7 +22,7 @@
 
 
 
-<div> <!-- 전체 div-->
+<div class="container" style=" width:90%">  <!-- 전체 div-->
 
 <form role="form" method="post" enctype="multipart/form-data">
 <div> <!-- 제목 div-->
@@ -38,24 +38,23 @@
  	<input type="file" multiple="multiple" name="filedata" id="filedata"> 
  </div> 
   </form>
-</div> 
+
  
  
 <div> <!-- 버튼 div  -->
-<input type="button" id="fileuploadPop" value="파일업로드" class="btn btn-default"> 
-<input type="button" id ="board_add_fbtn" class = "btn btn-default" value="저장"/>
-
-<!-- <button type="submit" class="btn btn-default">저장</button> -->
- <input type="button" id="board_list_fbtn" class="btn btn-default" value="취소"/> 
+ <input type="button" id ="board_add_fbtn" class = "btn btn-primary btn-sm" value="저장"/>
+ 	
+ <input type="button" id="board_list_fbtn" class="btn btn-primary btn-sm" value="취소"/> 
 </div>
 
+</div> 
  
 
 <script> 
  
 
 $("#board_list_fbtn").on("click", function(){  
-    	 location.href = "/board/board_list"; 
+    	 location.href = "/board/boardInqr"; 
     	
  	}) 
  	

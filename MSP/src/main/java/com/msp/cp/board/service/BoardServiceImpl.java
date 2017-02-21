@@ -94,6 +94,19 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.ReadFilePage(BOARD_NO);
 	}
+
+	@Override
+	public BoardVO readFileModify(int BOARD_NO) {
+	 
+		return boardDao.readFileModify(BOARD_NO);
+	}
+
+	@Override
+	public void removeDetail(int BOARD_NO) {
+		
+		 boardDao.removeDetail(BOARD_NO);
+		
+	}
  
  
  

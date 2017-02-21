@@ -104,13 +104,13 @@
 	</div>
 	
 	<div id = "button_div">
-	<input type="button" id="board_mng_modify_fbtn" class = "btn btn-default" value="편집"/>
-	<input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+	<input type="button" id="board_mng_modify_fbtn" class = "btn btn-primary btn-sm" value="편집"/>
+	<input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
 	</div>
 	
 	<div id = "button_div1">
-		<input type="button" id="board_mng_add_fbtn" class = "btn btn-default" value="저장"/>
-		<input type="button" class="btn btn-default" id="board_cancle_fbtn" value="취소"/>
+		<input type="button" id="btn btn-primary btn-sm" class = "btn btn-default" value="저장"/>
+		<input type="button" class="btn btn-primary btn-sm" id="board_cancle_fbtn" value="취소"/>
 	</div>
 
 </div>
@@ -120,7 +120,7 @@
 var formObj = $("form[role='form']");
 
 $("#board_list_fbtn").on("click", function(){  
-     	location.href = "/board_mng/board_mng_list";
+     	location.href = "/board_mng/boardmngInqr";
  	})
  	
  $("#board_mng_modify_fbtn").on("click", function() {

@@ -101,7 +101,7 @@
 <script>
  
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board_mng/board_mng_list";
+    	location.href = "/board_mng/boardmngInqr";
  	})
  	
  $("#board_mng_add_fbtn").on("click", function() {

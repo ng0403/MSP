@@ -17,7 +17,7 @@ select X.*
 		SELECT
  		 *
 		FROM tb_board
-		WHERE ACTIVE_FLG='Y'
+		WHERE ACTIVE_FLG='Y' AND BOARD_MNG_NO = 'BMG1000002'
 	    ORDER BY BOARD_NO DESC
 ) A
 	  ) X
@@ -50,11 +50,11 @@ WHERE ACTIVE_FLG='Y'
  
  <insert id="InsertBoard" parameterType="com.msp.cp.board.vo.BoardVO">
 INSERT INTO TB_BOARD (BOARD_NO, BOARD_MNG_NO, FILE_CD, TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
-VALUES(board_seq.nextval, 'BMG1000003',(SELECT FILE_CD FROM TB_FILE WHERE FILE_NM =#{FILE_NM}), #{TITLE}, #{CONTENT}, '1', 'abcd', '진수거', '')
+VALUES(board_seq.nextval, 'BMG1000002',(SELECT FILE_CD FROM TB_FILE WHERE FILE_NM =#{FILE_NM}), #{TITLE}, #{CONTENT}, '1', 'abcd', '진수거', '')
 
  </insert>
  
- <select id="readBoard"  resultType="com.msp.cp.board.vo.BoardVO">
+ <select id="readBoardFile"  resultType="com.msp.cp.board.vo.BoardVO">
  
 SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, C.FILE_NM
  FROM TB_BOARD A, TB_BOARD_MNG B, TB_FILE C
@@ -62,7 +62,20 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
  
  </select>
  
- <update id="removeBoard" parameterType="String" > 
+ <select id="readBoard"  resultType="com.msp.cp.board.vo.BoardVO">
+ 
+SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, A.FILE_CD
+ FROM TB_BOARD A, TB_BOARD_MNG B
+ WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO
+ 
+ </select>
+ 
+ <update id="removeBoard" parameterType="string" > 
+ update tb_board set active_flg = 'N'
+ 	where BOARD_NO = #{BOARD_NO}
+ </update>
+ 
+  <update id="removeDetail" parameterType="int" > 
  update tb_board set active_flg = 'N'
  	where BOARD_NO = #{BOARD_NO}
  </update>
