@@ -302,7 +302,7 @@ public class UserController {
 	}
 	
 //	Excel Data Import
-    @RequestMapping(value = "/excelUploadAjax", method = RequestMethod.POST)
+    @RequestMapping(value = "/excelUploadAjax", headers = "content-type=multipart/*", method = RequestMethod.POST)
     public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception{
         MultipartFile excelFile =request.getFile("excelFile");
         System.out.println("excelFile : " + excelFile);

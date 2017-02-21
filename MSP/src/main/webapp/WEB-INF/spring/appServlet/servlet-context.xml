@@ -34,6 +34,16 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 	
+<!-- 	엑셀파일 업로드용 설정 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="100000000" />
+	<beans:property name="uploadTempDir" ref="uploadDirResource" />
+	</beans:bean>
+	
+	<beans:bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+		<beans:constructor-arg value="c:/file/upload/" />
+	</beans:bean>
 	
 	
 	<!--파일 다운로드 용 View by 이재현  -->
