@@ -53,12 +53,14 @@
 			$('#joinform').find('input[type="text"]').attr('disabled',false).attr('readonly', false);
 			$('#emp_no').css('display','none');
 			$('#modifysave_btn').css('display','none');
+			$('#dept_nm').attr('readonly',true);
 			//$('#modifysave_btn').css("visibility","hidden");
 
 		}else{
 			$('#user_id').attr("readonly", true);
 			$('#emp_no').css('display','block');
 			$('#submit_btn').css('display','none');
+			$('#dept_nm').attr('readonly',true);
 			$('#joinform').find('input[type="text"]').attr('disabled',true);
 		    $('#joinform').find('input[type="password"]').attr('disabled',true);
 		    $('#joinform').find('input[type="button"]').attr('disabled',true);
