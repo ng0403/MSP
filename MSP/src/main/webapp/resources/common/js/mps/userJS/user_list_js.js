@@ -1,9 +1,9 @@
-////엑셀 Import 팝업	
-//function excelImportOpen() {
-//	var popUrl = "excelImportTab";
-//	var popOption = "width=300, height=100, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-//	window.open(popUrl, "", popOption);
-//}
+//엑셀 Import 팝업	
+function excelImportOpen() {
+	var popUrl = "excelImportTab";
+	var popOption = "width=300, height=100, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+	window.open(popUrl, "", popOption);
+}
 //사용자 신규등록 팝업	
 function userTabOpen() {
 		var popUrl = "userTab";
@@ -89,7 +89,7 @@ function deleteAction() {
 
 		//삭제처리 후 다시 불러올 리스트 url      
 
-		location.href = "${ctx}/user/userDel?user_id=" + del_code;
+		location.href = "userDel?user_id=" + del_code;
 	}
 }
 	

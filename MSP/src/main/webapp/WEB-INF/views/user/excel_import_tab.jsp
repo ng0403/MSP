@@ -21,10 +21,10 @@
 		<!-- Modal Main Div -->
 	<div>
 		<div>
-<%-- 			<form id="excelUploadForm2" name="excelUploadForm2" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax"> --%>
-<!-- 		    	<input id="excelFile" type="file" class="btn btn-default" name="excelFile" style="float: center;"/> -->
-<!-- 				<input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: center;"> -->
-<!-- 			</form> -->
+			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax"> 
+				<input id="excelFile" type="file" name="excelFile" class="btn btn-default" style="float: center;"/>
+				<input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: center;">
+			</form>
 		</div>
 		
 	</div>

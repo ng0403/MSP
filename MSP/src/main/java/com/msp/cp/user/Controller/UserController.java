@@ -331,4 +331,12 @@ public class UserController {
         }
         return new ModelAndView("redirect:/user/userlist");
     }
+    //상세정보 팝업
+    @RequestMapping(value="/excelImportTab", method=RequestMethod.GET)
+    public ModelAndView excelImportTab(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
+    {
+    	System.out.println("ExcelTab Controller");
+    	ModelAndView mov = new ModelAndView("/user/excel_import_tab");
+    	return mov;
+    }
 }

@@ -143,13 +143,14 @@
 			</c:otherwise>
 		</c:choose>
 		<div class="" style="text-align: right; margin-right: 10%;">
-			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax"> 
+<%-- 			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/user/excelUploadAjax">  --%>
 				<input type="button" value="엑셀출력" class="btn btn-default" onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-	            <input id="excelFile" type="file" name="excelFile" class="btn btn-default" style="float: right;"/>
-		        <input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: right;"> 
+<!-- 	            <input id="excelFile" type="file" name="excelFile" class="btn btn-default" style="float: right;"/> -->
+		        <input type="button" id="ExcelImpoartPopBtn" class="btn btn-default" onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
+<!-- 		        <input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: right;">  -->
 				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()" class="btn btn-default" value="등록" style="float: left;" />
 				<input type="button" id="iuserDelBtn" onclick="deleteAction()" class="btn btn-default" value="삭제" style="float: left;"  />
-			</form>
+<!-- 			</form> -->
 		</div>
 	</div>
 	</div>
