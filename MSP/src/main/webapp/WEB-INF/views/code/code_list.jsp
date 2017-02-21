@@ -8,19 +8,21 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
-
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
+
+
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
+
 <title>Code List</title>
 
 <style type="text/css">
 #codeMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
-.codeWindow{display: none; position:absolute; width:20%; height:20%; left:45%; top:30%; z-index:10000;
+.codeWindow{display: none; position:absolute; width:20%; height:25%; left:45%; top:30%; z-index:10000;
 				background-color: white; overflow: auto;}	
 
 .menuOpen{display: none;}	
@@ -40,9 +42,11 @@
 
 .page1 {
 	width: 15%;
+	clear: both;
+	display: inline-block;
 	text-align: center;
-	float: inherit;
-	
+	vertical-align: top;
+	margin:0 auto;
 }
 
 </style>
@@ -84,10 +88,10 @@ $(document).ready(function() {
 	});
 
 	//검은 막을 눌렀을 때
-	$("#codeMask").click(function() {
-		$(this).hide();
-		$('.codeWindow').hide();
-	});
+	//$("#codeMask").click(function() {
+	//	$(this).hide();
+	//	$('.codeWindow').hide();
+	//});
 });
 
 </script>
@@ -95,16 +99,14 @@ $(document).ready(function() {
 
 </head>
 <body>
-<%@include file="../include/header.jsp"%>
+<%-- <%@include file="../include/header.jsp"%> --%>
 
 <!--Main_Div  -->
 <div class="main_div">
 
 	<!-- Navigation Div -->
 	<div class="navi_div">■ 코드관리</div>
-	
-	<br><br>
-		
+
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
@@ -120,7 +122,7 @@ $(document).ready(function() {
 							<input type="text" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}">
 						</td>
 					   	 <td>
-					    	<input type="button" id="search_fbtn" class="user_serach_fbtn" onclick="fn_search(1)" value="검색">
+					    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
 					    </td>
 					</tr>
 				</table>
@@ -131,12 +133,11 @@ $(document).ready(function() {
 			</form>
 		</div>
 	</div>
-	
-	<br>
-	
+
 	<!-- List Cover Div -->
 		<div class="list_div">
 			<div class="list2_div">
+				<div class="table_div">
 				<form name="delAllForm" id="delAllForm" method="post" action="codeDetailDel">
 					<table id="mastertable" class="table table-bordered">
 						<thead>
@@ -150,8 +151,7 @@ $(document).ready(function() {
 						</thead>
 						<tbody id="codeListTbody">
 							<c:forEach var="codeInqrList" items="${codeInqrList}">
-								<tr class="open_detail" data_num="${codeInqrList.CODE1}" onmouseover="this.style.background='#c0c4cb'" 
-									onmouseout="this.style.background='white'">
+								<tr class="open_detail" data_num="${codeInqrList.CODE1}">
 									<td align="center" scope="row">
 										<input type="checkbox" name="del_code" id="del_code" value="${codeInqrList.CODE1}">
 									</td>
@@ -164,17 +164,17 @@ $(document).ready(function() {
 						</tbody>
 					</table>
 				</form>
-				
-				<!-- Button Div -->
-				<div class="btn01">
-					<div class="left">
-						<input type="button" id="code_add_btn" class="btn btn-default" value="추가" /> 
-						<input type="button" id="code_del_btn" class="btn btn-default" value="삭제" />
-					</div>
 				</div>
 				
-				<!-- Pagine Div -->
-				<div id="codePagingDiv" class="page1">
+				<!-- Button Div -->
+				<div class="paging_div">
+					<div class="left">
+						<input type="button" id="code_add_btn" class="btn btn-primary btn-sm" value="추가" /> 
+						<input type="button" id="code_del_btn" class="btn btn-primary btn-sm" value="삭제" />
+					</div>
+					
+					<!-- Pagine Div -->
+					<div id="codePagingDiv" class="page1">
 						<input type="hidden" id="endPageNum" value="${page.endPageNum}" />
 						<input type="hidden" id="startPageNum" value="${page.startPageNum}" />
 						<input type="hidden" id="userPageNum" value="${pageNum}" />
@@ -205,20 +205,21 @@ $(document).ready(function() {
 							</c:otherwise>
 						</c:choose>
 					</div>
+				</div>
 			</div>
 
 			<div class="list3_div">
 			<h4>공통코드 상세</h4>
 				<form method="post" id="joinform1" action="codeMasterAdd">
-					<table class="table">
+					<table class="table table-hover">
 						<tbody id="tbody1">
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" />
+									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" readonly="readonly"/>
 								</td>
 								<td>
-									<input type="button" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
+									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
 								</td>
 							</tr>
 							<tr>
@@ -237,16 +238,16 @@ $(document).ready(function() {
 				<!-- Button Div -->
 				<div class="btn02">
 					<div class="left">
-						<input type="button" id="codeMaster_add_btn" class="btn btn-default" value="추가" style="display: none" /> 
-						<input type="button" id="codeMaster_reset_btn" class="btn btn-default" value="취소" style="display: none" />
+						<input type="button" id="codeMaster_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
+						<input type="button" id="codeMaster_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
 					</div>
 				</div>
 				
-				<br><br><br>
+				<br><br>
 				
 				<h4>상세코드 상세</h4>
 				<form method="post" id="joinform2">
-					<table class="table">
+					<table class="table table-hover">
 						<tbody id="tbody1">
 							<tr>
 								<th>공통코드</th>
@@ -254,7 +255,7 @@ $(document).ready(function() {
 									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
 								</td>
 								<td>
-									<input type="button" name="selectGrp" id="sel_grp1" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
+									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
 								</td>
 							</tr>
 							<tr>
@@ -280,9 +281,9 @@ $(document).ready(function() {
 				<!-- Button Div -->
 				<div class="btn02">
 					<div class="left">
-						<input type="button" id="codeDetail_add_btn" class="btn btn-default" value="추가" style="display: none" /> 
-						<input type="button" id="codeDetail_mdfy_btn" class="btn btn-default" value="수정" style="display: none" /> 
-						<input type="button" id="codeDetail_reset_btn" class="btn btn-default" value="취소" style="display: none" />
+						<input type="button" id="codeDetail_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
+						<input type="button" id="codeDetail_mdfy_btn" class="btn btn-primary btn-sm" value="수정" style="display: none" /> 
+						<input type="button" id="codeDetail_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
 					</div>
 				</div>
 			</div>
@@ -295,10 +296,6 @@ $(document).ready(function() {
            				</div>
        				 </div>
     			</div>
-<!-- 				<div style="font-size:11.5px;"> -->
-				
-<!-- 				</div> -->
-
 			</div>
 		</div>
 		
@@ -383,7 +380,7 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
-					
+					//paging(data, "#codePagingDiv", "fn_search");
 					$("#codePagingDiv").empty();
 					
 					if(data.page.endPageNum == 1)
@@ -471,7 +468,7 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
-						
+					
 					$("#codePagingDiv").empty();
 						
 					if(data.page.endPageNum == 1)
@@ -703,11 +700,6 @@ $(document).ready(function() {
 			}
 		});
 		
-		// 공통코드 상세보기 삭제버튼
-		$("#codeMaster_reset_btn").on("click", function(){
-			$("#grp_cd").val("");
-		});
-			
 		// 상세코드 상세보기 추가버튼 
 		$("#codeDetail_add_btn").on("click", function(){
 			if($("#grp_cd1").val() == "" || $("#grp_cd1").val() == null){
@@ -758,17 +750,18 @@ $(document).ready(function() {
 			}
 		});
 		
+		// 상세코드 상세보기 취소버튼
 		$("#codeDetail_reset_btn").on("click", function(){
-			$("#grp_cd1").val("");
-			$("#code1").val("");
-			$("#code_txt").val("");
-			$("#code_desc").val("");
+			 $("form").each(function() {  
+		            this.reset();  
+		         });  
 		});
 		
+		// 공통코드 상세보기 취소버튼
 		$("#codeMaster_reset_btn").on("click", function(){
-			$("#grp_cd").val("");
-			$("#gpr_nm").val("");
-			$("#grp_desc").val("");
+			 $("form").each(function() {  
+		            this.reset();  
+		         });  
 		});
 	
 		
@@ -777,4 +770,4 @@ $(document).ready(function() {
 </body>
 </html>
 
-<%@include file="../include/footer.jsp"%>
+<%-- <%@include file="../include/footer.jsp"%> --%>

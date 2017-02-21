@@ -54,6 +54,15 @@ VALUES(board_seq.nextval, 'BMG1000002',(SELECT FILE_CD FROM TB_FILE WHERE FILE_N
 
  </insert>
  
+ 
+ <insert id="QnAInsert" parameterType="com.msp.cp.board.vo.BoardVO">
+INSERT INTO TB_BOARD (BOARD_NO, BOARD_MNG_NO,  TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
+VALUES(board_seq.nextval, 'BMG1000003',  #{TITLE}, #{CONTENT}, '1',
+ ( SELECT CODE1 FROM TB_CODE_DETAIL WHERE CODE_TXT = #{QUESTION_TITLE}), '진수거', '')
+
+ </insert>
+  
+  
  <select id="readBoardFile"  resultType="com.msp.cp.board.vo.BoardVO">
  
 SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, C.FILE_NM
@@ -91,8 +100,7 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
 SELECT A.BOARD_NO, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.TITLE, A.CONTENT, A.CREATED_BY, A.CREATED, A.VIEW_CNT, B.BOARD_MNG_NO
 FROM tb_board A, TB_BOARD_MNG B
 WHERE A.BOARD_MNG_NO = B.BOARD_MNG_NO  AND B.BOARD_MNG_CD = 'BG03'
- 
- 
+  
  </select>
  
  
@@ -182,8 +190,13 @@ values (
 	
 	SELECT FILE_PATH
 	FROM TB_FILE
-	WHERE FILE_CD=#{FILE_CD}
+	WHERE FILE_CD=#{FILE_CD} 
+	</select>
 	
+	<select id="CODE" parameterType="java.lang.String" resultType="com.msp.cp.board.vo.BoardVO">
+	 SELECT CODE_TXT
+ 	FROM TB_CODE_DETAIL
+ 	WHERE CODE1 = #{QUESTION_TYPE_CD}
 	</select>
  
 

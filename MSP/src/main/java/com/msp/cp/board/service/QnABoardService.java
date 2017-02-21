@@ -9,6 +9,10 @@ import com.msp.cp.common.PagerVO;
 public interface QnABoardService {
 	  public List<Object> list(Map map);
 	  PagerVO getBoardListCount(Map<String, Object> map);
+	  
+	  public void insert(BoardVO vo);
+	  public BoardVO CODE(String QUESTION_TYPE_CD);
+
 	  public BoardVO detail(int BOARD_NO);
 	  public BoardVO read(int BOARD_NO); 
 	  public void modify(BoardVO vo);

@@ -13,7 +13,7 @@
 <body>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
-<%@include file="../include/header.jsp"%>
+<%-- <%@include file="../include/header.jsp"%> --%>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
@@ -356,4 +356,4 @@ $("#board_add_fbtn").on("click", function(){
 
 </body>
 </html>
-<%@include file="../include/footer.jsp"%>
+<%-- <%@include file="../include/footer.jsp"%> --%>

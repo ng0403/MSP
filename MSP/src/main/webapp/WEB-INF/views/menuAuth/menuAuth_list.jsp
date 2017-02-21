@@ -8,23 +8,26 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="${ctx}/resources/common/js/common.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
-
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <!--  -->
 
 <title>MenuAuth List</title>
 
 <style type="text/css">
-#menuAuthMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;} 
-#menu_pop_div { display: none; position:absolute; width:50%; height:75%; left:80%; top:30%; 
-				background-color: #c0c4cb	; overflow: auto; }
+#menuAuthMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
+#menuAuthInsertMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
 
 .menuAuthWindow {display: none; position:absolute; width:50%; height:50%; left:30%; top:30%; z-index:10000;
 				background-color: white; overflow: auto;}	
+.menuAuthInsertWindow {display: none; position:absolute; width:50%; height:50%; left:30%; top:30%; z-index:10000;
+				background-color: white; overflow: auto;}
+
 .menuOpen{display: none;}		
 .block_div{display:block; height: 10px; clear: both;}
 
@@ -53,6 +56,14 @@
 	width: 48%;
 }
 
+.page2 {
+	width: 15%;
+	text-align: center;
+	float: inherit;
+	margin-left: 35%;
+	
+}
+
 </style>
 
 <script type="text/javascript">
@@ -77,6 +88,25 @@ function menuAuthByMask() {
 	$('.menuAuthWindow').show();
 }
 
+function menuAuthInsertByMask() {
+	//화면의 높이와 너비를 구한다.
+	var maskHeight = $(document).height();
+	var maskWidth = $(window).width();
+	
+	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+	$("#menuAuthInsertMask").css({
+		'width' : maskWidth,
+		'height' : maskHeight
+	});
+	
+	//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
+	$('#menuAuthInsertMask').fadeIn(1000);
+	$('#menuAuthInsertMask').fadeTo("slow", 0.5);
+
+	//윈도우 같은 거 띄운다.
+	$('.menuAuthInsertWindow').show();
+}
+
 $(document).ready(function() {
 	$("#auth_id_pop").on("click", function(){
 		authListInqrPop(1);
@@ -92,6 +122,7 @@ $(document).ready(function() {
 	// 추가할 때 메뉴선택 팝업클릭 시
 	$("#menuAuth_add_btn").on("click", function(){
 		save_cd = "insert";
+		menuAuthInsertByMask();
 	});
 	
 	//검은 막 띄우기
@@ -107,16 +138,16 @@ $(document).ready(function() {
 	});
 
 	// 상세보기 닫기 버튼을 눌렀을 때
-	$('.menuAuthWindow #menuClose').click(function(e) {
+	$('.menuAuthWindow #menuAuthClose').click(function(e) {
 		//링크 기본동작은 작동하지 않도록 한다.	
 		$("#generalTbody").empty();
 		$("#menuAuthMask, .menuAuthWindow").hide();
 	});
 
-	// 검은 막을 눌렀을 때
-	$("#menuAuthMask").click(function() {
-		$(this).hide();
-		$('.menuAuthWindow').hide();
+	// 등록 닫기 버튼을 눌렀을 때
+	$('.menuAuthInsertWindow #menuClose').click(function(e) {
+		//링크 기본동작은 작동하지 않도록 한다.	
+		$("#menuAuthInsertMask, .menuAuthInsertWindow").hide();
 	});
 	
 	// 등록 팝업 취소버튼 클릭 시
@@ -137,7 +168,7 @@ function viewLoadingShow(){
 }
 
 function viewLoadingHide(){
-   $('#viewLoadingImg').fadeOut();   
+   	 $('#viewLoadingImg').fadeOut();   
 }
 
 </script>
@@ -145,16 +176,15 @@ function viewLoadingHide(){
 
 </head>
 <body>
-<%@include file="../include/header.jsp"%>
+<%-- <%@include file="../include/header.jsp"%> --%>
 
 	<!--Main_Div  -->
 	<div class="main_div">
 		<!-- Navigation Div -->
 		<div class="navi_div">■ 메뉴권한관리</div>
-		<br><br>
-		
+
 		<!-- Search Cover Div -->
-		<div class="">
+		<div class="search_div">
 			<div class="search1_div">
 				<form name="searchForm">
 					<table>
@@ -168,7 +198,7 @@ function viewLoadingHide(){
 								<input type="text" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
 							</td>
 						   	<td>
-						    	<input type="button" id="search_fbtn" class="user_serach_fbtn" onclick="fn_search(1)" value="검색">
+						    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
 						    </td>
 						</tr>
 					</table>
@@ -180,11 +210,11 @@ function viewLoadingHide(){
 			</div>
 		<!-- class="search_div" -->
 		</div>
-		<br>
 			
 		<!-- List Cover Div -->
 		<div class="list_div">
-			<div>
+			<div class="list_div1">
+				<div class="table_div">
 				<form name="delAllForm" id="delAllForm" method="post" action="menuAuthDel">
 					<table id="mastertable" class="table table-bordered">
 						<thead>
@@ -203,8 +233,7 @@ function viewLoadingHide(){
 						
 						<tbody id="menuAuthListTbody">
 							<c:forEach var="menuAuthInqrList" items="${menuAuthInqrList}">
-								<tr class="open_detail" data_num="${menuAuthInqrList.MENU_CD}" 
-									onmouseover="this.style.background='#c0c4cb'" onmouseout="this.style.background='white'">
+								<tr class="open_detail" data_num="${menuAuthInqrList.MENU_CD}">
 									<td align="center" scope="row">
 										<input type="checkbox" name="del_menuAuth" id="del_menuAuth" value="${menuAuthInqrList.MENU_CD}:${menuAuthInqrList.AUTH_ID}" />
 									</td>
@@ -223,17 +252,19 @@ function viewLoadingHide(){
 						</tbody>
 					</table>
 				</form>
-				
-				<!-- Button Div -->
-				<div class="btn01">
-					<div class="left">
-						<input type="button" id="menuAuth_add_btn" class="btn btn-default" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가"/> 
-						<input type="button" id="menuAuth_del_btn" class="btn btn-default" value="삭제" />
-					</div>
+				</div>
+				<!-- class="list1_div" -->	
+			</div>
+			
+			<!-- Button Div -->
+			<div class="paging_div">
+				<div class="left">
+					<input type="button" id="menuAuth_add_btn" class="btn btn-primary btn-sm" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가"/> 
+					<input type="button" id="menuAuth_del_btn" class="btn btn-primary btn-sm" value="삭제" />
 				</div>
 				
 				<!-- Pagine Div -->
-				<div id="menuAuthPagingDiv" class="page1">
+				<div id="menuAuthPagingDiv" class="page2">
 					<input type="hidden" id="endPageNum" value="${page.endPageNum}" />
 					<input type="hidden" id="startPageNum" value="${page.startPageNum}" />
 					<input type="hidden" id="userPageNum" value="${pageNum}" />
@@ -266,10 +297,7 @@ function viewLoadingHide(){
 					</c:choose>
 				<!-- class="page1" -->
 				</div>
-				
-			<!-- class="list2_div" -->	
 			</div>
-		
 		<!-- class="list_div" -->
 		</div>
 		
@@ -285,113 +313,14 @@ function viewLoadingHide(){
 			<img src="${ctx}/resources/image/viewLoading.gif">
    		</div>
 		
-		 <!-- menu detail 팝업 -->
+		 <!-- menuAuth 팝업 -->
 		<div style="font-size:11.5px;">
 	    	<jsp:include page="../menuAuth/menuAuth_pop.jsp"></jsp:include>
 		</div>
 		<!-- //menu detail 팝업 -->
 		
-		<!--  메뉴권한 등록 창띄우기 -->
-    	<div class="modal fade" id="menuAuthAddLayer" style="display: none;">
-			<div class="modal-dialog modal-lg">   <!-- modal-lg -->
-				<div class="modal-content">
-					<span style="float:left;margin-left:1%;margin-top:1%; font-size:15px;">
-						<strong>메뉴권한 등록</strong></span>
-		        
-		        <form name="menuAuthAdd" id="menuAuthAdd" action="menuAuthAdd" method="post"> <!-- enctype="multipart/form-data" -->
-		        	<input type="button" id="menuAuthClose" class="btn btn-default" data-dismiss="modal" value="닫기" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
-		        	<input type="button" class="btn btn-default" id="menuAuth_save_btn" name="menuAuth_save_btn" value="저장" style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/><!-- submit으로 보내는 것이 post,  value값 직접 전달이get -->
-		        
-	            	<div class="block_div"></div><div class="block_div"></div><div class="block_div"></div>
-	           
-					<div align="center" style="width: 100%">
-						<table class="board_view" style="font-size:12px;width: 100%">
-							<tr height="15px">
-								<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>권한명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<input type="text" id="auth_nm" name ="auth_nm" value="${auth_nm}" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
-									<input type="hidden" id="auth_id" name="auth_id" value="${auth_id}">
-									<input type="button" id="auth_id_pop" name="auth_id_pop" value="선택">
-								</td>
-								<th style="width: 12%; text-align: left;"><span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>메뉴명&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<input type="text" id="up_menu_nm" name="menu_nm" style="width: 50%;"/>
-									<input type="hidden" id="up_menu_cd" name="menu_cd" value="${menu_cd}">
-									<input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택">
-								</td>
-							</tr>
-							<tr height="15px"></tr>
-							<tr height="15px">
-								<th style="width:20%; text-align: right;"><span style="color:red;">*</span>활성화여부&nbsp;&nbsp;&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<select id="active_flg3" name="active_flg3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
-								</td>
-							</tr>
-							<tr height="15px"></tr>
-							<tr height="15px">
-								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>조회권한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<select id="inqr_auth3" name="inqr_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
-								</td>
-								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>생성권한&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<select id="add_auth3" name="add_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
-								</td>
-							</tr>
-							<tr height="15px"></tr>
-							<tr height="15px">
-								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>수정권한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<select id="mdfy_auth3" name="mdfy_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
-								</td>
-								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>삭제권한&nbsp;&nbsp;</th>
-								<td style="width: 38%; text-align: left;">
-									<select id="del_auth3" name="del_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
-								</td>
-							</tr>
-							<tr height="15px"></tr>
-							<tr height="15px">
-								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴접근권한</th>
-								<td style="width: 38%; text-align: left;">
-									<select id="menu_acc_auth3" name="menu_acc_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
-								</td>
-							</tr>
-							<tr height="50px"></tr>
-						</table>
-					</div>
-		        </form>
-				</div>
-			</div>
-			
-			<jsp:include page="../menu/menulist_pop.jsp"></jsp:include>
-			<jsp:include page="../auth/authlist_pop.jsp"></jsp:include>
-			
-		<!-- 등록 DIV -->
-    	</div>	
+		<jsp:include page="../menuAuth/menuAuth_insert.jsp"></jsp:include>
+		
 	<!-- class="main_div" -->
 	</div>
 	
@@ -456,18 +385,19 @@ function viewLoadingHide(){
 					{
 						for(var i=0; i<menuAuthInqrList.length; i++)
 						{
-							var menu_cd = menuAuthInqrList[i].MENU_CD;
-							var menu_nm  = menuAuthInqrList[i].MENU_NM;
+							var menu_cd   = menuAuthInqrList[i].MENU_CD;
+							var menu_nm   = menuAuthInqrList[i].MENU_NM;
+							var auth_id   = menuAuthInqrList[i].AUTH_ID;
 							var auth_nm   = menuAuthInqrList[i].AUTH_NM;
 							var inqr_auth = menuAuthInqrList[i].INQR_AUTH;
-							var add_auth = menuAuthInqrList[i].ADD_AUTH;
+							var add_auth  = menuAuthInqrList[i].ADD_AUTH;
 							var mdfy_auth = menuAuthInqrList[i].MDFY_AUTH;
-							var del_auth = menuAuthInqrList[i].DEL_AUTH;
+							var del_auth  = menuAuthInqrList[i].DEL_AUTH;
 							var menu_acc_auth = menuAuthInqrList[i].MENU_ACC_AUTH;
 							
 							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
-							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+"'></td>"
+							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+":"+auth_id+"'></td>"
 							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
 		    				+"<td>"+menu_nm+"</td>"
 		    				+"<td>"+auth_nm+"</td>"
@@ -482,46 +412,7 @@ function viewLoadingHide(){
 					
 					tbody.append(contents);
 					
-					$("#menuAuthPagingDiv").empty();
-					
-					if(data.page.endPageNum == 1)
-					{
-						pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
-						+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
-					}
-					else if(data.page.startPageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else if(data.pageNum == 1)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					else if(data.pageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					$("#menuAuthPagingDiv").append(pageContent);
+					paging(data, "#menuAuthPagingDiv", "fn_search");
 				}
 			});
 			
@@ -553,6 +444,7 @@ function viewLoadingHide(){
 						{
 							var menu_cd = menuAuthInqrList[i].MENU_CD;
 							var menu_nm  = menuAuthInqrList[i].MENU_NM;
+							var auth_id   = menuAuthInqrList[i].AUTH_ID;
 							var auth_nm   = menuAuthInqrList[i].AUTH_NM;
 							var inqr_auth = menuAuthInqrList[i].INQR_AUTH;
 							var add_auth = menuAuthInqrList[i].ADD_AUTH;
@@ -562,7 +454,7 @@ function viewLoadingHide(){
 							
 							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
 							+"<td align='center' scope='row'>"
-							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+"'></td>"
+							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+":"+auth_id+"'></td>"
 							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
 		    				+"<td>"+menu_nm+"</td>"
 		    				+"<td>"+auth_nm+"</td>"
@@ -577,47 +469,8 @@ function viewLoadingHide(){
 					
 					tbody.append(contents);
 					
-					$("#menuAuthPagingDiv").empty();
+					paging(data, "#menuAuthPagingDiv", "fn_search");
 					
-					if(data.page.endPageNum == 1)
-					{
-						pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
-						+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
-					}
-					else if(data.page.startPageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else if(data.pageNum == 1)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					else if(data.pageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					
-					$("#menuAuthPagingDiv").append(pageContent);
 				}
 			});
 		}
@@ -834,29 +687,37 @@ function viewLoadingHide(){
 		
 		// 삭제 버튼 눌렀을 때
 		$("#menuAuth_del_btn").on("click", function(){
-			var check = document.getElementsByName("del_menuAuth");
-			var check_len = check.length;
-			var checked = 0;
 			
-			for(i=0; i<check_len; i++)
-			{
-				if(check[i].checked == true)
+			if(confirm("선택한 컬럼을 삭제 하시겠습니까?")) {
+				var check = document.getElementsByName("del_menuAuth");
+				var check_len = check.length;
+				var checked = 0;
+				
+				for(i=0; i<check_len; i++)
 				{
-					$("#delAllForm").submit();
-					checked++;
+					if(check[i].checked == true)
+					{
+						$("#delAllForm").submit();
+						checked++;
+					}
+				}
+				
+				if(checked == 0)
+				{
+					alert("체크박스를 체크하세요.");
 				}
 			}
-			
-			if(checked == 0)
-			{
-				alert("체크박스를 체크하세요.");
+			else {
+				return false;
 			}
+
 		});
+	
 
 	</script>
 
 </body>
 </html>
 
-<%@include file="../include/footer.jsp"%>
+<%-- <%@include file="../include/footer.jsp"%> --%>
 

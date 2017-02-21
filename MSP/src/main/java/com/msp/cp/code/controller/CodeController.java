@@ -46,8 +46,6 @@ public class CodeController {
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum, 
 			@RequestParam Map<String, Object> map, Model model, CodeVO vo) throws Exception {
 		
-		System.out.println("code 진입");
-		System.out.println(pageNum);
 		map.put("pageNum", pageNum);
 		
 		PagerVO page = codeService.getCodeListCount(map);
@@ -57,10 +55,7 @@ public class CodeController {
 			page.setEndRow(0);
 		}
 		
-		System.out.println("page map :" + map.get("page"));
 		List<Object> codeInqrList = codeService.searchCodeList(map);
-		System.out.println(codeInqrList.toString());
-		
 		ModelAndView mov = new ModelAndView("/code/code_list");
 		
 		mov.addObject("page", page);
@@ -81,8 +76,6 @@ public class CodeController {
 	@RequestMapping(value="/codeMasterAdd", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeMasterInsert(CodeVO codeVo)
 	{
-		System.out.println("codeMaster insert");
-		
 		codeVo.setCreated_by("ADMIN");		
 		codeService.insertCodeMaster(codeVo);
 				
@@ -134,8 +127,6 @@ public class CodeController {
 	@RequestMapping(value = "codeDetailMdfy", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeDetailModify(CodeVO codeVo)
 	{
-		System.out.println(codeVo);
-		
 		codeService.modifyCodeDetail(codeVo);
 		
 		return "redirect:/code/codeInqr"; 
@@ -157,8 +148,6 @@ public class CodeController {
 		for(int i=0; i<delCode.length; i++)
 		{
 			String dc = delCode[i];
-			
-			System.out.println(dc);
 			
 			codeVo.setCode1(dc);
 			
@@ -208,13 +197,8 @@ public class CodeController {
 	@RequestMapping(value="/codeSearch_list2", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map<String, Object> searchGrpList2(ModelMap model, HttpServletRequest request, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{
-		System.out.println("Search GrpCode");
-		
 		String grp_cd = request.getParameter("grp_cd_sch").trim();
 		String grp_nm = request.getParameter("grp_nm_sch").trim();
-		
-		System.out.println(grp_cd);
-		System.out.println(grp_nm);
 		
 		if(grp_cd == null)
 		{
@@ -265,11 +249,7 @@ public class CodeController {
 	@RequestMapping(value="/searchGrpPop", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody Map<String, Object> searchGrpPopup(ModelMap model)
 	{
-		System.out.println("grp_cd popup");
-		
 		List<CodeVO> grpPop = codeService.searchGrpPop();
-		
-		System.out.println(grpPop.toString());
 		
 		model.addAttribute("grpPop", grpPop);
 		
