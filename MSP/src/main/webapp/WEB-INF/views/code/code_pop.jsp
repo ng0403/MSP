@@ -28,13 +28,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="menuMask"></div>
+	<div id="codeMask"></div>
 	
-	<div class="menuWindow" >
+	<div class="codeWindow" >
 		<div id="mainDiv" style="width:100%; align="center">
 			<span style="margin-top:1%; font-size: 15px; float:center; margin-left:1%;"><strong style="text-align: center;">공통코드 선택</strong></span>
 			<div>
-				<input type="button" href="#" id="menuClose" class="func_btn" data-dismiss="modal" 
+				<input type="button" href="#" id="codeClose" class="func_btn" data-dismiss="modal" 
 					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
 			</div>
 			<div class="block_div">

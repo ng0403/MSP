@@ -214,7 +214,7 @@ public class MenuAuthController {
      * 작 성 일 : 2017/02/20
      * 수 정 자 : 
      * 수 정 일 : 
-	 * 내     용 : 공통코드 수정한다. 
+	 * 내     용 : 해당 메뉴권한을 수정한다. 
 	 * */
 	@RequestMapping(value="/menuAuthMdfy", method={RequestMethod.GET, RequestMethod.POST})
 	public String menuAuthMdfy(MenuAuthVO menuAuthVo, HttpServletRequest request)
@@ -244,9 +244,15 @@ public class MenuAuthController {
 		return "redirect:/menuAuth/menuAuthInqr";
 	}
 	
-	//menuAuthDetailDel
-	
-	@RequestMapping(value="/menuAuthDetailDel", method={RequestMethod.GET, RequestMethod.POST})
+	/**
+	 * 업 무 명 : 메뉴권한 삭제
+	 * 작 성 자 : 이재욱
+     * 작 성 일 : 2017/02/20
+     * 수 정 자 : 
+     * 수 정 일 : 
+	 * 내     용 : 메뉴권한을 삭제한다. 
+	 * */
+	@RequestMapping(value="/menuAuthDel", method={RequestMethod.GET, RequestMethod.POST})
 	public String menuAuthDelete(MenuAuthVO menuAuthVo, String del_menuAuth)
 	{
 		String menu_cd = "";

@@ -43,7 +43,7 @@ public class CodeServiceImpl implements CodeService {
 	public List<CodeVO> searchGrpList2(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		List<CodeVO> obj = codeDao.searchGrpList2(map);
-
+		
 		return obj;
 	}
 	

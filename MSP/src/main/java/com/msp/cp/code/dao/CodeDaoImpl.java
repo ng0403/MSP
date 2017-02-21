@@ -47,7 +47,8 @@ public class CodeDaoImpl implements CodeDao {
 	public List<CodeVO> searchGrpList2(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		List<CodeVO> obj = sqlSession.selectList("searchGrpList2", map);
-
+		System.out.println("DAO(map) : " + map);
+		System.out.println("DAO : " + obj);
 		return obj;
 	}
 	

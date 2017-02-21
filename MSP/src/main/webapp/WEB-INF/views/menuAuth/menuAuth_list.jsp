@@ -185,7 +185,7 @@ function viewLoadingHide(){
 		<!-- List Cover Div -->
 		<div class="list_div">
 			<div>
-				<form name="delAllForm" id="delAllForm" method="post" action="menuAuthDetailDel">
+				<form name="delAllForm" id="delAllForm" method="post" action="menuAuthDel">
 					<table id="mastertable" class="table table-bordered">
 						<thead>
 							<tr>

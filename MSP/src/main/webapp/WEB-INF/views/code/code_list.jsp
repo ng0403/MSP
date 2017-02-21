@@ -19,8 +19,9 @@
 <title>Code List</title>
 
 <style type="text/css">
-.menuWindow{display: none; position:absolute; width:15%; height:15%; left:80%; top:30%; 
-				background-color: #c0c4cb	; overflow: auto;}	
+#codeMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
+.codeWindow{display: none; position:absolute; width:20%; height:20%; left:45%; top:30%; z-index:10000;
+				background-color: white; overflow: auto;}	
 
 .menuOpen{display: none;}	
 	
@@ -47,42 +48,45 @@
 </style>
 
 <script type="text/javascript">
-function menuByMask() {
+function codeByMask() {
 	//화면의 높이와 너비를 구한다.
 	var maskHeight = $(document).height();
 	var maskWidth = $(window).width();
 	
-	alert("Height : " + maskHeight + " Width :" + maskWidth);
-	
 	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-	$("#menuMask").css({
+	$("#codeMask").css({
 		'width' : maskWidth,
 		'height' : maskHeight
 	});
+	
+	//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
+	$('#codeMask').fadeIn(1000);
+	$('#codeMask').fadeTo("slow", 0.5);
+
 
 	//윈도우 같은 거 띄운다.
-	$('.menuWindow').show();
+	$('.codeWindow').show();
 }
 
 $(document).ready(function() {
 	//검은 막 띄우기
 	$('.menuOpen').click(function(e) {
 		e.preventDefault();
-		menuByMask();
+		codeByMask();
 	});
 
 	//닫기 버튼을 눌렀을 때
-	$('.menuWindow #menuClose').click(function(e) {
+	$('.codeWindow #codeClose').click(function(e) {
 		//링크 기본동작은 작동하지 않도록 한다.
 		e.preventDefault();
 		$("#generalTbody").empty();
-		$("#menuMask, .menuWindow").hide();
+		$("#codeMask, .codeWindow").hide();
 	});
 
 	//검은 막을 눌렀을 때
-	$("#menuMask").click(function() {
+	$("#codeMask").click(function() {
 		$(this).hide();
-		$('.menuWindow').hide();
+		$('.codeWindow').hide();
 	});
 });
 
@@ -105,7 +109,12 @@ $(document).ready(function() {
 	<div class="search_div">
 		<div class="search2_div">
 			<form name="searchForm">
+				<table>
 					<tr>
+						<th>공통코드</th>
+						<td>
+							<input type="text" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}">
+						</td>
 						<th>공통코드명</th>
 						<td>
 							<input type="text" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}">
@@ -114,6 +123,7 @@ $(document).ready(function() {
 					    	<input type="button" id="search_fbtn" class="user_serach_fbtn" onclick="fn_search(1)" value="검색">
 					    </td>
 					</tr>
+				</table>
 			</form>
 			<!-- Paging Form -->
 			<form id="codelistPagingForm" method="post" action="codeInqr">
@@ -207,12 +217,15 @@ $(document).ready(function() {
 								<td>
 									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" />
 								</td>
+								<td>
+									<input type="button" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
+								</td>
+							</tr>
+							<tr>
 								<th>공통코드명</th>
 								<td>
 									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" />
 								</td>
-							</tr>
-							<tr>
 								<th>공통코드 설명</th>
 								<td><input type="text" name="grp_desc" id="grp_desc"
 									class="iuser_txt" style="width: 90%" value="${grp_desc}" /></td>
@@ -241,7 +254,7 @@ $(document).ready(function() {
 									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
 								</td>
 								<td>
-									<input type="button" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none" /> <!--  onclick="fn_selectPop()" -->
+									<input type="button" name="selectGrp" id="sel_grp1" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
 								</td>
 							</tr>
 							<tr>
@@ -282,13 +295,14 @@ $(document).ready(function() {
            				</div>
        				 </div>
     			</div>
+<!-- 				<div style="font-size:11.5px;"> -->
 				
-				<div style="font-size:11.5px;">
-					<jsp:include page="../code/code_pop.jsp"></jsp:include>
-				</div>
+<!-- 				</div> -->
 
 			</div>
-		</div>	
+		</div>
+		
+		<jsp:include page="../code/code_pop.jsp"></jsp:include>
 		
 	<script type="text/javascript">
 		
@@ -330,7 +344,9 @@ $(document).ready(function() {
 		//사용자관리 페이징
 		function userPaging(pageNum) 
 		{
-			var grp_cd = $("#grp_nm_sch").val();
+			var grp_cd = $("#grp_cd_sch").val();
+			var grp_nm = $("#grp_nm_sch").val();
+			
 			var tbody = $("#codeListTbody");
 			var contents = "";
 			
@@ -340,7 +356,7 @@ $(document).ready(function() {
 				type     : 'POST',
 				dataType : 'json',
 				data     : {
-					"grp_cd":grp_cd, "pageNum":pageNum
+					"grp_cd_sch":grp_cd, "grp_nm_sch":grp_nm, "pageNum":pageNum
 				},
 				success  : function(data) {
 					tbody.empty();
@@ -351,7 +367,7 @@ $(document).ready(function() {
 						for(var i=0; i<codeInqrList.length; i++)
 						{
 							var grp_cd1 = codeInqrList[i].grp_cd;
-							var grp_nm  = codeInqrList[i].grp_nm;
+							var grp_nm1  = codeInqrList[i].grp_nm;
 							var code1   = codeInqrList[i].code1;
 							var code_txt = codeInqrList[i].code_txt;
 							
@@ -359,7 +375,7 @@ $(document).ready(function() {
 							+"<td align='center' scope='row'>"
 							+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
 		    				+"<td align='center'>"+grp_cd1+"</td>"
-		    				+"<td>"+grp_nm+"</td>"
+		    				+"<td>"+grp_nm1+"</td>"
 		    				+"<td align='center'>"+code1+"</td>"
 							+"<td>"+code_txt+"</td>"
 							+"</tr>";
@@ -416,86 +432,88 @@ $(document).ready(function() {
 		// 검색 버튼 클릭시
 		function fn_search(pageNum)
 		{
-				var grp_cd = $("#grp_nm_sch").val();
-				var tbody = $("#codeListTbody");
-				var contents = "";
-				var pageContent = "";
-				
-				$.ajax({
-					url      : 'codeSearch_list2',
-					type     : 'POST',
-					dataType : 'json',
-					data     : {
-						"grp_cd":grp_cd, "pageNum":pageNum
-					},
-					success  : function(data) {						
-						tbody.empty();
-						var codeInqrList = data.codeInqrList;
-													
-						if(codeInqrList.lenght != 0)
+			var grp_cd = $("#grp_cd_sch").val();
+			var grp_nm = $("#grp_nm_sch").val();
+			
+			var tbody = $("#codeListTbody");
+			var contents = "";
+			var pageContent = "";
+			
+			$.ajax({
+				url      : 'codeSearch_list2',
+				type     : 'POST',
+				dataType : 'json',
+				data     : {
+					"grp_cd_sch":grp_cd, "grp_nm_sch":grp_nm, "pageNum":pageNum
+				},
+				success  : function(data) {						
+					tbody.empty();
+					var codeInqrList = data.codeInqrList;
+												
+					if(codeInqrList.lenght != 0)
+					{
+						for(var i=0; i<codeInqrList.length; i++)
 						{
-							for(var i=0; i<codeInqrList.length; i++)
-							{
-								var grp_cd1 = codeInqrList[i].grp_cd;
-								var grp_nm  = codeInqrList[i].grp_nm;
-								var code1   = codeInqrList[i].code1;
-								var code_txt = codeInqrList[i].code_txt;
-								
-								contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background=#c0c4cb' onmouseout='this.style.background='white''>"
-								+"<td align='center' scope='row'>"
-								+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
-			    				+"<td align='center'>"+grp_cd1+"</td>"
-			    				+"<td>"+grp_nm+"</td>"
-			    				+"<td align='center'>"+code1+"</td>"
-								+"<td>"+code_txt+"</td>"
-								+"</tr>";
-							}
+							var grp_cd1 = codeInqrList[i].grp_cd;
+							var grp_nm1  = codeInqrList[i].grp_nm;
+							var code1   = codeInqrList[i].code1;
+							var code_txt = codeInqrList[i].code_txt;
+							
+							contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background=#c0c4cb' onmouseout='this.style.background='white''>"
+							+"<td align='center' scope='row'>"
+							+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
+		    				+"<td align='center'>"+grp_cd1+"</td>"
+		    				+"<td>"+grp_nm1+"</td>"
+		    				+"<td align='center'>"+code1+"</td>"
+							+"<td>"+code_txt+"</td>"
+							+"</tr>";
 						}
-						
-						tbody.append(contents);
-						
-						$("#codePagingDiv").empty();
-						
-						if(data.page.endPageNum == 1)
-						{
-							pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-							+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
-							+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
-						}
-						else if(data.page.startPageNum == data.page.endPageNum)
-						{
-							pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-							+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-							+"<a style='color:black; text-decoration: none;'>▶</a>";
-						}
-						else if(data.pageNum == 1)
-						{
-							pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-							+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-						}
-						else if(data.pageNum == data.page.endPageNum)
-						{
-							pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-							+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-							+"<a style='color:black; text-decoration: none;'>▶</a>";
-						}
-						else
-						{
-							pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-							+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
-							+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-							+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-						}
-						$("#codePagingDiv").append(pageContent);
 					}
-				});
+					
+					tbody.append(contents);
+						
+					$("#codePagingDiv").empty();
+						
+					if(data.page.endPageNum == 1)
+					{
+						pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+						+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
+						+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
+					}
+					else if(data.page.startPageNum == data.page.endPageNum)
+					{
+						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
+						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+						+"<a style='color:black; text-decoration: none;'>▶</a>";
+					}
+					else if(data.pageNum == 1)
+					{
+						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+						+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
+					}
+					else if(data.pageNum == data.page.endPageNum)
+					{
+						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
+						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+						+"<a style='color:black; text-decoration: none;'>▶</a>";
+					}
+					else
+					{
+						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
+						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
+						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
+						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
+					}
+					$("#codePagingDiv").append(pageContent);
+				}
+			});
 		}
 			
 		// 검색 버튼 클릭시 - 기존
@@ -528,8 +546,8 @@ $(document).ready(function() {
 			});
 		});
 		
-		// 공통코드 선택 POPUP
-		$("#sel_grp").on("click", function(){
+		function fn_selGrpPop()
+		{
 			var tbody_general = $('#generalTbody');
 			var contents = "";
 			
@@ -564,13 +582,15 @@ $(document).ready(function() {
 				}
 			});
 			$('.menuOpen').click();
-		});
+		}
 		
 		// Mainc창에 상세코드 상세보기란에 있는 공통코드 부분에 값을 넣는다.
 		function pop_grpCode(grpCode)
 		{
 			var tmp = grpCode;
+			$("#grp_cd").val("0"+grpCode);
 			$("#grp_cd1").val("0"+grpCode);
+			$("#codeMask, .codeWindow").hide();
 		}
 		
 		// 코드 추가버튼을 눌렀을 시
@@ -582,6 +602,7 @@ $(document).ready(function() {
 			$("#codeDetail_mdfy_btn").hide();
 			$("#codeDetail_reset_btn").show();
 			$("#sel_grp").show();
+			$("#sel_grp1").show();
 			
 			// 상세보기로 내용이 있을 경우 reset해준다.
 			$("#joinform1").each(function(){
@@ -735,6 +756,19 @@ $(document).ready(function() {
 				alert("상세코드가 수정 되었습니다.");
 				$("#joinform2").submit();
 			}
+		});
+		
+		$("#codeDetail_reset_btn").on("click", function(){
+			$("#grp_cd1").val("");
+			$("#code1").val("");
+			$("#code_txt").val("");
+			$("#code_desc").val("");
+		});
+		
+		$("#codeMaster_reset_btn").on("click", function(){
+			$("#grp_cd").val("");
+			$("#gpr_nm").val("");
+			$("#grp_desc").val("");
 		});
 	
 		

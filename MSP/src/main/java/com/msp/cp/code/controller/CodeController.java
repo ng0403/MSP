@@ -197,32 +197,6 @@ public class CodeController {
 	}
 	
 	/**
-	 * 업 무 명 : Search 코드조회 화면 (처음)
-	 * 작 성 자 : 이재욱
-     * 작 성 일 : 2017/02/07
-     * 수 정 자 : 
-     * 수 정 일 : 
-	 * 내     용 : 조건에 맞는 공통코드를 검색한다. 
-	 * */
-	@RequestMapping(value="/codeSearch_list/{grp_cd}", method={RequestMethod.GET, RequestMethod.POST})
-	public ResponseEntity<List<CodeVO>> searchGrpList(@PathVariable("grp_cd") String grp_cd)
-	{
-		ResponseEntity<List<CodeVO>> entity = null;
-		
-		CodeVO codeVo = new CodeVO();
-		codeVo.setGrp_cd(grp_cd);
-		
-		try {
-			entity = new ResponseEntity<>(codeService.searchGrpList(codeVo), HttpStatus.OK);
-		} catch(Exception e) {
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			e.printStackTrace();
-		}
-		
-		return entity;
-	}
-	
-	/**
 	 * 업 무 명 : Search 코드조회 화면(수정본)
 	 * 작 성 자 : 이재욱
      * 작 성 일 : 2017/02/08
@@ -236,16 +210,25 @@ public class CodeController {
 	{
 		System.out.println("Search GrpCode");
 		
-		String grp_cd = request.getParameter("grp_cd").trim();
+		String grp_cd = request.getParameter("grp_cd_sch").trim();
+		String grp_nm = request.getParameter("grp_nm_sch").trim();
+		
+		System.out.println(grp_cd);
+		System.out.println(grp_nm);
 		
 		if(grp_cd == null)
 		{
 			grp_cd = "";
 		}
+		if(grp_nm == null)
+		{
+			grp_nm = "";
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("grp_cd", grp_cd);
+		map.put("gpr_nm", grp_nm);
 		map.put("pageNum", pageNum);
 		
 		PagerVO page = codeService.getCodeListCount(map);
