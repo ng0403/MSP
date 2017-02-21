@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <script src="${ctx}/resources/common/js/common.js"></script>
-<script src="${ctx}/resources/common/js/mps/menu/menu.js"></script>
+<script src="${ctx}/resources/common/js/mps/menu/menu_list.js"></script>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>메뉴관리화면</title>
 

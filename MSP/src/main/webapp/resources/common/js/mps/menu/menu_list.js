@@ -60,11 +60,15 @@
 		/*저장버튼 클릭 시 처리 이벤트*/
 		$("#menu_save_fbtn").click(function(){
 			if(save_cd == "insert"){
-				menuSave();
-				pageReady(true);
+				if (confirm("정보를 추가 하시겠습니까?")) {
+					menuSave();
+					pageReady(true);
+				}
 			}else if(save_cd == "update"){
-				menuMdfy();
-				pageReady(true);
+				if (confirm("정보를 수정 하시겠습니까?")) {
+					menuMdfy();
+					pageReady(true);
+				}
 			}
 		})
 		/* 체크박스 전체선택, 전체해제 */
@@ -112,7 +116,7 @@
 			})
 			paging(data,"#paging_div", "menuListInqr");
 		}).fail(function(){
-			alert("부서 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+			alert("메뉴 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
 	}
 	/*메뉴 상세정보 요청 함수*/
@@ -129,7 +133,7 @@
 				detailOutput(menu_cd, menu_nm, menu_url, menu_level, up_menu_cd, up_menu_nm, active_flg);
 			})
 		}).fail(function(){
-			alert("부서 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+			alert("메뉴 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
 	}
 	/*메뉴 입력 요청 함수*/
