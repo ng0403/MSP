@@ -20,7 +20,12 @@
 
 <form role="form" name = "form_modify" method="post">
  <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"/> 
+
  <input type='hidden' id="REPLY_FLG" name='REPLY_FLG' value="${boardlist.REPLY_FLG}"/>
+</form>
+
+<form role="form1">
+ <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"/> 
 </form>
  
 
@@ -44,7 +49,7 @@
 
  
 <div> <!-- 버튼 div  -->
-<input type="button" id="board_modify_fbtn" class = "btn btn-default" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+<input type="button" id="board_modify_fbtn" class = "btn btn-primary btn-sm" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"/>  <input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
 </div>
 
 
@@ -57,7 +62,7 @@
  
   <!-- 댓글 등록 버튼 -->
  <div class="col-md-2" >
- <input type="button" id="reply_add_fbtn" class = "btn btn-default" value="저장"/>
+ <input type="button" id="reply_add_fbtn" class = "btn btn-primary btn-sm " value="저장"/>
  </div>
 </div>
  
@@ -75,7 +80,7 @@
 <script>
   
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/board_list";
+    	location.href = "/board/boardInqr";
  	})
  	 
 
@@ -169,9 +174,15 @@ $(document).ready(function(){
  
  
  $("#board_remove_fbtn").on("click", function(){
-	 formObj.attr("action", "/board/board_remove");
-	 formObj.attr("method", "post");
-	 formObj.submit();
+	 var formObj1 = $("form[role='form1']");
+	 if(confirm("삭제 하시겠습니까?")){
+	 formObj1.attr("action", "/board/detail_remove");
+	 formObj1.attr("method", "post");
+	 formObj1.submit();
+	 }
+	 else{
+		 
+	 }
  }) 
  
  

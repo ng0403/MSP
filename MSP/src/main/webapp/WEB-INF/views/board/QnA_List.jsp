@@ -21,7 +21,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 
-<div class= main_div>
+<div class="container" style=" width:90%">
 
 <div class = navi_div>
 
@@ -63,7 +63,7 @@
  
 
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
-	<table class="table table-bordered" style ="width: 90%">
+	<table class="table table-bordered">
 						<thead>
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
@@ -138,7 +138,7 @@
 </div>
 
 <!-- 페이징 전용 폼 -->
-			<form  action="${ctx}/board/board_QnA_list" id="boardlistPagingForm" method="post">
+			<form  action="${ctx}/board/QnAInqr" id="boardlistPagingForm" method="post">
 				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
@@ -295,7 +295,7 @@ $("#board_add_fbtn").on("click", function(){
  		var qna_answer = $("#qna_answer").val();
 		var keyword    = $("#keyword").val();
 		
-		$.post("/board/search_QnA_list",{"qna_answer":qna_answer, "keyword":keyword, "pageNum":pageNum}, function(data){
+		$.post("/board/search_QnaInqr",{"qna_answer":qna_answer, "keyword":keyword, "pageNum":pageNum}, function(data){
 			$(".qna_list").html("");
 			$(data.qna_list).each(function(){
   				var BOARD_NO = this.board_NO;

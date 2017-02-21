@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="${ctx}/resources/common/js/common.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -19,33 +20,32 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 
 
-<div class= main_div>
-
-<div class = navi_div>
-
+<div class="main_div">
+ <div class="navi_div">
+게시판 > 리스트
 </div>
 
 <!-- Q&A 리스트, 조회화면 -->
+	<div class="search_div">
+			<div class="search2_div">
 	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
-		<div id="inputDiv" style="font-size:11.8px;width:100%;font-family:Helvetica, sans-serif;">
-			  		 
+	
 				<label for="keyword">제목 :</label>
-					<input type="text" id="keyword" name="keyword" style="width: 100px" />&nbsp;
-			
-				</form> 
-					<input type="button" class="button-default" onclick="boardListInqr(1);" value="조회" style="font-size:11px;float:right;margin-right:1%;
-					    background-color:#81BEF7;font-color:white;"/> 
-					 
+				<input type="text" id="keyword" name="keyword" style="" > &nbsp; 
+	
+			 <input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" class="btn btn-default btn-sm" value="검색">
+		 </form>  
 		</div>
+ </div>
 
-<div class= "list_div">
-
-<div class= "board_list1" id="board_list1">  
+<div class="list_div">
+			<div class="list1_div">  
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
-	<table class="table table-bordered" style ="width: 90%">
-	<thead>
+	<table  class="table table-hover" >
+					<thead>
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
 							<th>번호</th>
@@ -53,8 +53,10 @@
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
+							
 						</tr>
-						</thead> 
+						
+					 </thead> 
  					 
  						<tbody class="board_list">
  						 <c:forEach items="${boardlist}" var="boardVO"> 
@@ -73,10 +75,14 @@
  					 
 						 </tbody>
 					</table>
-					</form>
+		 </form>
  </div>	
-					<div class="paging_div" style="width: 100%; text-align: center;">
-	
+ 
+  <div class="paging_div">
+ 	<div class="left">
+	     <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
+	 </div> 
+	 	<div class="page" id="paging_div" >
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
 		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
 		<input type="hidden" id="boardPageNum" value="${pageNum}"/>
@@ -105,10 +111,8 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
-					
-					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
-					
-
+		<div class="right">
+ 		</div> 
 </div>
 
 <div class = paging_div>
@@ -118,7 +122,7 @@
 </div>
 
 <!-- 페이징 전용 폼 -->
-			<form  action="${ctx}/board/board_list" id="boardlistPagingForm" method="post">
+			<form  action="${ctx}/board/boardInqr" id="boardlistPagingForm" method="post">
 				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
@@ -223,7 +227,7 @@ $("#board_add_fbtn").on("click", function(){
 				
 				liststr2 +=  "</table>";
 					
-					var boardtable = document.getElementById("board_list1");
+					var boardtable = document.getElementById("list1_div");
 					boardtable.innerHTML = liststr + liststr1 + liststr2; 
 					 
 
@@ -296,7 +300,8 @@ $("#board_add_fbtn").on("click", function(){
 	function boardListInqr(pageNum){
 		
  		var keyword    = $("#keyword").val();
- 		$.post("/board/search_board_list",{"keyword":keyword, "pageNum":pageNum}, function(data){
+ 		alert(keyword);
+ 		$.post("/board/search_boardInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
 			
  			$(".board_list").html(""); 
 			$(data.qna_list).each(function(){
@@ -308,19 +313,7 @@ $("#board_add_fbtn").on("click", function(){
 				var VIEW_CNT = this.view_CNT;
 				boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
-			$("#paging_div").html("");
-			$(data).each(function(){
-				var pageNum = this.pageNum;
-				var pageSize = this.page.pageSize;
-				var pageBlockSize = this.page.pageBlockSize;
-				var startRow = this.page.startRow;
-				var endRow = this.page.endRow;
-				var startPageNum = this.page.startPageNum;
-				var endPageNum = this.page.endPageNum;
-				var currentPageNum = this.page.currentPageNum;
-				var totalPageCount = this.page.totalPageCount;
-				pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount);
-			})
+			paging(data,"#paging_div", "boardListInqr");
 		}).fail(function(){
 			alert("목록을 불러오는데 실패하였습니다.")
 		})
@@ -354,55 +347,9 @@ $("#board_add_fbtn").on("click", function(){
 				
 		$(".board_list").append(board_Tr);
  			
-	}
-
+	} 
 	
-	
-	
-	/*페이징 출력 함수*/
-	function pageOutput(pageNum, totalCount, pageSize, pageBlockSize, startRow, endRow, startPageNum, endPageNum, currentPageNum, totalPageCount){
-		if(endPageNum == 1)
-		{
-			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress='pageInputRepDept(event);'/>"  
-			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
-			+"<a style='color:black; text-decoration: none;'>▶</a>"
-		}
-		else if(startPageNum == endPageNum)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqr("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=authListInqrt("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='color:black; text-decoration: none;'>▶</a>";
-		}
-		else if(pageNum == 1)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
-		else if(pageNum == endPageNum)
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"' onkeypress=\"pageInputRepDept(event);\"/>" 
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='color:black; text-decoration: none;'>▶</a>";
-		}
-		else
-		{
-			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"' onkeypress=\"pageInputRepDept(event);\"/>"
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
-			+"<a style='cursor: pointer;' onclick=boardPaging(("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
-		$("#paging_div").append(pageContent);
-
-	}
-
+	 
 	
 </script>
 

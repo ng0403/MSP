@@ -41,7 +41,7 @@
 
  
 <div> <!-- 버튼 div  -->
-<input type="button" id="board_modify_fbtn" class = "btn btn-default" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-default" value="삭제"/>  <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+<input type="button" id="board_modify_fbtn" class = "btn btn-primary btn-sm" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"/>  <input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
 </div>
  
  
@@ -65,7 +65,7 @@
  
  
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/QnA_List";
+    	location.href = "/board/QnAInqr";
  	})
  	
  	  

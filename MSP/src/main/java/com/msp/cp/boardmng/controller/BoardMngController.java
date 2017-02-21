@@ -26,7 +26,7 @@ public class BoardMngController {
 	BoardMngService boardmngService;
 	
 	
-	@RequestMapping("/board_mng_list")
+	@RequestMapping("/boardmngInqr")
 	public ModelAndView boardmngList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
 		System.out.println("board_mng_list entering");
 		System.out.println("pagenum" + pageNum);
@@ -74,7 +74,7 @@ public class BoardMngController {
 		
 		boardmngService.modify(vo);
 		System.out.println("modify success" + vo.toString());
-		return "redirect:/board_mng/board_mng_list";
+		return "redirect:/board_mng/boardmngInqr";
 	}
 	
 	@RequestMapping(value="/board_mng_add" ,method=RequestMethod.GET)
@@ -90,7 +90,7 @@ public class BoardMngController {
 		System.out.println("vo is  " + vo);
 		boardmngService.add(vo);
 		
-		return "redirect:/board_mng/board_mng_list";
+		return "redirect:/board_mng/boardmngInqr";
 		
 	}
 	

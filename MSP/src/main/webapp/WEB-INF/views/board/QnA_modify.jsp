@@ -19,7 +19,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
  
 
-<div> <!-- 전체 div-->
+<div class="container" style=" width:90%"> <!-- 전체 div-->
 
 	<form role="form" name="modifyForm" action="/board/board_modify " method="post">
 	 <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardVO.BOARD_NO}"> 
@@ -40,9 +40,9 @@
  </form>
 <div> <!-- 버튼 div  -->
 <!-- <input type="button" class = "btn btn-default" value="저장"/> -->
- <button type="submit" id = "board_modify_fbtn" class="btn btn-default">저장</button>
+ <button type="submit" id = "board_modify_fbtn" class="btn btn-primary btn-sm">저장</button>
 <!--  <input type="button" class="btn btn-default" id="board_modify_fbtn" value="저장"/> -->
- <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+ <input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
 </div>
 
 
@@ -85,7 +85,7 @@ var formObj = $("form[role='form']");
 console.log(formObj);
  
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/QnA_List";
+    	location.href = "/board/QnAInqr";
  	})
  	
 $("#board_modify_fbtn").on("click", function(){

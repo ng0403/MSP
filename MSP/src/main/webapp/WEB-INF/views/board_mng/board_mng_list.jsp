@@ -6,6 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="${ctx}/resources/common/js/common.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -19,6 +21,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 
 
 <div class= main_div>
@@ -33,11 +36,12 @@
 </div>
 </div>
 
-<div class= "container" style="width :90%">
-
-<div class= "list1_div" id="list1_div">  
- <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
-	<table class="table table-bordered" style ="width: 90%">
+<div class="list_div">
+<div class="list1_div">
+<div class="table_div">
+  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
+	<table class="table table-hover">
+	<thead>
 						<tr>
 							<th><input id="checkall" type="checkbox"/></th>
 							<th>게시판관리번호</th>
@@ -46,6 +50,7 @@
 							<th>생성일</th>
 							<th>사용여부</th>
 						</tr> 
+	</thead>
  						<c:forEach items="${boardmnglist}" var="boardMngVO"> 
 							<tr>
 								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardMngVO.BOARD_MNG_NO}"></td>
@@ -63,9 +68,13 @@
 						 
 					</table>
 					</form>
-	</div>				
-					<div class="paging_div" style="width: 100%; text-align: center;">
-	
+	</div>		
+			
+		<div class="paging_div">	
+		 <div class="left">
+		 <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
+ 		
+		</div>
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
 		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
 		<input type="hidden" id="boardPageNum" value="${pageNum}"/>
@@ -95,7 +104,6 @@
 		</c:choose>
 		</div>
 					
-					<input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
 					
 
 </div>
@@ -186,7 +194,7 @@ $("#board_add_fbtn").on("click", function(){
 					
 					liststr2 +=  "</table>";
  					
- 					var boardtable = document.getElementById("list1_div");
+ 					var boardtable = document.getElementById("list2_div");
  					boardtable.innerHTML = liststr + liststr1 + liststr2;
   					 
 

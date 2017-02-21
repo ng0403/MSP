@@ -462,7 +462,7 @@
 </script>
 </head>
 <body>
-<%@include file="../include/header.jsp"%>
+<%-- <%@include file="../include/header.jsp"%> --%>
 	<div class="main_div">
 		<div class="navi_div">
 			사용자 > 부서관리
@@ -668,4 +668,4 @@
 	</div>
 </body>
 </html>
-<%@include file="../include/footer.jsp"%>
+<%-- <%@include file="../include/footer.jsp"%> --%>

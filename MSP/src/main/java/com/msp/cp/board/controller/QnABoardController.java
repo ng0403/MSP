@@ -28,7 +28,7 @@ public class QnABoardController {
 	@Autowired
 	QnABoardService qnaService; 
 	
-	@RequestMapping(value="/QnA_List", method={RequestMethod.GET, RequestMethod.POST} )
+	@RequestMapping(value="/QnAInqr", method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView QnA_List(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) {
 
 		System.out.println("board_list Insert ");
@@ -108,7 +108,7 @@ public class QnABoardController {
 	}
 	
 	
-	@RequestMapping(value="/search_QnA_list", method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/search_QnAInqr", method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String, Object> search_QnA_list( ModelMap model, HttpServletRequest request,
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		System.out.println("search entering");
