@@ -319,7 +319,7 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="${ctx}/user/userlist">
+              <a href="${ctx}/user/userInqr">
                 <i class="fa fa-dashboard"></i> <span>사용자관리</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -474,3 +474,4 @@
             <li class="active">General Elements</li>
           </ol>
         </section>
+        
