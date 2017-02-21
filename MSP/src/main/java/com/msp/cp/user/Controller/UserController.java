@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.msp.cp.common.PagerVO;
 import com.msp.cp.dept.service.DeptService;
 import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.Service.UserService;
 import com.msp.cp.user.vo.userVO;
+import com.msp.cp.utils.PagerVO;
 
 @Controller
 @RequestMapping(value="/user")
@@ -38,31 +42,35 @@ public class UserController {
 	DeptService deptService;
 	
 	//사용자관리 리스트
+//	@ResponseBody
 	@RequestMapping(value="/userInqr", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView userListPage(HttpSession session, Locale locale,HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			userVO userVO,String user_id_sch, String user_nm_sch, String dept_nm_sch ,
+			userVO userVO,String active_key, String user_sch_key, String dept_nm_sch ,
 			@RequestParam(value = "code", defaultValue="empty") String selectcode,
 			String excel, 
 			@RequestParam Map<String, Object> userMap, 
 			@RequestParam Map<String, Object> map)
 	{
-		user_id_sch = request.getParameter("user_id_sch");
-		user_nm_sch = request.getParameter("user_nm_sch");
-		dept_nm_sch = request.getParameter("dept_cd_sch");
-		
+//		user_id_sch = request.getParameter("user_id_sch");
+//		user_nm_sch = request.getParameter("user_nm_sch");
+//		dept_nm_sch = request.getParameter("dept_cd_sch");
+		active_key = request.getParameter("active_key");
+		user_sch_key = request.getParameter("user_sch_key");
 		System.out.println("user Controller");
 		
 		map.put("pageNum", pageNum);
-		map.put("user_id_sch", user_id_sch);
-		map.put("user_nm_sch", user_nm_sch);
-		map.put("dept_nm_sch", dept_nm_sch);
+		map.put("active_key", active_key);
+		map.put("user_sch_key", user_sch_key);
+//		map.put("user_id_sch", user_id_sch);
+//		map.put("user_nm_sch", user_nm_sch);
+//		map.put("dept_nm_sch", dept_nm_sch);
 		
 		System.out.println("1. USER List Controller pageNum : " + pageNum);
 		
-		System.out.println("2. user_id_sch : " + user_id_sch);
-		System.out.println("3. user_nm_sch : " + user_nm_sch);
-		System.out.println("4. dept_nm_sch : " + dept_nm_sch);
+//		System.out.println("2. user_id_sch : " + user_id_sch);
+//		System.out.println("3. user_nm_sch : " + user_nm_sch);
+//		System.out.println("4. dept_nm_sch : " + dept_nm_sch);
 		
 		PagerVO page=userService.getUserListCount(map);
 		map.put("page", page);
@@ -82,16 +90,57 @@ public class UserController {
 		List<userVO> user_list = userService.searchListUser(map);
 
 		System.out.println("15. User Search list : " +user_list);
-		ModelAndView mov = new ModelAndView("/user/user_list", "user_list", user_list);
+		ModelAndView mov = new ModelAndView("/user/user_list");
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
-		mov.addObject("user_id_sch", user_id_sch);
-		mov.addObject("user_nm_sch", user_nm_sch);
-		mov.addObject("dept_cd_sch", dept_nm_sch);
-		
+//		mov.addObject("user_id_sch", user_id_sch);
+//		mov.addObject("user_nm_sch", user_nm_sch);
+//		mov.addObject("dept_cd_sch", dept_nm_sch);
+		mov.addObject("active_key", active_key);
+		mov.addObject("user_sch_key", user_sch_key);
+		mov.addObject("user_list", user_list);
+		System.out.println("16. User Search list : " + mov);
 		return mov;
 		
 	}
+	@RequestMapping(value="/userAjax_list", method={RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String, Object> userList(ModelMap model,
+			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
+		System.out.println("aJax list Controller");
+		
+		String active_key=request.getParameter("active_key").trim();                      
+	    String user_sch_key=request.getParameter("user_sch_key").trim(); 
+		
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    
+	    map.put("active_key", active_key);
+		map.put("user_sch_key", user_sch_key);
+		map.put("pageNum", pageNum);
+
+		PagerVO page=userService.getUserListCount(map);
+		if(page.getEndRow()==1){
+			page.setEndRow(0);
+		}
+		
+		int startRow = page.getStartRow();
+		int endRow = page.getEndRow();
+		
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("page", page);
+
+		List<userVO> user_list = userService.searchListUser(map);
+		
+		System.out.println(user_list);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("user_list", user_list);
+
+		return model;
+	}
+	
 	
 	//상세정보 팝업
 	@RequestMapping(value="/userTab", method=RequestMethod.GET)
@@ -146,16 +195,30 @@ public class UserController {
 	}
 	
 	//사용자 삭제
-	@RequestMapping(value="userDel", method={RequestMethod.GET, RequestMethod.POST})
-	public String userDel(String user_id) throws Exception { 
-		System.out.println("del controller enter");
-		String[] arrIdx = user_id.split(",");
-		for (int i=0; i<arrIdx.length; i++) {
-			System.out.println(arrIdx[i]);
-			userService.userDel(arrIdx[i]);
-		}
-		return "redirect:/user/userInqr";
+	@RequestMapping(value="/userDel/{del_code}", method={RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity<String> userDel(String user_id, @PathVariable("del_code") String del_code) throws Exception {
+		System.out.println("삭제 컨트롤러 입성");
+		ResponseEntity<String> entity = null;
+		int result;
+		
+		String[] delcode = del_code.split(",");
+		System.out.println(delcode.length);
+		for(int i = 0; i < delcode.length; i++)
+		{
+			try{
+				String dc = delcode[i];
+				result = userService.userDel(dc);
+				if(result==1){
+					entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+		}		
+		return entity;
 	}
+	
 	
 	//userMdfyPop 사용자 정보 수정 팝업
 	@RequestMapping(value="/userMdfyPop", method={RequestMethod.GET, RequestMethod.POST})

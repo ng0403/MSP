@@ -1,3 +1,76 @@
+/*사용자 리스트 출력및 페이징 처리 함수*/
+	function userListInqr(pageNum){
+		var active_key = $("#active_key").val();
+		var user_sch_key = $("#user_sch_key").val();
+		var values=[];
+		$.post("/user/userAjax_list",
+				{"active_key":active_key
+			, "user_sch_key":user_sch_key
+			, "pageNum":pageNum}
+		, function(data){
+			alert(data);
+			values = data.user_list;
+			$(".user_list").html("");
+			alert(data.toSource());
+//			$(data.user_list).each(function(){
+			$(values).each(function(){
+				alert(data.user_list);
+				alert(this.User_ID);
+				alert(data.user_list.User_ID);
+ 				var user_id = this.USER_ID;
+				var user_nm = this.USER_NM;
+				var dept_nm = this.DEPT_NM;
+				var cphone_num1 = this.CPHONE_NUM1;
+				var cphone_num2 = this.CPHONE_NUM2;
+				var cphone_num3 = this.CPHONE_NUM3;
+				var email_id = this.EMAIL_ID;
+				var email_domain = this.EMAIL_DOMAIN;			
+				var auth_nm = this.AUTH_NM;			
+				var active_flg = this.ACTIVE_FLG;
+				userListOutput(user_id, user_nm, dept_nm, email_id, email_domain, cphone_num1 ,cphone_num2, cphone_num3, auth_nm, active_flg);  
+			})
+//			paging(data,"#paging_div", "userListInqr");
+		}).fail(function(){
+			alert("사용자 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+		})
+	}
+	/*사용자 리스트 출력 함수*/
+	function userListOutput(user_id, user_nm, dept_nm, email_id, email_domain, cphone_num1 ,cphone_num2, cphone_num3, auth_nm, active_flg){
+		
+		var user_tr = $("<tr>");
+		user_tr.addClass("open_detail");
+		user_tr.attr("data_num",user_id);
+		
+		var del_code_td = $("<td>");
+		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + menu_cd + "'>");
+		
+		var user_id_td = $("<td>");
+		user_id_td.html("<input type='text' onclick='' name='user_id' value='" + user_id + "'>");
+		
+		var user_nm_td = $("<td>");
+		user_nm_td.html(user_nm);
+		
+		var dept_td = $("<td>");
+		dept_td.html(dept_cd);
+		
+		var cphone_num1_td = $("<td>");
+		cphone_num1_td.html(cphone_num1 + "-" + cphone_num2 + "-" + cphone_num3);
+		
+		var auth_td = $("<td>");
+		auth_td.html(auth_nm);
+		
+		var active_flg_td = $("<td>");
+		if(active_flg=='Y'){
+			active_flg_td.html("활성화");
+		}else if(active_flg=='N'){
+			active_flg_td.html("비활성화");
+		}
+		
+		user_tr.append(del_code_td).append(user_id_td).append(user_nm_td).append(dept_td).append(cphone_num1_td).append(auth_td).append(active_flg_td);
+				
+		$(".user_list").append(user_tr);
+			
+	}
 //엑셀 Import 팝업	
 function excelImportOpen() {
 	var popUrl = "excelImportTab";
@@ -52,7 +125,39 @@ function check() {
 //                window.open("about:blank","_self").close();
                 
         }
- 
+/*부서 삭제 요청 함수*/
+function userDel(){
+	var del_code = "";
+	$( "input[name='del_code']:checked" ).each (function (){
+		  del_code = del_code + $(this).val()+"," ;
+	});
+	
+	var delCode = del_code.split(","); //맨끝 콤마 지우기
+	alert(delCode);
+	if(delCode == ""){
+		alert("삭제할 대상을 선택해 주세요");
+		return false;
+	}else{
+		
+		$.ajax({
+			url:"/user/userDel/"+del_code,
+			type:"post",
+			contentType:"application/json; charset=UTF-8",
+			dataType:"text",
+			//data:JSON.stringify({del_code : del_code}),
+			error:function(){
+				alert("시스템 오류 입니다. 관리자에게 문의하세요.");
+			},
+			success:function(resultData){
+				if(resultData == "SUCCESS"){
+					alert("사용자 삭제가 완료되었습니다.");
+					userListInqr(1);
+				}
+					
+			}
+		})
+	}
+}
 //AS-ID 엑셀 다운로드 적용 함수
 function download_list_Excel(formID){
 	var ctx = $("#ctx").val();

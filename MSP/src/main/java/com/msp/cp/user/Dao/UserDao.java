@@ -13,7 +13,7 @@ public interface UserDao {
 
 	public void insert(userVO vo);
 
-	public void userDel(String dc);
+	public int userDel(String dc);
 
 	public userVO searchListUserOne(String user_id);
 

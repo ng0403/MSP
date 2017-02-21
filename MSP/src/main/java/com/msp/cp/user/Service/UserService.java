@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.vo.userVO;
 
@@ -16,7 +16,7 @@ public interface UserService {
 
 	public Object userOneSelectByIdNM(Object user_id);
 
-	public void userDel(String dc);
+	public int userDel(String dc);
 
 	public userVO searchListUserOne(String user_id);
 

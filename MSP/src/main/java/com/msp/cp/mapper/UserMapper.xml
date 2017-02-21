@@ -7,7 +7,7 @@
 	    select count(*) as cnt
 		 FROM TB_USER
 		where del_flg='N'  
-		<if test="user_id_sch != null and user_id_sch != ''">   
+		<if test="active_key == 'user_id'">   
         		and user_id like '%'||#{user_id_sch}||'%' 
         	</if>
 	 	<if test="user_nm_sch != null and user_nm_sch != ''">   

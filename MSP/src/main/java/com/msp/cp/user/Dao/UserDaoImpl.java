@@ -59,9 +59,11 @@ public class UserDaoImpl implements UserDao {
 
 //	사용자 삭제
 	@Override
-	public void userDel(String dc) {
-		sqlSession.update("user.userDel", dc);
-		System.out.println("user del dao impl enter");
+	public int userDel(String dc) {
+		int result=0;
+		result = sqlSession.update("user.userDel", dc);
+		System.out.println("user del dao impl enter : " + result);
+		return result;
 		
 	}
 
