@@ -623,7 +623,78 @@ function viewLoadingHide(){
 		
 		// 추가버튼 눌렀을 때
 		$("#menuAuth_save_btn").on("click", function(){
-			$("#menuAuthAdd").submit();
+			// 유효성 검사
+			if($("#auth_nm").val() == "" || $("#auth_nm").val() == null)
+			{
+				alert("권한을 선택하세요.");
+				document.menuAuthAdd.auth_id_pop.focus();
+				
+				return false;
+			}
+			if($("#up_menu_nm").val() == "" || $("#up_menu_nm").val() == null)
+			{
+				alert("메뉴를 선택하세요.");
+				document.menuAuthAdd.menu_cd_pop.focus();
+				
+				return false;
+			}
+			if($("#active_flg3").val() == "" || $("#active_flg3").val() == null)
+			{
+				alert("황성화여부를 선택하세요.");
+				document.menuAuthAdd.active_flg3.focus();
+				
+				return false;
+			}
+			if($("#inqr_auth3").val() == "" || $("#inqr_auth3").val() == null)
+			{
+				alert("조회권한을 선택하세요.");
+				document.menuAuthAdd.inqr_auth3.focus();
+				
+				return false;
+			}
+			if($("#add_auth3").val() == "" || $("#add_auth3").val() == null)
+			{
+				alert("생성권한을 선택하세요.");
+				document.menuAuthAdd.add_auth3.focus();
+				
+				return false;
+			}
+			if($("#mdfy_auth3").val() == "" || $("#mdfy_auth3").val() == null)
+			{
+				alert("수정권한을 선택하세요.");
+				document.menuAuthAdd.mdfy_auth3.focus();
+				
+				return false;
+			}
+			if($("#del_auth3").val() == "" || $("#del_auth3").val() == null)
+			{
+				alert("삭제권한을 선택하세요.");
+				document.menuAuthAdd.del_auth3.focus();
+				
+				return false;
+			}
+			if($("#menu_acc_auth3").val() == "" || $("#menu_acc_auth3").val() == null)
+			{
+				alert("메뉴접근권한을 선택하세요.");
+				document.menuAuthAdd.menu_acc_auth3.focus();
+				
+				return false;
+			}
+			else
+			{
+				if(confirm("헤당 메뉴권한을 등록하시겠습니까?"))
+				{
+					$("#menuAuthAdd").submit();
+					
+					alert("메뉴권한이 등록되었습니다.");
+				}
+				else
+				{
+					return false;
+				}
+			}
+			
+			
 		});
 		
 		// 삭제 버튼 눌렀을 때
