@@ -53,9 +53,6 @@ public class UserController {
 			@RequestParam Map<String, Object> userMap, 
 			@RequestParam Map<String, Object> map)
 	{
-//		user_id_sch = request.getParameter("user_id_sch");
-//		user_nm_sch = request.getParameter("user_nm_sch");
-//		dept_nm_sch = request.getParameter("dept_cd_sch");
 		active_key = request.getParameter("active_key");
 		user_sch_key = request.getParameter("user_sch_key");
 		System.out.println("user Controller");
@@ -63,15 +60,9 @@ public class UserController {
 		map.put("pageNum", pageNum);
 		map.put("active_key", active_key);
 		map.put("user_sch_key", user_sch_key);
-//		map.put("user_id_sch", user_id_sch);
-//		map.put("user_nm_sch", user_nm_sch);
-//		map.put("dept_nm_sch", dept_nm_sch);
 		
 		System.out.println("1. USER List Controller pageNum : " + pageNum);
 		
-//		System.out.println("2. user_id_sch : " + user_id_sch);
-//		System.out.println("3. user_nm_sch : " + user_nm_sch);
-//		System.out.println("4. dept_nm_sch : " + dept_nm_sch);
 		
 		PagerVO page=userService.getUserListCount(map);
 		map.put("page", page);
@@ -94,9 +85,6 @@ public class UserController {
 		ModelAndView mov = new ModelAndView("/user/user_list");
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
-//		mov.addObject("user_id_sch", user_id_sch);
-//		mov.addObject("user_nm_sch", user_nm_sch);
-//		mov.addObject("dept_cd_sch", dept_nm_sch);
 		mov.addObject("active_key", active_key);
 		mov.addObject("user_sch_key", user_sch_key);
 		mov.addObject("user_list", user_list);
@@ -146,7 +134,6 @@ public class UserController {
 
 		return model;
 	}
-	
 	
 	//상세정보 팝업
 	@RequestMapping(value="/userTab", method=RequestMethod.GET)
@@ -231,7 +218,6 @@ public class UserController {
 	public ResponseEntity<List<userVO>> userMdfyPop(HttpSession session, Locale locale, HttpServletRequest req,@PathVariable("id") String user_id)
 	{
 		ResponseEntity<List<userVO>> entity = null;
-		int entry_flg = 2;
 		try{
 			entity = new ResponseEntity<>(userService.searchListUserOne(user_id), HttpStatus.OK);
 			System.out.println("디비 다녀와쪙");
@@ -241,6 +227,27 @@ public class UserController {
 		}
 				
 		return entity;
+	}
+	
+	//temp code ajax Controller
+	@RequestMapping(value="/user_code_list/{id}", method={RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String, Object> user_code_list(ModelMap model,
+			HttpServletRequest request,@PathVariable("id") String user_id){
+		System.out.println("aJax list Controller");
+		
+//		Map<String,Object> map = new HashMap<String,Object>();
+		List<userVO> rank_cd_list = userService.rankCdList();
+		List<userVO> duty_cd_list = userService.dutyCdList();
+		
+		List<userVO> user_list = userService.searchListUserOne(user_id);
+		
+		System.out.println(user_list);
+		
+		model.addAttribute("user_list", user_list);
+		model.addAttribute("rank_cd_list", rank_cd_list);
+		model.addAttribute("duty_cd_list", duty_cd_list);
+		
+		return model;
 	}
 	
 	//userMdfy 사용자 정보 수정

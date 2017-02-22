@@ -33,7 +33,6 @@
    	    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
    	    return this;
    	}
-		var entry_flg = ${entry_flg}
 		var tmp = $('#Duser_id').val();
 		alert(tmp);
 		
@@ -62,7 +61,6 @@
 		
 		//추가 버튼
 			$("#Dsubmit_btn").on("click", function() {
-				var entry_flg = ${entry_flg}
 				var tmp = $('#Duser_id').val();
 				var user_pwd = $('#Duser_pwd').val();
 				var user_pwd_chk = $('#Duser_pwd_chk').val();
@@ -70,22 +68,21 @@
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
-				if(entry_flg != 1){
-					alert("이미 존재하는 계정입니다.");
-				}else{
+				if(tmp != null){
 					if(tmplength > 0){
 						//passwordCheck();
-						if(passwordCheck() == true){
+						if(passwordCheck(2) == true){
 							$('#Djoinform').attr("action", "${ctx}/user/userInsert").submit(); 
 						}
 					}else{
 							alert("사용자 아이디가 없습니다.");
 						}
+				}else{
+					alert("이미 존재하는 계정입니다.");
 				}
 			});
 		//편집 버튼 
 			$("#Dmodify_btn").on("click", function() {
-				var entry_flg = ${entry_flg}
 				var tmp = $('#Duser_id').val();
 				alert(tmp);
 				$('created_by').val(tmp);
@@ -107,16 +104,15 @@
 			});
 		//편집 저장 버튼
 			$("#Dmodifysave_btn").on("click", function() {
-				var entry_flg = ${entry_flg}
 				var tmp = $('#Duser_id').val();
 				alert(tmp);
 				var user_pwd = $('#Duser_pwd');
 				var user_pwd_chk = $('#Duser_pwd_chk');
 				var rank_cd = $("#Drank_cd option:selected").val();
 				var tmplength = tmp.length;
-				if(entry_flg != 1){
+				if(tmp != null){
 					//passwordCheck();
-					if(passwordCheck() == true){
+					if(passwordCheck(2) == true){
 						$('#Djoinform').attr("action", "${ctx}/user/userMdfy?user_id = "+tmp).submit();
 					}
 					

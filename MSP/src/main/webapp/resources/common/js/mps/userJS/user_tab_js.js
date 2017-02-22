@@ -43,10 +43,18 @@ function ln_Close(e) {
 	    }
 	 
 	    //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
-		  function passwordCheck() {
-			var userID = document.getElementById("user_id").value;
-			var user_pwd = document.getElementById("user_pwd").value; 
-			var user_pwd_chk = document.getElementById("user_pwd_chk").value; 
+		  function passwordCheck(flg) {
+			if(flg == 1)
+				{
+					var userID = document.getElementById("user_id").value;
+					var user_pwd = document.getElementById("user_pwd").value; 
+					var user_pwd_chk = document.getElementById("user_pwd_chk").value; 
+				}else if(flg == 2){
+					var userID = document.getElementById("Duser_id").value;
+					var user_pwd = document.getElementById("Duser_pwd").value; 
+					var user_pwd_chk = document.getElementById("Duser_pwd_chk").value; 
+					
+				}
 			
 			// 재입력 일치 여부 
 			if (user_pwd != user_pwd_chk) { 
@@ -89,6 +97,53 @@ function ln_Close(e) {
 				
 				return true;
 			} 
+		  //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
+		  function passwordCheck() {
+			  var userID = document.getElementById("user_id").value;
+			  var user_pwd = document.getElementById("user_pwd").value; 
+			  var user_pwd_chk = document.getElementById("user_pwd_chk").value; 
+			  
+			  // 재입력 일치 여부 
+			  if (user_pwd != user_pwd_chk) { 
+				  alert("입력한 두 개의 비밀번호가 서로 일치하지 않습니다.");
+				  return ; 
+			  } 
+			  // 길이 
+			  if(!/^[a-zA-Z0-9!@#$%^&*()?_~]{6,15}$/.test(user_pwd_chk)) 
+			  { 
+				  alert("비밀번호는 숫자, 영문, 특수문자 조합으로 6~15자리를 사용해야 합니다.");
+				  return ;
+			  } 
+			  // 영문, 숫자, 특수문자 2종 이상 혼용 
+			  var chk = 0; 
+			  if(user_pwd.search(/[0-9]/g) != -1 ) chk ++; 
+			  if(user_pwd_chk.search(/[a-z]/ig) != -1 ) chk ++; 
+			  if(user_pwd_chk.search(/[!@#$%^&*()?_~]/g) != -1 ) chk ++; 
+			  if(chk < 2) {
+				  alert("비밀번호는 숫자, 영문, 특수문자를 두가지이상 혼용하여야 합니다."); 
+				  return ; 
+			  }
+			  // 동일한 문자/숫자 4이상, 연속된 문자 
+			  if(/(\w)\1\1\1/.test(user_pwd_chk) || isContinuedValue(user_pwd_chk)) 
+			  {
+				  alert("비밀번호에 4자 이상의 연속 또는 반복 문자 및 숫자를 사용하실 수 없습니다."); 
+				  return ; 
+			  }
+			  // 아이디 포함 여부 
+			  if(user_pwd_chk.search(userID)>-1) 
+			  {
+				  alert("ID가 포함된 비밀번호는 사용하실 수 없습니다."); 
+				  return ;
+			  }
+			  /* // 기존 비밀번호와 새 비밀번호 일치 여부 
+			if (user_pwd == user_pwd_chk) 
+			{
+				alert("기존 비밀본호와 새 비밀번호가 일치합니다."); 
+				return false; 
+				} */ 
+			  
+			  return true;
+		  } 
 	
 		  function isContinuedValue(value) {
 			  console.log("value = " + value);

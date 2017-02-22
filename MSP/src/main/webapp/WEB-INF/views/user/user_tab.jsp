@@ -71,16 +71,15 @@
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
-				if(tmp != null){
-					alert("이미 존재하는 계정입니다.");
-				}else{
-					if(tmplength > 0){
-						//passwordCheck();
-						if(passwordCheck() == true){
-							$('#joinform').attr("action", "${ctx}/user/userInsert").submit(); 
-						}
+				if(tmp == null){
+						alert("사용자 아이디가 없습니다.");
 					}else{
-							alert("사용자 아이디가 없습니다.");
+						if(tmplength > 0){
+							if(passwordCheck(1) == true){
+								$('#joinform').attr("action", "${ctx}/user/userInsert").submit(); 
+						}else{
+							alert("이미 존재하는 계정입니다.");
+						}
 						}
 				}
 			});
