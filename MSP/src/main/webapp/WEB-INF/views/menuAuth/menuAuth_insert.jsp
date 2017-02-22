@@ -37,7 +37,7 @@
 				<input type="button" id="menuClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
 					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
 		        <input type="button" class="btn btn-primary btn-sm" id="menuAuth_save_btn" name="menuAuth_save_btn" value="저장" 
-		               style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;"/>
+		               style="font-size:11.5px;float:right;margin-right:1%;margin-top:1%;" onclick="menuAuthInsert()"/>
 			</div>
 			<div class="block_div"></div>
 			
@@ -66,60 +66,42 @@
 							<tr height="15px">
 								<th style="width:20%; text-align: right;"><span style="color:red;">*</span>활성화여부&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="active_flg3" name="active_flg3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
+									<input type="radio" id="active_flg3" name="active_flg3" value="Y">&nbsp;&nbsp;Y&nbsp;&nbsp;
+									<input type="radio" id="active_flg3" name="active_flg3" value="N">N
 								</td>
 							</tr>
 							<tr height="15px"></tr>
 							<tr height="15px">
 								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>조회권한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="inqr_auth3" name="inqr_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
+									<input type="radio" id="inqr_auth3" name="inqr_auth3" value="Y">&nbsp;&nbsp;Y&nbsp;&nbsp;
+									<input type="radio" id="inqr_auth3" name="inqr_auth3" value="N">N
 								</td>
 								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>생성권한&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="add_auth3" name="add_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
+									<input type="radio" id="add_auth3" name="add_auth3" value="Y">&nbsp;&nbsp;Y&nbsp;&nbsp;
+									<input type="radio" id="add_auth3" name="add_auth3" value="N">N
 								</td>
 							</tr>
 							<tr height="15px"></tr>
 							<tr height="15px">
 								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>수정권한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="mdfy_auth3" name="mdfy_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
+									<input type="radio" id="mdfy_auth3" name="mdfy_auth3" value="Y">&nbsp;&nbsp;Y&nbsp;&nbsp;
+									<input type="radio" id="mdfy_auth3" name="mdfy_auth3" value="N">N
 								</td>
 								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>삭제권한&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="del_auth3" name="del_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
+									<input type="radio" id="del_auth3" name="del_auth3" value="Y">&nbsp;&nbsp;Y&nbsp;&nbsp;
+									<input type="radio" id="del_auth3" name="del_auth3" value="N">N
 								</td>
 							</tr>
 							<tr height="15px"></tr>
 							<tr height="15px">
 								<th style="width: 12%; text-align: right;"><span style="color:red;">*</span>메뉴접근권한</th>
 								<td style="width: 38%; text-align: left;">
-									<select id="menu_acc_auth3" name="menu_acc_auth3" style="width: 30%;font-size:10.5px;">
-									    <option value="">선택</option>
-									    <option value="Y">Y</option>
-									    <option value="N">N</option>
-									</select>
+									<input type="radio" id="menu_acc_auth3" name="menu_acc_auth3" value="Y">&nbsp;&nbsp;Y&nbsp;&nbsp;
+									<input type="radio" id="menu_acc_auth3" name="menu_acc_auth3" value="N">N
 								</td>
 							</tr>
 							<tr height="50px"></tr>
