@@ -19,7 +19,7 @@
 					,(
 						SELECT DISTINCT menu_nm 
 						FROM TB_menu
-						WHERE up_menu_cd = m.menu_cd
+						WHERE m.up_menu_cd = menu_cd
 					  ) as up_menu_nm
 					,m.active_flg
 				FROM TB_MENU m
@@ -66,7 +66,7 @@
 			,(
 				SELECT DISTINCT menu_nm 
 				FROM TB_menu
-				WHERE up_menu_cd = m.menu_cd
+				WHERE m.up_menu_cd = menu_cd
 			) as up_menu_nm
 			,m.active_flg
 		FROM TB_MENU m
@@ -137,12 +137,12 @@
 					,(
 						SELECT DISTINCT menu_nm 
 						FROM TB_menu
-						WHERE up_menu_cd = m.menu_cd
+						WHERE m.up_menu_cd = menu_cd
 					  ) as up_menu_nm
-					,m.active_flg
 				FROM TB_MENU m
 				WHERE
 					m.del_flg='N'
+					and m.active_flg='Y'
 					<if test="menu_nm_key != null">
 						and m.menu_nm like '%'||#{menu_nm_key}||'%'
 					</if>
