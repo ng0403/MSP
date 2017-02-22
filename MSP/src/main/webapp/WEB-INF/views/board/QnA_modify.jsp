@@ -93,7 +93,7 @@ $("#board_modify_fbtn").on("click", function(){
 /* 	alert("go1"); 
 	formObj.submit(); */
 	
-	$("form[name='modifyForm']").attr("action", "${ctx}/board/board_modify").submit();
+	$("form[name='modifyForm']").attr("action", "${ctx}/board/QnA_modify").submit();
 	
 }) 		
 });

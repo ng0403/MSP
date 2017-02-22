@@ -71,12 +71,12 @@ values (
  </delete>
  
  
- <select id="ajaxList" resultType="map">
+ <select id="ajaxList" resultType="com.msp.cp.boardmng.vo.BoardMngVO">
  
  SELECT
-  BOARD_MNG_NO, BOARD_MNG_CD, BOARD_NM, CREATED, ACTIVE_FLG
+  BOARD_MNG_NO, BOARD_MNG_CD, BOARD_NM, to_char(to_date(CREATED,'yy-mm-dd hh:mi'),'yyyy-mm-dd hh:mm') CREATED, ACTIVE_FLG
 FROM TB_BOARD_MNG
-WHERE ACTIVE_FLG='Y'
+ 
  </select>
  
  <select id="codetxt" parameterType="String" resultType="map">

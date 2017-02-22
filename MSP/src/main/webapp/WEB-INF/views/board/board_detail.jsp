@@ -39,7 +39,8 @@
 
 <div>
 <label for="created_by">${boardlist.CREATED_BY}</label> 
-<label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label> 
+<%-- <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label>  --%>
+<label for="created"> ${boardlist.CREATED} </label>
 <label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label>
 <label> <a href="/board/file_down?FILE_CD='${boardlist.FILE_CD}'">${boardlist.FILE_NM}</a></label>
 </div> 
@@ -88,7 +89,8 @@ $("#board_list_fbtn").on("click", function(){
 
  function remove_reply(e){ 
 		var REPLY_NO = e;
-		 
+		
+		if(confirm("정보를 삭제 하시겠습니까?")){
 		 $.ajax({
 				url : '/reply/reply_remove/',
 				headers : {
@@ -109,7 +111,7 @@ $("#board_list_fbtn").on("click", function(){
 				} 
 		         
 				}) 
-		 
+		}
 	}
 	
 function ajax_list(){
@@ -177,7 +179,7 @@ $(document).ready(function(){
  
  $("#board_remove_fbtn").on("click", function(){
 	 var formObj1 = $("form[role='form1']");
-	 if(confirm("삭제 하시겠습니까?")){
+	 if(confirm("정보를 삭제 하시겠습니까?")){
 	 formObj1.attr("action", "/board/detail_remove");
 	 formObj1.attr("method", "post");
 	 formObj1.submit();

@@ -112,6 +112,21 @@ public class BoardDaoImpl implements BoardDao {
 		
 	}
 
+	@Override
+	public List<BoardVO> QnAajaxlist() {
+		 
+		return sqlSession.selectList("QnAajaxlist");
+	}
+
+	@Override
+	public void viewadd(int BOARD_NO) {
+		
+		sqlSession.update("viewadd",BOARD_NO);
+		
+	}
+
+
+
 
  
 

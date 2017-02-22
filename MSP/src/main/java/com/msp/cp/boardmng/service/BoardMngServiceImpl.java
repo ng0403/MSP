@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.msp.cp.board.vo.BoardVO;
 import com.msp.cp.boardmng.dao.BoardMngDao;
 import com.msp.cp.boardmng.vo.BoardMngVO;
 import com.msp.cp.common.PagerVO;
@@ -60,7 +61,7 @@ public class BoardMngServiceImpl implements BoardMngService {
 	}
 
 	@Override
-	public List<Object> ajaxlist() {
+	public List<BoardMngVO> ajaxlist() {
 
 		return boardmngDao.ajaxlist();
 	}

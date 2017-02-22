@@ -6,6 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -109,7 +111,7 @@
 	</div>
 	
 	<div id = "button_div1">
-		<input type="button" id="btn btn-primary btn-sm" class = "btn btn-default" value="저장"/>
+		<input type="button" class = "btn btn-primary btn-sm" id="board_mng_add_fbtn"  value="저장"/>
 		<input type="button" class="btn btn-primary btn-sm" id="board_cancle_fbtn" value="취소"/>
 	</div>
 

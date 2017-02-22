@@ -32,8 +32,9 @@
 
 <div>
 <label for="created_by">${boardlist.CREATED_BY}</label> 
-<label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label> 
-<label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label>
+<%-- <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label> --%>
+<label for="created">${boardlist.CREATED}</label>
+ <label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label>
 </div> 
 
 <div> <!-- 내용 div -->

@@ -69,15 +69,19 @@ public class BoardController {
 		System.out.println("hi detail" + BOARD_NO);
 		BoardVO vo = boardService.detail(BOARD_NO);
 		String FILE_CD = vo.getFILE_CD();
-		System.out.println("fileCD" + FILE_CD);
+		
+		boardService.viewadd(BOARD_NO);
+	
 		
 		if(FILE_CD == null)
 		{
- 		 model.addAttribute("boardlist", boardService.detail(BOARD_NO));
+		  
+			model.addAttribute("boardlist", boardService.detail(BOARD_NO));
 		}
 		else
 		{ 
-		 model.addAttribute("boardlist", boardService.ReadFilePage(BOARD_NO));
+			 
+			model.addAttribute("boardlist",  boardService.ReadFilePage(BOARD_NO));
 		}
 			
   		System.out.println("board_detail" + model.toString()); 
@@ -241,15 +245,33 @@ public class BoardController {
 	    }
 	    return entity;
 		 
-		
 	}
 	
 	
+	@RequestMapping(value="/QnAajax_list", method=RequestMethod.POST) 
+	 @ResponseBody
+	public ResponseEntity<List<BoardVO>> QnAajax_list(){ 
+		
+		System.out.println("QnAajax List Entering");
+
+		ResponseEntity<List<BoardVO>> entity = null;
+	    try {
+	      entity = new ResponseEntity<>(boardService.QnAajaxlist(), HttpStatus.OK);
+	      System.out.println("entity? "+ entity);
+	      System.out.println("insert entity" + entity);
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+	    }
+	    return entity; 
+	    
+	}
+	
 	
 	@RequestMapping(value="/search_boardInqr", method={RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody Map<String, Object> search_QnA_list( ModelMap model, HttpServletRequest request,
+	public @ResponseBody Map<String, Object> search_board_list( ModelMap model, HttpServletRequest request,
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
-		System.out.println("search entering");
+		System.out.println("search entering1111");
  		String keyword    = request.getParameter("keyword");
 	    
 	    Map<String,Object> map = new HashMap<String,Object>();
@@ -278,6 +300,7 @@ public class BoardController {
 
 		return model;
 	}
+	 
 	
 	@RequestMapping(value = "/file_down", method = RequestMethod.GET)
 	public void downloadFile(

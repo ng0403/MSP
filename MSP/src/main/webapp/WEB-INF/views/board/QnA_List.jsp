@@ -34,29 +34,29 @@
  <div class="search2_div">
 <!-- Q&A 리스트, 조회화면 -->
 	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
-		<div id="inputDiv">
-				<label for="user_id">질문유형 :</label>
-					 <select id="qna_type" name="qna_type">
+	 
+				<!-- <label for="user_id">질문유형 :</label> -->
+					<!--  <select id="qna_type" name="qna_type">
 					    <option value=""> -- 선택 -- </option>
  							<option value="Y">Y</option>
  							<option value="N">N</option>
- 					</select>
+ 					</select> -->
 						<label>답변	 :</label>
 					<select id="qna_answer" name="qna_answer">
 					    <option value=""> -- 답변 -- </option>
  							<option value="Y">Y</option>
  							<option value="N">N</option>
  					</select>
-				<label for="keyword">제목 :</label>
-					<input type="text" id="keyword" name="keyword"	/>&nbsp; 
+				 <label for="keyword">제목 :</label>
+				 <input type="text" id="keyword" name="keyword"	/>&nbsp; 
 				 <input type="button" class="btn btn-default btn-sm" onclick="QnAListInqr(1);" value="검색">
+		 
 				</form> 
-</div>
-</div>
- 
+				</div>
+</div> 
  
 <div class="list_div">
- <div class="list1_div">
+ <div class="list1_div" id="list1_div">
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table class="table table-hover">
 						<thead>
@@ -78,7 +78,7 @@
 
 								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
    								<td>${boardVO.BOARD_NO}</td>
-   								<td>${boardVO.QUESTION_TYPE_CD}</td>
+   								<td>${boardVO.CODE_TXT}</td>
    								<td>${boardVO.ANSWER_FLG}</td>
 								<td><a href="/board/QnA_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
 								<td>${boardVO.CREATED_BY} </td>
@@ -94,7 +94,7 @@
 				</div>	
 		 <div class="paging_div">
 		 <div class="left">
-		 <input type="button" id = "board_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-default" value="삭제"  onclick="deleteAction() "/>
+		 <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
 		 
 		</div>
 		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
@@ -149,6 +149,10 @@ $("#board_add_fbtn").on("click", function(){
 	location.href="/board/QnA_insert";
 	
 })
+
+
+
+
   
 
 /* 삭제(체크박스된 것 전부) */
@@ -173,49 +177,19 @@ $("#board_add_fbtn").on("click", function(){
  		            "X-HTTP-Method-Override" : "POST"
  		         },
  				data : del_code,
- 				dataType : 'json',
+ 				dataType : 'text',
  				processData: false,
  				contentType: false,
  				type: 'POST',
  				success : function(result) {
- 					alert("hello ajax");
- 					
- 					var ajaxList = result.data; 
- 						
- 					var liststr = "";
- 					var liststr1 = "";
- 					var liststr2 = "";
- 					
- 				 	var list = ajaxList.length;
- 				 	alert("list" + list);  
- 				 	
- 				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
-										"<tr>" +
-									"<th>" +
-										"<input id='checkall' type='checkbox'/>" +
-									"<th>번호</th>" +
-									"<th>제목</th>" +
-									"<th>작성자</th>" +
-									"<th>작성일</th>" +
-									"<th>조회수</th>" +
-									"</tr>";
- 				 	
-					for(var i=0 ; i<ajaxList.length; i++) {  
-						 liststr1  +=    "<tr>" +
-  										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_NO + "/>" +
- 										"<td>" + ajaxList[i].BOARD_NO + "</td>" +
- 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_NO + "\">" + ajaxList[i].TITLE + "\</a> </td>" +
- 										"<td>" + ajaxList[i].CREATED_BY + "</td>" +
- 										"<td>" + ajaxList[i].CREATED + "</td>" +
- 										"<td>" + ajaxList[i].VIEW_CNT + "</td>" +
- 										"</tr>";
-  								
- 				 	}
-					
-					liststr2 +=  "</table>";
- 					
- 					var boardtable = document.getElementById("list1_div");
- 					boardtable.innerHTML = liststr + liststr1 + liststr2;
+ 					alert("들어왔다");
+ 					if(result =="success")
+						{
+						QnAajaxList();
+						}
+					else{
+						alert("오류!");
+					}
   					 
 
  				} ,  error:function(request,status,error){
@@ -263,6 +237,67 @@ $("#board_add_fbtn").on("click", function(){
 	
 	
 	
+	
+function QnAajaxList() {
+ 		
+ 		$.ajax({
+				url : '/board/QnAajax_list',
+				headers : {
+		            "Content-Type" : "application/json",
+		            "X-HTTP-Method-Override" : "POST"
+		         },
+				data : "",
+				dataType : 'json',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				success : function(result) {
+   
+					var ajaxList = result; 
+ 					var liststr = "";
+					var liststr1 = "";
+					var liststr2 = "";
+					
+				 	var list = ajaxList.length;
+ 				 	
+				 	liststr    += "<table class='table table-hover'>" +
+									"<tr>" +
+								"<th>" +
+									"<input id='checkall' type='checkbox'/>" +
+								"<th>번호</th>" +
+								"<th>질문유형</th>" +
+								"<th>답변상태</th>" +
+								"<th>제목</th>" +	
+								"<th>작성자</th>" +
+								"<th>작성일</th>" +
+								"<th>조회수</th>" +
+								"</tr>";
+				 	
+				for(var i=0 ; i<ajaxList.length; i++) {  
+					 liststr1  +=    "<tr>" +
+										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].board_NO + "/>" +
+										"<td>" + ajaxList[i].board_NO + "</td>" +
+										"<td>" + ajaxList[i].code_TXT + "</td>" +
+		   								"<td>" + ajaxList[i].answer_FLG  + "</td>" +
+ 										"<td><a href=\"/board/QnA_detail?BOARD_NO=" + ajaxList[i].board_NO + "\">" + ajaxList[i].title + "\</a> </td>" +
+										"<td>" + ajaxList[i].created_BY + "</td>" +
+										"<td>"+ ajaxList[i].created +" </td>" + 
+										"<td>" + ajaxList[i].view_CNT + "</td>" +
+										"</tr>";
+								
+				 	}
+				
+				liststr2 +=  "</table>";
+					
+					var boardtable = document.getElementById("list1_div");
+					boardtable.innerHTML = liststr + liststr1 + liststr2; 
+					 
+
+				}  
+				})
+ 	}
+	
+	
 	//사용자관리 페이징
 	function boardPaging(pageNum) {
  		$(document).ready(function() {
@@ -291,19 +326,19 @@ $("#board_add_fbtn").on("click", function(){
 	/*리스트 출력및 페이징 처리 함수*/
 	function QnAListInqr(pageNum){
  		var qna_answer = $("#qna_answer").val();
-		var keyword    = $("#keyword").val();
-		
-		$.post("/board/search_QnaInqr",{"qna_answer":qna_answer, "keyword":keyword, "pageNum":pageNum}, function(data){
+		var keyword    = $("#keyword").val(); 
+		$.post("/board/search_QnAInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
 			$(".qna_list").html("");
 			$(data.qna_list).each(function(){
   				var BOARD_NO = this.board_NO;
-				var QUESTION_TYPE_CD = this.question_TYPE_CD;
+				var CODE_TXT = this.code_TXT;
 				var ANSWER_FLG = this.answer_FLG;
 				var TITLE = this.title;
 				var CREATED_BY = this.created_BY;
 				var CREATED  = this.created;
+			 
 				var VIEW_CNT = this.view_CNT;
-				qnaListOutput(BOARD_NO, QUESTION_TYPE_CD, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT);
+				qnaListOutput(BOARD_NO, CODE_TXT, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
 			paging(data,"#paging_div", "QnAListInqr");
 		}).fail(function(){
@@ -313,7 +348,7 @@ $("#board_add_fbtn").on("click", function(){
 	
 	  
 	/* 리스트 출력 함수 */
-	function qnaListOutput(BOARD_NO, QUESTION_TYPE_CD, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT){
+	function qnaListOutput(BOARD_NO, CODE_TXT, ANSWER_FLG, TITLE, CREATED_BY, CREATED, VIEW_CNT){
 	
 		var qna_Tr = $("<tr>");
  	
@@ -324,7 +359,7 @@ $("#board_add_fbtn").on("click", function(){
  		board_no_td.html(BOARD_NO);
 		
 		var question_type_cd_td = $("<td>");
-		question_type_cd_td.html(QUESTION_TYPE_CD);
+		question_type_cd_td.html(CODE_TXT);
 		
 		var answer_flg_td = $("<td>");
 		if(ANSWER_FLG=='Y'){
@@ -340,7 +375,7 @@ $("#board_add_fbtn").on("click", function(){
 		created_by_td.html(CREATED_BY);
 		
 		var created_td =$("<td>");
-		created_td.html(CREATED_BY);
+		created_td.html(CREATED);
 		
 		var view_cnt_td =$("<td>");
 		view_cnt_td.html(VIEW_CNT);

@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 
 
+
 <div class="main_div">
  <div class="navi_div">
 게시판 > 리스트
@@ -42,7 +43,7 @@
  </div>
 
 <div class="list_div">
-			<div class="list1_div">  
+			<div class="list1_div" id ="list1_div">  
  <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table  class="table table-hover" >
 					<thead>
@@ -141,7 +142,7 @@ $("#board_add_fbtn").on("click", function(){
 	function deleteAction() {
 		var del_code = "";
 		$("input[name='del_code']:checked").each(function() {
-			del_code = del_code + $(this).val() + ",";
+			del_code = del_code + $(this).val() + ","; 
  		}); 
 		 
 		if (del_code == '') {
@@ -149,8 +150,7 @@ $("#board_add_fbtn").on("click", function(){
 			return false;
 		}
  
-		if (confirm("정보를 삭제 하시겠습니까?")) {
-
+		if (confirm("정보를 삭제 하시겠습니까?")) { 
  			$.ajax({
  				url : '/board/board_remove',
  				headers : {
@@ -195,14 +195,14 @@ $("#board_add_fbtn").on("click", function(){
 				type: 'POST',
 				success : function(result) {
    
-					 var ajaxList = result; 
+					var ajaxList = result; 
  					var liststr = "";
 					var liststr1 = "";
 					var liststr2 = "";
 					
 				 	var list = ajaxList.length;
  				 	
-				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
+				 	liststr    += "<table  class='table table-hover' >" +
 									"<tr>" +
 								"<th>" +
 									"<input id='checkall' type='checkbox'/>" +
@@ -219,8 +219,8 @@ $("#board_add_fbtn").on("click", function(){
 										"<td>" + ajaxList[i].board_NO + "</td>" +
 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].board_NO + "\">" + ajaxList[i].title + "\</a> </td>" +
 										"<td>" + ajaxList[i].created_BY + "</td>" +
-										"<td>"+ ajaxList[i].created +" </td>" + 
-										"<td>" + ajaxList[i].view_CNT + "</td>" +
+										"<td>" + ajaxList[i].created + "</td>" + 
+ 										"<td>" + ajaxList[i].view_CNT + "</td>" +
 										"</tr>";
 								
 				 	}
@@ -300,16 +300,17 @@ $("#board_add_fbtn").on("click", function(){
 	function boardListInqr(pageNum){
 		
  		var keyword    = $("#keyword").val();
- 		alert(keyword);
+ 		 
  		$.post("/board/search_boardInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
 			
  			$(".board_list").html(""); 
 			$(data.qna_list).each(function(){
-				alert("gg");
+				 
    				var BOARD_NO = this.board_NO;
   				var TITLE = this.title;
 				var CREATED_BY = this.created_BY;
 				var CREATED  = this.created;
+				 
 				var VIEW_CNT = this.view_CNT;
 				boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})
@@ -338,7 +339,7 @@ $("#board_add_fbtn").on("click", function(){
 		created_by_td.html(CREATED_BY);
 		
 		var created_td =$("<td>");
-		created_td.html(CREATED_BY);
+		created_td.html(CREATED);
 		
 		var view_cnt_td =$("<td>");
 		view_cnt_td.html(VIEW_CNT);

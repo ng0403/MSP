@@ -12,6 +12,9 @@
 <body>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
+<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
@@ -92,7 +95,7 @@
 	</div>
 	
 	<div>
-	<input type="button" id="board_mng_add_fbtn" class = "btn btn-default" value="추가"/> <input type="button" class="btn btn-default" id="board_list_fbtn" value="목록"/>
+	<input type="button" id="board_mng_add_fbtn" class = "btn btn-primary btn-sm" value="저장"/> <input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
 	</div>
 
 </div>
@@ -116,8 +119,7 @@ $("#board_list_fbtn").on("click", function(){
  
  function fn_SelectBox(e){
 	 
-	var CODE_TXT = e; 
-	
+	var CODE_TXT = e;  
  	 
 	 $.ajax({
 	 				url : '/board_mng/board_mng_codetxt',

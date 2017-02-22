@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.msp.cp.board.vo.BoardVO;
 import com.msp.cp.boardmng.service.BoardMngService;
 import com.msp.cp.boardmng.vo.BoardMngVO;
 import com.msp.cp.common.PagerVO;
@@ -25,8 +28,7 @@ public class BoardMngController {
 	@Autowired
 	BoardMngService boardmngService;
 	
-	
-	@RequestMapping("/boardmngInqr")
+	@RequestMapping(value="/boardmngInqr", method=RequestMethod.GET) 
 	public ModelAndView boardmngList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
 		System.out.println("board_mng_list entering");
 		System.out.println("pagenum" + pageNum);
@@ -97,11 +99,11 @@ public class BoardMngController {
 	
 	@RequestMapping(value="/board_mng_remove" ,method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> board_mng_remove(@RequestBody String del_code){
+	public ResponseEntity<String> board_mng_remove(@RequestBody String del_code){
 		System.out.println("remove insert" + del_code);
 		 
 		String[] delcode = del_code.split(",");
-		
+		ResponseEntity<String> entity = null;
 		
 		for(int i = 0; i < delcode.length; i++)
 		{
@@ -109,16 +111,15 @@ public class BoardMngController {
 			System.out.println("delete..." + dc);
 			boardmngService.remove(dc);
 			System.out.println("success"); 
-		} 
-		
-		Map<String, Object> map = new HashMap<String, Object>(); 
-
-		 List<Object> ajaxlist =  boardmngService.ajaxlist(); 
-	     map.put("data", ajaxlist);
-	     System.out.println("ajax map? " + map.toString());
-		
- 	     
-		return map;
+			
+			if(i == delcode.length-1)
+			{
+		 	      entity = new ResponseEntity<>("success", HttpStatus.OK);
+		 	      System.out.println(entity);
+			}
+		}  
+	     
+	    return entity;
 		
 	}
 	
@@ -134,5 +135,47 @@ public class BoardMngController {
 		System.out.println(map);
 		return map;
 	}
+	
+	@RequestMapping(value="/ajax_list", method=RequestMethod.POST) 
+	 @ResponseBody
+	public ResponseEntity<List<BoardMngVO>> ajax_list(){ 
+		
+		System.out.println("ajax List Entering");
+
+		ResponseEntity<List<BoardMngVO>> entity = null;
+	    try {
+	      
+	     List<BoardMngVO> vo = boardmngService.ajaxlist();
+	     String ACTIVE_FLG;
+	     String ACTIVE_FLGS = "Y";
+	     for(int i = 0; i< vo.size() ; i++){ 
+	     ACTIVE_FLG = vo.get(i).getACTIVE_FLG(); 
+	     System.out.println("ACTIVE_FLG" + ACTIVE_FLG);
+ 	     boolean A = ACTIVE_FLG.equals(ACTIVE_FLGS);
+ 	     
+	    if(A == true)
+	     { 
+	    	 System.out.println("True" );
+ 	    	 vo.get(i).setACTIVE_FLG("활성화");
+	     }
+	     else{ 
+	    	 System.out.println("False");
+ 	    	 vo.get(i).setACTIVE_FLG("비활성화"); 
+	    }
+	    
+	      entity = new ResponseEntity<>(vo, HttpStatus.OK);
+ 	      System.out.println("entity? "+ entity);
+	      System.out.println("insert entity" + entity);
+	     }
+	      
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+	    }
+	    return entity;
+		 
+	}
+	
+	
 
 }
