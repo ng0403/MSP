@@ -92,17 +92,39 @@ function excelImportOpen() {
 }
 //사용자 신규등록 팝업	
 function userTabOpen() {
+//	opener.location.href = "userTab";
+//	$("#userTab_pop_div").show();
+//	$("#userDetail_pop_div").hide();
+		var popWidth  = '650'; // 파업사이즈 너비
+		var popHeight = '450'; // 팝업사이즈 높이
+		var winHeight = document.body.clientHeight;	// 현재창의 높이
+		var winWidth = document.body.clientWidth;	// 현재창의 너비
+		var winX = window.screenLeft;	// 현재창의 x좌표
+		var winY = window.screenTop;	// 현재창의 y좌표
+	
+		var popX = winX + (winWidth - popWidth)/2;
+		var popY = winY + (winHeight - popHeight)/2;
 		var popUrl = "userTab";
-		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-		window.open(popUrl, "", popOption);
+		var popOption = "width=650, height=500, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+		window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 	}
+
 //사용자 정보 수정 팝업
 function onPopup(id) {
+	var popWidth  = '650'; // 파업사이즈 너비
+	var popHeight = '540'; // 팝업사이즈 높이
+	var winHeight = document.body.clientHeight;	// 현재창의 높이
+	var winWidth = document.body.clientWidth;	// 현재창의 너비
+	var winX = window.screenLeft;	// 현재창의 x좌표
+	var winY = window.screenTop;	// 현재창의 y좌표
+
+	var popX = winX + (winWidth - popWidth)/2;
+	var popY = winY + (winHeight - popHeight)/2;
 	var tmp = id;//$("#user_id_h").val();
 	var popUrl = "userMdfyPop?user_id=" + tmp; //팝업창에 출력될 페이지 URL
-	var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;"; //팝업창 옵션(optoin)
+	var popOption = "width=650, height=600, resize=no, scrollbars=no, status=no, location=no, directories=no;"; //팝업창 옵션(optoin)
 
-	window.open(popUrl, "", popOption);
+	window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 }
 
 //엑셀 파일 추가 fucntion

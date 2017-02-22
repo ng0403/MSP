@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  
 <!DOCTYPE html>
@@ -10,19 +9,22 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" /> --%>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>리스트</title>
 <script type="text/javascript">
 $(document).ready(function() { 
+
+	$("#userTab_pop_div").hide();
+	$("#userDetail_pop_div").hide();
 	var result = ${result}
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
@@ -166,6 +168,7 @@ $(document).ready(function() {
 	</div> 
 	<div class="paging_div">
 				<div class="left">
+<!-- 					<input type="button" id="iuserListAddBtn" onclick="location.href='joinUs.jsp'"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" /> -->
 					<input type="button" id="iuserListAddBtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
 					<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
 				</div>
@@ -204,7 +207,12 @@ $(document).ready(function() {
 				</div>
 			</div>
 	</div>
-	
+	<div id="userTab_pop_div" style="font-size:11.5px;">
+		<jsp:include page="../user/user_tab.jsp"></jsp:include>
+	</div> 
+	<div id="userDetail_pop_div" style="font-size:11.5px;">
+		<jsp:include page="../user/user_detail.jsp"></jsp:include>
+	</div> 
 </div>
 
 </body>

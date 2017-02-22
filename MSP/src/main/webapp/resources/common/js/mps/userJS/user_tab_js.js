@@ -1,3 +1,9 @@
+//window.showmodalDialog close
+function ln_Close(e) {
+            window.returnValue = "ok"
+            window.close();
+        }
+
 /* 리스트 클릭 시 팝업 숨김. */
 	function hideModal(){
  		$('#dept_pop_div').hide();
