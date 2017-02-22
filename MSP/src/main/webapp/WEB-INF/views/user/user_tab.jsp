@@ -4,7 +4,6 @@
 <html>
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<c:set var="entry_flg" value="${entry_flg}" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <%-- <script src="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css"></script> --%>
@@ -36,10 +35,9 @@
      	    return this;
      	}
 		
-		var entry_flg = $('#entry_flg').val();
 // 		var tmp = $('#user_id').val();
 		
-		if(entry_flg == 1)
+		if(tmp == null)
 		{
 			//$('#addsave_btn').CSS('display', "hidden");
 			$('#joinform').find('input[type="text"]').attr('disabled',false).attr('readonly', false);
@@ -65,15 +63,15 @@
 		
 		//추가 버튼
 			$("#submit_btn").on("click", function() {
-				var entry_flg = $('#entry_flg').val();
 				var tmp = $('#user_id').val();
+				alert(tmp);
 				var user_pwd = $('#user_pwd').val();
 				var user_pwd_chk = $('#user_pwd_chk').val();
 				var rank_cd = $("#rank_cd option:selected").val();
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
-				if(entry_flg != 1){
+				if(tmp != null){
 					alert("이미 존재하는 계정입니다.");
 				}else{
 					if(tmplength > 0){
@@ -88,12 +86,12 @@
 			});
 		//편집 버튼 
 			$("#modify_btn").on("click", function() {
-				var entry_flg = $('#entry_flg').val();
 				var tmp = $('#user_id').val();
+				alert(tmp);
 				$('created_by').val(tmp);
 				
 				var tmplength = tmp.length;
-				if(entry_flg != 1){
+				if(tmp != null){
 					$('#joinform').find('input[type="text"]').attr('disabled',false);
 					$('#joinform').find('input[type="password"]').attr('disabled',false);
 					$('#joinform').find('input[type="button"]').attr('disabled',false);
@@ -109,13 +107,13 @@
 			});
 		//편집 저장 버튼
 			$("#modifysave_btn").on("click", function() {
-				var entry_flg = $('#entry_flg').val();
 				var tmp = $('#user_id').val();
+				alert(tmp);
 				var user_pwd = $('#user_pwd');
 				var user_pwd_chk = $('#user_pwd_chk');
 				var rank_cd = $("#rank_cd option:selected").val();
 				var tmplength = tmp.length;
-				if(entry_flg != 1){
+				if(tmp != null){
 					//passwordCheck();
 					if(passwordCheck() == true){
 						$('form').attr("action", "${ctx}/user/userMdfy?user_id = "+tmp).submit();
@@ -140,6 +138,10 @@
 			var user_nm_pop = $(this).attr("user_nm_pop");
 			$('#dept_cd').val(dept_cd_pop);
 			$('#dept_nm').val(user_nm_pop);
+			var dept_cd_pop = $(this).attr("Ddept_cd_pop");
+			var user_nm_pop = $(this).attr("Duser_nm_pop");
+			$('#Ddept_cd').val(dept_cd_pop);
+			$('#Ddept_nm').val(user_nm_pop);
 		});
 	}); 
 		
@@ -147,9 +149,10 @@
  </script>
 </head>
 <body>
+<div id="userTabMask" class="mask_div"></div>
 	<input type="hidden" id="ctx" value="${ctx}">
 		<!-- Modal Main Div -->
-	<div class="modalL_main_div">
+	<div class="Npop_main_div" id="userTabWindow">
 		
 		<!-- Modal Navigation Div -->
 		<div class="modalL_navi_div">
@@ -160,7 +163,6 @@
 			<form method="post" id="joinform" >
 				<table >
 					<tbody >
-					<input type="hidden" id="entry_flg" name="entry_flg" value="${entry_flg}">
 						<tr>
 							<th style="padding-left: 1%; text-align: right;" >사용자ID</th>
 							<td style=" padding-left: 1%;width: 25%;">
