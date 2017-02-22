@@ -13,6 +13,9 @@
 		<if test="grp_cd != null and grp_cd != ''">
 			AND TM.grp_cd = #{grp_cd}
 		</if>
+		<if test="grp_nm != null and grp_nm != ''">
+			AND TM.GRP_NM LIKE '%' || #{grp_nm} || '%'
+		</if>
 	</select>
 
 	<select id="searchCodeList" parameterType="int" resultType="map">

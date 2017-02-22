@@ -216,7 +216,7 @@ function viewLoadingHide(){
 			<div class="list_div1">
 				<div class="table_div">
 				<form name="delAllForm" id="delAllForm" method="post" action="menuAuthDel">
-					<table id="mastertable" class="table table-bordered">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<td align="center"><input id="checkall" type="checkbox" /></td>
@@ -272,27 +272,27 @@ function viewLoadingHide(){
 					<c:choose>
 						<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 							<a style="color: black; text-decoration: none;">/ 1</a>
 							<a style="color: black; text-decoration: none;">▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
-							<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-							<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum">▶</a>
+							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+							<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
-							<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
-							<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+							<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
+							<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a style="color: black; text-decoration: none;">▶</a>
 						</c:when>
 						<c:otherwise>
-							<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
-							<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-							<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum">▶</a>
+							<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
+							<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);;" style="width: 15%;" />
+							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+							<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 						</c:otherwise>
 					</c:choose>
 				<!-- class="page1" -->
@@ -336,6 +336,14 @@ function viewLoadingHide(){
 		$("#menu_nm_sch").keypress(function(){
 			enterSearch(event, fn_search);
 		});
+		
+		//페이지 엔터시 이벤트
+		$(document).on("keypress","#pageInput",function(){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+    		if (keycode == '13') {
+				pageInputRep(event, fn_search);
+    		}
+		});
 
 		
 		//페이지 엔터키 기능
@@ -363,68 +371,11 @@ function viewLoadingHide(){
 					}
 					else 
 					{
-						userPaging(pageNum);
+						fn_search(pageNum);
 					}
 				}
 				event.stopPropagation();
 			});
-		}				
-	
-		//사용자관리 페이징
-		function userPaging(pageNum) 
-		{
-			var auth_id_sch = $("#auth_id_sch").val();
-			var menu_nm_sch = $("#menu_nm_sch").val();
-			var tbody = $("#menuAuthListTbody");
-			var contents = "";
-			
-			// Ajax를 이용해서 페이지 리스트 출력해줘야 하는부분.
-			$.ajax({
-				url      : 'menuAuth_list',
-				type     : 'POST',
-				dataType : 'json',
-				data     : {
-					"auth_id_sch":auth_id_sch, "menu_nm_sch":menu_nm_sch, "pageNum":pageNum
-				},
-				success  : function(data) {
-					tbody.empty();
-					var menuAuthInqrList = data.menuAuthInqrList;
-												
-					if(menuAuthInqrList.lenght != 0)
-					{
-						for(var i=0; i<menuAuthInqrList.length; i++)
-						{
-							var menu_cd   = menuAuthInqrList[i].MENU_CD;
-							var menu_nm   = menuAuthInqrList[i].MENU_NM;
-							var auth_id   = menuAuthInqrList[i].AUTH_ID;
-							var auth_nm   = menuAuthInqrList[i].AUTH_NM;
-							var inqr_auth = menuAuthInqrList[i].INQR_AUTH;
-							var add_auth  = menuAuthInqrList[i].ADD_AUTH;
-							var mdfy_auth = menuAuthInqrList[i].MDFY_AUTH;
-							var del_auth  = menuAuthInqrList[i].DEL_AUTH;
-							var menu_acc_auth = menuAuthInqrList[i].MENU_ACC_AUTH;
-							
-							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
-							+"<td align='center' scope='row'>"
-							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+":"+auth_id+"'></td>"
-							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"
-		    				+"<td>"+menu_nm+"</td>"
-		    				+"<td>"+auth_nm+"</td>"
-							+"<td>"+inqr_auth+"</td>"
-							+"<td>"+add_auth+"</td>"
-							+"<td>"+mdfy_auth+"</td>"
-							+"<td>"+del_auth+"</td>"
-							+"<td>"+menu_acc_auth+"</td>"
-							+"</tr>";
-						}
-					}
-					
-					tbody.append(contents);
-					
-					paging(data, "#menuAuthPagingDiv", "fn_search");
-				}
-			});
-			
 		}
 		
 		// 검색 버튼 클릭시

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 import com.msp.cp.menuAuth.dao.MenuAuthDao;
 import com.msp.cp.menuAuth.vo.MenuAuthVO;
 
