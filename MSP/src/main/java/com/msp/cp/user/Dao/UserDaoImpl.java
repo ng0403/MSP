@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 	
 //	사용자관리 리스트 
 	@Override
-	public List<userVO> searchListUser(Map<String,Object> map) {
+	public List<userVO> searchListUser(Map map) {
 		System.out.println("9. DaoImpl User List Search Dao Impl");
 		System.out.println("10. DaoImpl map. toString : " + map.toString());
 		System.out.println("11. DaoImpl endRow : " + map.get("endRow"));

@@ -29,6 +29,13 @@ $(document).ready(function() {
 	var menu_cd = "";
 	var save_cd = "";
 	
+	/*부서명 클릭 시 상세정보 출력 이벤트*/
+	$(document).on("click", ".open_detail", function(){
+		var user_id_pop = $(this).attr("user_id_pop");
+		$('#user_id').val(user_id_pop);
+		onPopup(user_id_pop);
+	})
+	
 	$(function(){
 		/*테스트 입력제어*/
 // 		pageReady(true);
@@ -108,13 +115,13 @@ $(document).ready(function() {
 			<table summary="menu_list_tb" class="table table-hover">
 					<colgroup>
 						<col width="5%">
-						<col width="25%">
-						<col width="25%">
-						<col width="25%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
 						<col width="20%">
 						<col width="20%">
-						<col width="20%">
-						<col width="20%">
+						<col width="10%">
+						<col width="10%">
 					</colgroup>
 					<thead>
 						<tr>
@@ -132,7 +139,7 @@ $(document).ready(function() {
 								<c:choose>
 									<c:when test="${not empty user_list}">
 										<c:forEach var="user_list" items="${user_list}">
-											<tr class="open_detail" data_num="${user_list.user_id}">
+											<tr class="open_detail" data_num="${user_list.USER_ID}">
 												<td>
 													<input type="checkbox" class="del_point" name="del_code" value="${user_list.USER_ID}">
 												</td>

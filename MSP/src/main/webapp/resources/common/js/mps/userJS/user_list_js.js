@@ -8,16 +8,12 @@
 			, "user_sch_key":user_sch_key
 			, "pageNum":pageNum}
 		, function(data){
-			alert(data);
 			values = data.user_list;
 			$(".user_list").html("");
-			alert(data.toSource());
-//			$(data.user_list).each(function(){
-			$(values).each(function(){
-				alert(data.user_list);
-				alert(this.user_id);
-				alert(data.user_list.user_id);
- 				/*var user_id = this.USER_ID;
+//			alert(data.toSource());
+//			alert(data.user_list.toSource());
+			$(data.user_list).each(function(){
+ 				var user_id = this.USER_ID;
 				var user_nm = this.USER_NM;
 				var dept_nm = this.DEPT_NM;
 				var cphone_num1 = this.CPHONE_NUM1;
@@ -26,17 +22,8 @@
 				var email_id = this.EMAIL_ID;
 				var email_domain = this.EMAIL_DOMAIN;			
 				var auth_nm = this.AUTH_NM;			
-				var active_flg = this.ACTIVE_FLG;*/
-				var user_id = this.user_id;
-				var user_nm = this.user_nm;
-				var dept_nm = this.dept_nm;
-				var cphone_num1 = this.cphone_num1;
-				var cphone_num2 = this.cphone_num2;
-				var cphone_num3 = this.cphone_num3;
-				var email_id = this.email_id;
-				var email_domain = this.email_domain;			
-				var auth_nm = this.auth_nm;			
-				var active_flg = this.active_flg;
+				var active_flg = this.ACTIVE_FLG;
+				
 				userListOutput(user_id, user_nm, dept_nm, email_id, email_domain, cphone_num1 ,cphone_num2, cphone_num3, auth_nm, active_flg);  
 			})
 //			paging(data,"#paging_div", "userListInqr");
@@ -52,16 +39,16 @@
 		user_tr.attr("data_num",user_id);
 		
 		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + menu_cd + "'>");
+		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + user_id + "'>");
 		
 		var user_id_td = $("<td>");
-		user_id_td.html("<input type='text' onclick='' name='user_id' value='" + user_id + "'>");
+		user_id_td.html(user_id);
 		
 		var user_nm_td = $("<td>");
 		user_nm_td.html(user_nm);
 		
 		var dept_td = $("<td>");
-		dept_td.html(dept_cd);
+		dept_td.html(dept_nm);
 		
 		var cphone_num1_td = $("<td>");
 		cphone_num1_td.html(cphone_num1 + "-" + cphone_num2 + "-" + cphone_num3);
@@ -84,7 +71,7 @@
 //엑셀 Import 팝업	
 function excelImportOpen() {
 	var popUrl = "excelImportTab";
-	var popOption = "width=300, height=100, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+	var popOption = "width=520, height=160, resize=no, scrollbars=no, status=no, location=no, directories=no;";
 	window.open(popUrl, "", popOption);
 }
 //사용자 신규등록 팝업	
