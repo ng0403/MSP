@@ -146,6 +146,8 @@ span {
 .main-footer {
 	clear: both;
 }
-
+#pageInput{
+	width: 20%;
+}
 
 
