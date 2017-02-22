@@ -272,25 +272,25 @@ function viewLoadingHide(){
 					<c:choose>
 						<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
 							<a style="color: black; text-decoration: none;">/ 1</a>
 							<a style="color: black; text-decoration: none;">▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
 							<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum">▶</a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
 							<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
 							<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a style="color: black; text-decoration: none;">▶</a>
 						</c:when>
 						<c:otherwise>
 							<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="menuAuthpageNumEnter(event);" style="width: 15%;" />
 							<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum">▶</a>
 						</c:otherwise>
@@ -329,8 +329,17 @@ function viewLoadingHide(){
 		$("#navisub11").show();
 		$("#naviuser").css("font-weight", "bold");
 		
+		$("#auth_id_sch").keypress(function(){
+			enterSearch(event, fn_search);
+		});
+		
+		$("#menu_nm_sch").keypress(function(){
+			enterSearch(event, fn_search);
+		});
+
+		
 		//페이지 엔터키 기능
-		function userpageNumEnter(event, url) 
+		function menuAuthpageNumEnter(event, url) 
 		{
 			$(document).ready(function() {
 				var keycode = (event.keyCode ? event.keyCode : event.which);

@@ -303,6 +303,15 @@ $(document).ready(function() {
 		$("#navisub11").show();
 		$("#naviuser").css("font-weight", "bold");
 		
+		// grp_cd_sch grp_nm_sch
+		$("#grp_cd_sch").keypress(function(){
+			enterSearch(event, fn_search);
+		});
+		
+		$("#grp_nm_sch").keypress(function(){
+			enterSearch(event, fn_search);
+		})
+		
 		//페이지 엔터키 기능
 		function userpageNumEnter(event, url) 
 		{
@@ -377,47 +386,8 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
-					//paging(data, "#codePagingDiv", "fn_search");
-					$("#codePagingDiv").empty();
+					paging(data, "#codePagingDiv", "userPaging");
 					
-					if(data.page.endPageNum == 1)
-					{
-						pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
-						+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
-					}
-					else if(data.page.startPageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else if(data.pageNum == 1)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					else if(data.pageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					$("#codePagingDiv").append(pageContent);
 				}
 			});
 			
@@ -465,47 +435,8 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
+					paging(data, "#codePagingDiv", "fn_search");
 					
-					$("#codePagingDiv").empty();
-						
-					if(data.page.endPageNum == 1)
-					{
-						pageContent = "<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress='pageInputRepUser(event);'/>"  
-						+"<a style='color: black; text-decoration: none;'> / "+data.page.endPageNum+"</a>"
-					}
-					else if(data.page.startPageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%;' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else if(data.pageNum == 1)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.startPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					else if(data.pageNum == data.page.endPageNum)
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.page.endPageNum+"' onkeypress=\"pageInputRepUser(event);\"/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='color:black; text-decoration: none;'>▶</a>";
-					}
-					else
-					{
-						pageContent ="<input type='hidden' id='pageNum' value='"+data.pageNum+"'/><input type='hidden' id='endPageNum' value='"+data.page.endPageNum+"'/>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum-1)+") id='pNum'> ◀ </a>"
-						+"<input type='text' style='width: 15%; ' id='pageInput' class='repUserPageInput' value='"+data.pageNum+"' onkeypress=\"pageInputRepUser(event);\"/>"
-						+"<a style='cursor: pointer;' onclick=fn_search("+data.page.endPageNum+") id='pNum'> / "+data.page.endPageNum+"</a>" 
-						+"<a style='cursor: pointer;' onclick=fn_search("+(data.pageNum+1)+") id='pNum'> ▶ </a>";
-					}
-					$("#codePagingDiv").append(pageContent);
 				}
 			});
 		}
