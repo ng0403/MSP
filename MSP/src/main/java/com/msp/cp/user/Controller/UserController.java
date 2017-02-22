@@ -103,6 +103,8 @@ public class UserController {
 		return mov;
 		
 	}
+	
+	//ajax Controller
 	@RequestMapping(value="/userAjax_list", method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String, Object> userList(ModelMap model,
 			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
@@ -110,6 +112,9 @@ public class UserController {
 		
 		String active_key=request.getParameter("active_key").trim();                      
 	    String user_sch_key=request.getParameter("user_sch_key").trim(); 
+	    
+	    System.out.println("active_key : "  + active_key);
+	    System.out.println("user_sch_key : "  + user_sch_key);
 		
 	    
 	    Map<String,Object> map = new HashMap<String,Object>();
@@ -400,6 +405,6 @@ public class UserController {
         {
         	System.out.println("Excel Insert 실패");
         }
-        return new ModelAndView("/user/user_list", "result", result);
+        return new ModelAndView("/user/excel_import_tab", "result", result);
     }
 }

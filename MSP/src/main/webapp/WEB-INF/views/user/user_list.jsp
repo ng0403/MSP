@@ -9,6 +9,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
+<script src="${ctx}/resources/common/js/common.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
@@ -26,8 +27,8 @@ $(document).ready(function() {
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
 	
-	var menu_cd = "";
-	var save_cd = "";
+// 	var menu_cd = "";
+// 	var save_cd = "";
 	
 	/*부서명 클릭 시 상세정보 출력 이벤트*/
 	$(document).on("click", ".open_detail", function(){
@@ -37,21 +38,11 @@ $(document).ready(function() {
 	})
 	
 	$(function(){
-		/*테스트 입력제어*/
-// 		pageReady(true);
-		
 		/*검색버튼 클릭 시 처리 이벤트*/
 		$("#search_fbtn").click(function(){
 			userListInqr(1);
 		})
-		$("#user_sch_key").keypress(function(){
-			enterSearch(event, userListInqr(1));
-		})
-		/*사용자 아이디 클릭 시 상세정보 출력 이벤트*/
-// 		$(document).on("click", ".open_detail", function(){
-// 			user_id = $(this).attr("data_num");
-// 			userDetailInqr(menu_cd);
-// 		})
+
 		
 		/*삭제버튼 클릭 시 처리 이벤트*/
 		$("#iuserDelBtn").click(function(){
@@ -75,7 +66,6 @@ $(document).ready(function() {
 
 </head>
 <body>
-<%--  <%@include file="../include/header.jsp"%> --%>
 
 <!--Main_Div  -->
 <div class="main_div">
@@ -92,7 +82,7 @@ $(document).ready(function() {
 					<option value="" selected="selected">-검색조건-</option>
 					<option value="user_id_sch">사용자ID</option>
 					<option value="user_nm_sch">사용자명</option>
-					<option value="dept_cd_sch">부서명</option>
+					<option value="dept_nm_sch">부서명</option>
 				</select>	
 				<input type="text" id="user_sch_key" name="uesr_sch_key" > &nbsp;
 				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>
@@ -149,6 +139,10 @@ $(document).ready(function() {
 												<td>${user_list.EMAIL_ID}@${user_list.EMAIL_DOMAIN}</td>
 												<td>${user_list.CPHONE_NUM1}-${user_list.CPHONE_NUM2}-${user_list.CPHONE_NUM3}</td>
 												<td>${user_list.AUTH_NM}</td>
+<!-- 												<td> -->
+<%-- 													<c:if test="${user_list.AUTH_NM eq NULL}">권한없음.</c:if> --%>
+<%-- 													<c:if test="${user_list.AUTH_NM != NULL}">${user_list.AUTH_NM}</c:if></td> --%>
+<!-- 												<td> -->
 												<td>
 													<c:if test="${user_list.ACTIVE_FLG eq 'Y'}">활성화</c:if>
 													<c:if test="${user_list.ACTIVE_FLG eq 'N'}">비활성화</c:if>
@@ -167,46 +161,51 @@ $(document).ready(function() {
 		</form>
 		</div>
 	<!-- Paging Div -->
-	<div class="paging_div" style="width: 100%; text-align: center;">
-	
-		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
-		<input type="hidden" id="userPageNum" value="${pageNum}"/>
-		<c:choose>
-			<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/>  
-				<a style="color: black; text-decoration: none;"> / 1</a>
-				<a style="color: black; text-decoration: none;"> ▶ </a>
-			</c:when>
-			<c:when test="${pageNum == page.startPageNum}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/>  
-				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-			</c:when>
-			<c:when test="${pageNum == page.endPageNum}">
-				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum"> ◀ </a>
-				<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="userpageNumEnter(event);" style="width: 2%;"/> 
-				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-				<a style="color: black; text-decoration: none;"> ▶ </a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum" > ◀ </a>
-				<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="(event);" style="width: 2%;"/>  
-				<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-				<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-			</c:otherwise>
-		</c:choose>
-		<div class="" style="text-align: right; margin-right: 10%;">
-				<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-		        <input type="button" id="ExcelImpoartPopBtn"  class="btn btn-primary btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
-				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="등록"style="float: left;" />
-				<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
-		</div>
-	</div>
+	<div id="viewLoadingImg" style="display: none;">
+			<img src="${ctx}/resources/image/viewLoading.gif">
+	</div> 
+	<div class="paging_div">
+				<div class="left">
+					<input type="button" id="iuserListAddBtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
+					<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
+				</div>
+				<div class="page" id="paging_div">	
+					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+					<input type="hidden" id="PageNum" value="${pageNum}"/>
+					<c:choose>
+						<c:when test="${page.endPageNum == 1}">
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> / ${page.endPageNum}</a>
+							<a style="color: black;"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.startPageNum}">
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="userListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+							<a href="#" onclick="userListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.endPageNum}">
+							<a href="#" onclick="userListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="userListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="userListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
+							<input type="text" id="pageInput" value="${pageNum}" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="userListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+							<a href="#" onclick="userListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="right">
+					<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
+			        <input type="button" id="ExcelImpoartPopBtn"  class="btn btn-primary btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
+					
+				</div>
+			</div>
 	</div>
 	
 </div>
 
 </body>
 </html>
-<%-- <%@include file="../include/footer.jsp"%> --%>
