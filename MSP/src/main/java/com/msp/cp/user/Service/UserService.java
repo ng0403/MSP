@@ -10,7 +10,7 @@ import com.msp.cp.user.vo.userVO;
 
 public interface UserService {
 
-	public List<userVO> searchListUser(Map<String,Object> map);
+	public List<userVO> searchListUser(Map map);
 
 	public void insertUser(userVO vo);
 

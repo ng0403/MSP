@@ -36,6 +36,7 @@
     /*페이징 ajax()*/
     function paging(data, divMessage, fMessage){
     	$(divMessage).html("");
+    	$(divMessage).empty();
 		$(data).each(function(){
 			var pageNum = this.pageNum;
 			var totalCount = this.page.totalCount;
@@ -56,7 +57,7 @@
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"/>"  
+			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
 			+"<a style='color:black; text-decoration: none;'>▶</a>"
 		}
@@ -86,9 +87,9 @@
 		else
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+"<a style='cursor: pointer;' onclick="+fMessage+""+(pageNum-1)+") id='pNum'> ◀ </a>"
+			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
 			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"'/>"
-			+"<a style='cursor: pointer;' onclick="+fMessage+""+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
+			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
 		$(divMessage).append(pageContent);
@@ -125,3 +126,11 @@
 		//윈도우 같은 거 띄운다.
 		$('#'+message2+'').show();
 	}
+	/* 체크박스 전체선택, 전체해제 */
+	$("#checkall").on("click", function(){
+	      if( $("#checkall").is(':checked') ){
+	        $("input[name=del_code]").prop("checked", true);
+	      }else{
+	        $("input[name=del_code]").prop("checked", false);
+	      }
+	})

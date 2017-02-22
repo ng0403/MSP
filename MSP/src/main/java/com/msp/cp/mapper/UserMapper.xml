@@ -7,44 +7,45 @@
 	    select count(*) as cnt
 		 FROM TB_USER
 		where del_flg='N'  
-		<if test="active_key == 'user_id'">   
-        		and user_id like '%'||#{user_id_sch}||'%' 
+		<if test="active_key == 'user_id_sch'">   
+        		and user_id like '%'||#{user_sch_key}||'%' 
         	</if>
-	 	<if test="user_nm_sch != null and user_nm_sch != ''">   
-        		and user_nm like '%'||#{user_nm_sch}||'%'
+	 	<if test="active_key == 'user_nm_sch'">   
+        		and user_nm like '%'||#{user_sch_key}||'%'
         	</if>
-	 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
-        		and dept_cd like '%'||#{dept_cd_sch}||'%' 
+	 	<if test="active_key == 'dept_nm_sch'">   
+        		and dept_cd like '%'||#{user_sch_key}||'%' 
         	</if>
 	</select>
 
 <!-- User List 출력  -->
-	<select id="searchListUser" parameterType="map" resultType="com.msp.cp.user.vo.userVO"><!-- parameterType="string" resultType="map" -->
+	<select id="searchListUser" parameterType="string" resultType="map"> <!-- parameterType="map" resultType="com.msp.cp.user.vo.userVO" -->
 		select X.*
 		from ( 
-		    select rownum as rnum, A.*, td.DEPT_NM
+		    select rownum as rnum, A.*, td.DEPT_NM, tua.auth_nm
 		      from (
 		            select *
 		            from tb_user
 		            where del_flg='N'
 		             order by created desc) A, tb_dept td
+		             , (select tua.auth_id, ta.auth_nm, tua.user_id
+		             	  from tb_user_auth tua, tb_auth ta
+		                 where tua.auth_id=ta.auth_id) tua
                 where 1=1
-                <if test="user_id_sch != null and user_id_sch != ''">   
-        			and A.user_id like '%'||#{user_id_sch}||'%' 
-	        		</if>
-				 	<if test="user_nm_sch != null and user_nm_sch != ''">   
-			        	and A.user_nm like '%'||#{user_nm_sch}||'%'
-			        </if>
-				 	<if test="dept_cd_sch != null and dept_cd_sch != ''">   
-			        	and td.DEPT_NM like '%'||#{dept_cd_sch}||'%'
-			        </if>
+                <if test="active_key == 'user_id_sch'">   
+        			and A.user_id like '%'||#{user_sch_key}||'%' 
+	        	</if>
+			 	<if test="active_key == 'user_nm_sch'">   
+		        	and A.user_nm like '%'||#{user_sch_key}||'%'
+		        </if>
+			 	<if test="active_key == 'dept_nm_sch'">   
+	        		and td.dept_nm like '%'||#{user_sch_key}||'%' 
+	        	</if>
                 and A.DEPT_CD = td.DEPT_CD
+                and A.user_id = tua.user_id(+)
 		    ) X
-		    <!-- <![CDATA[
-				where X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
-			]]> -->
 			<![CDATA[
-				where X.rnum >= #{startRow} and X.rnum < #{endRow}
+				where X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
 			]]>
 	</select>
 

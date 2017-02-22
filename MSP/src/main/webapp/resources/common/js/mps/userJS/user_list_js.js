@@ -1,23 +1,22 @@
+function sleep(ms){
+  ts1 = new Date().getTime() + ms;
+  do ts2 = new Date().getTime(); while (ts2<ts1);
+}
 /*사용자 리스트 출력및 페이징 처리 함수*/
 	function userListInqr(pageNum){
 		var active_key = $("#active_key").val();
 		var user_sch_key = $("#user_sch_key").val();
 		var values=[];
+		viewLoadingShow();
 		$.post("/user/userAjax_list",
 				{"active_key":active_key
 			, "user_sch_key":user_sch_key
 			, "pageNum":pageNum}
 		, function(data){
-			alert(data);
 			values = data.user_list;
 			$(".user_list").html("");
-			alert(data.toSource());
-//			$(data.user_list).each(function(){
-			$(values).each(function(){
-				alert(data.user_list);
-				alert(this.user_id);
-				alert(data.user_list.user_id);
- 				/*var user_id = this.USER_ID;
+			$(data.user_list).each(function(){
+ 				var user_id = this.USER_ID;
 				var user_nm = this.USER_NM;
 				var dept_nm = this.DEPT_NM;
 				var cphone_num1 = this.CPHONE_NUM1;
@@ -26,20 +25,12 @@
 				var email_id = this.EMAIL_ID;
 				var email_domain = this.EMAIL_DOMAIN;			
 				var auth_nm = this.AUTH_NM;			
-				var active_flg = this.ACTIVE_FLG;*/
-				var user_id = this.user_id;
-				var user_nm = this.user_nm;
-				var dept_nm = this.dept_nm;
-				var cphone_num1 = this.cphone_num1;
-				var cphone_num2 = this.cphone_num2;
-				var cphone_num3 = this.cphone_num3;
-				var email_id = this.email_id;
-				var email_domain = this.email_domain;			
-				var auth_nm = this.auth_nm;			
-				var active_flg = this.active_flg;
+				var active_flg = this.ACTIVE_FLG;
+				
 				userListOutput(user_id, user_nm, dept_nm, email_id, email_domain, cphone_num1 ,cphone_num2, cphone_num3, auth_nm, active_flg);  
 			})
-//			paging(data,"#paging_div", "userListInqr");
+			viewLoadingHide();
+			paging(data,"#paging_div", "userListInqr");
 		}).fail(function(){
 			alert("사용자 목록을 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		})
@@ -52,16 +43,19 @@
 		user_tr.attr("data_num",user_id);
 		
 		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + menu_cd + "'>");
+		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + user_id + "'>");
 		
 		var user_id_td = $("<td>");
-		user_id_td.html("<input type='text' onclick='' name='user_id' value='" + user_id + "'>");
+		user_id_td.html(user_id);
 		
 		var user_nm_td = $("<td>");
 		user_nm_td.html(user_nm);
 		
 		var dept_td = $("<td>");
-		dept_td.html(dept_cd);
+		dept_td.html(dept_nm);
+
+		var email_td = $("<td>");
+		email_td.html(email_id + "@" + email_domain);
 		
 		var cphone_num1_td = $("<td>");
 		cphone_num1_td.html(cphone_num1 + "-" + cphone_num2 + "-" + cphone_num3);
@@ -76,16 +70,25 @@
 			active_flg_td.html("비활성화");
 		}
 		
-		user_tr.append(del_code_td).append(user_id_td).append(user_nm_td).append(dept_td).append(cphone_num1_td).append(auth_td).append(active_flg_td);
+		user_tr.append(del_code_td).append(user_id_td).append(user_nm_td).append(dept_td).append(email_td).append(cphone_num1_td).append(auth_td).append(active_flg_td);
 				
 		$(".user_list").append(user_tr);
 			
 	}
 //엑셀 Import 팝업	
 function excelImportOpen() {
+	var popWidth  = '520'; // 파업사이즈 너비
+	var popHeight = '160'; // 팝업사이즈 높이
+	var winHeight = document.body.clientHeight;	// 현재창의 높이
+	var winWidth = document.body.clientWidth;	// 현재창의 너비
+	var winX = window.screenLeft;	// 현재창의 x좌표
+	var winY = window.screenTop;	// 현재창의 y좌표
+
+	var popX = winX + (winWidth - popWidth)/2;
+	var popY = winY + (winHeight - popHeight)/2;
 	var popUrl = "excelImportTab";
-	var popOption = "width=300, height=100, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-	window.open(popUrl, "", popOption);
+	var popOption = "width=520, height=160, resize=no, scrollbars=no, status=no, location=no, directories=no; ,top=pop,left=popX";
+	window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 }
 //사용자 신규등록 팝업	
 function userTabOpen() {
@@ -132,7 +135,6 @@ function check() {
                 };
                 opener.parent.location.reload();
                 user_goSearch();
-//                window.open("about:blank","_self").close();
                 
         }
 /*부서 삭제 요청 함수*/
@@ -173,9 +175,10 @@ function download_list_Excel(formID){
 	var ctx = $("#ctx").val();
 	var form = $("#"+formID);
 	var excel = $('<input type="hidden" value="true" name="excel">');
-	form.append(excel);
-	form.submit();
-		alert("submit 지남.");
+	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")){
+		form.append(excel);
+		form.submit();
+	}
 	$("input[name=excel]").val("");
 	}
 	// 1.모두 체크
