@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 	
 //	사용자관리 리스트 
 	@Override
-	public List<userVO> searchListUser(Map map) {
+	public List<userVO> searchListUser(Map<String,Object> map) {
 		System.out.println("9. DaoImpl User List Search Dao Impl");
 		System.out.println("10. DaoImpl map. toString : " + map.toString());
 		System.out.println("11. DaoImpl endRow : " + map.get("endRow"));
@@ -59,9 +59,11 @@ public class UserDaoImpl implements UserDao {
 
 //	사용자 삭제
 	@Override
-	public void userDel(String dc) {
-		sqlSession.update("user.userDel", dc);
-		System.out.println("user del dao impl enter");
+	public int userDel(String dc) {
+		int result=0;
+		result = sqlSession.update("user.userDel", dc);
+		System.out.println("user del dao impl enter : " + result);
+		return result;
 		
 	}
 

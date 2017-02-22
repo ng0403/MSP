@@ -7,13 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 import com.msp.cp.dept.dao.DeptDao;
 import com.msp.cp.dept.vo.DeptVO;
 import com.msp.cp.user.Dao.UserDao;
 import com.msp.cp.user.vo.userVO;
-import com.msp.cp.utils.ExcelRead;
-import com.msp.cp.utils.ExcelReadOption;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	
 //	사용자관리 리스트
 	@Override
-	public List<userVO> searchListUser(Map map) {
+	public List<userVO> searchListUser(Map<String,Object> map) {
 		System.out.println("8. ServiceImpl User List Search Service Impl");
 		List<userVO> obj = userDao.searchListUser(map);
 		System.out.println("14. ServiceImpl User List Search Service Impl" + obj.toString());
@@ -50,9 +48,11 @@ public class UserServiceImpl implements UserService {
 
 //	사용자 삭제
 	@Override
-	public void userDel(String dc) {
-		userDao.userDel(dc);
+	public int userDel(String dc) {
+		int result = 0;
+		result = userDao.userDel(dc);
 		System.out.println("del serviceImpl enter");
+		return result;
 		
 	}
 

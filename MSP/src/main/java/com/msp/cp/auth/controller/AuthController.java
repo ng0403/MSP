@@ -257,40 +257,41 @@ public class AuthController {
 	}
 	
 	//Excel Data Import
-	@RequestMapping(value = "/excelUploadAjax", headers = "content-type=multipart/*", method = RequestMethod.POST)
-	public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception{
-	
-		MultipartFile excelFile =request.getFile("excelFile");
-		System.out.println("excelFile : " + excelFile);
-		System.out.println("엑셀 파일 업로드 컨트롤러");
-		
-		if(excelFile==null || excelFile.isEmpty()){
-		    throw new RuntimeException("엑셀파일을 선택 해 주세요.");
-		}
-		
-		//파일 저장경로입니다.
-		File destFile = new File("C:\\"+excelFile.getOriginalFilename());
-		System.out.println("destFile : " + destFile);
-		
-		try{
-		    excelFile.transferTo(destFile);
-		    
-		}catch(IllegalStateException | IOException e){
-			
-		    throw new RuntimeException(e.getMessage(),e);
-		}
-		
-		int result = authService.excelUpload(destFile);
-		System.out.println("result : " + result);
-		
-		if(result == 1){
-			
-			System.out.println("Excel Insert 성공");
-			
-		}else {
-			
-			System.out.println("Excel Insert 실패");
-		}
-		return new ModelAndView("/auth/authInqr", "result", result);
-	}
+    @RequestMapping(value = "/excelUploadAjax", headers = "content-type=multipart/*", method = RequestMethod.POST)
+    public ModelAndView excelUploadAjax(MultipartHttpServletRequest request)  throws Exception {
+        
+    	MultipartFile excelFile =request.getFile("excelFile");
+        System.out.println("excelFile : " + excelFile);
+        System.out.println("엑셀 파일 업로드 컨트롤러");
+        
+        if(excelFile==null || excelFile.isEmpty()){
+        	
+            throw new RuntimeException("엑셀파일을 선택 해 주세요.");
+        }
+        
+        //파일 저장경로
+        File destFile = new File("E:\\"+excelFile.getOriginalFilename());
+        System.out.println("destFile : " + destFile);
+        
+        try{
+        	
+            excelFile.transferTo(destFile);
+            
+        }catch(IllegalStateException | IOException e){
+        	
+            throw new RuntimeException(e.getMessage(),e);
+        }
+        
+        int result = authService.excelUpload(destFile);
+        System.out.println("result : " + result);
+        
+        if(result == 1){
+        	
+        	System.out.println("Excel Insert 성공");
+        }else {
+        	
+        	System.out.println("Excel Insert 실패");
+        }
+        return new ModelAndView("/auth/auth_list", "result", result);
+    }
 }

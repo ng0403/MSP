@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  
 <!DOCTYPE html>
@@ -21,7 +20,7 @@
 		<!-- Modal Main Div -->
 	<div>
 		<div>
-			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/auth/excelUploadAjax"> 
+			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post" action="${ctx}/auth/excelUploadAjax"> 
 				<input id="excelFile" type="file" name="excelFile" class="btn btn-default" style="float: center;"/>
 				<input type="button" id="addExcelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: center;">
 			</form>

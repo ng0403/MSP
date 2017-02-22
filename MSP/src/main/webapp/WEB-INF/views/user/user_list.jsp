@@ -9,6 +9,8 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
@@ -21,9 +23,46 @@
 <script type="text/javascript">
 $(document).ready(function() { 
 	var result = ${result}
-	alert(result);
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
+	
+	var menu_cd = "";
+	var save_cd = "";
+	
+	$(function(){
+		/*테스트 입력제어*/
+// 		pageReady(true);
+		
+		/*검색버튼 클릭 시 처리 이벤트*/
+		$("#search_fbtn").click(function(){
+			userListInqr(1);
+		})
+		$("#user_sch_key").keypress(function(){
+			enterSearch(event, userListInqr(1));
+		})
+		/*사용자 아이디 클릭 시 상세정보 출력 이벤트*/
+// 		$(document).on("click", ".open_detail", function(){
+// 			user_id = $(this).attr("data_num");
+// 			userDetailInqr(menu_cd);
+// 		})
+		
+		/*삭제버튼 클릭 시 처리 이벤트*/
+		$("#iuserDelBtn").click(function(){
+			if (confirm("정보를 삭제 하시겠습니까?")) {
+				userDel();
+			}
+		})
+		
+		
+		/* 체크박스 전체선택, 전체해제 */
+		$("#checkall").on("click", function(){
+		      if( $("#checkall").is(':checked') ){
+		        $("input[name=del_code]").prop("checked", true);
+		      }else{
+		        $("input[name=del_code]").prop("checked", false);
+		      }
+		})
+	})
 });
 </script>
 
@@ -48,7 +87,8 @@ $(document).ready(function() {
 					<option value="user_nm_sch">사용자명</option>
 					<option value="dept_cd_sch">부서명</option>
 				</select>	
-				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>검색
+				<input type="text" id="user_sch_key" name="uesr_sch_key" > &nbsp;
+				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>
 <!-- 			</form> -->
 			<!-- 페이징 전용 폼 -->
 <%-- 			<form  action="${ctx}/user/userInqr" id="userlistPagingForm" method="post"> --%>
@@ -56,7 +96,7 @@ $(document).ready(function() {
 <%-- 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/> --%>
 <%-- 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/> --%>
 <!-- 			</form> -->
-<%-- 			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form> --%>
+			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form>
 		</div>
 	</div>
 
@@ -66,42 +106,57 @@ $(document).ready(function() {
 		<div class="list1_div" style=" margin-left: 1%;">
 			<form id="delAll_form" name="delAll_form">
 			<table summary="menu_list_tb" class="table table-hover">
-				<thead>
 					<colgroup>
 						<col width="5%">
 						<col width="25%">
 						<col width="25%">
 						<col width="25%">
 						<col width="20%">
+						<col width="20%">
+						<col width="20%">
+						<col width="20%">
 					</colgroup>
-				</thead>
-				<tbody id="usertbody">
-				<c:if test="${not empty user_list}">
-					<c:forEach var="list" items="${user_list}">
+					<thead>
 						<tr>
-							<th scope="row"><input type="checkbox" class="ab" name="del_code" value="${list.USER_ID}">
-							 <input	type="hidden" id="user_id_h" value="${list.USER_ID}" /></th>
-							<a href="#"><td style="width: 10%;" name="user_id" id="${list.USER_ID}" onclick="onPopup(this.id);">${list.USER_ID}</td></a>
-							<td style="width: 10%;" class="user_name_tag">${list.USER_NM}</td>
-							<td style="width: 10%;" class="org_name_tag">${list.DEPT_NM}<input type="hidden" id="dept_cd" value="${list.DEPT_CD}"/></td>
-							<td style="width: 20%;" class="email_tag">${list.EMAIL_ID}@${list.EMAIL_DOMAIN}</td>
-							<td style="width: 20%;" class="cell_phone_tag">${list.CPHONE_NUM1}-${list.CPHONE_NUM2}-${list.CPHONE_NUM3}</td>
-							<td style="width: 10%;" class="auth_name_tag">
-								<c:if test="${empty list.AUTH_NM}"> 권한없음	</c:if>
-								<c:if test="${not empty list.AUTH_NM}"> ${list.AUTH_NM} </c:if>
-							</td>
-							<%-- <td style="width: 20%;" class="user_type_cd">${list.USER_TYPE_CD}</td> --%>
-							<td style="width: 20%;" class="active_flg">${list.ACTIVE_FLG}</td>
+							<th><input type="checkbox" id="checkall"></th>
+							<th>사용자ID</th>
+							<th>사용자명</th>
+							<th>부서명</tH>
+							<th>이메일</th>
+							<th>연락처</th>
+							<th>권한</th>
+							<th>상태</th>
 						</tr>
-					</c:forEach>
-				</c:if>
-				<c:if test="${user_list.size() == 0}">
-					<tr style="cursor: default; background-color: white;">
-						<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
-					</tr>
-				</c:if>
-				</tbody>
-			</table>
+					</thead>
+					<tbody class="user_list">
+								<c:choose>
+									<c:when test="${not empty user_list}">
+										<c:forEach var="user_list" items="${user_list}">
+											<tr class="open_detail" data_num="${user_list.user_id}">
+												<td>
+													<input type="checkbox" class="del_point" name="del_code" value="${user_list.USER_ID}">
+												</td>
+												<td name="user_id" id="${user_list.USER_ID}" onclick="onPopup(this.id);">${user_list.USER_ID}</td>
+												<td>${user_list.USER_NM}</td>
+												<td>${user_list.DEPT_NM}</td>
+												<td>${user_list.EMAIL_ID}@${user_list.EMAIL_DOMAIN}</td>
+												<td>${user_list.CPHONE_NUM1}-${user_list.CPHONE_NUM2}-${user_list.CPHONE_NUM3}</td>
+												<td>${user_list.AUTH_NM}</td>
+												<td>
+													<c:if test="${user_list.ACTIVE_FLG eq 'Y'}">활성화</c:if>
+													<c:if test="${user_list.ACTIVE_FLG eq 'N'}">비활성화</c:if>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="5">사용자가 존재하지 않습니다.</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>			
 		</form>
 		</div>
 	<!-- Paging Div -->
@@ -138,7 +193,7 @@ $(document).ready(function() {
 				<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
 		        <input type="button" id="ExcelImpoartPopBtn"  class="btn btn-primary btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
 				<input type="button" id="iuserListAddBtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="등록"style="float: left;" />
-				<input type="button" id="iuserDelBtn" onclick="deleteAction()"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
+				<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
 		</div>
 	</div>
 	</div>

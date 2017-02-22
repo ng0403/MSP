@@ -27,7 +27,7 @@ public interface AuthService {
 
 	public List<userVO> authExcel(Map<String, Object> authMap);
 
-	public int excelUpload(File destFile);
+	public int excelUpload(File destFile) throws Exception;
 
 
 

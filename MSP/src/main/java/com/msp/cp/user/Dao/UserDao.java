@@ -7,13 +7,13 @@ import java.util.Map;
 import com.msp.cp.user.vo.userVO;
 
 public interface UserDao {
-	public List<userVO> searchListUser(Map map);
+	public List<userVO> searchListUser(Map<String,Object> map);
 
 	public Object selectOnes(String root, Object obj);
 
 	public void insert(userVO vo);
 
-	public void userDel(String dc);
+	public int userDel(String dc);
 
 	public userVO searchListUserOne(String user_id);
 

@@ -216,10 +216,7 @@ $(document).ready(function() {
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" readonly="readonly"/>
-								</td>
-								<td>
-									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
+									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}"/>
 								</td>
 							</tr>
 							<tr>
@@ -613,22 +610,28 @@ $(document).ready(function() {
 	
 		// 코드 삭제버튼 클릭 시
 		$("#code_del_btn").on("click", function(){
-			var check = document.getElementsByName("del_code");
-			var check_len = check.length;
-			var checked = 0;
 			
-			for(i=0; i<check_len; i++)
-			{
-				if(check[i].checked == true)
+			if(confirm("선택한 상세코드를 삭제 하시겠습니까?")) {
+				var check = document.getElementsByName("del_code");
+				var check_len = check.length;
+				var checked = 0;
+				
+				for(i=0; i<check_len; i++)
 				{
-					$("#delAllForm").submit();
-					checked++;
+					if(check[i].checked == true)
+					{
+						$("#delAllForm").submit();
+						checked++;
+					}
+				}
+		
+				if(checked == 0)
+				{
+					alert("체크박스를 선택해주세요.");
 				}
 			}
-	
-			if(checked == 0)
-			{
-				alert("체크박스를 선택해주세요.");
+			else {
+				return false;
 			}
 		});
 

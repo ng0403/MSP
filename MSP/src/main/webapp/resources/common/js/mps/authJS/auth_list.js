@@ -11,7 +11,7 @@ $(function(){
 	})
 	
 	$("#keyword").keypress(function(){
-		enterSearch(event, "authListInqr");
+		enterSearch(event, authListInqr(1));
 	})
 	
 	/*권한ID 클릭 시 상세정보 출력 이벤트*/
@@ -391,7 +391,6 @@ function checkFileType(filePath) {
     } else {
         return false;
     }
-
 }
 
 //엑셀파일 insert

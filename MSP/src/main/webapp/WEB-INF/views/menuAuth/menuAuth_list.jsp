@@ -688,7 +688,7 @@ function viewLoadingHide(){
 		// 삭제 버튼 눌렀을 때
 		$("#menuAuth_del_btn").on("click", function(){
 			
-			if(confirm("선택한 컬럼을 삭제 하시겠습니까?")) {
+			if(confirm("선택한 메뉴권한을 삭제 하시겠습니까?")) {
 				var check = document.getElementsByName("del_menuAuth");
 				var check_len = check.length;
 				var checked = 0;
