@@ -64,7 +64,7 @@
          	</if>
 	</select >
 	
-	<select id="menuAuthDetail" parameterType="string" resultType="map">
+	<select id="menuAuthDetail" parameterType="map" resultType="com.msp.cp.menuAuth.vo.MenuAuthVO">
 		SELECT
 		 auth_id,
  		 (SELECT auth_nm
@@ -79,7 +79,9 @@
    		  WHERE menu_cd = TMA.menu_cd) AS up_menu_cd,
   		 (SELECT menu_nm
    		  FROM tb_menu
-   		  WHERE up_menu_cd = TMA.menu_cd) AS up_menu_nm,
+   		  WHERE menu_cd = (SELECT up_menu_cd
+                           FROM tb_menu
+                           WHERE menu_cd = TMA.menu_cd)) AS up_menu_nm,
   		 (SELECT menu_url
    	      FROM tb_menu
    		  WHERE menu_cd = TMA.menu_cd) AS menu_url,

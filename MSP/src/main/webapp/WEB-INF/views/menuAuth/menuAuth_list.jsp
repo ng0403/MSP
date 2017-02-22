@@ -344,39 +344,7 @@ function viewLoadingHide(){
 				pageInputRep(event, fn_search);
     		}
 		});
-
 		
-		//페이지 엔터키 기능
-		function menuAuthpageNumEnter(event, url) 
-		{
-			$(document).ready(function() {
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-			
-				if (keycode == '13') 
-				{
-					var pageNum = parseInt($("#pageInput").val());
-					
-					if ($("#pageInput").val() == '') 
-					{
-						alert("페이지 번호를 입력하세요.");
-							
-						$("#pageInput").focus();
-					}
-					else if(parseInt($("#pageInput").val()) > parseInt($("#endPageNum").val())) 
-					{
-						alert("페이지 번호가 너무 큽니다.");
-							
-						$("#pageInput").val($("#pageNum").val());
-						$("#pageInput").focus();
-					}
-					else 
-					{
-						fn_search(pageNum);
-					}
-				}
-				event.stopPropagation();
-			});
-		}
 		
 		// 검색 버튼 클릭시
 		function fn_search(pageNum)
@@ -471,19 +439,32 @@ function viewLoadingHide(){
 					
 					for(var i=0; i<menuAuthDetail.length; i++)
 					{
-						var auth_id = menuAuthDetail[i].AUTH_ID;
-						var auth_nm = menuAuthDetail[i].AUTH_NM;
-						var menu_cd = menuAuthDetail[i].MENU_CD;
-						var menu_nm = menuAuthDetail[i].MENU_NM;
-						var up_menu_cd = menuAuthDetail[i].UP_MENU_CD;
-	 					var up_menu_nm = menuAuthDetail[i].UP_MENU_NM;
-	 					var menu_url   = menuAuthDetail[i].MENU_URL;
-	 					var active_flg = menuAuthDetail[i].ACTIVE_FLG;
-	 					var inqr_auth  = menuAuthDetail[i].INQR_AUTH;
-						var add_auth   = menuAuthDetail[i].ADD_AUTH;
-						var mdfy_auth  = menuAuthDetail[i].MDFY_AUTH;
-	 					var del_auth   = menuAuthDetail[i].DEL_AUTH;
+						var auth_id = menuAuthDetail[i].auth_id;
+						var auth_nm = menuAuthDetail[i].auth_nm;
+						var menu_cd = menuAuthDetail[i].menu_cd;
+						var menu_nm = menuAuthDetail[i].menu_nm;
+						var up_menu_cd = menuAuthDetail[i].up_menu_cd;
+	 					var up_menu_nm = menuAuthDetail[i].up_menu_nm;
+	 					var menu_url   = menuAuthDetail[i].menu_url;
+	 					var active_flg = menuAuthDetail[i].active_flg;
+	 					var inqr_auth  = menuAuthDetail[i].inqr_auth;
+						var add_auth   = menuAuthDetail[i].add_auth;
+						var mdfy_auth  = menuAuthDetail[i].mdfy_auth;
+	 					var del_auth   = menuAuthDetail[i].del_auth;
 	 					var menu_acc_auth = menuAuthDetail[i].menu_acc_auth;
+	 					
+	 					if(up_menu_cd == null)
+	 					{
+	 						up_menu_cd = "없음";
+	 					}
+	 					if(up_menu_nm == null)
+	 					{
+	 						up_menu_nm = "없음";
+	 					}
+	 					if(menu_url == null)
+	 					{
+	 						menu_url = "없음";
+	 					}
 	 					
 	 					contents1 ="<tr height='15px'>"+
 	 					"<th style=' width: 12%; text-align: center;'>권한ID&nbsp;&nbsp;</th>"+
