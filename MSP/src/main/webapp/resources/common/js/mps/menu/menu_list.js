@@ -71,14 +71,7 @@
 				}
 			}
 		})
-		/* 체크박스 전체선택, 전체해제 */
-		$("#checkall").on("click", function(){
-		      if( $("#checkall").is(':checked') ){
-		        $("input[name=del_code]").prop("checked", true);
-		      }else{
-		        $("input[name=del_code]").prop("checked", false);
-		      }
-		})
+		
 		//메뉴검색 버튼 클릭시 이벤트
 		$("#menuInqr_popup_fbtn").click(function(){
 			menuListInqrPop(1);

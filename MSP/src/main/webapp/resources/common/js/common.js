@@ -36,6 +36,7 @@
     /*페이징 ajax()*/
     function paging(data, divMessage, fMessage){
     	$(divMessage).html("");
+    	$(divMessage).empty();
 		$(data).each(function(){
 			var pageNum = this.pageNum;
 			var totalCount = this.page.totalCount;
@@ -125,3 +126,11 @@
 		//윈도우 같은 거 띄운다.
 		$('#'+message2+'').show();
 	}
+	/* 체크박스 전체선택, 전체해제 */
+	$("#checkall").on("click", function(){
+	      if( $("#checkall").is(':checked') ){
+	        $("input[name=del_code]").prop("checked", true);
+	      }else{
+	        $("input[name=del_code]").prop("checked", false);
+	      }
+	})

@@ -66,14 +66,7 @@
 				}
 			}
 		})
-		/* 체크박스 전체선택, 전체해제 */
-		$("#allCheck").on("click", function(){
-		      if( $("#allCheck").is(':checked') ){
-		        $("input[name=del_code]").prop("checked", true);
-		      }else{
-		        $("input[name=del_code]").prop("checked", false);
-		      }
-		})
+		
 		//페이지 엔터시 이벤트
 		$(document).on("keypress","#pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
