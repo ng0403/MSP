@@ -404,38 +404,39 @@ function excelImportOpen() {
 
 //엑셀 파일 추가 fucntion
 function checkFileType(filePath) {
-    var fileFormat = filePath.split(".");
-    if (fileFormat.indexOf("xlsx") > -1) {
-        return true;
-    } else {
-        return false;
-    }
+	var fileFormat = filePath.split(".");
+	if (fileFormat.indexOf("xlsx") > -1) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 //엑셀파일 insert
 function check() {
-    var excelFile = $("#excelFile").val();
-    alert(excelFile);
-    if (excelFile == "" || excelFile == null) {
-        alert("파일을 선택해주세요.");
-        return false;
-    } else if (!checkFileType(excelFile)) {
-        alert("엑셀 파일만 업로드 가능합니다.");
-        return false;
-    }
-
-    if (confirm("업로드 하시겠습니까?")) {
+	
+	var excelFile = $("#excelFile").val();
+	alert(excelFile);
+	
+	if (excelFile == "" || excelFile == null) {
+		
+	    alert("파일을 선택해주세요.");
+	    return false;
+	    
+	} else if (!checkFileType(excelFile)) {
+		
+	    alert("엑셀 파일만 업로드 가능합니다.");
+	    return false;
+	}
+	
+	if (confirm("업로드 하시겠습니까?")) {
+		
 		$("#excelUploadForm").append(excelFile);
 		$("#excelUploadForm").submit();
-		
-		alert("여기><");
-	  };
-	  
-	  opener.parent.location.reload();
-	  auth_goSearch();
-	  Window.close();
-	  
-	  //opener.document.location.href="/auth/authInqr";
+    };
+    opener.parent.location.reload();
+   	auth_goSearch();
+    //opener.document.location.href="/auth/authInqr";
 }
  
 //AS-ID 엑셀 다운로드 적용 함수

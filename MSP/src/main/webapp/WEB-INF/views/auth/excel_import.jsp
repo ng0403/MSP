@@ -6,10 +6,12 @@
 <c:set var="result" value="${result}" />
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script> 
+<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+ <title>Insert title here</title>
+ 
  <script type="text/javascript">
+ 
  $(document).ready(function() {
 	 var result = $("#result").val();
 	 if(result == "1"){
@@ -20,15 +22,16 @@
  });
  
  </script>
+
 </head>
 <body>
 	<input type="hidden" id="ctx" value="${ctx}">
 	<input type="hidden" id="result" value="${result}">
 		<!-- Modal Main Div -->
 	<div>
-		<div>
-			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post"action="${ctx}/auth/excelUploadAjax"> 
-				<input id="excelFile" type="file" name="excelFile" class="btn btn-default" style="float: center;"/>
+		<div style="text-align: center; margin-top: 10%;">
+			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data" method="post" action="${ctx}/auth/excelUploadAjax"> 
+				<input type="file"   id="excelFile"       class="btn btn-default" name="excelFile"  style="float: center;"/>
 				<input type="button" id="excelImpoartBtn" class="btn btn-default" onclick="check();" value="업로드" style="float: center;">
 			</form>
 		</div>

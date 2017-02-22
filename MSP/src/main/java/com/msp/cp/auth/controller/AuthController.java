@@ -277,7 +277,7 @@ public class AuthController {
         	
             excelFile.transferTo(destFile);
             
-        }catch(IllegalStateException | IOException e){
+        } catch (IllegalStateException | IOException e){
         	
             throw new RuntimeException(e.getMessage(),e);
         }
@@ -291,6 +291,6 @@ public class AuthController {
         }else {
         	System.out.println("Excel Insert 실패");
         }
-        return new ModelAndView("/auth/auth_list", "result", result);
+        return new ModelAndView("/auth/excel_import", "result", result);
     }
 }
