@@ -76,6 +76,7 @@ $("#checkall").on("click", function(){
 	})
 })
 
+
 /*//페이지 엔터키 기능
 function authpageNumEnter(event) {
 	$(document).ready(function() {
@@ -123,7 +124,9 @@ function authEnterSearch(event) {
 //조회 버튼기능
 function auth_goSearch(){
 	
+	var active_key = $("#active_key").val();
 	var keyword = $("#keyword").val();
+	var pageNum = $("#pageNum").val();
 				
 	$("#searchForm").submit();
 		
@@ -226,10 +229,15 @@ function authDel(){
 	
 	var delCode = del_code.split(","); //맨끝 콤마 지우기
 	
+	console.log("### del_code => {}" + del_code);
+	if (confirm("정보를 삭제 하시겠습니까?")) {
+	
+	}
+	
 	if(delCode == ""){
 		alert("삭제할 대상을 선택해 주세요");
 		return false;
-	}else{
+	} else{
 		$.ajax({
 			url:"/auth/delete/"+del_code,
 			type:"post",
@@ -248,6 +256,8 @@ function authDel(){
 		})
 	}
 }
+
+
 
 /* 리스트 출력 함수 */
 function authListOutput(auth_id, auth_nm, active_flg){
@@ -378,9 +388,18 @@ function pageReady(boolean){
 
 //엑셀 Import 팝업	
 function excelImportOpen() {
+	var popWidth  = '520'; // 파업사이즈 너비
+	var popHeight = '160'; // 팝업사이즈 높이
+	var winHeight = document.body.clientHeight;	// 현재창의 높이
+	var winWidth = document.body.clientWidth;	// 현재창의 너비
+	var winX = window.screenLeft;	// 현재창의 x좌표
+	var winY = window.screenTop;	// 현재창의 y좌표
+
+	var popX = winX + (winWidth - popWidth)/2;
+	var popY = winY + (winHeight - popHeight)/2;
 	var popUrl = "excelImportTab";
-	var popOption = "width=300, height=100, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-	window.open(popUrl, "", popOption);
+	var popOption = "width=520, height=160, resize=no, scrollbars=no, status=no, location=no, directories=no; ,top=pop,left=popX";
+	window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 }
 
 //엑셀 파일 추가 fucntion
@@ -409,11 +428,14 @@ function check() {
 		$("#excelUploadForm").append(excelFile);
 		$("#excelUploadForm").submit();
 		
+		alert("여기><");
 	  };
+	  
 	  opener.parent.location.reload();
 	  auth_goSearch();
-	//window.open("about:blank","_self").close();
-                
+	  Window.close();
+	  
+	  //opener.document.location.href="/auth/authInqr";
 }
  
 //AS-ID 엑셀 다운로드 적용 함수

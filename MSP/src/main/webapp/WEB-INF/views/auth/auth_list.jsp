@@ -32,29 +32,26 @@
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
+			<label>활성상태</label>
+			<select id="active_key" name="active_key" class="selectField">
+				<option value="" selected="selected">전체</option>
+				<option value="Y">활성화</option>
+				<option value="N">비활성화</option>
+			</select>
+			<label>권한명</label>&nbsp;
+			<input type="text" id="keyword" name="keyword" class="int_search"> 
+			&nbsp;&nbsp;
+			<input type="button" id="auth_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 			
-					<label>활성상태</label>
-					<select id="active_key" name="active_key" class="selectField">
-						<option value="" selected="selected">전체</option>
-						<option value="Y">활성화</option>
-						<option value="N">비활성화</option>
-					</select>
-					<label>권한명</label>&nbsp;
-					<input type="text" id="keyword" name="keyword" class="int_search"> 
-					&nbsp;&nbsp;
-					<input type="button" id="auth_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 			<!-- 페이징 전용 폼 -->
 			<form  action="${ctx}/auth/authInqr" id="authlistPagingForm" method="post">
 				<input type="hidden" name="active_key" value="${active_key}"/>
 				<input type="hidden" name="keyword" value="${keyword}"/>
 			</form>
 			<form action="${ctx}/auth/authInqr" id="authListExcelForm" method="post"></form>
-			
 		</div>
-		<div class="search3_div">
-			
-			
-		</div>
+		
+		<div class="search3_div"></div>
 	</div>
 	
 	<!-- List Cover Div -->
@@ -167,8 +164,8 @@
 			</form>
 			
 			<div class="btn_div">
-				<input type="button" id="auth_menu" class="btn btn-primary btn-sm" value="메뉴권한" style="display:none" >
-				<input type="button" id="auth_user" class="btn btn-primary btn-sm" value="사용자권한" style="display:none" >
+				<input type="button" id="auth_menu" class="btn btn-primary btn-sm" value="메뉴권한" style="display:none" onclick="location.href='${ctx}/menu/menuInqr'" >
+				<input type="button" id="auth_user" class="btn btn-primary btn-sm" value="사용자권한" style="display:none" onclick="location.href='${ctx}/userAuth/view'" >
 				
 				<div class="right">
 					<input type="button" id="auth_reset_nfbtn" class="btn btn-primary btn-sm" value="초기화" style="display:none"  />

@@ -286,10 +286,9 @@ public class AuthController {
         System.out.println("result : " + result);
         
         if(result == 1){
-        	
         	System.out.println("Excel Insert 성공");
-        }else {
         	
+        }else {
         	System.out.println("Excel Insert 실패");
         }
         return new ModelAndView("/auth/auth_list", "result", result);
