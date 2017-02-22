@@ -16,9 +16,6 @@
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 
-
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
-
 <title>Code List</title>
 
 <style type="text/css">
@@ -208,21 +205,29 @@ $(document).ready(function() {
 			<h4>공통코드 상세</h4>
 				<form method="post" id="joinform1" name="joinform1" action="codeMasterAdd">
 					<table class="table table-hover">
+						<colgroup>
+							<col width="22%">
+							<col width="28%">
+							<col width="22%">
+							<col width="28%">
+						</colgroup>
 						<tbody id="tbody1">
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" readonly="readonly"/>
+									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 95%" value="${grp_cd}" readonly="readonly"/>
 								</td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<th>공통코드명</th>
 								<td>
-									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" readonly="readonly"/>
+									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 95%" value="${grp_nm}" readonly="readonly"/>
 								</td>
-								<th>공통코드 설명</th>
+								<th>공통코드설명</th>
 								<td>
-									<input type="text" name="grp_desc" id="grp_desc" class="iuser_txt" style="width: 90%" value="${grp_desc}" readonly="readonly"/>
+									<input type="text" name="grp_desc" id="grp_desc" class="iuser_txt" style="width: 95%" value="${grp_desc}" readonly="readonly"/>
 								</td>
 							</tr>
 						</tbody>
@@ -242,15 +247,23 @@ $(document).ready(function() {
 				<h4>상세코드 상세</h4>
 				<form method="post" id="joinform2" name="joinform2">
 					<table class="table table-hover">
+						<colgroup>
+							<col width="22%">
+							<col width="28%">
+							<col width="22%">
+							<col width="28%">
+						</colgroup>
 						<tbody id="tbody1">
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
+									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" readonly="readonly" />
 								</td>
 								<td>
 									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" 
 									       style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" readonly="readonly"/> 
+								</td>
+								<td>
 								</td>
 							</tr>
 							<tr>
@@ -258,15 +271,19 @@ $(document).ready(function() {
 								<td>
 									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" readonly="readonly"/>
 								</td>
-								<th>상세코드명</th>
+								<th>상세코드<br>명</th>
 								<td>
 									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>	
-								<th>상세코드 설명</th>
+								<th>상세코드<br>설명</th>
 								<td>
 									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" readonly="readonly"/>
+								</td>
+								<td>
+								</td>
+								<td>
 								</td>
 							</tr>
 						</tbody>

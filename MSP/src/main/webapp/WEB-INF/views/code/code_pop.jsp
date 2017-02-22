@@ -16,7 +16,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script>
 
-<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
