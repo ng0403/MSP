@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.msp.cp.code.dao.CodeDao;
 import com.msp.cp.code.vo.CodeVO;
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 
 @Service
 public class CodeServiceImpl implements CodeService {

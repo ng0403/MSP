@@ -9,6 +9,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="${ctx}/resources/common/js/common.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
@@ -86,12 +87,7 @@ $(document).ready(function() {
 		$("#generalTbody").empty();
 		$("#codeMask, .codeWindow").hide();
 	});
-
-	//검은 막을 눌렀을 때
-	//$("#codeMask").click(function() {
-	//	$(this).hide();
-	//	$('.codeWindow').hide();
-	//});
+	
 });
 
 </script>
@@ -115,7 +111,7 @@ $(document).ready(function() {
 					<tr>
 						<th>공통코드</th>
 						<td>
-							<input type="text" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}">
+							<input type="text" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}" onkeypress="fn_press_han(this)" maxlength="2">
 						</td>
 						<th>공통코드명</th>
 						<td>
@@ -181,27 +177,27 @@ $(document).ready(function() {
 						<c:choose>
 							<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 								<a style="color: black; text-decoration: none;">◀ </a>
-								<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
+								<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 								<a style="color: black; text-decoration: none;">/ 1</a>
 								<a style="color: black; text-decoration: none;">▶ </a>
 							</c:when>
 							<c:when test="${pageNum == page.startPageNum}">
 								<a style="color: black; text-decoration: none;">◀ </a>
-								<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
-								<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-								<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum">▶</a>
+								<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+								<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 							</c:when>
 							<c:when test="${pageNum == page.endPageNum}">
-								<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum">◀</a>
-								<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
-								<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+								<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
+								<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 								<a style="color: black; text-decoration: none;">▶</a>
 							</c:when>
 							<c:otherwise>
-								<a href="#" onclick="userPaging('${pageNum-1}');" id="pNum">◀</a>
-								<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="userpageNumEnter(event);" style="width: 15%;" />
-								<a href="#" onclick="userPaging('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-								<a href="#" onclick="userPaging('${pageNum+1}');" id="pNum">▶</a>
+								<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
+								<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+								<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -216,17 +212,18 @@ $(document).ready(function() {
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}"/>
+									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
 								<th>공통코드명</th>
 								<td>
-									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" />
+									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" readonly="readonly"/>
 								</td>
 								<th>공통코드 설명</th>
-								<td><input type="text" name="grp_desc" id="grp_desc"
-									class="iuser_txt" style="width: 90%" value="${grp_desc}" /></td>
+								<td>
+									<input type="text" name="grp_desc" id="grp_desc" class="iuser_txt" style="width: 90%" value="${grp_desc}" readonly="readonly"/>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -252,23 +249,24 @@ $(document).ready(function() {
 									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
 								</td>
 								<td>
-									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" /> 
+									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" 
+									       style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" readonly="readonly"/> 
 								</td>
 							</tr>
 							<tr>
 								<th>상세코드</th>
 								<td>
-									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" />
+									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" readonly="readonly"/>
 								</td>
 								<th>상세코드명</th>
 								<td>
-									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" />
+									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>	
 								<th>상세코드 설명</th>
 								<td>
-									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" />
+									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" readonly="readonly"/>
 								</td>
 							</tr>
 						</tbody>
@@ -310,87 +308,35 @@ $(document).ready(function() {
 		
 		$("#grp_nm_sch").keypress(function(){
 			enterSearch(event, fn_search);
-		})
+		});
 		
-		//페이지 엔터키 기능
-		function userpageNumEnter(event, url) 
+		//페이지 엔터시 이벤트
+		$(document).on("keypress","#pageInput",function(){
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+    		if (keycode == '13') {
+				pageInputRep(event, fn_search);
+    		}
+		});
+		
+		function fn_press_han(obj)
+	    {
+	        //좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
+	        if(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39
+	        || event.keyCode == 46 ) return;
+	        //obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+	        obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+	    }
+		
+		function inputOnlyNum(obj)
 		{
-			$(document).ready(function() {
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-			
-				if (keycode == '13') 
-				{
-					var pageNum = parseInt($("#pageInput").val());
-					
-					if ($("#pageInput").val() == '') 
-					{
-						alert("페이지 번호를 입력하세요.");
-							
-						$("#pageInput").focus();
-					}
-					else if(parseInt($("#pageInput").val()) > parseInt($("#endPageNum").val())) 
-					{
-						alert("페이지 번호가 너무 큽니다.");
-							
-						$("#pageInput").val($("#pageNum").val());
-						$("#pageInput").focus();
-					}
-					else 
-					{
-						userPaging(pageNum);
-					}
-				}
-				event.stopPropagation();
-			});
-		}				
-	
-		//사용자관리 페이징
-		function userPaging(pageNum) 
-		{
-			var grp_cd = $("#grp_cd_sch").val();
-			var grp_nm = $("#grp_nm_sch").val();
-			
-			var tbody = $("#codeListTbody");
-			var contents = "";
-			
-			// Ajax를 이용해서 페이지 리스트 출력해줘야 하는부분.
-			$.ajax({
-				url      : 'codeSearch_list2',
-				type     : 'POST',
-				dataType : 'json',
-				data     : {
-					"grp_cd_sch":grp_cd, "grp_nm_sch":grp_nm, "pageNum":pageNum
-				},
-				success  : function(data) {
-					tbody.empty();
-					var codeInqrList = data.codeInqrList;
-												
-					if(codeInqrList.lenght != 0)
-					{
-						for(var i=0; i<codeInqrList.length; i++)
-						{
-							var grp_cd1 = codeInqrList[i].grp_cd;
-							var grp_nm1  = codeInqrList[i].grp_nm;
-							var code1   = codeInqrList[i].code1;
-							var code_txt = codeInqrList[i].code_txt;
-							
-							contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
-							+"<td align='center' scope='row'>"
-							+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
-		    				+"<td align='center'>"+grp_cd1+"</td>"
-		    				+"<td>"+grp_nm1+"</td>"
-		    				+"<td align='center'>"+code1+"</td>"
-							+"<td>"+code_txt+"</td>"
-							+"</tr>";
-						}
-					}
-					
-					tbody.append(contents);
-					paging(data, "#codePagingDiv", "userPaging");
-					
-				}
-			});
-			
+			if(event.keyCode >= 48 && event.keyCode <= 57)
+			{
+				return true;
+			}
+			else
+			{
+				event.returnValue = false;
+			}
 		}
 		
 		// 검색 버튼 클릭시
@@ -423,7 +369,7 @@ $(document).ready(function() {
 							var code1   = codeInqrList[i].code1;
 							var code_txt = codeInqrList[i].code_txt;
 							
-							contents += "<tr class='open_detail' data_num='"+code1+"' onmouseover='this.style.background=#c0c4cb' onmouseout='this.style.background='white''>"
+							contents += "<tr class='open_detail' data_num='"+code1+"' >"
 							+"<td align='center' scope='row'>"
 							+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
 		    				+"<td align='center'>"+grp_cd1+"</td>"
@@ -471,6 +417,7 @@ $(document).ready(function() {
 			});
 		});
 		
+		// 공통코드 선택하기 위한 팝업조회
 		function fn_selGrpPop()
 		{
 			var tbody_general = $('#generalTbody');

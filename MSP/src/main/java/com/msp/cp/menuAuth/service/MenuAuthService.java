@@ -3,7 +3,7 @@ package com.msp.cp.menuAuth.service;
 import java.util.List;
 import java.util.Map;
 
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 import com.msp.cp.menuAuth.vo.MenuAuthVO;
 
 public interface MenuAuthService {

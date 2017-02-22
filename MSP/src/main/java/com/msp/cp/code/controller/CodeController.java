@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.code.service.CodeService;
 import com.msp.cp.code.vo.CodeVO;
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
 
 @Controller
 @RequestMapping(value="/code")
