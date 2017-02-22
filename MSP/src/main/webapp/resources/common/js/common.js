@@ -1,3 +1,14 @@
+$(function(){
+	/* 체크박스 전체선택, 전체해제 */
+	$("#checkall").on("click", function(){
+	      if( $("#checkall").is(':checked') ){
+	        $("input[name=del_code]").prop("checked", true);
+	      }else{
+	        $("input[name=del_code]").prop("checked", false);
+	      }
+	})
+})
+
 // 검색 페이징 엔터키
     function pageInputRep(event, fMessage) {	
     	$(document).ready(function() {
@@ -126,11 +137,4 @@
 		//윈도우 같은 거 띄운다.
 		$('#'+message2+'').show();
 	}
-	/* 체크박스 전체선택, 전체해제 */
-	$("#checkall").on("click", function(){
-	      if( $("#checkall").is(':checked') ){
-	        $("input[name=del_code]").prop("checked", true);
-	      }else{
-	        $("input[name=del_code]").prop("checked", false);
-	      }
-	})
+	
