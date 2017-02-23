@@ -49,11 +49,13 @@ public class UserDaoImpl implements UserDao {
 
 //	사용자 신규등록
 	@Override
-	public void insert(userVO vo) {
+	public int insert(userVO vo) {
+		int result =0;
 		System.out.println("insert start DaoImpl");
 		System.out.println("insert start DaoImpl vo : " + vo.toString());
-		sqlSession.insert("user.userInsert", vo);
-		System.out.println("insert success DaoImpl");
+		result = sqlSession.insert("user.userInsert", vo);
+		System.out.println("insert success DaoImpl : " + result);
+		return result;
 		
 	}
 
@@ -79,10 +81,13 @@ public class UserDaoImpl implements UserDao {
 
 //	사용자 아이디 클릭 시 팝업
 	@Override
-	public void userMdfy(userVO vo) {
+	public int userMdfy(userVO vo) {
+		int result=0;
 		System.out.println("After userMdfyDaoImpl : " + vo);
-		sqlSession.update("userEdit", vo);
-		System.out.println("Before userMdfyDaoImpl : " + vo);
+		result = sqlSession.update("userEdit", vo);
+		System.out.println("Before userMdfyDaoImpl : " + result);
+		
+		return result;
 		
 	}
 

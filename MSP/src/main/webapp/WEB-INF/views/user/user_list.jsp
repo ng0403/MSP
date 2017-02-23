@@ -11,51 +11,33 @@
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
-<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/user/ModalCss.css" type="text/css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<style type="text/css">
-.Dpop_main_div, .Npop_main_div{
-	display: none;
-	position:absolute; 
-	width:650px; 
-	height:550px; 
-	left:40%; 
-	top:15%; 
-	z-index:10000; 
-	background-color: #FFFFFF; 
-	overflow: auto;
-}
-.DEPTpop_main_div{
-	display: none;
-	position:absolute; 
-	width:650px; 
-	height:550px; 
-	left:40%; 
-	top:15%; 
-	z-index:11000; 
-	background-color: #FFFFFF; 
-	overflow: auto;
-}
-</style>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />
 <title>리스트</title>
 <script type="text/javascript">
 $(document).ready(function() { 
+	 <c:if test="${result=='1'}" var = "result"> 
+			window.close();
+			opener.parent.location.href = "userlist";
+	 </c:if>
+	
 	$('#dept_pop_div').hide();
 	$('#Ddept_pop_div').hide();
-	var result = ${result}
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
 	
 // 	var menu_cd = "";
 // 	var save_cd = "";
 	
+
 	/*부서명 클릭 시 상세정보 출력 이벤트*/
 	$(document).on("click", ".open_detail", function(){
 		var user_id_pop = $(this).attr("user_id_pop");
@@ -108,7 +90,6 @@ $(document).ready(function() {
 		
 		<!-- Search1 Div  -->
 		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
-<%-- 			<form name="userSearchForm" method="post" action="${ctx}/user/userInqr"> --%>
 				<select id="active_key" name="active_key" class="selectField" >
 					<option value="" selected="selected">-검색조건-</option>
 					<option value="user_id_sch">사용자ID</option>
@@ -117,13 +98,7 @@ $(document).ready(function() {
 				</select>	
 				<input type="text" id="user_sch_key" name="uesr_sch_key" > &nbsp;
 				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>
-<!-- 			</form> -->
 			<!-- 페이징 전용 폼 -->
-<%-- 			<form  action="${ctx}/user/userInqr" id="userlistPagingForm" method="post"> --%>
-<%-- 				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/> --%>
-<%-- 				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/> --%>
-<%-- 				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/> --%>
-<!-- 			</form> -->
 			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form>
 		</div>
 	</div>
@@ -132,6 +107,7 @@ $(document).ready(function() {
 	<div class="list_div">
 		<!-- List1 Div -->
 		<div class="list1_div" style=" margin-left: 1%;">
+		<div class="table_div">
 			<form id="delAll_form" name="delAll_form">
 			<table summary="menu_list_tb" class="table table-hover">
 					<colgroup>
@@ -146,7 +122,7 @@ $(document).ready(function() {
 					</colgroup>
 					<thead>
 						<tr>
-							<th><input type="checkbox" id="checkall"></th>
+							<th id="checkTh"><input type="checkbox" id="checkall"></th>
 							<th>사용자ID</th>
 							<th>사용자명</th>
 							<th>부서명</tH>
@@ -161,10 +137,11 @@ $(document).ready(function() {
 									<c:when test="${not empty user_list}">
 										<c:forEach var="user_list" items="${user_list}">
 											<tr class="open_detail" data_num="${user_list.USER_ID}">
-												<td>
+												<td id="checkTd">
 													<input type="checkbox" class="del_point" name="del_code" value="${user_list.USER_ID}">
+													<input type="hidden" id="user_id" value="${user_list.USER_ID}">
 												</td>
-												<td name="user_id" id="${user_list.USER_ID}" onclick="onPopup(this.id);">${user_list.USER_ID}</td>
+												<td onclick="onPopup(this.id);" name="user_id" id="${user_list.USER_ID}"> ${user_list.USER_ID}</td>
 												<td>${user_list.USER_NM}</td>
 												<td>${user_list.DEPT_NM}</td>
 												<td>${user_list.EMAIL_ID}@${user_list.EMAIL_DOMAIN}</td>
@@ -190,6 +167,7 @@ $(document).ready(function() {
 							</tbody>
 						</table>			
 		</form>
+		</div>
 		</div>
 	<!-- Paging Div -->
 	<div id="viewLoadingImg" style="display: none;">
@@ -237,6 +215,12 @@ $(document).ready(function() {
 	</div>
 		<jsp:include page="../user/user_tab.jsp"></jsp:include>
 		<jsp:include page="../user/user_detail.jsp"></jsp:include>
+	<div id="dept_pop_div" style="font-size:11.5px;">
+		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include>
+	</div>
+	<div id="Ddept_pop_div" style="font-size:11.5px;">
+		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include>
+	</div>
 </div>
 
 </body>
