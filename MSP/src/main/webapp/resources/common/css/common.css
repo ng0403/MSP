@@ -116,6 +116,11 @@ span {
 		display: inline-block;
 	}
 }
+
+#h5 {
+	font-weight: bold;
+}
+
 .table_div{
 	height:450px;
 }

@@ -161,7 +161,6 @@ $(document).ready(function() {
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
-			<form name="searchForm">
 				<table>
 					<tr>
 						<th>공통코드</th>
@@ -177,7 +176,6 @@ $(document).ready(function() {
 					    </td>
 					</tr>
 				</table>
-			</form>
 			<!-- Paging Form -->
 			<form id="codelistPagingForm" method="post" action="codeInqr">
 			
@@ -194,10 +192,10 @@ $(document).ready(function() {
 						<thead>
 							<tr>
 								<td align="center"><input id="checkall" type="checkbox" /></td>
-								<td align="center">공통코드</td>
-								<td align="center">공통코드명</td>
-								<td align="center">상세코드</td>
-								<td align="center">상세코드명</td>
+								<td align="center" style="font-weight: bold;">공통코드</td>
+								<td align="center" style="font-weight: bold;">공통코드명</td>
+								<td align="center" style="font-weight: bold;">상세코드</td>
+								<td align="center" style="font-weight: bold;">상세코드명</td>
 							</tr>
 						</thead>
 						<tbody id="codeListTbody">
@@ -260,7 +258,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="list3_div">
-			<h5>공통코드 상세</h5>
+			<h5 id="h5">공통코드 상세</h5>
 				<form method="post" id="joinform1" name="joinform1" action="codeMasterAdd">
 					<table class="table table-hover">
 						<colgroup>
@@ -302,7 +300,7 @@ $(document).ready(function() {
 				
 				<br><br>
 				
-				<h5>상세코드 상세</h5>
+				<h5 id="h5" >상세코드 상세</h5>
 				<form method="post" id="joinform2" name="joinform2">
 					<table class="table table-hover">
 						<colgroup>
