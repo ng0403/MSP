@@ -43,6 +43,7 @@
 	        	</if>
                 and A.DEPT_CD = td.DEPT_CD
                 and A.user_id = tua.user_id(+)
+                order by A.created desc
 		    ) X
 			<![CDATA[
 				where X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
