@@ -27,7 +27,7 @@
 
 <div class="container" >  <!-- 전체 div-->
 
-	<form role="form" method="post" enctype="multipart/form-data">
+	<form role="form" method="post">
 		<div> <!-- 제목 div-->
 			<label id="txt" >제  목</label>
 		 	<input type="text" class="form-control" id="TITLE" name="TITLE" placeholder="제목을 입력해 주세요."  />
