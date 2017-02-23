@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.code.service.CodeService;
 import com.msp.cp.code.vo.CodeVO;
+import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.PagerVO;
 
 @Controller
@@ -44,7 +45,8 @@ public class CodeController {
 	public ModelAndView codeInqr(HttpSession session, Locale locale,
 			@RequestParam(value = "pageNum", defaultValue="1") int pageNum, 
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum, 
-			@RequestParam Map<String, Object> map, Model model, CodeVO vo) throws Exception {
+			@RequestParam Map<String, Object> map, @RequestParam Map<String, Object> codeMap, 
+			Model model, CodeVO vo, String excel) throws Exception {
 		
 		map.put("pageNum", pageNum);
 		
@@ -53,6 +55,17 @@ public class CodeController {
 		map.put("page", page);
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
+		}
+		
+		if(excel != null){
+			if(excel.equals("true")){
+				ModelAndView mav = new ModelAndView("/code/code_list_excel");
+				List<userVO> codeExcel = codeService.userExcel(codeMap);
+				
+				mav.addObject("codeExcel", codeExcel);
+				
+				return mav;
+			}
 		}
 		
 		System.out.println("CodeInqr");

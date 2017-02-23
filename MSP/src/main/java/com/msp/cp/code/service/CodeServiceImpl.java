@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.msp.cp.code.dao.CodeDao;
 import com.msp.cp.code.vo.CodeVO;
+import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.PagerVO;
 
 @Service
@@ -111,6 +112,15 @@ public class CodeServiceImpl implements CodeService {
 		// TODO Auto-generated method stub
 		List<CodeVO> mLevel = codeDao.menuLevel();
 		return mLevel;
+	}
+	
+	// Excel
+	@Override
+	public List<userVO> userExcel(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<userVO> codeExcel = codeDao.userExcel(map);
+
+		return codeExcel;
 	}
 
 }

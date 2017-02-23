@@ -109,6 +109,7 @@ public class MenuAuthController {
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		
+		System.out.println("맵 : " + map);
 		List<MenuAuthVO> menuAuthInqrList = menuAuthService.searchMenuAuth(map);
 		
 		model.addAttribute("menuAuthInqrList", menuAuthInqrList);
