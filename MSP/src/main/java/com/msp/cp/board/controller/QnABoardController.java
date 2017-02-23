@@ -143,12 +143,15 @@ public class QnABoardController {
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		System.out.println("search entering");
  		String keyword    = request.getParameter("keyword");
+	    String qna_answer = request.getParameter("qna_answer");
 	    
+	    System.out.println(qna_answer + "   qna_answer   " + "   keyword   " + keyword);
 	    Map<String,Object> map = new HashMap<String,Object>();
 	    
  		map.put("keyword", keyword);
 		map.put("pageNum", pageNum);
-
+		map.put("qna_answer" , qna_answer);
+		
 		PagerVO page = qnaService.getQnACount(map);
 		System.out.println("page?" + page.toString());
 		if(page.getEndRow()==1){

@@ -72,7 +72,7 @@ public class BoardController {
 		
 		boardService.viewadd(BOARD_NO);
 	
-		
+		System.out.println("파일 CD"  + FILE_CD);
 		if(FILE_CD == null)
 		{
 		  

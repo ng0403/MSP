@@ -6,7 +6,7 @@
 	<select id="boardListCount" parameterType="java.util.Map" resultType="int">
 	    select count(*) as cnt
 		 FROM TB_BOARD
-		where del_flg='N'   
+		where ACTIVE_FLG='N'   
 	</select>
 	
 <select id="BoardList" parameterType="int" resultType="map">
@@ -146,9 +146,9 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
             SELECT *
          FROM TB_BOARD
          WHERE 
-         	DEL_FLG = 'N'
-       	 	<if test="active_key != null and active_key != '' " >   
-            	AND ANSWER_FLG = #{active_key}
+         	ACTIVE_FLG = 'Y' and BOARD_MNG_NO ='BMG1000003'
+       	 	<if test="qna_answer != null and qna_answer != '' " >   
+            	AND ANSWER_FLG = #{qna_answer}
 		 	</if>
 		 	<if test="keyword != null and keyword != ''" >   
             	AND TITLE LIKE '%' || #{keyword} || '%'
