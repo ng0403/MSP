@@ -55,6 +55,8 @@ public class CodeController {
 			page.setEndRow(0);
 		}
 		
+		System.out.println("CodeInqr");
+		
 		List<Object> codeInqrList = codeService.searchCodeList(map);
 		ModelAndView mov = new ModelAndView("/code/code_list");
 		
@@ -255,6 +257,8 @@ public class CodeController {
 		
 		return model;
 	}
+	
+	
 }
 
 

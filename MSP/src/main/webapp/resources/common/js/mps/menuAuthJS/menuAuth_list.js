@@ -2,24 +2,24 @@
 		$("#naviuser").css("font-weight", "bold");
 		
 		$("#auth_id_sch").keypress(function(){
-			enterSearch(event, fn_search);
+			enterSearch(event, fn_menuAuthSearch);
 		});
 		
 		$("#menu_nm_sch").keypress(function(){
-			enterSearch(event, fn_search);
+			enterSearch(event, fn_menuAuthSearch);
 		});
 		
 		//페이지 엔터시 이벤트
 		$(document).on("keypress","#pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
     		if (keycode == '13') {
-				pageInputRep(event, fn_search);
+				pageInputRep(event, fn_menuAuthSearch);
     		}
 		});
 		
 		
 		// 검색 버튼 클릭시
-		function fn_search(pageNum)
+		function fn_menuAuthSearch(pageNum)
 		{
 			var auth_id_sch = $("#auth_id_sch").val();
 			var menu_nm_sch = $("#menu_nm_sch").val();
@@ -69,7 +69,7 @@
 					
 					tbody.append(contents);
 					
-					paging(data, "#menuAuthPagingDiv", "fn_search");
+					paging(data, "#menuAuthPagingDiv", "fn_menuAuthSearch");
 					
 				}
 			});
