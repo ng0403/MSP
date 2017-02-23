@@ -192,11 +192,11 @@ function viewLoadingHide(){
 						<tr>
 							<th>권한명</th>
 							<td>
-								<input type="text" class="form-control" id="auth_id_sch" name="auth_id_sch" value="${auth_id_sch}">
+								<input type="text" class="inputTxt" id="auth_id_sch" name="auth_id_sch" value="${auth_id_sch}">
 							</td>
 						    <th>메뉴명</th>
 							<td>
-								<input type="text" class="form-control" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
+								<input type="text" class="inputTxt" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
 							</td>
 						   	<td>
 						    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
@@ -241,8 +241,8 @@ function viewLoadingHide(){
 									<td>
 										<a href="javascript:void(0)" onclick="fn_menuAuthPop('${menuAuthInqrList.MENU_CD}', '${menuAuthInqrList.AUTH_NM }')">${menuAuthInqrList.MENU_CD}</a>
 									</td>
-									<td>${menuAuthInqrList.MENU_NM}</td>
-									<td>${menuAuthInqrList.AUTH_NM}</td>
+									<td align="left">${menuAuthInqrList.MENU_NM}</td>
+									<td align="left">${menuAuthInqrList.AUTH_NM}</td>
 									<td>${menuAuthInqrList.INQR_AUTH}</td>
 									<td>${menuAuthInqrList.ADD_AUTH}</td>
 									<td>${menuAuthInqrList.MDFY_AUTH}</td>
@@ -273,25 +273,25 @@ function viewLoadingHide(){
 					<c:choose>
 						<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 							<a style="color: black; text-decoration: none;">/ 1</a>
 							<a style="color: black; text-decoration: none;">▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
 							<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="inputTxt" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a style="color: black; text-decoration: none;">▶</a>
 						</c:when>
 						<c:otherwise>
 							<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);;" style="width: 15%;" />
+							<input type="text" id="pageInput" class="inputTxt" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);;" style="width: 15%;" />
 							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 						</c:otherwise>

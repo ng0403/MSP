@@ -141,28 +141,28 @@
 	 					contents1 ="<tr height='15px'>"+
 	 					"<th style=' width: 12%; text-align: center;'>권한ID&nbsp;&nbsp;</th>"+
 	 					"<td style='width: 38%; text-align: left;'>"+
-						"<input type = 'text' id='auth_id1' name='auth_nm' value='"+auth_nm+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
+						"<input type='text' class='inputTxt' id='auth_id1' name='auth_nm' value='"+auth_nm+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
 						"<input type = 'hidden' id='auth_id2' name='auth_id2' value='"+auth_id+"'>"+
 						"</td>"+
 						"<th style=' width: 12%; text-align: center;'>메뉴코드&nbsp;&nbsp;</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
-							"<input type = 'text' id='menu_cd1' name='menu_cd1' value='"+menu_cd+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
+							"<input type='text' class='inputTxt' id='menu_cd1' name='menu_cd1' value='"+menu_cd+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
 						"</td>"+
 						"</tr>"+
 						"<tr height='15px'>"+
 						"<th style='width: 12%; text-align: center;'>메뉴명&nbsp;&nbsp;</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
-							"<input type='text' id='menu_nm1' name='menu_nm1' value='"+menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
+							"<input type='text' class='inputTxt' id='menu_nm1' name='menu_nm1' value='"+menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
 						"<th style='width: 12%; text-align: center;'>상위메뉴코드&nbsp;&nbsp;</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
-							"<input type='text' id='up_menu_cd1' name='up_menu_cd1' value='"+up_menu_cd+"' style='width: 80%;' readonly='readonly'/>"+
+							"<input type='text' class='inputTxt' id='up_menu_cd1' name='up_menu_cd1' value='"+up_menu_cd+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
 						"</tr>"+
 						"<tr height='15px'>"+
 						"<th style='width: 12%; text-align: center;'>상위메뉴명&nbsp;&nbsp;</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
-							"<input type='text' id='up_menu_nm1' name='up_menu_nm1' value='"+up_menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
+							"<input type='text' class='inputTxt' id='up_menu_nm1' name='up_menu_nm1' value='"+up_menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
 						"</td>"+
 						"<th style='width: 12%; text-align: center;'>메뉴URL&nbsp;&nbsp;</th>"+

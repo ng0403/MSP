@@ -184,7 +184,7 @@ $(document).ready(function() {
 			</form>
 		</div>
 	</div>
-
+     
 	<!-- List Cover Div -->
 		<div class="list_div">
 			<div class="list2_div">
@@ -260,7 +260,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="list3_div">
-			<h3>공통코드 상세</h3>
+			<h5>공통코드 상세</h5>
 				<form method="post" id="joinform1" name="joinform1" action="codeMasterAdd">
 					<table class="table table-hover">
 						<colgroup>
@@ -302,7 +302,7 @@ $(document).ready(function() {
 				
 				<br><br>
 				
-				<h3>상세코드 상세</h3>
+				<h5>상세코드 상세</h5>
 				<form method="post" id="joinform2" name="joinform2">
 					<table class="table table-hover">
 						<colgroup>
