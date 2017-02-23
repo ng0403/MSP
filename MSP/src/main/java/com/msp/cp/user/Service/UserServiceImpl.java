@@ -39,11 +39,13 @@ public class UserServiceImpl implements UserService {
 
 //	사용자 신규 추가
 	@Override
-	public void insertUser(userVO vo) {
-		System.out.println("insert start ServiceImpl");
-		userDao.insert(vo);
-		System.out.println("insert success ServiceImpl");
+	public int insertUser(userVO vo) {
+		int result=0;
+		System.out.println("insert start ServiceImpl : "+ vo);
+		result = userDao.insert(vo);
+		System.out.println("insert success ServiceImpl : " + result);
 		
+		return result;
 	}
 
 //	사용자 삭제
@@ -65,10 +67,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void userMdfy(userVO vo) {
+	public int userMdfy(userVO vo) {
+		int result =0;
 		System.out.println("After userMdfy ServiceImpl : " + vo);
-		userDao.userMdfy(vo);
-		System.out.println("Before userMdfy ServiceImpl : " + vo);
+		result = userDao.userMdfy(vo);
+		System.out.println("Before userMdfy ServiceImpl : " + result);
+		
+		return result;
 	}
 
 	@Override

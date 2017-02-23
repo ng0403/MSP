@@ -33,7 +33,7 @@
 		<div class="list_div">
 			<div class="list2_div">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list_tb" class="table table-bordered" style ="width: 100%;">
+					<table summary="dept_list_tb" style ="width: 100%;"><!-- class="table table-bordered" -->
 						<colgroup>
 							<col width="30%">
 							<col width="30%">

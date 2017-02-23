@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -143,57 +144,25 @@ public class UserController {
 		return model;
 	}
 	
-	//상세정보 팝업
-	@RequestMapping(value="/userTab", method=RequestMethod.GET)
-	public ModelAndView userTabListPage(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
-	{
-		int entry_flg = 1;
-		System.out.println("userTab Controller");
-		
-		List<userVO> rank_cd_list = userService.rankCdList();
-		List<userVO> duty_cd_list = userService.dutyCdList();
-		System.out.println("dept_sch_list Controller");
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("pageNum", pageNum);
-		//페이징 처리
-		com.msp.cp.utils.PagerVO page = deptService.getDeptCount(map);
-		if(page.getEndRow()==1){
-			page.setEndRow(0);
-		}
-		
-		int startRow = page.getStartRow();
-		int endRow = page.getEndRow();
-		
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		//검색 결과 list
-		List<DeptVO> dept_list = userService.dept_list(map);
-		System.out.println("UserTab : " + rank_cd_list);
-		ModelAndView mov = new ModelAndView("/user/user_tab");
-		
-		System.out.println("DeptTab : " + dept_list);
-		
-		mov.addObject("dept_list", dept_list);
-		mov.addObject("entry_flg", entry_flg);
-		mov.addObject("rank_cd_list", rank_cd_list);
-		mov.addObject("duty_cd_list", duty_cd_list);
-		
-		return mov;
-	}
-	
 	//사용자 추가
 	@RequestMapping(value="/userInsert", method=RequestMethod.POST)
-	public ModelAndView userInsert(userVO vo, HttpSession session) {
-		System.out.println("userInsert Controller : " + vo.toString());
-		userService.insertUser(vo);
-		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/user/user_tab");
-		int result = 1;
-		mov.addObject("result", result);
-		System.out.println(mov);
-		
-		return mov;
-	}
+	public ResponseEntity<String> userInsert(HttpSession session, @RequestBody userVO vo) {
+	ResponseEntity<String> entity = null;
+			
+			int result;
+			
+			try{
+				result = userService.insertUser(vo);
+				if(result == 1){
+					entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+		}
 	
 	//사용자 삭제
 	@RequestMapping(value="/userDel/{del_code}", method={RequestMethod.GET, RequestMethod.POST})
@@ -241,19 +210,23 @@ public class UserController {
 	
 	//userMdfy 사용자 정보 수정
 	@RequestMapping(value="/userMdfy", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView userMdfy(userVO vo, HttpServletRequest req)
+	public ResponseEntity<String> userMdfy(HttpServletRequest req, @RequestBody userVO vo)
 	{
-		String user_id = vo.getUser_id();
+		ResponseEntity<String> entity = null;
 		
-		vo.setUser_id(user_id);
-		System.out.println("userModfy controller " + vo.getUser_id());
-		userService.userMdfy(vo);
-		System.out.println("insert success");
-		ModelAndView mov = new ModelAndView("/user/user_detail");
-		int result = 1;
-		mov.addObject("result", result);
-		System.out.println(mov);
-		return mov;
+		int result;
+		
+		try{
+			result = userService.userMdfy(vo);
+			if(result == 1){
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
 		
 		
 	}
@@ -299,7 +272,7 @@ public class UserController {
 		return mov;
 	}
 	
-	//상세정보 팝업
+	//엑셀 추가 전 팝업
 	@RequestMapping(value="/excelImportTab", method=RequestMethod.GET)
 	public ModelAndView excelImportTab(HttpSession session, Locale locale,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum)
 	{

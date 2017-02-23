@@ -28,7 +28,6 @@
 
 label {
 	
-	float: left;
 	margin-top: 5px;
 	margin-left: 10px;
 }
@@ -36,7 +35,6 @@ label {
 	
 	margin-left: 7px;
 	width: 300px;
-	float: left;
 }
 
 #dept_inqr_fbtn {
@@ -44,7 +42,6 @@ label {
 	margin-left: 10px;
 	width: 55px;
 	height: 34px;
-	float: left;
 	
 }
 

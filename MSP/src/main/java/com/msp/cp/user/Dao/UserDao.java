@@ -11,13 +11,13 @@ public interface UserDao {
 
 	public Object selectOnes(String root, Object obj);
 
-	public void insert(userVO vo);
+	public int insert(userVO vo);
 
 	public int userDel(String dc);
 
 	public List<userVO> searchListUserOne(String user_id);
 
-	public void userMdfy(userVO vo);
+	public int userMdfy(userVO vo);
 
 	int UserListCount(String string, Map<String, Object> map);
 

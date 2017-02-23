@@ -1,3 +1,5 @@
+///////////////////////////////////function//////////////////////////////////////////////
+
 //window.showmodalDialog close
 function ln_Close(e) {
             window.returnValue = "ok"
@@ -44,6 +46,7 @@ function ln_Close(e) {
 	 
 	    //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
 		  function passwordCheck(flg) {
+			  alert(flg);
 			if(flg == 1)
 				{
 					var userID = document.getElementById("user_id").value;
@@ -55,7 +58,7 @@ function ln_Close(e) {
 					var user_pwd_chk = document.getElementById("Duser_pwd_chk").value; 
 					
 				}
-			
+			alert("user_pwd : "+user_pwd+" user_pwd_chk : " + user_pwd_chk);
 			// 재입력 일치 여부 
 			if (user_pwd != user_pwd_chk) { 
 				alert("입력한 두 개의 비밀번호가 서로 일치하지 않습니다.");
@@ -94,56 +97,10 @@ function ln_Close(e) {
 				alert("기존 비밀본호와 새 비밀번호가 일치합니다."); 
 				return false; 
 				} */ 
-				
+				alert("합격");
 				return true;
 			} 
-		  //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
-		  function passwordCheck() {
-			  var userID = document.getElementById("user_id").value;
-			  var user_pwd = document.getElementById("user_pwd").value; 
-			  var user_pwd_chk = document.getElementById("user_pwd_chk").value; 
-			  
-			  // 재입력 일치 여부 
-			  if (user_pwd != user_pwd_chk) { 
-				  alert("입력한 두 개의 비밀번호가 서로 일치하지 않습니다.");
-				  return ; 
-			  } 
-			  // 길이 
-			  if(!/^[a-zA-Z0-9!@#$%^&*()?_~]{6,15}$/.test(user_pwd_chk)) 
-			  { 
-				  alert("비밀번호는 숫자, 영문, 특수문자 조합으로 6~15자리를 사용해야 합니다.");
-				  return ;
-			  } 
-			  // 영문, 숫자, 특수문자 2종 이상 혼용 
-			  var chk = 0; 
-			  if(user_pwd.search(/[0-9]/g) != -1 ) chk ++; 
-			  if(user_pwd_chk.search(/[a-z]/ig) != -1 ) chk ++; 
-			  if(user_pwd_chk.search(/[!@#$%^&*()?_~]/g) != -1 ) chk ++; 
-			  if(chk < 2) {
-				  alert("비밀번호는 숫자, 영문, 특수문자를 두가지이상 혼용하여야 합니다."); 
-				  return ; 
-			  }
-			  // 동일한 문자/숫자 4이상, 연속된 문자 
-			  if(/(\w)\1\1\1/.test(user_pwd_chk) || isContinuedValue(user_pwd_chk)) 
-			  {
-				  alert("비밀번호에 4자 이상의 연속 또는 반복 문자 및 숫자를 사용하실 수 없습니다."); 
-				  return ; 
-			  }
-			  // 아이디 포함 여부 
-			  if(user_pwd_chk.search(userID)>-1) 
-			  {
-				  alert("ID가 포함된 비밀번호는 사용하실 수 없습니다."); 
-				  return ;
-			  }
-			  /* // 기존 비밀번호와 새 비밀번호 일치 여부 
-			if (user_pwd == user_pwd_chk) 
-			{
-				alert("기존 비밀본호와 새 비밀번호가 일치합니다."); 
-				return false; 
-				} */ 
-			  
-			  return true;
-		  } 
+		 
 	
 		  function isContinuedValue(value) {
 			  console.log("value = " + value);
@@ -153,17 +110,23 @@ function ln_Close(e) {
 			  var temp1 = ""; 
 			  var temp2 = ""; 
 			  var temp3 = ""; 
+			  var temp4 = ""; 
+			  var temp5 = ""; 
+			  var temp6 = ""; 
 			  for (var i = 0; i < value.length-3; i++) {
 				  console.log("=========================");
 				  temp0 = value.charAt(i); 
 				  temp1 = value.charAt(i + 1); 
 				  temp2 = value.charAt(i + 2); 
 				  temp3 = value.charAt(i + 3); 
+				  temp4 = value.charAt(i + 4); 
+				  temp5 = value.charAt(i + 5); 
+				  temp6 = value.charAt(i + 6); 
 				  console.log(temp0); console.log(temp1); console.log(temp2); console.log(temp3);
-				  if (temp0.charCodeAt(0) - temp1.charCodeAt(0) == 1 && temp1.charCodeAt(0) - temp2.charCodeAt(0) == 1 && temp2.charCodeAt(0) - temp3.charCodeAt(0) == 1) {
+				  if (temp0.charCodeAt(0) - temp1.charCodeAt(0) == 1 && temp1.charCodeAt(0) - temp2.charCodeAt(0) == 1 && temp2.charCodeAt(0) - temp3.charCodeAt(0) == 1&& temp3.charCodeAt(0) - temp4.charCodeAt(0) == 1&& temp4.charCodeAt(0) - temp5.charCodeAt(0) == 1&& temp5.charCodeAt(0) - temp6.charCodeAt(0) == 1) {
 					  intCnt1 = intCnt1 + 1;
 				  } 
-				  if (temp0.charCodeAt(0) - temp1.charCodeAt(0) == -1 && temp1.charCodeAt(0) - temp2.charCodeAt(0) == -1 && temp2.charCodeAt(0) - temp3.charCodeAt(0) == -1) {
+				  if (temp0.charCodeAt(0) - temp1.charCodeAt(0) == -1 && temp1.charCodeAt(0) - temp2.charCodeAt(0) == -1 && temp2.charCodeAt(0) - temp3.charCodeAt(0) == -1 && temp3.charCodeAt(0) - temp4.charCodeAt(0) == -1 && temp4.charCodeAt(0) - temp5.charCodeAt(0) == -1 && temp5.charCodeAt(0) - temp6.charCodeAt(0) == -1) {
 					  intCnt2 = intCnt2 + 1;
 				  }
 				  console.log("=========================");
@@ -171,3 +134,12 @@ function ln_Close(e) {
 			  console.log(intCnt1 > 0 || intCnt2 > 0); 
 			  return (intCnt1 > 0 || intCnt2 > 0); 
 			  }
+		  
+		function closeTab(){
+//		 		$('.auth_list_pop, #paging_authPop_div').html("");
+			$('#userTabMask, #userTabWindow').hide();
+			$('#userDetailMask, #userDetailWindow').hide();
+			
+		} 
+///////////////////////////////////Jquery//////////////////////////////////////////////
+		

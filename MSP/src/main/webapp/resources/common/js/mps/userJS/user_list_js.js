@@ -1,6 +1,3 @@
-
-
-
 //delay
 function sleep(ms){
   ts1 = new Date().getTime() + ms;
@@ -49,7 +46,7 @@ function sleep(ms){
 		var del_code_td = $("<td>");
 		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + user_id + "'>");
 		
-		var user_id_td = $("<td>");
+		var user_id_td = $("<td onclick='onPopup(this.id)' id="+user_id+">");
 		user_id_td.html(user_id);
 		
 		var user_nm_td = $("<td>");
@@ -96,23 +93,9 @@ function excelImportOpen() {
 }
 //사용자 신규등록 팝업	
 function userTabOpen() {
-//	opener.location.href = "userTab";
-//	$("#userTab_pop_div").show();
-//	$("#userDetail_pop_div").hide();
-//		var popWidth  = '650'; // 파업사이즈 너비
-//		var popHeight = '450'; // 팝업사이즈 높이
-//		var winHeight = document.body.clientHeight;	// 현재창의 높이
-//		var winWidth = document.body.clientWidth;	// 현재창의 너비
-//		var winX = window.screenLeft;	// 현재창의 x좌표
-//		var winY = window.screenTop;	// 현재창의 y좌표
-//	
-//		var popX = winX + (winWidth - popWidth)/2;
-//		var popY = winY + (winHeight - popHeight)/2;
-//		var popUrl = "userTab";
-//		var popOption = "width=650, height=500, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-//		window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 	popByMask("userTabMask", "userTabWindow");
 	}
+
 
 //사용자 정보 수정 팝업
 function onPopup(user_id) {
@@ -143,6 +126,9 @@ function onPopup(user_id) {
 		popByMask("userDetailMask", "userDetailWindow");
 	}).fail(function(){
 		alert("메뉴 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+		$('#userTabMask, #userTabWindow').hide();
+		$('#userDetailMask, #userDetailWindow').hide();
+		userListInqr(1);
 	})
 }
 
@@ -301,7 +287,7 @@ function deleteAction() {
 	console.log("### del_code => {}" + del_code);
 
 	if (confirm("정보를 삭제 하시겠습니까?")) {
-
+		
 		//삭제처리 후 다시 불러올 리스트 url      
 
 		location.href = "userDel?user_id=" + del_code;

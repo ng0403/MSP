@@ -12,7 +12,7 @@ public interface UserService {
 
 	public List<userVO> searchListUser(Map map);
 
-	public void insertUser(userVO vo);
+	public int insertUser(userVO vo);
 
 	public Object userOneSelectByIdNM(Object user_id);
 
@@ -20,7 +20,7 @@ public interface UserService {
 
 	public List<userVO> searchListUserOne(String user_id);
 
-	public void userMdfy(userVO vo);
+	public int userMdfy(userVO vo);
 
 	PagerVO getUserListCount(Map<String, Object> map);
 
