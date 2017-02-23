@@ -37,6 +37,12 @@ label {
 	width: 300px;
 }
 
+#sel1
+{
+	width: 95%;
+	margin-left: 20px;
+}
+
 #dept_inqr_fbtn {
 	
 	margin-left: 10px;

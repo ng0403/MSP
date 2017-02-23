@@ -55,11 +55,11 @@ th { width: 16%;
 .DEPTpop_main_div{
 	display: none;
 	position:absolute; 
-	width:650px; 
-	height:550px; 
-	left:40%; 
-	top:15%; 
-	z-index:3; 
+	width:500px; 
+	height:400px; 
+	left:10%; 
+	top:5%; 
+	z-index:2; 
 	background-color: #FFFFFF; 
 	overflow: auto;
 }

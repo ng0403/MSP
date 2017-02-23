@@ -28,7 +28,7 @@ select X.*
 ) A
 	  ) X
  <![CDATA[
-		 where X.rnum > #{page.startRow} and X.rnum <= #{page.endRow}
+		 where X.rnum >= #{page.startRow} and X.rnum <= #{page.endRow}
 		 
 			]]>
  </select>
@@ -131,8 +131,8 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
 ) A
 	  ) X
  <![CDATA[
-		 where X.rnum > #{page.startRow} and X.rnum <= #{page.endRow}
-		 
+		 where X.rnum >= #{page.startRow} and X.rnum <= #{page.endRow}
+		 ORDER BY BOARD_NO DESC
 			]]>
  </select>     
          
@@ -168,7 +168,7 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
 		 	<if test="keyword != null and keyword != ''" >   
             	AND TITLE LIKE '%' || #{keyword} || '%'
          	</if>
-         ORDER BY BOARD_NO ASC ) A
+         ORDER BY BOARD_NO DESC ) A
      ) X
      <![CDATA[
         WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
@@ -208,14 +208,14 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
          SELECT BOARD_NO, TITLE, QUESTION_TYPE_CD, ANSWER_FLG, CREATED_BY, to_char(CREATED,'yy-mm-dd hh:mi') CREATED, VIEW_CNT
          FROM TB_BOARD
          WHERE 
-         	DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000002'
+         	ACTIVE_FLG = 'Y' AND BOARD_MNG_NO = 'BMG1000002'
        	 	<if test="active_key != null and active_key != '' " >   
             	AND ANSWER_FLG = #{active_key}
 		 	</if>
 		 	<if test="keyword != null and keyword != ''" >   
             	AND TITLE LIKE '%' || #{keyword} || '%'
          	</if>
-         ORDER BY BOARD_NO ASC ) A
+         ORDER BY BOARD_NO DESC ) A
      ) X
      <![CDATA[
         WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}

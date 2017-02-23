@@ -8,7 +8,7 @@ function ln_Close(e) {
 
 /* 리스트 클릭 시 팝업 숨김. */
 	function hideModal(){
- 		$('#dept_pop_div').hide();
+ 		$('.DEPTpop_main_div').hide();
  	}
  	
 	function onlyNumber(event){

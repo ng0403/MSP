@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.msp.cp.code.vo.CodeVO;
+import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.ExcelRead;
 import com.msp.cp.utils.ExcelReadOption;
 
@@ -114,6 +115,20 @@ public class CodeDaoImpl implements CodeDao {
 	public List<CodeVO> menuLevel() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("code.searchmenuLevel");
+	}
+
+	@Override
+	public List<userVO> userExcel(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<userVO> codeExcel = null;
+		
+		try {
+			codeExcel = sqlSession.selectList("codeListExcel", map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return codeExcel;
 	}
 
 }

@@ -18,15 +18,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
+
 
 <form role="form" name = "form_modify" method="post">
  <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"> 
 </form>
  
+ <div class="navi_div">
+		Q&A > 리스트 > 게시글
+</div>
 
-<div class="container" style=" width:90%" > <!-- 전체 div-->
+<div class="container"> <!-- 전체 div-->
 
 <div> <!-- 제목 div-->
+<label id="txt" >제  목</label>
  <input type="text" class="form-control" id="title" value= "${boardlist.QUESTION_TITLE}"  readonly="readonly" />
 </div> 
 
@@ -38,11 +44,12 @@
 </div> 
 
 <div> <!-- 내용 div -->
+ <label id="txt" >내  용</label> 
  <textarea class="form-control" rows="10" id="content"  readonly="readonly" >${boardlist.CONTENT}</textarea>
 </div> 
 
  
-<div> <!-- 버튼 div  -->
+<div id="btns"> <!-- 버튼 div  -->
 <input type="button" id="board_modify_fbtn" class = "btn btn-primary btn-sm" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"/>  <input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
 </div>
  

@@ -1,3 +1,5 @@
+		
+$(function(){
 		$("#navisub11").show();
 		$("#naviuser").css("font-weight", "bold");
 		
@@ -16,8 +18,7 @@
 				pageInputRep(event, fn_menuAuthSearch);
     		}
 		});
-		
-		
+})
 		// 검색 버튼 클릭시
 		function fn_menuAuthSearch(pageNum)
 		{
@@ -139,99 +140,99 @@
 	 					}
 	 					
 	 					contents1 ="<tr height='15px'>"+
-	 					"<th style=' width: 12%; text-align: center;'>권한ID&nbsp;&nbsp;</th>"+
+	 					"<th style=' width: 12%; text-align: right;'>권한ID</th>"+
 	 					"<td style='width: 38%; text-align: left;'>"+
 						"<input type='text' class='inputTxt' id='auth_id1' name='auth_nm' value='"+auth_nm+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
 						"<input type = 'hidden' id='auth_id2' name='auth_id2' value='"+auth_id+"'>"+
 						"</td>"+
-						"<th style=' width: 12%; text-align: center;'>메뉴코드&nbsp;&nbsp;</th>"+
+						"<th style=' width: 12%; text-align: right;'>메뉴코드</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
 							"<input type='text' class='inputTxt' id='menu_cd1' name='menu_cd1' value='"+menu_cd+"' style='font-size:12px;width:80%;background-color:#F2F2F2;' readonly='readonly'>"+
 						"</td>"+
 						"</tr>"+
 						"<tr height='15px'>"+
-						"<th style='width: 12%; text-align: center;'>메뉴명&nbsp;&nbsp;</th>"+
+						"<th style='width: 12%; text-align: right'>메뉴명</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
 							"<input type='text' class='inputTxt' id='menu_nm1' name='menu_nm1' value='"+menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
-						"<th style='width: 12%; text-align: center;'>상위메뉴코드&nbsp;&nbsp;</th>"+
+						"<th style='width: 12%; text-align: right;'>상위메뉴코드</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
 							"<input type='text' class='inputTxt' id='up_menu_cd1' name='up_menu_cd1' value='"+up_menu_cd+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
 						"</tr>"+
 						"<tr height='15px'>"+
-						"<th style='width: 12%; text-align: center;'>상위메뉴명&nbsp;&nbsp;</th>"+
+						"<th style='width: 12%; text-align: right;'>상위메뉴명</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
 							"<input type='text' class='inputTxt' id='up_menu_nm1' name='up_menu_nm1' value='"+up_menu_nm+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
 						"</td>"+
-						"<th style='width: 12%; text-align: center;'>메뉴URL&nbsp;&nbsp;</th>"+
+						"<th style='width: 12%; text-align: right;'>메뉴URL</th>"+
 						"<td style='width: 38%; text-align: left;'>"+
 							"<input type='text' id='menu_url1' name='menu_url1' value='"+menu_url+"' style='width: 80%;' readonly='readonly'/>"+
 						"</td>"+
 						"</tr>";
 						
-						active_radio1 = "<tr><th style='width: 12%; text-align: center;'>활성화 상태&nbsp;&nbsp;</th>"+ 
+						active_radio1 = "<tr><th style='width: 12%; text-align: right;'>활성화</br>상태</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
 							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td>";
-						active_radio2 = "<tr><th style='width: 12%; text-align: center;'>활성화 상태&nbsp;&nbsp;</th>"+ 
+						active_radio2 = "<tr><th style='width: 12%; text-align: right;'>활성화</br>상태</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='active_flg1' id='active1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
 							"<input type='radio' name='active_flg1' id='active2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td>";
 							
-						inqr_radio1 = "<th style='width: 12%; text-align: center;'>조회권한&nbsp;&nbsp;</th>"+ 
+						inqr_radio1 = "<th style='width: 12%; text-align: right;'>조회권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
 							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='true false;'/>N"
 							+"</td></tr>";
-						inqr_radio2 = "<th style='width: 12%; text-align: center;'>조회권한&nbsp;&nbsp;</th>"+ 
+						inqr_radio2 = "<th style='width: 12%; text-align: right;'>조회권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='inqr_auth1' id='inqr_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
 							"<input type='radio' name='inqr_auth1' id='inqr_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td></tr>";
 							
-						add_radio1 = "<tr><th style='width: 12%; text-align: center;'>생성권한&nbsp;&nbsp;</th>"+ 
+						add_radio1 = "<tr><th style='width: 12%; text-align: right;'>생성권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
 							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td>";
-						add_radio2 = "<tr><th style='width: 12%; text-align: center;'>생성권한&nbsp;&nbsp;</th>"+ 
+						add_radio2 = "<tr><th style='width: 12%; text-align: right;'>생성권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='add_auth1' id='add_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
 							"<input type='radio' name='add_auth1' id='add_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td>";
 							
-						mdfy_radio1 = "<th style='width: 12%; text-align: center;'>수정권한&nbsp;&nbsp;</th>"+ 
+						mdfy_radio1 = "<th style='width: 12%; text-align: right;'>수정권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
 							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td></tr>";
-						mdfy_radio2 = "<th style='width: 12%; text-align: center;'>수정권한&nbsp;&nbsp;</th>"+ 
+						mdfy_radio2 = "<th style='width: 12%; text-align: right;'>수정권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='mdfy_auth1' id='mdfy_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
 							"<input type='radio' name='mdfy_auth1' id='mdfy_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td></tr>";
 							
-						del_radio1 = "<tr><th style='width: 12%; text-align: center;'>삭제권한&nbsp;&nbsp;</th>"+ 
+						del_radio1 = "<tr><th style='width: 12%; text-align: right;'>삭제권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
 							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td>";
-						del_radio2 = "<tr><th style='width: 12%; text-align: center;'>삭제권한&nbsp;&nbsp;</th>"+ 
+						del_radio2 = "<tr><th style='width: 12%; text-align: right;'>삭제권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='del_auth1' id='del_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
 							"<input type='radio' name='del_auth1' id='del_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"
 							+"</td>";
 						
-						menu_acc_radio1 = "<th style='width: 12%; text-align: center;'>메뉴접근권한&nbsp;&nbsp;</th>"+ 
+						menu_acc_radio1 = "<th style='width: 12%; text-align: right;'>메뉴접근</br>권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;' checked/>Y"+
 							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;'/>N"
 							+"</td></tr>";
-						menu_acc_radio2 = "<th style='width: 12%; text-align: center;'>메뉴접근권한&nbsp;&nbsp;</th>"+ 
+						menu_acc_radio2 = "<th style='width: 12%; text-align: right;'>메뉴접근</br>권한</th>"+ 
 							"<td style='width: 38%; text-align: left;'>"				   
 							+"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth1' value='Y' style='text-align:right;width:10%;' onclick='return true;'/>Y"+
 							"<input type='radio' name='menu_acc_auth1' id='menu_acc_auth2' value='N' style='margin-left:15px;text-align:left;width:10%;' onclick='return true;' checked/>N"

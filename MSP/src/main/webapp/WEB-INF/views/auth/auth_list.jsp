@@ -18,6 +18,43 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style type="text/css">
+
+label {
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#active_key {
+	float: left;
+	margin-top: 2px;
+	margin-right: 15px;
+}
+
+#keyword {
+	width: 200px;
+	float: left;
+	margin-left: -10px;
+}
+
+#auth_inqr_fbtn {
+	width: 55px;
+	height: 34px;
+}
+
+#excelExportPopBtn {
+	margin-left: 5px;
+}
+
+th, td {
+	text-align: center;
+}
+#authNm {
+	text-align: left;
+	padding-left: 40px;
+}
+
+</style>
 <title>Auth List</title>
 </head>
 <body>
@@ -39,7 +76,7 @@
 				<option value="N">비활성화</option>
 			</select>
 			<label>권한명</label>&nbsp;
-			<input type="text" id="keyword" name="keyword" class="int_search"> 
+			<input type="text" id="keyword" name="keyword" class="form-control" > 
 			&nbsp;&nbsp;
 			<input type="button" id="auth_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 			
@@ -79,7 +116,7 @@
 										<td style="width:30%; cursor: pointer;">
 											${auth_list.auth_id}
 										</td> 
-										<td style="width:30%;">${auth_list.auth_nm}</td>
+										<td style="width:30%;" id="authNm">${auth_list.auth_nm}</td>
 										<td>
 											<c:if test="${auth_list.active_flg eq 'Y'}">활성화</c:if>
 											<c:if test="${auth_list.active_flg eq 'N'}">비활성화</c:if>
@@ -147,11 +184,11 @@
 					<tbody id="tbody1">
 						<tr>
 							<th style="font-weight: bold;">권한ID</th>
-							<td><input type="text" style="padding-left: 6px;" name="auth_id" id="auth_id" class="txt" value="${auth_id}" readonly="readonly" ></input></td>
+							<td><input type="text" style="padding-left: 6px;" name="auth_id" id="auth_id" class="form-control"  value="${auth_id}" readonly="readonly" ></input></td>
 						</tr>
 						<tr>
 							<th style="font-weight: bold;">권한명</th>
-							<td><input type="text" style="padding-left: 6px;" name="auth_nm" id="auth_nm" class="txt" value="${auth_nm}"></input></td>
+							<td><input type="text" style="padding-left: 6px;" name="auth_nm" id="auth_nm" class="form-control"  value="${auth_nm}"></input></td>
 						</tr>
 						<tr>
 							<th style="font-weight: bold;">활성화여부</th>

@@ -25,10 +25,10 @@
 <script>
 	$(document).ready(function() {
  		$('#dept_pop_div').hide();
-	      //부서검색버튼 클릭 
+	      //검색버튼 클릭 
      	$("#dept_sch_fbtn").on("click", function() {
-     		$("#dept_pop_div").show();
-     		$("#dept_pop_div").center();
+     		$(".DEPTpop_main_div").show();
+     		$(".DEPTpop_main_div").center();
      		deptListInqrPop(1);
     		});
      	jQuery.fn.center = function () {
@@ -63,64 +63,59 @@
 		} 
 			
 		
-		//추가 버튼
+		// 사용자 신규 추가(저장) 버튼
 			$("#submit_btn").on("click", function() {
-				var tmp = $('#user_id').val();
+				var tmp = $('#Nuser_id').val();
 				var user_pwd = $('#user_pwd').val();
 				var user_pwd_chk = $('#user_pwd_chk').val();
 				var rank_cd = $("#rank_cd option:selected").val();
 				
 				$('created_by').val(tmp);
 				var tmplength = tmp.length;
-				if(tmp == null){
-						alert("사용자 아이디가 없습니다.");
-					}else{
-						if(tmplength > 0){
-// 							if(passwordCheck(1) == true){
-								alert("AJAX 진입");
-								$.ajax({
-									url:"/user/userInsert" 
-									, type:"post"
-									, contentType:"application/json; charset=UTF-8"
-									, dataType:"text"
-									, data:JSON.stringify({
-										user_id:$("#user_id").val()
-										, user_nm:$("#user_nm").val()
-										, user_pwd:$("#user_pwd").val()
-										, email_id:$("#email_id").val()
-										, email_domain:$("#email_domain").val()
-										, cphone_num1:$("#cphone_num1").val()
-										, cphone_num2:$("#cphone_num2").val()
-										, cphone_num3:$("#cphone_num3").val()
-										, phone_num1:$("#phone_num1").val()
-										, phone_num2:$("#phone_num2").val()
-										, phone_num3:$("#phone_num3").val()
-										, dept_cd:$("#dept_cd").val()
-										, rank_cd:$("#rank_cd").val()
-										, duty_cd:$("#duty_cd").val()
-									}), 
-									error:function(){
-										alert("시스템 오류입니다. 관리자에게 문의하세요.");
-									}, success:function(resultData){
-										alert("resultData : " + resultData);
-										if(resultData == "SUCCESS"){
-											alert("사용자 등록이 완료되었습니다.");
-											userListInqr(1);
-											$('#dept_pop_div').hide();
-											$('#Ddept_pop_div').hide();
-											$('#userTabMask, #userTabWindow').hide();
-											$('#userDetailMask, #userDetailWindow').hide();
-										}
-									}
-								})
-								
-//		 					}
-							
-						}else{
-							alert("신규 데이터를 입력하세요.");
+				if(tmp != null){
+// 					if(passwordCheck(1) == true){
+					viewLoadingShow();
+					$.ajax({
+						url:"/user/userInsert" 
+						, type:"post"
+						, contentType:"application/json; charset=UTF-8"
+						, dataType:"text"
+						, data:JSON.stringify({
+							user_id:$("#Nuser_id").val()
+							, user_nm:$("#user_nm").val()
+							, user_pwd:$("#user_pwd").val()
+							, email_id:$("#email_id").val()
+							, email_domain:$("#email_domain").val()
+							, cphone_num1:$("#cphone_num1").val()
+							, cphone_num2:$("#cphone_num2").val()
+							, cphone_num3:$("#cphone_num3").val()
+							, phone_num1:$("#phone_num1").val()
+							, phone_num2:$("#phone_num2").val()
+							, phone_num3:$("#phone_num3").val()
+							, dept_cd:$("#dept_cd").val()
+							, rank_cd:$("#rank_cd").val()
+							, duty_cd:$("#duty_cd").val()
+						}), 
+						error:function(){
+							alert("시스템 오류입니다. 관리자에게 문의하세요.");
+						}, success:function(resultData){
+							alert("resultData : " + resultData);
+							if(resultData == "SUCCESS"){
+								alert("사용자 등록이 완료되었습니다.");
+								userListInqr(1);
+								$('.DEPTpop_main_div').hide();
+								$('#userTabMask, #userTabWindow').hide();
+								$('#userDetailMask, #userDetailWindow').hide();
+							}viewLoadingHide();
 						}
-					}
-			});
+					})
+					
+//					}
+				
+			}else{
+				alert("신규 데이터를 입력하세요.");
+			}
+		});
 		
 		 var tmp = $('#user_id').val(); 
 
@@ -169,11 +164,11 @@
 								<input type="hidden" id="user_id_h" value="${user_id}">
 								<input type="hidden" id="created_by" value="">
 								<input type="hidden" id="active_flg" value="${active_flg}">
- 								<input type="text" name="user_id" id="user_id" class="inputTxt" style=" width:100%" value="" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
+ 								<input type="text" name="user_id" id="Nuser_id" class="inputTxt" maxlength="10" style=" width:100%" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th style="padding-left: 1%; text-align: right;">직급</th>
  							<td style="padding-left: 1%;">
- 								 <select name="rank_cd" class="inputTxt" style="width: 45%;">
+ 								 <select name="rank_cd" id="rank_cd" class="inputTxt" style="width: 45%;">
 									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
 										<option value="<c:out value="${rankCd.rank_cd}" />" 
 											<c:if test="${rank_cd == rankCd.rank_cd }">selected="selected"</c:if>>
@@ -190,7 +185,7 @@
 							</td>
 							<th style="padding-left: 1%; text-align: right;">조직ID</th>
 							<td style="padding-left: 1%;">
-								 <select name="duty_cd" class="inputTxt" style="width: 45%;" >
+								 <select name="duty_cd" id="duty_cd" class="inputTxt" style="width: 45%;" >
 									<c:forEach var="dutyCd" items="${duty_cd_list}" varStatus="status2">
 										<option value="<c:out value="${dutyCd.duty_cd}" />" 
 											<c:if test="${duty_cd == dutyCd.duty_cd }">selected="selected"</c:if>>

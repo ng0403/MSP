@@ -11,7 +11,9 @@
 			var dept_cd_pop = $(this).attr("dept_cd_pop");
 			var dept_nm_pop = $(this).attr("dept_nm_pop");
 			$('#dept_cd').val(dept_cd_pop);
+			$('#Ddept_cd').val(dept_cd_pop);
 			$('#dept_nm').val(dept_nm_pop);
+			$('#Ddept_nm').val(dept_nm_pop);
 			//deptDetailInqr(dept_cd);
 			hideModal();
 		})

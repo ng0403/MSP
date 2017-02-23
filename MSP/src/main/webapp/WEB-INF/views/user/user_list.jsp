@@ -12,11 +12,11 @@
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  -->
 <!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" />
@@ -29,8 +29,8 @@ $(document).ready(function() {
 			opener.parent.location.href = "userlist";
 	 </c:if>
 	
-	$('#dept_pop_div').hide();
-	$('#Ddept_pop_div').hide();
+// 	$('#dept_pop_div').hide();
+// 	$('#Ddept_pop_div').hide();
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
 	
@@ -139,7 +139,7 @@ $(document).ready(function() {
 											<tr class="open_detail" data_num="${user_list.USER_ID}">
 												<td id="checkTd">
 													<input type="checkbox" class="del_point" name="del_code" value="${user_list.USER_ID}">
-													<input type="hidden" id="user_id" value="${user_list.USER_ID}">
+<%-- 													<input type="hidden" id="user_id" value="${user_list.USER_ID}"> --%>
 												</td>
 												<td onclick="onPopup(this.id);" name="user_id" id="${user_list.USER_ID}"> ${user_list.USER_ID}</td>
 												<td>${user_list.USER_NM}</td>
@@ -215,12 +215,10 @@ $(document).ready(function() {
 	</div>
 		<jsp:include page="../user/user_tab.jsp"></jsp:include>
 		<jsp:include page="../user/user_detail.jsp"></jsp:include>
-	<div id="dept_pop_div" style="font-size:11.5px;">
+<!-- 	<div id="dept_pop_div" style="font-size:11.5px;"> -->
 		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include>
-	</div>
-	<div id="Ddept_pop_div" style="font-size:11.5px;">
-		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include>
-	</div>
+<!-- 	</div> -->
+
 </div>
 
 </body>

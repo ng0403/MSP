@@ -137,6 +137,7 @@
 				</div>
 			</div>
 			<div id="dept_detail_div" class="list3_div">
+			<h5 id="h5">부서관리 상세</h5>
 				<form id="dept_detail_form" name="dept_detail_form">
 					<table summary="dept_detail" class="table table-hover">
 						<colgroup>

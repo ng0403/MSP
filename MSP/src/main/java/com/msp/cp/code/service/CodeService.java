@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msp.cp.code.vo.CodeVO;
+import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.PagerVO;
 
 public interface CodeService {
@@ -26,4 +27,5 @@ public interface CodeService {
 	  
 	  // menu_level 검색
 	  public List<CodeVO> menuLevel();
+	public List<userVO> userExcel(Map<String, Object> codeMap);
 }
