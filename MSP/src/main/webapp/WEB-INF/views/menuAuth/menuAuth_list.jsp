@@ -192,11 +192,11 @@ function viewLoadingHide(){
 						<tr>
 							<th>권한명</th>
 							<td>
-								<input type="text" id="auth_id_sch" name="auth_id_sch" value="${auth_id_sch}">
+								<input type="text" class="form-control" id="auth_id_sch" name="auth_id_sch" value="${auth_id_sch}">
 							</td>
 						    <th>메뉴명</th>
 							<td>
-								<input type="text" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
+								<input type="text" class="form-control" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
 							</td>
 						   	<td>
 						    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
