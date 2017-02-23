@@ -11,7 +11,7 @@
 #checkTh {
 	width: 5%;
 }
-
+    
 #dept_pop_div { display: none; position:absolute; width:50%; height:75%; left:80%; top:30%; 
 				background-color: #c0c4cb	; overflow: auto;}
 				
