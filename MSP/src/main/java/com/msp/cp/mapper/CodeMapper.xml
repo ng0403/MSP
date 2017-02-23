@@ -125,6 +125,24 @@
 		WHERE
 			code1 = #{code1}
 	</delete>
+	
+	<!-- Excel -->
+	<select id="codeListExcel" parameterType="string" resultType="map">
+		SELECT	X.*
+		FROM 
+     	 (
+        	select rownum as rnum, A.*
+       		from (
+               		 SELECT tm.grp_cd, tm.grp_nm, td.code1, td.code_txt
+               		 FROM 
+               		 	TB_CODE_MASTER TM, TB_CODE_DETAIL TD
+                	 WHERE 
+                	 	TM.GRP_CD = TD.GRP_CD
+               		 ORDER BY 
+               		 	TM.GRP_CD, TD.CODE1
+             	  ) A
+     	 ) X
+	</select>
 
 	<!-- menu_level 검색 -->
 	<select id="searchmenuLevel" resultType="com.msp.cp.code.vo.CodeVO">

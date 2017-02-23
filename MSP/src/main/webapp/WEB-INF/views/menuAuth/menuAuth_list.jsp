@@ -199,7 +199,7 @@ function viewLoadingHide(){
 								<input type="text" class="inputTxt" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
 							</td>
 						   	<td>
-						    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
+						    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_menuAuthSearch(1)" value="검색">
 						    </td>
 						</tr>
 					</table>
@@ -273,27 +273,27 @@ function viewLoadingHide(){
 					<c:choose>
 						<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+							<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_menuAuthSearch);" style="width: 15%;" />
 							<a style="color: black; text-decoration: none;">/ 1</a>
 							<a style="color: black; text-decoration: none;">▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
 							<a style="color: black; text-decoration: none;">◀ </a>
-							<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
-							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-							<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
+							<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_menuAuthSearch);" style="width: 15%;" />
+							<a href="#" onclick="fn_menuAuthSearch('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+							<a href="#" onclick="fn_menuAuthSearch('${pageNum+1}');" id="pNum">▶</a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
-							<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="inputTxt" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
-							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+							<a href="#" onclick="fn_menuAuthSearch('${pageNum-1}');" id="pNum">◀</a>
+							<input type="text" id="pageInput" class="inputTxt" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_menuAuthSearch);" style="width: 15%;" />
+							<a href="#" onclick="fn_menuAuthSearch('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 							<a style="color: black; text-decoration: none;">▶</a>
 						</c:when>
 						<c:otherwise>
-							<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-							<input type="text" id="pageInput" class="inputTxt" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);;" style="width: 15%;" />
-							<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-							<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
+							<a href="#" onclick="fn_menuAuthSearch('${pageNum-1}');" id="pNum">◀</a>
+							<input type="text" id="pageInput" class="inputTxt" value="${pageNum}" onkeypress="pageInputRep(event, fn_menuAuthSearch);;" style="width: 15%;" />
+							<a href="#" onclick="fn_menuAuthSearch('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+							<a href="#" onclick="fn_menuAuthSearch('${pageNum+1}');" id="pNum">▶</a>
 						</c:otherwise>
 					</c:choose>
 				<!-- class="page1" -->

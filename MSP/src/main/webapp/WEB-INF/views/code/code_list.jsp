@@ -172,14 +172,14 @@ $(document).ready(function() {
 							<input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50">
 						</td>
 					   	 <td>
-					    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
+					    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_codeSearch(1)" value="검색">
 					    </td>
 					</tr>
 				</table>
 			<!-- Paging Form -->
-			<form id="codelistPagingForm" method="post" action="codeInqr">
-			
-			</form>
+			<form id="codelistPagingForm" method="post" action="codeInqr"></form>
+			<!-- Excel -->
+			<form id="codelistExcelForm" method="post" action="${ctx}/code/codeInqr"></form>
 		</div>
 	</div>
      
@@ -230,29 +230,33 @@ $(document).ready(function() {
 						<c:choose>
 							<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 								<a style="color: black; text-decoration: none;">◀ </a>
-								<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_codeSearch);" style="width: 15%;" />
 								<a style="color: black; text-decoration: none;">/ 1</a>
 								<a style="color: black; text-decoration: none;">▶ </a>
 							</c:when>
 							<c:when test="${pageNum == page.startPageNum}">
 								<a style="color: black; text-decoration: none;">◀ </a>
-								<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
-								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-								<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
+								<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_codeSearch);" style="width: 15%;" />
+								<a href="#" onclick="fn_codeSearch('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+								<a href="#" onclick="fn_codeSearch('${pageNum+1}');" id="pNum">▶</a>
 							</c:when>
 							<c:when test="${pageNum == page.endPageNum}">
-								<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-								<input type="text" id="pageInput" class="inputTxt" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
-								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+								<a href="#" onclick="fn_codeSearch('${pageNum-1}');" id="pNum">◀</a>
+								<input type="text" id="pageInput" class="inputTxt" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_codeSearch);" style="width: 15%;" />
+								<a href="#" onclick="fn_codeSearch('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 								<a style="color: black; text-decoration: none;">▶</a>
 							</c:when>
 							<c:otherwise>
-								<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-								<input type="text" id="pageInput" class="inputTxt" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
-								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
-								<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
+								<a href="#" onclick="fn_codeSearch('${pageNum-1}');" id="pNum">◀</a>
+								<input type="text" id="pageInput" class="inputTxt" value="${pageNum}" onkeypress="pageInputRep(event, fn_codeSearch);" style="width: 15%;" />
+								<a href="#" onclick="fn_codeSearch('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
+								<a href="#" onclick="fn_codeSearch('${pageNum+1}');" id="pNum">▶</a>
 							</c:otherwise>
 						</c:choose>
+					</div>
+					
+					<div class="right">
+						<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right;">
 					</div>
 				</div>
 			</div>
@@ -376,18 +380,18 @@ $(document).ready(function() {
 		
 		// grp_cd_sch grp_nm_sch
 		$("#grp_cd_sch").keypress(function(){
-			enterSearch(event, fn_search);
+			enterSearch(event, fn_codeSearch);
 		});
 		
 		$("#grp_nm_sch").keypress(function(){
-			enterSearch(event, fn_search);
+			enterSearch(event, fn_codeSearch);
 		});
 		
 		//페이지 엔터시 이벤트
 		$(document).on("keypress","#pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
     		if (keycode == '13') {
-				pageInputRep(event, fn_search);
+				pageInputRep(event, fn_codeSearch);
     		}
 		});
 		
@@ -615,7 +619,7 @@ $(document).ready(function() {
 		}
 		
 		// 검색 버튼 클릭시
-		function fn_search(pageNum)
+		function fn_codeSearch(pageNum)
 		{
 			var grp_cd = $("#grp_cd_sch").val();
 			var grp_nm = $("#grp_nm_sch").val();
@@ -656,7 +660,7 @@ $(document).ready(function() {
 					}
 					
 					tbody.append(contents);
-					paging(data, "#codePagingDiv", "fn_search");
+					paging(data, "#codePagingDiv", "fn_codeSearch");
 					
 				}
 			});
@@ -755,6 +759,23 @@ $(document).ready(function() {
 			$("#codeDetail_reset_btn").show();
 		}
 			
+			
+		//AS-ID 엑셀 다운로드 적용 함수
+		function download_list_Excel(formID){
+			var ctx = $("#ctx").val();
+			var form = $("#"+formID);
+			var excel = $('<input type="hidden" value="true" name="excel">');
+			
+			if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다."))
+			{
+				form.append(excel);
+				form.submit();
+			}
+			
+			$("input[name=excel]").val("");
+		}
+		
+		
 		// 검색 버튼 클릭시 - 기존
 		$(function(){
 			$("#search_fbtn1").click(function(){
