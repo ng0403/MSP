@@ -33,12 +33,7 @@
 	<div class="menuAuthWindow" >
 		<div id="mainDiv" style="align="center">
 			<span style="margin-top:1%; font-size: 15px; float:center; margin-left:1%;"><strong style="text-align: center;">메뉴 권한 상세보기</strong></span>
-			<div>
-				<input type="button" id="menuAuthClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
-					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
-				<input type="button" id="menuAuthMdfy_btn" class="btn btn-primary btn-sm" data-dismiss="modal" 
-					   style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="수정"/>
-			</div>
+			
 			<div class="block_div"></div>
 			
 			<div style="height:150px; width:98%;">
@@ -48,12 +43,19 @@
 					
 					<div align="center">
 						<form id="menuAuthMdfyForm" name="menuAuthMdfyForm" action="menuAuthMdfy" method="post">
-							<table class="menuAuth_view" style="font-size: 12px;">
+							<table class="table table-hover">
 								<tbody id="generalTbody">
 								
 								</tbody>
 							</table>
 						</form>
+						
+						<div>
+							<input type="button" id="menuAuthMdfy_btn" class="btn btn-primary btn-sm" data-dismiss="modal" 
+					  			   style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="수정"/>
+							<input type="button" id="menuAuthClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
+					 			   style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="닫기"/>
+						</div>
 					</div>
 					
 				</div>
