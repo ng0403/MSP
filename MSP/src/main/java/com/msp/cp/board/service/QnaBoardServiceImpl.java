@@ -33,7 +33,7 @@ public class QnaBoardServiceImpl implements QnABoardService {
 		
 		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 10, 999);
 		
-		return page;
+		return page; 
 	}
 
 	@Override
@@ -60,6 +60,8 @@ public class QnaBoardServiceImpl implements QnABoardService {
 		
 		PagerVO page = new PagerVO(PageNum, pageListCount, 10, 20);
 		return page; 
+		
+		 
 		 
 	}
 

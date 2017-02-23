@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 
 
@@ -36,7 +36,7 @@
 	    	<form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
 	
 				<label >제  목</label>
-				<input type="text" id="keyword" name="keyword" class="form-control" > &nbsp; 
+				<input type="text" id="keyword" name="keyword" class="inputTxt" > &nbsp; 
 	
 			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" class="btn btn-default btn-sm" value="검색">
 		 </form>  

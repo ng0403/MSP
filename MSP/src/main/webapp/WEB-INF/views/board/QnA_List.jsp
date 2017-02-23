@@ -8,7 +8,8 @@
 <head>
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>  
 <script src="${ctx}/resources/common/js/common.js"></script>
-
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -33,8 +34,7 @@
 <div class="search_div">
  <div class="search2_div">
 <!-- Q&A 리스트, 조회화면 -->
-	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
-	 
+	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post"> 
 				<!-- <label for="user_id">질문유형 :</label> -->
 					<!--  <select id="qna_type" name="qna_type">
 					    <option value=""> -- 선택 -- </option>
@@ -48,9 +48,8 @@
  							<option value="N">N</option>
  					</select>
 				 <label for="keyword">제목 :</label>
-				 <input type="text" id="keyword" name="keyword" class="form-control" >&nbsp; 
-				 <input type="button" class="btn btn-default btn-sm" onclick="QnAListInqr(1);" value="검색">
-		 
+				 <input type="text" id="keyword" name="keyword" class="inputTxt" >&nbsp; 
+				 <input type="button" class="btn btn-default btn-sm" onclick="QnAListInqr(1);" value="검색"> 
 				</form> 
 				</div>
 </div> 
@@ -109,7 +108,7 @@
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
 							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
-							<a href="#" onclick="QnAListInqrv('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+							<a href="#" onclick="QnAListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
 							<a href="#" onclick="QnAListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
@@ -327,7 +326,7 @@ function QnAajaxList() {
 	/*리스트 출력및 페이징 처리 함수*/
 	function QnAListInqr(pageNum){
  		var qna_answer = $("#qna_answer").val();
-		var keyword    = $("#keyword").val(); 
+ 		var keyword    = $("#keyword").val(); 
 		$.post("/board/search_QnAInqr",{"qna_answer" : qna_answer, "keyword":keyword, "pageNum":pageNum}, function(data){
 			$(".qna_list").html("");
 			$(data.qna_list).each(function(){

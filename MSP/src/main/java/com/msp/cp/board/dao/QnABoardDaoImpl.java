@@ -107,6 +107,7 @@ public class QnABoardDaoImpl implements QnABoardDao {
 	@Override
 	public List<BoardVO> QnAList2(Map<String, Object> map) {
 		// TODO Auto-generated method stub
+		System.out.println("map222" + map.toString());
 	  return sqlSession.selectList("board.selectQnA2", map);
  
 	}

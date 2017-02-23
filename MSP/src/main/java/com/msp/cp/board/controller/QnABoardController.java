@@ -146,7 +146,7 @@ public class QnABoardController {
 		map.put("pageNum", pageNum);
 		map.put("qna_answer" , qna_answer);
 		
-		PagerVO page = qnaService.getQnACount(map);
+		PagerVO page = qnaService.getQnaListCount(map);
 		System.out.println("page?" + page.toString());
 		if(page.getEndRow()==1){
 			page.setEndRow(0);
@@ -160,6 +160,7 @@ public class QnABoardController {
 		List<BoardVO> list = qnaService.QnAList(map); 
 		System.out.println("초기 list" + list.toString());
 		String QUESTION_TYPE_CD = list.get(0).getQUESTION_TYPE_CD();
+		System.out.println("code cd ? " + QUESTION_TYPE_CD);
 		map.put("QUESTION_TYPE_CD", QUESTION_TYPE_CD);
 		
 		System.out.println("mapmapmap" +map.toString());
