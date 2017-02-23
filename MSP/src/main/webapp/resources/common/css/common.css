@@ -4,7 +4,7 @@
  /* ///////input text CSS/////////////// */   
     label {
     width:60px;
-    float:left;
+   /*  float:left; */
     font-size:12px;
     line-height:24px;
     font-weight:bold;
