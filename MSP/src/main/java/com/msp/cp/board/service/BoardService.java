@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
- 
+import com.msp.cp.utils.PagerVO;
+  
 public interface BoardService {
 	
 	  public List<Object> list(Map map);
@@ -21,8 +21,9 @@ public interface BoardService {
 	  public void insert(BoardVO vo);
 	  public void removeBoard(String dc);
 	  public void removeDetail(int BOARD_NO);
-	  PagerVO getBoardListCount(Map<String, Object> map);
 	  
+	  PagerVO getBoardListCount(Map<String, Object> map);
+ 	  
 	  public List<BoardVO> SearchList(Map<String, Object> map);
 
 	  

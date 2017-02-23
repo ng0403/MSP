@@ -6,7 +6,13 @@
 	<select id="boardListCount" parameterType="java.util.Map" resultType="int">
 	    select count(*) as cnt
 		 FROM TB_BOARD
-		where ACTIVE_FLG='N'   
+		where ACTIVE_FLG='Y' AND BOARD_MNG_NO = 'BMG1000002'   
+	</select>
+	
+	<select id="qnaListCount" parameterType="java.util.Map" resultType="int">
+	    select count(*) as cnt
+		 FROM TB_BOARD
+		where ACTIVE_FLG='Y' AND BOARD_MNG_NO = 'BMG1000003'   
 	</select>
 	
 <select id="BoardList" parameterType="int" resultType="map">
@@ -114,14 +120,23 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
  </update>
  
  
- <select id="QnAList" resultType="map">
-
-SELECT A.BOARD_NO, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.CREATED_BY, A.CREATED, B.CODE_TXT, A.TITLE, A.VIEW_CNT
+ <select id="QnAList" resultType="map">  
+    select X.*
+		from ( 
+		    select rownum as rnum, A.*
+		        from (
+		SELECT A.BOARD_NO, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.CREATED_BY, A.CREATED, B.CODE_TXT, A.TITLE, A.VIEW_CNT
          FROM TB_BOARD A, TB_CODE_DETAIL B
          WHERE DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000003' AND A.QUESTION_TYPE_CD = B.CODE1
-
-
- </select>
+) A
+	  ) X
+ <![CDATA[
+		 where X.rnum > #{page.startRow} and X.rnum <= #{page.endRow}
+		 
+			]]>
+ </select>     
+         
+ 
  
  
  <select id="QnACount" parameterType="java.util.Map" resultType="int" >

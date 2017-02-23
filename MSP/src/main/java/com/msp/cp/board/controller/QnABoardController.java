@@ -1,10 +1,8 @@
 package com.msp.cp.board.controller;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,15 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.msp.cp.auth.vo.AuthVO;
 import com.msp.cp.board.service.QnABoardService;
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
-import com.msp.cp.utils.FileManager;
+import com.msp.cp.utils.PagerVO;
 
 @Controller
 @RequestMapping("/board/*")
@@ -40,7 +34,7 @@ public class QnABoardController {
 		System.out.println("pagenum" + pageNum);
 		map.put("pageNum", pageNum);
 
-		PagerVO page= qnaService.getBoardListCount(map); 
+		PagerVO page= qnaService.getQnaListCount(map);
 		System.out.println("pagevo" + page.toString());
 		map.put("page", page);
 		
@@ -141,7 +135,7 @@ public class QnABoardController {
 	@RequestMapping(value="/search_QnAInqr", method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String, Object> search_QnA_list( ModelMap model, HttpServletRequest request,
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
-		System.out.println("search entering");
+		System.out.println("search entering1111");
  		String keyword    = request.getParameter("keyword");
 	    String qna_answer = request.getParameter("qna_answer");
 	    

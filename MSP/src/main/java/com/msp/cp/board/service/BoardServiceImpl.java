@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.msp.cp.board.dao.BoardDao;
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
-
+import com.msp.cp.utils.PagerVO;
+ 
 @Service
 public class BoardServiceImpl implements BoardService {
 	
@@ -114,14 +114,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.QnAajaxlist();
 	}
 
+	
 	@Override
 	public void viewadd(int BOARD_NO) {
 		
 		boardDao.viewadd(BOARD_NO);
 		
 	}
-
-
  
  
  

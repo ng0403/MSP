@@ -25,6 +25,7 @@ public interface BoardDao {
 	 public void removeDetail(int BOARD_NO);
 	 
 	int BoardListCount(String string, Map<String, Object> map);
+ 	
 	public void insertAttachData(BoardVO attach);
     public Object searchOneFiledata(String FILE_CD);
 

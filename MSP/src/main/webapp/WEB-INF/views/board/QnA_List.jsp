@@ -48,7 +48,7 @@
  							<option value="N">N</option>
  					</select>
 				 <label for="keyword">제목 :</label>
-				 <input type="text" id="keyword" name="keyword"	/>&nbsp; 
+				 <input type="text" id="keyword" name="keyword" class="form-control" >&nbsp; 
 				 <input type="button" class="btn btn-default btn-sm" onclick="QnAListInqr(1);" value="검색">
 		 
 				</form> 
@@ -94,36 +94,38 @@
 				</div>	
 		 <div class="paging_div">
 		 <div class="left">
-		 <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
-		 
+		 <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>	 
 		</div>
-		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
-		<input type="hidden" id="boardPageNum" value="${pageNum}"/>
-		<c:choose>
-			<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 2%;"/>  
-				<a style="color: black; text-decoration: none;"> / 1</a>
-				<a style="color: black; text-decoration: none;"> ▶ </a>
-			</c:when>
-			<c:when test="${pageNum == page.startPageNum}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 2%;"/>  
-				<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-				<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-			</c:when>
-			<c:when test="${pageNum == page.endPageNum}">
-				<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum"> ◀ </a>
-				<input type="text" id="pageInput" class="boardPageInput" value="${page.endPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 2%;"/> 
-				<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-				<a style="color: black; text-decoration: none;"> ▶ </a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum" > ◀ </a>
-				<input type="text" id="pageInput" class="boardPageInput" value="${pageNum}" onkeypress="(event);" style="width: 2%;"/>  
-				<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-				<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-			</c:otherwise>
-		</c:choose>
+		
+		<div class="page" id="paging_div">	
+					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+					<input type="hidden" id="PageNum" value="${pageNum}"/>
+					<c:choose>
+						<c:when test="${page.endPageNum == 1}">
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> / ${page.endPageNum}</a>
+							<a style="color: black;"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.startPageNum}">
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="QnAListInqrv('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+							<a href="#" onclick="QnAListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.endPageNum}">
+							<a href="#" onclick="QnAListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="QnAListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="QnAListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
+							<input type="text" id="pageInput" value="${pageNum}" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="QnAListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+							<a href="#" onclick="QnAListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				
 		</div>
 					
 					
@@ -320,8 +322,7 @@ function QnAajaxList() {
 			}
 		});
 	}
-	
-	
+	 
 	
 	/*리스트 출력및 페이징 처리 함수*/
 	function QnAListInqr(pageNum){

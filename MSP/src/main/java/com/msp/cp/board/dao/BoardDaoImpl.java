@@ -124,7 +124,7 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.update("viewadd",BOARD_NO);
 		
 	}
-
+ 
 
 
 
