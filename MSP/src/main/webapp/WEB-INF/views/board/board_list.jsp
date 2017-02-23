@@ -21,117 +21,117 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 
 
 <div class="main_div">
- <div class="navi_div">
-게시판 > 리스트
-</div>
+	<div class="navi_div">
+ 		게시판 > 리스트
+	</div>
 
-<!-- Q&A 리스트, 조회화면 -->
+	<!-- Q&A 리스트, 조회화면 -->
 	<div class="search_div">
-			<div class="search2_div">
-	    <form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
+		<div class="search2_div">
+	    	<form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
 	
-				<label for="keyword">제목 :</label>
-				<input type="text" id="keyword" name="keyword" style="" > &nbsp; 
+				<label >제  목</label>
+				<input type="text" id="keyword" name="keyword" class="form-control" > &nbsp; 
 	
-			 <input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" class="btn btn-default btn-sm" value="검색">
+			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" class="btn btn-default btn-sm" value="검색">
 		 </form>  
 		</div>
- </div>
+	</div>
 
-<div class="list_div">
-			<div class="list1_div" id ="list1_div">  
- <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
-	<table  class="table table-hover" >
-					<thead>
-						<tr>
-							<th><input id="checkall" type="checkbox"/></th>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-							<th>조회수</th>
+	<div class="list_div">
+		<div class="list1_div" id ="list1_div">  
+ 			<form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
+				<div class="table_div">
+					<table  class="table table-hover" >
+						<thead>
+							<tr>
+								<th><input id="checkall" type="checkbox"/></th>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>작성일</th>
+								<th>조회수</th>
+								
+							</tr>
 							
-						</tr>
-						
-					 </thead> 
- 					 
- 						<tbody class="board_list">
- 						 <c:forEach items="${boardlist}" var="boardVO"> 
-						
-							<tr class="open_list">
-								<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
-   								<td>${boardVO.BOARD_NO}</td>
-								<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
-								<td>${boardVO.CREATED_BY} </td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${boardVO.CREATED}" /></td>
-								<td>${boardVO.VIEW_CNT}</td>
-							</tr> 
-						
-						</c:forEach>
- 					 
-						 </tbody>
+						 </thead> 
+				 					 
+						<tbody class="board_list">
+							<c:forEach items="${boardlist}" var="boardVO"> 
+					
+								<tr class="open_list">
+									<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
+			 						<td>${boardVO.BOARD_NO}</td>
+									<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
+									<td>${boardVO.CREATED_BY} </td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREATED}" /></td>
+									<td>${boardVO.VIEW_CNT}</td>
+								</tr> 
+							</c:forEach>
+						</tbody>
 					</table>
+				</div>
 		 </form>
- </div>	
+ 	</div>	
  
-  <div class="paging_div">
- 	<div class="left">
-	     <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
-	 </div> 
-	 	<div class="page" id="paging_div" >
-		<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-		<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
-		<input type="hidden" id="boardPageNum" value="${pageNum}"/>
-		<c:choose>
-			<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 2%;"/>  
-				<a style="color: black; text-decoration: none;"> / 1</a>
-				<a style="color: black; text-decoration: none;"> ▶ </a>
-			</c:when>
-			<c:when test="${pageNum == page.startPageNum}">
-				<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 2%;"/>  
-				<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-				<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-			</c:when>
-			<c:when test="${pageNum == page.endPageNum}">
-				<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum"> ◀ </a>
-				<input type="text" id="pageInput" class="boardPageInput" value="${page.endPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 2%;"/> 
-				<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-				<a style="color: black; text-decoration: none;"> ▶ </a>
-			</c:when>
-			<c:otherwise>
-				<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum" > ◀ </a>
-				<input type="text" id="pageInput" class="boardPageInput" value="${pageNum}" onkeypress="(event);" style="width: 2%;"/>  
-				<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-				<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-			</c:otherwise>
-		</c:choose>
+	<div class="paging_div">
+	
+	 	<div class="left">
+		     <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
+		</div> 
+		
+		<div class="page" id="paging_div" >
+			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+			<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+			<input type="hidden" id="boardPageNum" value="${pageNum}"/>
+			<c:choose>
+				<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
+					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 20%;"/>  
+					<a style="color: black; text-decoration: none;"> / 1</a>
+					<a style="color: black; text-decoration: none;"> ▶ </a>
+				</c:when>
+				<c:when test="${pageNum == page.startPageNum}">
+					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 20%;"/>  
+					<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
+					<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+				</c:when>
+				<c:when test="${pageNum == page.endPageNum}">
+					<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum"> ◀ </a>
+					<input type="text" id="pageInput" class="boardPageInput" value="${page.endPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 20%;"/> 
+					<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="color: black; text-decoration: none;"> ▶ </a>
+				</c:when>
+				<c:otherwise>
+					<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum" > ◀ </a>
+					<input type="text" id="pageInput" class="boardPageInput" value="${pageNum}" onkeypress="(event);" style="width: 20%;"/>  
+					<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+				</c:otherwise>
+			</c:choose>
 		</div>
+		
 		<div class="right">
  		</div> 
-</div>
+	</div>
 
-<div class = paging_div>
-
-</div> 
-
+	<div class = paging_div>
+	
+	</div> 
 </div>
 
 <!-- 페이징 전용 폼 -->
-			<form  action="${ctx}/board/boardInqr" id="boardlistPagingForm" method="post">
-				<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
-				<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
-				<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
-			</form>
+<form  action="${ctx}/board/boardInqr" id="boardlistPagingForm" method="post">
+	<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
+	<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
+	<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
+</form>
 
 <script type="text/javascript">
- 
  
 $("#board_add_fbtn").on("click", function(){
 	location.href="/board/board_insert";
