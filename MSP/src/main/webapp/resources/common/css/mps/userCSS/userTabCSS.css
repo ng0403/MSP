@@ -10,17 +10,17 @@
     overflow: auto;
 }
 
-#Dtable td{
-	width: 40%;
-}
+/* #Dtable td{ */
+/* 	width: 40%; */
+/* } */
 
-.input{
-	width: 100%;
-}
+/* .input{ */
+/* 	width: 100%; */
+/* } */
 
-th { width: 16%;
-     text-align: right;
-    }
+/* th { width: 16%; */
+/*      text-align: right; */
+/*     } */
 
 /* Modal Content/Box */
 .modalL_list_div {
