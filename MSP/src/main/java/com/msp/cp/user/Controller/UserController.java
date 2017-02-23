@@ -79,6 +79,8 @@ public class UserController {
 				return mav;
 			}
 		}
+		List<userVO> rank_cd_list = userService.rankCdList();
+		List<userVO> duty_cd_list = userService.dutyCdList();
 		List<userVO> user_list = userService.searchListUser(map);
 
 		System.out.println("15. User Search list : " +user_list);
@@ -88,6 +90,8 @@ public class UserController {
 		mov.addObject("active_key", active_key);
 		mov.addObject("user_sch_key", user_sch_key);
 		mov.addObject("user_list", user_list);
+		mov.addObject("rank_cd_list", rank_cd_list);
+		mov.addObject("duty_cd_list", duty_cd_list);
 		System.out.println("16. User Search list : " + mov);
 		return mov;
 		
@@ -124,6 +128,8 @@ public class UserController {
 		map.put("endRow", endRow);
 		map.put("page", page);
 
+		List<userVO> rank_cd_list = userService.rankCdList();
+		List<userVO> duty_cd_list = userService.dutyCdList();
 		List<userVO> user_list = userService.searchListUser(map);
 		
 		System.out.println(user_list);
@@ -131,6 +137,8 @@ public class UserController {
 		model.addAttribute("page", page);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("user_list", user_list);
+		model.addAttribute("rank_cd_list", rank_cd_list);
+		model.addAttribute("duty_cd_list", duty_cd_list);
 
 		return model;
 	}
@@ -229,26 +237,7 @@ public class UserController {
 		return entity;
 	}
 	
-	//temp code ajax Controller
-	@RequestMapping(value="/user_code_list/{id}", method={RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody Map<String, Object> user_code_list(ModelMap model,
-			HttpServletRequest request,@PathVariable("id") String user_id){
-		System.out.println("aJax list Controller");
-		
-//		Map<String,Object> map = new HashMap<String,Object>();
-		List<userVO> rank_cd_list = userService.rankCdList();
-		List<userVO> duty_cd_list = userService.dutyCdList();
-		
-		List<userVO> user_list = userService.searchListUserOne(user_id);
-		
-		System.out.println(user_list);
-		
-		model.addAttribute("user_list", user_list);
-		model.addAttribute("rank_cd_list", rank_cd_list);
-		model.addAttribute("duty_cd_list", duty_cd_list);
-		
-		return model;
-	}
+
 	
 	//userMdfy 사용자 정보 수정
 	@RequestMapping(value="/userMdfy", method={RequestMethod.GET, RequestMethod.POST})
