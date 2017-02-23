@@ -11,6 +11,26 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+
+
+<style>
+
+label { 
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#keyword {
+	width: 200px;
+	margin-left: -10px;
+}
+
+#board_inqr_fbtn {
+	width: 55px;
+	height: 34px;
+}
+</style>
 </head>
 <body>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
@@ -22,7 +42,8 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-
+ <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
+ <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 
 <div class="main_div">
 
@@ -48,7 +69,7 @@
  							<option value="N">N</option>
  					</select>
 				 <label for="keyword">제목 :</label>
-				 <input type="text" id="keyword" name="keyword" class="form-control" >&nbsp; 
+				 <input type="text" id="keyword" name="keyword" class="inputTxt" >&nbsp; 
 				 <input type="button" class="btn btn-default btn-sm" onclick="QnAListInqr(1);" value="검색">
 		 
 				</form> 
@@ -184,15 +205,13 @@ $("#board_add_fbtn").on("click", function(){
  				contentType: false,
  				type: 'POST',
  				success : function(result) {
- 					alert("들어왔다");
- 					if(result =="success")
+  					if(result =="success")
 						{
 						QnAajaxList();
 						}
 					else{
 						alert("오류!");
-					}
-  					 
+					} 
 
  				} ,  error:function(request,status,error){
 		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

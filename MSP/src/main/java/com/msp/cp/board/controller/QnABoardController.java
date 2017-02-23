@@ -146,7 +146,7 @@ public class QnABoardController {
 		map.put("pageNum", pageNum);
 		map.put("qna_answer" , qna_answer);
 		
-		PagerVO page = qnaService.getQnACount(map);
+		PagerVO page = qnaService.getQnaListCount(map);
 		System.out.println("page?" + page.toString());
 		if(page.getEndRow()==1){
 			page.setEndRow(0);
