@@ -27,10 +27,10 @@ public class QnABoardDaoImpl implements QnABoardDao {
 	}
 
 	@Override
-	public int BoardListCount(String string, Map<String, Object> map) {
+	public int QnaListCount(String string, Map<String, Object> map) {
 		int totalCount = 0;
 		try {
-			totalCount = sqlSession.selectOne("board.boardListCount", map);
+			totalCount = sqlSession.selectOne("board.qnaListCount", map);
 			System.out.println("6. DAoImpl totalCount : " + totalCount);
 		} catch (Exception e) {
 			e.printStackTrace();

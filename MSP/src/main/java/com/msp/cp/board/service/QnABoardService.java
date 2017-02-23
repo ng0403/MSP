@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
-
+import com.msp.cp.utils.PagerVO;
+ 
 public interface QnABoardService {
 	  public List<Object> list(Map map);
-	  PagerVO getBoardListCount(Map<String, Object> map);
+	  PagerVO getQnaListCount(Map<String, Object> map);
 	  
 	  public void insert(BoardVO vo);
 	  public BoardVO CODE(String QUESTION_TYPE_CD);

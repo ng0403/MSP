@@ -24,7 +24,7 @@
 
 <form role="form" method="post" >
 <div> <!-- 제목 div-->
- <input type="text" class="form-control" id="TITLE" name="TITLE" placeholder="제목을 입력해 주세요."  />
+ <input type="text" class="inputTxt" id="TITLE" name="TITLE" placeholder="제목을 입력해 주세요."  />
  <select class="form-control" id="sel1" name = "QUESTION_TITLE">
      <option value="인적서비스">인적서비스</option>
      <option value="점포서비스">점포서비스</option>

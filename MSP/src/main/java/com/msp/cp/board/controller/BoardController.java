@@ -28,8 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.board.service.BoardService;
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
 import com.msp.cp.utils.FileManager;
+import com.msp.cp.utils.PagerVO;
 
 @Controller
 @RequestMapping("/board/*")

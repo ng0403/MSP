@@ -6,10 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msp.cp.auth.vo.AuthVO;
 import com.msp.cp.board.dao.QnABoardDao;
 import com.msp.cp.board.vo.BoardVO;
-import com.msp.cp.common.PagerVO;
+import com.msp.cp.utils.PagerVO;
+ 
 
 @Service
 public class QnaBoardServiceImpl implements QnABoardService {
@@ -24,11 +24,11 @@ public class QnaBoardServiceImpl implements QnABoardService {
 	}
 
 	@Override
-	public PagerVO getBoardListCount(Map<String, Object> map) {
+	public PagerVO getQnaListCount(Map<String, Object> map) {
 		
 		int boardPageNum = (Integer)map.get("pageNum");
 		System.out.println("5. ServiceImpl Page userPageNum : " + boardPageNum);
-		int totalRowCount = qnaboardDao.BoardListCount("boardListCount", map);
+		int totalRowCount = qnaboardDao.QnaListCount("boardListCount", map);
 		System.out.println("7. ServiceImpl Page totalRowCount : " + totalRowCount);
 		
 		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 10, 999);
@@ -58,8 +58,8 @@ public class QnaBoardServiceImpl implements QnABoardService {
 		int PageNum = (Integer) map.get("pageNum");
 		int pageListCount = qnaboardDao.getQnACount(map);
 		
-		PagerVO page = new PagerVO(PageNum, pageListCount, 5, 20);
-		return page;
+		PagerVO page = new PagerVO(PageNum, pageListCount, 10, 20);
+		return page; 
 		 
 	}
 

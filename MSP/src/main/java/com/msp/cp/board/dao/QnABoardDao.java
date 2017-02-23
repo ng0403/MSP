@@ -8,7 +8,8 @@ import com.msp.cp.board.vo.BoardVO;
 
 public interface QnABoardDao {
 	public List<Object> list(Map map);
-	int BoardListCount(String string, Map<String, Object> map);
+	
+	int QnaListCount(String string, Map<String, Object> map);
 	
 	public void viewadd(int BOARD_NO); 
 	public BoardVO detail(int BOARD_NO);
