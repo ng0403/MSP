@@ -111,3 +111,49 @@ label {
 #pageInput{
 	width: 15%;
 }
+
+
+/* insert 화면  */
+.container {
+	
+	margin-top: 70px; 
+	width: 90%;
+	height: 500px;;
+	
+}
+
+#txt {
+	margin-right: 10px;
+}
+
+#TITLE, #CONTENT {
+	
+	width: 95%;
+	margin-left: 20px;
+}
+
+ #CONTENT {
+ 	
+ 
+ 	margin-top: 6px; 
+ 	width: 95%;
+ 	height: 400px;;
+ }
+
+#file {
+	
+	margin-top: 13px;
+	margin-left: 50px;
+	
+}
+
+#btns {
+	
+	margin-top: 13px;
+	margin-left: 50px;
+}
+
+
+
+
+

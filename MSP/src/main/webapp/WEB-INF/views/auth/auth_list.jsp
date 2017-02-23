@@ -63,9 +63,9 @@
 					<thead>
 						<tr style="width:100%;">
 							<th><input type="checkbox" id="checkall" ></th>
-							<th>권한ID</th>
-							<th>권한명</th>
-							<th>활성화여부</th>
+							<th align="center" >권한ID</th>
+							<th align="center" >권한명</th>
+							<th align="center" >활성화여부</th>
 						</tr>
 					</thead>
 					<tbody class="auth_list" >
@@ -141,6 +141,7 @@
 		
 		
 		<div id="dept_detail_div" class="list3_div">
+			<h5 id="h5">권한 상세</h5>
 			<form id="auth_detail_form" name="auth_detail_form">
 				<table summary="auth_detail" class="table table-hover">
 					<tbody id="tbody1">

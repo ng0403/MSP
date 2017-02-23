@@ -85,35 +85,34 @@
 		     <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
 		</div> 
 		
-		<div class="page" id="paging_div" >
-			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
-			<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
-			<input type="hidden" id="boardPageNum" value="${pageNum}"/>
-			<c:choose>
-				<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
-					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 20%;"/>  
-					<a style="color: black; text-decoration: none;"> / 1</a>
-					<a style="color: black; text-decoration: none;"> ▶ </a>
-				</c:when>
-				<c:when test="${pageNum == page.startPageNum}">
-					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" class="boardPageInput" value="${page.startPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 20%;"/>  
-					<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-					<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-				</c:when>
-				<c:when test="${pageNum == page.endPageNum}">
-					<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum"> ◀ </a>
-					<input type="text" id="pageInput" class="boardPageInput" value="${page.endPageNum}" onkeypress="boardpageNumEnter(event);" style="width: 20%;"/> 
-					<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-					<a style="color: black; text-decoration: none;"> ▶ </a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" onclick="boardPaging('${pageNum-1}');" id="pNum" > ◀ </a>
-					<input type="text" id="pageInput" class="boardPageInput" value="${pageNum}" onkeypress="(event);" style="width: 20%;"/>  
-					<a href="#" onclick="boardPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-					<a href="#" onclick="boardPaging('${pageNum+1}');" id="pNum"> ▶ </a>
-				</c:otherwise>
-			</c:choose>
-		</div>
+		<div class="page" id="paging_div">	
+					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+					<input type="hidden" id="PageNum" value="${pageNum}"/>
+					<c:choose>
+						<c:when test="${page.endPageNum == 1}">
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> / ${page.endPageNum}</a>
+							<a style="color: black;"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.startPageNum}">
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="boardListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+							<a href="#" onclick="boardListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.endPageNum}">
+							<a href="#" onclick="boardListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="boardListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="boardListInqr'${pageNum-1}');" id="pNum" > ◀ </a>
+							<input type="text" id="pageInput" value="${pageNum}" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="boardListInqr'${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+							<a href="#" onclick="boardListInqr'${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:otherwise>
+					</c:choose>
+				</div>
 		
 		<div class="right">
  		</div> 
@@ -123,14 +122,7 @@
 	
 	</div> 
 </div>
-
-<!-- 페이징 전용 폼 -->
-<form  action="${ctx}/board/boardInqr" id="boardlistPagingForm" method="post">
-	<input type="hidden" name="user_id_sch" value="${user_id_sch}"/>
-	<input type="hidden" name="user_nm_sch" value="${user_nm_sch}"/>
-	<input type="hidden" name="dept_cd_sch" value="${dept_cd_sch}"/>
-</form>
-
+ 
 <script type="text/javascript">
  
 $("#board_add_fbtn").on("click", function(){
@@ -255,8 +247,8 @@ $("#board_add_fbtn").on("click", function(){
 		$(document).ready(function() {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13') {
-				var pageNum = parseInt($("#pageInput").val());
-				if (pageNum == '') {
+ 				var pageNum = parseInt($("#pageInput").val());
+ 				if (pageNum == '') {
 					alert("페이지 번호를 입력하세요.")
 					$("#pageInput").focus();
 				} else if(pageNum > parseInt($("#endPageNum").val())) {
@@ -264,42 +256,37 @@ $("#board_add_fbtn").on("click", function(){
 					$("#pageInput").val($("#boardPageNum").val());
 					$("#pageInput").focus();
 				} else {
+					alert("입성");
 					boardPaging(pageNum);
 				}
 			}
 			event.stopPropagation();
 		});
 	}
+	 
+	 
+	//페이지 엔터시 이벤트
+	$(document).on("keypress","#pageInput",function(){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if (keycode == '13') {
+			pageInputRep(event, menuListInqr);
+		}
+	})
+	
+	//페이지 엔터시 이벤트
+	$(document).on("keypress","#pageInput",function(){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if (keycode == '13') {
+			pageInputRep(event, menuListInqr);
+		}
+	})
 	
 	
 	
-	//사용자관리 페이징
-	function boardPaging(pageNum) {
- 		$(document).ready(function() {
-			var ctx = $("#ctx").val(); 
-			
-			var $form = $('#boardlistPagingForm');
-		    
-		    var pageNum_input = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');
-
-		    $form.append(pageNum_input);
-		    $form.submit();
-		});
-	}
-	//검색 엔터키
-	function boardEnterSearch(event) {
-		$(document).ready(function() {
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if (keycode == '13') {
-				board_goSearch();
-			}
-		});
-	}
 	
-	
+	 
 	/*리스트 출력및 페이징 처리 함수*/
-	function boardListInqr(pageNum){
-		
+	function boardListInqr(pageNum){ 
  		var keyword    = $("#keyword").val();
  		 
  		$.post("/board/search_boardInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
@@ -310,8 +297,7 @@ $("#board_add_fbtn").on("click", function(){
    				var BOARD_NO = this.board_NO;
   				var TITLE = this.title;
 				var CREATED_BY = this.created_BY;
-				var CREATED  = this.created;
-				 
+				var CREATED  = this.created; 
 				var VIEW_CNT = this.view_CNT;
 				boardListOutput(BOARD_NO, TITLE, CREATED_BY, CREATED, VIEW_CNT);
 			})

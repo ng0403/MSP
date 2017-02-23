@@ -10,6 +10,7 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
@@ -85,6 +86,63 @@ $(document).ready(function() {
 		$("#codeMask, .codeWindow").hide();
 	});
 	
+	$("#grp_cd_sch").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#grp_nm_sch").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#grp_cd").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#grp_nm").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#grp_desc").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#code1").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#code_txt").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	$("#code_desc").keyup(function(){
+		if(lengthCheck($(this).val(), $(this).attr('maxlength')) == false)
+		{
+			$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+		}
+	});
+	
+	
 });
 
 </script>
@@ -103,30 +161,28 @@ $(document).ready(function() {
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
-			<form name="searchForm">
 				<table>
 					<tr>
 						<th>공통코드</th>
 						<td>
-							<input type="text" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}" onkeypress="fn_press_han(this)" maxlength="2">
+							<input type="text" class="inputTxt" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}" maxlength="2">
 						</td>
 						<th>공통코드명</th>
 						<td>
-							<input type="text" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}">
+							<input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50">
 						</td>
 					   	 <td>
 					    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_search(1)" value="검색">
 					    </td>
 					</tr>
 				</table>
-			</form>
 			<!-- Paging Form -->
 			<form id="codelistPagingForm" method="post" action="codeInqr">
 			
 			</form>
 		</div>
 	</div>
-
+     
 	<!-- List Cover Div -->
 		<div class="list_div">
 			<div class="list2_div">
@@ -136,10 +192,10 @@ $(document).ready(function() {
 						<thead>
 							<tr>
 								<td align="center"><input id="checkall" type="checkbox" /></td>
-								<td align="center">공통코드</td>
-								<td align="center">공통코드명</td>
-								<td align="center">상세코드</td>
-								<td align="center">상세코드명</td>
+								<td align="center" style="font-weight: bold;">공통코드</td>
+								<td align="center" style="font-weight: bold;">공통코드명</td>
+								<td align="center" style="font-weight: bold;">상세코드</td>
+								<td align="center" style="font-weight: bold;">상세코드명</td>
 							</tr>
 						</thead>
 						<tbody id="codeListTbody">
@@ -174,25 +230,25 @@ $(document).ready(function() {
 						<c:choose>
 							<c:when test="${page.endPageNum == 1 || page.endPageNum == 0}">
 								<a style="color: black; text-decoration: none;">◀ </a>
-								<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 								<a style="color: black; text-decoration: none;">/ 1</a>
 								<a style="color: black; text-decoration: none;">▶ </a>
 							</c:when>
 							<c:when test="${pageNum == page.startPageNum}">
 								<a style="color: black; text-decoration: none;">◀ </a>
-								<input type="text" id="pageInput" class="userPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<input type="text" id="pageInput" class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 								<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 							</c:when>
 							<c:when test="${pageNum == page.endPageNum}">
 								<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-								<input type="text" id="pageInput" class="userPageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<input type="text" id="pageInput" class="inputTxt" value="${page.endPageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 								<a style="color: black; text-decoration: none;">▶</a>
 							</c:when>
 							<c:otherwise>
 								<a href="#" onclick="fn_search('${pageNum-1}');" id="pNum">◀</a>
-								<input type="text" id="pageInput" class="userPageInput" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
+								<input type="text" id="pageInput" class="inputTxt" value="${pageNum}" onkeypress="pageInputRep(event, fn_search);" style="width: 15%;" />
 								<a href="#" onclick="fn_search('${page.endPageNum}');" id="pNum">/ ${page.endPageNum}</a>
 								<a href="#" onclick="fn_search('${pageNum+1}');" id="pNum">▶</a>
 							</c:otherwise>
@@ -202,7 +258,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="list3_div">
-			<h4>공통코드 상세</h4>
+			<h5 id="h5">공통코드 상세</h5>
 				<form method="post" id="joinform1" name="joinform1" action="codeMasterAdd">
 					<table class="table table-hover">
 						<colgroup>
@@ -215,7 +271,7 @@ $(document).ready(function() {
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 95%" value="${grp_cd}" readonly="readonly"/>
+									<input type="text" name="grp_cd" id="grp_cd" class="inputTxt" style="width: 95%" value="${grp_cd}" maxlength="2" readonly="readonly"/>
 								</td>
 								<td></td>
 								<td></td>
@@ -223,11 +279,11 @@ $(document).ready(function() {
 							<tr>
 								<th>공통코드명</th>
 								<td>
-									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 95%" value="${grp_nm}" readonly="readonly"/>
+									<input type="text" name="grp_nm" id="grp_nm" class="inputTxt" style="width: 95%" value="${grp_nm}" maxlength="50" readonly="readonly"/>
 								</td>
 								<th>공통코드설명</th>
 								<td>
-									<input type="text" name="grp_desc" id="grp_desc" class="iuser_txt" style="width: 95%" value="${grp_desc}" readonly="readonly"/>
+									<input type="text" name="grp_desc" id="grp_desc" class="inputTxt" style="width: 95%" value="${grp_desc}" maxlength="500" readonly="readonly"/>
 								</td>
 							</tr>
 						</tbody>
@@ -244,7 +300,7 @@ $(document).ready(function() {
 				
 				<br><br>
 				
-				<h4>상세코드 상세</h4>
+				<h5 id="h5" >상세코드 상세</h5>
 				<form method="post" id="joinform2" name="joinform2">
 					<table class="table table-hover">
 						<colgroup>
@@ -257,7 +313,7 @@ $(document).ready(function() {
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" readonly="readonly" />
+									<input type="text" name="grp_cd" id="grp_cd1" class="inputTxt" style="width: 90%" value="${grp_cd}" readonly="readonly" />
 								</td>
 								<td>
 									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" 
@@ -269,17 +325,17 @@ $(document).ready(function() {
 							<tr>
 								<th>상세코드</th>
 								<td>
-									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" readonly="readonly"/>
+									<input type="text" name="code1" id="code1" class="inputTxt" style="width: 90%" value="${code1}" maxlength="4" readonly="readonly"/>
 								</td>
 								<th>상세코드<br>명</th>
 								<td>
-									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" readonly="readonly"/>
+									<input type="text" name="code_txt" id="code_txt" class="inputTxt" style="width: 90%" value="${code_txt}" maxlength="100" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>	
 								<th>상세코드<br>설명</th>
 								<td>
-									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" readonly="readonly"/>
+									<input type="text" name="code_desc" id="code_desc" class="inputTxt" maxlength="500" style="width: 90%;" value="${code_desc}" readonly="readonly"/>
 								</td>
 								<td>
 								</td>
@@ -527,6 +583,37 @@ $(document).ready(function() {
 		         });  
 		});
 		
+		// 문자열 Byte 계싼
+		function lengthCheck(obj, maxlength)
+		{
+			var str = new String(obj.value);
+			var byteCount = 0;
+			
+			if(obj.length != 0)
+			{
+				for(var i=0; i<obj.length; i++)
+				{
+					var str2 = obj.charAt(i);
+					
+					if(escape(str2).length > 4)
+					{
+						byteCount += 2;
+					}
+					else
+					{
+						byteCount += 1;
+					}
+				}
+			}
+			
+			if(byteCount > maxlength)
+			{
+				alert("글자수를 초과하였습니다.");
+				return false;
+			}
+
+		}
+		
 		// 검색 버튼 클릭시
 		function fn_search(pageNum)
 		{
@@ -575,36 +662,6 @@ $(document).ready(function() {
 			});
 		}
 			
-		// 검색 버튼 클릭시 - 기존
-		$(function(){
-			$("#search_fbtn1").click(function(){
-				var grp_cd = $("#grp_nm_sch").val();
-				//var url = "codeSearch_list/"+grp_cd;
-				var url = "codeSearch_list2";
-				var tbody = $("#codeListTbody");
-				var contents = "";
-				
-				// getJSON은 get 방식으로 post는 post 방식으로 ajax를 사용한다. (getJSON = get)
-				$.post(url, function(data){
-					$(data).each(function() {	// each -> foreach
-						tbody.empty();			// tbody 부분을 비워주는 역할.
-						
-						contents += "<tr class='open_detail' data_num='"+this.code1+"' onmouseover='this.style.background=#c0c4cb' onmouseout='this.style.background=white'>"
-						+"<td align='center' scope='row'>"
-						+"<input type='checkbox' name='del_code' id='del_code' value='"+this.code1+"'></td>"
-	    				+"<td align='center'>"+this.grp_cd+"</td>"
-	    				+"<td>"+this.grp_nm+"</td>"
-	    				+"<td align='center'>"+this.code1+"</td>"
-						+"<td>"+this.code_txt+"</td>"
-						+"</tr>";
-						
-						tbody.append(contents);
-					});
-					
-				});
-			});
-		});
-		
 		// 공통코드 선택하기 위한 팝업조회
 		function fn_selGrpPop()
 		{
@@ -635,7 +692,6 @@ $(document).ready(function() {
 										grp_nm_pop+
 									"</td>"+
 								"</tr>";
-								
 						}
 					}
 					tbody_general.append(contents);
@@ -644,11 +700,11 @@ $(document).ready(function() {
 			$('.menuOpen').click();
 		}
 		
-		// Mainc창에 상세코드 상세보기란에 있는 공통코드 부분에 값을 넣는다.
+		// Main창에 상세코드 상세보기란에 있는 공통코드 부분에 값을 넣는다.
 		function pop_grpCode(grpCode)
 		{
 			var tmp = grpCode;
-			$("#grp_cd").val("0"+grpCode);
+
 			$("#grp_cd1").val("0"+grpCode);
 			$("#codeMask, .codeWindow").hide();
 		}
@@ -697,7 +753,37 @@ $(document).ready(function() {
 			$("#codeDetail_add_btn").hide();
 			$("#codeDetail_mdfy_btn").show();
 			$("#codeDetail_reset_btn").show();
-		}	
+		}
+			
+		// 검색 버튼 클릭시 - 기존
+		$(function(){
+			$("#search_fbtn1").click(function(){
+				var grp_cd = $("#grp_nm_sch").val();
+				//var url = "codeSearch_list/"+grp_cd;
+				var url = "codeSearch_list2";
+				var tbody = $("#codeListTbody");
+				var contents = "";
+				
+				// getJSON은 get 방식으로 post는 post 방식으로 ajax를 사용한다. (getJSON = get)
+				$.post(url, function(data){
+					$(data).each(function() {	// each -> foreach
+						tbody.empty();			// tbody 부분을 비워주는 역할.
+						
+						contents += "<tr class='open_detail' data_num='"+this.code1+"' onmouseover='this.style.background=#c0c4cb' onmouseout='this.style.background=white'>"
+						+"<td align='center' scope='row'>"
+						+"<input type='checkbox' name='del_code' id='del_code' value='"+this.code1+"'></td>"
+	    				+"<td align='center'>"+this.grp_cd+"</td>"
+	    				+"<td>"+this.grp_nm+"</td>"
+	    				+"<td align='center'>"+this.code1+"</td>"
+						+"<td>"+this.code_txt+"</td>"
+						+"</tr>";
+						
+						tbody.append(contents);
+					});
+					
+				});
+			});
+		});
 	
 	</script>
 </div>

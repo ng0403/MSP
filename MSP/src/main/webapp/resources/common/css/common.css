@@ -1,5 +1,26 @@
 @CHARSET "UTF-8";
 
+
+ /* ///////input text CSS/////////////// */   
+    label {
+    width:60px;
+    float:left;
+    font-size:12px;
+    line-height:24px;
+    font-weight:bold;
+
+}
+.inputTxt {
+    width:100%;
+    margin-bottom:5px;
+    line-height:18px;
+    padding:2px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:1px solid #CCC;
+}
+
 #main_div {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
@@ -73,14 +94,15 @@ span {
 	}
 	.list3_div{
 		padding: 10px;
-		margin-top: 35px; 
+		/* margin-top: 35px;  */
+		
 		margin-left: 20px;
 		width: 38%;
 		display: inline-block;
 	}
 }
 @media screen and (max-width:1099px){
-	.list2_div {
+	.list2_div {s
 		padding: 10px;	
 		float: left;
 		width: 100%;
@@ -88,12 +110,17 @@ span {
 	
 	.list3_div {
 		padding: 10px;
-		margin-top: 35px; 
+		/* margin-top: 35px;  */
 		margin-left: 20px;
 		width: 100%;
 		display: inline-block;
 	}
 }
+
+#h5 {
+	font-weight: bold;
+}
+
 .table_div{
 	height:450px;
 }
@@ -124,7 +151,7 @@ span {
 	vertical-align: top;
 	margin:0;
 }
-
+    
 .page {
 	width: auto;
 	clear: both;

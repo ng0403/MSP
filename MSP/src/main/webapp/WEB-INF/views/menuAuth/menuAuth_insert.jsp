@@ -51,13 +51,13 @@
 							<tr height="15px">
 								<th style=" width: 12%; text-align: right;"><span style="color:red;">*</span>권한명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<input type="text" id="auth_nm" name ="auth_nm" value="${auth_nm}" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
+									<input type="text" class="form-control" id="auth_nm" name ="auth_nm" value="${auth_nm}" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
 									<input type="hidden" id="auth_id" name="auth_id" value="${auth_id}">
 									<input type="button" id="auth_id_pop" name="auth_id_pop" value="선택" class="btn btn-default btn-sm">
 								</td>
 								<th style="width: 12%; text-align: left;"><span style="color:red;">&nbsp;&nbsp;*</span>메뉴명&nbsp;&nbsp;</th>
 								<td style="width: 38%; text-align: left;">
-									<input type="text" id="up_menu_nm" name="menu_nm" style="width: 50%;"/>
+									<input type="text" class="form-control" id="up_menu_nm" name="menu_nm" style="width: 50%;"/>
 									<input type="hidden" id="up_menu_cd" name="menu_cd" value="${menu_cd}">
 									<input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택" class="btn btn-default btn-sm">
 								</td>

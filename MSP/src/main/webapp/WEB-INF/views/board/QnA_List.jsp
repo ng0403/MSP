@@ -327,7 +327,7 @@ function QnAajaxList() {
 	function QnAListInqr(pageNum){
  		var qna_answer = $("#qna_answer").val();
 		var keyword    = $("#keyword").val(); 
-		$.post("/board/search_QnAInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
+		$.post("/board/search_QnAInqr",{"qna_answer" : qna_answer, "keyword":keyword, "pageNum":pageNum}, function(data){
 			$(".qna_list").html("");
 			$(data.qna_list).each(function(){
   				var BOARD_NO = this.board_NO;
