@@ -30,14 +30,27 @@ select X.*
  <select id="ajaxList" resultType="com.msp.cp.board.vo.BoardVO">
  
  SELECT
-  BOARD_NO, TITLE, CONTENT, CREATED_BY, to_char(CREATED, 'yy-mm-dd hh:mm' ), VIEW_CNT
+  BOARD_NO, TITLE, CONTENT, CREATED_BY, to_char(to_date(CREATED,'yy-mm-dd hh:mi'),'yyyy-mm-dd hh:mm') CREATED, VIEW_CNT
 FROM tb_board
-WHERE ACTIVE_FLG='Y'
+WHERE ACTIVE_FLG='Y' AND BOARD_MNG_NO = 'BMG1000002'
+ORDER BY BOARD_NO DESC
+
+ </select> 	  
+ 
+ 
+ <select id="QnAajaxlist" resultType="com.msp.cp.board.vo.BoardVO">
+ 
+
+SELECT A.BOARD_NO, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.CREATED_BY, to_char(A.CREATED,'yy-mm-dd hh:mi') CREATED, B.CODE_TXT , A.TITLE, A.VIEW_CNT
+         FROM TB_BOARD A, TB_CODE_DETAIL B 
+         WHERE DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000003' AND A.QUESTION_TYPE_CD = B.CODE1
+	ORDER BY BOARD_NO DESC
+
  </select>
  
  
  <select id="ReadPage"  resultType="com.msp.cp.board.vo.BoardVO">
- SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, A.FILE_CD
+ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, to_char(A.CREATED,'yy-mm-dd hh:mi') CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUESTION_TYPE_CD, A.FILE_CD
  FROM TB_BOARD A, TB_BOARD_MNG B
  WHERE BOARD_NO = #{BOARD_NO} AND A.BOARD_MNG_NO = B.BOARD_MNG_NO
  </select>
@@ -50,14 +63,14 @@ WHERE ACTIVE_FLG='Y'
  
  <insert id="InsertBoard" parameterType="com.msp.cp.board.vo.BoardVO">
 INSERT INTO TB_BOARD (BOARD_NO, BOARD_MNG_NO, FILE_CD, TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
-VALUES(board_seq.nextval, 'BMG1000002',(SELECT FILE_CD FROM TB_FILE WHERE FILE_NM =#{FILE_NM}), #{TITLE}, #{CONTENT}, '1', 'abcd', '진수거', '')
+VALUES(board_seq.nextval, 'BMG1000002',(SELECT FILE_CD FROM TB_FILE WHERE FILE_NM =#{FILE_NM}), #{TITLE}, #{CONTENT}, '0', 'abcd', '진수거', '')
 
  </insert>
  
  
  <insert id="QnAInsert" parameterType="com.msp.cp.board.vo.BoardVO">
 INSERT INTO TB_BOARD (BOARD_NO, BOARD_MNG_NO,  TITLE, CONTENT, VIEW_CNT, QUESTION_TYPE_CD, CREATED_BY,  UPDATED_BY)
-VALUES(board_seq.nextval, 'BMG1000003',  #{TITLE}, #{CONTENT}, '1',
+VALUES(board_seq.nextval, 'BMG1000003',  #{TITLE}, #{CONTENT}, '0',
  ( SELECT CODE1 FROM TB_CODE_DETAIL WHERE CODE_TXT = #{QUESTION_TITLE}), '진수거', '')
 
  </insert>
@@ -79,7 +92,7 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
  
  </select>
  
- <update id="removeBoard" parameterType="string" > 
+ <update id="removeBoard" parameterType="String" > 
  update tb_board set active_flg = 'N'
  	where BOARD_NO = #{BOARD_NO}
  </update>
@@ -87,6 +100,11 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
   <update id="removeDetail" parameterType="int" > 
  update tb_board set active_flg = 'N'
  	where BOARD_NO = #{BOARD_NO}
+ </update>
+ 
+ <update id="viewadd" parameterType="int">
+ update tb_board set view_cnt = view_cnt + 1
+ where BOARD_NO = #{BOARD_NO}
  </update>
  
  <update id="ModifyBoard" >
@@ -97,10 +115,12 @@ SELECT A.TITLE, A.CONTENT, A.BOARD_NO, A.CREATED, A.VIEW_CNT, B.REPLY_FLG, A.QUE
  
  
  <select id="QnAList" resultType="map">
-SELECT A.BOARD_NO, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.TITLE, A.CONTENT, A.CREATED_BY, A.CREATED, A.VIEW_CNT, B.BOARD_MNG_NO
-FROM tb_board A, TB_BOARD_MNG B
-WHERE A.BOARD_MNG_NO = B.BOARD_MNG_NO  AND B.BOARD_MNG_CD = 'BG03'
-  
+
+SELECT A.BOARD_NO, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.CREATED_BY, A.CREATED, B.CODE_TXT, A.TITLE, A.VIEW_CNT
+         FROM TB_BOARD A, TB_CODE_DETAIL B
+         WHERE DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000003' AND A.QUESTION_TYPE_CD = B.CODE1
+
+
  </select>
  
  
@@ -123,7 +143,7 @@ WHERE A.BOARD_MNG_NO = B.BOARD_MNG_NO  AND B.BOARD_MNG_CD = 'BG03'
 SELECT X.*
 FROM ( SELECT ROWNUM AS RNUM, A.*
        FROM (
-         SELECT *
+            SELECT *
          FROM TB_BOARD
          WHERE 
          	DEL_FLG = 'N'
@@ -140,14 +160,15 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
 	 ]]>
 </select>
 
- <select id="SearchList"  parameterType="map" resultType="com.msp.cp.board.vo.BoardVO">
+<select id="selectQnA2"  parameterType="map" resultType="com.msp.cp.board.vo.BoardVO">
 SELECT X.*
 FROM ( SELECT ROWNUM AS RNUM, A.*
        FROM (
-         SELECT *
-         FROM TB_BOARD
+           
+ SELECT A.BOARD_NO, A.TITLE, A.QUESTION_TYPE_CD, A.ANSWER_FLG, A.CREATED_BY, B.CODE_TXT, A.CREATED, A.VIEW_CNT
+         FROM TB_BOARD A, TB_CODE_DETAIL B 
          WHERE 
-         	DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000002'
+         	DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000003' AND A.QUESTION_TYPE_CD = #{QUESTION_TYPE_CD} AND A.QUESTION_TYPE_CD = B.CODE1
        	 	<if test="active_key != null and active_key != '' " >   
             	AND ANSWER_FLG = #{active_key}
 		 	</if>
@@ -163,6 +184,29 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
 
 
 
+
+
+ <select id="SearchList"  parameterType="map" resultType="com.msp.cp.board.vo.BoardVO">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT BOARD_NO, TITLE, QUESTION_TYPE_CD, ANSWER_FLG, CREATED_BY, to_char(CREATED,'yy-mm-dd hh:mi') CREATED, VIEW_CNT
+         FROM TB_BOARD
+         WHERE 
+         	DEL_FLG = 'N' AND BOARD_MNG_NO = 'BMG1000002'
+       	 	<if test="active_key != null and active_key != '' " >   
+            	AND ANSWER_FLG = #{active_key}
+		 	</if>
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND TITLE LIKE '%' || #{keyword} || '%'
+         	</if>
+         ORDER BY BOARD_NO ASC ) A
+     ) X
+     <![CDATA[
+        WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
+	 ]]>
+</select>
+  
 
  	<insert id="insertAttachData" parameterType="com.msp.cp.board.vo.BoardVO">
 	

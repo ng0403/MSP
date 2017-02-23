@@ -3,6 +3,7 @@ package com.msp.cp.boardmng.service;
 import java.util.List;
 import java.util.Map;
 
+import com.msp.cp.board.vo.BoardVO;
 import com.msp.cp.boardmng.vo.BoardMngVO;
 import com.msp.cp.common.PagerVO;
 
@@ -13,6 +14,6 @@ public interface BoardMngService {
 	  public void modify(BoardMngVO vo);
 	  public void add(BoardMngVO vo);
 	  public void remove(String dc);
-	  public List<Object> ajaxlist();
+	  public List<BoardMngVO> ajaxlist();
 	  public List<Object> codetxt(String CODE_TXT);
 }

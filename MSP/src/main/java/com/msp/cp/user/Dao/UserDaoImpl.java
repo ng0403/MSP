@@ -69,9 +69,9 @@ public class UserDaoImpl implements UserDao {
 
 //	사용자 관리 상세정보	
 	@Override
-	public userVO searchListUserOne(String user_id) {
+	public List<userVO> searchListUserOne(String user_id) {
 		System.out.println("After userDaoImpl : " + user_id);
-		userVO vo= sqlSession.selectOne("userDetail", user_id);
+		List<userVO> vo= sqlSession.selectList("userDetail", user_id);
 		System.out.println("Before userDaoImpl : " + vo);
 		
 		return vo;

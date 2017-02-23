@@ -1,8 +1,9 @@
 package com.msp.cp.menuAuth.vo;
 
 public class MenuAuthVO {
-	String auth_id, menu_cd, inqr_auth, add_auth, mdfy_auth, del_auth,
-		   menu_acc_auth, active_flg, created_by, updated_by;
+	String auth_id, auth_nm, menu_cd, menu_nm, up_menu_cd, up_menu_nm, menu_url, 
+		   inqr_auth, add_auth, mdfy_auth, del_auth, menu_acc_auth,
+		   active_flg, created_by, updated_by;
 
 	public String getAuth_id() {
 		return auth_id;
@@ -18,6 +19,30 @@ public class MenuAuthVO {
 
 	public void setMenu_cd(String menu_cd) {
 		this.menu_cd = menu_cd;
+	}
+
+	public String getUp_menu_cd() {
+		return up_menu_cd;
+	}
+
+	public void setUp_menu_cd(String up_menu_cd) {
+		this.up_menu_cd = up_menu_cd;
+	}
+
+	public String getUp_menu_nm() {
+		return up_menu_nm;
+	}
+
+	public void setUp_menu_nm(String up_menu_nm) {
+		this.up_menu_nm = up_menu_nm;
+	}
+
+	public String getMenu_url() {
+		return menu_url;
+	}
+
+	public void setMenu_url(String menu_url) {
+		this.menu_url = menu_url;
 	}
 
 	public String getInqr_auth() {
@@ -82,6 +107,30 @@ public class MenuAuthVO {
 
 	public void setUpdated_by(String updated_by) {
 		this.updated_by = updated_by;
+	}
+
+	public String getAuth_nm() {
+		return auth_nm;
+	}
+
+	public void setAuth_nm(String auth_nm) {
+		this.auth_nm = auth_nm;
+	}
+
+	public String getMenu_nm() {
+		return menu_nm;
+	}
+
+	public void setMenu_nm(String menu_nm) {
+		this.menu_nm = menu_nm;
+	}
+
+	@Override
+	public String toString() {
+		return "MenuAuthVO [auth_id=" + auth_id + ", menu_cd=" + menu_cd + ", up_menu_cd=" + up_menu_cd
+				+ ", up_menu_nm=" + up_menu_nm + ", menu_url=" + menu_url + ", inqr_auth=" + inqr_auth + ", add_auth="
+				+ add_auth + ", mdfy_auth=" + mdfy_auth + ", del_auth=" + del_auth + ", menu_acc_auth=" + menu_acc_auth
+				+ ", active_flg=" + active_flg + ", created_by=" + created_by + ", updated_by=" + updated_by + "]";
 	}
 	
 	

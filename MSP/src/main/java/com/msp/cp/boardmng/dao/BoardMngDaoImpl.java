@@ -59,8 +59,8 @@ public class BoardMngDaoImpl implements BoardMngDao {
 	}
 
 	@Override
-	public List<Object> ajaxlist() {
-		
+	public List<BoardMngVO> ajaxlist() {
+ 
 		return sqlSession.selectList("boardmng.ajaxList");
 	}
 

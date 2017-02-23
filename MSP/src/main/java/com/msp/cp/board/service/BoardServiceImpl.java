@@ -107,7 +107,21 @@ public class BoardServiceImpl implements BoardService {
 		 boardDao.removeDetail(BOARD_NO);
 		
 	}
- 
+
+	@Override
+	public List<BoardVO> QnAajaxlist() {
+		 
+		return boardDao.QnAajaxlist();
+	}
+
+	@Override
+	public void viewadd(int BOARD_NO) {
+		
+		boardDao.viewadd(BOARD_NO);
+		
+	}
+
+
  
  
  

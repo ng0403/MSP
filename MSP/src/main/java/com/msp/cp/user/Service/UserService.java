@@ -18,7 +18,7 @@ public interface UserService {
 
 	public int userDel(String dc);
 
-	public userVO searchListUserOne(String user_id);
+	public List<userVO> searchListUserOne(String user_id);
 
 	public void userMdfy(userVO vo);
 

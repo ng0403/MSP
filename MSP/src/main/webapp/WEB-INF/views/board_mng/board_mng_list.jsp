@@ -6,14 +6,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>  
 <script src="${ctx}/resources/common/js/common.js"></script>
-
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 <%-- <%@include file="../include/header.jsp"%> --%>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -26,18 +26,18 @@
 
 <div class= main_div>
 
-<div class = navi_div>
-
+ <div class="navi_div">
+게시판 관리 > 리스트
 </div>
 
-<div class= search_div>
+<!-- <div class= search_div>
 <div class= search1_div>
 
 </div>
-</div>
+</div> -->
 
 <div class="list_div">
-<div class="list1_div">
+<div class="list1_div" id="list1_div">
    <form name="delAllForm" id ="delAllForm" method="post" action="/board/board_remove">  
 	<table class="table table-hover">
 	<thead>
@@ -68,6 +68,7 @@
 					</table>
 					</form>
  
+</div>
 			
 		<div class="paging_div">	
 		 <div class="left">
@@ -105,7 +106,6 @@
 					
 					
 
-</div>
 
 <div class = paging_div>
 
@@ -136,7 +136,7 @@ $("#board_add_fbtn").on("click", function(){
 			del_code = del_code + $(this).val() + ",";
  		}); 
 		
- 		alert(del_code);
+
 
 		if (del_code == '') {
 			alert("삭제할 대상을 선택하세요.");
@@ -152,50 +152,22 @@ $("#board_add_fbtn").on("click", function(){
  		            "X-HTTP-Method-Override" : "POST"
  		         },
  				data : del_code,
- 				dataType : 'json',
+ 				dataType : 'text',
  				processData: false,
  				contentType: false,
  				type: 'POST',
  				success : function(result) {
- 					alert("hello ajax");
  					
- 					var ajaxList = result.data; 
- 						
- 					var liststr = "";
- 					var liststr1 = "";
- 					var liststr2 = "";
- 				 	var list = ajaxList.length;
- 				 	alert("list" + list); 
-
-					 	
- 				 	liststr    += "<table class='table table-bordered' style ='width: 90%'>" +
-										"<tr>" +
-									"<th>" +
-										"<input id='checkall' type='checkbox'/>" +
-									"<th>게시판관리번호</th>" +
-									"<th>게시판구분</th>" +
-									"<th>게시판이름</th>" +
-									"<th>생성일</th>" +
-									"<th>사용여부</th>" +
-									"</tr>";
- 				 	
-					for(var i=0 ; i<ajaxList.length; i++) {  
-						 liststr1  +=    "<tr>" +
-  										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].BOARD_MNG_NO + "/>" +
- 										"<td>" + ajaxList[i].BOARD_MNG_NO + "</td>" +
- 										"<td>" + ajaxList[i].BOARD_MNG_CD + "</td>" +
- 										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].BOARD_MNG_NO + "\">" + ajaxList[i].BOARD_NM + "\</a> </td>" +
- 										"<td>" + ajaxList[i].CREATED + "</td>" +
- 										"<td>" + ajaxList[i].ACTIVE_FLG + "</td>" +
-  										"</tr>";
-  								
- 				 	}
-					
-					liststr2 +=  "</table>";
- 					
- 					var boardtable = document.getElementById("list2_div");
- 					boardtable.innerHTML = liststr + liststr1 + liststr2;
-  					 
+ 					 					
+ 					if(result =="success")
+						{
+ 					 
+						ajaxList();
+						}
+					else{
+						alert("오류!");
+					}
+ 					 
 
  				} ,  error:function(request,status,error){
 		             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -204,7 +176,67 @@ $("#board_add_fbtn").on("click", function(){
 			
   		} 
  	}
-  
+ 	
+ 	
+ 	
+ 	
+function ajaxList() {
+		
+		$.ajax({
+			url : '/board_mng/ajax_list',
+			headers : {
+	            "Content-Type" : "application/json",
+	            "X-HTTP-Method-Override" : "POST"
+	         },
+			data : "",
+			dataType : 'json',
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			success : function(result) {
+  				
+				
+				var ajaxList = result; 
+			    var liststr = "";
+				var liststr1 = "";
+				var liststr2 = "";
+				 
+				
+			 	var list = ajaxList.length;
+				 
+			 	liststr    += "<table  class='table table-hover' >" +
+								"<tr>" +
+							"<th>" +
+								"<input id='checkall' type='checkbox'/>" +
+							"<th>게시판관리번호</th>" +
+							"<th>게시판구분</th>" +
+							"<th>게시판이름</th>" +
+							"<th>생성일</th>" +
+							"<th>사용여부</th>" +
+							"</tr>";
+			 	
+			for(var i=0 ; i<ajaxList.length; i++) {  
+				 liststr1  +=    "<tr>" +
+									"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].board_MNG_NO + "/>" +
+									"<td>" + ajaxList[i].board_MNG_NO + "</td>" +
+									"<td>" + ajaxList[i].board_MNG_CD + "</td>" +
+									"<td><a href=\"/board_mng/board_mng_detail?BOARD_MNG_NO=" + ajaxList[i].board_MNG_NO + "\">" + ajaxList[i].board_NM + "\</a> </td>" +
+									"<td>" + ajaxList[i].created + "</td>" + 
+							 		"<td>" + ajaxList[i].active_FLG + "</td>" +  
+									"</tr>";
+							
+			 	}
+			
+			liststr2 +=  "</table>";
+				
+				var boardtable = document.getElementById("list1_div");
+				boardtable.innerHTML = liststr + liststr1 + liststr2; 
+				 
+
+			}  
+			})
+	}
+   
  
 	$("#checkall").on("click", function() {
 

@@ -12,12 +12,16 @@ public interface QnABoardService {
 	  
 	  public void insert(BoardVO vo);
 	  public BoardVO CODE(String QUESTION_TYPE_CD);
-
+	  
+	  public void viewadd(int BOARD_NO); 
 	  public BoardVO detail(int BOARD_NO);
 	  public BoardVO read(int BOARD_NO); 
+	  
+	  
 	  public void modify(BoardVO vo);
 	  public PagerVO getQnACount(Map<String, Object> map);
 	  
 	  public List<BoardVO> QnAList(Map<String, Object> map);
+	  public List<BoardVO> QnAList2(Map<String, Object> map);
 
 }

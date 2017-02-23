@@ -1,3 +1,7 @@
+
+
+
+//delay
 function sleep(ms){
   ts1 = new Date().getTime() + ms;
   do ts2 = new Date().getTime(); while (ts2<ts1);
@@ -92,17 +96,108 @@ function excelImportOpen() {
 }
 //사용자 신규등록 팝업	
 function userTabOpen() {
-		var popUrl = "userTab";
-		var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;";
-		window.open(popUrl, "", popOption);
+//	opener.location.href = "userTab";
+//	$("#userTab_pop_div").show();
+//	$("#userDetail_pop_div").hide();
+//		var popWidth  = '650'; // 파업사이즈 너비
+//		var popHeight = '450'; // 팝업사이즈 높이
+//		var winHeight = document.body.clientHeight;	// 현재창의 높이
+//		var winWidth = document.body.clientWidth;	// 현재창의 너비
+//		var winX = window.screenLeft;	// 현재창의 x좌표
+//		var winY = window.screenTop;	// 현재창의 y좌표
+//	
+//		var popX = winX + (winWidth - popWidth)/2;
+//		var popY = winY + (winHeight - popHeight)/2;
+//		var popUrl = "userTab";
+//		var popOption = "width=650, height=500, resize=no, scrollbars=no, status=no, location=no, directories=no;";
+//		window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
+	popByMask("userTabMask", "userTabWindow");
 	}
-//사용자 정보 수정 팝업
-function onPopup(id) {
-	var tmp = id;//$("#user_id_h").val();
-	var popUrl = "userMdfyPop?user_id=" + tmp; //팝업창에 출력될 페이지 URL
-	var popOption = "width=650, height=450, resize=no, scrollbars=no, status=no, location=no, directories=no;"; //팝업창 옵션(optoin)
 
-	window.open(popUrl, "", popOption);
+//사용자 정보 수정 팝업
+function onPopup(user_id) {
+	$.post("userMdfyPop/"+user_id, function(data){
+		console.log(data);
+		$(data).each(function(){
+			var user_id = this.user_id;
+			var user_nm = this.user_nm;
+			var user_pwd = this.user_pwd;
+			var emp_no = this.emp_no;
+			var rank_cd = this.rank_cd;
+			var rank_nm = this.rank_nm;
+			var duty_cd = this.duty_cd;
+			var duty_nm = this.duty_nm;
+			var dept_nm = this.dept_nm;
+			var dept_cd = this.dept_cd;
+			var cphone_num1 = this.cphone_num1;
+			var cphone_num2 = this.cphone_num2;
+			var cphone_num3 = this.cphone_num3;
+			var phone_num1 = this.phone_num1;
+			var phone_num2 = this.phone_num2;
+			var phone_num3 = this.phone_num3;
+			var email_id = this.email_id;
+			var email_domain = this.email_domain;
+			var active_flg = this.active_flg;
+			userDetailOutput(user_id, user_nm, user_pwd,emp_no, rank_cd, rank_nm, duty_cd, duty_nm, dept_nm, dept_cd, cphone_num1,cphone_num2,cphone_num3,phone_num1,phone_num2,phone_num3,email_id, email_domain, active_flg);
+		})
+		popByMask("userDetailMask", "userDetailWindow");
+	}).fail(function(){
+		alert("메뉴 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+	})
+}
+
+/*메뉴 상세정보 출력 함수*/
+function userDetailOutput(user_id, user_nm, user_pwd, emp_no
+		, rank_cd, rank_nm, duty_cd, duty_nm, dept_nm
+		, dept_cd, cphone_num1,cphone_num2,cphone_num3
+		,phone_num1,phone_num2,phone_num3
+		,email_id, email_domain, active_flg){
+
+	userDataReset();
+	
+	$("#Duser_id").val(user_id);
+	$("#Duser_nm").val(user_nm);
+	$("#Demp_no").val(emp_no);
+	$("#Duser_pwd").val(user_pwd);
+	$("#Demp_no").val(emp_no);
+	$("#Drank_cd").val(rank_cd).prop("selected","selected");
+	$("#Drank_nm").val(rank_nm);
+	$("#Dduty_cd").val(duty_cd).prop("selected","selected");
+	$("#Dduty_nm").val(duty_nm);
+	$("#Ddept_nm").val(dept_nm);
+	$("#Ddept_cd").val(dept_cd);
+	$("#Dcphone_num1").val(cphone_num1).prop("selected","selected");
+	$("#Dcphone_num2").val(cphone_num2);
+	$("#Dcphone_num3").val(cphone_num3);
+	$("#Dphone_num1").val(phone_num1).prop("selected","selected");
+	$("#Dphone_num2").val(phone_num2);
+	$("#Dphone_num3").val(phone_num3);
+	$("#Demail_id").val(email_id);
+	$("#Demail_domain").val(email_domain);
+	$("#Dactive_flg").val(active_flg);
+//	$(".active_flg:radio[value='"+active_flg+"']").prop("checked", "checked");
+}
+/*상세정보 초기화*/
+function userDataReset(){
+	$("#Duser_id").val("");
+	$("#Duser_nm").val("");
+	$("#Duser_pwd").val("");
+	$("#Demp_no").val("");
+	$("#Drank_cd").find("option:eq(0)").prop("selected","selected");
+	$("#Drank_nm").val("");
+	$("#Dduty_cd").find("option:eq(0)").prop("selected","selected");
+	$("#Dduty_nm").val("");
+	$("#Ddept_nm").val("");
+	$("#Ddept_cd").val("");
+	$("#Dcphone_num1").find("option:eq(0)").prop("selected","selected");
+	$("#Dcphone_num2").val("");
+	$("#Dcphone_num3").val("");
+	$("#Dphone_num1").find("option:eq(0)").prop("selected","selected");
+	$("#Dphone_num2").val("");
+	$("#Dphone_num3").val("");
+	$("#Demail_id").val("");
+	$("#Demail_domain").val("");
+	$("#Dactive_flg").val("");
 }
 
 //엑셀 파일 추가 fucntion

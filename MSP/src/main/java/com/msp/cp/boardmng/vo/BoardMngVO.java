@@ -1,5 +1,7 @@
 package com.msp.cp.boardmng.vo;
 
+import java.util.Date;
+
 public class BoardMngVO {
 	
 	private String BOARD_MNG_NO;
@@ -11,12 +13,20 @@ public class BoardMngVO {
 	private String ACTIVE_FLG;
 	private String DEL_FLG;
 	private String CREATED_BY;
-	private String CREATED;
+	private Date CREATED;
 	private String UPDATED_BY;
 	private String UPDATED;
 	private String BOARD_MNG_NM;
 	private String CODE_TXT;
+	private String ACTIVE_FLGSTRING;
 	
+	
+	public String getACTIVE_FLGSTRING() {
+		return ACTIVE_FLGSTRING;
+	}
+	public void setACTIVE_FLGSTRING(String aCTIVE_FLGSTRING) {
+		ACTIVE_FLGSTRING = aCTIVE_FLGSTRING;
+	}
 	public String getCODE_TXT() {
 		return CODE_TXT;
 	}
@@ -83,10 +93,10 @@ public class BoardMngVO {
 	public void setCREATED_BY(String cREATED_BY) {
 		CREATED_BY = cREATED_BY;
 	}
-	public String getCREATED() {
+	public Date getCREATED() {
 		return CREATED;
 	}
-	public void setCREATED(String cREATED) {
+	public void setCREATED(Date cREATED) {
 		CREATED = cREATED;
 	}
 	public String getUPDATED_BY() {
@@ -109,7 +119,7 @@ public class BoardMngVO {
 				+ ", REPLY_FLG=" + REPLY_FLG + ", FILE_ATTACH_FLG=" + FILE_ATTACH_FLG + ", NOTICE_FLG=" + NOTICE_FLG
 				+ ", ACTIVE_FLG=" + ACTIVE_FLG + ", DEL_FLG=" + DEL_FLG + ", CREATED_BY=" + CREATED_BY + ", CREATED="
 				+ CREATED + ", UPDATED_BY=" + UPDATED_BY + ", UPDATED=" + UPDATED + ", BOARD_MNG_NM=" + BOARD_MNG_NM
-				+ ", CODE_TXT=" + CODE_TXT + "]";
+				+ ", CODE_TXT=" + CODE_TXT + ", ACTIVE_FLGSTRING=" + ACTIVE_FLGSTRING + "]";
 	}
 	
 	

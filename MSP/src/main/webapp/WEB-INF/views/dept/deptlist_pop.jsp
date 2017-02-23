@@ -19,7 +19,7 @@
 
 </head>
 <body>
-	<div class="main_div" style=" background: beige;">
+	<div class="DEPTpop_main_div" style=" background: beige;">
 		<div class="navi_div">
 			부서검색
 		</div>

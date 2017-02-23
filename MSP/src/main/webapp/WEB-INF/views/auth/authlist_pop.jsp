@@ -13,14 +13,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="${ctx}/resources/common/js/mps/auth/authlist_pop.js"></script>
+<script src="${ctx}/resources/common/js/mps/authJS/authlist_pop.js"></script>
 <title>권한 조회</title>
 </head>
 <body>
 <div id="authMask" class="mask_div"></div>
 <div class="pop_main_div" id="authWindow">
 	<!-- Navigation Div -->
-	<div class="navi_div">권한관리
+	<div class="navi_div">권한조회
 		<div>
 			<input type="button" id="authInpr_close_nfbtn" class="func_btn" style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
 		</div>

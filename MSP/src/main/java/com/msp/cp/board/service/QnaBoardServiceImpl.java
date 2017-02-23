@@ -81,7 +81,19 @@ public class QnaBoardServiceImpl implements QnABoardService {
 		 
 		return qnaboardDao.CODE(QUESTION_TYPE_CD);
 	}
-	
-	
+
+	@Override
+	public void viewadd(int BOARD_NO) {
+		
+		qnaboardDao.viewadd(BOARD_NO);
+		
+	}
+
+	@Override
+	public List<BoardVO> QnAList2(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return qnaboardDao.QnAList2(map);
+	}
+ 
 
 }

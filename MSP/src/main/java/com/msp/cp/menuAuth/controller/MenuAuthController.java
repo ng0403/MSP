@@ -148,6 +148,7 @@ public class MenuAuthController {
 		map.put("auth_nm", auth_nm);
 		
 		List<MenuAuthVO> menuAuthDetail = menuAuthService.menuAuthDetail(map);
+		System.out.println("리스트 : " + menuAuthDetail.toString());
 
 		model.addAttribute("menuAuthDetail", menuAuthDetail);
 		

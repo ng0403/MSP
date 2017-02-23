@@ -57,9 +57,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public userVO searchListUserOne(String user_id) {
+	public List<userVO> searchListUserOne(String user_id) {
 		System.out.println("After userServiceImpl : " + user_id);
-		userVO vo = userDao.searchListUserOne(user_id);
+		List<userVO> vo = userDao.searchListUserOne(user_id);
 		System.out.println("Before userServiceImpl : " + vo);
 		return vo;
 	}

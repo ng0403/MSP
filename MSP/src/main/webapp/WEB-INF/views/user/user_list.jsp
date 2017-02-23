@@ -9,6 +9,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
@@ -19,10 +20,35 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+.Dpop_main_div, .Npop_main_div{
+	display: none;
+	position:absolute; 
+	width:650px; 
+	height:550px; 
+	left:40%; 
+	top:15%; 
+	z-index:10000; 
+	background-color: #FFFFFF; 
+	overflow: auto;
+}
+.DEPTpop_main_div{
+	display: none;
+	position:absolute; 
+	width:650px; 
+	height:550px; 
+	left:40%; 
+	top:15%; 
+	z-index:11000; 
+	background-color: #FFFFFF; 
+	overflow: auto;
+}
+</style>
 <title>리스트</title>
 <script type="text/javascript">
 $(document).ready(function() { 
+	$('#dept_pop_div').hide();
+	$('#Ddept_pop_div').hide();
 	var result = ${result}
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
@@ -34,7 +60,7 @@ $(document).ready(function() {
 	$(document).on("click", ".open_detail", function(){
 		var user_id_pop = $(this).attr("user_id_pop");
 		$('#user_id').val(user_id_pop);
-		onPopup(user_id_pop);
+// 		onPopup(user_id_pop);
 	})
 	
 	$(function(){
@@ -52,13 +78,18 @@ $(document).ready(function() {
 		})
 		
 		
-		/* 체크박스 전체선택, 전체해제 */
-		$("#checkall").on("click", function(){
-		      if( $("#checkall").is(':checked') ){
-		        $("input[name=del_code]").prop("checked", true);
-		      }else{
-		        $("input[name=del_code]").prop("checked", false);
-		      }
+// 		/* 체크박스 전체선택, 전체해제 */
+// 		$("#checkall").on("click", function(){
+// 		      if( $("#checkall").is(':checked') ){
+// 		        $("input[name=del_code]").prop("checked", true);
+// 		      }else{
+// 		        $("input[name=del_code]").prop("checked", false);
+// 		      }
+// 		})
+		
+		//사용자상세정보 버튼 클릭시 이벤트
+		$("#userAdd_fbtn").click(function(){
+			popByMask("userMask", "userWindow");
 		})
 	})
 });
@@ -166,7 +197,7 @@ $(document).ready(function() {
 	</div> 
 	<div class="paging_div">
 				<div class="left">
-					<input type="button" id="iuserListAddBtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
+					<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
 					<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
 				</div>
 				<div class="page" id="paging_div">	
@@ -204,7 +235,8 @@ $(document).ready(function() {
 				</div>
 			</div>
 	</div>
-	
+		<jsp:include page="../user/user_tab.jsp"></jsp:include>
+		<jsp:include page="../user/user_detail.jsp"></jsp:include>
 </div>
 
 </body>

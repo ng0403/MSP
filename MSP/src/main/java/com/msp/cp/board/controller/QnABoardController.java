@@ -36,7 +36,7 @@ public class QnABoardController {
 	@RequestMapping(value="/QnAInqr", method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView QnA_List(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) {
 
-		System.out.println("board_list Insert ");
+		System.out.println("board_list Insert111");
 		System.out.println("pagenum" + pageNum);
 		map.put("pageNum", pageNum);
 
@@ -63,6 +63,7 @@ public class QnABoardController {
 	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
 		
 		System.out.println("hi detail" + BOARD_NO);
+		qnaService.viewadd(BOARD_NO);
 		
 		BoardVO vo = new BoardVO();
 		vo = qnaService.detail(BOARD_NO);
@@ -133,7 +134,7 @@ public class QnABoardController {
 		qnaService.modify(vo);
 		System.out.println("modify success" + vo.toString());
 		
-		return "redirect:/board/board_list";
+		return "redirect:/board/QnAInqr";
 	}
 	
 	
@@ -159,16 +160,23 @@ public class QnABoardController {
 		
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-
-		List<BoardVO> list = qnaService.QnAList(map);
-		System.out.println("list?" + list.toString());
+		List<BoardVO> list = qnaService.QnAList(map); 
+		System.out.println("초기 list" + list.toString());
+		String QUESTION_TYPE_CD = list.get(0).getQUESTION_TYPE_CD();
+		map.put("QUESTION_TYPE_CD", QUESTION_TYPE_CD);
 		
+		System.out.println("mapmapmap" +map.toString());
+		
+		List<BoardVO> list1 = qnaService.QnAList2(map); 
+		System.out.println("list111" + list1.toString());
+
 		model.addAttribute("page", page);
 		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("qna_list", list);
+		model.addAttribute("qna_list", list1);
 
 		return model;
 	}
-	 
+	
+	
 
 }

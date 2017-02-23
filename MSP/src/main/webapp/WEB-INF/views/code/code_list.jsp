@@ -16,9 +16,6 @@
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 
-
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
-
 <title>Code List</title>
 
 <style type="text/css">
@@ -135,7 +132,7 @@ $(document).ready(function() {
 			<div class="list2_div">
 				<div class="table_div">
 				<form name="delAllForm" id="delAllForm" method="post" action="codeDetailDel">
-					<table id="mastertable" class="table table-bordered">
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<td align="center"><input id="checkall" type="checkbox" /></td>
@@ -206,23 +203,31 @@ $(document).ready(function() {
 
 			<div class="list3_div">
 			<h4>공통코드 상세</h4>
-				<form method="post" id="joinform1" action="codeMasterAdd">
+				<form method="post" id="joinform1" name="joinform1" action="codeMasterAdd">
 					<table class="table table-hover">
+						<colgroup>
+							<col width="22%">
+							<col width="28%">
+							<col width="22%">
+							<col width="28%">
+						</colgroup>
 						<tbody id="tbody1">
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 90%" size="5" value="${grp_cd}" readonly="readonly"/>
+									<input type="text" name="grp_cd" id="grp_cd" class="iuser_txt" style="width: 95%" value="${grp_cd}" readonly="readonly"/>
 								</td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<th>공통코드명</th>
 								<td>
-									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 90%" value="${grp_nm}" readonly="readonly"/>
+									<input type="text" name="grp_nm" id="grp_nm" class="iuser_txt" style="width: 95%" value="${grp_nm}" readonly="readonly"/>
 								</td>
-								<th>공통코드 설명</th>
+								<th>공통코드설명</th>
 								<td>
-									<input type="text" name="grp_desc" id="grp_desc" class="iuser_txt" style="width: 90%" value="${grp_desc}" readonly="readonly"/>
+									<input type="text" name="grp_desc" id="grp_desc" class="iuser_txt" style="width: 95%" value="${grp_desc}" readonly="readonly"/>
 								</td>
 							</tr>
 						</tbody>
@@ -240,17 +245,25 @@ $(document).ready(function() {
 				<br><br>
 				
 				<h4>상세코드 상세</h4>
-				<form method="post" id="joinform2">
+				<form method="post" id="joinform2" name="joinform2">
 					<table class="table table-hover">
+						<colgroup>
+							<col width="22%">
+							<col width="28%">
+							<col width="22%">
+							<col width="28%">
+						</colgroup>
 						<tbody id="tbody1">
 							<tr>
 								<th>공통코드</th>
 								<td>
-									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" size="5" readonly="readonly" />
+									<input type="text" name="grp_cd" id="grp_cd1" class="iuser_txt" style="width: 90%" value="${grp_cd}" readonly="readonly" />
 								</td>
 								<td>
 									<input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" 
 									       style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" readonly="readonly"/> 
+								</td>
+								<td>
 								</td>
 							</tr>
 							<tr>
@@ -258,15 +271,19 @@ $(document).ready(function() {
 								<td>
 									<input type="text" name="code1" id="code1" class="iuser_txt" style="width: 90%" value="${code1}" readonly="readonly"/>
 								</td>
-								<th>상세코드명</th>
+								<th>상세코드<br>명</th>
 								<td>
 									<input type="text" name="code_txt" id="code_txt" class="iuser_txt" style="width: 90%" value="${code_txt}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>	
-								<th>상세코드 설명</th>
+								<th>상세코드<br>설명</th>
 								<td>
 									<input type="text" name="code_desc" id="code_desc" class="iuser_txt" maxlength="12" style="width: 90%" value="${code_desc}" readonly="readonly"/>
+								</td>
+								<td>
+								</td>
+								<td>
 								</td>
 							</tr>
 						</tbody>
@@ -318,26 +335,197 @@ $(document).ready(function() {
     		}
 		});
 		
-		function fn_press_han(obj)
-	    {
-	        //좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
-	        if(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39
-	        || event.keyCode == 46 ) return;
-	        //obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
-	        obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
-	    }
+		// 코드 추가버튼을 눌렀을 시
+		$("#code_add_btn").on("click", function(){
+			// 숨겨놓은 각각의 버튼을 보여준다.
+			var form1 = document.joinform1;
+			var form2 = document.joinform2;
+			
+			$("#codeMaster_add_btn").show();
+			$("#codeMaster_reset_btn").show();
+			$("#codeDetail_add_btn").show();
+			$("#codeDetail_mdfy_btn").hide();
+			$("#codeDetail_reset_btn").show();
+			$("#sel_grp").show();
+			$("#sel_grp1").show();
+			
+			// 상세보기에 걸려 있는 readOnly false 
+			form1.grp_cd.readOnly = false;
+			form1.grp_nm.readOnly = false;
+			form1.grp_desc.readOnly = false;
+			
+			form2.code1.readOnly = false;
+			form2.code_txt.readOnly = false;
+			form2.code_desc.readOnly = false;
+			
+			// 상세보기로 내용이 있을 경우 reset해준다.
+			$("#joinform1").each(function(){
+				this.reset();
+			})
+			
+			$("#joinform2").each(function(){
+				this.reset();
+			})
+		});
+	
+		// 코드 삭제버튼 클릭 시
+		$("#code_del_btn").on("click", function(){
+			
+			if(confirm("선택한 상세코드를 삭제 하시겠습니까?")) {
+				var check = document.getElementsByName("del_code");
+				var check_len = check.length;
+				var checked = 0;
+				
+				for(i=0; i<check_len; i++)
+				{
+					if(check[i].checked == true)
+					{
+						$("#delAllForm").submit();
+						checked++;
+						
+						alert("선택한 정보를 삭제하였습니다.")
+					}
+				}
 		
-		function inputOnlyNum(obj)
-		{
-			if(event.keyCode >= 48 && event.keyCode <= 57)
+				if(checked == 0)
+				{
+					alert("체크박스를 선택해주세요.");
+				}
+			}
+			else {
+				return false;
+			}
+		});
+		
+		// 공통코드 상세보기 추가 버튼
+		$("#codeMaster_add_btn").on("click", function(){
+			if($("#grp_cd").val() == "" || $("#grp_cd").val() == null){
+				alert("공통코드를 입력해주세요");
+				document.joinform1.grp_cd.focus();
+				
+				return false;
+			}
+			else if($("#grp_nm").val() == "" || $("#grp_nm").val() == null){
+				alert("공통코드명을 입력해주세요");
+				document.joinform1.grp_nm.focus();
+				
+				return false;
+			}
+			else if($("#grp_desc").val() == "" || $("#grp_desc").val() == null)
 			{
-				return true;
+				alert("공통코드설명를 입력해주세요");
+				document.joinform1.grp_desc.focus();
+				
+				return false;
 			}
 			else
 			{
-				event.returnValue = false;
+				if(confirm("공통코드를 등록 하시겠습니까?"))
+				{
+					$("#joinform1").submit();
+					
+					alert("공통코드가 등록 되었습니다.");
+				}
+				else
+				{
+					return false;
+				}
+				
 			}
-		}
+		});
+		
+		// 상세코드 상세보기 추가버튼 
+		$("#codeDetail_add_btn").on("click", function(){
+			if($("#grp_cd1").val() == "" || $("#grp_cd1").val() == null){
+				alert("공통코드를 선택해주세요");
+				document.joinform2.selectGrp.focus();
+				
+				return false;
+			}
+			if($("#code1").val() == "" || $("#code1").val() == null){
+				alert("상세코드를 입력해주세요");
+				document.joinform2.code1.focus();
+				
+				return false;
+			}
+			else if($("#code_txt").val() == "" || $("#code_txt").val() == null)
+			{
+				alert("상세코드명를 입력해주세요");
+				document.joinform2.code_txt.focus();
+				
+				return false;
+			}
+			else if($("#code_desc").val() == "" || $("#code_desc").val() == null)
+			{
+				alert("상세코드설명를 입력해주세요");
+				document.joinform2.code_desc.focus();
+				
+				return false;
+			}
+			else
+			{
+				if(confirm("상세코드를 등록 하시겠습니까?"))
+				{
+					$('form').attr("action", "codeDetailAdd");
+					$("#joinform2").submit();
+					
+					alert("상세코드가 등록 되었습니다.");
+				}
+				else
+				{
+					return false;
+				}
+				
+			}
+		});
+		
+		// 상세코드 상세보기 수정버튼
+		$("#codeDetail_mdfy_btn").on("click", function(){
+			$("#code1").readOnly = true;
+			
+			if($("#code_txt").val() == "" || $("#code_txt").val() == null)
+			{
+				alert("상세코드명를 입력해주세요");
+				document.joinform2.code_txt.focus();
+				
+				return false;
+			}
+			else if($("#code_desc").val() == "" || $("#code_desc").val() == null)
+			{
+				alert("상세코드설명를 입력해주세요");
+				document.joinform2.code_desc.focus();
+				
+				return false;
+			}
+			else
+			{	
+				if(confirm("해당 상세코드를 수정하시겠습니까?"))
+				{
+					$('form').attr("action", "codeDetailMdfy"); 
+					$("#joinform2").submit();
+					
+					alert("상세코드가 수정 되었습니다.");
+				}
+				else
+				{
+					return false;
+				}
+			}
+		});
+		
+		// 상세코드 상세보기 취소버튼
+		$("#codeDetail_reset_btn").on("click", function(){
+			 $("form").each(function() {  
+		            this.reset();  
+		         });  
+		});
+		
+		// 공통코드 상세보기 취소버튼
+		$("#codeMaster_reset_btn").on("click", function(){
+			 $("form").each(function() {  
+		            this.reset();  
+		         });  
+		});
 		
 		// 검색 버튼 클릭시
 		function fn_search(pageNum)
@@ -465,54 +653,6 @@ $(document).ready(function() {
 			$("#codeMask, .codeWindow").hide();
 		}
 		
-		// 코드 추가버튼을 눌렀을 시
-		$("#code_add_btn").on("click", function(){
-			// 숨겨놓은 각각의 버튼을 보여준다.
-			$("#codeMaster_add_btn").show();
-			$("#codeMaster_reset_btn").show();
-			$("#codeDetail_add_btn").show();
-			$("#codeDetail_mdfy_btn").hide();
-			$("#codeDetail_reset_btn").show();
-			$("#sel_grp").show();
-			$("#sel_grp1").show();
-			
-			// 상세보기로 내용이 있을 경우 reset해준다.
-			$("#joinform1").each(function(){
-				this.reset();
-			})
-			
-			$("#joinform2").each(function(){
-				this.reset();
-			})
-		});
-	
-		// 코드 삭제버튼 클릭 시
-		$("#code_del_btn").on("click", function(){
-			
-			if(confirm("선택한 상세코드를 삭제 하시겠습니까?")) {
-				var check = document.getElementsByName("del_code");
-				var check_len = check.length;
-				var checked = 0;
-				
-				for(i=0; i<check_len; i++)
-				{
-					if(check[i].checked == true)
-					{
-						$("#delAllForm").submit();
-						checked++;
-					}
-				}
-		
-				if(checked == 0)
-				{
-					alert("체크박스를 선택해주세요.");
-				}
-			}
-			else {
-				return false;
-			}
-		});
-
 		// 상세보기 (공통코드를 클릭 햇을 시 해당 정보를 하단에 띄어준다.)
 		$(function(){
 			$(document).on("click", ".open_detail", function() {	// ajax일 경우 이런 식으로 사용해야한다.
@@ -559,93 +699,6 @@ $(document).ready(function() {
 			$("#codeDetail_reset_btn").show();
 		}	
 	
-		// 공통코드 상세보기 추가 버튼
-		$("#codeMaster_add_btn").on("click", function(){
-			if($("#grp_cd").val() == "" || $("#grp_cd").val() == null){
-				alert("공통코드를 입력해주세요");
-				return false;
-			}
-			else if($("#grp_nm").val() == "" || $("#grp_nm").val() == null){
-				alert("공통코드명을 입력해주세요");
-				return false;
-			}
-			else if($("#grp_desc").val() == "" || $("#grp_desc").val() == null)
-			{
-				alert("공통코드설명를 입력해주세요");
-				return false;
-			}
-			else
-			{
-				alert("공통코드가 등록 되었습니다.");
-				$("#joinform1").submit();
-			}
-		});
-		
-		// 상세코드 상세보기 추가버튼 
-		$("#codeDetail_add_btn").on("click", function(){
-			if($("#grp_cd1").val() == "" || $("#grp_cd1").val() == null){
-				alert("공통코드를 선택해주세요");
-				return false;
-			}
-			if($("#code1").val() == "" || $("#code1").val() == null){
-				alert("상세코드를 입력해주세요");
-				return false;
-			}
-			else if($("#code_txt").val() == "" || $("#code_txt").val() == null)
-			{
-				alert("상세코드명를 입력해주세요");
-				return false;
-			}
-			else if($("#code_desc").val() == "" || $("#code_desc").val() == null)
-			{
-				alert("상세코드설명를 입력해주세요");
-				return false;
-			}
-			else
-			{
-				alert("상세코드가 등록 되었습니다.");
-				$('form').attr("action", "codeDetailAdd");
-				$("#joinform2").submit();
-			}
-		});
-		
-		// 상세코드 상세보기 수정버튼
-		$("#codeDetail_mdfy_btn").on("click", function(){
-			$("#code1").readOnly = true;
-			
-			if($("#code_txt").val() == "" || $("#code_txt").val() == null)
-			{
-				alert("상세코드명를 입력해주세요");
-				return false;
-			}
-			else if($("#code_desc").val() == "" || $("#code_desc").val() == null)
-			{
-				alert("상세코드설명를 입력해주세요");
-				return false;
-			}
-			else
-			{	 
-				$('form').attr("action", "codeDetailMdfy"); 
-				alert("상세코드가 수정 되었습니다.");
-				$("#joinform2").submit();
-			}
-		});
-		
-		// 상세코드 상세보기 취소버튼
-		$("#codeDetail_reset_btn").on("click", function(){
-			 $("form").each(function() {  
-		            this.reset();  
-		         });  
-		});
-		
-		// 공통코드 상세보기 취소버튼
-		$("#codeMaster_reset_btn").on("click", function(){
-			 $("form").each(function() {  
-		            this.reset();  
-		         });  
-		});
-	
-		
 	</script>
 </div>
 </body>
