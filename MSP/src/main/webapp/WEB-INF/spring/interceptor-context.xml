@@ -5,5 +5,18 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-
+<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/user/**"/>
+		<bean class="com.msp.cp.interceptor.UserInterceptor"/>
+</mvc:interceptor>
+ 
+ <!-- admin 하위 페이지로 접속하려 한다면, -->
+ <!-- com.msp.cp.interceptor.UserInterceptor 파일에 가서 판단 -->
+  <mvc:interceptor>
+   <mvc:mapping path="/admin/**"/>
+   <bean class="com.msp.cp.interceptor.AdminInterceptor" />
+  </mvc:interceptor>
+ 
+ </mvc:interceptors>
 </beans>
