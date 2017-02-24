@@ -67,7 +67,7 @@
 								<tr class="open_list">
 									<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
 			 						<td>${boardVO.BOARD_NO}</td>
-									<td><a href="/board/board_detail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
+									<td><a href="/board/boardDetail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
 									<td>${boardVO.CREATED_BY} </td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREATED}" /></td>
 									<td>${boardVO.VIEW_CNT}</td>
@@ -149,7 +149,7 @@ $(document).ready(function() {
 
  
 $("#board_add_fbtn").on("click", function(){
-	location.href="/board/board_insert";
+	location.href="/board/boardInsert";
 	
 })
   
@@ -246,7 +246,7 @@ $("#board_add_fbtn").on("click", function(){
 					 liststr1  +=    "<tr>" +
 										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].board_NO + "/>" +
 										"<td>" + ajaxList[i].board_NO + "</td>" +
-										"<td><a href=\"/board/board_detail?BOARD_NO=" + ajaxList[i].board_NO + "\">" + ajaxList[i].title + "\</a> </td>" +
+										"<td><a href=\"/board/boardDetail?BOARD_NO=" + ajaxList[i].board_NO + "\">" + ajaxList[i].title + "\</a> </td>" +
 										"<td>" + ajaxList[i].created_BY + "</td>" +
 										"<td>" + ajaxList[i].created + "</td>" + 
  										"<td>" + ajaxList[i].view_CNT + "</td>" +
@@ -355,7 +355,7 @@ $("#board_add_fbtn").on("click", function(){
  		board_no_td.html(BOARD_NO); 
  		
 		var title_td = $("<td>");
-		title_td.html("<a href=\"/board/board_detail?BOARD_NO=" + BOARD_NO + "\">" + TITLE + "\</a>");
+		title_td.html("<a href=\"/board/boardDetail?BOARD_NO=" + BOARD_NO + "\">" + TITLE + "\</a>");
 		
 		var created_by_td =$("<td>");
 		created_by_td.html(CREATED_BY);

@@ -62,7 +62,7 @@ $("#board_list_fbtn").on("click", function(){
  	 
  	     var formObj = $("form[role='form']");
   	     
- 		 formObj.attr("action", "/board/board_insert");
+ 		 formObj.attr("action", "/board/boardInsert");
  		 formObj.attr("method", "post");
  		 formObj.submit(); 
  		 

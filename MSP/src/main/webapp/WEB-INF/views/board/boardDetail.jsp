@@ -184,7 +184,7 @@ $(document).ready(function(){
 		var sessionID = "${SessionID}" 
 
 		if(sessionID == 'admin'){
- 		 	formObj.attr("action", "/board/board_modify");
+ 		 	formObj.attr("action", "/board/boardModify");
 			formObj.attr("method", "get");		
 			formObj.submit();
 			

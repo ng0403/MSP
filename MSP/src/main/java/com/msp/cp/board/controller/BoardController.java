@@ -78,7 +78,7 @@ public class BoardController {
 		return mov; 
 	} 
 	
-	@RequestMapping(value="/board_detail", method= RequestMethod.GET)
+	@RequestMapping(value="/boardDetail", method= RequestMethod.GET)
 	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model, HttpSession session) throws Exception {
 		
 //		접속된 사용자 아이디 
@@ -110,13 +110,13 @@ public class BoardController {
 		 
 	}
 	
-	@RequestMapping(value="/board_insert", method=RequestMethod.GET)
+	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
 	public void board_add() {
 		  
 	}
 	
 	
-	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
+	@RequestMapping(value="/boardInsert", method=RequestMethod.POST)
 	public String  board_insert(MultipartHttpServletRequest multi, HttpServletRequest request, BoardVO attach) { 
  		  
 		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -173,7 +173,7 @@ public class BoardController {
 	} 
 	  
 	
-	@RequestMapping(value="/board_modify", method=RequestMethod.GET)
+	@RequestMapping(value="/boardModify", method=RequestMethod.GET)
 	public void board_modifyPage(int BOARD_NO, Model model)
 	{ 
 		System.out.println("hi MODIFY" + BOARD_NO);
@@ -192,7 +192,7 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping(value="/board_modify", method=RequestMethod.POST)
+	@RequestMapping(value="/boardModify", method=RequestMethod.POST)
 	public String board_modify(BoardVO vo)
 	{
 		System.out.println("modify  Entering" + vo);
