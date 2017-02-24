@@ -172,8 +172,9 @@ public class MenuAuthController {
 	 * 내     용 : 공통코드 등록한다. 
 	 * */
 	@RequestMapping(value="/menuAuthAdd", method={RequestMethod.GET, RequestMethod.POST})
-	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpServletRequest request)
+	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpSession session, HttpServletRequest request)
 	{
+		String session_uesrId = (String)session.getAttribute("user_id");
 		String auth_id    = request.getParameter("auth_id");
 		String menu_cd    = request.getParameter("menu_cd");
 		String active_flg = request.getParameter("active_flg3"); 
@@ -183,6 +184,8 @@ public class MenuAuthController {
 		String del_auth   = request.getParameter("del_auth3");
 		String menu_acc_auth = request.getParameter("menu_acc_auth3");
 		
+		System.out.println(session_uesrId);
+		
 		menuAuthVo.setAuth_id(auth_id);
 		menuAuthVo.setMenu_cd(menu_cd);
 		menuAuthVo.setActive_flg(active_flg);
@@ -191,7 +194,7 @@ public class MenuAuthController {
 		menuAuthVo.setMdfy_auth(mdfy_auth);
 		menuAuthVo.setDel_auth(del_auth);
 		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
-		menuAuthVo.setCreated_by("ADMIN");
+		menuAuthVo.setCreated_by(session_uesrId);
 		
 		menuAuthService.insertMenuAuth(menuAuthVo);
 		

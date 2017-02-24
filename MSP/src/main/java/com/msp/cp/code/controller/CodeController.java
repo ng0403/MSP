@@ -102,9 +102,11 @@ public class CodeController {
 	 * 내     용 : 공통코드 등록한다. 
 	 * */
 	@RequestMapping(value="/codeMasterAdd", method={RequestMethod.GET, RequestMethod.POST})
-	public String codeMasterInsert(CodeVO codeVo)
+	public String codeMasterInsert(CodeVO codeVo, HttpSession session)
 	{
-		codeVo.setCreated_by("ADMIN");		
+		String session_userId = (String)session.getAttribute("user_id");
+		codeVo.setCreated_by(session_userId);
+		
 		codeService.insertCodeMaster(codeVo);
 				
 		return "redirect:/code/codeInqr";
@@ -135,9 +137,10 @@ public class CodeController {
 	 * 내     용 : 공통코드를 선택 후에 상세코드를 등록한다. 
 	 * */
 	@RequestMapping(value="/codeDetailAdd", method={RequestMethod.GET, RequestMethod.POST})
-	public String codeDetailInsert(CodeVO codeVo)
+	public String codeDetailInsert(CodeVO codeVo, HttpSession session)
 	{
-		codeVo.setCreated_by("ADMIN");
+		String session_userId = (String)session.getAttribute("uesr_id");
+		codeVo.setCreated_by(session_userId);
 		
 		codeService.insertCodeDetail(codeVo);
 		
