@@ -230,7 +230,8 @@ public class DeptController {
 		if(page.getEndRow()==1){
 			page.setEndRow(0);
 		}
-		
+		System.out.println("page?" + page);
+		System.out.println("map?" + map.toString());
 		int startRow = page.getStartRow();
 		int endRow = page.getEndRow();
 		
@@ -238,7 +239,7 @@ public class DeptController {
 		map.put("endRow", endRow);
 
 		List<DeptVO> list = deptService.searchListPop(map);
-		
+		System.out.println("list???" + list.toString());
 		model.addAttribute("page", page);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("dept_list", list);
