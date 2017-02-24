@@ -68,7 +68,7 @@ $(function(){
 		if(endPageNum == 1)
 		{
 			pageContent = "<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+startPageNum+"'/>"  
+			+ "<a style='color: black; text-decoration: none;'> ◀ </a><input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+startPageNum+"'/>"  
 			+"<a style='color: black; text-decoration: none;'> / "+endPageNum+"</a>"
 			+"<a style='color:black; text-decoration: none;'>▶</a>"
 		}
@@ -76,14 +76,14 @@ $(function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px;' id='pageInput' class='repPageInput' value='"+endPageNum+"'/>" 
+			+"<input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
 		else if(pageNum == 1)
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
-			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+startPageNum+"'/>" 
+			+ "<a style='color:black; text-decoration: none;'>◀</a><input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+startPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		}
@@ -91,7 +91,7 @@ $(function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+endPageNum+"'/>" 
+			+"<input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
@@ -99,7 +99,7 @@ $(function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"'/>"
+			+"<input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+pageNum+"'/>"
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		} 
