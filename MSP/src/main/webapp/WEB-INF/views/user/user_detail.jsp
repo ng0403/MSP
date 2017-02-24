@@ -140,7 +140,6 @@
 							error:function(){
 								alert("시스템 오류입니다. 관리자에게 문의하세요.");
 							}, success:function(resultData){
-								alert("resultData : " + resultData);
 								if(resultData == "SUCCESS"){
 									alert("사용자 수정이 완료되었습니다.");
 									userListInqr(1);
@@ -148,6 +147,7 @@
 									$('#userTabMask, #userTabWindow').hide();
 									$('#userDetailMask, #userDetailWindow').hide();
 								}viewLoadingHide();
+								location.reload();
 							}
 						})
 						

@@ -32,10 +32,10 @@ $(document).ready(function() {
 	 var sessionID = "${SessionID}" 
 
 	if(sessionID == 'admin'){
-		 alert("관리자 권한으로 접속하셨습니다.");
+// 		 alert("관리자 권한으로 접속하셨습니다.");
 	 }else{
 		 alert("${SessionID}");
-			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
+			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
 // 			location.href = "/logout";
 			location.href = "/";
 	 }
