@@ -161,7 +161,7 @@ $(document).ready(function() {
 	<c:set var="SessionID" value="${sessionScope.user_id}" />
 	<!-- Navigation Div -->
 	<div class="navi_div">
-			관리자 > 공통코드관리
+			공통코드관리
 		</div>
 
 	<!-- Search Cover Div -->

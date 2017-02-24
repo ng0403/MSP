@@ -193,7 +193,7 @@ function viewLoadingHide(){
 	<div class="main_div">
 		<!-- Navigation Div -->
 		<div class="navi_div">
-			관리자 > 권한 > 권한별 메뉴관리
+			권한별 메뉴관리
 		</div>
 
 		<!-- Search Cover Div -->
