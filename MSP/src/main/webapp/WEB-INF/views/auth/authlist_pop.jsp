@@ -14,6 +14,31 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="${ctx}/resources/common/js/mps/authJS/authlist_pop.js"></script>
+<style type="text/css">
+
+.pop_main_div {
+	width: 550px;
+	height: 430px;
+	overflow:hidden;
+
+}
+
+label {
+	padding-left: 15px;
+}
+
+#keyword_pop {
+	width: 150px;
+}
+
+#authInqr_pop_fbtn {
+	margin-left: -5px;
+}
+
+#paging_authPop_div {
+	margin-left: 190px;
+}
+</style>
 <title>권한 조회</title>
 </head>
 <body>
@@ -41,7 +66,7 @@
 	<!-- List Cover Div -->
 	<div class="list_div">
 		<div class="modal_list_div">
-			<table summary="auth_list_tb" class="table table-hover">
+			<table summary="auth_list_tb" class="table table-hover" style="width: 95%;">
 				<colgroup>
 					<col width="50%">
 					<col width="50%">

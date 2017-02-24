@@ -15,7 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
@@ -25,6 +25,34 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<style type="text/css">
+#mainDiv {
+/* 	border: 1px solid red; */
+	margin-top: 15px;
+	margin-left: 5px;
+}
+
+#center {
+	border: 1px solid blue;
+}
+#mainStrong {
+	margin-top: 15px;
+	padding-top: 30px; 
+}
+
+#insert_tbl {
+/* 	text-align: center; */
+	vertical-align: middle;
+}
+
+th, td {
+	vertical-align: middle;
+}
+#btns {
+	padding-left: 15px;
+}
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,18 +60,18 @@
 	
 	<div class="menuAuthInsertWindow" >
 		<div id="mainDiv" style="align="center">
-			<span style="margin-top:1%; font-size: 15px; float:center; margin-left:1%;"><strong style="text-align: center;">메뉴 권한 등록</strong></span>
+			<span style="padding-top:30px; font-size: 15px; float:center; margin-left:20px;"><strong style="text-align: center;">메뉴 권한 등록</strong></span>
 			<div class="block_div"></div>
 			
 			<div style="height:150px; width:98%;">
 				<!-- General -->
 				<div>
 					<br/>
-					<div align="center" style="width: 100%">
+					<div align="center" style="width: 95%; margin: auto;">
 						<form name="menuAuthAdd" id="menuAuthAdd" action="menuAuthAdd" method="post">
-							<table class="table table-hover" style="font-size:12px;width: 100%">
+							<table id="insert_tbl"class="table table-hover" style="font-size:12px;width: 95%">
 							<tr height="15px">
-								<th style=" width: 20%; text-align: right;">권한명</th>
+								<th style=" width: 20%; text-align: right; ">권한명</th>
 								<td style="width: 30%; text-align: left;">
 									<input type="text" class="inputTxt" id="auth_nm" name ="auth_nm" value="${auth_nm}" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
 									<input type="hidden" id="auth_id" name="auth_id" value="${auth_id}">
@@ -110,7 +138,7 @@
 						</table>
 						</form>
 					</div>
-					<div>
+					<div id="btns">
 		        		<input type="button" class="btn btn-primary btn-sm" id="menuAuth_save_btn" name="menuAuth_save_btn" value="저장" 
 		            		   style="font-size:11.5px; float:left; margin-left:1%;margin-top:1%;" onclick="menuAuthInsert()"/>
 		            	<input type="button" id="menuClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
