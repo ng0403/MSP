@@ -57,4 +57,10 @@ public class MenuDaoImpl implements MenuDao{
 		return sqlSession.selectList("menu.selectMenuPop", map);
 	}
 
+	@Override
+	public List<MenuVO> menuTreeList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("menu.menuTreeList");
+	}
+
 }

@@ -43,7 +43,7 @@
 <!-- 						<option value="N">비활성화</option> -->
 <!-- 					</select> -->
 					<label>부서명</label>
-					<input type="text" id="dept_nm_key" name="dept_nm_key" > &nbsp;
+					<input type="text" id="dept_nm_key" name="dept_nm_key"> &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 				</form>
 			</div>

@@ -77,6 +77,11 @@
 			menuListInqrPop(1);
 			popByMask("menuMask", "menuWindow");
 		})
+		//메뉴트리확인 버튼 클릭시 이벤트
+		$("#menuTree_inqr_fbtn").click(function(){
+			menuTreeListInqrPop();
+			popByMask("menuTreeMask", "menuTreeWindow");
+		})
 		//페이지 엔터시 이벤트
 		$(document).on("keypress","#pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -283,9 +288,11 @@
 	function pageReady(boolean){
 		if(boolean == true){
 			$("#menu_save_fbtn").hide();
+			$("#menuInqr_popup_fbtn").hide();
 			$("#menu_edit_nfbtn").show();
 		}else if(boolean == false){
 			$("#menu_save_fbtn").show();
+			$("#menuInqr_popup_fbtn").show();
 			$("#menu_edit_nfbtn").hide();
 		}
 		$("#menu_cd").attr("readonly",true);

@@ -21,4 +21,6 @@ public interface MenuDao {
 
 	public List<MenuVO> searchListPop(Map<String, Object> map);
 
+	public List<MenuVO> menuTreeList();
+
 }
