@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.utils.PagerVO;
+import com.msp.cp.common.SessionAuth.SessionAuthService;
+import com.msp.cp.common.SessionAuth.SessionAuthVO;
 import com.msp.cp.menuAuth.service.MenuAuthService;
 import com.msp.cp.menuAuth.vo.MenuAuthVO;
 
@@ -28,6 +30,9 @@ public class MenuAuthController {
 	
 	@Autowired
 	MenuAuthService menuAuthService;
+	
+	@Autowired
+	SessionAuthService sessionAuthService;
 
 	/**
 	 * 업 무 명 : menuAuthInqr 메뉴권한조회 화면
@@ -42,20 +47,22 @@ public class MenuAuthController {
 			@RequestParam(value = "pageNum", defaultValue="1") int pageNum, 
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum, 
 			@RequestParam Map<String, Object> map, Model model, MenuAuthVO vo) throws Exception {
-		System.out.println(pageNum);
 		map.put("pageNum", pageNum);
 		
+		String sessionID = (String)session.getAttribute("user_id");
 		PagerVO page = menuAuthService.getMenuAuthListCount(map);
 		
+		map.put("sessionID", sessionID);
 		map.put("page", page);
+		
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
 		}
 		
-		System.out.println("page map :" + map.get("page"));
-		
 		List<Object> menuAuthInqrList = menuAuthService.searchMenuAuthList(map);
-		System.out.println(menuAuthInqrList.toString());
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
+		
+		System.out.println(session_auth_list);
 		
 		ModelAndView mov = new ModelAndView("/menuAuth/menuAuth_list");
 		
