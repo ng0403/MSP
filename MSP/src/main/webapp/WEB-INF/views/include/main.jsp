@@ -254,18 +254,18 @@ vertical-align:middle;
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form"  style="margin-top:2%;width:95%;">
+          <!-- <form action="#" method="get" class="sidebar-form"  style="margin-top:2%;width:95%;">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." style="margin-left:8px;"/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="width:100%;margin-top:2%;">
-            <li class="header"><div style="height:28px;vertical-align:middle;color:#E5FCF9;font-size:17px;background-color:#1A2226;">&nbsp;&nbsp;MAIN NAVIGATION</div></li>
+            <!-- <li class="header"><div style="height:28px;vertical-align:middle;color:#E5FCF9;font-size:17px;background-color:#1A2226;">&nbsp;&nbsp;MAIN NAVIGATION</div></li> -->
             <li class="treeview">
               <a href="/user/userInqr">
                 <i class="fa fa-dashboard"></i> 
