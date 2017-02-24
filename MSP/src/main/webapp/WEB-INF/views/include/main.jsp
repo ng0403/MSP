@@ -84,7 +84,7 @@ vertical-align:middle;
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<!-- Ionicons -->
 	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-	<!-- Theme style-->
+	<!-- Theme style -->
 	<link href="${ctx}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 	<!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
@@ -254,18 +254,18 @@ vertical-align:middle;
             </div>
           </div>
           <!-- search form -->
-          <!-- <form action="#" method="get" class="sidebar-form"  style="margin-top:2%;width:95%;">
+          <form action="#" method="get" class="sidebar-form"  style="margin-top:2%;width:95%;">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." style="margin-left:8px;"/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form> -->
+          </form>
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" style="width:100%;margin-top:2%;">
-            <!-- <li class="header"><div style="height:28px;vertical-align:middle;color:#E5FCF9;font-size:17px;background-color:#1A2226;">&nbsp;&nbsp;MAIN NAVIGATION</div></li> -->
+            <li class="header"><div style="height:28px;vertical-align:middle;color:#E5FCF9;font-size:17px;background-color:#1A2226;">&nbsp;&nbsp;MAIN NAVIGATION</div></li>
             <li class="treeview">
               <a href="/user/userInqr">
                 <i class="fa fa-dashboard"></i> 

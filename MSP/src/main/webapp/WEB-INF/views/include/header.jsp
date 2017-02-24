@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
-    <head>
-      
-    <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
-    <!-- 부가적인 테마 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <head>  
+  <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
+ <!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
-    <title>Main DashBoard</title>
+    <title>AdminLTE 2 | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
@@ -31,35 +31,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script type="text/javascript">
-
-        /* $(function(){ 
-            $("#user").click(function(){ 
-                $("#content1").load("/user/userInqr"); 
-            }); 
-            $("#auth").click(function(){ 
-                $("#content1").load("/auth/authInqr"); 
-            }); 
-            $("#board").click(function(){ 
-                $("#content1").load("/board/boardInqr"); 
-            }); 
-            $("#code").click(function(){ 
-                $("#content1").load("/code/codeInqr"); 
-            }); 
-            $("#dept").click(function(){ 
-                $("#content1").load("/dept/deptInqr"); 
-            }); 
-            $("#userAuth").click(function(){ 
-                $("#content1").load("/userAuth/view"); 
-            }); 
-            $("#menuAuth").click(function(){ 
-                $("#content1").load("/menuAuth/menuAuthInqr"); 
-            }); 
-        });  */
-
-    </script>
-    
-    </head>
+  </head>
     <body class="skin-blue sidebar-mini">
     <div class="wrapper">
       
@@ -85,7 +57,7 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-              <!-- <li class="dropdown messages-menu">
+              <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
@@ -93,9 +65,9 @@
                 <ul class="dropdown-menu">
                   <li class="header">You have 4 messages</li>
                   <li>
-                    inner menu: contains the actual data
+                    <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <li>start message
+                      <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
                             <img src="/resources/dist/img/user7-128x128.jpg" class="img-circle" alt="User Image"/>
@@ -106,7 +78,7 @@
                           </h4>
                           <p>Why not buy a new awesome theme?</p>
                         </a>
-                      </li>end message
+                      </li><!-- end message -->
                       <li>
                         <a href="#">
                           <div class="pull-left">
@@ -160,7 +132,7 @@
                   <li class="footer"><a href="#">See All Messages</a></li>
                 </ul>
               </li>
-              Notifications: style can be found in dropdown.less
+              <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
@@ -169,7 +141,7 @@
                 <ul class="dropdown-menu">
                   <li class="header">You have 10 notifications</li>
                   <li>
-                    inner menu: contains the actual data
+                    <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
                         <a href="#">
@@ -202,7 +174,7 @@
                   <li class="footer"><a href="#">View all</a></li>
                 </ul>
               </li>
-              Tasks: style can be found in dropdown.less
+              <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
@@ -211,9 +183,9 @@
                 <ul class="dropdown-menu">
                   <li class="header">You have 9 tasks</li>
                   <li>
-                    inner menu: contains the actual data
+                    <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <li>Task item
+                      <li><!-- Task item -->
                         <a href="#">
                           <h3>
                             Design some buttons
@@ -225,8 +197,8 @@
                             </div>
                           </div>
                         </a>
-                      </li>end task item
-                      <li>Task item
+                      </li><!-- end task item -->
+                      <li><!-- Task item -->
                         <a href="#">
                           <h3>
                             Create a nice theme
@@ -238,8 +210,8 @@
                             </div>
                           </div>
                         </a>
-                      </li>end task item
-                      <li>Task item
+                      </li><!-- end task item -->
+                      <li><!-- Task item -->
                         <a href="#">
                           <h3>
                             Some task I need to do
@@ -251,8 +223,8 @@
                             </div>
                           </div>
                         </a>
-                      </li>end task item
-                      <li>Task item
+                      </li><!-- end task item -->
+                      <li><!-- Task item -->
                         <a href="#">
                           <h3>
                             Make beautiful transitions
@@ -264,14 +236,14 @@
                             </div>
                           </div>
                         </a>
-                      </li>end task item
+                      </li><!-- end task item -->
                     </ul>
                   </li>
                   <li class="footer">
                     <a href="#">View all tasks</a>
                   </li>
                 </ul>
-              </li> -->
+              </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -311,9 +283,9 @@
                 </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
-              <!-- <li>
+              <li>
                 <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li> -->
+              </li>
             </ul>
           </div>
         </nav>
@@ -345,12 +317,10 @@
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header"><div style="color:#E5FCF9;font-size:13px;">MAIN NAVIGATION</div></li>
+            <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="#" id="user">
-                <i class="fa fa-dashboard"></i> 
-                <span>사용자관리</span> 
-                <i class="fa fa-angle-left pull-right"></i>
+              <a href="${ctx}/user/userInqr">
+                <i class="fa fa-dashboard"></i> <span>사용자관리</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="/resources/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
@@ -371,11 +341,8 @@
               </ul>
             </li> -->
             <li>
-              <a href="#" id="auth">
-                <i class="fa fa-th"></i> 
-                <span>권한관리</span> 
-                <i class="fa fa-angle-left pull-right"></i>
-                <!-- <small class="label pull-right bg-green">new</small> -->
+              <a href="/auth/list">
+                <i class="fa fa-th"></i> <span>권한관리</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
            <!--  <li class="treeview">
@@ -406,10 +373,9 @@
                 <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
               </ul>
             </li> -->
-            <li class="treeview">
-              <a href="#" id="board">
-                <i class="fa fa-edit"></i> 
-                <span>게시판관리</span>
+            <li class="treeview active">
+              <a href="${ctx}/board/board_list">
+                <i class="fa fa-edit"></i> <span>게시판관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <!-- <ul class="treeview-menu">
@@ -419,7 +385,7 @@
               </ul> -->
             </li>
             <li class="treeview">
-              <a href="#" id="code">
+              <a href="${ctx}/code/codeInqr">
                 <i class="fa fa-table"></i> <span>공통코드관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -429,25 +395,20 @@
               </ul> -->
             </li>
             <li>
-              <a href="#" id="dept">
-                <i class="fa fa-calendar"></i> 
-                <span>부서관리</span>
-                <i class="fa fa-angle-left pull-right"></i>
-                <!-- <small class="label pull-right bg-red">3</small> -->
+              <a href="${ctx}/dept/list">
+                <i class="fa fa-calendar"></i> <span>부서관리</span>
+                <small class="label pull-right bg-red">3</small>
               </a>
             </li>
             <li>
-              <a href="#" id="userAuth">
-                <i class="fa fa-envelope"></i> 
-                <span>사용자권한</span>
-                <i class="fa fa-angle-left pull-right"></i>
-                <!-- <small class="label pull-right bg-yellow">12</small> -->
+              <a href="${ctx}/userAuth/view">
+                <i class="fa fa-envelope"></i> <span>사용자권한</span>
+                <small class="label pull-right bg-yellow">12</small>
               </a>
             </li>
             <li>
-              <a href="#" id="menuAuth">
-                <i class="fa fa-envelope"></i> 
-                <span>메뉴권한</span>
+              <a href="${ctx}/menuAuth/menuAuthInqr">
+                <i class="fa fa-envelope"></i> <span>메뉴권한</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
@@ -502,11 +463,10 @@
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        
         <section class="content-header">
           <h1>
-                  <!--  메뉴 네비게이션 표시창
-            <small>네비게이션 위치</small> -->
+            메뉴 네비게이션 표시창
+            <small>네비게이션 위치</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -514,8 +474,4 @@
             <li class="active">General Elements</li>
           </ol>
         </section>
-        
-        <!-- <div class="content_div" id="content1">
-        
-        </div> -->
         
