@@ -9,8 +9,21 @@
 			TB_MENU_AUTH
 		WHERE
 			ACTIVE_FLG = 'Y'
-		<if test="grp_cd != null and grp_cd != ''">
-			AND TM.grp_cd = #{grp_cd}
+		<if test="auth_id_sch != null and auth_id_sch != ''">
+			AND auth_id in (SELECT 
+								auth_id
+						   FROM
+								TB_AUTH
+						   WHERE  
+						   		auth_nm LIKE '%' || #{auth_id_sch} || '%')
+		</if>
+		<if test="menu_nm_sch != null and menu_nm_sch != ''">
+			AND menu_cd in (SELECT 
+								menu_cd
+							FROM
+								TB_MENU
+							WHERE  
+							 	menu_nm LIKE '%' || #{menu_nm_sch} || '%')
 		</if>
 	</select>
 	
