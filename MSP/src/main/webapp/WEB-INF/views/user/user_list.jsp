@@ -37,7 +37,7 @@ $(document).ready(function() {
 		 alert("${SessionID}");
 			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
 // 			location.href = "/logout";
-// 			location.href = "/";
+			location.href = "/";
 	 }
 	
 	

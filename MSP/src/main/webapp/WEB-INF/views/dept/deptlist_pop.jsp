@@ -25,16 +25,16 @@
 			부서검색
 		</div>
 		<div class="search_div">
-			<div class="search2_div">
+			<div class="search2_div" style="width: 100%;">
 					<label>부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key"> &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
 			</div>
 		</div>
 		<div class="list_div">
-			<div class="list2_div">
+			<div class="list2_div" style="width: 100%;">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list_tb" style ="width: 100%;"><!-- class="table table-bordered" -->
+					<table summary="dept_list_tb" style ="width: 98%;"class="table table-bordered"><!--  -->
 						<colgroup>
 							<col width="30%">
 							<col width="30%">
