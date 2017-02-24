@@ -4,6 +4,7 @@
 <html>
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
@@ -264,8 +265,12 @@
 			</div>
 		<!-- Modal Btn Div -->
 		<div class="modalL_btn_div" style="margin-top: 2%;">
-			<input type="button" id="submit_btn" class="btn btn-primary btn-sm" value="추가"/>
-			<input type="reset" id="btnReset_btn" class="btn btn-primary btn-sm" value="취소"/>
+		<c:choose>
+			<c:when test="${SessionID == 'admin'}">
+				<input type="button" id="submit_btn" class="btn btn-primary btn-sm" value="추가"/>
+				<input type="reset" id="btnReset_btn" class="btn btn-primary btn-sm" value="취소"/>
+			</c:when>
+		</c:choose>
 <!-- 			<input type="button" id="addsave_btn" class="iuser_tab_bt" value="저장"/> -->
 <!-- 			<input type="button" id="modifysave_btn" class="btn btn-primary btn-sm"  value="저장"/> -->
 		</div>
