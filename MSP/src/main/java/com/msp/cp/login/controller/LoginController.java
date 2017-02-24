@@ -3,10 +3,12 @@ package com.msp.cp.login.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,27 +34,47 @@ public class LoginController {
 	}*/
 	
 	//로그인처리
-	@RequestMapping(value = "/login", method=RequestMethod.POST)
-	public String Login(String user_id, String user_pwd){
+	@RequestMapping(value = "/login", method={RequestMethod.POST,RequestMethod.GET})
+	public String Login(String user_id, String user_pwd, Model model
+			/*, RedirectAttributes redirectAttributes*/){
 		
 		String result = loginService.doLogin(user_id, user_pwd);
 		/*MenuVo loginMenu = loginService.getLoginMenuInfo();
 		
 		String menu_id = loginMenu.getMenu_id();
 		String menu_url = loginMenu.getMenu_url();*/
+		//redirectAttributes.addAttribute("user_id",user_id);
+		//redirectAttributes.addAttribute("user_pwd",user_pwd);
 		
-		String destPage="";
+		model.addAttribute("user_id",user_id);
+		model.addAttribute("user_pwd",user_pwd);
+		//ModelAndView mav = new ModelAndView("/include/main");
+		
+		//String destPage="";
 		if(result.equals("LOGIN_SUCCESS")){
 			// 로그인이 성공한 경우, 모니터링 - 통합상황판 페이지로 이동
-			destPage ="redirect:/user/userInqr";
+			/*destPage ="redirect:/user/userInqr";*/
+			//destPage ="redirect:/main";
 //			destPage = "redirect:/"+menu_url+"?menu_id="+menu_id;
+			return "/include/main";
 		}else{
 			// 로그인이 실패한 경우
-			destPage = "redirect:/" + "?loginResult=" + result;
+			return "redirect:/" + "?loginResult=" + result;
 		}
 		
-		return destPage;
 	}
+	/*@RequestMapping(value = "/main", method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView gotoMain(HttpServletRequest request){
+		String user_id = request.getParameter("user_id");
+		String user_pwd = request.getParameter("user_pwd");
+		ModelAndView mav = new ModelAndView("/include/main");
+		
+		System.out.println(user_id);
+		mav.addObject("user_id",user_id);
+		mav.addObject("user_pwd",user_pwd);
+		
+		return mav;
+	}*/
 
 	//로그아웃
 	@RequestMapping(value="/logout", method=RequestMethod.GET)

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <style type="text/css">
 
@@ -14,6 +15,8 @@ margin-left: 40%;
 
 </style>
 <script type="text/javascript">
+/* 접속된 세션 아이디 입니다. */
+var sessionID = "${SessionID}" 
 /**
  * 로그인처리 서비스 호출
  */
@@ -57,7 +60,7 @@ function initLogin() {
 <div id="wrap">
 <!-- Logo 영역 -->
     <div class="loginWrap">
-        <h1 class="h1Logo"><center>회사 로고 영역</center></h1><%-- <img src="${ctx}/resources/images/bonBack.jpg" alt="CorePlus" /> --%>
+        <h1 class="h1Logo"><center>Shopping Mall Management</center></h1><%-- <img src="${ctx}/resources/images/bonBack.jpg" alt="CorePlus" /> --%>
         
        <c:if test="${not empty sessionScope.user_id}"> 
         <div id="loginalign">
@@ -72,7 +75,7 @@ function initLogin() {
             <legend>로그인</legend>
             <div>
                <c:if test="${not empty sessionScope.user_id}">
-               <p>세션:${sessionScope.user_id}</p>
+               <p>접속된 계정:${sessionScope.user_id}</p>
                </c:if>
                 <p>
                     <input type="text" name="user_id" id="user_id" placeholder="Your ID" autocomplete="off" autofocus="autofocus"></input> <!-- tabIndex=1 --> 

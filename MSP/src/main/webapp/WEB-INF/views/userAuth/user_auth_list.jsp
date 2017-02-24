@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 
+<%-- <%@include file="../include/header.jsp"%> --%>
+
 <%--
     Class Name : user_auth_list.jsp
     Description : 사용자권한리스트,등록화면을 담당
@@ -17,23 +19,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" type="text/css" />
-<script type="text/javascript" src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
-<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
-<%-- <script type="text/javascript" src="${ctx}/resources/common/js/jquery-ui.js"></script> --%>
-<script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/jquery-ui.css"	type="text/css" /> --%>
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/content.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" />
-<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
+    <!-- <title>Main DashBoard</title> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <script type="text/javascript" src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+	<!-- <script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script> -->
+	<%-- <script type="text/javascript" src="${ctx}/resources/common/js/jquery-ui.js"></script> --%>
+	<script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script>
+	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/jquery-ui.css"	type="text/css" /> --%>
+	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
+	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
+	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
+	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/content.css" type="text/css" />
+	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" />
+	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
+	<!-- Font Awesome Icons -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<!-- Ionicons -->
+	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+	<!-- Theme style -->
+	<link href="${ctx}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+	<!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
 <title>Insert title here</title>
 <style type="text/css">
@@ -406,12 +419,17 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<input type="hidden" id="ctx" value="${ctx}">
+	<%-- <input type="hidden" id="ctx" value="${ctx}">
 	<input type="hidden" id="userNo" value="${userNo}">
-	<input type="hidden" id="popUserAuthId1">
+	<input type="hidden" id="popUserAuthId1"> --%>
     <div style="margin-left:1%;"><h4>권한관리>사용자권한 리스트</h4></div>
     
 	<div id="container" style="margin-top:2%;">
+	
+	<input type="hidden" id="ctx" value="${ctx}">
+	<input type="hidden" id="userNo" value="${userNo}">
+	<input type="hidden" id="popUserAuthId1">
+	
 	    <!-- 사용자권한 리스트,조회화면 -->
 	    <form name="frm_userAuth" id="frm_userAuth" action="/userAuth/deleteUserAuth"	enctype="multipart/form-data"  method="post">
 		<div id="inputDiv" style="font-size:11.8px;width:100%;font-family:Helvetica, sans-serif;">
@@ -436,7 +454,7 @@ $(document).ready(function(){
 					    background-color:#81BEF7;font-color:white;"/>&nbsp;
 		</div><div class="block_div"></div>
 
-		<div id="tableDiv" style="font-size:11.8px;font-family:Helvetica, sans-serif;">
+		<div id="tableDiv" style="font-size:11.8px;font-family:Helvetica, sans-serif; height:400px;">
 			<table class="commonTable" id="userAuthListTable"	style="width: 100%;word-break:break-all; white-space:nowrap;">
 				<thead>
 					<tr>
@@ -691,4 +709,7 @@ $(document).ready(function(){
 	
 	</script>
 </body>
+
 </html>
+
+<%-- <%@include file="../include/footer.jsp"%> --%>
