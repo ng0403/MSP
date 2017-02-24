@@ -43,8 +43,8 @@ function sleep(ms){
 		user_tr.addClass("open_detail");
 		user_tr.attr("data_num",user_id);
 		
-		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + user_id + "'>");
+		var del_code_td = $("<td class='thth'>");
+		del_code_td.html("<input type='checkbox' class='del_code' name='del_code' value='" + user_id + "'>");
 		
 		var user_id_td = $("<td onclick='onPopup(this.id)' id="+user_id+">");
 		user_id_td.html(user_id);
