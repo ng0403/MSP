@@ -31,17 +31,17 @@
 <%-- <%@include file="../include/header.jsp"%> --%>
 	<div class="main_div">
 		<div class="navi_div">
-			사용자 > 부서관리
+			부서관리
 		</div>
 		<div class="search_div">
 			<div class="search2_div">
 				<form id="searchForm" name="searchForm">
-					<label>활성상태</label>
-					<select id="active_key" name="active_key" class="selectField">
-						<option value="" selected="selected">전체</option>
-						<option value="Y">활성화</option>
-						<option value="N">비활성화</option>
-					</select>
+<!-- 					<label>활성상태</label> -->
+<!-- 					<select id="active_key" name="active_key" class="selectField"> -->
+<!-- 						<option value="" selected="selected">전체</option> -->
+<!-- 						<option value="Y">활성화</option> -->
+<!-- 						<option value="N">비활성화</option> -->
+<!-- 					</select> -->
 					<label>부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key" > &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="btn btn-default btn-sm" value="검색">

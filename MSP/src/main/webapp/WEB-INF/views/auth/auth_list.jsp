@@ -40,6 +40,7 @@ label {
 #auth_inqr_fbtn {
 	width: 55px;
 	height: 34px;
+	margin-left: -10px;
 }
 
 #excelExportPopBtn {
@@ -69,12 +70,12 @@ th, td {
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
-			<label>활성상태</label>
-			<select id="active_key" name="active_key" class="selectField">
-				<option value="" selected="selected">전체</option>
-				<option value="Y">활성화</option>
-				<option value="N">비활성화</option>
-			</select>
+<!-- 			<label>활성상태</label> -->
+<!-- 			<select id="active_key" name="active_key" class="selectField"> -->
+<!-- 				<option value="" selected="selected">전체</option> -->
+<!-- 				<option value="Y">활성화</option> -->
+<!-- 				<option value="N">비활성화</option> -->
+<!-- 			</select> -->
 			<label>권한명</label>&nbsp;
 			<input type="text" id="keyword" name="keyword" class="form-control" > 
 			&nbsp;&nbsp;
@@ -202,7 +203,7 @@ th, td {
 			</form>
 			
 			<div class="btn_div">
-				<input type="button" id="auth_menu" class="btn btn-primary btn-sm" value="메뉴권한" style="display:none" onclick="location.href='${ctx}/menu/menuInqr'" >
+				<input type="button" id="auth_menu" class="btn btn-primary btn-sm" value="메뉴권한" style="display:none" onclick="location.href='${ctx}/menuAuth/menuAuthInqr'" >
 				<input type="button" id="auth_user" class="btn btn-primary btn-sm" value="사용자권한" style="display:none" onclick="location.href='${ctx}/userAuth/view'" >
 				
 				<div class="right">
