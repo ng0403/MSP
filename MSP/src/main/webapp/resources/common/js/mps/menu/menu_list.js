@@ -277,6 +277,7 @@
 		$("#up_menu_cd").val("");
 		$("#up_menu_nm").val("");
 		$("input:radio[name='active_flg']").removeAttr("checked");
+		save_cd = "";
 	}
 	//페이지 처음 출력시 이벤트
 	function pageReady(boolean){

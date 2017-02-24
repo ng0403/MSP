@@ -81,6 +81,12 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public List<MenuVO> menuTreeList() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
+	public List<MenuVO> menuTreeList() {
+		// TODO Auto-generated method stub
 		List<CodeVO> mLevel = codeService.menuLevel();
 		List<MenuVO> list = new ArrayList<MenuVO>();
 		Map<String, List<MenuVO>> menuMap = new HashMap<String, List<MenuVO>>();
@@ -94,6 +100,6 @@ public class MenuServiceImpl implements MenuService{
 		List<MenuVO> menu = menuMap.get("menu0");
 		
 		return list;
-	}
+	}*/
 
 }
