@@ -131,8 +131,8 @@
 						</c:choose>
 					</div>
 					<div class="right">
-						<input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excel입력">
-						<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excel출력">
+						<!-- <input type="button" id="dept_exIm_fbtn" class="btn btn-primary btn-sm" value="excel입력">
+						<input type="button" id="dept_exEx_fbtn" class="btn btn-primary btn-sm" value="excel출력"> -->
 					</div>
 				</div>
 			</div>
