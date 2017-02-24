@@ -129,7 +129,7 @@ $(document).ready(function() {
 					<option value="user_nm_sch">사용자명</option>
 					<option value="dept_nm_sch">부서명</option>
 				</select>	
-				<input type="text" id="user_sch_key" name="uesr_sch_key" > &nbsp;
+				<input type="text" id="user_sch_key" name="uesr_sch_key" style="width: 25%; " > &nbsp;
 				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>
 			<!-- 페이징 전용 폼 -->
 			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form>
