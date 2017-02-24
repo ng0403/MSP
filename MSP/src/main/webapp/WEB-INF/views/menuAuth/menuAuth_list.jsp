@@ -178,6 +178,7 @@ function viewLoadingHide(){
 </head>
 <body>
 <%-- <%@include file="../include/header.jsp"%> --%>
+	<c:set var="SessionID" value="${sessionScope.user_id}" />
 
 	<!--Main_Div  -->
 	<div class="main_div">
