@@ -11,26 +11,26 @@
 #checkTh {
 	width: 5%;
 }
-
+    
 #dept_pop_div { display: none; position:absolute; width:50%; height:75%; left:80%; top:30%; 
 				background-color: #c0c4cb	; overflow: auto;}
 				
 .inputTag {
     
       height: 20px;
-      padding: 2px 2px 2px 2px; /* »ó, ¿ì, ÁÂ, ÇÏ */
+      padding: 2px 2px 2px 2px; /* ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½ */
       text-align: left; /* left, center, right */
       border: #888888 1px solid;
       background-color: #FFFFFF;
       
-      /* Å×µÎ¸® °¢°¢ÀÇ »ö»ó ¹× µÎ²²¸¦ ÁöÁ¤ÇÒ¶§ »ç¿ëÇÕ´Ï´Ù
+      /* ï¿½×µÎ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½
       border-right: #888888 1px solid;
       border-left: #888888 1px solid;
       border-top: #888888 1px solid;
       border-bottom: #888888 1px solid;
       */
-      /* ±Û²ÃÀ» µû·Î ÁöÁ¤ÇÒ ¼ö ÀÖ´Ù.
-      font-family: ±Ã¼­, Gulim, 'Times New Roman';
+      /* ï¿½Û²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+      font-family: ï¿½Ã¼ï¿½, Gulim, 'Times New Roman';
       */
       color: #0000ff;
       font-size: 10pt; 

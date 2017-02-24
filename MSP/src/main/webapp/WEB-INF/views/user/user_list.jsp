@@ -1,26 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
 <!DOCTYPE html>
 <html>
-<head>
+<head>     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />   
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> 
+<script src="${ctx}/resources/common/js/common.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
-<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>리스트</title>
 <script type="text/javascript">
 $(document).ready(function() { 
@@ -28,9 +29,18 @@ $(document).ready(function() {
 			window.close();
 			opener.parent.location.href = "userlist";
 	 </c:if>
+	 /* 접속된 세션 아이디 입니다. */
+	 var sessionID = "${SessionID}" 
+
+	if(sessionID == 'admin'){
+		 alert("관리자 권한으로 접속하셨습니다.");
+	 }else{
+			alert("권한없음.", " ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
+// 			location.href = "/logout";
+			location.href = "/";
+	 }
 	
-// 	$('#dept_pop_div').hide();
-// 	$('#Ddept_pop_div').hide();
+	
 	$("#navisub11").show();
 	$("#naviuser").css("font-weight", "bold");
 	
@@ -77,6 +87,28 @@ $(document).ready(function() {
 });
 </script>
 
+<style type="text/css">
+
+.list_div {
+	margin: auto;
+
+}
+
+.thth {
+	text-align: center;
+}
+
+.idUser{
+	text-align: left;
+	padding-left: 50px;
+}
+
+#userAdd_fbtn, #ExcelImpoartPopBtn {
+	margin-right: 5px;
+}
+
+</style>
+
 </head>
 <body>
 
@@ -90,6 +122,7 @@ $(document).ready(function() {
 		
 		<!-- Search1 Div  -->
 		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
+<%-- 				<input type="hidden" id="sessionID" name="sessionID" value="${SessionID}">  --%>
 				<select id="active_key" name="active_key" class="selectField" >
 					<option value="" selected="selected">-검색조건-</option>
 					<option value="user_id_sch">사용자ID</option>
@@ -104,32 +137,32 @@ $(document).ready(function() {
 	</div>
 
 	<!-- List1 Cover Div -->
-	<div class="list_div">
+	<div class="list_div" >
 		<!-- List1 Div -->
 		<div class="list1_div" style=" margin-left: 1%;">
 		<div class="table_div">
 			<form id="delAll_form" name="delAll_form">
-			<table summary="menu_list_tb" class="table table-hover">
+			<table summary="menu_list_tb" class="table table-hover" style="width:100%; margin:auto">
 					<colgroup>
 						<col width="5%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
+						<col width="13%">
+						<col width="12%">
+						<col width="12%">
+						<col width="18%">
 						<col width="20%">
-						<col width="20%">
 						<col width="10%">
 						<col width="10%">
-					</colgroup>
+					</colgroup>  
 					<thead>
-						<tr>
-							<th id="checkTh"><input type="checkbox" id="checkall"></th>
-							<th>사용자ID</th>
-							<th>사용자명</th>
-							<th>부서명</tH>
-							<th>이메일</th>
-							<th>연락처</th>
-							<th>권한</th>
-							<th>상태</th>
+						<tr >
+							<th id="checkTh" class="thth"><input type="checkbox" id="checkall"></th>
+							<th class="thth">사용자ID</th>
+							<th class="thth">사용자명</th>
+							<th class="thth">부서명</tH>
+							<th class="thth">이메일</th>
+							<th class="thth">연락처</th>
+							<th class="thth">권한</th>
+							<th class="thth">상태</th>
 						</tr>
 					</thead>
 					<tbody class="user_list">
@@ -137,21 +170,21 @@ $(document).ready(function() {
 									<c:when test="${not empty user_list}">
 										<c:forEach var="user_list" items="${user_list}">
 											<tr class="open_detail" data_num="${user_list.USER_ID}">
-												<td id="checkTd">
+												<td id="checkTd" class="thth">
 													<input type="checkbox" class="del_point" name="del_code" value="${user_list.USER_ID}">
 <%-- 													<input type="hidden" id="user_id" value="${user_list.USER_ID}"> --%>
 												</td>
-												<td onclick="onPopup(this.id);" name="user_id" id="${user_list.USER_ID}"> ${user_list.USER_ID}</td>
+												<td onclick="onPopup(this.id);" name="user_id" id="${user_list.USER_ID}" > ${user_list.USER_ID}</td>
 												<td>${user_list.USER_NM}</td>
 												<td>${user_list.DEPT_NM}</td>
 												<td>${user_list.EMAIL_ID}@${user_list.EMAIL_DOMAIN}</td>
-												<td>${user_list.CPHONE_NUM1}-${user_list.CPHONE_NUM2}-${user_list.CPHONE_NUM3}</td>
+												<td class="thth">${user_list.CPHONE_NUM1}-${user_list.CPHONE_NUM2}-${user_list.CPHONE_NUM3}</td>
 												<td>${user_list.AUTH_NM}</td>
 <!-- 												<td> -->
 <%-- 													<c:if test="${user_list.AUTH_NM eq NULL}">권한없음.</c:if> --%>
 <%-- 													<c:if test="${user_list.AUTH_NM != NULL}">${user_list.AUTH_NM}</c:if></td> --%>
 <!-- 												<td> -->
-												<td>
+												<td class="thth">
 													<c:if test="${user_list.ACTIVE_FLG eq 'Y'}">활성화</c:if>
 													<c:if test="${user_list.ACTIVE_FLG eq 'N'}">비활성화</c:if>
 												</td>

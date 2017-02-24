@@ -20,18 +20,9 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+
 </head>
-<body>
-<%-- <%@include file="../include/header.jsp"%> --%>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- 부가적인 테마 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
- 
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" /> --%>
+<body> 
  
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
@@ -52,7 +43,7 @@
 				<label >제  목</label>
 				<input type="text" id="keyword" name="keyword" class="inputTxt" > &nbsp; 
 	
-			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" class="btn btn-default btn-sm" value="검색">
+			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 		 </form>  
 		</div>
 	</div>

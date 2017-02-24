@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.msp.cp.HomeController;
 import com.msp.cp.code.service.CodeService;
 import com.msp.cp.code.vo.CodeVO;
-import com.msp.cp.utils.PagerVO;
 import com.msp.cp.menu.service.MenuService;
 import com.msp.cp.menu.vo.MenuVO;
+import com.msp.cp.utils.PagerVO;
 
 @Controller
 @RequestMapping(value="/menu")
@@ -122,6 +120,22 @@ public class MenuController {
 
 		return model;
 	}
+	
+	@RequestMapping(value="/menuTreeInqr", method={RequestMethod.GET,RequestMethod.POST})
+	public ResponseEntity<List<MenuVO>> menuTreeList(HttpSession session){
+		
+		ResponseEntity<List<MenuVO>> entity = null;
+		
+		try{
+			entity = new ResponseEntity<>(menuService.menuTreeList(), HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+				
+		return entity;
+	}
+	
 	
 	@RequestMapping(value="/detail_list/{menu_cd}", method={RequestMethod.GET,RequestMethod.POST})
 	public ResponseEntity<List<MenuVO>> deptDetailList(@PathVariable("menu_cd") String menu_cd){
