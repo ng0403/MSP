@@ -9,6 +9,10 @@ function ln_Close(e) {
 /* 리스트 클릭 시 팝업 숨김. */
 	function hideModal(){
  		$('.DEPTpop_main_div').hide();
+ 		$('.DEPT_POP_BACK').hide();
+ 		$('#dept_pop_div').hide();
+ 		$(".DEPT_POP_BACK").hide();
+ 		$('#Ddept_pop_div').hide();
  	}
  	
 	function onlyNumber(event){
@@ -138,5 +142,8 @@ function ln_Close(e) {
 			$('#userDetailMask, #userDetailWindow').hide();
 			
 		} 
+		function DEPT_POP_CLOSE(){
+			hideModal();
+		}
 ///////////////////////////////////Jquery//////////////////////////////////////////////
 		

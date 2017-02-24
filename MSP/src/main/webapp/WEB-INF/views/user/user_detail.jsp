@@ -21,9 +21,11 @@
 <script>
 	$(document).ready(function() {
  		$('#Ddept_pop_div').hide();
+ 		$('#DEPT_POP_BACK').hide();
 	      //부서검색버튼 클릭 
    	$("#Ddept_sch_fbtn").on("click", function() {
    		$(".DEPTpop_main_div").show();
+   		$(".DEPT_POP_BACK").show();
  		$(".DEPTpop_main_div").center();
    		deptListInqrPop(1);
    		
@@ -209,7 +211,7 @@
 								<input type="hidden" id="Duser_id_h" value="${user_id}">
 								<input type="hidden" id="Dcreated_by" value="">
 								<input type="hidden" id="Dactive_flg" value="${active_flg}">
- 								<input type="text" name="Duser_id" id="Duser_id" class="inputTxt" style=" width:50%" value="${user_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="Demp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
+ 								<input type="text" name="Duser_id" id="Duser_id" class="inputTxt" style=" width:100%" value="${user_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="Demp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th style="padding-left: 1%; text-align: right;">직급</th>
  							<td>

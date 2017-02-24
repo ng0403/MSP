@@ -20,7 +20,12 @@
 
 </head>
 <body>
+<div class="DEPT_POP_BACK"></div>
 	<div class="DEPTpop_main_div" style=" background: beige;">
+	
+		<div>
+			<input type="button" id="DeptTabInpr_close_nfbtn" onclick="DEPT_POP_CLOSE();" class="func_btn" style="font-size:11px;margin-top:1%; margin-right:1%; float: right;" value="닫기"/>
+		</div>
 		<div class="navi_div">
 			부서검색
 		</div>

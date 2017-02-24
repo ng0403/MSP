@@ -17,6 +17,9 @@
 			//deptDetailInqr(dept_cd);
 			hideModal();
 		})
+		function DEPT_POP_CLOSE(){
+			hideModal();
+		}
 		//페이지 엔터시 이벤트
 		$(document).on("keypress","#paging_deptPop_div #pageInput",function(){
 			var keycode = (event.keyCode ? event.keyCode : event.which);

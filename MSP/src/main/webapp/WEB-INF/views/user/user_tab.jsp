@@ -25,9 +25,11 @@
 <script>
 	$(document).ready(function() {
  		$('#dept_pop_div').hide();
+ 		$(".DEPT_POP_BACK").hide();
 	      //검색버튼 클릭 
      	$("#dept_sch_fbtn").on("click", function() {
      		$(".DEPTpop_main_div").show();
+     		$(".DEPT_POP_BACK").show();
      		$(".DEPTpop_main_div").center();
      		deptListInqrPop(1);
     		});
