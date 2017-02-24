@@ -221,23 +221,23 @@ $(document).ready(function() {
 					<input type="hidden" id="PageNum" value="${pageNum}"/>
 					<c:choose>
 						<c:when test="${page.endPageNum == 1}">
-							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 15%; padding: 3px; '/>  
 							<a style="color: black;"> / ${page.endPageNum}</a>
 							<a style="color: black;"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
-							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 15%; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="userListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
 							<a href="#" onclick="userListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
 							<a href="#" onclick="userListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
-							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, userListInqr);" style='width: 15%; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="userListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
 						</c:when>
 						<c:otherwise>
 							<a href="#" onclick="userListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
-							<input type="text" id="pageInput" value="${pageNum}" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<input type="text" id="pageInput" value="${pageNum}" style='width: 15%; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="userListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
 							<a href="#" onclick="userListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 						</c:otherwise>
