@@ -9,6 +9,19 @@
     height: 100%;
     overflow: none;
 }
+.DEPT_POP_BACK {
+    display: contents;
+    position: absolute;
+    z-index: 2;
+/*     background-color: rgba(0, 0, 0, 1); */
+    left: 30%;
+    top: 10%;
+    width: 40%;
+    height: 75%;
+    overflow: none;
+    opacity:0.5;
+
+}
    
 /* #Dtable td{ */
 /* 	width: 40%; */
@@ -59,7 +72,7 @@
 	height:60%; 
 	left:10%; 
 	top:5%; 
-	z-index:2; 
+	z-index:3; 
 	background-color: #FFFFFF; 
 	overflow: none;
 }
