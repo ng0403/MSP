@@ -57,10 +57,11 @@ public class LoginController {
 			/*destPage ="redirect:/user/userInqr";*/
 			//destPage ="redirect:/main";
 //			destPage = "redirect:/"+menu_url+"?menu_id="+menu_id;
-			return "redirect:/main";
+			return "redirect:/user/userInqr";
 		}else{
 			// 로그인이 실패한 경우
-			return "redirect:/" + "?loginResult=" + result;
+			return "redirect:/user/userInqr";
+//			redirect:/" + "?loginResult=" + result
 		}
 		
 	}
@@ -68,7 +69,7 @@ public class LoginController {
 	public ModelAndView gotoMain(HttpServletRequest request){
 		String user_id = request.getParameter("user_id");
 		String user_pwd = request.getParameter("user_pwd");
-		ModelAndView mav = new ModelAndView("/include/main");
+		ModelAndView mav = new ModelAndView("/user/user_list");
 		
 		System.out.println(user_id);
 		mav.addObject("user_id",user_id);

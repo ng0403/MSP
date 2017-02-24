@@ -4,6 +4,7 @@
 <html>
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script>
@@ -312,10 +313,13 @@
 			</div>
 		<!-- Modal Btn Div -->
 		<div class="modalL_btn_div" style="margin-top: 2%;">
-			<input type="button" id="Dsubmit_btn" class="btn btn-primary btn-sm" value="추가"/>
-			<input type="button" id="Dmodify_btn" class="btn btn-primary btn-sm" value="편집" />
-			<input type="reset" id="DbtnReset_btn" class="btn btn-primary btn-sm" value="취소"/>
-			<input type="button" id="Dmodifysave_btn" class="btn btn-primary btn-sm"  value="저장"/>
+		<c:choose>
+			<c:when test="${SessionID == 'admin'}">
+				<input type="button" id="Dmodify_btn" class="btn btn-primary btn-sm" value="편집" />
+				<input type="reset" id="DbtnReset_btn" class="btn btn-primary btn-sm" value="취소"/>
+				<input type="button" id="Dmodifysave_btn" class="btn btn-primary btn-sm"  value="저장"/>
+			</c:when>
+		</c:choose>
 		</div>
 		</div>
 </div>	
