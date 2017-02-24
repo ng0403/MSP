@@ -63,18 +63,29 @@
          		<if test="active_flg =='N'" >   
              		AND ACTIVE_FLG = 'N'
 		 		</if>
+		 		<if test="auth_id_sch != null and auth_id_sch != ''">
+					AND auth_id in (SELECT 
+										auth_id
+						  			FROM
+										TB_AUTH
+						   			WHERE  
+						   				auth_nm LIKE '%' || #{auth_id_sch} || '%')
+				</if>
+				<if test="menu_nm_sch != null and menu_nm_sch != ''">
+					AND menu_cd in (SELECT 
+										menu_cd
+									FROM
+										TB_MENU
+									WHERE  
+							 			menu_nm LIKE '%' || #{menu_nm_sch} || '%')
+				</if>
          		ORDER BY AUTH_ID ASC ) A
      		) X
      	<![CDATA[
         WHERE 
         	X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
 	 	]]>
-	 		<if test="auth_id_sch != null and auth_id_sch != ''" >   
-            	AND auth_nm LIKE '%' || #{auth_id_sch} || '%'
-         	</if>
-         	<if test="menu_nm_sch != null and menu_nm_sch != ''">
-         		AND menu_nm LIKE '%' || #{menu_nm_sch} || '%'
-         	</if>
+	 	
 	</select >
 	
 	<select id="menuAuthDetail" parameterType="map" resultType="com.msp.cp.menuAuth.vo.MenuAuthVO">

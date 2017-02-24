@@ -6,8 +6,11 @@ public class LoginVO {
 	String user_nm;
 	String user_pwd;
 	String del_yn;
-	//int pwd_ernm_yn;
 	
+	
+	
+	//int pwd_ernm_yn;
+
 	public LoginVO(){}
 	
 	public LoginVO(String user_id, String user_nm, String user_pwd, String del_yn) {/*, int pwd_ernm_yn*/
