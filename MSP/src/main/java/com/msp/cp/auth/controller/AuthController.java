@@ -64,6 +64,8 @@ public class AuthController {
 		
 		//페이징 처리
 		PagerVO page = authService.getAuthCount(map);
+		map.put("page", page);
+		
 		if(page.getEndRow()==1){
 			page.setEndRow(0);
 		}
@@ -101,15 +103,15 @@ public class AuthController {
 	public @ResponseBody Map<String, Object> authList( ModelMap model, HttpServletRequest request,
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 		
-		String active_key = request.getParameter("active_key").trim();                      
+		/*String active_key = request.getParameter("active_key").trim();      */                
 		String keyword    = request.getParameter("keyword");
 	    
 	    Map<String,Object> map = new HashMap<String,Object>();
 	    
-	    map.put("active_key", active_key);
+	   /* map.put("active_key", active_key);*/
 		map.put("keyword", keyword);
 		map.put("pageNum", pageNum);
-
+		System.out.println(map);
 		PagerVO page = authService.getAuthCount(map);
 		
 		if(page.getEndRow()==1){
