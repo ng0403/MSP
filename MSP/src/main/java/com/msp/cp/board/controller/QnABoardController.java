@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.board.service.QnABoardService;
 import com.msp.cp.board.vo.BoardVO;
+import com.msp.cp.common.SessionAuth.SessionAuthService;
+import com.msp.cp.common.SessionAuth.SessionAuthVO;
 import com.msp.cp.utils.PagerVO;
 
 @Controller
@@ -27,11 +30,21 @@ public class QnABoardController {
 	@Autowired
 	QnABoardService qnaService; 
 	
+	@Autowired
+	SessionAuthService sessionAuthService;
+	
 	@RequestMapping(value="/QnAInqr", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView QnA_List(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) {
+	public ModelAndView QnA_List(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map,  HttpSession session ) {
 
 		System.out.println("board_list Insert");
+		
+//		접속된 사용자 아이디 
+		String sessionID = (String) session.getAttribute("user_id");
+		System.out.println("접속된 계정 : " + sessionID);
+		
+		
 		map.put("pageNum", pageNum);
+		map.put("sessionID", sessionID);  
 
 		PagerVO page= qnaService.getQnaListCount(map);
 		map.put("page", page);
@@ -39,21 +52,34 @@ public class QnABoardController {
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
 		}
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
+		System.out.println("session 정보 : " + session_auth_list); 
+		
  		List<Object> boardlist = qnaService.list(map); 
  		
 		ModelAndView mov = new ModelAndView("/board/QnA_List");
 		mov.addObject("boardlist", boardlist);
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
-		 
+		mov.addObject("session_auth_list",session_auth_list); 
 		
 		return mov; 
 	}
 	
 	@RequestMapping(value="/QnA_detail", method= RequestMethod.GET)
-	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
+	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model, HttpSession session) throws Exception {
 		
 		System.out.println("hi detail" + BOARD_NO);
+		
+//		접속된 사용자 아이디 
+		String sessionID = (String) session.getAttribute("user_id");
+		System.out.println("접속된 계정 : " + sessionID);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sessionID", sessionID);  
+		
+		
+		
 		qnaService.viewadd(BOARD_NO);
 		
 		BoardVO vo = new BoardVO();

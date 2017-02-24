@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.board.service.BoardService;
 import com.msp.cp.board.vo.BoardVO;
+import com.msp.cp.common.SessionAuth.SessionAuthService;
+import com.msp.cp.common.SessionAuth.SessionAuthVO;
 import com.msp.cp.utils.FileManager;
 import com.msp.cp.utils.PagerVO;
 
@@ -39,14 +42,28 @@ public class BoardController {
 	@Autowired
 	BoardService boardService; 
 	
+	@Autowired
+	SessionAuthService sessionAuthService;
+	
 	@RequestMapping(value="/boardInqr", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
-		
+	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ,HttpSession session) throws Exception{
+		 
 		System.out.println("board_list Insert ");
+		
+//		접속된 사용자 아이디 
+		String sessionID = (String) session.getAttribute("user_id");
+		System.out.println("접속된 계정 : " + sessionID);
+		 
+		
 		map.put("pageNum", pageNum);
-
+		map.put("sessionID", sessionID); 
 		PagerVO page=boardService.getBoardListCount(map); 
 		map.put("page", page);
+		
+		
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
+		System.out.println("session 정보 : " + session_auth_list);
+
 		
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
@@ -57,14 +74,25 @@ public class BoardController {
 		mov.addObject("boardlist", boardlist);
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
-		 
+		mov.addObject("session_auth_list",session_auth_list);
 		return mov; 
 	} 
 	
 	@RequestMapping(value="/board_detail", method= RequestMethod.GET)
-	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
+	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model, HttpSession session) throws Exception {
+		
+//		접속된 사용자 아이디 
+		String sessionID = (String) session.getAttribute("user_id");
+		System.out.println("접속된 계정 : " + sessionID);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sessionID", sessionID);  
+		
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
+		System.out.println("session 정보 : " + session_auth_list); 
+		
 		BoardVO vo = boardService.detail(BOARD_NO);
-		String FILE_CD = vo.getFILE_CD();
+		String FILE_CD = vo.getFILE_CD(); 
 		
 		boardService.viewadd(BOARD_NO);
 	
@@ -213,13 +241,12 @@ public class BoardController {
 	}
 	
 	
-	
 	@RequestMapping(value="/ajax_list", method=RequestMethod.POST) 
 	 @ResponseBody
-	public ResponseEntity<List<BoardVO>> ajax_list(){ 
+	public ResponseEntity<List<BoardVO>> ajax_list( ){ 
 		
 		System.out.println("ajax List Entering");
- 
+	  
 		ResponseEntity<List<BoardVO>> entity = null;
 	    try {
  	      entity = new ResponseEntity<>(boardService.ajaxlist(), HttpStatus.OK);

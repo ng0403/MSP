@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+ <c:set var="SessionID" value="${sessionScope.user_id}" />
     
 <!DOCTYPE html>
 <html>
@@ -123,6 +124,29 @@
 </div>
  </div>
 <script type="text/javascript">
+
+$(document).ready(function() { 
+	 
+	 /* 접속된 세션 아이디 입니다. */
+	 var sessionID = "${SessionID}" 
+
+	if(sessionID == 'admin'){
+ 	 }else{
+		 alert("${SessionID}");
+			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
+//			location.href = "/logout";
+			location.href = "/";
+	 }
+	
+})
+
+
+
+
+
+
+
+
  
 $("#board_add_fbtn").on("click", function(){
 	location.href="/board/board_insert";
@@ -143,29 +167,42 @@ $("#board_add_fbtn").on("click", function(){
 		}
  
 		if (confirm("정보를 삭제 하시겠습니까?")) { 
- 			$.ajax({
- 				url : '/board/board_remove',
- 				headers : {
- 		            "Content-Type" : "application/json",
- 		            "X-HTTP-Method-Override" : "POST"
- 		         },
- 				data : del_code,
- 				dataType : 'text',
- 				processData: false,
- 				contentType: false,
- 				type: 'POST',
- 				success : function(result) {
-  					if(result =="success")
- 						{
- 						ajaxList();
- 						}
- 					else{
- 						alert("오류!");
- 					}
- 				
- 				}
- 				}) 
-			
+			 /* 접속된 세션 아이디 입니다. */
+			 var sessionID = "${SessionID}" 
+
+			if(sessionID == 'admin'){
+				
+
+				$.ajax({
+	 				url : '/board/board_remove',
+	 				headers : {
+	 		            "Content-Type" : "application/json",
+	 		            "X-HTTP-Method-Override" : "POST"
+	 		         },
+	 				data : del_code,
+	 				dataType : 'text',
+	 				processData: false,
+	 				contentType: false,
+	 				type: 'POST',
+	 				success : function(result) {
+	  					if(result =="success")
+	 						{
+	 						ajaxList();
+	 						}
+	 					else{
+	 						alert("오류!");
+	 					}
+	 				
+	 				}
+	 				}) 
+				
+				
+		 	 }else{
+				 alert("${SessionID}");
+					alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
+//					location.href = "/logout";
+					location.href = "/";
+			 } 
   		} 
  	}
  	
@@ -173,9 +210,9 @@ $("#board_add_fbtn").on("click", function(){
  	
  	
  	function ajaxList() {
- 		
- 		$.ajax({
-				url : '/board/ajax_list',
+ 		boardListInqr(1);
+ 		/* $.ajax({
+				url : '/board/search_boardInqr',
 				headers : {
 		            "Content-Type" : "application/json",
 		            "X-HTTP-Method-Override" : "POST"
@@ -224,7 +261,7 @@ $("#board_add_fbtn").on("click", function(){
 					 
 
 				}  
-				})
+				}) */
  	}
   
  

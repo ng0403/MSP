@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    
+ <c:set var="SessionID" value="${sessionScope.user_id}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -168,6 +168,21 @@ label {
 <script type="text/javascript">
  
  
+$(document).ready(function() { 
+	 
+	 /* 접속된 세션 아이디 입니다. */
+	 var sessionID = "${SessionID}" 
+
+	if(sessionID == 'admin'){
+	 }else{
+		 alert("${SessionID}");
+			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
+//			location.href = "/logout";
+			location.href = "/";
+	 }
+	
+})
+ 
 $("#board_add_fbtn").on("click", function(){
 	location.href="/board/QnA_insert";
 	
@@ -207,7 +222,7 @@ $("#board_add_fbtn").on("click", function(){
  				success : function(result) {
   					if(result =="success")
 						{
-						QnAajaxList();
+  						QnAListInqr(1);
 						}
 					else{
 						alert("오류!");
