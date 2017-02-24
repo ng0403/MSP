@@ -68,6 +68,12 @@
 .tdstyle {
 	text-align: left;
 }
+
+.thth {
+	text-align: center;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -186,7 +192,9 @@ function viewLoadingHide(){
 	<!--Main_Div  -->
 	<div class="main_div">
 		<!-- Navigation Div -->
-		<div class="navi_div">■ 메뉴권한관리</div>
+		<div class="navi_div">
+			관리자 > 권한 > 권한별 메뉴관리
+		</div>
 
 		<!-- Search Cover Div -->
 		<div class="search_div">
@@ -224,15 +232,15 @@ function viewLoadingHide(){
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<td align="center"><input id="checkall" type="checkbox" /></td>
-								<td align="center">메뉴코드</td>
-								<td align="center">메뉴명</td>
-								<td align="center">권한명</td>
-								<td align="center">조회권한</td>
-								<td align="center">생성권한</td>
-								<td align="center">수정권한</td>
-								<td align="center">삭제권한</td>
-								<td align="center">메뉴접근권한</td>
+								<th class="thth"><input id="checkall" type="checkbox" /></th>
+								<th class="thth">메뉴코드</th>
+								<th class="thth">메뉴명</th>
+								<th class="thth">권한명</th>
+								<th class="thth">조회권한</th>
+								<th class="thth">생성권한</th>
+								<th class="thth">수정권한</th>
+								<th class="thth">삭제권한</th>
+								<th class="thth">메뉴접근권한</th>
 							</tr>
 						</thead>
 						

@@ -48,6 +48,10 @@
 	margin:0 auto;
 }
 
+.thth {
+	text-align: center;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -156,7 +160,9 @@ $(document).ready(function() {
 <div class="main_div">
 	<c:set var="SessionID" value="${sessionScope.user_id}" />
 	<!-- Navigation Div -->
-	<div class="navi_div">■ 코드관리</div>
+	<div class="navi_div">
+			관리자 > 공통코드관리
+		</div>
 
 	<!-- Search Cover Div -->
 	<div class="search_div">
@@ -191,11 +197,11 @@ $(document).ready(function() {
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<td align="center"><input id="checkall" type="checkbox" /></td>
-								<td align="center" style="font-weight: bold;">공통코드</td>
-								<td align="center" style="font-weight: bold;">공통코드명</td>
-								<td align="center" style="font-weight: bold;">상세코드</td>
-								<td align="center" style="font-weight: bold;">상세코드명</td>
+								<th class="thth"><input id="checkall" type="checkbox" /></th>
+								<th class="thth" style="font-weight: bold;">공통코드</th>
+								<th class="thth" style="font-weight: bold;">공통코드명</th>
+								<th class="thth" style="font-weight: bold;">상세코드</th>
+								<th class="thth" style="font-weight: bold;">상세코드명</th>
 							</tr>
 						</thead>
 						<tbody id="codeListTbody">
