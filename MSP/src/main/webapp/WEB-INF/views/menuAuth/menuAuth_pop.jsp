@@ -7,21 +7,15 @@
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
-
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
-<%-- <script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script> --%>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/content.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" />
 <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet"/>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 

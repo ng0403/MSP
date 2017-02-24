@@ -8,12 +8,12 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 <script src="${ctx}/resources/common/js/common.js"></script>
 <script src="${ctx}/resources/common/js/mps/menuAuthJS/menuAuth_list.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <!--  -->
@@ -65,6 +65,9 @@
 	
 }
 
+.tdstyle {
+	text-align: left;
+}
 </style>
 
 <script type="text/javascript">
@@ -179,7 +182,7 @@ function viewLoadingHide(){
 <body>
 <%-- <%@include file="../include/header.jsp"%> --%>
 	<c:set var="SessionID" value="${sessionScope.user_id}" />
-
+	
 	<!--Main_Div  -->
 	<div class="main_div">
 		<!-- Navigation Div -->
@@ -242,8 +245,8 @@ function viewLoadingHide(){
 									<td>
 										<a href="javascript:void(0)" onclick="fn_menuAuthPop('${menuAuthInqrList.MENU_CD}', '${menuAuthInqrList.AUTH_NM }')">${menuAuthInqrList.MENU_CD}</a>
 									</td>
-									<td align="left">${menuAuthInqrList.MENU_NM}</td>
-									<td align="left">${menuAuthInqrList.AUTH_NM}</td>
+									<td class="tdstyle">${menuAuthInqrList.MENU_NM}</td>
+									<td class="tdstyle">${menuAuthInqrList.AUTH_NM}</td>
 									<td>${menuAuthInqrList.INQR_AUTH}</td>
 									<td>${menuAuthInqrList.ADD_AUTH}</td>
 									<td>${menuAuthInqrList.MDFY_AUTH}</td>
