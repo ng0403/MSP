@@ -30,12 +30,10 @@ public class QnABoardController {
 	@RequestMapping(value="/QnAInqr", method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView QnA_List(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) {
 
-		System.out.println("board_list Insert111");
-		System.out.println("pagenum" + pageNum);
+		System.out.println("board_list Insert");
 		map.put("pageNum", pageNum);
 
 		PagerVO page= qnaService.getQnaListCount(map);
-		System.out.println("pagevo" + page.toString());
 		map.put("page", page);
 		
 		if(page.getEndRow() == 1){
@@ -48,7 +46,6 @@ public class QnABoardController {
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
 		 
-		System.out.println("board_list" + mov);
 		
 		return mov; 
 	}
@@ -62,7 +59,6 @@ public class QnABoardController {
 		BoardVO vo = new BoardVO();
 		vo = qnaService.detail(BOARD_NO);
 		String QUESTION_TYPE_CD = vo.getQUESTION_TYPE_CD();
-		System.out.println("question_type_cd?" + QUESTION_TYPE_CD);
 		String TITLE = vo.getTITLE();
 		
 		BoardVO vo1 = new BoardVO();
@@ -76,7 +72,6 @@ public class QnABoardController {
  		vo.setQUESTION_TITLE(QUESTION_TITLE);
 		
   		model.addAttribute("boardlist", vo );
-		System.out.println("QnA_detail" + model.toString()); 
 		 
 	}
 	 
@@ -89,7 +84,6 @@ public class QnABoardController {
 	@RequestMapping(value="/QnA_insert", method=RequestMethod.POST)
 	public String  board_insert(BoardVO vo) { 
 		System.out.println("QnA Insert Entering");
-		System.out.println("QnA vo?" + vo.toString());
 		qnaService.insert(vo);  
    
 		System.out.println("board_insert success....");
@@ -103,17 +97,14 @@ public class QnABoardController {
 	@RequestMapping(value="/QnA_modify", method=RequestMethod.GET)
 	public void board_modifyPage(int BOARD_NO, Model model)
 	{
-		System.out.println("hi MODIFY" + BOARD_NO);
 		BoardVO vo = new BoardVO();
 		vo = qnaService.read(BOARD_NO);
 		String QUESTION_TYPE_CD = vo.getQUESTION_TYPE_CD();
 		String TITLE = vo.getTITLE();
-		System.out.println("11" + QUESTION_TYPE_CD + "TITLE"  + TITLE);
 		
 		String QUESTION_TITLE = "[" + QUESTION_TYPE_CD + "] " + "    " + TITLE;
 		
 		
-		System.out.println("gg" + QUESTION_TITLE );
 		vo.setQUESTION_TITLE(QUESTION_TITLE);
 		System.out.println("modify Page Entering");
 		model.addAttribute( "boardVO", vo );
@@ -135,11 +126,10 @@ public class QnABoardController {
 	@RequestMapping(value="/search_QnAInqr", method={RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String, Object> search_QnA_list( ModelMap model, HttpServletRequest request,
 													   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
-		System.out.println("search entering1111");
+		System.out.println("search entering");
  		String keyword    = request.getParameter("keyword");
 	    String qna_answer = request.getParameter("qna_answer");
 	    
-	    System.out.println(qna_answer + "   qna_answer   " + "   keyword   " + keyword);
 	    Map<String,Object> map = new HashMap<String,Object>();
 	    
  		map.put("keyword", keyword);
@@ -158,14 +148,11 @@ public class QnABoardController {
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		List<BoardVO> list = qnaService.QnAList(map); 
-		System.out.println("초기 list" + list.toString());
 		String QUESTION_TYPE_CD = list.get(0).getQUESTION_TYPE_CD();
 		map.put("QUESTION_TYPE_CD", QUESTION_TYPE_CD);
 		
-		System.out.println("mapmapmap" +map.toString());
 		
 		List<BoardVO> list1 = qnaService.QnAList2(map); 
-		System.out.println("list111" + list1.toString());
 
 		model.addAttribute("page", page);
 		model.addAttribute("pageNum", pageNum);

@@ -30,12 +30,9 @@ public class BoardMngController {
 	
 	@RequestMapping(value="/boardmngInqr", method=RequestMethod.GET) 
 	public ModelAndView boardmngList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
-		System.out.println("board_mng_list entering");
-		System.out.println("pagenum" + pageNum);
 		map.put("pageNum", pageNum);
 		
  		PagerVO page= boardmngService.getBoardMngListCount(map); 
-		System.out.println("pagevo" + page.toString());
 		map.put("page", page);
 		
 		if(page.getEndRow() == 1){
@@ -48,7 +45,6 @@ public class BoardMngController {
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum); 
 
-		System.out.println("board_list" + mov);
 		return mov; 
 		
 	}
@@ -56,10 +52,8 @@ public class BoardMngController {
 	@RequestMapping(value="/board_mng_detail", method=RequestMethod.GET)
 	public void board_mng_detail(@RequestParam("BOARD_MNG_NO")String BOARD_MNG_NO, Model model ){
 		
-	System.out.println("board_mng_detail entering");
 	
 	model.addAttribute("board_mng_list", boardmngService.detail(BOARD_MNG_NO));
-	System.out.println("board_mng_detail" + model.toString());
 		
 	}
 	
@@ -72,7 +66,7 @@ public class BoardMngController {
 	@RequestMapping(value="/board_mng_modify", method=RequestMethod.POST)
 	public String board_mng_modify(BoardMngVO vo){
 			
-		System.out.println("BOARD_MNG_MODIFY ENTERING" + vo.toString());
+		System.out.println("BOARD_MNG_MODIFY ENTERING");
 		
 		boardmngService.modify(vo);
 		System.out.println("modify success" + vo.toString());
@@ -89,7 +83,6 @@ public class BoardMngController {
 	public String board_mng_add_post(BoardMngVO vo) {
 		
 		System.out.println("enter board_mng_add...");
-		System.out.println("vo is  " + vo);
 		boardmngService.add(vo);
 		
 		return "redirect:/board_mng/boardmngInqr";
@@ -108,7 +101,6 @@ public class BoardMngController {
 		for(int i = 0; i < delcode.length; i++)
 		{
 			String dc = delcode[i];
-			System.out.println("delete..." + dc);
 			boardmngService.remove(dc);
 			System.out.println("success"); 
 			
@@ -127,7 +119,6 @@ public class BoardMngController {
 	@ResponseBody
 	public Map<String, Object> board_mng_codetxt(@RequestBody String CODE_TXT ) {
 		
-		System.out.println("hello codetxt" + CODE_TXT);
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		List<Object> codelist = boardmngService.codetxt(CODE_TXT);
 		map.put("data", codelist);
@@ -150,22 +141,17 @@ public class BoardMngController {
 	     String ACTIVE_FLGS = "Y";
 	     for(int i = 0; i< vo.size() ; i++){ 
 	     ACTIVE_FLG = vo.get(i).getACTIVE_FLG(); 
-	     System.out.println("ACTIVE_FLG" + ACTIVE_FLG);
  	     boolean A = ACTIVE_FLG.equals(ACTIVE_FLGS);
  	     
 	    if(A == true)
 	     { 
-	    	 System.out.println("True" );
  	    	 vo.get(i).setACTIVE_FLG("활성화");
 	     }
 	     else{ 
-	    	 System.out.println("False");
  	    	 vo.get(i).setACTIVE_FLG("비활성화"); 
 	    }
 	    
 	      entity = new ResponseEntity<>(vo, HttpStatus.OK);
- 	      System.out.println("entity? "+ entity);
-	      System.out.println("insert entity" + entity);
 	     }
 	      
 	    } catch (Exception e) {

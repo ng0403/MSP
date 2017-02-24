@@ -18,7 +18,6 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Override
 	public List<ReplyVO> listReply(Integer BOARD_NO) throws Exception {
- 		System.out.println("SERVICE" +BOARD_NO);
 		return replyDao.listReply(BOARD_NO);
 	}
 
