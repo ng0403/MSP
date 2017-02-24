@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.SessionID}" />
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" />  --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
@@ -56,6 +57,23 @@ th, td {
 }
 
 </style>
+<script type="text/javascript">
+
+$(document).ready(function() { 
+	/* 접속된 세션 아이디 입니다. */
+	var sessionID = "${SessionID}" 
+		
+	if(sessionID == 'admin'){
+//		 alert("관리자 권한으로 접속하셨습니다.");
+	 }else{
+//		 alert("${SessionID}");
+			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
+			location.href = "/logout";
+			//uujlocation.href = "/";
+	 }
+});
+
+</script>
 <title>Auth List</title>
 </head>
 <body>
