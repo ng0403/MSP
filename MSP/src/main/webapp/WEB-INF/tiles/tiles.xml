@@ -24,6 +24,18 @@
 	<definition name="/board/board_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/>
 	</definition>
+	<!-- 게시판글상세 -->
+	<definition name="/board/board_detail" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_detail.jsp"/>
+	</definition>
+	<!-- 게시판글등록 -->
+	<definition name="/board/board_insert" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_insert.jsp"/>
+	</definition>
+	<!-- 게시판글수정 -->
+	<definition name="/board/board_modify" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_modify.jsp"/>
+	</definition>
 	<!-- 공통코드 -->
 	<definition name="/code/code_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/code/code_list.jsp"/>
