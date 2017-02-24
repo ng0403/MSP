@@ -226,7 +226,6 @@ function userDel(){
 	});
 	
 	var delCode = del_code.split(","); //맨끝 콤마 지우기
-	alert(delCode);
 	if(delCode == ""){
 		alert("삭제할 대상을 선택해 주세요");
 		return false;
