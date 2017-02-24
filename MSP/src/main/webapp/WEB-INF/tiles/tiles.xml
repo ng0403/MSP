@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	<definition name="layout_content" template="/WEB-INF/views/include/main.jsp">
+		<put-attribute name="main_center1" value="/WEB-INF/views/home.jsp" />
+	</definition>
+			
+	<!-- 사용자 -->
+	<definition name="login" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/user/user_list.jsp"/>
+	</definition>
+	<!-- 사용자 -->
+	<definition name="user_mng" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/user/user_list.jsp"/>
+	</definition>
+	<!-- 권한 -->
+	<!-- <definition name="prod" extends="layout_content">
+	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
+	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
+	</definition> -->
+	<!-- 게시판 -->
+	<!-- <definition name="prod" extends="layout_content">
+	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
+	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
+	</definition> -->
+	<!-- 공통코드 -->
+	<!-- <definition name="prod" extends="layout_content">
+	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
+	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
+	</definition> -->
+	<!-- 부서 -->
+	<!-- <definition name="prod" extends="layout_content">
+	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
+	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
+	</definition> -->
+	<!-- 사용자권한 -->
+	<!-- <definition name="prod" extends="layout_content">
+	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
+	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
+	</definition> -->
+	<!-- 메뉴권한 -->
+	<!-- <definition name="prod" extends="layout_content">
+	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
+	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
+	</definition> -->
+	
+</tiles-definitions>
