@@ -6,7 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 <script src="${ctx}/resources/common/js/common.js"></script>
@@ -78,6 +80,17 @@
 
 <script type="text/javascript">
 var save_cd;
+var sessionID = "${SessionID}"
+
+if(sessionID == 'admin')
+{
+	
+}
+else
+{
+	alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
+	location.href = "/";
+}
 
 function menuAuthByMask() {
 	//화면의 높이와 너비를 구한다.
@@ -187,7 +200,6 @@ function viewLoadingHide(){
 </head>
 <body>
 <%-- <%@include file="../include/header.jsp"%> --%>
-	<c:set var="SessionID" value="${sessionScope.user_id}" />
 	
 	<!--Main_Div  -->
 	<div class="main_div">
