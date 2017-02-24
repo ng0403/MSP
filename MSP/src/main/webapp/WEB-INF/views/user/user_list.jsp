@@ -34,10 +34,10 @@ $(document).ready(function() {
 	if(sessionID == 'admin'){
 // 		 alert("관리자 권한으로 접속하셨습니다.");
 	 }else{
-		 alert("${SessionID}");
+// 		 alert("${SessionID}");
 			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
 // 			location.href = "/logout";
-			location.href = "/";
+// 			location.href = "/";
 	 }
 	
 	
@@ -208,8 +208,12 @@ $(document).ready(function() {
 	</div> 
 	<div class="paging_div">
 				<div class="left">
-					<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
-					<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
+				<c:choose>
+					<c:when test="${SessionID == 'admin'}">
+						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
+						<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
+					</c:when>
+				</c:choose>
 				</div>
 				<div class="page" id="paging_div">	
 					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
@@ -240,8 +244,12 @@ $(document).ready(function() {
 					</c:choose>
 				</div>
 				<div class="right">
-					<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-			        <input type="button" id="ExcelImpoartPopBtn"  class="btn btn-primary btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
+				<c:choose>
+					<c:when test="${SessionID == 'admin'}">
+						<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
+			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-primary btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;">
+			        </c:when>
+			    </c:choose> 
 					
 				</div>
 			</div>
