@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.msp.cp.login.service.LoginService;
 
@@ -36,15 +37,15 @@ public class LoginController {
 	//로그인처리
 	@RequestMapping(value = "/login", method={RequestMethod.POST,RequestMethod.GET})
 	public String Login(String user_id, String user_pwd, Model model
-			/*, RedirectAttributes redirectAttributes*/){
+			, RedirectAttributes redirectAttributes){
 		
 		String result = loginService.doLogin(user_id, user_pwd);
 		/*MenuVo loginMenu = loginService.getLoginMenuInfo();
 		
 		String menu_id = loginMenu.getMenu_id();
 		String menu_url = loginMenu.getMenu_url();*/
-		//redirectAttributes.addAttribute("user_id",user_id);
-		//redirectAttributes.addAttribute("user_pwd",user_pwd);
+		redirectAttributes.addAttribute("user_id",user_id);
+		redirectAttributes.addAttribute("user_pwd",user_pwd);
 		
 		model.addAttribute("user_id",user_id);
 		model.addAttribute("user_pwd",user_pwd);
@@ -56,14 +57,14 @@ public class LoginController {
 			/*destPage ="redirect:/user/userInqr";*/
 			//destPage ="redirect:/main";
 //			destPage = "redirect:/"+menu_url+"?menu_id="+menu_id;
-			return "/include/main";
+			return "redirect:/main";
 		}else{
 			// 로그인이 실패한 경우
 			return "redirect:/" + "?loginResult=" + result;
 		}
 		
 	}
-	/*@RequestMapping(value = "/main", method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "/main", method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView gotoMain(HttpServletRequest request){
 		String user_id = request.getParameter("user_id");
 		String user_pwd = request.getParameter("user_pwd");
@@ -74,7 +75,7 @@ public class LoginController {
 		mav.addObject("user_pwd",user_pwd);
 		
 		return mav;
-	}*/
+	}
 
 	//로그아웃
 	@RequestMapping(value="/logout", method=RequestMethod.GET)

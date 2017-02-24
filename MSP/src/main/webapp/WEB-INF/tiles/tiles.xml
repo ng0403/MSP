@@ -5,46 +5,40 @@
        
 <tiles-definitions>
 	<definition name="layout_content" template="/WEB-INF/views/include/main.jsp">
-		<put-attribute name="main_center1" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="main_center1" value="" />
 	</definition>
 			
-	<!-- 사용자 -->
-	<definition name="login" extends="layout_content">
+	<!-- 메인화면 -->
+	<definition name="/include/main" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/user/user_list.jsp"/>
 	</definition>
 	<!-- 사용자 -->
-	<definition name="user_mng" extends="layout_content">
+	<definition name="/user/user_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/user/user_list.jsp"/>
 	</definition>
 	<!-- 권한 -->
-	<!-- <definition name="prod" extends="layout_content">
-	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
-	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
-	</definition> -->
+	<definition name="/auth/auth_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/auth/auth_list.jsp"/>
+	</definition>
 	<!-- 게시판 -->
-	<!-- <definition name="prod" extends="layout_content">
-	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
-	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
-	</definition> -->
+	<definition name="/board/board_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/>
+	</definition>
 	<!-- 공통코드 -->
-	<!-- <definition name="prod" extends="layout_content">
-	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
-	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
-	</definition> -->
+	<definition name="/code/code_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/code/code_list.jsp"/>
+	</definition>
 	<!-- 부서 -->
-	<!-- <definition name="prod" extends="layout_content">
-	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
-	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
-	</definition> -->
+	<definition name="/dept/dept_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/dept/dept_list.jsp"/>
+	</definition>
 	<!-- 사용자권한 -->
-	<!-- <definition name="prod" extends="layout_content">
-	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
-	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
-	</definition> -->
+	<definition name="/userAuth/user_auth_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/userAuth/user_auth_list.jsp"/>
+	</definition>
 	<!-- 메뉴권한 -->
-	<!-- <definition name="prod" extends="layout_content">
-	 <put-attribute name="master" value="/WEB-INF/views/standard/prod/prod_list.jsp"/>
-	 <put-attribute name="detail" value="/WEB-INF/views/standard/prod/prod_tab.jsp" />
-	</definition> -->
+	<definition name="/menuAuth/menuAuth_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/menuAuth/menuAuth_list.jsp"/>
+	</definition>
 	
 </tiles-definitions>
