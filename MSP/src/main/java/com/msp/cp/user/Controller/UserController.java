@@ -26,9 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.msp.cp.common.SessionAuth.SessionAuthService;
+import com.msp.cp.common.SessionAuth.SessionAuthVO;
 import com.msp.cp.dept.service.DeptService;
 import com.msp.cp.dept.vo.DeptVO;
-import com.msp.cp.menu.vo.MenuVO;
 import com.msp.cp.user.Service.UserService;
 import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.PagerVO;
@@ -42,6 +43,10 @@ public class UserController {
 	
 	@Autowired
 	DeptService deptService;
+
+	@Autowired
+	SessionAuthService sessionAuthService;
+	
 	
 	//사용자관리 리스트
 //	@ResponseBody
@@ -54,6 +59,10 @@ public class UserController {
 			@RequestParam Map<String, Object> userMap, 
 			@RequestParam Map<String, Object> map)
 	{
+//		접속된 사용자 아이디 
+		String sessionID = (String) session.getAttribute("user_id");
+		System.out.println("접속된 계정 : " + sessionID);
+
 		active_key = request.getParameter("active_key");
 		user_sch_key = request.getParameter("user_sch_key");
 		System.out.println("user Controller");
@@ -61,6 +70,7 @@ public class UserController {
 		map.put("pageNum", pageNum);
 		map.put("active_key", active_key);
 		map.put("user_sch_key", user_sch_key);
+		map.put("sessionID", sessionID);
 		
 		System.out.println("1. USER List Controller pageNum : " + pageNum);
 		
@@ -83,6 +93,8 @@ public class UserController {
 		List<userVO> rank_cd_list = userService.rankCdList();
 		List<userVO> duty_cd_list = userService.dutyCdList();
 		List<userVO> user_list = userService.searchListUser(map);
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
+		System.out.println("session 정보 : " + session_auth_list);
 
 		System.out.println("15. User Search list : " +user_list);
 		ModelAndView mov = new ModelAndView("/user/user_list");

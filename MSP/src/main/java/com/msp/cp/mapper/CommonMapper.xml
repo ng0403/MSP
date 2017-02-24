@@ -24,4 +24,21 @@
 		VALUES(#{A}, #{B}, #{C}, #{D}, #{E})      
 	</update>	
 	
+	<!-- User List 출력  -->
+	<select id="sessionInqr" parameterType="string" resultType="map"> <!-- parameterType="map" resultType="" -->
+		select auth.user_id, auth.auth_id, auth.auth_nm, tma.menu_cd, tma.inqr_auth, tma.add_auth, tma.mdfy_auth, tma.del_auth, tma.menu_acc_auth, tma.active_flg 
+		  from(select tua.user_id, tua.auth_id, ta.auth_nm, tua.active_flg
+		        from (select auth_id, auth_nm, active_flg, del_flg
+		                from tb_auth
+		                where 1=1
+		                and active_flg='Y'
+		                and del_flg='N') ta, tb_user_auth tua
+		        where 1=1
+		          and ta.auth_id = tua.auth_id
+		          and tua.active_flg='Y') auth, tb_menu_auth tma
+		where 1=1
+		  and auth.auth_id = tma.auth_id
+		  and tma.active_flg='Y'
+		  and auth.user_id=#{sessionID}
+	</select>
 </mapper>
