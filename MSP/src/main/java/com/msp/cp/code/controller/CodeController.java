@@ -37,9 +37,10 @@ public class CodeController {
 	 * 업 무 명 : codeInqr 코드조회 화면
 	 * 작 성 자 : 이재욱
      * 작 성 일 : 2017/01/31
-     * 수 정 자 : 
-     * 수 정 일 : 
+     * 수 정 자 : 이재욱
+     * 수 정 일 : 2017/02/23
 	 * 내     용 : 공통코드 및 상세코드를 조회한다. 
+	 *        엑셀출력 버트능ㄹ 클릭 했을 시 엑셀 Export 기능을 추가.
 	 * */
 	@RequestMapping(value="/codeInqr", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView codeInqr(HttpSession session, Locale locale,
@@ -57,6 +58,7 @@ public class CodeController {
 			page.setEndRow(0);
 		}
 		
+		// Excel Export 해주는 부분
 		if(excel != null){
 			if(excel.equals("true")){
 				ModelAndView mav = new ModelAndView("/code/code_list_excel");
