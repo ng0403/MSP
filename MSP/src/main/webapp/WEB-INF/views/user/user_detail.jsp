@@ -317,9 +317,9 @@
 		</div>
 		</div>
 </div>	
-	<div id="Ddept_pop_div" style="font-size:11.5px;">
-		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include>
-	</div> 
+<!-- 	<div id="Ddept_pop_div" style="font-size:11.5px;"> -->
+<%-- 		<jsp:include page="../dept/deptlist_pop.jsp"></jsp:include> --%>
+<!-- 	</div>  -->
 	
 
 </body>
