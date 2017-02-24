@@ -105,6 +105,7 @@ public class UserController {
 		mov.addObject("user_list", user_list);
 		mov.addObject("rank_cd_list", rank_cd_list);
 		mov.addObject("duty_cd_list", duty_cd_list);
+		mov.addObject("session_auth_list", session_auth_list);
 		System.out.println("16. User Search list : " + mov);
 		return mov;
 		
@@ -112,9 +113,13 @@ public class UserController {
 	
 	//ajax Controller
 	@RequestMapping(value="/userAjax_list", method={RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody Map<String, Object> userList(ModelMap model,
+	public @ResponseBody Map<String, Object> userList(ModelMap model,HttpSession session,
 			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
 		System.out.println("aJax list Controller");
+		
+//		접속된 사용자 아이디 
+		String sessionID = (String) session.getAttribute("user_id");
+		System.out.println("접속된 계정 : " + sessionID);
 		
 		String active_key=request.getParameter("active_key").trim();                      
 	    String user_sch_key=request.getParameter("user_sch_key").trim(); 
@@ -128,6 +133,7 @@ public class UserController {
 	    map.put("active_key", active_key);
 		map.put("user_sch_key", user_sch_key);
 		map.put("pageNum", pageNum);
+		map.put("sessionID", sessionID);
 
 		PagerVO page=userService.getUserListCount(map);
 		if(page.getEndRow()==1){
@@ -144,7 +150,9 @@ public class UserController {
 		List<userVO> rank_cd_list = userService.rankCdList();
 		List<userVO> duty_cd_list = userService.dutyCdList();
 		List<userVO> user_list = userService.searchListUser(map);
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
 		
+		System.out.println("session 정보 : " + session_auth_list);
 		System.out.println(user_list);
 		
 		model.addAttribute("page", page);
@@ -152,6 +160,7 @@ public class UserController {
 		model.addAttribute("user_list", user_list);
 		model.addAttribute("rank_cd_list", rank_cd_list);
 		model.addAttribute("duty_cd_list", duty_cd_list);
+		model.addAttribute("session_auth_list", session_auth_list);
 
 		return model;
 	}

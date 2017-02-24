@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.code.service.CodeService;
 import com.msp.cp.code.vo.CodeVO;
+import com.msp.cp.common.SessionAuth.SessionAuthService;
+import com.msp.cp.common.SessionAuth.SessionAuthVO;
 import com.msp.cp.user.vo.userVO;
 import com.msp.cp.utils.PagerVO;
 
@@ -32,6 +34,9 @@ public class CodeController {
 	
 	@Autowired
 	CodeService codeService;
+	
+	@Autowired
+	SessionAuthService sessionAuthService;
 	
 	/**
 	 * 업 무 명 : codeInqr 코드조회 화면
@@ -51,9 +56,12 @@ public class CodeController {
 		
 		map.put("pageNum", pageNum);
 		
+		String sessionID = (String)session.getAttribute("user_id");
 		PagerVO page = codeService.getCodeListCount(map);
 		
+		map.put("sessionID", sessionID);
 		map.put("page", page);
+		
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
 		}
@@ -73,7 +81,10 @@ public class CodeController {
 		System.out.println("CodeInqr");
 		
 		List<Object> codeInqrList = codeService.searchCodeList(map);
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
 		ModelAndView mov = new ModelAndView("/code/code_list");
+		
+		System.out.println(session_auth_list);
 		
 		mov.addObject("page", page);
 		mov.addObject("pageNum", pageNum);
@@ -91,9 +102,11 @@ public class CodeController {
 	 * 내     용 : 공통코드 등록한다. 
 	 * */
 	@RequestMapping(value="/codeMasterAdd", method={RequestMethod.GET, RequestMethod.POST})
-	public String codeMasterInsert(CodeVO codeVo)
+	public String codeMasterInsert(CodeVO codeVo, HttpSession session)
 	{
-		codeVo.setCreated_by("ADMIN");		
+		String session_userId = (String)session.getAttribute("user_id");
+		codeVo.setCreated_by(session_userId);
+		
 		codeService.insertCodeMaster(codeVo);
 				
 		return "redirect:/code/codeInqr";
@@ -124,9 +137,10 @@ public class CodeController {
 	 * 내     용 : 공통코드를 선택 후에 상세코드를 등록한다. 
 	 * */
 	@RequestMapping(value="/codeDetailAdd", method={RequestMethod.GET, RequestMethod.POST})
-	public String codeDetailInsert(CodeVO codeVo)
+	public String codeDetailInsert(CodeVO codeVo, HttpSession session)
 	{
-		codeVo.setCreated_by("ADMIN");
+		String session_userId = (String)session.getAttribute("uesr_id");
+		codeVo.setCreated_by(session_userId);
 		
 		codeService.insertCodeDetail(codeVo);
 		

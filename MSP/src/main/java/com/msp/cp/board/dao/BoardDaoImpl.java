@@ -65,7 +65,6 @@ public class BoardDaoImpl implements BoardDao {
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("board.boardListCount", map);
-			System.out.println("6. DAoImpl totalCount : " + totalCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

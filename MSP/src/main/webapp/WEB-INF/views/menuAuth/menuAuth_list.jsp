@@ -24,7 +24,7 @@
 #menuAuthMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
 #menuAuthInsertMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
 
-.menuAuthWindow {display: none; position:absolute; width:50%; height:65%; left:30%; top:30%; z-index:10000;
+.menuAuthWindow {display: none; position:absolute; width:50%; height:52%; left:28%; top:30%; z-index:10000;
 				background-color: white; overflow: auto;}	
 .menuAuthInsertWindow {display: none; position:absolute; width:50%; height:65%; left:30%; top:15%; z-index:10000;
 				background-color: white; overflow: auto;}
@@ -178,6 +178,7 @@ function viewLoadingHide(){
 </head>
 <body>
 <%-- <%@include file="../include/header.jsp"%> --%>
+	<c:set var="SessionID" value="${sessionScope.user_id}" />
 
 	<!--Main_Div  -->
 	<div class="main_div">

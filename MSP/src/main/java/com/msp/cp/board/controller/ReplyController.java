@@ -23,15 +23,11 @@ public class ReplyController {
 	
 	@RequestMapping(value="/reply_add", method=RequestMethod.POST) 
 	public ResponseEntity<List<ReplyVO>> replyadd(@RequestBody ReplyVO vo){
-		System.out.println("hello add reply");
-		System.out.println("vovo" + vo);
 		int BOARD_NO = vo.getBOARD_NO();
 		ResponseEntity<List<ReplyVO>> entity = null;
 		    try {
  		      replyService.addReply(vo); 
 		      entity = new ResponseEntity<>(replyService.listReply(BOARD_NO), HttpStatus.OK);
-		      System.out.println("entity? "+ entity);
-		      System.out.println("insert entity" + entity);
 		    } catch (Exception e) {
 		      e.printStackTrace();
 		      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);
@@ -47,7 +43,6 @@ public class ReplyController {
 	    try {
 	    	
  	      entity = new ResponseEntity<>(replyService.listReply(BOARD_NO), HttpStatus.OK);
-	      System.out.println("entity" + entity.toString());
 
 	    } catch (Exception e) {
 	      e.printStackTrace();
@@ -62,14 +57,11 @@ public class ReplyController {
 		public ResponseEntity<String> reply_remove(@RequestBody String REPLY_NO){
 			
 		 System.out.println("hello delete reply");
-			System.out.println("vovo" + REPLY_NO);
 			 
 			ResponseEntity<String> entity = null;
 			    try {
 	 		      replyService.removeReply(REPLY_NO); 
 			      entity = new ResponseEntity<>("success", HttpStatus.OK);
-			      System.out.println("entity? "+ entity);
-			      System.out.println("insert entity" + entity);
 			    } catch (Exception e) {
 			      e.printStackTrace();
 			      entity = new ResponseEntity<>( HttpStatus.BAD_REQUEST);

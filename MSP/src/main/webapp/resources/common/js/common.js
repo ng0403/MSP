@@ -45,12 +45,12 @@ $(function(){
     }
     
     /*페이징 ajax()*/
-    function paging(data, divMessage, fMessage){
+    function paging(data, divMessage, fMessage){ 
     	$(divMessage).html("");
     	$(divMessage).empty();
 		$(data).each(function(){
 			var pageNum = this.pageNum;
-			var totalCount = this.page.totalCount;
+ 			var totalCount = this.page.totalCount;
 			var pageSize = this.page.pageSize;
 			var pageBlockSize = this.page.pageBlockSize;
 			var startRow = this.page.startRow;
@@ -102,7 +102,7 @@ $(function(){
 			+"<input type='text' style='width: 50px; padding: 3px; ' id='pageInput' class='repPageInput' value='"+pageNum+"'/>"
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
-		}
+		} 
 		$(divMessage).append(pageContent);
 
 	}

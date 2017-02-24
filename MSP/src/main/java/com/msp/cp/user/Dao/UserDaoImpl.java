@@ -24,12 +24,8 @@ public class UserDaoImpl implements UserDao {
 //	사용자관리 리스트 
 	@Override
 	public List<userVO> searchListUser(Map map) {
-		System.out.println("9. DaoImpl User List Search Dao Impl");
-		System.out.println("10. DaoImpl map. toString : " + map.toString());
-		System.out.println("11. DaoImpl endRow : " + map.get("endRow"));
-		System.out.println("12. DaoImpl pageSize : " + map.get("pageSize"));
 		List<userVO> obj = sqlSession.selectList("searchListUser", map);
-		System.out.println("13. DaoImpl User List Search Dao Impl" + obj);
+		System.out.println("After User List Search Dao Impl" + obj);
 		
 		return obj;
 
@@ -51,10 +47,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int insert(userVO vo) {
 		int result =0;
-		System.out.println("insert start DaoImpl");
-		System.out.println("insert start DaoImpl vo : " + vo.toString());
 		result = sqlSession.insert("user.userInsert", vo);
-		System.out.println("insert success DaoImpl : " + result);
+		System.out.println("After Insert success DaoImpl : " + result);
 		return result;
 		
 	}
@@ -64,7 +58,7 @@ public class UserDaoImpl implements UserDao {
 	public int userDel(String dc) {
 		int result=0;
 		result = sqlSession.update("user.userDel", dc);
-		System.out.println("user del dao impl enter : " + result);
+		System.out.println("After User del dao impl : " + result);
 		return result;
 		
 	}
@@ -72,9 +66,8 @@ public class UserDaoImpl implements UserDao {
 //	사용자 관리 상세정보	
 	@Override
 	public List<userVO> searchListUserOne(String user_id) {
-		System.out.println("After userDaoImpl : " + user_id);
 		List<userVO> vo= sqlSession.selectList("userDetail", user_id);
-		System.out.println("Before userDaoImpl : " + vo);
+		System.out.println("AFter 사용자관리 상세정보 DaoImpl : " + vo);
 		
 		return vo;
 	}
@@ -83,9 +76,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int userMdfy(userVO vo) {
 		int result=0;
-		System.out.println("After userMdfyDaoImpl : " + vo);
 		result = sqlSession.update("userEdit", vo);
-		System.out.println("Before userMdfyDaoImpl : " + result);
+		System.out.println("After User Detail Pop MdfyDaoImpl : " + result);
 		
 		return result;
 		
@@ -97,7 +89,7 @@ public class UserDaoImpl implements UserDao {
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("user.userListCount", map);
-			System.out.println("6. DAoImpl totalCount : " + totalCount);
+			System.out.println("After User Total Count DaoImpl totalCount : " + totalCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

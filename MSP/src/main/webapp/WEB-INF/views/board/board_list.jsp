@@ -255,8 +255,7 @@ $("#board_add_fbtn").on("click", function(){
 					$("#pageInput").val($("#boardPageNum").val());
 					$("#pageInput").focus();
 				} else {
-					alert("입성");
-					boardPaging(pageNum);
+ 					boardPaging(pageNum);
 				}
 			}
 			event.stopPropagation();

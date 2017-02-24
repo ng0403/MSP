@@ -85,6 +85,8 @@
         WHERE 
         	X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
 	 	]]>
+	 	ORDER BY
+	 		MENU_CD
 	 	
 	</select >
 	

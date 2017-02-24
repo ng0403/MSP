@@ -27,9 +27,7 @@ public class QnaBoardServiceImpl implements QnABoardService {
 	public PagerVO getQnaListCount(Map<String, Object> map) {
 		
 		int boardPageNum = (Integer)map.get("pageNum");
-		System.out.println("5. ServiceImpl Page userPageNum : " + boardPageNum);
 		int totalRowCount = qnaboardDao.QnaListCount("boardListCount", map);
-		System.out.println("7. ServiceImpl Page totalRowCount : " + totalRowCount);
 		
 		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 10, 999);
 		

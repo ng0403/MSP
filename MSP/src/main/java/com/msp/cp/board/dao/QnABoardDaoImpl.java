@@ -31,7 +31,6 @@ public class QnABoardDaoImpl implements QnABoardDao {
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("board.qnaListCount", map);
-			System.out.println("6. DAoImpl totalCount : " + totalCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,7 +70,6 @@ public class QnABoardDaoImpl implements QnABoardDao {
 
 	@Override
 	public List<BoardVO> QnAList(Map<String, Object> map) {
-		System.out.println("search " + map.toString());
 		return sqlSession.selectList("board.selectQnA", map);
 
 	}
@@ -89,7 +87,6 @@ public class QnABoardDaoImpl implements QnABoardDao {
 	@Override
 	public BoardVO CODE(String QUESTION_TYPE_CD) {
 		// TODO Auto-generated method stub
-		System.out.println("question_type_cd?SSS" + QUESTION_TYPE_CD);
 
 		return  sqlSession.selectOne("CODE", QUESTION_TYPE_CD);
 	}

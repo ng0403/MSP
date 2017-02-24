@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<script src="${ctx}/resources/common/js/common.js"></script>
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -24,16 +25,16 @@
 			부서검색
 		</div>
 		<div class="search_div">
-			<div class="search2_div">
+			<div class="search2_div" style="width: 100%;">
 					<label>부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key"> &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
 			</div>
 		</div>
 		<div class="list_div">
-			<div class="list2_div">
+			<div class="list2_div" style="width: 100%;">
 				<form id="delAll_form" name="delAll_form">
-					<table summary="dept_list_tb" style ="width: 100%;"><!-- class="table table-bordered" -->
+					<table summary="dept_list_tb" style ="width: 98%;"class="table table-bordered"><!--  -->
 						<colgroup>
 							<col width="30%">
 							<col width="30%">

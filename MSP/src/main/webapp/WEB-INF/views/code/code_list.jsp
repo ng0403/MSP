@@ -154,7 +154,7 @@ $(document).ready(function() {
 
 <!--Main_Div  -->
 <div class="main_div">
-
+	<c:set var="SessionID" value="${sessionScope.user_id}" />
 	<!-- Navigation Div -->
 	<div class="navi_div">■ 코드관리</div>
 

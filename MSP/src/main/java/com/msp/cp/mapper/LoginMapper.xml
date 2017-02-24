@@ -12,15 +12,15 @@
 	</select>
 	
 	 <!-- 사용자 비밀번호 오류 횟수 설정  -->
-	<!-- <update id="updatePwdErnmYn" parameterType="com.msp.cp.login.vo.LoginVO">
-		UPDATE
-		    tb_user
-		SET
-		    user_pwd_ernm_yn = #{pwd_ernm_yn}
-		WHERE
-		    user_id = #{user_id}
-	</update>
- -->	
+<!-- 	<update id="updatePwdErnmYn" parameterType="com.msp.cp.login.vo.LoginVO"> -->
+<!-- 		UPDATE -->
+<!-- 		    tb_user -->
+<!-- 		SET -->
+<!-- 		    user_pwd_ernm_yn = #{pwd_ernm_yn} -->
+<!-- 		WHERE -->
+<!-- 		    user_id = #{user_id} -->
+<!-- 	</update> -->
+ 	
 	<!-- <select id="loginMenu" resultType="ibs.mid.bon.manager.menu.vo.MenuVo">
 	    SELECT menu_id, menu_url FROM mid.tb_com_menu order by menu_id FETCH FIRST 1 ROWS ONLY
 	</select> -->

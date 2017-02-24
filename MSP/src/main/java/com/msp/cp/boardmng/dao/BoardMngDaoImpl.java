@@ -19,7 +19,6 @@ public class BoardMngDaoImpl implements BoardMngDao {
 	public int BoardMngListCount(String string, Map<String, Object> map) {
 		int totalCount = 0;
 		try {
-			System.out.println("6. DAoImpl totalCount : " + totalCount); 
 			totalCount = sqlSession.selectOne("boardmng.boardMngListCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();

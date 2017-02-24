@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.msp.cp.utils.PagerVO;
+import com.msp.cp.common.SessionAuth.SessionAuthService;
+import com.msp.cp.common.SessionAuth.SessionAuthVO;
 import com.msp.cp.menuAuth.service.MenuAuthService;
 import com.msp.cp.menuAuth.vo.MenuAuthVO;
 
@@ -28,6 +30,9 @@ public class MenuAuthController {
 	
 	@Autowired
 	MenuAuthService menuAuthService;
+	
+	@Autowired
+	SessionAuthService sessionAuthService;
 
 	/**
 	 * 업 무 명 : menuAuthInqr 메뉴권한조회 화면
@@ -42,20 +47,22 @@ public class MenuAuthController {
 			@RequestParam(value = "pageNum", defaultValue="1") int pageNum, 
 			@RequestParam(value = "currentPageNum", defaultValue="1") int currentPageNum, 
 			@RequestParam Map<String, Object> map, Model model, MenuAuthVO vo) throws Exception {
-		System.out.println(pageNum);
 		map.put("pageNum", pageNum);
 		
+		String sessionID = (String)session.getAttribute("user_id");
 		PagerVO page = menuAuthService.getMenuAuthListCount(map);
 		
+		map.put("sessionID", sessionID);
 		map.put("page", page);
+		
 		if(page.getEndRow() == 1){
 			page.setEndRow(0);
 		}
 		
-		System.out.println("page map :" + map.get("page"));
-		
 		List<Object> menuAuthInqrList = menuAuthService.searchMenuAuthList(map);
-		System.out.println(menuAuthInqrList.toString());
+		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
+		
+		System.out.println(session_auth_list);
 		
 		ModelAndView mov = new ModelAndView("/menuAuth/menuAuth_list");
 		
@@ -165,8 +172,9 @@ public class MenuAuthController {
 	 * 내     용 : 공통코드 등록한다. 
 	 * */
 	@RequestMapping(value="/menuAuthAdd", method={RequestMethod.GET, RequestMethod.POST})
-	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpServletRequest request)
+	public String menuAuthInsert(MenuAuthVO menuAuthVo, HttpSession session, HttpServletRequest request)
 	{
+		String session_uesrId = (String)session.getAttribute("user_id");
 		String auth_id    = request.getParameter("auth_id");
 		String menu_cd    = request.getParameter("menu_cd");
 		String active_flg = request.getParameter("active_flg3"); 
@@ -176,6 +184,8 @@ public class MenuAuthController {
 		String del_auth   = request.getParameter("del_auth3");
 		String menu_acc_auth = request.getParameter("menu_acc_auth3");
 		
+		System.out.println(session_uesrId);
+		
 		menuAuthVo.setAuth_id(auth_id);
 		menuAuthVo.setMenu_cd(menu_cd);
 		menuAuthVo.setActive_flg(active_flg);
@@ -184,7 +194,7 @@ public class MenuAuthController {
 		menuAuthVo.setMdfy_auth(mdfy_auth);
 		menuAuthVo.setDel_auth(del_auth);
 		menuAuthVo.setMenu_acc_auth(menu_acc_auth);
-		menuAuthVo.setCreated_by("ADMIN");
+		menuAuthVo.setCreated_by(session_uesrId);
 		
 		menuAuthService.insertMenuAuth(menuAuthVo);
 		

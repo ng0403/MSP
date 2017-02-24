@@ -20,9 +20,7 @@ public class BoardMngServiceImpl implements BoardMngService {
 	@Override
 	public PagerVO getBoardMngListCount(Map<String, Object> map) {
 		int boardPageNum = (Integer)map.get("pageNum");
-		System.out.println("5. ServiceImpl Page userPageNum : " + boardPageNum);
 		int totalRowCount = boardmngDao.BoardMngListCount("boardmngListCount", map);
-		System.out.println("7. ServiceImpl Page totalRowCount : " + totalRowCount);
 		
 		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 10, 999);
 		

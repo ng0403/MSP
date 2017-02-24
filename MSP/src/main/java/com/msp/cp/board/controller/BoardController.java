@@ -43,11 +43,9 @@ public class BoardController {
 	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ) throws Exception{
 		
 		System.out.println("board_list Insert ");
-		System.out.println("pagenum" + pageNum);
 		map.put("pageNum", pageNum);
 
 		PagerVO page=boardService.getBoardListCount(map); 
-		System.out.println("pagevo" + page.toString());
 		map.put("page", page);
 		
 		if(page.getEndRow() == 1){
@@ -60,19 +58,16 @@ public class BoardController {
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
 		 
-		System.out.println("board_list" + mov);
 		return mov; 
 	} 
 	
 	@RequestMapping(value="/board_detail", method= RequestMethod.GET)
 	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model) throws Exception {
-		System.out.println("hi detail" + BOARD_NO);
 		BoardVO vo = boardService.detail(BOARD_NO);
 		String FILE_CD = vo.getFILE_CD();
 		
 		boardService.viewadd(BOARD_NO);
 	
-		System.out.println("파일 CD"  + FILE_CD);
 		if(FILE_CD == null)
 		{
 		  
@@ -84,7 +79,6 @@ public class BoardController {
 			model.addAttribute("boardlist",  boardService.ReadFilePage(BOARD_NO));
 		}
 			
-  		System.out.println("board_detail" + model.toString()); 
 		 
 	}
 	
@@ -112,14 +106,12 @@ public class BoardController {
  	 		    String name = multipartFile.getOriginalFilename();
  	 		     
  	 		    StringTokenizer toke = new StringTokenizer(name, ".");
- 	 		    System.out.println("filename length" + name.toString());
  	 		    String[] filename = new String[2];
  	 		    
  	 		    for(int i= 0; toke.hasMoreElements() ; i++)
  	 		    {
   	 		     filename[i] = toke.nextToken();
   	 		   
-  	 		     System.out.println("ggg" +  filename[i] ); 
   	 		    }
  	 		   
  	 		    attach.setFILE_NM(filename[0]);
@@ -138,7 +130,6 @@ public class BoardController {
 			String uploadpath = fileManager.doFileUpload(file.get(i), request);
 		
 			attach.setFILE_PATH(uploadpath);
-			System.out.println("딩가딩가오" + attach.toString());
 			boardService.insertAttachData(attach);
 		
 		}
@@ -161,14 +152,11 @@ public class BoardController {
 		
 		BoardVO vo = boardService.detail(BOARD_NO);
 		String FILE_CD = vo.getFILE_CD();
-		System.out.println("fileCD" + FILE_CD);
 		
 		if(FILE_CD != null){
-			System.out.println("File_CD 있다");
 			model.addAttribute("boardVO", boardService.readFileModify(BOARD_NO));
 		}
 		else{
-			System.out.println("File_CD 없다");
 			model.addAttribute( "boardVO", boardService.read(BOARD_NO)); 
 		}
 	  
@@ -182,7 +170,6 @@ public class BoardController {
 		System.out.println("modify  Entering" + vo);
 		
 		boardService.modify(vo);
-		System.out.println("modify success" + vo.toString());
 		
 		return "redirect:/board/boardInqr";
 	}
@@ -191,7 +178,7 @@ public class BoardController {
 	 @ResponseBody
 	public ResponseEntity<String> board_remove(@RequestBody String del_code){ 
 		
-		System.out.println("remove insert" + del_code);
+		System.out.println("remove insert");
 
 		String[] delcode = del_code.split(",");
 		ResponseEntity<String> entity = null;
@@ -200,7 +187,6 @@ public class BoardController {
 		for(int i = 0; i < delcode.length; i++)
 		{
 			String dc = delcode[i];
-			System.out.println("delete..." + dc);
 			boardService.removeBoard(dc);
 			System.out.println("success"); 
 			
@@ -218,7 +204,7 @@ public class BoardController {
 	@RequestMapping(value="/detail_remove", method=RequestMethod.POST) 
 	public String detailRemove(int BOARD_NO){ 
 		
-		System.out.println("remove insert" + BOARD_NO);
+		System.out.println("remove insert");
 
 		 
 			boardService.removeDetail(BOARD_NO); 

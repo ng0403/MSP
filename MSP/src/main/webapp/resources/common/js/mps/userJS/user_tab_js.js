@@ -46,7 +46,6 @@ function ln_Close(e) {
 	 
 	    //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
 		  function passwordCheck(flg) {
-			  alert(flg);
 			if(flg == 1)
 				{
 					var userID = document.getElementById("user_id").value;
@@ -58,7 +57,6 @@ function ln_Close(e) {
 					var user_pwd_chk = document.getElementById("Duser_pwd_chk").value; 
 					
 				}
-			alert("user_pwd : "+user_pwd+" user_pwd_chk : " + user_pwd_chk);
 			// 재입력 일치 여부 
 			if (user_pwd != user_pwd_chk) { 
 				alert("입력한 두 개의 비밀번호가 서로 일치하지 않습니다.");
@@ -97,7 +95,6 @@ function ln_Close(e) {
 				alert("기존 비밀본호와 새 비밀번호가 일치합니다."); 
 				return false; 
 				} */ 
-				alert("합격");
 				return true;
 			} 
 		 
