@@ -10,7 +10,6 @@
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
 <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
-<script src="${ctx}/resources/common/js/common.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />   
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> 
@@ -35,9 +34,10 @@ $(document).ready(function() {
 	if(sessionID == 'admin'){
 		 alert("관리자 권한으로 접속하셨습니다.");
 	 }else{
-			alert("권한없음.", " ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
+		 alert("${SessionID}");
+			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
 // 			location.href = "/logout";
-			location.href = "/";
+// 			location.href = "/";
 	 }
 	
 	

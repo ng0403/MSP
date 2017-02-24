@@ -7,6 +7,7 @@ import com.msp.cp.login.vo.LoginVO;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class LoginServiceImpl implements LoginService {
 		// 로그인한 사용자 정보를 가져온다
 		LoginVO userInfo = null;
 		userInfo = getUserInfo(user_id);
+		System.out.println("userInfo : " + userInfo);
 		
 		if(userInfo != null){
 			// 비밀번호 오류횟수
@@ -39,13 +41,14 @@ public class LoginServiceImpl implements LoginService {
 				try{
 					// 정상일 경우
 					// 암호화된 비밀번호 취득
-					pswdno = userInfo.getUser_pwd();
-							/*Commons.getCryptoMD5String(user_pwd);*/
+					pswdno = user_pwd;/*Commons.getCryptoMD5String(user_pwd);*/
+					System.out.println("password Check : " + user_pwd);
+							/*userInfo.getUser_pwd();*/
 					System.out.println("login service Impl pswdno : " + pswdno);
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+				System.out.println("getUser_pwd : " + userInfo.getUser_pwd());
 				// 비밀번호가 일치하는 경우
 				if (userInfo.getUser_pwd().equals(pswdno)) {
 					
@@ -61,7 +64,7 @@ public class LoginServiceImpl implements LoginService {
 					result = "LOGIN_SUCCESS";
 				} else {
 					// 비밀번호가 일치하지 않는 경우, 비밀번호 오류 횟수를 1증가시킨다
-					setPwdErnmYn(userInfo.getUser_id(), pwdErnm + 1);
+//					setPwdErnmYn(userInfo.getUser_id(), pwdErnm + 1);
 					if (pwdErnm + 1 == 3) {
 						result = "LOGIN_DENINED";
 					} else {
