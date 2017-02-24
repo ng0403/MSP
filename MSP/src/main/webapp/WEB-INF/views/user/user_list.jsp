@@ -115,7 +115,7 @@ $(document).ready(function() {
 <!--Main_Div  -->
 <div class="main_div">
 	<!-- Navigation Div -->
-	<div class="navi_div" style="margin-bottom: 1%; margin-top: 1%;">■ 사용자관리</div>
+	<div class="navi_div" style="margin-bottom: 1%; margin-top: 1%;"> 사용자관리</div>
 	
 	<!-- Search1 Cover Div -->
 	<div class="">
