@@ -86,7 +86,7 @@
         	X.RNUM >= #{page.startRow} AND X.RNUM <= #{page.endRow}
 	 	]]>
 	 	ORDER BY
-	 		AUTH_ID, MENU_CD
+	 		MENU_CD
 	 	
 	</select >
 	
