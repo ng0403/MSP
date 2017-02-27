@@ -15,62 +15,10 @@
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/AuthCSS/authCSS.css" type="text/css" />  --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
 
-<style type="text/css">
-
-label {
-	float: left;
-	margin-top: 5px;
-	margin-left: 5px;
-}
-#active_key {
-	float: left;
-	margin-top: 2px;
-	margin-right: 15px;
-}
-  
-#keyword {
-	width: 200px;
-	height: 34px;
-	float: left;
-	margin-left: -10px;
-}
-
-#auth_inqr_fbtn {
-	width: 55px;
-	height: 34px;
-	margin-left: -10px;
-}
-
-#excelExportPopBtn {
-	margin-left: 5px;
-}
-
-th, td {
-	text-align: center;
-}
-#authNm {
-	text-align: left;
-	padding-left: 40px;
-}
-
-</style>
-<script type="text/javascript">
-
-	/* 접속된 세션 아이디 입니다. */
-	var sessionID = "${SessionID}"
-//	alert("${SessionID}");
-	if(sessionID == 'admin') {
-//		 alert("관리자 권한으로 접속하셨습니다.");		
-	} else {
-		alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
-		location.href = "/";
-	}
-
-
-</script>
 <title>Auth List</title>
 </head>
 <body>
