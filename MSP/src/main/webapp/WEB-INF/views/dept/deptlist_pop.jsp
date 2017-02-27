@@ -15,6 +15,7 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> --%>
 <script src="${ctx}/resources/common/js/mps/dept/deptlist_pop.js"></script>
 <title>부서 조회</title>
 
@@ -30,7 +31,7 @@
 			부서검색
 		</div>
 		<div class="search_div">
-			<div class="search2_div" style="width: 100%;">
+			<div class="search2_div" style="width: 100%; height: 34px;">
 					<label>부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key"> &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="search_btn" value="검색">
