@@ -96,8 +96,8 @@ th, td {
 			<input type="button" id="auth_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 			
 			<div class="excelBtn">
-				<input type="button" id="excelExportPopBtn"  class="btn btn-default btn-sm" onclick="download_list_Excel('authListExcelForm');"  value="엑셀출력" style="float: right;">
-		        <input type="button" id="ExcelImpoartPopBtn" class="btn btn-default btn-sm" onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
+				<input type="button" id="excelExportPopBtn"  class="btn btn-info btn-sm" onclick="download_list_Excel('authListExcelForm');"  value="엑셀출력" style="float: right;">
+		        <input type="button" id="ExcelImpoartPopBtn" class="btn btn-info btn-sm" onclick="excelImportOpen();" value="엑셀등록" style="float: right;"> 
 			</div>
 			
 			<!-- 페이징 전용 폼 -->
@@ -219,11 +219,11 @@ th, td {
 			</form>
 			
 			<div class="btn_div">
-				<input type="button" id="auth_menu" class="btn btn-info btn-sm" value="메뉴권한" style="display:none" onclick="location.href='${ctx}/menuAuth/menuAuthInqr'" >
-				<input type="button" id="auth_user" class="btn btn-info btn-sm" value="사용자권한" style="display:none" onclick="location.href='${ctx}/userAuth/view'" >
+				<input type="button" id="auth_menu" class="btn btn-default btn-sm" value="메뉴권한" style="display:none" onclick="location.href='${ctx}/menuAuth/menuAuthInqr'" >
+				<input type="button" id="auth_user" class="btn btn-default btn-sm" value="사용자권한" style="display:none" onclick="location.href='${ctx}/userAuth/view'" >
 				
 				<div class="right">
-					<input type="button" id="auth_reset_nfbtn" class="btn btn-primary btn-sm" value="초기화" style="display:none"  />
+					<input type="button" id="auth_reset_nfbtn" class="btn btn-default btn-sm" value="초기화" style="display:none"  />
 					<input type="button" id="auth_edit_nfbtn"  class="btn btn-primary btn-sm" value="편집" style="display:none" />
 	  				<input type="button" id="auth_save_fbtn"   class="btn btn-primary btn-sm" value="저장" style="display:none" />
 				</div>
