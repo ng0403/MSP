@@ -47,51 +47,51 @@
 
 <div class="container"> <!-- 전체 div-->
 
-<div> <!-- 제목 div-->
-<label id="txt" >제  목</label>
+	<div> <!-- 제목 div-->
+		<label id="txt" >제  목</label>
+		<input type="text" class="inputTxt" name= "TITLE" id="TITLE" value= "${boardlist.TITLE}"  readonly="readonly" />
+	</div> 
 
- <input type="text" class="inputTxt" name= "TITLE" id="TITLE" value= "${boardlist.TITLE}"  readonly="readonly" />
-</div> 
+<!-- 	<div id="created"> -->
+<%-- 		<label for="created_by">${boardlist.CREATED_BY}</label>  --%>
+<%-- 		<%-- <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label>  --%> 
+<%-- 		<label for="created"> ${boardlist.CREATED} </label> --%>
+<%-- 		<label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label> --%>
+<%-- 		<label> <a href="/board/file_down?FILE_CD=${boardlist.FILE_CD}">${boardlist.FILE_NM}</a></label>	 --%>
+<!-- 		<br /> -->
+<!-- 	</div>  -->
 
-<div>
-<label for="created_by">${boardlist.CREATED_BY}</label> 
-<%-- <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label>  --%>
-<label for="created"> ${boardlist.CREATED} </label>
-<label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label>
-<label> <a href="/board/file_down?FILE_CD=${boardlist.FILE_CD}">${boardlist.FILE_NM}</a></label>
-</div> 
- 
+	<div id="detail_con"> <!-- 내용 div -->
+		 <label id="txt" >내  용</label>  
+		 <textarea  rows="10" id="boardcontent"  readonly="readonly" >${boardlist.CONTENT}</textarea>
+	</div> 
 
-<div> <!-- 내용 div -->
- <label id="txt" >내  용</label>  
- <textarea  rows="10" id="boardcontent"  readonly="readonly" >${boardlist.CONTENT}</textarea>
-</div> 
-
- 
-<div id="btns"> <!-- 버튼 div  -->
-<input type="button" id="board_modify_fbtn" class = "btn btn-primary btn-sm" value="편집"/> <input type="button" id="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"/>  <input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
-</div>
+	<div id="detail_btns"> <!-- 버튼 div  -->
+		<input type="button" id="board_modify_fbtn" class = "btn btn-primary btn-sm" value="편집"/> 
+		<input type="button" id="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"/>  
+		<input type="button" class="btn btn-primary btn-sm" id="board_list_fbtn" value="목록"/>
+	</div>
 
 
- <!-- 댓글div -->
-<div id="reply_div" class="timeline-body" style ="height:100px; margin-top:10px "> 
- <div class="col-sm-10" style=" height:40px">
- <textarea id = "reply_content" class="form-control" rows="2" id="content" ></textarea>
- </div>
+	<!-- 댓글div -->
+	<div id="reply_div" class="timeline-body" style ="height:100px; margin-top:10px "> 
+	
+		<div class="col-sm-10" style=" height:40px">
+			<textarea id = "reply_content" class="form-control" rows="2" id="content" ></textarea>
+		</div>
  
-  <!-- 댓글 등록 버튼 -->
- <div class="reply_div col-md-2 " >
- <input type="button" id="reply_add_fbtn" class = "btn btn-primary btn-sm " value="저장"/>
- </div>
-</div>
+		<!-- 댓글 등록 버튼 -->
+		<div id="detail_btn_div" class="reply_div col-md-2 " >
+			<input type="button" id="reply_add_fbtn" class = "btn btn-primary btn-sm " value="저장"/>
+		</div>
+	
+	</div>
  
- 
- <div class="col-md-12" id="reply_list" style="margin-top:10px">
- 
- <table id = "reply_table" class="table">
- 
- </table> 
- </div> 
+	<div class="col-md-12" id="reply_list" style="margin-top:10px">
+		<table id = "reply_table" class="table">
+		 
+		</table> 
+	</div> 
 
 </div>	
  

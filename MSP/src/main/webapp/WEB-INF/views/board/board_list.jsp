@@ -38,7 +38,7 @@
 				<label >제  목</label>
 				<input type="text" id="keyword" name="keyword" class="inputTxt" > &nbsp; 
 	
-			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
+			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 		 </form>  
 		</div>
 	</div>
@@ -55,23 +55,21 @@
 								<th>제목</th>
 								<th>작성자</th>
 								<th>작성일</th>
-								<th>조회수</th>
-								
+								<th>조회수</th> 
 							</tr>
 							
 						 </thead>  
 				 					 
 						<tbody class="board_list">
-							<c:forEach items="${boardlist}" var="boardVO"> 
-					
+							<c:forEach items="${boardlist}" var="boardVO">  
 								<tr class="open_list">
-									<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
-			 						<td>${boardVO.BOARD_NO}</td>
+									<td scope="row" style='width:10%;'><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
+			 						<td style='width:10%;'>${boardVO.BOARD_NO}</td>
 									<%-- <td><a href="/board/boardDetail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td> --%>
-									<td><a href="#" onclick="boardDetail('${boardVO.BOARD_NO}');" id="${boardVO.BOARD_NO}">${boardVO.TITLE}</td>
-									<td>${boardVO.CREATED_BY} </td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREATED}" /></td>
-									<td>${boardVO.VIEW_CNT}</td> 	
+									<td style='width:40%;'><a href="#" onclick="boardDetail('${boardVO.BOARD_NO}');" id="${boardVO.BOARD_NO}">${boardVO.TITLE}</td>
+									<td style='width:10%;'>${boardVO.CREATED_BY} </td>
+									<td style='width:20%;'><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREATED}" /></td>
+									<td style='width:10%;'>${boardVO.VIEW_CNT}</td> 	
 								</tr> 
 							</c:forEach>
 						</tbody>
@@ -144,8 +142,7 @@ $(document).ready(function() {
 
 	
  	function boardDetail(a){
-	alert(a);
-	var no = a;
+ 	var no = a;
  		location.href="/board/boardDetail?BOARD_NO=" + no;
  	} 
  	
@@ -259,10 +256,7 @@ $(document).ready(function() {
 			pageInputRep(event, menuListInqr);
 		}
 	})
-	
-	
-	
-	
+	 
 	 
 	/*리스트 출력및 페이징 처리 함수*/
 	function boardListInqr(pageNum){ 
@@ -292,22 +286,22 @@ $(document).ready(function() {
 		 
 		var board_Tr = $("<tr>");
  
-		var del_code_td = $("<td>");
-		del_code_td.html("<input type='checkbox' class='del_point' name='del_code' value='" + BOARD_NO + "'>");
+		var del_code_td = $("<td style='width:10%;'>");
+		del_code_td.html("<input type='checkbox' class='del_point'  name='del_code' value='" + BOARD_NO + "'>");
 		
-		var board_no_td = $("<td>");
+		var board_no_td = $("<td style='width:10%;' >");
  		board_no_td.html(BOARD_NO); 
  		
-		var title_td = $("<td>");
+		var title_td = $("<td style='width:40%;'>");
 		title_td.html("<a href=\"/board/boardDetail?BOARD_NO=" + BOARD_NO + "\">" + TITLE + "\</a>");
 		
-		var created_by_td =$("<td>");
+		var created_by_td =$("<td style='width:10%;'>");
 		created_by_td.html(CREATED_BY);
 		
-		var created_td =$("<td>");
+		var created_td =$("<td style='width:20%;'>");
 		created_td.html(CREATED);
 		
-		var view_cnt_td =$("<td>");
+		var view_cnt_td =$("<td style='width:10%;'>");
 		view_cnt_td.html(VIEW_CNT);
 		
 		board_Tr.append(del_code_td).append(board_no_td).append(title_td).append(created_by_td).append(created_td).append(view_cnt_td);

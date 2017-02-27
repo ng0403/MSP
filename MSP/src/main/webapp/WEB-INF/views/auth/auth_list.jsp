@@ -33,6 +33,7 @@ label {
 
 #keyword {
 	width: 200px;
+	height: 34px;
 	float: left;
 	margin-left: -10px;
 }
@@ -83,7 +84,7 @@ th, td {
 		
 	<!-- Search Cover Div -->
 	<div class="search_div">
-		<div class="search2_div">y
+		<div class="search2_div">
 <!-- 			<label>활성상태</label> -->
 <!-- 			<select id="active_key" name="active_key" class="selectField"> -->
 <!-- 				<option value="" selected="selected">전체</option> -->
@@ -91,7 +92,7 @@ th, td {
 <!-- 				<option value="N">비활성화</option> -->
 <!-- 			</select> -->
 			<label>권한명</label>&nbsp;
-			<input type="text" id="keyword" name="keyword" class="form-control" > &nbsp;&nbsp;
+			<input type="text" id="keyword" name="keyword" class="inputTxt" > &nbsp;&nbsp;
 			<input type="button" id="auth_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 			
 			<div class="excelBtn">

@@ -45,7 +45,7 @@
 
 	<div id="btns"> <!-- 버튼 div  -->
 		 <input type="button" id ="board_add_fbtn" class = "btn btn-primary btn-sm" value="저장"/>
-		 <input type="button" id="board_list_fbtn" class="btn btn-primary btn-sm" value="취소"/> 
+		 <input type="button" id="board_list_fbtn" class="btn btn-default btn-sm" value="취소"/> 
 	</div>
 
 </div> 
