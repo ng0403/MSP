@@ -10,10 +10,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" /> 
  <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />--%> 
  <!-- 합쳐지고 최소화된 최신 CSS -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
@@ -21,11 +21,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 합쳐지고 최소화된 최신 자바스크립트
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> --> 
+
 <title>Insert title here</title>
 </head>
 <body>
  
-
  
 <form role="form" name = "form_modify" method="post">
  <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"/> 
@@ -37,12 +37,9 @@
  <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"/> 
 </form>
 
-
  <div class="navi_div">
 		Q&A > 리스트 > 게시글
-</div>
-
- 
+</div> 
 
 <div class="container"> <!-- 전체 div-->
 
@@ -174,7 +171,7 @@ $(document).ready(function(){
 	 var liststr1 ="";
 	 var liststr2 = ""; 
      var formObj = $("form[role='form']");
-	 console.log(formObj);
+	 
 	
 	 ajax_list(); 
 	 
@@ -270,10 +267,7 @@ $(document).ready(function(){
 			})  
  }
  
- 
- 
-
- 
+  
  $("#reply_add_fbtn").on("click", function() {
   
 	 var REPLY_CONTENT_OBJ = $("#reply_content");
