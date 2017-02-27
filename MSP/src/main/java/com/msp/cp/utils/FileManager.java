@@ -27,15 +27,11 @@ public class FileManager {
 	
 	public boolean doFileDownload(String file_name, String pathname, HttpServletResponse response) {
 		String filePath = "downloads\\";
-		System.out.println("filepath?" + filePath);
-		String fullpathname = pathname +filePath+ file_name;
-		System.out.println("fullpathname?" +  fullpathname);
-		String viewfilename = file_name.substring(10, file_name.length());
-		System.out.println("viewfilename?" + viewfilename);
-	    try {
+ 		String fullpathname = pathname +filePath+ file_name;
+ 		String viewfilename = file_name.substring(10, file_name.length());
+ 	    try {
 	        File file = new File(fullpathname);
-	        System.out.println("file??" + file.toString());
-	        if (file.exists()){
+ 	        if (file.exists()){
 	            byte readByte[] = new byte[4096];
 
 	            response.setContentType("application/octet-stream");
@@ -44,7 +40,9 @@ public class FileManager {
 						"attachment; filename=" + UriUtils.encodeFragment(viewfilename, "UTF-8"));
 
 	            BufferedInputStream  fin  = new BufferedInputStream(new FileInputStream(file));
+	            System.out.println("ggg" + fin.toString());
 	            OutputStream outs = response.getOutputStream();
+	            System.out.println("outs" + outs.toString());
 	            
 	   			int read;
 	    		while ((read = fin.read(readByte, 0, 4096)) != -1)
@@ -63,8 +61,7 @@ public class FileManager {
 	}
 	
 	public String doFileUpload(MultipartFile file, HttpServletRequest request){
-		System.out.println("Hello? Entering");
- 		
+  		
 		String filePath = "downloads\\";
 		String folderPath = "";
 		String random = "";
