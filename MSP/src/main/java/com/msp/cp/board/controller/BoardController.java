@@ -79,8 +79,8 @@ public class BoardController {
 	} 
 	
 	@RequestMapping(value="/boardDetail", method= RequestMethod.GET)
-	public void boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, Model model, HttpSession session) throws Exception {
-		
+	public ModelAndView boardDetail(@RequestParam("BOARD_NO") int BOARD_NO, HttpSession session) throws Exception {
+		System.out.println("detail entering");
 //		접속된 사용자 아이디 
 		String sessionID = (String) session.getAttribute("user_id");
 		System.out.println("접속된 계정 : " + sessionID);
@@ -95,18 +95,23 @@ public class BoardController {
 		String FILE_CD = vo.getFILE_CD(); 
 		
 		boardService.viewadd(BOARD_NO);
+		ModelAndView mov = new ModelAndView();
+
 	
 		if(FILE_CD == null)
 		{
 		  
-			model.addAttribute("boardlist", boardService.detail(BOARD_NO));
+			mov.addObject("boardlist", boardService.detail(BOARD_NO));
 		}
 		else
 		{ 
 			 
-			model.addAttribute("boardlist",  boardService.ReadFilePage(BOARD_NO));
+			mov.addObject("boardlist",  boardService.ReadFilePage(BOARD_NO));
 		}
+		 
 			
+		
+		return mov;
 		 
 	}
 	

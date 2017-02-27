@@ -34,7 +34,7 @@ public class FileManager {
 		System.out.println("viewfilename?" + viewfilename);
 	    try {
 	        File file = new File(fullpathname);
-
+	        System.out.println("file??" + file.toString());
 	        if (file.exists()){
 	            byte readByte[] = new byte[4096];
 

@@ -192,10 +192,15 @@ $(document).ready(function() {
 							<input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50">
 						</td>
 					   	 <td>
-					    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_codeSearch(1)" value="검색">
+					    	<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색">
+					    </td>
+					    <td>
+					    	<input type="button" value="엑셀출력" id="excel" class="btn btn-info btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right; margin-left:210px;">
 					    </td>
 					</tr>
 				</table>
+				
+					
 			<!-- Paging Form -->
 			<form id="codelistPagingForm" method="post" action="codeInqr"></form>
 			<!-- Excel -->
@@ -274,10 +279,6 @@ $(document).ready(function() {
 							</c:otherwise>
 						</c:choose>
 					</div>
-					
-					<div class="right">
-						<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right;">
-					</div>
 				</div>
 			</div>
 
@@ -318,7 +319,7 @@ $(document).ready(function() {
 				<div class="btn02">
 					<div class="left">
 						<input type="button" id="codeMaster_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
-						<input type="button" id="codeMaster_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
+						<input type="button" id="codeMaster_reset_btn" class="btn btn-default btn-sm" value="취소" style="display: none" />
 					</div>
 				</div>
 				
@@ -375,7 +376,7 @@ $(document).ready(function() {
 					<div class="left">
 						<input type="button" id="codeDetail_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
 						<input type="button" id="codeDetail_mdfy_btn" class="btn btn-primary btn-sm" value="수정" style="display: none" /> 
-						<input type="button" id="codeDetail_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
+						<input type="button" id="codeDetail_reset_btn" class="btn btn-default btn-sm" value="취소" style="display: none" />
 					</div>
 				</div>
 			</div>
