@@ -25,7 +25,6 @@ var sessionID = "${SessionID}"
 
 if(sessionID == 'admin')
 {
-	
 }
 else
 {
