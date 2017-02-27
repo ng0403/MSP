@@ -22,8 +22,6 @@
 <title>Auth List</title>
 </head>
 <body>
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<%-- <%@include file="../include/header.jsp" %> --%>
 <!--Main_Div  -->
 <div class="main_div">
 
@@ -182,6 +180,5 @@
 		</div>
 	</div>
 </div>
-<%-- <%@include file="../include/footer.jsp"%> --%>
 </body>
 </html>
