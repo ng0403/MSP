@@ -71,7 +71,8 @@ vertical-align:middle;
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
 	<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 	<%-- <script type="text/javascript" src="${ctx}/resources/common/js/jquery-ui.js"></script> --%>
-	<script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script>
+	<%-- <script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script> --%>
+	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
 	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/jquery-ui.css"	type="text/css" /> --%>
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
