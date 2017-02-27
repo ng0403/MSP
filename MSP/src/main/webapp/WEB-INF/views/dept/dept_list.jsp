@@ -18,8 +18,9 @@
 <!-- <!-- 합쳐지고 최소화된 최신 자바스크립트 --> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 <%-- <script src="${ctx}/resources/common/js/mps/dept/dept_list.js"></script> --%>
+<%-- <script src="${ctx}/resources/common/css/mps/dept/dept_list.css"></script> --%>
 <title>부서관리화면</title>
-<style type="text/css">
+<!-- <style type="text/css">
 
 #label {
 	float: left;
@@ -52,7 +53,7 @@
 	width: 10px;
 
 }
-</style>
+</style> -->
 <script type="text/javascript">
 
 	

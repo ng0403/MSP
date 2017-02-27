@@ -1,0 +1,32 @@
+
+#label {
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#dept_nm_key {
+	width: 200px;
+/* 	height: 35px; */
+	float: left;
+	margin-left: -10px;
+}
+
+#dept_inqr_fbtn {
+	width: 55px;
+	height: 34px;
+	margin-left: 5px;
+}
+
+#dept_num1, #dept_fnum1 {
+	width: 70px;
+}
+
+#dept_num2, #dept_num3, #dept_fnum2, #dept_fnum3{
+	width: 100px;
+}
+
+#hyphen {
+	width: 10px;
+
+}
