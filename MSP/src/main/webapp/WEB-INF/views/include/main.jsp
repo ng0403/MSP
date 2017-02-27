@@ -22,15 +22,15 @@
 	
 
 <!-- 	/* 사용자 */ -->
-	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
-	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />
+<%-- 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" />  --%>
+<%-- 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" /> --%>
 	
 <!-- 	권한 -->
-	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/AuthCSS/authCSS.css" type="text/css" />
+<%-- 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/AuthCSS/authCSS.css" type="text/css" /> --%>
 <!-- 	게시판 -->
-	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
+<%-- 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" /> --%>
 <!-- 	공통코드 -->
-	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" />
+<%-- 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" /> --%>
 	
 	<!-- <title>Main DashBoard</title> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />

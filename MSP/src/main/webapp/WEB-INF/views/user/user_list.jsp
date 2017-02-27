@@ -12,8 +12,8 @@
 <%-- <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script> --%>
 <%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
 <%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" />  --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />    --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />   
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />  --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />  --%>
 <!-- 합쳐지고 최소화된 최신 CSS -->
