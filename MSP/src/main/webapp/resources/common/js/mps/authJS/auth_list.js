@@ -76,7 +76,7 @@ $("#auth_save_fbtn").click(function(){
 		pageReady(true);
 	}
 })
-
+  
 /* 체크박스 전체선택, 전체해제 */
 $("#checkall").on("click", function(){
       if( $("#checkall").is(':checked') ){

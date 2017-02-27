@@ -173,7 +173,7 @@
 					<input type="button" id="auth_edit_nfbtn"  class="btn btn-primary btn-sm" value="편집" style="display:none" />
 	  				<input type="button" id="auth_save_fbtn"   class="btn btn-primary btn-sm" value="저장" style="display:none" />
 				</div>
-			</div>
+			</div> 41
 			  
 			
 			
