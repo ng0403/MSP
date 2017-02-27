@@ -4,15 +4,14 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<%-- <%@include file="header.jsp"%> --%>
 <!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <style type="text/css">
 #main_header1{
-background-color:#53C5BA;
-color:white;
+background-color:#B4E0EC;
+color:#2A5965;
 width:100%;
 height:6%;
 margin:auto;
@@ -34,7 +33,7 @@ clear:both;
 #main_left{
 background-color:#222D32;
 width:15%;
-height:100%;
+height:94%;
 margin:auto;
 float:left;
 }
@@ -42,7 +41,7 @@ float:left;
 #main_center1{
 background-color:#ECF0F5;
 width:85%;
-height:95%;
+height:89%;
 margin:auto;
 float:left;
 }
@@ -227,19 +226,20 @@ vertical-align:middle;
 </head>
 
 <body>
-    <div id="main_header1" style="background-color:#53C5BA;">
-        <div id="table_cell">&nbsp;&nbsp;&nbsp;&nbsp;
+    <div id="main_header1">
+        <tiles:insertAttribute name="main_header1" />
+        <%-- <div id="table_cell">&nbsp;&nbsp;&nbsp;&nbsp;
         <span style="font-size:21.5px;"><b>Shopping Mall</b> Management</span>
         <span style="float:right;margin-right:1%;">님 환영합니다.</span>
         <a href="#" style="float:right;margin-right:3px;">
              <span style="color:yellow;">${user_nm}</span>
         </a>
-        </div>
+        </div> --%>
     </div>
- <div id="main">
- <div id="main_left">
- 
- <aside class="main-sidebar"  style="width:15%;">
+    
+    <div id="main_left">
+     <tiles:insertAttribute name="main_left" />
+ <%-- <aside class="main-sidebar"  style="width:15%;">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
@@ -328,12 +328,16 @@ vertical-align:middle;
           </ul>
         </section>
         <!-- /.sidebar -->
-      </aside>
+      </aside> --%>
  
  </div>
+    
+ <!-- <div id="main"> -->
  
  <div id="main_center1">
      <tiles:insertAttribute name="main_center1" />
+     <%-- <tiles:insertAttribute name="main_board1" /> --%>
+     
      <%-- <div id="m1" value="m1" style="display:block">
          <jsp:include page="../user/user_list.jsp"/>
      </div>
@@ -359,15 +363,16 @@ vertical-align:middle;
  </div>
  
  <div id="main_footer1">
-     <div id="table_cell3">
+     <tiles:insertAttribute name="main_footer1" />
+     <!-- <div id="table_cell3">
      <div style="float:right;margin-right:2%;">
           <b>Version</b> 2.0
      </div>
      &nbsp;&nbsp;&nbsp;<strong >Copyright &copy; 2017 
      <a href="http://www.coreplus.co.kr">coreplusMPS</a>.</strong> All rights reserved.
-     </div>
+     </div> -->
  </div>
- </div>
+ <!-- </div> -->
 
 <script type="text/javascript">
 

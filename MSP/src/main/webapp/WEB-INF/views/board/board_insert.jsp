@@ -11,16 +11,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ 
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>  
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>   --%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
-
 <div class="navi_div">
 		게시판 > 리스트 > 추가
 </div>

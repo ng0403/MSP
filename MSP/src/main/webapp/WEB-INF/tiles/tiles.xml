@@ -30,13 +30,13 @@
 	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/>
 	</definition>
 	<!-- 게시판등록 -->
-	<definition name="/board/boardInsert" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/>
-	 <put-attribute name="main_board1" value="/WEB-INF/views/board/boardInsert.jsp"/>
+	<definition name="/board/board_insert" extends="layout_content">
+	 <!-- <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/> -->
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_insert.jsp"/>
 	</definition>
 	<!-- 게시판상세 -->
-	<definition name="/board/boardDetail" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/board/boardDetail.jsp"/>
+	<definition name="/board/board_detail" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_detail.jsp"/>
 	</definition>
 	<!-- 공통코드 -->
 	<definition name="/code/code_list" extends="layout_content">
