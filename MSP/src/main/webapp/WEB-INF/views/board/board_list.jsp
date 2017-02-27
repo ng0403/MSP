@@ -82,7 +82,9 @@
 	<div class="paging_div">
 	
 	 	<div class="left">
-		     <input type="button" id = "board_add_fbtn" class = "btn btn-primary btn-sm" value="추가"/> <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
+		     <!-- <input type="button" id = "board_add_fbtn"  class = "btn btn-primary btn-sm" value="추가"/>  -->
+		  <a href ="/board/boardInsert">추가</a>
+		    <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
 		</div> 
 		
 		<div class="page" id="paging_div">	
@@ -148,11 +150,12 @@ $(document).ready(function() {
 
 
  
-$("#board_add_fbtn").on("click", function(){
+/*   $("#board_add_fbtn").on("click", function(){
 	location.href="/board/boardInsert";
 	
-})
-  
+}) */
+ 
+   
 
 /* 삭제(체크박스된 것 전부) */
 	function deleteAction() {
