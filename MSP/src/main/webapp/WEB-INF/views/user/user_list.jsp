@@ -125,7 +125,7 @@ $(document).ready(function() {
 		<!-- Search1 Div  -->
 		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
 <%-- 				<input type="hidden" id="sessionID" name="sessionID" value="${SessionID}">  --%>
-				<select id="active_key" name="active_key" class="selectField" >
+				<select id="active_key" name="active_key" class="selectField" style="padding: 0px 0px 5px 0px;">
 					<option value="" selected="selected">-검색조건-</option>
 					<option value="user_id_sch">사용자ID</option>
 					<option value="user_nm_sch">사용자명</option>
