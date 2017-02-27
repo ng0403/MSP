@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <c:set var="ctx" value="${pageContext.request.contextPath }" /> --%>
-<%-- <c:set var="SessionID" value="${sessionScope.user_id}" /> --%>
+<c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
 <%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
 <%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
