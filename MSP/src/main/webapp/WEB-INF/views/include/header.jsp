@@ -3,6 +3,11 @@
    
 <!DOCTYPE html>
 <html>
+<head>
+<meta content="blendTrans(Duration=0.0)" http-equiv="Page-Enter" />
+<meta content="blendTrans(Duration=0.0)" http-equiv="Page-Exit" />
+</head>
+
   
     <body>
       
