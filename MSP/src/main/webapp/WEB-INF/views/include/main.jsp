@@ -16,7 +16,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
 <!-- 	/* CSS */ -->
-
+    <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
 <!-- common -->
     <!-- <title>Main DashBoard</title> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />
@@ -31,8 +32,7 @@
          folder instead of downloading all of them to reduce the load. -->
 	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" /> --%>
-	<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
+	
 
 <!-- 	/* 사용자 */ -->
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
@@ -44,23 +44,26 @@
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 <!-- 	공통코드 -->
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" />
-
+	
 <!-- JS	 -->
 <!-- 공통JS -->
 	<script type="text/javascript" src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 	<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
+	
 <!-- 	메뉴권한  -->
 	<script src="${ctx}/resources/common/js/mps/menuAuthJS/menuAuth_list.js"></script>
 	<!-- 	사용자  -->
 	<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 	<script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
+	<script src="${ctx}/resources/common/js/mps/dept/deptlist_pop.js"></script>
 	<!-- 	권한  -->
 	<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script>
 	<!-- 	부서  -->
 	<script src="${ctx}/resources/common/js/mps/dept/dept_list.js"></script>
+	
+	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
 
 	<title>Main</title>
 	<script type="text/javascript">
