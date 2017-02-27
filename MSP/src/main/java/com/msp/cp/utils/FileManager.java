@@ -27,10 +27,11 @@ public class FileManager {
 	
 	public boolean doFileDownload(String file_name, String pathname, HttpServletResponse response) {
 		String filePath = "downloads\\";
+		System.out.println("filepath?" + filePath);
 		String fullpathname = pathname +filePath+ file_name;
-		
+		System.out.println("fullpathname?" +  fullpathname);
 		String viewfilename = file_name.substring(10, file_name.length());
-		
+		System.out.println("viewfilename?" + viewfilename);
 	    try {
 	        File file = new File(fullpathname);
 

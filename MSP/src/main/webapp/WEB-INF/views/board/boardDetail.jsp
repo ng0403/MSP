@@ -54,7 +54,7 @@
 <%-- <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label>  --%>
 <label for="created"> ${boardlist.CREATED} </label>
 <label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label>
-<label> <a href="/board/file_down?FILE_CD= ${boardlist.FILE_CD}">${boardlist.FILE_NM}</a></label>
+<label> <a href="/board/file_down?FILE_CD=${boardlist.FILE_CD}">${boardlist.FILE_NM}</a></label>
 </div> 
  
 

@@ -111,8 +111,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
-	public void board_add() {
+	public ModelAndView board_add() {
+		  System.out.println("Entering");
 		  
+		  ModelAndView mov = new ModelAndView("/board/board_insert");
+		  
+		  
+		  return mov; 
 	}
 	
 	
@@ -318,14 +323,14 @@ public class BoardController {
 	@RequestMapping(value = "/file_down", method = RequestMethod.GET)
 	public void downloadFile( @RequestParam(value = "FILE_CD") String FILE_CD, HttpServletResponse response, HttpServletRequest request) {
 		
-		System.out.println("Hello down " + FILE_CD);
+		System.out.println("Hello down" + FILE_CD);
 		
 		Map<?, ?> map = (Map<?, ?>) boardService.searchOneFiledata(FILE_CD); 
     		System.out.println("map??" +map);
 		
 		if (map != null) {
 
-			String fileroot = map.get("FILE_ROOT").toString();
+			String fileroot = map.get("FILE_PATH").toString();
 			String[] temp = fileroot.split("\\\\");
 			String fileName = temp[temp.length - 1];
 			String root = "x`x`";
