@@ -1,72 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<c:set var="ctx" value="${pageContext.request.contextPath }" />
+<c:set var="SessionID" value="${sessionScope.user_id}" />
 
 <!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <style type="text/css">
-#main_header1{
-background-color:#B4E0EC;
-color:#2A5965;
-width:100%;
-height:6%;
-margin:auto;
-clear:both;
-display:table;
-}
-#table_cell{
-display:table-cell;
-vertical-align:middle;
-}
-#main{
-background-color:#ECF0F5;
-width:100%;
-height:94%;
-margin:auto;
-clear:both;
-}
-
-#main_left{
-background-color:#222D32;
-width:15%;
-height:94%;
-margin:auto;
-float:left;
-}
-
-#main_center1{
-background-color:#ECF0F5;
-width:85%;
-height:89%;
-margin:auto;
-float:left;
-}
-
-#main_footer1{
-background-color:white;
-width:85%;
-height:5%;
-/* margin:auto; */
-float:left;
-display:table;
-}
-#table_cell3{
-display:table-cell;
-vertical-align:middle;
-}
     
 </style>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-	<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
+   
 <!-- 	/* CSS */ -->
 
 <!-- common -->
@@ -82,7 +30,8 @@ vertical-align:middle;
 	<!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
 	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" />
+	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" /> --%>
+	<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
 
 <!-- 	/* 사용자 */ -->
@@ -97,7 +46,12 @@ vertical-align:middle;
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" />
 
 <!-- JS	 -->
-	
+<!-- 공통JS -->
+	<script type="text/javascript" src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
 <!-- 	메뉴권한  -->
 	<script src="${ctx}/resources/common/js/mps/menuAuthJS/menuAuth_list.js"></script>
 	<!-- 	사용자  -->
@@ -110,7 +64,7 @@ vertical-align:middle;
 
 	<title>Main</title>
 	<script type="text/javascript">
-	
+	var sessionID = "${SessionID}";
 
 </script>
 

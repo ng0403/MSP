@@ -1,6 +1,5 @@
-
 /* 접속된 세션 아이디 입니다. */
-var sessionID = "${SessionID}"
+//var sessionID = "${SessionID}"
 	
 //	alert("${SessionID}");
 if(sessionID == 'admin') {
