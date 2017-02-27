@@ -121,26 +121,32 @@ label {
 	
 	margin-top: 70px; 
 	width: 90%;
-	height: 500px;;
+	height: 500px;
 	
+}
+
+.reply_div{
+	float : right; 
 }
 
 #txt {
 	margin-right: 10px;
 }
 
-#TITLE, #CONTENT {
+#TITLE, #boardcontent {
 	
-	width: 95%;
-	margin-left: 20px;
+	width: 99.5%;
+/* 	margin-left: 20px; */
 }
 
- #CONTENT {
- 	
- 
+ #boardcontent { 
  	margin-top: 6px; 
- 	width: 95%;
- 	height: 400px;;
+ 	width: 99.5%;
+ 	height: 300px;;
+ }
+ 
+ #reply_content{
+ width: 99.5%;
  }
 
 #file {

@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script src="${ctx}/resources/common/js/common.js"></script> --%>
+<script src="${ctx}/resources/common/js/common.js"></script>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
@@ -144,7 +144,9 @@ $(document).ready(function() {
 
 	
  	function boardDetail(a){
- 		alert(a); 
+	alert(a);
+	var no = a;
+ 		location.href="/board/boardDetail?BOARD_NO=" + no;
  	} 
  	
     $("#board_add_fbtn").on("click", function(){

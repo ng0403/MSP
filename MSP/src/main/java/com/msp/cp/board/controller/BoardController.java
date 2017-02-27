@@ -95,7 +95,7 @@ public class BoardController {
 		String FILE_CD = vo.getFILE_CD(); 
 		
 		boardService.viewadd(BOARD_NO);
-		ModelAndView mov = new ModelAndView();
+		ModelAndView mov = new ModelAndView("/board/board_detail");
 
 	
 		if(FILE_CD == null)

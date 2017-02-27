@@ -35,7 +35,7 @@
 
 <div> <!-- 제목 div-->
 <label id="txt" >제  목</label>
- <input type="text" class="form-control" id="title" value= "${boardlist.QUESTION_TITLE}"  readonly="readonly" />
+ <input type="text" class="inputTxt" id="title" value= "${boardlist.QUESTION_TITLE}"  readonly="readonly" />
 </div> 
 
 <div>
