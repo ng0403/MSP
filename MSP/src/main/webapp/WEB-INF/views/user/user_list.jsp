@@ -125,20 +125,20 @@ $(document).ready(function() {
 		<!-- Search1 Div  -->
 		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
 <%-- 				<input type="hidden" id="sessionID" name="sessionID" value="${SessionID}">  --%>
-				<select id="active_key" name="active_key" class="selectField" style="padding: 0px 0px 5px 0px;">
+				<select id="active_key" name="active_key" class="selectField" style="padding: 0px 0px 2px 0px; height: 34px;">
 					<option value="" selected="selected">-검색조건-</option>
 					<option value="user_id_sch">사용자ID</option>
 					<option value="user_nm_sch">사용자명</option>
 					<option value="dept_nm_sch">부서명</option>
 				</select>	
-				<input type="text" id="user_sch_key" name="uesr_sch_key" style="width: 25%; " > &nbsp;
-				<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" value="검색"/>
+				<input type="text" id="user_sch_key" name="uesr_sch_key" style="width: 25%; height: 34px;" > &nbsp;
+				<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" value="검색" style="width:55px; height: 34px;"/>
 				
 				<div class="right">
 				<c:choose>
 					<c:when test="${SessionID == 'admin'}">
-						<input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-info btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;">
+						<input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;width:70px; height: 30px;">
+			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-info btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;width:70px; height: 30px;">
 			        </c:when>
 			    </c:choose> 
 					
@@ -219,12 +219,12 @@ $(document).ready(function() {
 	<div id="viewLoadingImg" style="display: none;">
 			<img src="${ctx}/resources/image/viewLoading.gif">
 	</div> 
-	<div class="paging_div">
+	<div class="paging_div" style="padding-left: 1%;">
 				<div class="left">
 				<c:choose>
 					<c:when test="${SessionID == 'admin'}">
-						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
-						<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
+						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;width:46px; height: 30px;" />
+						<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;width:46px; height: 30px;"  />
 					</c:when>
 				</c:choose>
 				</div>
