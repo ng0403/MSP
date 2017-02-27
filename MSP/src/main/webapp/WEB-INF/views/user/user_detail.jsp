@@ -316,7 +316,7 @@
 		<c:choose>
 			<c:when test="${SessionID == 'admin'}">
 				<input type="button" id="Dmodify_btn" class="btn btn-primary btn-sm" value="편집" />
-				<input type="reset" id="DbtnReset_btn" class="btn btn-primary btn-sm" value="취소"/>
+				<input type="reset" id="DbtnReset_btn" class="btn btn-default btn-sm" value="취소"/>
 				<input type="button" id="Dmodifysave_btn" class="btn btn-primary btn-sm"  value="저장"/>
 			</c:when>
 		</c:choose>

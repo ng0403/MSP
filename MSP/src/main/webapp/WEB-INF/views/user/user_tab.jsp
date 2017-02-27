@@ -268,7 +268,7 @@
 		<c:choose>
 			<c:when test="${SessionID == 'admin'}">
 				<input type="button" id="submit_btn" class="btn btn-primary btn-sm" value="추가"/>
-				<input type="reset" id="btnReset_btn" class="btn btn-primary btn-sm" value="취소"/>
+				<input type="reset" id="btnReset_btn" class="btn btn-default btn-sm" value="취소"/>
 			</c:when>
 		</c:choose>
 <!-- 			<input type="button" id="addsave_btn" class="iuser_tab_bt" value="저장"/> -->

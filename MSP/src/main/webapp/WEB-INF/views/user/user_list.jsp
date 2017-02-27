@@ -131,7 +131,18 @@ $(document).ready(function() {
 					<option value="dept_nm_sch">부서명</option>
 				</select>	
 				<input type="text" id="user_sch_key" name="uesr_sch_key" style="width: 25%; " > &nbsp;
-				<input type="button" id="search_fbtn" class="btn btn-default btn-sm" value="검색"/>
+				<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" value="검색"/>
+				
+				<div class="right">
+				<c:choose>
+					<c:when test="${SessionID == 'admin'}">
+						<input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
+			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-info btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;">
+			        </c:when>
+			    </c:choose> 
+					
+				</div>
+				
 			<!-- 페이징 전용 폼 -->
 			<form action="${ctx}/user/userInqr" id="userlistExcelForm" method="post"></form>
 		</div>
@@ -244,15 +255,7 @@ $(document).ready(function() {
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="right">
-				<c:choose>
-					<c:when test="${SessionID == 'admin'}">
-						<input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-primary btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;">
-			        </c:when>
-			    </c:choose> 
-					
-				</div>
+				
 			</div>
 	</div>
 		<jsp:include page="../user/user_tab.jsp"></jsp:include>
