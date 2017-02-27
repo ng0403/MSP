@@ -84,7 +84,7 @@
 										<td style="width:30%; cursor: pointer;">
 											${auth_list.auth_id}
 										</td> 
-										<td style="width:30%;" id="authNm">${auth_list.auth_nm}</td>
+										<td style="width:30%; text-align:center; " id="authNm">${auth_list.auth_nm}</td>
 										<td>
 											<c:if test="${auth_list.active_flg eq 'Y'}">활성화</c:if>
 											<c:if test="${auth_list.active_flg eq 'N'}">비활성화</c:if>
@@ -147,11 +147,11 @@
 					<tbody id="tbody1">
 						<tr>
 							<th style="font-weight: bold;">권한ID</th>
-							<td><input type="text" style="padding-left: 6px;" name="auth_id" id="auth_id" class="form-control"  value="${auth_id}" readonly="readonly" ></input></td>
+							<td><input type="text" style="padding-left: 6px;" name="auth_id" id="auth_id" class="inputTxt"  value="${auth_id}" readonly="readonly" ></input></td>
 						</tr>
 						<tr>
 							<th style="font-weight: bold;">권한명</th>
-							<td><input type="text" style="padding-left: 6px;" name="auth_nm" id="auth_nm" class="form-control"  value="${auth_nm}"></input></td>
+							<td><input type="text" style="padding-left: 6px;" name="auth_nm" id="auth_nm" class="inputTxt"  value="${auth_nm}"></input></td>
 						</tr>
 						<tr>
 							<th style="font-weight: bold;">활성화여부</th>
