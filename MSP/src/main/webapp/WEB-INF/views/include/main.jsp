@@ -16,8 +16,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
 <!-- 	/* CSS */ -->
-    <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
+    
 <!-- common -->
     <!-- <title>Main DashBoard</title> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />
@@ -44,6 +43,9 @@
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
 <!-- 	공통코드 -->
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" />
+	
+	<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
 	
 <!-- JS	 -->
 <!-- 공통JS -->

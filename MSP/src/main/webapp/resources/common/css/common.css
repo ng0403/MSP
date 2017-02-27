@@ -36,7 +36,7 @@ input {
 	border-radius: 3px;
 }
 
-input[type=text] {	width: 60%; }
+input[type=text] {	text-align:left;width: 60%; }
 
 input[type=text]::-ms-clear {	display: none;		}
 
