@@ -198,14 +198,15 @@ span {
 }
 
 .table_div{
+	text-align : left;
 	height:450px;
 	margin-top: 10px;
 }
-/* td, tr, th {
-	text-align: center;
+td, tr, th {
+	text-align: left;
 	vertical-align: middle;
 }
- */
+
 .checkall {
 	text-align: center;
 	vertical-align: middle;
