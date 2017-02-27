@@ -74,11 +74,11 @@ vertical-align:middle;
 	<%-- <script type="text/javascript" src="${ctx}/resources/common/js/standard/common.js"></script> --%>
 	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
 	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/jquery-ui.css"	type="text/css" /> --%>
-	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
+	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/header.css" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/content.css" type="text/css" />
-	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" />
+	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" /> --%>
 	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
 	<!-- Font Awesome Icons -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
