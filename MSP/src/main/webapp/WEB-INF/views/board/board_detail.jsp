@@ -3,25 +3,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  <c:set var="SessionID" value="${sessionScope.user_id}" />
-  
-<%-- <%@include file="../include/header.jsp"%>
- --%>
+ <c:set var="SessionID" value="${sessionScope.user_id}" />
+<%-- <%@include file="../include/header.jsp"%> --%>
+
  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+ <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" /> 
-<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
-<!-- 부가적인 테마 -->
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />--%> 
+ <!-- 합쳐지고 최소화된 최신 CSS -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+부가적인 테마
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> --%>
+합쳐지고 최소화된 최신 자바스크립트
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> --> 
 <title>Insert title here</title>
 </head>
 <body>
@@ -88,8 +87,7 @@
 	</div>
  
 	<div class="col-md-12" id="reply_list" style="margin-top:10px">
-		<table id = "reply_table" class="table">
-		 
+		<table id = "reply_table" class="table"> 
 		</table> 
 	</div> 
 
@@ -179,8 +177,28 @@ $(document).ready(function(){
 	 console.log(formObj);
 	
 	 ajax_list(); 
-		
 	 
+  /*리스트 출력및 페이징 처리 함수*/
+	/* 	function boardListInqr(pageNum){ 
+			var keyword    = $("#keyword").val();
+			 
+			$.post("/board/search_boardInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
+				
+				$(".board_list").html(""); 
+				$(data.qna_list).each(function(){
+					 
+					var REPLY_NO = this.reply_NO;
+					var CREATED_BY = this.created_BY;
+					var CONTENT = this.CONTENT;
+					replyListOutput(REPLY_NO, CREATED_BY, CONTENT);
+				})
+				paging(data,"#paging_div", "replyListInqr");
+			}).fail(function(){
+				alert("목록을 불러오는데 실패하였습니다.")
+			})
+		} */
+	 
+ 
  $("#board_modify_fbtn").on("click", function(){
 	 
 	 /* 접속된 세션 아이디 입니다. */
@@ -253,11 +271,14 @@ $(document).ready(function(){
  }
  
  
+ 
+
+ 
  $("#reply_add_fbtn").on("click", function() {
   
 	 var REPLY_CONTENT_OBJ = $("#reply_content");
 	 var REPLY_CONTENT = REPLY_CONTENT_OBJ.val();
-  	 var CREATED_BY = '이준석';
+  	 var CREATED_BY = "${SessionID}" ;
   	 
   	$.ajax({
 		type:'POST',

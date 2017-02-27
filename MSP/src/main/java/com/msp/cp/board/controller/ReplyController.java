@@ -42,7 +42,7 @@ public class ReplyController {
 		System.out.println("board_no ajax " + BOARD_NO); 
  	    ResponseEntity<List<ReplyVO>> entity = null;
 	    try {
-	    	
+	      
  	      entity = new ResponseEntity<>(replyService.listReply(BOARD_NO), HttpStatus.OK);
 
 	    } catch (Exception e) {
