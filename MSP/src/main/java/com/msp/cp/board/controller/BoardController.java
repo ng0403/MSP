@@ -316,15 +316,12 @@ public class BoardController {
 	 
 	
 	@RequestMapping(value = "/file_down", method = RequestMethod.GET)
-	public void downloadFile(
-			@RequestParam(value = "FILE_CD") String FILE_CD,
-			HttpServletResponse response, HttpServletRequest request) {
+	public void downloadFile( @RequestParam(value = "FILE_CD") String FILE_CD, HttpServletResponse response, HttpServletRequest request) {
+		
 		System.out.println("Hello down " + FILE_CD);
 		
-		Map<?, ?> map = (Map<?, ?>) boardService.searchOneFiledata(FILE_CD);
-		
-		
- 		System.out.println("map??" +map);
+		Map<?, ?> map = (Map<?, ?>) boardService.searchOneFiledata(FILE_CD); 
+    		System.out.println("map??" +map);
 		
 		if (map != null) {
 

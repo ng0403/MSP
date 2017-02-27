@@ -256,11 +256,10 @@ values (
  
 	</insert>  
 	
-	<select id="searchOneFiledata" parameterType="java.lang.String" resultType="java.util.Map">
-	
-	SELECT FILE_PATH
-	FROM TB_FILE
-	WHERE FILE_CD=#{FILE_CD} 
+	<select id="searchOneFiledata" parameterType="java.lang.String" resultType="map"> 
+		SELECT *
+		FROM TB_FILE
+		WHERE FILE_CD=#{FILE_CD} 
 	</select>
 	
 	<select id="CODE" parameterType="java.lang.String" resultType="com.msp.cp.board.vo.BoardVO">
