@@ -16,7 +16,7 @@
 <%-- <script src="${ctx}/resources/common/js/mps/authJS/authlist_pop.js"></script> --%>
 <style type="text/css">
 
-.pop_main_div {
+.pop_main_div {   
 	width: 550px;
 	height: 430px;
 	overflow:hidden;
