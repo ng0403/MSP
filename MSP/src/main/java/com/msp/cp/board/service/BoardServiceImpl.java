@@ -81,8 +81,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Object searchOneFiledata(String FILE_CD) {
-		System.out.println("File_cd" + FILE_CD);
-		Object obj =  boardDao.searchOneFiledata(FILE_CD); 
+ 		Object obj =  boardDao.searchOneFiledata(FILE_CD); 
  		return obj;
 	}
 

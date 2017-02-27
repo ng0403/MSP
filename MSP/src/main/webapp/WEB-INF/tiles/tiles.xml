@@ -26,18 +26,18 @@
 	 <put-attribute name="main_center1" value="/WEB-INF/views/auth/auth_list.jsp"/>
 	</definition>
 	<!-- 게시판 -->
-	<definition name="/board/board_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/>
+	<definition name="/board/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/{1}.jsp"/>
 	</definition>
 	<!-- 게시판등록 -->
-	<definition name="/board/board_insert" extends="layout_content">
-	 <!-- <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/> -->
+	<!-- <definition name="/board/board_insert" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_list.jsp"/>
 	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_insert.jsp"/>
-	</definition>
+	</definition> -->
 	<!-- 게시판상세 -->
-	<definition name="/board/board_detail" extends="layout_content">
+	<!-- <definition name="/board/board_detail" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_detail.jsp"/>
-	</definition>
+	</definition> -->
 	<!-- 공통코드 -->
 	<definition name="/code/code_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/code/code_list.jsp"/>
@@ -45,6 +45,10 @@
 	<!-- 부서 -->
 	<definition name="/dept/dept_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/dept/dept_list.jsp"/>
+	</definition>
+	<!-- 메뉴 -->
+	<definition name="/menu/menu_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/menu/menu_list.jsp"/>
 	</definition>
 	<!-- 사용자권한 -->
 	<definition name="/userAuth/user_auth_list" extends="layout_content">
