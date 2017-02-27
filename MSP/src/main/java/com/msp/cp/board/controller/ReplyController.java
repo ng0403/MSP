@@ -24,6 +24,7 @@ public class ReplyController {
 	@RequestMapping(value="/reply_add", method=RequestMethod.POST) 
 	public ResponseEntity<List<ReplyVO>> replyadd(@RequestBody ReplyVO vo){
 		int BOARD_NO = vo.getBOARD_NO();
+		System.out.println("replyvo?" +vo.toString());
 		ResponseEntity<List<ReplyVO>> entity = null;
 		    try {
  		      replyService.addReply(vo); 
