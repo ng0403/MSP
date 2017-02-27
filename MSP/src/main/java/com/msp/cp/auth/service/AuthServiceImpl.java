@@ -77,14 +77,14 @@ public class AuthServiceImpl implements AuthService {
 	public List<userVO> authExcel(Map<String, Object> map) {
 		
 		List<userVO> authExcel = authDao.authExcel(map);
-		System.out.println("authExcel Service Impl : "  + authExcel);
+		//System.out.println("authExcel Service Impl : "  + authExcel);
 		return authExcel;
 	}
 
 	@Override
 	public int excelUpload(File destFile) throws Exception {
 		
-		System.out.println("Excel Service Impl 시작 : ");
+		//System.out.println("Excel Service Impl 시작 : ");
 		int result = authDao.authUpLoadExcel(destFile);
 		
 		return result;
