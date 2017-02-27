@@ -34,7 +34,6 @@ input {
 	border: 1px solid #bebebe;
 	border-radius: 3px;
 }
-
 input[type=text] {width: 60%; line-height:27px;margin-top:0.5px;}
 
 input[type=text]::-ms-clear {	display: none;		}
