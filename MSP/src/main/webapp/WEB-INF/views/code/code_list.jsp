@@ -17,7 +17,8 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" /> --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" />
+
 <title>Code List</title>
 
 <script type="text/javascript">
@@ -180,12 +181,12 @@ $(document).ready(function() {
 						<tbody id="codeListTbody">
 							<c:forEach var="codeInqrList" items="${codeInqrList}">
 								<tr class="open_detail" data_num="${codeInqrList.CODE1}">
-									<td align="center" scope="row">
+									<td class="thth" scope="row">
 										<input type="checkbox" name="del_code" id="del_code" value="${codeInqrList.CODE1}">
 									</td>
-									<td align="center">${codeInqrList.GRP_CD}</td>
+									<td class="thth">${codeInqrList.GRP_CD}</td>
 									<td>${codeInqrList.GRP_NM}</td>
-									<td align="center">${codeInqrList.CODE1}</td>
+									<td class="thth">${codeInqrList.CODE1}</td>
 									<td>${codeInqrList.CODE_TXT}</td>
 								</tr>
 							</c:forEach>
@@ -624,11 +625,11 @@ $(document).ready(function() {
 							var code_txt = codeInqrList[i].code_txt;
 							
 							contents += "<tr class='open_detail' data_num='"+code1+"' >"
-							+"<td align='center' scope='row'>"
+							+"<td class='thth' scope='row'>"
 							+"<input type='checkbox' name='del_code' id='del_code' value='"+code1+"'></td>"
-		    				+"<td align='center'>"+grp_cd1+"</td>"
+		    				+"<td class='thth'>"+grp_cd1+"</td>"
 		    				+"<td>"+grp_nm1+"</td>"
-		    				+"<td align='center'>"+code1+"</td>"
+		    				+"<td class='thth'>"+code1+"</td>"
 							+"<td>"+code_txt+"</td>"
 							+"</tr>";
 						}
