@@ -18,7 +18,6 @@
             </div>
             <div class="pull-left info">
               <p style="color:white;">${user_nm}</p>
-
               <a href="#"><i class="fa fa-circle text-success"></i> <span style="color:#FCF9BC;">Online</span></a>
             </div>
           </div>

@@ -18,6 +18,6 @@
              <span style="color:#F9674F;">${user_nm}</span>
         </a>
         </div>
-    </body>
-</html>
         
+    </body>
+</html>       
