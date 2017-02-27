@@ -11,14 +11,14 @@
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 <%-- <script src="${ctx}/resources/common/js/common.js"></script>  --%>
-<%-- <script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script> --%>
+<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script>
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/AuthCSS/authCSS.css" type="text/css" />  --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/AuthCSS/authCSS.css" type="text/css" /> 
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
-
+   
 <title>Auth List</title>
 </head>
 <body>
@@ -173,7 +173,7 @@
 					<input type="button" id="auth_edit_nfbtn"  class="btn btn-primary btn-sm" value="편집" style="display:none" />
 	  				<input type="button" id="auth_save_fbtn"   class="btn btn-primary btn-sm" value="저장" style="display:none" />
 				</div>
-			</div> 41
+			</div> 
 			  
 			
 			
