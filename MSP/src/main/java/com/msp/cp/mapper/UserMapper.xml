@@ -47,6 +47,7 @@
 		    ) X
 			<![CDATA[
 				where X.rnum >= #{page.startRow} and X.rnum < #{page.endRow}
+				order by X.CREATED desc
 			]]>
 	</select>
 
