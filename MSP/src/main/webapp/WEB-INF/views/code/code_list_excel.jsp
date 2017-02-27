@@ -13,24 +13,8 @@
 	response.setHeader("Content-Description", "JSP Generated Data");
 	response.setContentType("application/vnd.ms-excel");
 %>
-<style type="text/css">
-.teleExcelTbl {
-	border: thin solid black;
-}
-.header{
-	border: thin solid black;
-	background-color: #f9ffff;
-	text-align: center;
-}
-.body{
-	border: thin solid black;
-	text-align: center;
-}
-.numStyle {
-	border: thin solid black;
-	text-align: right;
-}
-</style>
+
+
 <table class="userExcelTbl">
 	<thead>
 		<tr>

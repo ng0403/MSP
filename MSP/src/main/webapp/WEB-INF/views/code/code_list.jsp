@@ -17,43 +17,8 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
-
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" /> --%>
 <title>Code List</title>
-
-<style type="text/css">
-#codeMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
-.codeWindow{display: none; position:absolute; width:20%; height:25%; left:45%; top:30%; z-index:10000;
-				background-color: white; overflow: auto;}	
-
-.menuOpen{display: none;}	
-	
-.block_div{display:block; height: 10px; clear: both;}
-
-.modal.fade {
-  -webkit-transition: opacity .3s linear, top .3s ease-out;
-  -moz-transition: opacity .3s linear, top .3s ease-out;
-  -ms-transition: opacity .3s linear, top .3s ease-out;
-  -o-transition: opacity .3s linear, top .3s ease-out;
-  transition: opacity .3s linear, top .3s ease-out;
-}
-.modal.fade.in {
-  top: 5%;
-}
-
-.page1 {
-	width: 15%;
-	clear: both;
-	display: inline-block;
-	text-align: center;
-	vertical-align: top;
-	margin:0 auto;
-}
-
-.thth {
-	text-align: center;
-}
-
-</style>
 
 <script type="text/javascript">
 var sessionID = "${SessionID}"

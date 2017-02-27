@@ -18,33 +18,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<style type="text/css">
-#mainDiv {
-/* 	border: 1px solid red; */
-	margin-top: 15px;
-	margin-left: 5px;
-}
-
-#center {
-	border: 1px solid blue;
-}
-#mainStrong {
-	margin-top: 15px;
-	padding-top: 30px; 
-}
-
-#insert_tbl {
-/* 	text-align: center; */
-	vertical-align: middle;
-}
-
-th, td {
-	vertical-align: middle;
-}
-#btns {
-	padding-left: 15px;
-}
-</style>
 
 <title>Insert title here</title>
 </head>

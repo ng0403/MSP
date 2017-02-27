@@ -18,65 +18,9 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
-<!--  -->
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/MenuAuthCSS/menuAuthCSS.css" type="text/css" /> --%>
 
 <title>MenuAuth List</title>
-
-<style type="text/css">
-#menuAuthMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
-#menuAuthInsertMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
-
-.menuAuthWindow {display: none; position:absolute; width:50%; height:52%; left:28%; top:30%; z-index:10000;
-				background-color: white; overflow: auto;}	
-.menuAuthInsertWindow {display: none; position:absolute; width:50%; height:65%; left:30%; top:15%; z-index:10000;
-				background-color: white; overflow: auto;}
-
-.menuOpen{display: none;}		
-.block_div{display:block; height: 10px; clear: both;}
-
-.modal.fade {
-  -webkit-transition: opacity .3s linear, top .3s ease-out;
-  -moz-transition: opacity .3s linear, top .3s ease-out;
-  -ms-transition: opacity .3s linear, top .3s ease-out;
-  -o-transition: opacity .3s linear, top .3s ease-out;
-  transition: opacity .3s linear, top .3s ease-out;
-}
-
-.modal.fade.in {
-  top: 5%;
-}
-
-.page1 {
-	width: 15%;
-	text-align: center;
-	float: inherit;
-}
-
-.search1_div {
-	margin-top: 10px;
-	margin-left: 20px;
-	float: left;
-	width: 48%;
-}
-
-.page2 {
-	width: 15%;
-	text-align: center;
-	float: inherit;
-	margin-left: 35%;
-	
-}
-
-.tdstyle {
-	text-align: left;
-}
-
-.thth {
-	text-align: center;
-}
-
-
-</style>
 
 <script type="text/javascript">
 var save_cd;

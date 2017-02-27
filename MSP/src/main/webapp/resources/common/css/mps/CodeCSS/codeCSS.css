@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+#codeMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
+.codeWindow{display: none; position:absolute; width:20%; height:25%; left:45%; top:30%; z-index:10000;
+				background-color: white; overflow: auto;}	
+
+.menuOpen{display: none;}	
+	
+.block_div{display:block; height: 10px; clear: both;}
+
+.modal.fade {
+  -webkit-transition: opacity .3s linear, top .3s ease-out;
+  -moz-transition: opacity .3s linear, top .3s ease-out;
+  -ms-transition: opacity .3s linear, top .3s ease-out;
+  -o-transition: opacity .3s linear, top .3s ease-out;
+  transition: opacity .3s linear, top .3s ease-out;
+}
+.modal.fade.in {
+  top: 5%;
+}
+
+.page1 {
+	width: 15%;
+	clear: both;
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+	margin:0 auto;
+}
+
+.thth {
+	text-align: center;
+}
+
+.teleExcelTbl {
+	border: thin solid black;
+}
+.header{
+	border: thin solid black;
+	background-color: #f9ffff;
+	text-align: center;
+}
+.body{
+	border: thin solid black;
+	text-align: center;
+}
+.numStyle {
+	border: thin solid black;
+	text-align: right;
+}
