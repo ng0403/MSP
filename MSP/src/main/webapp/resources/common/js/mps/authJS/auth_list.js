@@ -137,8 +137,8 @@ function authListInqr(pageNum){
 
 	var active_key = $("#active_key").val();
 	var keyword    = $("#keyword").val();
-	
-	$.post("/auth/search_list",{"active_key":active_key, "keyword":keyword, "pageNum":pageNum}, function(data){
+		
+	$.post("/auth/search_list",{/*"active_key":active_key,*/ "keyword":keyword, "pageNum":pageNum}, function(data){
 		$(".auth_list").html("");
 		$(data.auth_list).each(function(){
 			var auth_id = this.auth_id;

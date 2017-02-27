@@ -351,7 +351,7 @@ $(document).ready(function() {
 								<td>
 									<input type="text" name="code1" id="code1" class="inputTxt" style="width: 90%" value="${code1}" maxlength="4" readonly="readonly"/>
 								</td>
-								<th>상세코드<br>명</th>
+								<th>상세코드명</th>
 								<td>
 									<input type="text" name="code_txt" id="code_txt" class="inputTxt" style="width: 90%" value="${code_txt}" maxlength="100" readonly="readonly"/>
 								</td>

@@ -68,6 +68,7 @@ public class CodeController {
 		
 		// Excel Export 해주는 부분
 		if(excel != null){
+			System.out.println("Excel");
 			if(excel.equals("true")){
 				ModelAndView mav = new ModelAndView("/code/code_list_excel");
 				List<userVO> codeExcel = codeService.userExcel(codeMap);
