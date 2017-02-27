@@ -30,7 +30,7 @@ $(document).ready(function() {
 			opener.parent.location.href = "userlist";
 	 </c:if>
 	 /* 접속된 세션 아이디 입니다. */
-	 var sessionID = "${SessionID}" 
+// 	 var sessionID = "${SessionID}" 
 
 	if(sessionID == 'admin'){
 // 		 alert("관리자 권한으로 접속하셨습니다.");
