@@ -38,7 +38,7 @@
 				<label >제  목</label>
 				<input type="text" id="keyword" name="keyword" class="inputTxt" > &nbsp; 
 	
-			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
+			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
 		 </form>  
 		</div>
 	</div>
