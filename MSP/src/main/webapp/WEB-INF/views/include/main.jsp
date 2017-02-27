@@ -55,15 +55,15 @@
 	<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 	
 <!-- 	메뉴권한  -->
-	<script src="${ctx}/resources/common/js/mps/menuAuthJS/menuAuth_list.js"></script>
+<%-- 	<script src="${ctx}/resources/common/js/mps/menuAuthJS/menuAuth_list.js"></script> --%>
 	<!-- 	사용자  -->
-	<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
-	<script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
-	<script src="${ctx}/resources/common/js/mps/dept/deptlist_pop.js"></script>
+<%-- 	<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
+<%-- 	<script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script> --%>
+<%-- 	<script src="${ctx}/resources/common/js/mps/dept/deptlist_pop.js"></script> --%>
 	<!-- 	권한  -->
-	<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script>
+<%-- 	<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script> --%>
 	<!-- 	부서  -->
-	<script src="${ctx}/resources/common/js/mps/dept/dept_list.js"></script>
+<%-- 	<script src="${ctx}/resources/common/js/mps/dept/dept_list.js"></script> --%>
 	
 	<script type="text/javascript" src="${ctx}/resources/common/js/common.js"></script>
 
