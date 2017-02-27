@@ -18,19 +18,7 @@
 <!-- 	/* CSS */ -->
     
 <!-- common -->
-    <!-- <title>Main DashBoard</title> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" type="text/css" />
-	<!-- Font Awesome Icons -->
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<!-- Ionicons -->
-	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-	<!-- Theme style -->
-	<link href="${ctx}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-	<!-- AdminLTE Skins. Choose a skin from the css/skins 
-         folder instead of downloading all of them to reduce the load. -->
-	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" /> --%>
+    
 	
 
 <!-- 	/* 사용자 */ -->
@@ -44,6 +32,18 @@
 <!-- 	공통코드 -->
 	<link rel="stylesheet" href="${ctx}/resources/common/css/mps/CodeCSS/codeCSS.css" type="text/css" />
 	
+	<!-- <title>Main DashBoard</title> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" type="text/css" />
+	<!-- Font Awesome Icons -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<!-- Ionicons -->
+	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+	<!-- Theme style -->
+	<link href="${ctx}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+	<!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
 	
