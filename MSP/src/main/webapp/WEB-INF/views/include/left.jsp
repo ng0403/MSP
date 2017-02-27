@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<aside class="main-sidebar"  style="width:15%;">
+<aside class="main-sidebar"  style="width:12%;">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar" >
           <!-- Sidebar user panel -->
