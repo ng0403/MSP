@@ -6,15 +6,15 @@
 <html>
 <head>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> 
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>  --%>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script> -->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">  -->
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> --%>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
