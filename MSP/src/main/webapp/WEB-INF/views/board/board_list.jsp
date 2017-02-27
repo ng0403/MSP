@@ -59,7 +59,7 @@
 								
 							</tr>
 							
-						 </thead> 
+						 </thead>  
 				 					 
 						<tbody class="board_list">
 							<c:forEach items="${boardlist}" var="boardVO"> 
@@ -67,7 +67,8 @@
 								<tr class="open_list">
 									<td scope="row"><input type="checkbox" id="del_code" name="del_code" value="${boardVO.BOARD_NO}"></td>
 			 						<td>${boardVO.BOARD_NO}</td>
-									<td><a href="/board/boardDetail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td>
+									<%-- <td><a href="/board/boardDetail?BOARD_NO=${boardVO.BOARD_NO}">${boardVO.TITLE}</a> </td> --%>
+									<td><a href="#" onclick="boardDetail('${boardVO.BOARD_NO}');" id="${boardVO.BOARD_NO}">${boardVO.TITLE}</td>
 									<td>${boardVO.CREATED_BY} </td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREATED}" /></td>
 									<td>${boardVO.VIEW_CNT}</td>
@@ -82,9 +83,8 @@
 	<div class="paging_div">
 	
 	 	<div class="left">
-		     <!-- <input type="button" id = "board_add_fbtn"  class = "btn btn-primary btn-sm" value="추가"/>  -->
-		  <a href ="/board/boardInsert">추가</a>
-		    <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
+		   <input type="button" id = "board_add_fbtn"  class = "btn btn-primary btn-sm" value="추가"/> 
+ 		    <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
 		</div> 
 		
 		<div class="page" id="paging_div">	
@@ -140,21 +140,17 @@ $(document).ready(function() {
 			location.href = "/";
 	 }
 	
-})
+}) 
 
-
-
-
-
-
-
-
- 
-/*   $("#board_add_fbtn").on("click", function(){
-	location.href="/board/boardInsert";
 	
-}) */
- 
+ 	function boardDetail(a){
+ 		alert(a);
+ 		
+ 	} 
+ 	
+    $("#board_add_fbtn").on("click", function(){
+	location.href="/board/boardInsert";
+    })
    
 
 /* 삭제(체크박스된 것 전부) */
@@ -173,9 +169,7 @@ $(document).ready(function() {
 			 /* 접속된 세션 아이디 입니다. */
 			 var sessionID = "${SessionID}" 
 
-			if(sessionID == 'admin'){
-				
-
+			if(sessionID == 'admin'){ 
 				$.ajax({
 	 				url : '/board/board_remove',
 	 				headers : {
@@ -197,76 +191,22 @@ $(document).ready(function() {
 	 					}
 	 				
 	 				}
-	 				}) 
-				
-				
+	 				})  
 		 	 }else{
 				 alert("${SessionID}");
 					alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 로그인화면으로 이동합니다. **");
 //					location.href = "/logout";
 					location.href = "/";
-			 } 
-  		} 
+			 }  
  	}
  	
  	
  	
  	
  	function ajaxList() {
- 		boardListInqr(1);
- 		/* $.ajax({
-				url : '/board/search_boardInqr',
-				headers : {
-		            "Content-Type" : "application/json",
-		            "X-HTTP-Method-Override" : "POST"
-		         },
-				data : "",
-				dataType : 'json',
-				processData: false,
-				contentType: false,
-				type: 'POST',
-				success : function(result) {
-   
-					var ajaxList = result; 
- 					var liststr = "";
-					var liststr1 = "";
-					var liststr2 = "";
-					
-				 	var list = ajaxList.length;
- 				 	
-				 	liststr    += "<table  class='table table-hover' >" +
-									"<tr>" +
-								"<th>" +
-									"<input id='checkall' type='checkbox'/>" +
-								"<th>번호</th>" +
-								"<th>제목</th>" +
-								"<th>작성자</th>" +
-								"<th>작성일</th>" +
-								"<th>조회수</th>" +
-								"</tr>";
-				 	
-				for(var i=0 ; i<ajaxList.length; i++) {  
-					 liststr1  +=    "<tr>" +
-										"<td scope='row'><input type='checkbox' name='del_code' value=" + ajaxList[i].board_NO + "/>" +
-										"<td>" + ajaxList[i].board_NO + "</td>" +
-										"<td><a href=\"/board/boardDetail?BOARD_NO=" + ajaxList[i].board_NO + "\">" + ajaxList[i].title + "\</a> </td>" +
-										"<td>" + ajaxList[i].created_BY + "</td>" +
-										"<td>" + ajaxList[i].created + "</td>" + 
- 										"<td>" + ajaxList[i].view_CNT + "</td>" +
-										"</tr>";
-								
-				 	}
-				
-				liststr2 +=  "</table>";
-					
-					var boardtable = document.getElementById("list1_div");
-					boardtable.innerHTML = liststr + liststr1 + liststr2; 
-					 
-
-				}  
-				}) */
+ 		boardListInqr(1); 
  	}
-  
+ 
  
 	$("#checkall").on("click", function() {
 
@@ -374,8 +314,7 @@ $(document).ready(function() {
 		$(".board_list").append(board_Tr);
  			
 	} 
-	
-	 
+ 
 	
 </script>
 
