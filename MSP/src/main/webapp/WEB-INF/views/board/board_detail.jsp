@@ -48,17 +48,18 @@
 		<input type="text" class="inputTxt" name= "TITLE" id="TITLE" value= "${boardlist.TITLE}"  readonly="readonly" />
 	</div> 
 
-<!-- 	<div id="created"> -->
-<%-- 		<label for="created_by">${boardlist.CREATED_BY}</label>  --%>
-<%-- 		<%-- <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"	value="${boardlist.CREATED}" /></label>  --%> 
-<%-- 		<label for="created"> ${boardlist.CREATED} </label> --%>
-<%-- 		<label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label> --%>
-<%-- 		<label> <a href="/board/file_down?FILE_CD=${boardlist.FILE_CD}">${boardlist.FILE_NM}</a></label>	 --%>
-<!-- 		<br /> -->
-<!-- 	</div>  -->
 
 	<div id="detail_con"> <!-- 내용 div -->
 		 <label id="txt" >내  용</label>  
+		 
+  	<div id="created"> 
+ 		<%-- <label for="created_by">${boardlist.CREATED_BY}</label>   --%>
+  		<%--   <label for="created"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardlist.CREATED}" /></label>  --%>
+ 		<%-- <label for="created"> ${boardlist.CREATED} </label>  --%>
+  		<label for="view_cnt">조회 : ${boardlist.VIEW_CNT}</label> 
+  		<label> <a href="/board/file_down?FILE_CD=${boardlist.FILE_CD}">${boardlist.FILE_NM}</a></label>	 
+ 		<br/> 
+ 	</div> 
 		 <textarea  rows="10" id="boardcontent"  readonly="readonly" >${boardlist.CONTENT}</textarea>
 	</div> 
 
@@ -70,14 +71,14 @@
 
 
 	<!-- 댓글div -->
-	<div id="reply_div" class="timeline-body" style ="height:100px; margin-top:10px "> 
+	<div id="reply_div" class="timeline-body" style ="height:50px; margin-top:10px "> 
 	
-		<div class="col-sm-10" style=" height:40px">
-			<textarea id = "reply_content" class="form-control" rows="2" id="content" ></textarea>
+		<div class="col-sm-11" style=" height:40px">
+			<textarea id = "reply_content" class="form-control" rows="2" id="content" style="width:90%" ></textarea>
 		</div>
  
 		<!-- 댓글 등록 버튼 -->
-		<div id="detail_btn_div" class="reply_div col-md-2 " >
+		<div id="detail_btn_div" class="reply_div col-md-1 " >
 			<input type="button" id="reply_add_fbtn" class = "btn btn-primary btn-sm " value="저장"/>
 		</div>
 	
@@ -89,6 +90,47 @@
 	</div> 
 
 </div>	
+ 
+ <%-- <div class="paging_div">
+	
+	 	<div class="left">
+		   <input type="button" id = "board_add_fbtn"  class = "btn btn-primary btn-sm" value="추가"/> 
+ 		    <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
+		</div> 
+		
+		<div class="page" id="paging_div">	
+					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+					<input type="hidden" id="PageNum" value="${pageNum}"/>
+					<c:choose>
+						<c:when test="${page.endPageNum == 1}">
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> / ${page.endPageNum}</a>
+							<a style="color: black;"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.startPageNum}">
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="boardListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
+							<a href="#" onclick="boardListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:when>
+						<c:when test="${pageNum == page.endPageNum}">
+							<a href="#" onclick="boardListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="boardListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="boardListInqr'${pageNum-1}');" id="pNum" > ◀ </a>
+							<input type="text" id="pageInput" value="${pageNum}" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<a href="#" onclick="boardListInqr'${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
+							<a href="#" onclick="boardListInqr'${pageNum+1}');" id="pNum"> ▶ </a>
+						</c:otherwise>
+					</c:choose>
+				</div>
+		
+		<div class="right">
+ 		</div> 
+	</div> --%>
+ 
  
 <script>
   
@@ -176,12 +218,11 @@ $(document).ready(function(){
 	 ajax_list(); 
 	 
   /*리스트 출력및 페이징 처리 함수*/
-	/* 	function boardListInqr(pageNum){ 
-			var keyword    = $("#keyword").val();
-			 
-			$.post("/board/search_boardInqr",{"keyword":keyword, "pageNum":pageNum}, function(data){
+	/* 	function replyListInqr(pageNum){ 
+ 			 
+			$.post("/reply/search_replyInqr",{"pageNum":pageNum}, function(data){
 				
-				$(".board_list").html(""); 
+				$(".reply_list").html(""); 
 				$(data.qna_list).each(function(){
 					 
 					var REPLY_NO = this.reply_NO;
@@ -231,10 +272,7 @@ $(document).ready(function(){
 		 
 	 }
  }) 
- 
- 
   
- 
   function ajax_list(){
  	 $.ajax({
 			url : '/reply/reply_list/' + BOARD_NO,
@@ -292,12 +330,7 @@ $(document).ready(function(){
 	          
 		      }); 
  }) 
- 
- 
- 
- 
-
- 
+  
 
 })
  

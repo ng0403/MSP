@@ -184,25 +184,28 @@ public class BoardController {
 	  
 	
 	@RequestMapping(value="/boardModify", method=RequestMethod.GET)
-	public void board_modifyPage(int BOARD_NO, Model model)
+	public ModelAndView board_modifyPage(int BOARD_NO, Model model)
 	{ 
 		System.out.println("hi MODIFY" + BOARD_NO);
 		
 		BoardVO vo = boardService.detail(BOARD_NO);
+		System.out.println("modify vo/" + vo);
 		String FILE_CD = vo.getFILE_CD();
 		
+		ModelAndView mov = new ModelAndView("/board/board_modify");
+
 		if(FILE_CD != null){
-			model.addAttribute("boardVO", boardService.readFileModify(BOARD_NO));
+			mov.addObject("boardVO", boardService.readFileModify(BOARD_NO));
 		}
 		else{
-			model.addAttribute( "boardVO", boardService.read(BOARD_NO)); 
+			mov.addObject( "boardVO", boardService.read(BOARD_NO)); 
 		}
 	  
-		
+		return mov;
 		
 	}
 	
-	@RequestMapping(value="/boardModify", method=RequestMethod.POST)
+	@RequestMapping(value="/board_modify", method=RequestMethod.POST)
 	public String board_modify(BoardVO vo)
 	{
 		System.out.println("modify  Entering" + vo);
@@ -220,11 +223,12 @@ public class BoardController {
 
 		String[] delcode = del_code.split(",");
 		ResponseEntity<String> entity = null;
-
-		
+		System.out.println("delcode?" + delcode.toString());
+		System.out.println("delcode length" + delcode.length);
 		for(int i = 0; i < delcode.length; i++)
 		{
 			String dc = delcode[i];
+			System.out.println("dc?" +  dc); 
 			boardService.removeBoard(dc);
 			System.out.println("success"); 
 			

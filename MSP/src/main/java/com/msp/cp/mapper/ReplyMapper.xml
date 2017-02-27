@@ -23,8 +23,11 @@ WHERE BOARD_NO = #{BOARD_NO}
  </delete>
 
 
-
-
+	<select id="replyListCount" parameterType="java.util.Map" resultType="int">
+	    select count(*) as cnt
+		 FROM TB_REPLY
+		where BOARD_NO = #{BOARD_NO}   
+		</select>
 
 
 
