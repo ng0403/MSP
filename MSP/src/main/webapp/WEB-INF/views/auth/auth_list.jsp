@@ -174,7 +174,7 @@
 	  				<input type="button" id="auth_save_fbtn"   class="btn btn-primary btn-sm" value="저장" style="display:none" />
 				</div>
 			</div>
-			
+			  
 			
 			
 		</div>
