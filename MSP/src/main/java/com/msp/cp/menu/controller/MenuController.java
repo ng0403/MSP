@@ -91,13 +91,13 @@ public class MenuController {
 	public @ResponseBody Map<String, Object> deptList(ModelMap model,
 			HttpServletRequest request,@RequestParam(value = "pageNum", defaultValue = "1") int pageNum){
 		
-		String active_key=request.getParameter("active_key").trim();                      
+		/*String active_key=request.getParameter("active_key").trim();*/                      
 	    String menu_nm_key=request.getParameter("menu_nm_key").trim(); 
 		
 	    
 	    Map<String,Object> map = new HashMap<String,Object>();
 	    
-	    map.put("active_key", active_key);
+	    /*map.put("active_key", active_key);*/
 		map.put("menu_nm_key", menu_nm_key);
 		map.put("pageNum", pageNum);
 

@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
@@ -18,8 +18,7 @@
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <script src="${ctx}/resources/common/js/common.js"></script>
-<script src="${ctx}/resources/common/js/mps/menu/menu_list.js"></script>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
+<script src="${ctx}/resources/common/js/mps/menu/menu_list.js"></script> --%>
 <title>메뉴관리화면</title>
 
 </head>

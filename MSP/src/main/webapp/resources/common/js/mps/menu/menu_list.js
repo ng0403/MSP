@@ -99,10 +99,10 @@
 			"action":"list"
 		})
 		$("#searchForm").submit(); */
-		var active_key = $("#active_key").val();
+		/*var active_key = $("#active_key").val();*/
 		var menu_nm_key = $("#menu_nm_key").val();
 		
-		$.post("/menu/search_list",{"active_key":active_key, "menu_nm_key":menu_nm_key, "pageNum":pageNum}, function(data){
+		$.post("/menu/search_list",{/*"active_key":active_key,*/ "menu_nm_key":menu_nm_key, "pageNum":pageNum}, function(data){
 			$(".menu_list").html("");
 			$(data.menu_list).each(function(){
  				var menu_cd = this.menu_cd;

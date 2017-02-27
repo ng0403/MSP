@@ -88,17 +88,38 @@ public class MenuServiceImpl implements MenuService{
 	/*@Override
 	public List<MenuVO> menuTreeList() {
 		// TODO Auto-generated method stub
-		List<CodeVO> mLevel = codeService.menuLevel();
+		List<MenuVO> menu = menuDao.menuTreeList("ML01");
+		List<MenuVO> smenu = menuDao.menuTreeList("ML02");
+		List<MenuVO> tmenu = menuDao.menuTreeList("ML03");
+		List<MenuVO> fmenu = menuDao.menuTreeList("ML04");
 		List<MenuVO> list = new ArrayList<MenuVO>();
-		Map<String, List<MenuVO>> menuMap = new HashMap<String, List<MenuVO>>();
-		//ArrayList<String> mlevelS = new ArrayList<>();
-		for (int i = 0; i < mLevel.size(); i++ ) {
-			CodeVO cvo = (CodeVO) mLevel;
-			//mlevelS.add(cvo.getCode1());
-			List<MenuVO> menu = menuDao.selectMenuTree(cvo.getCode1());
-			menuMap.put("menu" + i, menu);
+		
+		for (MenuVO menuVO : menu) {
+			ArrayList<MenuVO> slist = new ArrayList<MenuVO>();
+			ArrayList<MenuVO> tlist = new ArrayList<MenuVO>();
+			ArrayList<MenuVO> flist = new ArrayList<MenuVO>();
+			MenuVO mov = menuVO;
+			for(MenuVO smenuVO : smenu){
+				MenuVO smov = smenuVO;
+				if(mov.getMenu_cd().equals(smov.getUp_menu_cd())){
+					slist.add(smov);
+				}
+				for(MenuVO tmenuVO : tmenu){
+					MenuVO tmov = tmenuVO;
+					if(smov.getMenu_cd().equals(tmov.getUp_menu_cd())){
+						tlist.add(tmov);
+					}
+					for(MenuVO fmenuVO : fmenu){
+						MenuVO fmov = fmenuVO;
+						if(tmov.getMenu_cd().equals(fmov.getUp_menu_cd())){
+							flist.add(fmov);
+						}
+					}
+				}
+			}
+			list.add(new MenuVO(mov.getMenu_cd(), mov.getMenu_nm(),  mov.getMenu_url(),
+					mov.getMenu_level(), mov.getUp_menu_cd(),  mov.getActive_key(), slist, tlist, flist));
 		}
-		List<MenuVO> menu = menuMap.get("menu0");
 		
 		return list;
 	}*/

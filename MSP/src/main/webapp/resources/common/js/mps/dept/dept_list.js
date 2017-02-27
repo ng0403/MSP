@@ -83,10 +83,10 @@
 			"action":"list"
 		})
 		$("#searchForm").submit(); */
-		var active_key = $("#active_key").val();
+		/*var active_key = $("#active_key").val();*/
 		var dept_nm_key = $("#dept_nm_key").val();
 		
-		$.post("/dept/search_list",{"active_key":active_key, "dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
+		$.post("/dept/search_list",{/*"active_key":active_key,*/ "dept_nm_key":dept_nm_key, "pageNum":pageNum}, function(data){
 			$(".dept_list").html("");
 			$(data.dept_list).each(function(){
  				var dept_cd = this.dept_cd;
