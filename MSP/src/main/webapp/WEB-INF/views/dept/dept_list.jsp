@@ -1,27 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath }" />
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<script src="${ctx}/resources/common/js/common.js"></script> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
-<script src="${ctx}/resources/common/js/common.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="${ctx}/resources/common/js/mps/dept/dept_list.js"></script>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mainDiv.css" type="text/css" /> --%>
 <title>부서관리화면</title>
+<style type="text/css">
 
+#label {
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#dept_nm_key {
+	width: 200px;
+/* 	height: 35px; */
+	float: left;
+	margin-left: -10px;
+}
+
+#dept_inqr_fbtn {
+	width: 55px;
+	height: 34px;
+	margin-left: 5px;
+}
+
+#dept_num1, #dept_fnum1 {
+	width: 70px;
+}
+
+#dept_num2, #dept_num3, #dept_fnum2, #dept_fnum3{
+	width: 100px;
+}
+
+#hyphen {
+	width: 10px;
+
+}
+</style>
 <script type="text/javascript">
 
 	
@@ -42,9 +73,9 @@
 <!-- 						<option value="Y">활성화</option> -->
 <!-- 						<option value="N">비활성화</option> -->
 <!-- 					</select> -->
-					<label>부서명</label>
-					<input type="text" id="dept_nm_key" name="dept_nm_key"> &nbsp;
-					<input type="button" id="dept_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
+					<label id="label">부서명</label>
+					<input type="text" id="dept_nm_key" name="dept_nm_key" class="form-control" > &nbsp;
+					<input type="button" id="dept_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 				</form>
 			</div>
 		</div>
@@ -141,8 +172,8 @@
 				<form id="dept_detail_form" name="dept_detail_form">
 					<table summary="dept_detail" class="table table-hover">
 						<colgroup>
-							<col width="35%">
-							<col width="65%">
+							<col width="30%">
+							<col width="70%">
 						</colgroup>
 						<tbody>
 							<tr>
@@ -179,9 +210,9 @@
 										<option value="063">063</option>
 										<option value="064">064</option>
 									</select>
-									<label>-</label>
+									<label id="hyphen">-</label>
 									<input type="text" id="dept_num2" name="dept_num2" class="pNum">
-									<label>-</label>
+									<label id="hyphen">-</label>
 									<input type="text" id="dept_num3" name="dept_num3" class="pNum">
 								</td>
 							</tr>
@@ -207,9 +238,9 @@
 										<option value="063">063</option>
 										<option value="064">064</option>
 									</select>
-									<label>-</label>
+									<label id="hyphen">-</label>
 									<input type="text" id="dept_fnum2" name="dept_fnum2" class="pNum">
-									<label>-</label>
+									<label id="hyphen">-</label>
 									<input type="text" id="dept_fnum3" name="dept_fnum3" class="pNum">
 								</td>
 							</tr>
@@ -226,7 +257,7 @@
 						<div class="right">
 							<input type="button" id="dept_save_fbtn" class="btn btn-primary btn-sm" value="저장">
 							<input type="button" id="dept_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
-							<input type="button" id="dept_reset_nfbtn" class="btn btn-info btn-sm" value="초기화">
+							<input type="button" id="dept_reset_nfbtn" class="btn btn-default btn-sm" value="초기화">
 						</div>
 					</div>
 				</form>
