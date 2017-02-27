@@ -5,8 +5,8 @@
 <head>
 <c:set var="result" value="${result}" />
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script>
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
+<%-- <script src="${ctx}/resources/common/js/mps/authJS/auth_list.js"></script> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>Insert title here</title>
  
