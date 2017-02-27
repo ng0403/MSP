@@ -2,15 +2,15 @@
 //var sessionID = "${SessionID}"
 	
 //	alert("${SessionID}");
-if(sessionID == 'admin') {
-//		 alert("관리자 권한으로 접속하셨습니다.");		
-} else {
-	alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
-	location.href = "/";
-}
-
-var dept_cd = "";
-var save_cd = "";
+//if(sessionID == 'admin') {
+////		 alert("관리자 권한으로 접속하셨습니다.");		
+//} else {
+//	alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **");
+//	location.href = "/";
+//}
+//
+//var dept_cd = "";
+//var save_cd = "";
 
 $(function(){
 
