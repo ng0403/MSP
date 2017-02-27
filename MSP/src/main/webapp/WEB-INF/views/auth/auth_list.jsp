@@ -30,7 +30,7 @@ label {
 	margin-top: 2px;
 	margin-right: 15px;
 }
-
+  
 #keyword {
 	width: 200px;
 	height: 34px;
