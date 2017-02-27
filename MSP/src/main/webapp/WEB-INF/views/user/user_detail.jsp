@@ -6,7 +6,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <c:set var="SessionID" value="${sessionScope.user_id}" />
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />
@@ -117,7 +117,7 @@
 				var tmplength = tmp.length;
 				if(tmp != null){
 					//passwordCheck();
-// 					if(passwordCheck(2) == true){
+					if(passwordCheck(2) == true){
 						viewLoadingShow();
 						$.ajax({
 							url:"/user/userMdfy" 
@@ -154,7 +154,7 @@
 							}
 						})
 						
-// 					}
+					}
 					
 				}else{
 					alert("신규 데이터를 입력하세요.");
@@ -229,7 +229,7 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">비밀번호</th>
 							<td>
-								<input type="password" name="user_pwd" id="Duser_pwd" class="inputTxt" maxlength="20" style="width:45%" value="${user_pwd}"></input>
+								<input type="password" name="user_pwd" id="Duser_pwd" class="inputTxt" maxlength="20" style="width:100%" value="${user_pwd}"></input>
 							</td>
 							<th style="padding-left: 1%; text-align: right;">조직ID</th>
 							<td>
@@ -246,7 +246,7 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">비밀번호확인</th>
 							<td>
-								<input type="password" name="user_pwd_chk" id="Duser_pwd_chk" class="inputTxt" style="width:45%"></input>
+								<input type="password" name="user_pwd_chk" id="Duser_pwd_chk" class="inputTxt" style="width:100%"></input>
 							</td>
 							<th>
 							</th>

@@ -9,11 +9,12 @@
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
+<script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />   
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" /> 
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />   --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />  --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />  --%>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -36,7 +37,7 @@ $(document).ready(function() {
 // 		 alert("관리자 권한으로 접속하셨습니다.");
 	 }else{
 // 		 alert("${SessionID}");
-			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **");
+			alert(" ** 편집권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **");
 // 			**\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **
 // 			location.href = "/logout";
 // 			location.href = "/";
