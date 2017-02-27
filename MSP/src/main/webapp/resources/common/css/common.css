@@ -30,13 +30,12 @@ a:active {
 /* img{ width: 80%;	height: 50%; } */
 
 input {
-	text-align: left;
 	text-decoration: none;
 	border: 1px solid #bebebe;
 	border-radius: 3px;
 }
 
-input[type=text] {	text-align:left;width: 60%; }
+input[type=text] {width: 60%; }
 
 input[type=text]::-ms-clear {	display: none;		}
 
@@ -198,12 +197,12 @@ span {
 }
 
 .table_div{
-	text-align : left;
+	/* text-align : left; */
 	height:450px;
 	margin-top: 10px;
 }
 td, tr, th {
-	text-align: left;
+	/* text-align: left; */
 	vertical-align: middle;
 }
 
@@ -282,7 +281,7 @@ clear:both;
 
 #main_left{
 background-color:#222D32;
-width:15%;
+width:12%;
 height:94%;
 margin:auto;
 float:left;
@@ -290,7 +289,7 @@ float:left;
 
 #main_center1{
 background-color:#ECF0F5;
-width:85%;
+width:88%;
 height:89%;
 margin:auto;
 float:left;
@@ -298,7 +297,7 @@ float:left;
 
 #main_footer1{
 background-color:white;
-width:85%;
+width:88%;
 height:5%;
 /* margin:auto; */
 float:left;
