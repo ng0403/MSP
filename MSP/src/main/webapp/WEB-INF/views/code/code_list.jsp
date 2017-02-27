@@ -180,25 +180,16 @@ $(document).ready(function() {
 	<!-- Search Cover Div -->
 	<div class="search_div">
 		<div class="search2_div">
-				<table>
-					<tr>
-						<th>공통코드</th>
-						<td>
-							<input type="text" class="inputTxt" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}" maxlength="2">
-						</td>
-						<th>공통코드명</th>
-						<td>
-							<input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50">
-						</td>
-					   	 <td>
-					    	<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색">
-					    </td>
-					    <td>
-					    	<input type="button" value="엑셀출력" id="excel" class="btn btn-info btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right; margin-left:210px;">
-					    </td>
-					</tr>
-				</table>
+			<label>공통코드</label>&nbsp;
+				<input type="text" class="inputTxt" id="grp_cd_sch" name="grp_cd_sch" value="${grp_cd_sch}" maxlength="2" style="width: 10%;"> &nbsp;&nbsp;
 				
+			<label>공통코드명</label>&nbsp;
+				<input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50" style="width: 20%;"> &nbsp;&nbsp;
+				<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색">	
+			
+			<div class="excelBtn">
+				<input type="button" id="excel" class="btn btn-info btn-sm"  onclick="download_list_Excel('codelistExcelForm');" value="엑셀출력" style="float: right;">
+			</div>	
 					
 			<!-- Paging Form -->
 			<form id="codelistPagingForm" method="post" action="codeInqr"></form>

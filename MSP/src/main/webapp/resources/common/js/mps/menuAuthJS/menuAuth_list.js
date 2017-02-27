@@ -53,7 +53,7 @@ $(function(){
 							var del_auth = menuAuthInqrList[i].DEL_AUTH;
 							var menu_acc_auth = menuAuthInqrList[i].MENU_ACC_AUTH;
 							
-							contents += "<tr class='open_detail' data_num='"+menu_cd+"' onmouseover='this.style.background='#c0c4cb' onmouseout='this.style.background='white''>"
+							contents += "<tr class='open_detail' data_num='"+menu_cd+"'>"
 							+"<td align='center' scope='row'>"
 							+"<input type='checkbox' name='del_menuAuth' id='del_menuAuth' value='"+menu_cd+":"+auth_id+"'></td>"
 							+"<td><a href='javascript:void(0)' onclick='fn_menuAuthPop(\""+menu_cd+"\", \""+auth_nm+"\")'>"+menu_cd+"</a></td>"

@@ -211,23 +211,13 @@ function viewLoadingHide(){
 		<!-- Search Cover Div -->
 		<div class="search_div">
 			<div class="search1_div">
-				<form name="searchForm">
-					<table>
-						<tr>
-							<th>권한명</th>
-							<td>
-								<input type="text" class="inputTxt" id="auth_id_sch" name="auth_id_sch" value="${auth_id_sch}">
-							</td>
-						    <th>메뉴명</th>
-							<td>
-								<input type="text" class="inputTxt" id="menu_nm_sch" name="menu_nm_sch" value="${menu_nm_sch}">
-							</td>
-						   	<td>
-						    	<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_menuAuthSearch(1)" value="검색">
-						    </td>
-						</tr>
-					</table>
-				</form>
+				<label>권한명</label>&nbsp;
+					<input type="text" id="auth_id_sch" name="auth_id_sch" class="inputTxt" style="width: 10%;"> &nbsp;&nbsp;
+				
+				<label>메뉴명</label>&nbsp;
+					<input type="text" id="menu_nm_sch" name="menu_nm_sch" class="inputTxt" style="width: 20%;"> &nbsp;&nbsp;
+					<input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_menuAuthSearch(1)" value="검색">
+				
 				<!-- Paging Form -->
 				<form id="menuAuthlistPagingForm" method="post" action="menuAuthInqr">
 			
