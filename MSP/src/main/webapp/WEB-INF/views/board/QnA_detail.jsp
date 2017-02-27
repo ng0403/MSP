@@ -85,8 +85,7 @@ $(document).ready(function(){
 	  
 	 var BOARD_NO = $("#BOARD_NO").val(); 
      var formObj = $("form[role='form']");
-	 console.log(formObj);
-	
+ 	
  $("#board_modify_fbtn").on("click", function(){
 	 
 	 /* 접속된 세션 아이디 입니다. */

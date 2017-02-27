@@ -1,6 +1,7 @@
 package com.msp.cp.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,24 @@ public class ReplyDaoImpl implements ReplyDao {
 		
 		sqlSession.delete("removeReply", REPLY_NO);
 		
+	}
+
+	@Override
+	public int ReplyListCount(String string, Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			totalCount = sqlSession.selectOne("reply.replyListCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
+	@Override
+	public List<ReplyVO> SearchList(Map<String, Object> map) {
+		
+		return sqlSession.selectList("reply.SearchList", map);
+
 	}
 
 }

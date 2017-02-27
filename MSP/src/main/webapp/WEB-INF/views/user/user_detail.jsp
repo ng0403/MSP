@@ -6,10 +6,10 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <c:set var="SessionID" value="${sessionScope.user_id}" />
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" /> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
  <title>Insert title here</title>
  <c:if test="${result=='1'}" var = "result"> 
@@ -117,7 +117,7 @@
 				var tmplength = tmp.length;
 				if(tmp != null){
 					//passwordCheck();
-// 					if(passwordCheck(2) == true){
+					if(passwordCheck(2) == true){
 						viewLoadingShow();
 						$.ajax({
 							url:"/user/userMdfy" 
@@ -154,7 +154,7 @@
 							}
 						})
 						
-// 					}
+					}
 					
 				}else{
 					alert("신규 데이터를 입력하세요.");
@@ -212,11 +212,11 @@
 								<input type="hidden" id="Duser_id_h" value="${user_id}">
 								<input type="hidden" id="Dcreated_by" value="">
 								<input type="hidden" id="Dactive_flg" value="${active_flg}">
- 								<input type="text" name="Duser_id" id="Duser_id" class="inputTxt" style=" width:100%" value="${user_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="Demp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
+ 								<input type="text" name="Duser_id" id="Duser_id" class="inputTxt" style=" width:100%;  height: 34px;" value="${user_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="Demp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th style="padding-left: 1%; text-align: right;">직급</th>
  							<td>
- 								 <select id="Drank_cd" name="rank_cd" class="inputTxt" style="width: 45%;"  >
+ 								 <select id="Drank_cd" name="rank_cd" class="inputTxt" style="width: 45%; height: 34px;"  >
 									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
 										<option value="<c:out value="${rankCd.rank_cd}" />" 
 											<c:if test="${rank_cd == rankCd.rank_cd }">selected="selected"</c:if>>
@@ -229,11 +229,11 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">비밀번호</th>
 							<td>
-								<input type="password" name="user_pwd" id="Duser_pwd" class="inputTxt" maxlength="20" style="width:45%" value="${user_pwd}"></input>
+								<input type="password" name="user_pwd" id="Duser_pwd" class="inputTxt" maxlength="20" style="width:100%;  height: 34px;" value="${user_pwd}"></input>
 							</td>
 							<th style="padding-left: 1%; text-align: right;">조직ID</th>
 							<td>
-								 <select name="duty_cd" id="Dduty_cd" class="inputTxt" style="width: 45%;">
+								 <select name="duty_cd" id="Dduty_cd" class="inputTxt" style="width: 45%; height: 34px;">
 									<c:forEach var="dutyCd" items="${duty_cd_list}" varStatus="status2">
 										<option value="<c:out value="${dutyCd.duty_cd}" />" 
 											<c:if test="${duty_cd == dutyCd.duty_cd }">selected="selected"</c:if>>
@@ -246,7 +246,7 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">비밀번호확인</th>
 							<td>
-								<input type="password" name="user_pwd_chk" id="Duser_pwd_chk" class="inputTxt" style="width:45%"></input>
+								<input type="password" name="user_pwd_chk" id="Duser_pwd_chk" class="inputTxt" style="width:100%;  height: 34px;"></input>
 							</td>
 							<th>
 							</th>
@@ -256,7 +256,7 @@
 						<tr>	
 							<th style="padding-left: 1%; text-align: right;"  >사용자명</th>
 							<td>
-								<input type="text" name="user_nm" id="Duser_nm" class="inputTxt" maxlength="10" style="width:90%" value="${user_nm}"></input>
+								<input type="text" name="user_nm" id="Duser_nm" class="inputTxt" maxlength="10" style="width:90%; height: 34px;" value="${user_nm}"></input>
 							</td>
 							<th>
 							</th>
@@ -266,26 +266,26 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;"  >휴대 전화</th>
 							<td colspan="3">
-								<select name="cphone_num1" id="Dcphone_num1" class="inputTxt"  style="width:15%;">
+								<select name="cphone_num1" id="Dcphone_num1" class="inputTxt"  style="width:15%; height: 34px;">
 									<option value="010">010</option>
 									<option value="011">011</option>
 									<option value="016">016</option>
 									<option value="019">019</option>
 								</select>- 
-								<input type="text" name="cphone_num2" id="Dcphone_num2" class="inputTxt" maxlength="4" style="width:25%;  margin-left: 1%;"  value="${cphone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>-
-								<input type="text" name="cphone_num3" id="Dcphone_num3" class="inputTxt" maxlength="4" style="width:25%;  margin-left: 1%;"  value="${cphone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
+								<input type="text" name="cphone_num2" id="Dcphone_num2" class="inputTxt" maxlength="4" style="width:25%; height: 34px; margin-left: 1%;"  value="${cphone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>-
+								<input type="text" name="cphone_num3" id="Dcphone_num3" class="inputTxt" maxlength="4" style="width:25%; height: 34px; margin-left: 1%;"  value="${cphone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
 						</tr>
 						<tr>
 							<th style="padding-left: 1%; text-align: right;"  >이메일</th>
 							<td colspan="3">
-								<input type="text" name="email_id" id="Demail_id" class="inputTxt"  style="width:30%;  margin-right: 1%;" maxlength="20" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">  @ 
- 								<input type="text" name="email_domain" id="Demail_domain" class="inputTxt"  style="width:35%;"  maxlength="20"  value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">
+								<input type="text" name="email_id" id="Demail_id" class="inputTxt"  style="width:30%; height: 34px; margin-right: 1%;" maxlength="20" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">  @ 
+ 								<input type="text" name="email_domain" id="Demail_domain" class="inputTxt"  style="width:35%;height: 34px;"  maxlength="20"  value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;">
  							
  						</tr>
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">부서</th>
 							<td style="padding-left: 1%;" colspan="3">
-								<input type="text" id="Ddept_nm" name="dept_nm" class="inputTxt" value="${dept_nm}" style="width:30%"/>
+								<input type="text" id="Ddept_nm" name="dept_nm" class="inputTxt" value="${dept_nm}" style="width:30%;height: 34px;"/>
 								<input type="button" class="btn btn-default btn-sm" id="Ddept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" >
 								<input type="hidden" id="Ddept_cd" name="dept_cd" value="${dept_cd}"/>
 							</td>
@@ -293,14 +293,14 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">내선전화</th>
 							<td colspan="3">
-							<select name="phone_num1" id="Dphone_num1" class="inputTxt" style="width:15%;" >
+							<select name="phone_num1" id="Dphone_num1" class="inputTxt" style="width:15%;height: 34px;" >
 									<option value="02">02</option>
 									<option value="031">031</option>
 									<option value="032">032</option>
 									<option value="033">033</option>
 								</select>- 
-							<input type="text" name="phone_num2" id="Dphone_num2" class="inputTxt" maxlength="4" style="width:30%; margin-left: 1%;" value="${phone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
-							-<input type="text" name="phone_num3" id="Dphone_num3" class="inputTxt" maxlength="4" style="width:30%;   margin-left: 1%;" value="${phone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
+							<input type="text" name="phone_num2" id="Dphone_num2" class="inputTxt" maxlength="4" style="width:30%; height: 34px; margin-left: 1%;" value="${phone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
+							-<input type="text" name="phone_num3" id="Dphone_num3" class="inputTxt" maxlength="4" style="width:30%; height: 34px;   margin-left: 1%;" value="${phone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
 							</td>
 							
 							
@@ -312,7 +312,7 @@
 			</form>
 			</div>
 		<!-- Modal Btn Div -->
-		<div class="modalL_btn_div" style="margin-top: 2%;">
+		<div class="modalL_btn_div" style="margin-top: 10%;">
 		<c:choose>
 			<c:when test="${SessionID == 'admin'}">
 				<input type="button" id="Dmodify_btn" class="btn btn-primary btn-sm" value="편집" />

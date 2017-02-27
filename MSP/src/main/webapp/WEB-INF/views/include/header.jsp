@@ -15,9 +15,9 @@
         <span style="font-size:21.5px;"><b>Shopping Mall</b> Management</span>
         <span style="float:right;margin-right:1%;">님 환영합니다.</span>
         <a href="#" style="float:right;margin-right:3px;">
-             <span style="color:yellow;">${user_nm}</span>
+             <span style="color:#F9674F;">${user_nm}</span>
         </a>
         </div>
-    </body>
-</html>
         
+    </body>
+</html>       

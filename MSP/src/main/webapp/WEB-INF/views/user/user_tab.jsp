@@ -6,7 +6,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <c:set var="SessionID" value="${sessionScope.user_id}" />
 <%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
 <%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
@@ -167,11 +167,11 @@
 								<input type="hidden" id="user_id_h" value="${user_id}">
 								<input type="hidden" id="created_by" value="">
 								<input type="hidden" id="active_flg" value="${active_flg}">
- 								<input type="text" name="user_id" id="Nuser_id" class="inputTxt" maxlength="10" style=" width:100%" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
+ 								<input type="text" name="user_id" id="Nuser_id" class="inputTxt" maxlength="10" style=" width:100%; height: 34px;" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"/><input type="text" name="emp_no" id="emp_no" class="inputTxt" style=" width:100%" value="${emp_no}"/>
  							</td>
  							<th style="padding-left: 1%; text-align: right;">직급</th>
  							<td style="padding-left: 1%;">
- 								 <select name="rank_cd" id="rank_cd" class="inputTxt" style="width: 45%;">
+ 								 <select name="rank_cd" id="rank_cd" class="inputTxt" style="width: 45%; height: 34px;">
 									<c:forEach var="rankCd" items="${rank_cd_list}" varStatus="status2">
 										<option value="<c:out value="${rankCd.rank_cd}" />" 
 											<c:if test="${rank_cd == rankCd.rank_cd }">selected="selected"</c:if>>
@@ -184,11 +184,11 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">비밀번호</th>
 							<td style="padding-left: 1%;">
-								<input type="password" name="user_pwd" id="user_pwd" class="inputTxt" maxlength="20" style="width:45%" value="${user_pwd}"></input>
+								<input type="password" name="user_pwd" id="user_pwd" class="inputTxt" maxlength="20" style="width:100%; height: 34px;" value="${user_pwd}"></input>
 							</td>
 							<th style="padding-left: 1%; text-align: right;">조직ID</th>
 							<td style="padding-left: 1%;">
-								 <select name="duty_cd" id="duty_cd" class="inputTxt" style="width: 45%;" >
+								 <select name="duty_cd" id="duty_cd" class="inputTxt" style="width: 45%; height: 34px;" >
 									<c:forEach var="dutyCd" items="${duty_cd_list}" varStatus="status2">
 										<option value="<c:out value="${dutyCd.duty_cd}" />" 
 											<c:if test="${duty_cd == dutyCd.duty_cd }">selected="selected"</c:if>>
@@ -201,7 +201,7 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">비밀번호확인</th>
 							<td style="padding-left: 1%;">
-								<input type="password" name="user_pwd_chk" id="user_pwd_chk" class="inputTxt" style="width:45%"></input>
+								<input type="password" name="user_pwd_chk" id="user_pwd_chk" class="inputTxt" style="width:100%; height: 34px;"></input>
 							</td>
 							<th></th>
 							<td></td>
@@ -209,7 +209,7 @@
 						<tr>	
 							<th style="padding-left: 1%; text-align: right;" >사용자명</th>
 							<td align="left" style="width: 30%; padding-left: 1%;">
-								<input type="text" name="user_nm" id="user_nm" class="inputTxt" maxlength="10" style="width:90%" value=""></input>
+								<input type="text" name="user_nm" id="user_nm" class="inputTxt" maxlength="10" style="width:90%; height: 34px;" value=""></input>
 							</td>
 							<th></th>
 							<td></td>
@@ -217,12 +217,12 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">휴대 전화</th>
 							<td style="padding-left: 1%;" align="left" colspan="3">
-								<select name="cphone_num1" id="cphone_num1"  class="inputTxt" style="width:15%;  ">
+								<select name="cphone_num1" id="cphone_num1"  class="inputTxt" style="width:15%;   height: 34px;">
 									<option value="010">010</option>
 									<option value="011">011</option>
 									<option value="016">016</option>
 									<option value="019">019</option>
-								</select>-<input type="text" name="cphone_num2" id="cphone_num2" class="inputTxt" maxlength="4" style="width:25%;  margin-left: 1%;" value="${cphone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>-<input type="text" name="cphone_num3" id="cphone_num3"  maxlength="4" style="width:25%;   margin-left: 1%;" value="${cphone_num3}" class="inputTxt" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/> 
+								</select>-<input type="text" name="cphone_num2" id="cphone_num2" class="inputTxt" maxlength="4" style="width:25%; height: 34px;  margin-left: 1%;" value="${cphone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>-<input type="text" name="cphone_num3" id="cphone_num3"  maxlength="4" style="width:25%;   height: 34px; margin-left: 1%;" value="${cphone_num3}" class="inputTxt" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/> 
 							</td>
 							
 							<td></td>
@@ -231,14 +231,14 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">이메일</th>
 							<td style="padding-left: 1%;"  align="left" colspan="3">
-								<input type="text" name="email_id" id="email_id" maxlength="20"  class="inputTxt"  style="width:30%;   margin-right: 1%;" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> @ <input type="text" name="email_domain" id="email_domain"  class="inputTxt"  style="width:35%;  " value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
+								<input type="text" name="email_id" id="email_id" maxlength="20"  class="inputTxt"  style="width:30%;  height: 34px;  margin-right: 1%;" value="${email_id}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> @ <input type="text" name="email_domain" id="email_domain"  class="inputTxt"  style="width:35%;  height: 34px; " value="${email_domain}" onkeypress="fn_press_han(this);" onkeydown="fn_press_han(this);" style="ime-mode:disabled;"> 
  							</td>
  						</tr>
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">부서</th>
 							<td  align="left" style=" padding-left: 1%;" colspan="3">
 								<input type="hidden" id="dept_cd" name="dept_cd" value="${dept_cd}"/> 
-								<input type="text" id="dept_nm" name="dept_nm" class="inputTxt" value="${dept_nm}" style="width:30%"/>
+								<input type="text" id="dept_nm" name="dept_nm" class="inputTxt" value="${dept_nm}" style="width:30%; height: 34px;"/>
 								<input type="button" class="btn btn-default btn-sm" id="dept_sch_fbtn" name="dept_sch_fbtn"  value="부서검색" class="" >
 							</td>
 							
@@ -246,14 +246,14 @@
 						<tr>
 							<th style="padding-left: 1%; text-align: right;">내선전화</th>
 							<td style="padding-left: 1%;" colspan="3">
-							<select name="phone_num1" id="phone_num1" class="inputTxt" style="width:15%;">
+							<select name="phone_num1" id="phone_num1" class="inputTxt" style="width:15%; height: 34px;">
 									<option value="02">02</option>
 									<option value="031">031</option>
 									<option value="032">032</option>
 									<option value="033">033</option>
 								</select> 
-							<input type="text" name="phone_num2" id="phone_num2" class="inputTxt" maxlength="4" style="width:25%;  margin-left: 1%;" value="${phone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
-							-<input type="text" name="phone_num3" id="phone_num3" class="inputTxt" maxlength="4" style="width:25%;  margin-left: 1%;" value="${phone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
+							<input type="text" name="phone_num2" id="phone_num2" class="inputTxt" maxlength="4" style="width:25%;  height: 34px; margin-left: 1%;" value="${phone_num2}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
+							-<input type="text" name="phone_num3" id="phone_num3" class="inputTxt" maxlength="4" style="width:25%;  height: 34px; margin-left: 1%;" value="${phone_num3}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>
 							</td>
 							
 						</tr>

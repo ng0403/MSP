@@ -8,7 +8,6 @@
 .navi_div {
 	font-size: 15pt;
 	font-weight: bold;
-	margin: 15px;;
 	margin-left: 25px;
 }
 
@@ -121,36 +120,37 @@ label {
 /* insert 화면  */
 .container {
 	
-	margin-top: 70px; 
+	margin-top: 20px; 
 	width: 90%;
 	height: 500px;
 	
 }
 
-.reply_div{
-	float : right; 
-}
+ .reply_div{
+	/* float : right; */
+	height:50px; 
+} 
 
 #txt {
 	margin-right: 10px;
 }
 
-#TITLE, #CONTENT, #boardcontent{
+#TITLE, #CONTENT {
 	
-	width: 95%;
+	width: 99.5%;
 /* 	margin-left: 20px; */
 }
 
  #boardcontent { 
  	margin-top: 6px; 
- 	width: 95%;
+ 	width: 99.5%;
  	height: 300px;;
  }
  
  #reply_content{
- 	width: 1000px;
- 	margin-left: 35px;
- }
+ 	width: 99.5%;
+/*  	margin-left : -15px; */	
+  }
 
 #file {
 	
@@ -162,7 +162,7 @@ label {
 #btns {
 	
 	margin-top: 20px;
-	margin-left: 50px;
+ 
 }
 
 
@@ -182,7 +182,7 @@ label {
 	
 	margin-top: 20px;
 	margin-bottom: 20px;
-	text-align: right;
+	/* text-align: right; */
 	margin-right: 10px;
 /* 	margin-left: 980px;  */
 	

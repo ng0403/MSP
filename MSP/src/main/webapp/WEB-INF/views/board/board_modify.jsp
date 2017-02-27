@@ -7,11 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script src="${ctx}/resources/common/js/common.js"></script> --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" />
+<link rel="stylesheet" href="${ctx}/resources/common/css/mps/BoardCSS/boardCSS.css" type="text/css" /> 
+<%-- 
+<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<script src="${ctx}/resources/common/js/common.js"></script>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+ <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 <!-- 부가적인 테마 -->
@@ -23,7 +24,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
  
 
 <div class="navi_div">
@@ -35,12 +35,11 @@
 
 	<form role="form" name="modifyForm" action="/board/board_modify " method="post">
 	 <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardVO.BOARD_NO}"> 
-
-<div> <!-- 제목 div-->
-   	<label id="txt" >제  목</label> 
- <input type="text" class="form-control" name="TITLE" value= "${boardVO.TITLE}" />
-</div> 
-
+ 	
+	<div> <!-- 제목 div-->
+		<label id="txt" >제  목</label>
+		<input type="text" class="inputTxt" name= "TITLE" id="TITLE" value= "${boardVO.TITLE}" />
+	</div> 
 
 <div> 
  
@@ -99,8 +98,7 @@ $(document).ready(
 	function() {
 var formObj = $("form[role='form']");
 
-console.log(formObj);
- 
+  
 $("#board_list_fbtn").on("click", function(){  
     	location.href = "/board/boardInqr";
  	})

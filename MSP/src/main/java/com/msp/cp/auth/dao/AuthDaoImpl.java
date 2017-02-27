@@ -73,7 +73,7 @@ public class AuthDaoImpl implements AuthDao {
 		try {
 			
 			authExcel = sqlSession.selectList("auth.auth_list_excel",map);
-			System.out.println("authExcel Dao Impl : " + authExcel);
+			//System.out.println("authExcel Dao Impl : " + authExcel);
 			
 		} catch (Exception e) {
 			
@@ -86,7 +86,7 @@ public class AuthDaoImpl implements AuthDao {
 	@Override
 	public int authUpLoadExcel(File destFile) {
 		
-		System.out.println("Excel DAO Impl 시작 : ");
+		//System.out.println("Excel DAO Impl 시작 : ");
 		
 		int result=0;
 		ExcelReadOption excelReadOption = new ExcelReadOption();
@@ -97,11 +97,11 @@ public class AuthDaoImpl implements AuthDao {
         excelReadOption.setStartRow(2);
         
         List<Map<String, String>>excelContent =ExcelRead.read(excelReadOption);
-        System.out.println("Excel DAO Impl : " + excelContent);
+        //System.out.println("Excel DAO Impl : " + excelContent);
         
         for(Map<String, String> article: excelContent){
         	
-           System.out.println(article);
+           //System.out.println(article);
            result = sqlSession.insert("common.authExcelInsert", article);
         }
 		return result;

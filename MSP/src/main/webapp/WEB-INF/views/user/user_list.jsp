@@ -6,22 +6,22 @@
 <!DOCTYPE html>
 <html>
 <head>     
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
-<%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<script src="${ctx}/resources/common/js/mps/userJS/user_list_js.js"></script>
+<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
+<script src="${ctx}/resources/common/js/common.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userTabCSS.css" type="text/css" /> 
 <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />   
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />  --%>
-<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />  --%>
+<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> 
+<link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" /> 
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 <!-- 부가적인 테마 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <title>리스트</title>
 <script type="text/javascript">
 $(document).ready(function() { 
@@ -30,13 +30,13 @@ $(document).ready(function() {
 			opener.parent.location.href = "userlist";
 	 </c:if>
 	 /* 접속된 세션 아이디 입니다. */
-// 	 var sessionID = "${SessionID}" 
+	 var sessionID = "${SessionID}" 
 
 	if(sessionID == 'admin'){
 // 		 alert("관리자 권한으로 접속하셨습니다.");
 	 }else{
 // 		 alert("${SessionID}");
-			alert(" ** 접근권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **");
+			alert(" ** 편집 권한이 없습니다. ** \n ** 관리자 권한으로 로그인하세요. **");
 // 			**\n ** 확인버튼 클릭 시. **\n ** 로그인화면으로 이동합니다. **
 // 			location.href = "/logout";
 // 			location.href = "/";
@@ -125,20 +125,20 @@ $(document).ready(function() {
 		<!-- Search1 Div  -->
 		<div class="search1_div" style=" margin-left: 1%; margin-bottom: 1%;">
 <%-- 				<input type="hidden" id="sessionID" name="sessionID" value="${SessionID}">  --%>
-				<select id="active_key" name="active_key" class="selectField" style="padding: 0px 0px 5px 0px;">
+				<select id="active_key" name="active_key" class="selectField" style="padding: 0px 0px 2px 0px; height: 34px;">
 					<option value="" selected="selected">-검색조건-</option>
 					<option value="user_id_sch">사용자ID</option>
 					<option value="user_nm_sch">사용자명</option>
 					<option value="dept_nm_sch">부서명</option>
 				</select>	
-				<input type="text" id="user_sch_key" name="uesr_sch_key" style="width: 25%; " > &nbsp;
-				<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" value="검색"/>
+				<input type="text" id="user_sch_key" name="uesr_sch_key" style="width: 25%; height: 34px;" > &nbsp;
+				<input type="button" id="search_fbtn" class="btn btn-primary btn-sm" value="검색" style="width:55px; height: 34px;"/>
 				
 				<div class="right">
 				<c:choose>
 					<c:when test="${SessionID == 'admin'}">
-						<input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;">
-			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-info btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;">
+						<input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('userlistExcelForm');" style="float: right;width:70px; height: 30px;">
+			        	<input type="button" id="ExcelImpoartPopBtn"  class="btn btn-info btn-sm"  onclick="excelImportOpen();" value="엑셀등록" style="float: right;width:70px; height: 30px;">
 			        </c:when>
 			    </c:choose> 
 					
@@ -219,12 +219,12 @@ $(document).ready(function() {
 	<div id="viewLoadingImg" style="display: none;">
 			<img src="${ctx}/resources/image/viewLoading.gif">
 	</div> 
-	<div class="paging_div">
+	<div class="paging_div" style="padding-left: 1%;">
 				<div class="left">
 				<c:choose>
 					<c:when test="${SessionID == 'admin'}">
-						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;" />
-						<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;"  />
+						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;width:46px; height: 30px;" />
+						<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;width:46px; height: 30px;"  />
 					</c:when>
 				</c:choose>
 				</div>
