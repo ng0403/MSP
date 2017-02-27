@@ -71,7 +71,7 @@
 									<td><a href="#" onclick="boardDetail('${boardVO.BOARD_NO}');" id="${boardVO.BOARD_NO}">${boardVO.TITLE}</td>
 									<td>${boardVO.CREATED_BY} </td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREATED}" /></td>
-									<td>${boardVO.VIEW_CNT}</td>
+									<td>${boardVO.VIEW_CNT}</td> 	
 								</tr> 
 							</c:forEach>
 						</tbody>
@@ -144,8 +144,7 @@ $(document).ready(function() {
 
 	
  	function boardDetail(a){
- 		alert(a);
- 		
+ 		alert(a); 
  	} 
  	
     $("#board_add_fbtn").on("click", function(){
