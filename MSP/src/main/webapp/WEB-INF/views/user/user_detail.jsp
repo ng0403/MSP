@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<c:set var="SessionID" value="${sessionScope.user_id}" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script>
-<script src="${ctx}/resources/common/js/common.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" />
-<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
+<%-- <c:set var="ctx" value="${pageContext.request.contextPath }" /> --%>
+<%-- <c:set var="SessionID" value="${sessionScope.user_id}" /> --%>
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
+<%-- <script src="${ctx}/resources/common/js/mps/userJS/user_tab_js.js"></script> --%>
+<%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/mps/userCSS/userCSS.css" type="text/css" /> --%>
+<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
  <title>Insert title here</title>
  <c:if test="${result=='1'}" var = "result"> 
 	<script type="text/javascript">

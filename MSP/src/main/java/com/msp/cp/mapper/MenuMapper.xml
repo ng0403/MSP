@@ -154,17 +154,19 @@
 		]]>
 	</select>
 	<!-- 부서검색 Pop -->
-	<select id="menuTreeList" parameterType="map" resultType="com.msp.cp.menu.vo.MenuVO">
+	<select id="menuTreeList" parameterType="String" resultType="com.msp.cp.menu.vo.MenuVO">
 		SELECT
 			menu_cd
 			,menu_nm
 			,menu_url
+			,up_menu_cd
 			,menu_level
 			,active_flg
 		FROM TB_MENU 
 		WHERE
 			del_flg='N'
-		ORDER BY up_menu_cd ASC, menu_level ASC, menu_cd ASC
+		CONNECT BY PRIOR menu_cd = up_menu_cd
+		START WITH up_menu_cd is null
 	</select>
 
 </mapper>

@@ -25,7 +25,7 @@ public class MenuVO {
 	}
 	
 	public MenuVO(String menu_cd, String menu_nm, String menu_url, String menu_level, String up_menu_cd,
-			String active_flg, String active_key, ArrayList<MenuVO> sMenuVO, ArrayList<MenuVO> tMenuVO,
+			String active_flg, ArrayList<MenuVO> sMenuVO, ArrayList<MenuVO> tMenuVO,
 			ArrayList<MenuVO> fMenuVO) {
 		super();
 		this.menu_cd = menu_cd;
@@ -34,7 +34,6 @@ public class MenuVO {
 		this.menu_level = menu_level;
 		this.up_menu_cd = up_menu_cd;
 		this.active_flg = active_flg;
-		this.active_key = active_key;
 		this.sMenuVO = sMenuVO;
 		this.tMenuVO = tMenuVO;
 		this.fMenuVO = fMenuVO;

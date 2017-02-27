@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
-<script src="${ctx}/resources/common/js/mps/menu/menutree_pop.js"></script>
+<%-- <c:set var="ctx" value="${pageContext.request.contextPath }" /> --%>
+<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script> --%>
+<%-- <script src="${ctx}/resources/common/js/mps/menu/menutree_pop.js"></script> --%>
 <title>메뉴 조회</title>
 </head>
 <body>
