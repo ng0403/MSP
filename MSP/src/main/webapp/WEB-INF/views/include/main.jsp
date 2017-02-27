@@ -78,7 +78,6 @@ vertical-align:middle;
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/menu.css" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/subMenu.css" type="text/css" />
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/content.css" type="text/css" /> --%>
-	
 	<link rel="stylesheet" href="${ctx}/resources/common/css/standard/common.css" type="text/css" />
 	<%-- <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> --%>
 	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
