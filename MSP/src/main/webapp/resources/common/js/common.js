@@ -76,7 +76,7 @@ $(function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 15%;' id='pageInput' class='inputTxt' value='"+endPageNum+"'/>" 
+			+"<input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
@@ -91,7 +91,7 @@ $(function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 15%;' id='pageInput' class='inputTxt' value='"+endPageNum+"'/>" 
+			+"<input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='color:black; text-decoration: none;'>▶</a>";
 		}
@@ -99,7 +99,7 @@ $(function(){
 		{
 			pageContent ="<input type='hidden' id='pageNum' value='"+pageNum+"'/><input type='hidden' id='endPageNum' value='"+endPageNum+"'/>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum-1)+") id='pNum'> ◀ </a>"
-			+"<input type='text' style='width: 15%;' id='pageInput' class='inputTxt' value='"+pageNum+"'/>"
+			+"<input type='text' style='width: 50px;' id='pageInput' class='inputTxt' value='"+pageNum+"'/>"
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+endPageNum+") id='pNum'> / "+endPageNum+"</a>" 
 			+"<a style='cursor: pointer;' onclick="+fMessage+"("+(pageNum+1)+") id='pNum'> ▶ </a>";
 		} 
