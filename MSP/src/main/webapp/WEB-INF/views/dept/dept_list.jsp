@@ -131,7 +131,7 @@
 				</div>
 				<div class="paging_div">
 					<div class="left">
-						<input type="button" id="dept_add_fbtn" class="btn btn-primary btn-sm" value="추가">
+						<input type="button" id="dept_add_fbtn" class="btn btn-default btn-sm" value="추가">
 						<input type="button" id="dept_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
 					</div>
 					<div class="page" id="paging_div">	
@@ -257,7 +257,7 @@
 					<div class="btn_div">
 						<div class="right">
 							<input type="button" id="dept_save_fbtn" class="btn btn-primary btn-sm" value="저장">
-							<input type="button" id="dept_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
+							<input type="button" id="dept_edit_nfbtn" class="btn btn-default btn-sm" value="편집">
 							<input type="button" id="dept_reset_nfbtn" class="btn btn-default btn-sm" value="초기화">
 						</div>
 					</div>
