@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<%-- <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
+<script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
 <script src="${ctx}/resources/common/js/common.js"></script>
-<script src="${ctx}/resources/common/js/mps/menu/menu_list.js"></script> --%>
+<script src="${ctx}/resources/common/js/mps/menu/menu_list.js"></script> 
 <title>메뉴관리화면</title>
 
 </head>
@@ -31,15 +31,15 @@
 		<div class="search_div">
 			<div class="search2_div">
 				<!-- <form id="searchForm" name="searchForm"> -->
-					<label>활성상태</label>
-					<select id="active_key" name="active_key" class="selectField">
-						<option value="" selected="selected">전체</option>
-						<option value="Y">활성화</option>
-						<option value="N">비활성화</option>
-					</select>
+<!-- 					<label>활성상태</label> -->
+<!-- 					<select id="active_key" name="active_key" class="selectField"> -->
+<!-- 						<option value="" selected="selected">전체</option> -->
+<!-- 						<option value="Y">활성화</option> -->
+<!-- 						<option value="N">비활성화</option> -->
+<!-- 					</select> -->
 					<label>메뉴명</label>
-					<input type="text" id="menu_nm_key" name="menu_nm_key" style="width:50%"> &nbsp;
-					<input type="button" id="menu_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
+					<input type="text" id="menu_nm_key" name="menu_nm_key" class="inputTxt" style="width:200px;"> &nbsp;
+					<input type="button" id="menu_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 				<!-- </form> -->
 			</div>
 		</div>
@@ -143,25 +143,25 @@
 							<tr>
 								<th class="dc">메뉴ID</th>
 								<td>
-									<input type="text" id="menu_cd" name="menu_cd">
+									<input type="text" id="menu_cd" name="menu_cd" class="inputTxt" >
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">메뉴명</th>
 								<td>
-									<input type="text" id="menu_nm" name="menu_nm">
+									<input type="text" id="menu_nm" name="menu_nm" class="inputTxt" >
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">메뉴URL</th>
 								<td>
-									<input type="text" id="menu_url" name="menu_url">
+									<input type="text" id="menu_url" name="menu_url" class="inputTxt">
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">메뉴레벨</th>
 								<td>
-									<select id="menu_level" name="menu_level">
+									<select id="menu_level" name="menu_level"  style="width:190px;">
 										<option value="0">메뉴 계층을 선택해주세요.</option>
 										<c:choose>
 											<c:when test="${not empty level_list}">
@@ -179,14 +179,14 @@
 							<tr>
 								<th class="dc">상위메뉴ID</th>
 								<td>
-									<input type="text" id="up_menu_cd" name="up_menu_cd">
+									<input type="text" id="up_menu_cd" name="up_menu_cd" class="inputTxt">
 									<input type="button" id="menuInqr_popup_fbtn" class="btn btn-primary btn-sm" value="메뉴검색">
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">상위메뉴명</th>
 								<td>
-									<input type="text" id="up_menu_nm" name="up_menu_nm">
+									<input type="text" id="up_menu_nm" name="up_menu_nm" class="inputTxt">
 								</td>
 							</tr>
 							<tr>
@@ -205,7 +205,7 @@
 						<div class="right">
 							<input type="button" id="menu_save_fbtn" class="btn btn-primary btn-sm" value="저장">
 							<input type="button" id="menu_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
-							<input type="button" id="menu_reset_nfbtn" class="btn btn-info btn-sm" value="초기화">
+							<input type="button" id="menu_reset_nfbtn" class="btn btn-default btn-sm" value="초기화">
 						</div>
 					</div>
 				</form>
