@@ -46,11 +46,14 @@ function initLogin() {
    if ($("#loginResult").val() == "LOGIN_FAIL1") {
       alert("로그인 정보가 올바르지 않습니다. 다시 입력해 주십시오.");
       location.href="${ctx}/";
+      location.href = "/logout"
    } else if ($("#loginResult").val() == "LOGIN_FAIL2") {
       location.href="${ctx}/";
+      location.href = "/logout"
    }else if ($("#loginResult").val() == "LOGIN_DENINED") {
       alert("로그인이 3회 이상 실패하였습니다. 관리자에게 문의해 주십시오.");
       location.href="${ctx}/";
+      location.href = "/logout"
    }
    // 포커스 처리
    $('#user_id').focus();

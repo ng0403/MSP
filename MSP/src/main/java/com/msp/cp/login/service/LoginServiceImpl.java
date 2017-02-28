@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println("getUser_pwd : " + userInfo.getUser_pwd());
+				System.out.println("getUser_pwd : " + pswdno );/*userInfo.getUser_pwd()*/
 				// 비밀번호가 일치하는 경우
 				if (userInfo.getUser_pwd().equals(pswdno)) {
 					
