@@ -33,13 +33,13 @@
 	<!-- Q&A 리스트, 조회화면 -->
 	<div class="search_div">
 		<div class="search2_div">
-	    	<form name="frm_QnA" id="frm_QnA" action="/board/search_QnA"	enctype="multipart/form-data"  method="post">
-	
+<!-- 	    	<form name="frm_QnA" id="frm_QnA" action="/board/search_boardInqr"	enctype="multipart/form-data"  method="post">
+ -->	
 				<label >제  목</label>
-				<input type="text" id="keyword" name="keyword" class="inputTxt" > &nbsp; 
+				<input type="text" id="keyword" name="keyword" class="inputTxt" onkeypress="pageInputRep(event, boardListInqr);" > &nbsp; 
 	
-			 	<input type="button" id="dept_inqr_fbtn" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
-		 </form>  
+			 	<input type="button" onclick="boardListInqr(1);" value="검색" id="board_inqr_fbtn" class="btn btn-default btn-sm" value="검색">
+		<!--  </form>   -->
 		</div>
 	</div>
 
@@ -91,18 +91,18 @@
 					<input type="hidden" id="PageNum" value="${pageNum}"/>
 					<c:choose>
 						<c:when test="${page.endPageNum == 1}">
-							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/>  
+							<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, boardListInqr);" style='width: 50px; padding: 3px; '/>  
 							<a style="color: black;"> / ${page.endPageNum}</a>
 							<a style="color: black;"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.startPageNum}">
-							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRep(event, boardListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="boardListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
 							<a href="#" onclick="boardListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 						</c:when>
 						<c:when test="${pageNum == page.endPageNum}">
 							<a href="#" onclick="boardListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
-							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, menuListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
+							<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRep(event, boardListInqr);" style='width: 50px; padding: 3px; '/> /&nbsp;
 							<a href="#" onclick="boardListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
 						</c:when>
 						<c:otherwise>
@@ -239,20 +239,12 @@ $(document).ready(function() {
 		});
 	}
 	 
-	 
-	//페이지 엔터시 이벤트
-	$(document).on("keypress","#pageInput",function(){
-		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if (keycode == '13') {
-			pageInputRep(event, menuListInqr);
-		}
-	})
 	
 	//페이지 엔터시 이벤트
 	$(document).on("keypress","#pageInput",function(){
 		var keycode = (event.keyCode ? event.keyCode : event.which);
 		if (keycode == '13') {
-			pageInputRep(event, menuListInqr);
+			pageInputRep(event, boardListInqr);
 		}
 	})
 	 
