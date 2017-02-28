@@ -215,7 +215,7 @@ function viewLoadingHide(){
                <input type="text" id="auth_id_sch" name="auth_id_sch" class="inputTxt" style="width: 10%; height: 34px;"> &nbsp;&nbsp;
                <label>메뉴명</label>&nbsp;
                <input type="text" id="menu_nm_sch" name="menu_nm_sch" class="inputTxt" style="width: 20%; height: 34px;"> &nbsp;&nbsp;
-               <input type="button" id="search_fbtn" class="btn btn-default btn-sm" onclick="fn_menuAuthSearch(1)" value="검색">
+               <input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_menuAuthSearch(1)" value="검색">
                
             <!-- Paging Form -->
             <form id="menuAuthlistPagingForm" method="post" action="menuAuthInqr">
