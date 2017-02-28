@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- <c:set var="SessionID" value="${sessionScope.user_id}" />
+<c:set var="ctx" value="${pageContext.request.contextPath }" />
  <c:set var="SessionID" value="${sessionScope.user_id}" />
 <%-- <%@include file="../include/header.jsp"%> --%>
 
@@ -84,20 +84,18 @@
 	
 	</div>
  
-	<div class="col-md-12" id="reply_list" style="margin-top:10px">
-		<table id = "reply_table" class="table"> 
+	<div class="col-md-12" style="margin-top:10px">
+		<table id = "reply_table" class="table">
+		<thead class="reply_list">
+		
+		</thead>
 		</table> 
 	</div> 
 
 </div>	
  
- <%-- <div class="paging_div">
-	
-	 	<div class="left">
-		   <input type="button" id = "board_add_fbtn"  class = "btn btn-primary btn-sm" value="추가"/> 
- 		    <input type="button" id ="board_remove_fbtn" class="btn btn-primary btn-sm" value="삭제"  onclick="deleteAction() "/>
-		</div> 
-		
+  <div class="paging_div">
+	 
 		<div class="page" id="paging_div">	
 					<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
 					<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
@@ -129,7 +127,7 @@
 		
 		<div class="right">
  		</div> 
-	</div> --%>
+	</div>  
  
  
 <script>
@@ -157,8 +155,9 @@ $("#board_list_fbtn").on("click", function(){
 				success : function(result) {
 					 
 					if(result=="success"){
-						ajax_list();
-					}
+				  		replyListInqr(1); 
+
+ 					}
 					  
 				} 
 		         
@@ -166,7 +165,7 @@ $("#board_list_fbtn").on("click", function(){
 		}
 	}
 	
-function ajax_list(){
+/* function ajax_list(){
 	 var BOARD_NO = $("#BOARD_NO").val();
 	 var liststr = "";
 	 var liststr1 ="";
@@ -201,7 +200,7 @@ function ajax_list(){
 	         
 			})  
 }
-
+ */
 	
 	 
  
@@ -214,28 +213,8 @@ $(document).ready(function(){
 	 var liststr2 = ""; 
      var formObj = $("form[role='form']");
 	 
-	
-	 ajax_list(); 
-	 
-  /*리스트 출력및 페이징 처리 함수*/
-	/* 	function replyListInqr(pageNum){ 
- 			 
-			$.post("/reply/search_replyInqr",{"pageNum":pageNum}, function(data){
-				
-				$(".reply_list").html(""); 
-				$(data.qna_list).each(function(){
-					 
-					var REPLY_NO = this.reply_NO;
-					var CREATED_BY = this.created_BY;
-					var CONTENT = this.CONTENT;
-					replyListOutput(REPLY_NO, CREATED_BY, CONTENT);
-				})
-				paging(data,"#paging_div", "replyListInqr");
-			}).fail(function(){
-				alert("목록을 불러오는데 실패하였습니다.")
-			})
-		} */
-	 
+     replyListInqr(1);
+	/*  ajax_list();   */
  
  $("#board_modify_fbtn").on("click", function(){
 	 
@@ -273,7 +252,7 @@ $(document).ready(function(){
 	 }
  }) 
   
-  function ajax_list(){
+  /* function ajax_list(){
  	 $.ajax({
 			url : '/reply/reply_list/' + BOARD_NO,
 			headers : {
@@ -303,7 +282,7 @@ $(document).ready(function(){
 			} 
 	         
 			})  
- }
+ } */
  
   
  $("#reply_add_fbtn").on("click", function() {
@@ -312,6 +291,7 @@ $(document).ready(function(){
 	 var REPLY_CONTENT = REPLY_CONTENT_OBJ.val();
   	 var CREATED_BY = "${SessionID}" ;
   	 
+  
   	$.ajax({
 		type:'POST',
 		url:'/reply/reply_add',
@@ -323,7 +303,7 @@ $(document).ready(function(){
 		contentType: false,
 		data:  JSON.stringify({"board_NO":BOARD_NO, "reply_CONTENT":REPLY_CONTENT, "created_BY":CREATED_BY}),
 		success:function(result){
-  				ajax_list();
+		  		replyListInqr(1); 
    				$("#reply_content").blur();
 	 
 			} 
@@ -333,6 +313,39 @@ $(document).ready(function(){
   
 
 })
+
+	 
+  /*리스트 출력및 페이징 처리 함수*/
+	 function replyListInqr(pageNum){ 
+	 	var BOARD_NO = $("#BOARD_NO").val(); 
+ 			$.post("/reply/search_replyInqr",{"BOARD_NO":BOARD_NO, "pageNum":pageNum}, function(data){
+				
+				$(".reply_list").html(""); 
+				$(data.qna_list).each(function(){
+					 
+					var REPLY_NO = this.reply_NO;
+					var CREATED_BY = this.created_BY;
+					var CONTENT = this.reply_CONTENT;
+					replyListOutput(REPLY_NO, CREATED_BY, CONTENT);
+				})
+				paging(data,"#paging_div", "replyListInqr");
+			}).fail(function(){
+				alert("목록을 불러오는데 실패하였습니다.")
+			})
+		}  
+
+/* 리스트 출력 함수 */
+	function replyListOutput(REPLY_NO, CREATED_BY, CONTENT){
+		 
+		var reply_Tr = $("<tr>");
+		/* var reply_td = $("<td style='width:10%;'>"); */
+		var reply_td = $("<th class='col-sm-1'>" + CREATED_BY + "</th> <th class='col-sm-10'>" +CONTENT+ "<span style='float:right' class='glyphicon glyphicon-remove' id = '"+REPLY_NO+"' onclick='remove_reply(this.id);'></span> </th>")
+/* 		reply_td.html("<th class='col-sm-1'>" + CREATED_BY + "</th> <th class='col-sm-10'>" +CONTENT+ "<span style='float:right' class='glyphicon glyphicon-remove' id = '"+REPLY_NO+"' onclick='remove_reply(this.id);'></span> </th>");
+ */		  
+		reply_Tr.append(reply_td); 
+		$(".reply_list").append(reply_Tr);
+ 			
+	} 
  
 </script>
 

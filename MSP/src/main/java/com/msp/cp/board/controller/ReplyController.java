@@ -84,11 +84,14 @@ public class ReplyController {
 		public @ResponseBody Map<String, Object> search_reply_list( ModelMap model, HttpServletRequest request,
 														   @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 			System.out.println("search entering1111");
- 		    
-		    Map<String,Object> map = new HashMap<String,Object>();
+	 		String BOARD_NO = request.getParameter("BOARD_NO");
+ 	 		
+	 		System.out.println("REPLY_NO !" + BOARD_NO);
+ 		    Map<String,Object> map = new HashMap<String,Object>();
 		    
  			map.put("pageNum", pageNum);
-
+ 			map.put("BOARD_NO", BOARD_NO);
+ 			
 			PagerVO page = replyService.getReplyListCount(map);
 			System.out.println("page?" + page.toString());
 			if(page.getEndRow()==1){

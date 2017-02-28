@@ -39,7 +39,7 @@ public class ReplyServiceImpl implements ReplyService {
 		int boardPageNum = (Integer)map.get("pageNum");
 		int totalRowCount = replyDao.ReplyListCount("replyListCount", map);
 		
-		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 10, 999);
+		PagerVO page = new PagerVO(boardPageNum, totalRowCount, 4, 999);
 		
 		return page;
 	}

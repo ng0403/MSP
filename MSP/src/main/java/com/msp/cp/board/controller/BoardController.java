@@ -127,7 +127,7 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.POST)
-	public String  board_insert(MultipartHttpServletRequest multi, HttpServletRequest request, BoardVO attach) { 
+	public String  board_insert(MultipartHttpServletRequest multi, HttpServletRequest request, BoardVO attach, HttpSession session) { 
  		  
 		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
 		 Iterator<String> iterator = multipartHttpServletRequest.getFileNames();

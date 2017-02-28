@@ -28,6 +28,24 @@ WHERE BOARD_NO = #{BOARD_NO}
 		 FROM TB_REPLY
 		where BOARD_NO = #{BOARD_NO}   
 		</select>
+		
+<select id="SearchList"  parameterType="map" resultType="com.msp.cp.board.vo.ReplyVO">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT REPLY_NO, REPLY_CONTENT, to_char(CREATED,'yy-mm-dd hh:mi') CREATED, CREATED_BY
+         FROM TB_REPLY
+         WHERE 
+         	BOARD_NO = #{BOARD_NO} 
+         ORDER BY REPLY_NO DESC ) A
+     ) X
+     <![CDATA[
+        WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
+	 ]]>
+</select>		
+		
+		
+		
 
 
 
