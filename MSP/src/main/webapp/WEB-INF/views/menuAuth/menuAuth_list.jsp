@@ -273,7 +273,7 @@ function viewLoadingHide(){
          <!-- Button Div -->
          <div class="paging_div">
             <div class="left">
-               <input type="button" id="menuAuth_add_btn" class="btn btn-primary btn-sm" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가"/> 
+               <input type="button" id="menuAuth_add_btn" class="btn-default btn" data-target="#menuAuthAddLayer" data-toggle="modal" value="추가"/> 
                <input type="button" id="menuAuth_del_btn" class="btn btn-primary btn-sm" value="삭제" onclick="menuAuthDel()" />
             </div>
             

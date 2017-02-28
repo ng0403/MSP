@@ -45,8 +45,8 @@
                   </form>
                   
                   <div>
-                     <input type="button" id="menuAuthMdfy_btn" class="btn btn-primary btn-sm" data-dismiss="modal" 
-                             style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="수정"/>
+                     <input type="button" id="menuAuthMdfy_btn" class="btn-default btn" data-dismiss="modal" 
+                             style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="편집"/>
                      <input type="button" id="menuAuthClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
                             style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="닫기"/>
                   </div>

@@ -230,7 +230,7 @@ $(document).ready(function() {
             <!-- Button Div -->
             <div class="paging_div">
                <div class="left">
-                  <input type="button" id="code_add_btn" class="btn btn-primary btn-sm" value="추가" /> 
+                  <input type="button" id="code_add_btn" class="btn-default btn" value="추가" /> 
                   <input type="button" id="code_del_btn" class="btn btn-primary btn-sm" value="삭제" />
                </div>
                
@@ -308,8 +308,8 @@ $(document).ready(function() {
             
             <!-- Button Div -->
             <div class="btn02">
-               <div class="left">
-                  <input type="button" id="codeMaster_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
+               <div class="right">
+                  <input type="button" id="codeMaster_add_btn" class="btn-default btn" value="추가" style="display: none" /> 
                   <input type="button" id="codeMaster_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
                </div>
             </div>
@@ -364,9 +364,9 @@ $(document).ready(function() {
             
             <!-- Button Div -->
             <div class="btn02">
-               <div class="left">
-                  <input type="button" id="codeDetail_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
-                  <input type="button" id="codeDetail_mdfy_btn" class="btn btn-primary btn-sm" value="수정" style="display: none" /> 
+               <div class="right">
+                  <input type="button" id="codeDetail_add_btn" class="btn-default btn" value="추가" style="display: none" /> 
+                  <input type="button" id="codeDetail_mdfy_btn" class="btn-default btn" value="편집" style="display: none" /> 
                   <input type="button" id="codeDetail_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
                </div>
             </div>
