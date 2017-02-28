@@ -18,13 +18,14 @@ function menuTreeListInqr(){
 	$.post("/menu/menuTreeInqr", function(data){
 		$(".sidebar-menu").html("");
 		$(data).each(function(){
+			//console.log(data);
  			var menu_cd = this.menu_cd;
 			var menu_nm = this.menu_nm;
 			var up_menu_cd = this.up_menu_cd;
 			var menu_url = this.menu_url;
 			var menu_level = this.menu_level;
 			var active_flg = this.active_flg;
-			
+
 			menuTreeMainListOutput(menu_cd, menu_nm, up_menu_cd, menu_url, menu_level, active_flg);
 			
 		})
@@ -48,11 +49,11 @@ function menuTreeMainListOutput(menu_cd, menu_nm, up_menu_cd, menu_url, menu_lev
 		menuT_li.attr("data_cd",menu_cd);
 		menuT_li.attr("data_up_cd",up_menu_cd);
 		menuT_li.attr("data_level",menu_level);
-		
+		//alert(menu_url);
 		menuT_a.attr("href", menu_url);
-//		menuT_a.attr("href", "#");
+		//menuT_a.attr("href", "#");
 //		menuT_a.attr("onClick", "changeContent("+menu_url+")");
-//		menuT_a.attr("onClick", "changeContent('/menu/menuInqr')");
+		//menuT_a.attr("onClick", "changeContent('/menu/menuInqr')");
 			
 		menuT_nm_span.attr("style","color:#ECF0F5;");
 		
@@ -78,15 +79,15 @@ function menuTreeMainListOutput(menu_cd, menu_nm, up_menu_cd, menu_url, menu_lev
 }
 
 function changeContent(url){
-//	alert(url);
-//	if(url != ''){
-//		alert(url);
-//		$("#main_center1").children().remove().load(url);
-//	}
+	//alert(url);
+	if(url != ''){
+		alert(url);
+		$("#main_center1").children().remove().load(url);
+	}
 	// 동적 폼생성 POST 전송
-	var $form = $('<form></form>');
+	/*var $form = $('<form></form>');
      $form.attr('action', url);
      $form.attr('method', 'post');
      $form.appendTo('body');
-     $form.submit();
+     $form.submit();*/
 }

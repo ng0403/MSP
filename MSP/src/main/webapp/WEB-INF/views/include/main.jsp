@@ -44,6 +44,9 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
 	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+	
+	<script src="${ctx}/resources/common/css/mps/dept/dept_list.css"></script> 
+	
 	<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> 
 	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">
 	
@@ -54,6 +57,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 	<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 	
+	<script src="${ctx}/resources/common/js/mps/dept/dept_list.js"></script> 
+
 <!-- 	메뉴권한  -->
 <%-- 	<script src="${ctx}/resources/common/js/mps/menuAuthJS/menuAuth_list.js"></script> --%>
 	<!-- 	사용자  -->
