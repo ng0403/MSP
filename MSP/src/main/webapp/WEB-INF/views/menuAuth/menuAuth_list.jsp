@@ -23,8 +23,8 @@
 <title>MenuAuth List</title>
 
 <style type="text/css">
-#menuAuthMask {position:absolute; z-index:10000; background-color:#000; display:none; left:0; top:0;}
-#menuAuthInsertMask {position:absolute; z-index:11000; background-color:#000; display:none; left:0; top:0;}
+#menuAuthMask {position:absolute; z-index:9000; background-color:#000; display:none; left:0; top:0;}
+#menuAuthInsertMask {position:absolute; z-index:10000; background-color:#000; display:none; left:0; top:0;}
 
 .menuAuthWindow {display: none; position:absolute; width:50%; height:55%; left:28%; top:30%; z-index:10000;
             background-color: white; overflow: auto;}   
