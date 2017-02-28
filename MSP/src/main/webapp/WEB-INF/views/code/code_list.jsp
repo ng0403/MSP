@@ -186,12 +186,14 @@ $(document).ready(function() {
             
             <label>공통코드명</label>&nbsp;
                  <input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50" style="width: 20%; height: 34px;"> &nbsp;&nbsp;
-               <input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색">   
-               
+               <input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색"> 
+               <input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right;">
          <!-- Paging Form -->
          <form id="codelistPagingForm" method="post" action="codeInqr"></form>
          <!-- Excel -->
          <form id="codelistExcelForm" method="post" action="${ctx}/code/codeInqr"></form>
+         
+         
       </div>
    </div>
      
@@ -267,9 +269,6 @@ $(document).ready(function() {
                   </c:choose>
                </div>
                
-               <div class="right">
-                  <input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right;">
-               </div>
             </div>
          </div>
 
@@ -309,8 +308,8 @@ $(document).ready(function() {
             <!-- Button Div -->
             <div class="btn02">
                <div class="right">
-                  <input type="button" id="codeMaster_add_btn" class="btn-default btn" value="추가" style="display: none" /> 
-                  <input type="button" id="codeMaster_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
+                  <input type="button" id="codeMaster_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
+                  <input type="button" id="codeMaster_reset_btn" class="btn-default btn" value="취소" style="display: none" />
                </div>
             </div>
             
@@ -332,7 +331,7 @@ $(document).ready(function() {
                            <input type="text" name="grp_cd" id="grp_cd1" class="inputTxt" style="width: 90%" value="${grp_cd}" readonly="readonly" />
                         </td>
                         <td>
-                           <input type="button" class="btn btn-default btn-sm" name="selectGrp" id="sel_grp1" value="선택" 
+                           <input type="button" class="btn btn-primary btn-sm" name="selectGrp" id="sel_grp1" value="선택" 
                                   style="width: 90%; display: none; text-align: center;" onclick="fn_selGrpPop()" readonly="readonly"/> 
                         </td>
                         <td>
@@ -345,13 +344,13 @@ $(document).ready(function() {
                         </td>
                         <th>상세코드명</th>
                         <td>
-                           <input type="text" name="code_txt" id="code_txt" class="inputTxt" style="width: 90%" value="${code_txt}" maxlength="100" readonly="readonly"/>
+                           <input type="text" name="code_txt" id="code_txt" class="inputTxt" style="width: 90%" value="${code_txt}" maxlength="100"/>
                         </td>
                      </tr>
                      <tr>   
                         <th>상세코드<br>설명</th>
                         <td>
-                           <input type="text" name="code_desc" id="code_desc" class="inputTxt" maxlength="500" style="width: 90%;" value="${code_desc}" readonly="readonly"/>
+                           <input type="text" name="code_desc" id="code_desc" class="inputTxt" maxlength="500" style="width: 90%;" value="${code_desc}"/>
                         </td>
                         <td>
                         </td>
@@ -365,9 +364,9 @@ $(document).ready(function() {
             <!-- Button Div -->
             <div class="btn02">
                <div class="right">
-                  <input type="button" id="codeDetail_add_btn" class="btn-default btn" value="추가" style="display: none" /> 
-                  <input type="button" id="codeDetail_mdfy_btn" class="btn-default btn" value="편집" style="display: none" /> 
-                  <input type="button" id="codeDetail_reset_btn" class="btn btn-primary btn-sm" value="취소" style="display: none" />
+                  <input type="button" id="codeDetail_add_btn" class="btn btn-primary btn-sm" value="추가" style="display: none" /> 
+                  <input type="button" id="codeDetail_mdfy_btn" class="btn btn-primary btn-sm" value="편집" style="display: none" /> 
+                  <input type="button" id="codeDetail_reset_btn" class="btn-default btn" value="취소" style="display: none" />
                </div>
             </div>
          </div>
