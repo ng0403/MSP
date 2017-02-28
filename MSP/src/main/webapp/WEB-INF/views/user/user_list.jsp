@@ -223,7 +223,7 @@ $(document).ready(function() {
 				<div class="left">
 				<c:choose>
 					<c:when test="${SessionID == 'admin'}">
-						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-primary btn-sm"  value="추가"style="float: left;width:46px; height: 30px;" />
+						<input type="button" id="userAdd_fbtn" onclick="userTabOpen()"  class="btn btn-default btn-sm"  value="추가"style="float: left;width:46px; height: 30px;" />
 						<input type="button" id="iuserDelBtn"  class="btn btn-primary btn-sm"  value="삭제" style="float: left;width:46px; height: 30px;"  />
 					</c:when>
 				</c:choose>
