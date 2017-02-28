@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta content="blendTrans(Duration=0.0)" http-equiv="Page-Enter" />
+<meta content="blendTrans(Duration=0.0)" http-equiv="Page-Exit" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -155,7 +157,7 @@
 						</tr>
 						<tr>
 							<th style="font-weight: bold;">활성화여부</th>
-							<td style="text-align: left; ">o
+							<td style="text-align: left; ">
 								<input type="radio" class="active_flg" name="active_flg" value="Y" style="margin-left: 73px;"/>Y &nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="radio" class="active_flg" name="active_flg" value="N"/>N
 							</td>
