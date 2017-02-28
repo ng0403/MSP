@@ -104,7 +104,7 @@
 			</div>
 			<div class="paging_div">
 				<div class="left">
-					<input type="button" id="auth_add_fbtn" class="btn btn-primary btn-sm" value="추가"/>
+					<input type="button" id="auth_add_fbtn" class="btn btn-default btn-sm" value="추가"/>
 		  			<input type="button" id="auth_del_fbtn" class="btn btn-primary btn-sm" value="삭제"/>
 				</div>
 				
@@ -155,8 +155,8 @@
 						</tr>
 						<tr>
 							<th style="font-weight: bold;">활성화여부</th>
-							<td>
-								<input type="radio" class="active_flg" name="active_flg" value="Y"/>Y &nbsp;&nbsp;&nbsp;&nbsp;
+							<td style="text-align: left; ">o
+								<input type="radio" class="active_flg" name="active_flg" value="Y" style="margin-left: 73px;"/>Y &nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="radio" class="active_flg" name="active_flg" value="N"/>N
 							</td>
 						</tr>
@@ -170,7 +170,7 @@
 				
 				<div class="right">
 					<input type="button" id="auth_reset_nfbtn" class="btn btn-default btn-sm" value="초기화" style="display:none"  />
-					<input type="button" id="auth_edit_nfbtn"  class="btn btn-primary btn-sm" value="편집" style="display:none" />
+					<input type="button" id="auth_edit_nfbtn"  class="btn btn-default btn-sm" value="편집" style="display:none" />
 	  				<input type="button" id="auth_save_fbtn"   class="btn btn-primary btn-sm" value="저장" style="display:none" />
 				</div>
 			</div> 
