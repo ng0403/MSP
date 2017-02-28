@@ -94,7 +94,7 @@
 				</div>
 			<div class="paging_div">
 				<div class="left">
-					<input type="button" id="menu_add_nfbtn" class="btn btn-primary btn-sm" value="추가">
+					<input type="button" id="menu_add_nfbtn" class="btn btn-default btn-sm" value="추가">
 					<input type="button" id="menu_del_fbtn" class="btn btn-primary btn-sm" value="삭제">
 				</div>
 				<div class="page" id="paging_div">	
@@ -200,11 +200,11 @@
 					</table>
 					<div class="btn_div">
 						<div class="left">
-							<input type="button" id="menuTree_inqr_fbtn" class="btn btn-info btn-sm" value="메뉴트리확인">
+							<input type="button" id="menuTree_inqr_fbtn" class="btn btn-primary btn-sm" value="메뉴트리확인">
 						</div>
 						<div class="right">
 							<input type="button" id="menu_save_fbtn" class="btn btn-primary btn-sm" value="저장">
-							<input type="button" id="menu_edit_nfbtn" class="btn btn-primary btn-sm" value="편집">
+							<input type="button" id="menu_edit_nfbtn" class="btn btn-default btn-sm" value="편집">
 							<input type="button" id="menu_reset_nfbtn" class="btn btn-default btn-sm" value="초기화">
 						</div>
 					</div>

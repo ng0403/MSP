@@ -154,7 +154,8 @@
 					
 				FROM TB_DEPT d
 				WHERE
-					d.del_flg='N'
+					1=1
+					and d.del_flg='N'
 					and d.active_flg='Y'
 					<if test="dept_nm_key != null">
 						and d.dept_nm like '%'||#{dept_nm_key}||'%'
