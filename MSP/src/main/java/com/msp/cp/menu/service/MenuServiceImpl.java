@@ -79,9 +79,9 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<MenuVO> menuTreeList() {
+	public List<MenuVO> menuTreeList(String sessionID) {
 		// TODO Auto-generated method stub
-		List<MenuVO> list = menuDao.menuTreeList();
+		List<MenuVO> list = menuDao.menuTreeList(sessionID);
 		return list;
 	}
 

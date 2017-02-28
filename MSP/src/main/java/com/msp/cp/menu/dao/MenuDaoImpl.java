@@ -58,9 +58,9 @@ public class MenuDaoImpl implements MenuDao{
 	}
 
 	@Override
-	public List<MenuVO> menuTreeList() {
+	public List<MenuVO> menuTreeList(String sessionID) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("menu.menuTreeList");
+		return sqlSession.selectList("menu.menuTreeList", sessionID);
 	}
 
 }

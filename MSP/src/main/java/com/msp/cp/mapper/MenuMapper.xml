@@ -155,6 +155,7 @@
 	</select>
 	<!-- 부서검색 Pop -->
 	<select id="menuTreeList" parameterType="String" resultType="com.msp.cp.menu.vo.MenuVO">
+		
 		SELECT
 			menu_cd
 			,menu_nm

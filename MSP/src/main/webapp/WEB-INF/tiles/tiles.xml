@@ -18,12 +18,12 @@
 	 <put-attribute name="main_center1" value="/WEB-INF/views/user/user_list.jsp"/>
 	</definition>
 	<!-- 사용자 -->
-	<definition name="/user/user_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/user/user_list.jsp"/>
+	<definition name="/user/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/user/{1}.jsp"/>
 	</definition>
 	<!-- 권한 -->
-	<definition name="/auth/auth_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/auth/auth_list.jsp"/>
+	<definition name="/auth/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/auth/{1}.jsp"/>
 	</definition>
 	<!-- 게시판 -->
 	<definition name="/board/*" extends="layout_content">
@@ -39,24 +39,24 @@
 	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_detail.jsp"/>
 	</definition> -->
 	<!-- 공통코드 -->
-	<definition name="/code/code_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/code/code_list.jsp"/>
+	<definition name="/code/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/code/{1}.jsp"/>
 	</definition>
 	<!-- 부서 -->
-	<definition name="/dept/dept_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/dept/dept_list.jsp"/>
+	<definition name="/dept/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/dept/{1}.jsp"/>
 	</definition>
 	<!-- 메뉴 -->
-	<definition name="/menu/menu_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/menu/menu_list.jsp"/>
+	<definition name="/menu/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/menu/{1}.jsp"/>
 	</definition>
 	<!-- 사용자권한 -->
-	<definition name="/userAuth/user_auth_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/userAuth/user_auth_list.jsp"/>
+	<definition name="/userAuth/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/userAuth/{1}.jsp"/>
 	</definition>
 	<!-- 메뉴권한 -->
-	<definition name="/menuAuth/menuAuth_list" extends="layout_content">
-	 <put-attribute name="main_center1" value="/WEB-INF/views/menuAuth/menuAuth_list.jsp"/>
+	<definition name="/menuAuth/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/menuAuth/{1}.jsp"/>
 	</definition>
 	<!-- <definition name="/*/*" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/{1}/{2}.jsp"/>

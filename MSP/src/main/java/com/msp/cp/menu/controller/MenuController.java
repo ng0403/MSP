@@ -123,11 +123,11 @@ public class MenuController {
 	
 	@RequestMapping(value="/menuTreeInqr", method={RequestMethod.GET,RequestMethod.POST})
 	public ResponseEntity<List<MenuVO>> menuTreeList(HttpSession session){
-		
+		String sessionID = (String) session.getAttribute("user_id");
 		ResponseEntity<List<MenuVO>> entity = null;
 		
 		try{
-			entity = new ResponseEntity<>(menuService.menuTreeList(), HttpStatus.OK);
+			entity = new ResponseEntity<>(menuService.menuTreeList(sessionID), HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

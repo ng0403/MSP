@@ -22,6 +22,6 @@ public interface MenuService {
 
 	public List<MenuVO> searchListPop(Map<String, Object> map);
 
-	public List<MenuVO> menuTreeList();
+	public List<MenuVO> menuTreeList(String sessionID);
 
 }
