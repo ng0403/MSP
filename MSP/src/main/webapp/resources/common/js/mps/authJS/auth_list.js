@@ -9,8 +9,8 @@
 //	location.href = "/";
 //}
 //
-//var dept_cd = "";
-//var save_cd = "";
+var dept_cd = "";
+var save_cd = "";
 
 $(function(){
 
@@ -22,7 +22,7 @@ $(function(){
 	})
 	
 	$("#keyword").keypress(function(){
-		enterSearch(event, authListInqr(1));
+		enterSearch(event, authListInqr);
 	})
 	
 	/*권한ID 클릭 시 상세정보 출력 이벤트*/
@@ -146,12 +146,14 @@ function auth_goSearch(){
 /*리스트 출력및 페이징 처리 함수*/
 function authListInqr(pageNum){
 
-	var active_key = $("#active_key").val();
+//	var active_key = $("#active_key").val();
 	var keyword    = $("#keyword").val();
 		
 	$.post("/auth/search_list",{/*"active_key":active_key,*/ "keyword":keyword, "pageNum":pageNum}, function(data){
 		$(".auth_list").html("");
+		console.log(data);
 		$(data.auth_list).each(function(){
+			
 			var auth_id = this.auth_id;
 			var auth_nm = this.auth_nm;
 			var active_flg = this.active_flg;

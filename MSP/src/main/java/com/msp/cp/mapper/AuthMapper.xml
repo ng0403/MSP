@@ -27,9 +27,9 @@ FROM ( SELECT ROWNUM AS RNUM, A.*
 <!--        	 	<if test="active_key != null and active_key != '' " >    -->
 <!--             	AND ACTIVE_FLG = #{active_key} -->
 <!-- 		 	</if> -->
-<!-- 		 	<if test="keyword != null and keyword != ''" >    -->
-<!--             	AND AUTH_NM LIKE '%' || #{keyword} || '%' -->
-<!--          	</if> -->
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND AUTH_NM LIKE '%' || #{keyword} || '%'
+         	</if>
          ORDER BY AUTH_ID ASC ) A
      ) X
      <![CDATA[
