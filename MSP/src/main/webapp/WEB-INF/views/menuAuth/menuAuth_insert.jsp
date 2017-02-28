@@ -132,7 +132,7 @@ th, td {
                   </form>
                </div>
                <div id="btns">
-                    <input type="button" class="btn btn-primary btn-sm" id="menuAuth_save_btn" name="menuAuth_save_btn" value="저장" 
+                    <input type="button" class="btn-default btn" id="menuAuth_save_btn" name="menuAuth_save_btn" value="추가" 
                            style="font-size:11.5px; float:left; margin-left:1%;margin-top:1%;" onclick="menuAuthInsert()"/>
                      <input type="button" id="menuClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
                         style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="닫기"/>
