@@ -68,13 +68,13 @@ th, td {
                         <td style="width: 30%; text-align: left;">
                            <input type="text" class="inputTxt" id="auth_nm" name ="auth_nm" value="${auth_nm}" style="width:50%; background-color:#F2F2F2;" readonly="readonly"/>
                            <input type="hidden" id="auth_id" name="auth_id" value="${auth_id}">
-                           <input type="button" id="auth_id_pop" name="auth_id_pop" value="선택" class="btn btn-default btn-sm">
+                           <input type="button" id="auth_id_pop" name="auth_id_pop" value="선택" class="btn btn-primary btn-sm">
                         </td>
                         <th style="width: 20%; text-align: right;">메뉴명</th>
                         <td style="width: 30%; text-align: left;">
                            <input type="text" class="inputTxt" id="up_menu_nm" name="menu_nm" style="width: 50%;"/>
                            <input type="hidden" id="up_menu_cd" name="menu_cd" value="${menu_cd}">
-                           <input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택" class="btn btn-default btn-sm">
+                           <input type="button" id="menu_cd_pop" name="menu_cd_pop" value="선택" class="btn btn-primary btn-sm">
                         </td>
                      </tr>
                      <tr height="15px"></tr>
@@ -132,9 +132,9 @@ th, td {
                   </form>
                </div>
                <div id="btns">
-                    <input type="button" class="btn-default btn" id="menuAuth_save_btn" name="menuAuth_save_btn" value="추가" 
+                    <input type="button" class="btn btn-primary btn-sm" id="menuAuth_save_btn" name="menuAuth_save_btn" value="추가" 
                            style="font-size:11.5px; float:left; margin-left:1%;margin-top:1%;" onclick="menuAuthInsert()"/>
-                     <input type="button" id="menuClose" class="btn btn-primary btn-sm" data-dismiss="modal" 
+                     <input type="button" id="menuClose" class="btn-default btn" data-dismiss="modal" 
                         style="font-size:11px;margin-top:1%; margin-left:1%; float: left;" value="닫기"/>
                </div>
                
