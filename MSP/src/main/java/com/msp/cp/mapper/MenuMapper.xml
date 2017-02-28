@@ -157,26 +157,26 @@
 	<select id="menuTreeList" parameterType="String" resultType="com.msp.cp.menu.vo.MenuVO">
 		
 		SELECT
-         m.menu_cd
-         ,m.menu_nm
-         ,m.menu_url
-         ,m.up_menu_cd
-         ,m.menu_level
-         ,m.active_flg
-      FROM TB_MENU m, (
-                  select auth_id, menu_cd, menu_acc_auth 
-                     from tb_menu_auth 
-                   where auth_id = (
-                               select auth_id 
-                                  from tb_user_auth 
-                                  where user_id = #{sessionId} 
-                                  and active_flg = 'Y')) a
-      WHERE
-            m.menu_cd = a.menu_cd(+)
-         and del_flg='N'
-         and a.menu_acc_auth = 'Y'
-      CONNECT BY PRIOR m.menu_cd = m.up_menu_cd
-      START WITH m.up_menu_cd is null
+	         m.menu_cd
+			,m.menu_nm
+			,m.menu_url
+			,m.up_menu_cd
+			,m.menu_level
+			,m.active_flg
+		FROM TB_MENU m, (
+						select auth_id, menu_cd, menu_acc_auth 
+						from tb_menu_auth 
+						where auth_id = (
+										select auth_id 
+										from tb_user_auth 
+										where user_id = #{sessionId} 
+										and active_flg = 'Y')) a
+		WHERE
+			m.menu_cd = a.menu_cd(+)
+			and del_flg='N'
+			and a.menu_acc_auth = 'Y'
+		CONNECT BY PRIOR m.menu_cd = m.up_menu_cd
+		START WITH m.up_menu_cd is null
 	</select>
 
 </mapper>
