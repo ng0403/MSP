@@ -67,7 +67,7 @@
 		</div>
 		<div class="search_div">
 			<div class="search2_div">
-				<form id="searchForm" name="searchForm">
+				<!-- <form id="searchForm" name="searchForm"> -->
 <!-- 					<label>활성상태</label> -->
 <!-- 					<select id="active_key" name="active_key" class="selectField"> -->
 <!-- 						<option value="" selected="selected">전체</option> -->
@@ -77,7 +77,7 @@
 					<label id="label">부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key" class="form-control" > &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
-				</form>
+				<!-- </form> -->
 			</div>
 		</div>
 		<div class="list_div">
