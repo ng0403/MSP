@@ -815,7 +815,7 @@ $(document).ready(function() {
                });
                
             });
-         });h
+         });
          
        });
    
