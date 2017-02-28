@@ -75,7 +75,7 @@
 <!-- 						<option value="N">비활성화</option> -->
 <!-- 					</select> -->
 					<label id="label">부서명</label>
-					<input type="text" id="dept_nm_key" name="dept_nm_key" class="form-control" > &nbsp;
+					<input type="text" id="dept_nm_key" name="dept_nm_key" class="inputTxt" > &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 				<!-- </form> -->
 			</div>
@@ -140,23 +140,23 @@
 						<input type="hidden" id="PageNum" value="${pageNum}"/>
 						<c:choose>
 							<c:when test="${page.endPageNum == 1}">
-								<a style="color: black;"> ◀ </a><input type="text" id="pageInput" class="monPageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/>  
+								<a style="color: black;"> ◀ </a><input type="text" id="pageInput"  class="inputTxt" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/>  
 								<a style="color: black;"> / ${page.endPageNum}</a>
 								<a style="color: black;"> ▶ </a>
 							</c:when>
 							<c:when test="${pageNum == page.startPageNum}">
-								◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+								◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="pageInputRepDept(event);"  class="inputTxt" style='width: 50px; padding: 3px; '/> /&nbsp;
 								<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum" >${page.endPageNum}</a>
 								<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 							</c:when>
 							<c:when test="${pageNum == page.endPageNum}">
 								<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum"> ◀ </a>
-								<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+								<input type="text" id="pageInput" value="${page.endPageNum}" onkeypress="pageInputRepDept(event);" class="inputTxt" style='width: 50px; padding: 3px; '/> /&nbsp;
 								<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a> ▶
 							</c:when>
 							<c:otherwise>
 								<a href="#" onclick="deptListInqr('${pageNum-1}');" id="pNum" > ◀ </a>
-								<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepDept(event);" style='width: 50px; padding: 3px; '/> /&nbsp;
+								<input type="text" id="pageInput" value="${pageNum}" onkeypress="pageInputRepDept(event);" class="inputTxt" style='width: 50px; padding: 3px; '/> /&nbsp;
 								<a href="#" onclick="deptListInqr('${page.endPageNum}');" id="pNum">${page.endPageNum}</a>
 								<a href="#" onclick="deptListInqr('${pageNum+1}');" id="pNum"> ▶ </a>
 							</c:otherwise>
@@ -180,19 +180,19 @@
 							<tr>
 								<th class="dc">부서코드</th>
 								<td>
-									<input type="text" id="dept_cd" name="dept_cd">
+									<input type="text" id="dept_cd" name="dept_cd" class="inputTxt">
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">부서명</th>
 								<td>
-									<input type="text" id="dept_nm" name="dept_nm">
+									<input type="text" id="dept_nm" name="dept_nm" class="inputTxt">
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">부서전화</th>
 								<td>
-									<select id="dept_num1" name="dept_num1">
+									<select id="dept_num1" name="dept_num1" class="inputTxt">
 										<option value="02">02</option>
 										<option value="031">031</option>
 										<option value="032">032</option>
@@ -212,15 +212,15 @@
 										<option value="064">064</option>
 									</select>
 									<label id="hyphen">-</label>
-									<input type="text" id="dept_num2" name="dept_num2" class="pNum">
+									<input type="text" id="dept_num2" name="dept_num2"  class="inputTxt" maxlength="4">
 									<label id="hyphen">-</label>
-									<input type="text" id="dept_num3" name="dept_num3" class="pNum">
+									<input type="text" id="dept_num3" name="dept_num3"  class="inputTxt" maxlength="4">
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">팩스번호</th>
 								<td>
-									<select id="dept_fnum1" name="dept_fnum1">
+									<select id="dept_fnum1" name="dept_fnum1" class="inputTxt">
 										<option value="02">02</option>
 										<option value="031">031</option>
 										<option value="032">032</option>
@@ -240,15 +240,15 @@
 										<option value="064">064</option>
 									</select>
 									<label id="hyphen">-</label>
-									<input type="text" id="dept_fnum2" name="dept_fnum2" class="pNum">
+									<input type="text" id="dept_fnum2" name="dept_fnum2" class="inputTxt" maxlength="4">
 									<label id="hyphen">-</label>
-									<input type="text" id="dept_fnum3" name="dept_fnum3" class="pNum">
+									<input type="text" id="dept_fnum3" name="dept_fnum3" class="inputTxt" maxlength="4">
 								</td>
 							</tr>
 							<tr>
 								<th class="dc">활성화여부</th>
 								<td>
-									<input type="radio" class="active_flg" name="active_flg" value="Y"/>Y
+									<input type="radio" class="active_flg" name="active_flg" value="Y"/>Y&nbsp;&nbsp;
 									<input type="radio" class="active_flg" name="active_flg" value="N"/>N
 								</td>
 							</tr>
