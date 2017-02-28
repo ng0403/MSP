@@ -361,6 +361,7 @@ $(function(){
 					$("#menuAuthAdd").submit();
 					
 					alert("메뉴권한이 등록되었습니다.");
+					$('.menuOpen').click();
 				}
 				else
 				{
