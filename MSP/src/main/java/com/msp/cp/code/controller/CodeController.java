@@ -108,6 +108,8 @@ public class CodeController {
 		String session_userId = (String)session.getAttribute("user_id");
 		codeVo.setCreated_by(session_userId);
 		
+		System.out.println(codeVo.getCreated_by());
+		
 		codeService.insertCodeMaster(codeVo);
 				
 		return "redirect:/code/codeInqr";
@@ -140,8 +142,10 @@ public class CodeController {
 	@RequestMapping(value="/codeDetailAdd", method={RequestMethod.GET, RequestMethod.POST})
 	public String codeDetailInsert(CodeVO codeVo, HttpSession session)
 	{
-		String session_userId = (String)session.getAttribute("uesr_id");
+		String session_userId = (String)session.getAttribute("user_id");
 		codeVo.setCreated_by(session_userId);
+		
+		System.out.println(codeVo.getCreated_by());
 		
 		codeService.insertCodeDetail(codeVo);
 		
