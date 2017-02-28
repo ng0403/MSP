@@ -186,12 +186,14 @@ $(document).ready(function() {
             
             <label>공통코드명</label>&nbsp;
                  <input type="text" class="inputTxt" id="grp_nm_sch" name="grp_nm_sch" value="${grp_nm_sch}" maxlength="50" style="width: 20%; height: 34px;"> &nbsp;&nbsp;
-               <input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색">   
-               
+               <input type="button" id="search_fbtn" class="btn btn-primary btn-sm" onclick="fn_codeSearch(1)" value="검색"> 
+               <input type="button" value="엑셀출력"  class="btn btn-info btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right;">
          <!-- Paging Form -->
          <form id="codelistPagingForm" method="post" action="codeInqr"></form>
          <!-- Excel -->
          <form id="codelistExcelForm" method="post" action="${ctx}/code/codeInqr"></form>
+         
+         
       </div>
    </div>
      
@@ -267,9 +269,6 @@ $(document).ready(function() {
                   </c:choose>
                </div>
                
-               <div class="right">
-                  <input type="button" value="엑셀출력"  class="btn btn-primary btn-sm"  onclick="download_list_Excel('codelistExcelForm');" style="float: right;">
-               </div>
             </div>
          </div>
 
