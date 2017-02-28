@@ -71,17 +71,17 @@
 
 
 	<!-- 댓글div -->
-	<div id="reply_div" class="timeline-body" style ="height:50px; margin-top:10px "> 
-	
-		<div class="col-sm-11" style=" height:40px">
-			<textarea id = "reply_content" class="form-control" rows="2" id="content" style="width:90%" ></textarea>
+	<div id="reply_div" class="timeline-body" style ="height:50px; margin-top:10px; width:90% "> 
+ 
+		<div class="col-sm" style=" height:40px" style="float:left; width:70%">
+			<textarea id = "reply_content" class="form-control" rows="2" id="content" style="width:100%" ></textarea>
+ 
+		</div> 
+		<!-- 댓글 등록 버튼 -->
+		 <div id="detail_btn_div" class="reply_div col-md-4" style="float:right; margin-top:-40px; margin-right:-380px;" >
+	     <input type="button" id="reply_add_fbtn" class = "btn btn-primary btn-sm " value="저장"/> 
 		</div>
  
-		<!-- 댓글 등록 버튼 -->
-		<div id="detail_btn_div" class="reply_div col-md-1 " >
-			<input type="button" id="reply_add_fbtn" class = "btn btn-primary btn-sm " value="저장"/>
-		</div>
-	
 	</div>
  
 	<div class="col-md-12" style="margin-top:10px">
