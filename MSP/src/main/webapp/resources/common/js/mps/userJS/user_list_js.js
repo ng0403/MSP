@@ -125,7 +125,7 @@ function onPopup(user_id) {
 		})
 		popByMask("userDetailMask", "userDetailWindow");
 	}).fail(function(){
-		alert("메뉴 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
+		alert("사용자 상세정보를 불러오는데 실패하였습니다. 잠시 후에 다시 시도해 주세요.")
 		$('#userTabMask, #userTabWindow').hide();
 		$('#userDetailMask, #userDetailWindow').hide();
 		userListInqr(1);

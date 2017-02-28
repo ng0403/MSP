@@ -60,7 +60,8 @@ public class LoginController {
 			return "redirect:/user/userInqr";
 		}else{
 			// 로그인이 실패한 경우
-			return "redirect:/user/userInqr";
+			return "redirect:/" + "?loginResult=" + result;
+//			return "redirect:/";
 //			redirect:/" + "?loginResult=" + result
 		}
 		
