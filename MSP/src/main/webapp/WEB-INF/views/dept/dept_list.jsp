@@ -21,7 +21,6 @@
 <%-- <script src="${ctx}/resources/common/css/mps/dept/dept_list.css"></script> --%>
 <title>부서관리화면</title>
 <!-- <style type="text/css">
-
 #label {
 	float: left;
 	margin-top: 5px;
