@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="SessionID" value="${sessionScope.user_id}" />
@@ -6,10 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title> --%>
+
 <script src="${ctx}/resources/common/js/mps/include/left_navi.js"></script>
-</head>
-<body>
+
+<!-- </head>
+<body> -->
 
 <aside class="main-sidebar"  style="width:12%;">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -24,6 +26,7 @@
               <a href="#"><i class="fa fa-circle text-success"></i> <span style="color:#FCF9BC;">Online</span></a>
             </div>
           </div>
+          
           <!-- search form -->
           <!-- <form action="#" method="get" class="sidebar-form"  style="margin-top:2%;width:95%;">
             <div class="input-group">
@@ -98,5 +101,5 @@
         <!-- /.sidebar -->
       </aside>
 
-</body>
-</html>
+<!-- </body>
+</html> -->
