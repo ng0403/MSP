@@ -17,7 +17,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" />
 <link rel="stylesheet" href="${ctx}/resources/common/css/common_pop.css" type="text/css" />
-<script src="${ctx}/resources/common/js/common.js"></script>
+<%-- <script src="${ctx}/resources/common/js/common.js"></script> --%>
 <script src="${ctx}/resources/common/js/mps/menu/menu_list.js"></script> 
 <title>메뉴관리화면</title>
 
@@ -155,7 +155,7 @@
 							<tr>
 								<th class="dc">메뉴URL</th>
 								<td>
-									<input type="text" id="menu_url" name="menu_url" class="inputTxt">
+									<input type="text" id="menu_url" name="menu_url" class="inputTxt" maxlength="50">
 								</td>
 							</tr>
 							<tr>

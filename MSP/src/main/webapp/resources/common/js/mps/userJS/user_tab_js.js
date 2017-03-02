@@ -15,7 +15,7 @@ function ln_Close(e) {
  		$('#Ddept_pop_div').hide();
  	}
  	
-	function onlyNumber(event){
+/*	function onlyNumber(event){
 	 	event = event || window.event;
 	 	var keyID = (event.which) ? event.which : event.keyCode;
 	 	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8|| keyID == 9|| keyID == 18 || keyID == 46 || keyID == 37 || keyID == 39 ) 
@@ -31,14 +31,14 @@ function ln_Close(e) {
 	 	else
 	 		event.target.value = event.target.value.replace(/[^0-9]/g, "");
 	 }
-	 /* 숫자만 입력받기 */
+	  숫자만 입력받기 
 	   function fn_press(event, type) {
 	       if(type == "numbers") {
 	           if(event.keyCode < 48 || event.keyCode > 57) return false;
 	           //onKeyDown일 경우 좌, 우, tab, backspace, delete키 허용 정의 필요
 	       }
 	   }
-	 /* 한글입력 방지 */
+	  한글입력 방지 
 	    function fn_press_han(obj)
 	    {
 	        //좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
@@ -46,7 +46,7 @@ function ln_Close(e) {
 	        || event.keyCode == 46 ) return;
 	        //obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 	        obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
-	    }
+	    }*/
 	 
 	    //비밀번호 유효성 검사 (영문,숫자,특수문자 혼합하여 8자리~20자리 이내.(비밀번호 표준))
 		  function passwordCheck(flg) {

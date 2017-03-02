@@ -54,15 +54,26 @@
 		})
 		/*저장버튼 클릭 시 처리 이벤트*/
 		$("#dept_save_fbtn").click(function(){
-			if(save_cd == "insert"){
-				if (confirm("정보를 추가 하시겠습니까?")) {
-					deptSave();
-					pageReady(true);
-				}
-			}else if(save_cd == "update"){
-				if (confirm("정보를 수정 하시겠습니까?")) {
-					deptMdfy();
-					pageReady(true);
+			if($("#dept_nm").val() == ""||$("#dept_nm").val() == null){
+				alert("메뉴이름을 입력해 주세요.");
+				$("#menu_nm").focus();
+				return;
+			}
+			if($(".active_flg:checked").val() == "" ||$(".active_flg:checked").val() == null){
+				alert("활성화 여부를 선택해 주세요.");
+				$(".active_flg").focus();
+				return;
+			}else{
+				if(save_cd == "insert"){
+					if (confirm("정보를 추가 하시겠습니까?")) {
+						deptSave();
+						pageReady(true);
+					}
+				}else if(save_cd == "update"){
+					if (confirm("정보를 수정 하시겠습니까?")) {
+						deptMdfy();
+						pageReady(true);
+					}
 				}
 			}
 		})
@@ -74,6 +85,14 @@
 				pageInputRep(event, deptListInqr);
     		}
 		})
+		//숫자만 입력
+		$("#dept_num2, #dept_num3, #dept_fnum2, #dept_fnum3").keydown(function(){
+			return onlyNumber(event);
+		})
+		$("#dept_num2, #dept_num3, #dept_fnum2, #dept_fnum3").keyup(function(){
+			removeChar(event);
+		})
+		
 	})
 	
 	/*부서 리스트 출력및 페이징 처리 함수*/

@@ -59,15 +59,26 @@
 		})
 		/*저장버튼 클릭 시 처리 이벤트*/
 		$("#menu_save_fbtn").click(function(){
-			if(save_cd == "insert"){
-				if (confirm("정보를 추가 하시겠습니까?")) {
-					menuSave();
-					pageReady(true);
-				}
-			}else if(save_cd == "update"){
-				if (confirm("정보를 수정 하시겠습니까?")) {
-					menuMdfy();
-					pageReady(true);
+			if($("#menu_nm").val() == ""||$("#menu_nm").val() == null){
+				alert("메뉴이름을 입력해 주세요.");
+				$("#menu_nm").focus();
+				return;
+			}
+			if($(".active_flg:checked").val() == "" ||$(".active_flg:checked").val() == null){
+				alert("활성화 여부를 선택해 주세요.");
+				$(".active_flg").focus();
+				return;
+			}else{
+				if(save_cd == "insert"){
+					if (confirm("정보를 추가 하시겠습니까?")) {
+						menuSave();
+						pageReady(true);
+					}
+				}else if(save_cd == "update"){
+					if (confirm("정보를 수정 하시겠습니까?")) {
+						menuMdfy();
+						pageReady(true);
+					}
 				}
 			}
 		})
@@ -89,6 +100,14 @@
 				pageInputRep(event, menuListInqr);
     		}
 		})
+		//한글입력방지
+		$("#menu_url").keypress(function(){
+			fn_press_han(this);
+		})
+		$("#menu_url").keydown(function(){
+			fn_press_han(this);
+		})
+		//
 		
 	})
 	
