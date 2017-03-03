@@ -38,6 +38,10 @@
 	 <put-attribute name="main_center1" value="/WEB-INF/views/board/board_detail.jsp"/>
 	</definition> -->
 	<!-- 공통코드 -->
+	<!-- 게시판 -->
+	<definition name="/board_mng/*" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/board_mng/{1}.jsp"/>
+	</definition>
 	<definition name="/code/code_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/code/code_list.jsp"/>
 	</definition>

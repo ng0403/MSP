@@ -36,9 +36,6 @@ function menuTreeListInqr(){
 }
 /*메뉴 리스트 출력 함수*/
 function menuTreeMainListOutput(menu_cd, menu_nm, up_menu_cd, menu_url, menu_level, active_flg){
-	if(menu_url == null){
-		menu_url = "";
-	}
 	
 	if(active_flg == 'N'){
 		return;
@@ -53,9 +50,9 @@ function menuTreeMainListOutput(menu_cd, menu_nm, up_menu_cd, menu_url, menu_lev
 		menuT_li.attr("data_up_cd",up_menu_cd);
 		menuT_li.attr("data_level",menu_level);
 		//alert(menu_url);
-		//menuT_a.attr("href", menu_url);
-		menuT_a.attr("href", "#");
-		menuT_a.attr("onClick", "changeContent('"+menu_url+"')");
+		menuT_a.attr("href", menu_url);
+		//menuT_a.attr("href", "#");
+		//menuT_a.attr("onClick", "changeContent('"+menu_url+"')");
 		//menuT_a.attr("onClick", "changeContent('/menu/menuInqr')");
 			
 		menuT_nm_span.attr("style","color:#ECF0F5;");
