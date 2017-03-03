@@ -26,6 +26,7 @@
 </div>
 
 <div class="container" >  <!-- 전체 div-->
+     <input type='hidden' id="BOARD_MNG_NO" name='BOARD_MNG_NO' value="${board_mng}"/>  
 
 	<form role="form" method="post" enctype="multipart/form-data">
 		<div> <!-- 제목 div-->
@@ -53,8 +54,10 @@
 <script>  
 
 $("#board_list_fbtn").on("click", function(){  
-	 
-    	 location.href = "/board/boardInqr"; 
+		
+	     var BOARD_MNG_NO = $("#BOARD_MNG_NO").val();
+	 	alert(BOARD_MNG_NO);
+    	 location.href = "/board/boardInqr?BOARD_MNG_NO="+BOARD_MNG_NO; 
     	
  	}) 
  	

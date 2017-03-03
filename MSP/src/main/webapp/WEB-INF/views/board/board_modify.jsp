@@ -35,7 +35,7 @@
 
 	<form role="form" name="modifyForm" action="/board/board_modify " method="post">
 	 <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardVO.BOARD_NO}"> 
- 	
+	 <input type='hidden' id="BOARD_MNG_NO" name='BOARD_MNG_NO' value="${boardVO.BOARD_MNG_NO}">  
 	<div> <!-- 제목 div-->
 		<label id="txt" >제  목</label>
 		<input type="text" class="inputTxt" name= "TITLE" id="TITLE" value= "${boardVO.TITLE}" />
@@ -96,13 +96,9 @@
  
 $(document).ready(
 	function() {
+	 
 var formObj = $("form[role='form']");
 
-  
-$("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/boardInqr";
- 	})
- 	
 $("#board_modify_fbtn").on("click", function(){
 /* 	alert("go1"); 
 	formObj.submit(); */
@@ -112,6 +108,12 @@ $("#board_modify_fbtn").on("click", function(){
 }) 		
 });
 
+
+$("#board_list_fbtn").on("click", function(){  
+	var BOARD_MNG_NO = $("#BOARD_MNG_NO").val(); 
+    	location.href = "/board/boardInqr?BOARD_MNG_NO=" + BOARD_MNG_NO;
+ 	})
+ 	
 
  
  

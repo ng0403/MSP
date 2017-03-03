@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,9 +45,10 @@ public class BoardController {
 	
 	@Autowired
 	SessionAuthService sessionAuthService;
-	
+	 
 	@RequestMapping(value="/boardInqr", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ,HttpSession session) throws Exception{
+	public ModelAndView boardList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam Map<String, Object> map ,HttpSession session
+			,@RequestParam("BOARD_MNG_NO") String BOARD_MNG_NO) throws Exception{
 		 
 		System.out.println("board_list Insert ");
 		
@@ -57,9 +59,9 @@ public class BoardController {
 		
 		map.put("pageNum", pageNum);
 		map.put("sessionID", sessionID); 
+		map.put("BOARD_MNG_NO", BOARD_MNG_NO); 
 		PagerVO page=boardService.getBoardListCount(map); 
 		map.put("page", page);
-		
 		
 		List<SessionAuthVO> session_auth_list = sessionAuthService.sessionInqr(map);
 		System.out.println("session 정보 : " + session_auth_list);
@@ -69,12 +71,16 @@ public class BoardController {
 			page.setEndRow(0);
 		}
  		List<Object> boardlist = boardService.list(map); 
- 		
+ 		System.out.println("list boardlist " + boardlist.toString());
+ 		System.out.println("map??" + map.toString());
 		ModelAndView mov = new ModelAndView("/board/board_list");
 		mov.addObject("boardlist", boardlist);
 		mov.addObject("page",  page);
 		mov.addObject("pageNum",  pageNum);
 		mov.addObject("session_auth_list",session_auth_list);
+		mov.addObject("BOARD_MNG_NO", BOARD_MNG_NO);
+		
+		System.out.println("mov board_mng_no?" + mov.toString());
 		return mov; 
 	} 
 	
@@ -92,6 +98,7 @@ public class BoardController {
 		System.out.println("session 정보 : " + session_auth_list); 
 		
 		BoardVO vo = boardService.detail(BOARD_NO);
+		System.out.println("vovo?" + vo);
 		String FILE_CD = vo.getFILE_CD(); 
 		
 		boardService.viewadd(BOARD_NO);
@@ -116,13 +123,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
-	public ModelAndView board_add() {
-		  System.out.println("Entering");
-		  
+	public ModelAndView board_add(@RequestParam("BOARD_MNG_NO") String BOARD_MNG_NO) {
+		  System.out.println("Entering"); 
+ 		  System.out.println(BOARD_MNG_NO);
 		  ModelAndView mov = new ModelAndView("/board/board_insert");
-		  
-		  
-		  return mov; 
+		  mov.addObject("board_mng" ,BOARD_MNG_NO);
+		  System.out.println("insert mov??" + mov.toString());
+
+ 		  return mov; 
 	}
 	
 	
@@ -198,7 +206,7 @@ public class BoardController {
 			mov.addObject("boardVO", boardService.readFileModify(BOARD_NO));
 		}
 		else{
-			mov.addObject( "boardVO", boardService.read(BOARD_NO)); 
+			mov.addObject("boardVO", boardService.read(BOARD_NO)); 
 		}
 	  
 		return mov;

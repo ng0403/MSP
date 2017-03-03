@@ -32,6 +32,8 @@
 
  <input type='hidden' id="REPLY_FLG" name='REPLY_FLG' value="${boardlist.REPLY_FLG}"/>
 </form>
+ <input type='hidden' id="BOARD_MNG_NO" name='BOARD_MNG_NO' value="${boardlist.BOARD_MNG_NO}"/>
+ 
 
 <form role="form1">
  <input type='hidden' id="BOARD_NO" name='BOARD_NO' value="${boardlist.BOARD_NO}"/> 
@@ -133,7 +135,8 @@
 <script>
   
 $("#board_list_fbtn").on("click", function(){  
-    	location.href = "/board/boardInqr";
+	var BOARD_MNG_NO = $("#BOARD_MNG_NO").val();
+     	location.href = "/board/boardInqr?BOARD_MNG_NO=" + BOARD_MNG_NO;
  	})
  	 
 
