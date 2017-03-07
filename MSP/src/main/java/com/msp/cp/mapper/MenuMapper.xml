@@ -164,13 +164,14 @@
 			,m.menu_level
 			,m.active_flg
 		FROM TB_MENU m, (
-						select auth_id, menu_cd, menu_acc_auth 
-						from tb_menu_auth 
-						where auth_id = (
-										select auth_id 
-										from tb_user_auth 
-										where user_id = #{sessionId} 
-										and active_flg = 'Y')) a
+						select distinct ma.menu_cd, ma.menu_acc_auth 
+						from tb_menu_auth ma, tb_user_auth ua
+						where 1=1
+                            and ma.auth_id = ua.auth_id
+                            and ua.user_id = #{sessionId}
+                            and ua.active_flg = 'Y'
+                        order by ma.menu_cd
+						) a
 		WHERE
 			m.menu_cd = a.menu_cd(+)
 			and del_flg='N'
