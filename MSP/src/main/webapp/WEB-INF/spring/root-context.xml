@@ -9,4 +9,6 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3"></property>
 		<property name="order" value="2"></property>
 	</bean>	 -->
+	
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
 </beans>
