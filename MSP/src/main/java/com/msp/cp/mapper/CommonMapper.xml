@@ -24,6 +24,17 @@
 		VALUES(#{A}, #{B}, #{C}, #{D}, #{E})      
 	</update>	
 	
+		<!-- 	지역관리, D3.js 예제	 -->
+	<update id="dthreeExcelInsert" parameterType="java.util.List">
+		INSERT INTO TB_CHART ( 
+			AREA,
+		    KOREA,
+		    FOREIGNER
+		   ) 
+		VALUES(#{A}, #{B}, #{C})      
+	</update>
+	
+	
 	<!-- User List 출력  -->
 	<select id="sessionInqr" parameterType="string" resultType="map"> <!-- parameterType="map" resultType="" -->
 		select auth.user_id, auth.auth_id, auth.auth_nm, tma.menu_cd, tma.inqr_auth, tma.add_auth, tma.mdfy_auth, tma.del_auth, tma.menu_acc_auth, tma.active_flg 
