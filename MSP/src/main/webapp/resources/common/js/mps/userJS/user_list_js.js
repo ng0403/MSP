@@ -62,7 +62,11 @@ function sleep(ms){
 		cphone_num1_td.html(cphone_num1 + "-" + cphone_num2 + "-" + cphone_num3);
 		
 		var auth_td = $("<td>");
-		auth_td.html(auth_nm);
+		if(auth_nm != null){
+			auth_td.html(auth_nm);
+		}else if(auth_nm == null){
+			auth_td.html("권한없음");
+		}
 		
 		var active_flg_td = $("<td>");
 		if(active_flg=='Y'){

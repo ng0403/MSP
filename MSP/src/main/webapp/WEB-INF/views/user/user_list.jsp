@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>     
+<script src="${ctx}/resources/common/js/mps/userJS/d3.min.js" charset="utf-8"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="${ctx}/resources/common/js/jquery-1.11.1.js"></script>
@@ -113,7 +114,7 @@ $(document).ready(function() {
 
 </head>
 <body>
-
+<%-- <script src="${ctx}/resources/common/js/mps/userJS/exam2.js" charset="utf-8"></script> --%>
 <!--Main_Div  -->
 <div class="main_div">
 	<!-- Navigation Div -->
@@ -192,11 +193,11 @@ $(document).ready(function() {
 												<td>${user_list.DEPT_NM}</td>
 												<td>${user_list.EMAIL_ID}@${user_list.EMAIL_DOMAIN}</td>
 												<td class="thth">${user_list.CPHONE_NUM1}-${user_list.CPHONE_NUM2}-${user_list.CPHONE_NUM3}</td>
-												<td>${user_list.AUTH_NM}</td>
-<!-- 												<td> -->
-<%-- 													<c:if test="${user_list.AUTH_NM eq NULL}">권한없음.</c:if> --%>
-<%-- 													<c:if test="${user_list.AUTH_NM != NULL}">${user_list.AUTH_NM}</c:if></td> --%>
-<!-- 												<td> -->
+<%-- 												<td>${user_list.AUTH_NM}</td> --%>
+												<td class="thth">
+													<c:if test="${user_list.AUTH_NM eq NULL}">권한없음</c:if>
+													<c:if test="${user_list.AUTH_NM != NULL}">${user_list.AUTH_NM}</c:if>
+												</td>
 												<td class="thth">
 													<c:if test="${user_list.ACTIVE_FLG eq 'Y'}">활성화</c:if>
 													<c:if test="${user_list.ACTIVE_FLG eq 'N'}">비활성화</c:if>
