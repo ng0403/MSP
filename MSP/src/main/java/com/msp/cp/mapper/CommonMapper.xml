@@ -31,7 +31,7 @@
 		    KOREA,
 		    FOREIGNER
 		   ) 
-		VALUES(#{A}, #{B}, #{C})      
+		VALUES(#{A}, #{B}, #{C}, #{D})      
 	</update>
 	
 	
