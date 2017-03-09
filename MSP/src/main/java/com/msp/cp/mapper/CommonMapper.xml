@@ -29,7 +29,8 @@
 		INSERT INTO TB_CHART ( 
 			AREA,
 		    KOREA,
-		    FOREIGNER
+		    FOREIGNER,
+		    ACTIVE_FLG
 		   ) 
 		VALUES(#{A}, #{B}, #{C}, #{D})      
 	</update>
