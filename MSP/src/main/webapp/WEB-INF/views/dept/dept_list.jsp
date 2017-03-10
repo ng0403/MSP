@@ -23,7 +23,7 @@
 <script src="${ctx}/resources/common/css/mps/dept/dept_list.css"></script>  --%>
 <title>부서관리화면</title>
 <style type="text/css">
-#label {
+#labelDept {
 	float: left;
 	margin-top: 5px;
 	margin-left: 5px;
@@ -74,7 +74,7 @@
 <!-- 						<option value="Y">활성화</option> -->
 <!-- 						<option value="N">비활성화</option> -->
 <!-- 					</select> -->
-					<label id="label">부서명</label>
+					<label id="labelDept">부서명</label>
 					<input type="text" id="dept_nm_key" name="dept_nm_key" class="inputTxt" > &nbsp;
 					<input type="button" id="dept_inqr_fbtn" class="btn btn-primary btn-sm" value="검색">
 				<!-- </form> -->
