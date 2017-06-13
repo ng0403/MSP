@@ -45,7 +45,7 @@
          folder instead of downloading all of them to reduce the load. -->
 	<link href="${ctx}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 	
-	<script src="${ctx}/resources/common/css/mps/dept/dept_list.css"></script> 
+<%-- 	<script src="${ctx}/resources/common/css/mps/dept/dept_list.css"></script>  --%>
 	
 	<link rel="stylesheet" href="${ctx}/resources/common/css/common.css" type="text/css" /> 
 	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet">

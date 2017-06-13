@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chart">
+<!-- 전체 행의 개수 -->
+<select id="dthreeCount" parameterType="java.util.Map" resultType="int" >
+SELECT COUNT(*) AS CNT
+FROM TB_CHART
+WHERE 1=1
+	<if test="active_key != null and active_key != '' ">   
+		AND ACTIVE_FLG = #{active_key}
+	</if>
+<if test="keyword != null and keyword != ''">   
+  		AND AREA LIKE '%'||#{keyword}||'%' 
+</if>
+</select>
+
+<select id="selectDthree"  parameterType="map" resultType="com.msp.cp.chart.vo.DthreeVO">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT *
+         FROM TB_CHART
+         WHERE 1=1
+               AND ACTIVE_FLG = 'Y'
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND AREA LIKE '%' || #{keyword} || '%'
+         	</if>
+          ORDER BY AREA ASC ) A
+     ) X
+     <![CDATA[
+        WHERE X.RNUM >= #{startRow} AND X.RNUM <= #{endRow}
+	 ]]>
+</select>
+
+<select id="selectDthreeAll"  parameterType="map" resultType="com.msp.cp.chart.vo.DthreeVO">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT *
+         FROM TB_CHART
+         WHERE 1=1
+               AND ACTIVE_FLG = 'Y'
+			 <if test="keyword != null and keyword != ''" >   
+	            	AND AREA LIKE '%' || #{keyword} || '%'
+	         </if>
+          	ORDER BY AREA ASC ) A
+     ) X
+</select>
+
+<select id="dthreeCheck" parameterType="com.msp.cp.chart.vo.DthreeVO" resultType="map">
+SELECT
+    AREA,
+    KOREA,
+    FOREIGNER,
+    ACTIVE_FLG
+FROM TB_CHART
+WHERE AREA = #{area}
+</select>
+
+<select id="selectDetailDthree" parameterType="string" resultType="com.msp.cp.chart.vo.DthreeVO">
+SELECT
+	AREA,
+    KOREA,
+    FOREIGNER,
+    ACTIVE_FLG
+FROM TB_CHART
+WHERE AREA = #{area}
+	  AND ACTIVE_FLG = 'Y'
+</select>
+
+<insert id = "insertDthree" parameterType = "com.msp.cp.chart.vo.DthreeVO"> 
+INSERT INTO TB_CHART 
+(
+    AREA,
+    KOREA,
+    FOREIGNER,
+    ACTIVE_FLG
+)
+VALUES
+(
+    #{area},
+    #{korea},
+    #{foreigner},
+    #{active_flg}
+)
+</insert>
+
+<update id = "updateDthree" parameterType = "com.msp.cp.chart.vo.DthreeVO"> 
+UPDATE TB_CHART
+SET KOREA = #{korea},
+    FOREIGNER = #{foreigner},
+    ACTIVE_FLG = #{active_flg}
+WHERE  AREA = #{area}
+</update>
+
+<update id = "deleteDthree" parameterType="com.msp.cp.chart.vo.DthreeVO">
+UPDATE TB_CHART
+SET ACTIVE_FLG = 'N'
+WHERE  AREA = #{area}
+</update>
+
+<select id="dthree_list_excel" parameterType="string" resultType="map">
+SELECT X.*
+FROM ( SELECT ROWNUM AS RNUM, A.*
+       FROM (
+         SELECT *
+         FROM TB_CHART
+         WHERE 1=1
+         	<if test="active_key != null and active_key != '' " >   
+            	AND ACTIVE_FLG = #{active_key}
+		 	</if>
+		 	<if test="keyword != null and keyword != ''" >   
+            	AND AREA LIKE '%' || #{keyword} || '%'
+         	</if>
+         ORDER BY AREA ASC ) A
+     ) X
+</select>
+
+</mapper>

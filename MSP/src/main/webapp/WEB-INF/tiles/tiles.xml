@@ -61,6 +61,10 @@
 	<definition name="/menuAuth/menuAuth_list" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/menuAuth/menuAuth_list.jsp"/>
 	</definition>
+	<!-- 지역관리 -->
+	<definition name="/chart/dthree_list" extends="layout_content">
+	 <put-attribute name="main_center1" value="/WEB-INF/views/chart/dthree_list.jsp"/>
+	</definition>
 	<!-- <definition name="/*/*" extends="layout_content">
 	 <put-attribute name="main_center1" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition> -->

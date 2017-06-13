@@ -33,6 +33,11 @@
 		p:alwaysUseFullPath="true">
 		<beans:property name="order" value="3" />
 	</beans:bean>
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"
+		p:alwaysUseFullPath="true">
+		<beans:property name="order" value="3" />
+	</beans:bean>
 	
 <!-- 	엑셀파일 업로드용 설정 -->
 	<beans:bean id="multipartResolver"
